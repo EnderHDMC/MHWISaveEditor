@@ -15,7 +15,6 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
 
   slotSignalMapper = new QSignalMapper(this);
-
   for (int i = 0; i < 3; ++i) {
     QAction* slotAction = new QAction("Slot " + QString::number(i + 1));
     connect(slotAction, SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
@@ -25,11 +24,16 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 
   connect(slotSignalMapper, SIGNAL(mappedInt(int)),
     this, SLOT(Slot(int)));
+
+  mhwRaw = nullptr;
 }
 
 MHWISaveEditor::~MHWISaveEditor()
 {
   delete ui;
+
+  free(mhwRaw);
+  mhwRaw = nullptr;
 }
 
 static QString GetDefaultSavePath()
@@ -74,7 +78,6 @@ void MHWISaveEditor::Open()
   if (dialog.exec()) {
     QStringList files = dialog.selectedFiles();
     filepath = files[0];
-
     qInfo("%s", qUtf8Printable(filepath));
 
     QFile file(filepath, this);
@@ -88,7 +91,9 @@ void MHWISaveEditor::Open()
       qWarning("File: %s, cannot be read.", qUtf8Printable(filepath));
       return;
     }
+    file.close();
 
+    if (mhwRaw) free(mhwRaw);
     mhwRaw = (MHWSaveRaw*)malloc(sizeof(MHWSaveRaw));
     if (!mhwRaw) {
       qWarning("Error allocating memory.");
@@ -96,7 +101,6 @@ void MHWISaveEditor::Open()
     };
 
     memcpy(mhwRaw->data, saveBlob.constData(), saveBlob.length());
-
     if (!IsBlowfishDecrypted(&mhwRaw->save)) {
       DecryptSave(mhwRaw->data, sizeof(MHWSaveRaw));
     }
