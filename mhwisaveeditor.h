@@ -5,6 +5,10 @@
 #include <QSignalMapper>
 #include "types/mhwSave.h"
 
+#define ALL_SAVE "All Files (*)"
+#define ENCRYPTED_SAVE "Encrypted Save (*.raw)"
+#define UNENCRYPTED_SAVE "Unencrypted Save(*.bin)"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MHWISaveEditor; }
 QT_END_NAMESPACE

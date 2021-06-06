@@ -2,6 +2,7 @@
 #include "ui_mhwisaveeditor.h"
 
 #include <QFileDialog>
+#include <QSaveFile>
 #include <QByteArray>
 
 #include "crypto/iceborne_crypt.h"
@@ -44,6 +45,8 @@ void MHWISaveEditor::Open()
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
+  dialog.selectFile("SAVEDATA1000");
+  dialog.setFileMode(QFileDialog::ExistingFile);
 
   if (dialog.exec()) {
     QStringList files = dialog.selectedFiles();
@@ -80,6 +83,60 @@ void MHWISaveEditor::Open()
 void MHWISaveEditor::Save()
 {
   qInfo("Hello from Save");
+
+  if (!mhwRaw) return;
+  QString path = GetDefaultSavePath();
+  QString filepath = QString();
+
+  const QStringList filters({ tr(ALL_SAVE),
+                              tr(ENCRYPTED_SAVE),
+                              tr(UNENCRYPTED_SAVE) });
+
+  QFileDialog dialog(this);
+  dialog.setDirectory(path);
+  dialog.setNameFilters(filters);
+  dialog.setAcceptMode(QFileDialog::AcceptSave);
+
+  if (dialog.exec()) {
+    QString selectedFilter = dialog.selectedNameFilter();
+    QStringList files = dialog.selectedFiles();
+    filepath = files[0];
+    if (selectedFilter == tr(ALL_SAVE)) {
+      QFileInfo fileInfo(filepath);
+      filepath = fileInfo.absolutePath() + "/" + fileInfo.baseName();
+    }
+    qInfo("%s", qUtf8Printable(filepath));
+
+    QSaveFile file(filepath);
+    if (!file.open(QIODevice::WriteOnly)) {
+      qWarning("File: %s, cannot be written.", qUtf8Printable(filepath));
+      return;
+    }
+
+    MHWSaveRaw* saveWrite = nullptr;
+    if (selectedFilter == tr(ENCRYPTED_SAVE) || selectedFilter == tr(ALL_SAVE)) {
+      saveWrite = (MHWSaveRaw*)malloc(sizeof(MHWSaveRaw));
+      if (!saveWrite) {
+        qInfo("Error allocating memory.");
+        return;
+      }
+      memcpy(saveWrite, mhwRaw, sizeof(MHWSaveRaw));
+      EncryptSave(saveWrite->data, sizeof(MHWSaveRaw));
+    }
+    else if (selectedFilter == tr(UNENCRYPTED_SAVE)) {
+      saveWrite = mhwRaw;
+    }
+
+    assert(saveWrite);
+    int length = file.write((char*)saveWrite->data, sizeof(MHWSaveRaw));
+    if (length != sizeof(MHWSaveRaw)) {
+      qWarning("File: %s, cannot be written.", qUtf8Printable(filepath));
+      return;
+    }
+    file.commit();
+
+    if (saveWrite != mhwRaw) free(saveWrite);
+  }
 }
 
 void MHWISaveEditor::Slot(int slot)
