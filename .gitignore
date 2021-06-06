@@ -1,6 +1,9 @@
-
-.vs/
+# Build files
 [Dd]ebug
 [Rr]elease
 
+# User files
 *.user
+
+# Visual Studio Cache
+.vs/
