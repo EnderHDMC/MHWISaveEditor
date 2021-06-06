@@ -47,6 +47,9 @@
     <ClInclude Include="types\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utility\paths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

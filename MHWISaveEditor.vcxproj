@@ -26,6 +26,7 @@
     <ClInclude Include="types\mhwAppearance.h" />
     <ClInclude Include="types\mhwSave.h" />
     <ClInclude Include="types\types.h" />
+    <ClInclude Include="utility\paths.h" />
     <QtMoc Include="mhwisaveeditor.h" />
     <ClInclude Include="utility\endian.h" />
   </ItemGroup>
