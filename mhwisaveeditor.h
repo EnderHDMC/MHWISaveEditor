@@ -21,15 +21,17 @@ public slots:
   void Open();
   void Save();
   void Slot(int slot);
+  void OpenLocation(const QString& location);
 
 public:
-  MHWISaveEditor(QWidget *parent = nullptr);
+  MHWISaveEditor(QWidget* parent = nullptr);
   ~MHWISaveEditor();
 
 private:
-  Ui::MHWISaveEditor *ui;
-  MHWSaveRaw *mhwRaw;
+  Ui::MHWISaveEditor* ui;
+  MHWSaveRaw* mhwRaw;
 
-  QSignalMapper *slotSignalMapper;
+  QSignalMapper* slotSignalMapper;
+  QSignalMapper* openSignalMapper;
 };
 #endif // MHWISAVEEDITOR_H

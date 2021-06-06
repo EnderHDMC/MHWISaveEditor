@@ -4,9 +4,12 @@
 #include <QFileDialog>
 #include <QSaveFile>
 #include <QByteArray>
+#include <QDesktopServices>
 
 #include "crypto/iceborne_crypt.h"
 #include "utility/paths.h"
+
+#include "utility/system/FileUtils.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent)
@@ -21,9 +24,15 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
     slotSignalMapper->setMapping(slotAction, i);
     ui->menuSlot->addAction(slotAction);
   }
+  connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Slot(int)));
 
-  connect(slotSignalMapper, SIGNAL(mappedInt(int)),
-    this, SLOT(Slot(int)));
+  openSignalMapper = new QSignalMapper(this);
+  connect(ui->actionOpenGameLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
+  openSignalMapper->setMapping(ui->actionOpenGameLocation, GetGamePath());
+  connect(ui->actionOpenSaveLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
+  openSignalMapper->setMapping(ui->actionOpenSaveLocation, GetDefaultSavePath() + "/" + QString::fromUtf8(SAVE_NAME));
+
+  connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
 
   mhwRaw = nullptr;
 }
@@ -142,4 +151,10 @@ void MHWISaveEditor::Save()
 void MHWISaveEditor::Slot(int slot)
 {
   qInfo("Selected slot index %d.", slot);
+}
+
+void MHWISaveEditor::OpenLocation(const QString& location)
+{
+  qInfo("Opening: %s", qUtf8Printable(location));
+  FileUtils::showInGraphicalShell(location);
 }

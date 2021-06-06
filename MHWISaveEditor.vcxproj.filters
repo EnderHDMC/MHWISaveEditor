@@ -50,6 +50,9 @@
     <ClInclude Include="utility\paths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utility\system\FileUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
