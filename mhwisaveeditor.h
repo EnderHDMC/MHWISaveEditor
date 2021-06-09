@@ -22,6 +22,8 @@ public slots:
   void Save();
   void Slot(int slot);
   void OpenLocation(const QString& location);
+  void Backup();
+  void Restore();
 
 public:
   MHWISaveEditor(QWidget* parent = nullptr);

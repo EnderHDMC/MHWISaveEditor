@@ -158,3 +158,11 @@ void MHWISaveEditor::OpenLocation(const QString& location)
   qInfo("Opening: %s", qUtf8Printable(location));
   FileUtils::showInGraphicalShell(location);
 }
+
+void MHWISaveEditor::Backup() {
+
+}
+
+void MHWISaveEditor::Restore() {
+
+}
