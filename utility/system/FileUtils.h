@@ -16,6 +16,9 @@ public:
 
     args << QDir::toNativeSeparators(path);
     QProcess::startDetached("explorer", args);
+#else
+    QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    return;
 #endif
   }
 };
