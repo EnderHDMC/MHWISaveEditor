@@ -7,8 +7,6 @@
 #include <QDesktopServices>
 #include <QGridLayout>
 
-#include "itemslotview.h"
-
 // Encryption
 #include "crypto/iceborne_crypt.h"
 // Save paths
@@ -16,6 +14,10 @@
 #include "utility/system/FileUtils.h"
 // Inventory Layout
 #include "types/inventoryAreas.h"
+// Item Data
+#include "data/ItemDB.h"
+#include "data/BitmapDB.h"
+#include "inventoryeditor.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent)
@@ -43,30 +45,18 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   int count = COUNTOF(areas);
   for (size_t i = 0; i < count; i++)
   {
-    int localoffset = areas[i].localoffset;
-    int count = areas[i].count;
-    item_type type = areas[i].type;
-    char* area = areas[i].area;
-
     QWidget* newTab = new QWidget(ui->tabWidget);
-
+    
     QGridLayout* layout = new QGridLayout();
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
-    for (size_t i = 0; i < count; i++)
-    {
-      ItemSlotView* itemSlotView = new ItemSlotView();
-      itemSlotView->setContentsMargins(0, 0, 0, 0);
-      layout->addWidget(itemSlotView, i / 8, i % 8);
-    }
 
-    ui->tabWidget->addTab(newTab, tr(area));
+    InventoryEditor* editor = new InventoryEditor(&areas[i], newTab);
+    layout->addWidget(editor);
     newTab->setLayout(layout);
-    newTab->show();
-    layout->layout();
+
+    ui->tabWidget->addTab(newTab, tr(areas[i].area));
   }
-  ui->tabWidget->layout();
-  ui->tabWidget->setCurrentIndex(0);
 
   mhwRaw = nullptr;
 }
@@ -77,6 +67,14 @@ MHWISaveEditor::~MHWISaveEditor()
 
   free(mhwRaw);
   mhwRaw = nullptr;
+}
+
+void MHWISaveEditor::closeEvent(QCloseEvent* event)
+{
+  ItemDB* itemDB = itemDB->GetInstance();
+  itemDB->Free();
+  BitmapDB* bitmapDB = bitmapDB->GetInstance();
+  bitmapDB->Free();
 }
 
 void MHWISaveEditor::Open()

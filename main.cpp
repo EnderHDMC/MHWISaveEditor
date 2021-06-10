@@ -4,9 +4,23 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include "data/BitmapDB.h"
+#include "data/ItemDB.h"
+
 int main(int argc, char* argv[])
 {
   QApplication a(argc, argv);
+
+  ItemDB* itemDB = itemDB->GetInstance();
+  BitmapDB* bitmapDB = bitmapDB->GetInstance();
+
+  for (size_t i = 0; i < itemDB->count(); i++)
+  {
+    itemInfo* info = itemDB->GetItemById(i);
+
+    QString path = QString("res/ItemIcons/%1_%2.png").arg(info->iconID).arg(info->iconColor);
+    QPixmap* bmp = bitmapDB->Pixmap(path);
+  }
 
   QTranslator translator;
   const QStringList uiLanguages = QLocale::system().uiLanguages();

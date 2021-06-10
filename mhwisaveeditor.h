@@ -5,6 +5,8 @@
 #include <QSignalMapper>
 #include "types/mhwSave.h"
 
+#include "itemslotview.h"
+
 constexpr char* ALL_SAVE = "All Files (*)";
 constexpr char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
 constexpr char* UNENCRYPTED_SAVE = "Unencrypted Save(*.bin)";
@@ -28,6 +30,8 @@ public slots:
 public:
   MHWISaveEditor(QWidget* parent = nullptr);
   ~MHWISaveEditor();
+
+  void closeEvent(QCloseEvent* event);
 
 private:
   Ui::MHWISaveEditor* ui;

@@ -56,6 +56,12 @@
     <ClInclude Include="types\inventoryAreas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="data\ItemDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data\BitmapDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -67,6 +73,15 @@
     <ClCompile Include="itemslotview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="data\BitmapDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data\ItemDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inventoryeditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mhwisaveeditor.h">
@@ -75,12 +90,18 @@
     <QtMoc Include="itemslotview.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="inventoryeditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mhwisaveeditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="itemslotview.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="inventoryeditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
