@@ -63,6 +63,9 @@
       <FileType>Text</FileType>
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="res\SAVEDATA1000.map">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\BoxIcons\0.png">

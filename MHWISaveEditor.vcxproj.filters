@@ -1501,5 +1501,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MasterItemList.json" />
+    <None Include="res\SAVEDATA1000.map" />
   </ItemGroup>
 </Project>
