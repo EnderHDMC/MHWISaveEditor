@@ -3,7 +3,7 @@
 #include "mhwSave.h"
 #include <cstddef>
 
-enum item_type
+enum class item_type
 {
   Item = 0,
   Material = 1,
