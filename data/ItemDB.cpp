@@ -40,7 +40,7 @@ void ItemDB::Free()
 // TODO: Right now we're assuming item id = item index
 itemInfo* ItemDB::GetItemById(u32 id)
 {
-  if (id > items.size()) id = 0;
+  if (id > items.size()) return nullptr;
   return &items[id];
 }
 
