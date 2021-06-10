@@ -193,9 +193,10 @@ struct MHWItemSlot {
 };
 
 struct MHWItemPouch {
-    u8 unknown[16];
+    u8 unkowna[16];
     MHWItemSlot items[24];
-    u8 unkown[424];
+    MHWItemSlot ammo[16];
+    u8 unkownb[296];
 };
 
 struct MHWStorage {

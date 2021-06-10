@@ -20,5 +20,6 @@ struct inventory_area {
 };
 
 const inventory_area areas[] = {
-  {offsetof(MHWSaveSlot, ItemPouch) + offsetof(MHWItemPouch, items), COUNTOF(MHWItemPouch::items), item_type::Item, "Item Pouch"}
+  {offsetof(MHWSaveSlot, ItemPouch) + offsetof(MHWItemPouch, items), COUNTOF(MHWItemPouch::items), item_type::Item, "Item Pouch"},
+  {offsetof(MHWSaveSlot, ItemPouch) + offsetof(MHWItemPouch, ammo), COUNTOF(MHWItemPouch::ammo), item_type::Item, "Ammo Pouch"}
 };
