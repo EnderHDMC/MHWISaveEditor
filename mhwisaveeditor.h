@@ -6,6 +6,7 @@
 #include "types/mhwSave.h"
 
 #include "itemslotview.h"
+#include "inventoryeditor.h"
 
 constexpr char* ALL_SAVE = "All Files (*)";
 constexpr char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
@@ -39,5 +40,7 @@ private:
 
   QSignalMapper* slotSignalMapper;
   QSignalMapper* openSignalMapper;
+
+  QList<InventoryEditor*> inventoryEditors;
 };
 #endif // MHWISAVEEDITOR_H

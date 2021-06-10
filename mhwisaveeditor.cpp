@@ -43,10 +43,11 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
 
   int count = COUNTOF(areas);
+  inventoryEditors.resize(count);
   for (size_t i = 0; i < count; i++)
   {
     QWidget* newTab = new QWidget(ui->tabWidget);
-    
+
     QGridLayout* layout = new QGridLayout();
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
@@ -54,6 +55,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
     InventoryEditor* editor = new InventoryEditor(&areas[i], newTab);
     layout->addWidget(editor);
     newTab->setLayout(layout);
+    inventoryEditors[i] = editor;
 
     ui->tabWidget->addTab(newTab, tr(areas[i].area));
   }
@@ -88,8 +90,9 @@ void MHWISaveEditor::Open()
   dialog.setDirectory(path);
   dialog.selectFile("SAVEDATA1000");
   dialog.setFileMode(QFileDialog::ExistingFile);
+  int result = dialog.exec();
 
-  if (dialog.exec()) {
+  if (result) {
     QStringList files = dialog.selectedFiles();
     filepath = files[0];
     qInfo("%s", qUtf8Printable(filepath));
@@ -117,6 +120,15 @@ void MHWISaveEditor::Open()
     memcpy(mhwRaw->data, saveBlob.constData(), saveBlob.length());
     if (!IsBlowfishDecrypted(&mhwRaw->save)) {
       DecryptSave(mhwRaw->data, sizeof(MHWSaveRaw));
+    }
+  }
+
+  // Load the save into the inventory slots
+  if (result) {
+    for (size_t i = 0; i < inventoryEditors.count(); i++)
+    {
+      InventoryEditor* editor = inventoryEditors[i];
+      editor->Load(mhwRaw, 0);
     }
   }
 }

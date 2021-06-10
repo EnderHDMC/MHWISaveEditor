@@ -1,7 +1,8 @@
 #pragma once
 
 #include <QWidget>
-#include "types/mhwSave.h"
+#include "types/inventoryAreas.h"
+
 namespace Ui { class ItemSlotView; };
 
 class ItemSlotView : public QWidget
@@ -9,17 +10,16 @@ class ItemSlotView : public QWidget
   Q_OBJECT
 
 public:
-  ItemSlotView(QWidget* parent = Q_NULLPTR);
+  ItemSlotView(const inventory_area* area, int slot, QWidget* parent = Q_NULLPTR);
   ~ItemSlotView();
 
-  void Load(MHWSaveRaw* mhwSave, int saveslot, int slot);
+  void Load(MHWSaveRaw* mhwSave, int saveslot);
 
 private:
   Ui::ItemSlotView* ui;
 
-
-
   MHWSaveRaw* mhwSave = nullptr;
+  const inventory_area* area;
   int saveslot = 0;
-  int slot = 0;
+  int invslot = 0;
 };

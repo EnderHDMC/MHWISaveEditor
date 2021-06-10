@@ -11,7 +11,7 @@ InventoryEditor::InventoryEditor(const inventory_area* area, QWidget* parent)
   
   for (size_t i = 0; i < slotViews.size(); i++)
   {
-    slotViews[i] = new ItemSlotView(this);
+    slotViews[i] = new ItemSlotView(area, i, this);
     ui->gridLayout->addWidget(slotViews[i], i / 8, i % 8);
   }
 }
@@ -19,4 +19,13 @@ InventoryEditor::InventoryEditor(const inventory_area* area, QWidget* parent)
 InventoryEditor::~InventoryEditor()
 {
   delete ui;
+}
+
+void InventoryEditor::Load(MHWSaveRaw* save, int saveslot)
+{
+  for (size_t i = 0; i < slotViews.count(); i++)
+  {
+    ItemSlotView* slotView = slotViews[i];
+    slotView->Load(save, saveslot);
+  }
 }
