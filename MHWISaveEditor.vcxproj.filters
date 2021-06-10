@@ -84,4 +84,1401 @@
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MonsterIcons\Anjanath.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Azure Rathalos.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Barroth.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Bazelgeuse.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Behemoth.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Black Diablos.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Deviljho.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Diablos.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Dodogama.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Empty.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Great Girros.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Great Jagras.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Jyuratodus.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Kirin.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Kulu-Ya-Ku.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Kushala Daora.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Lavasioth.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Legiana.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Lunastra.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Nergigante.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Odogaron.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Paolumu.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Pink Rathian.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Pukei-Pukei.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Radobaan.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Rathalos.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Rathian.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Temper.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Teostra.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Tobi-Kadachi.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Tzitzi-Ya-Ku.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Uragaan.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MonsterIcons\Vaal Hazak.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_15.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\0_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\10_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\10_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\10_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\10_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\10_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\10_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\11_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\12_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\12_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\13_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\14_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\14_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\16_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\16_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\16_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\16_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\16_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\16_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_15.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\17_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\18_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\18_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\19_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\19_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\19_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\19_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\19_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\19_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\1_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\1_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\1_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\1_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\1_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\1_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\1_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\1_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\20_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\20_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\21_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\21_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\21_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\21_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\21_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\21_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\21_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_15.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\22_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\23_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\23_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\23_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\23_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\23_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\24_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\24_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\24_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\24_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\25_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\26_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\29_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\29_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\29_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\29_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\29_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\2_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\2_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\2_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\2_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\2_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\30_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\32_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\33_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\33_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\33_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\33_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\33_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\34_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\36_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\36_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\37_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\37_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\37_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\37_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\38_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\38_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\38_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\38_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\38_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\39_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\39_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\39_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\39_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\3_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\3_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\3_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\41_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\42_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\43_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\44_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\45_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\46_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_15.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\4_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\5_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\6_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\7_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\8_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\8_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\9_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\50_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\52_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\58_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\58_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\59_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\59_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\59_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\59_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\59_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\59_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\59_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\59_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\60_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\60_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\60_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\60_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\60_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\61_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\61_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\61_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\61_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\61_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\62_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\62_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\62_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\62_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\62_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\64_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\65_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\65_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\65_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\65_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\65_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_15.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_19.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\66_26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_15.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\67_24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\68_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\70_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\70_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\70_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\77_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\77_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\77_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\78_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\78_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\79_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\92_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\93_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\93_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\93_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\93_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\93_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\93_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\93_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\94_19.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\95_15.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\109_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\109_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\109_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\109_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\109_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\109_10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\109_25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\110_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\112_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\255_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\lvl1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\lvl2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\lvl3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\star.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ItemIcons\00000002.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Icon\monhan_fw_F6x_icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\BoxIcons\0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\BoxIcons\1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\BoxIcons\2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\BoxIcons\3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\BoxIcons\4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\MasterItemList.json" />
+  </ItemGroup>
 </Project>
