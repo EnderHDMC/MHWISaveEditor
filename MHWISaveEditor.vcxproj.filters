@@ -53,6 +53,9 @@
     <ClInclude Include="utility\system\FileUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="types\inventoryAreas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -61,14 +64,23 @@
     <ClCompile Include="mhwisaveeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="itemslotview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mhwisaveeditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="itemslotview.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mhwisaveeditor.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="itemslotview.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

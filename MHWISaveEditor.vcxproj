@@ -22,7 +22,9 @@
     <ClInclude Include="crypto\blowfish.h" />
     <ClInclude Include="crypto\iceborne_crypt.h" />
     <ClInclude Include="crypto\sha1.h" />
+    <QtMoc Include="itemslotview.h" />
     <ClInclude Include="types\constants.h" />
+    <ClInclude Include="types\inventoryAreas.h" />
     <ClInclude Include="types\mhwAppearance.h" />
     <ClInclude Include="types\mhwSave.h" />
     <ClInclude Include="types\types.h" />
@@ -32,6 +34,7 @@
     <ClInclude Include="utility\endian.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="itemslotview.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mhwisaveeditor.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
@@ -45,6 +48,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="itemslotview.ui" />
     <QtUic Include="mhwisaveeditor.ui" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -5,11 +5,17 @@
 #include <QSaveFile>
 #include <QByteArray>
 #include <QDesktopServices>
+#include <QGridLayout>
 
+#include "itemslotview.h"
+
+// Encryption
 #include "crypto/iceborne_crypt.h"
+// Save paths
 #include "utility/paths.h"
-
 #include "utility/system/FileUtils.h"
+// Inventory Layout
+#include "types/inventoryAreas.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent)
@@ -33,6 +39,34 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   openSignalMapper->setMapping(ui->actionOpenSaveLocation, GetDefaultSavePath() + "/" + QString::fromUtf8(SAVE_NAME));
 
   connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
+
+  int count = COUNTOF(areas);
+  for (size_t i = 0; i < count; i++)
+  {
+    int localoffset = areas[i].localoffset;
+    int count = areas[i].count;
+    item_type type = areas[i].type;
+    char* area = areas[i].area;
+
+    QWidget* newTab = new QWidget(ui->tabWidget);
+
+    QGridLayout* layout = new QGridLayout();
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    for (size_t i = 0; i < count; i++)
+    {
+      ItemSlotView* itemSlotView = new ItemSlotView();
+      itemSlotView->setContentsMargins(0, 0, 0, 0);
+      layout->addWidget(itemSlotView, i / 8, i % 8);
+    }
+
+    ui->tabWidget->addTab(newTab, tr(area));
+    newTab->setLayout(layout);
+    newTab->show();
+    layout->layout();
+  }
+  ui->tabWidget->layout();
+  ui->tabWidget->setCurrentIndex(0);
 
   mhwRaw = nullptr;
 }
