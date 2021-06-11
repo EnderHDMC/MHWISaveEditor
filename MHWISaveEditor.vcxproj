@@ -27,9 +27,9 @@
     <ClInclude Include="data\ItemDB.h" />
     <QtMoc Include="inventoryeditor.h" />
     <ClInclude Include="types\constants.h" />
-    <ClInclude Include="types\inventoryAreas.h" />
-    <ClInclude Include="types\mhwAppearance.h" />
-    <ClInclude Include="types\mhwSave.h" />
+    <ClInclude Include="types\inventory_areas.h" />
+    <ClInclude Include="types\mhw_enums.h" />
+    <ClInclude Include="types\mhw_save.h" />
     <ClInclude Include="types\types.h" />
     <ClInclude Include="utility\paths.h" />
     <ClInclude Include="utility\system\FileUtils.h" />
@@ -63,7 +63,7 @@
       <FileType>Text</FileType>
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="res\SAVEDATA1000.map">
+    <None Include="res\SAVEDATA1000.ksy">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>

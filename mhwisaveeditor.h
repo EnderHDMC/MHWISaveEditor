@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QSignalMapper>
-#include "types/mhwSave.h"
+#include "types/mhw_save.h"
 
 #include "itemslotview.h"
 #include "inventoryeditor.h"
@@ -36,7 +36,7 @@ public:
 
 private:
   Ui::MHWISaveEditor* ui;
-  MHWSaveRaw* mhwRaw;
+  mhw_save_raw* mhwRaw;
 
   QSignalMapper* slotSignalMapper;
   QSignalMapper* openSignalMapper;

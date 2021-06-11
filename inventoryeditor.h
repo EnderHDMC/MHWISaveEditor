@@ -1,10 +1,11 @@
 #pragma once
 
 #include <QWidget>
+#include <QSignalMapper>
 
 #include "itemslotview.h"
-#include "types/inventoryAreas.h"
-#include <QSignalMapper>
+
+#include "types/inventory_areas.h"
 
 namespace Ui { class InventoryEditor; };
 
@@ -16,7 +17,7 @@ public:
   InventoryEditor(const inventory_area* area, QWidget* parent = Q_NULLPTR);
   ~InventoryEditor();
 
-  void Load(MHWSaveRaw *save, int saveslot);
+  void Load(mhw_save_raw *save, int saveslot);
 
 private:
   Ui::InventoryEditor* ui;

@@ -21,7 +21,7 @@ InventoryEditor::~InventoryEditor()
   delete ui;
 }
 
-void InventoryEditor::Load(MHWSaveRaw* save, int saveslot)
+void InventoryEditor::Load(mhw_save_raw* save, int saveslot)
 {
   for (size_t i = 0; i < slotViews.count(); i++)
   {

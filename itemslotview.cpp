@@ -22,7 +22,7 @@ ItemSlotView::~ItemSlotView()
   delete ui;
 }
 
-void ItemSlotView::Load(MHWSaveRaw* mhwSave, int saveslot)
+void ItemSlotView::Load(mhw_save_raw* mhwSave, int saveslot)
 {
   this->mhwSave = mhwSave;
   this->saveslot = saveslot;
@@ -30,8 +30,8 @@ void ItemSlotView::Load(MHWSaveRaw* mhwSave, int saveslot)
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
   ItemDB* itemDB = itemDB->GetInstance();
 
-  u8* slot = ((u8*)(&mhwSave->save.Saves[saveslot])) + area->localoffset;
-  MHWItemSlot* itemSlot = ((MHWItemSlot*)(slot)+invslot);
+  u8* slot = ((u8*)(&mhwSave->save.section3.Saves[saveslot])) + area->localoffset;
+  mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
   itemInfo* info = itemDB->GetItemById(itemSlot->id);
   if (!info) {
     QMessageBox msgBox;

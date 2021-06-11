@@ -13,7 +13,7 @@
 #include "utility/paths.h"
 #include "utility/system/FileUtils.h"
 // Inventory Layout
-#include "types/inventoryAreas.h"
+#include "types/inventory_areas.h"
 // Item Data
 #include "data/ItemDB.h"
 #include "data/BitmapDB.h"
@@ -104,14 +104,14 @@ void MHWISaveEditor::Open()
     }
 
     QByteArray saveBlob = file.readAll();
-    if (saveBlob.length() != sizeof(MHWSaveRaw)) {
+    if (saveBlob.length() != sizeof(mhw_save_raw)) {
       qWarning("File: %s, cannot be read.", qUtf8Printable(filepath));
       return;
     }
     file.close();
 
     if (mhwRaw) free(mhwRaw);
-    mhwRaw = (MHWSaveRaw*)malloc(sizeof(MHWSaveRaw));
+    mhwRaw = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
     if (!mhwRaw) {
       qWarning("Error allocating memory.");
       return;
@@ -119,7 +119,7 @@ void MHWISaveEditor::Open()
 
     memcpy(mhwRaw->data, saveBlob.constData(), saveBlob.length());
     if (!IsBlowfishDecrypted(&mhwRaw->save)) {
-      DecryptSave(mhwRaw->data, sizeof(MHWSaveRaw));
+      DecryptSave(mhwRaw->data, sizeof(mhw_save_raw));
     }
   }
 
@@ -166,23 +166,23 @@ void MHWISaveEditor::Save()
       return;
     }
 
-    MHWSaveRaw* saveWrite = nullptr;
+    mhw_save_raw* saveWrite = nullptr;
     if (selectedFilter == tr(ENCRYPTED_SAVE) || selectedFilter == tr(ALL_SAVE)) {
-      saveWrite = (MHWSaveRaw*)malloc(sizeof(MHWSaveRaw));
+      saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
       if (!saveWrite) {
         qInfo("Error allocating memory.");
         return;
       }
-      memcpy(saveWrite, mhwRaw, sizeof(MHWSaveRaw));
-      EncryptSave(saveWrite->data, sizeof(MHWSaveRaw));
+      memcpy(saveWrite, mhwRaw, sizeof(mhw_save_raw));
+      EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
     }
     else if (selectedFilter == tr(UNENCRYPTED_SAVE)) {
       saveWrite = mhwRaw;
     }
 
     assert(saveWrite);
-    int length = file.write((char*)saveWrite->data, sizeof(MHWSaveRaw));
-    if (length != sizeof(MHWSaveRaw)) {
+    int length = file.write((char*)saveWrite->data, sizeof(mhw_save_raw));
+    if (length != sizeof(mhw_save_raw)) {
       qWarning("File: %s, cannot be written.", qUtf8Printable(filepath));
       return;
     }
