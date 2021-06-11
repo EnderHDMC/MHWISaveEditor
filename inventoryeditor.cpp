@@ -1,6 +1,8 @@
 #include "inventoryeditor.h"
 #include "ui_inventoryeditor.h"
 
+#include <QScrollBar>
+
 InventoryEditor::InventoryEditor(const inventory_area* area, QWidget* parent)
   : QWidget(parent)
 {
@@ -8,11 +10,12 @@ InventoryEditor::InventoryEditor(const inventory_area* area, QWidget* parent)
   ui->setupUi(this);
 
   slotViews.resize(area->count);
-  
+
   for (size_t i = 0; i < slotViews.size(); i++)
   {
     slotViews[i] = new ItemSlotView(area, i, this);
-    ui->gridLayout->addWidget(slotViews[i], i / 8, i % 8);
+    slotViews[i]->setFixedSize(128, 128);
+    ui->gridLayoutScroll->addWidget(slotViews[i], i / 8, i % 8);
   }
 }
 
