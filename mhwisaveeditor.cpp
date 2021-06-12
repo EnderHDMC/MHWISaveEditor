@@ -26,11 +26,15 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
 
   slotSignalMapper = new QSignalMapper(this);
-  for (int i = 0; i < 3; ++i) {
-    QAction* slotAction = new QAction("Slot " + QString::number(i + 1));
-    connect(slotAction, SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
-    slotSignalMapper->setMapping(slotAction, i);
-    ui->menuSlot->addAction(slotAction);
+  slotActions.resize(3);
+  for (int i = 0; i < slotActions.size(); ++i) {
+    slotActions[i] = new QAction("Slot " + QString::number(i + 1));
+    slotActions[i]->setCheckable(true);
+    slotActions[i]->setChecked(i == saveslot);
+
+    connect(slotActions[i], SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
+    slotSignalMapper->setMapping(slotActions[i], i);
+    ui->menuSlot->addAction(slotActions[i]);
   }
   connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Slot(int)));
 
@@ -81,8 +85,6 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
 
 void MHWISaveEditor::Open()
 {
-  qInfo("Hello from Open");
-
   QString path = GetDefaultSavePath();
   QString filepath = QString();
 
@@ -124,19 +126,11 @@ void MHWISaveEditor::Open()
   }
 
   // Load the save into the inventory slots
-  if (result) {
-    for (size_t i = 0; i < inventoryEditors.count(); i++)
-    {
-      InventoryEditor* editor = inventoryEditors[i];
-      editor->Load(mhwRaw, 0);
-    }
-  }
+  LoadSaveSlot();
 }
 
 void MHWISaveEditor::Save()
 {
-  qInfo("Hello from Save");
-
   if (!mhwRaw) return;
   QString path = GetDefaultSavePath();
   QString filepath = QString();
@@ -192,9 +186,28 @@ void MHWISaveEditor::Save()
   }
 }
 
+void MHWISaveEditor::LoadSaveSlot()
+{
+  if (!mhwRaw) return;
+
+  for (size_t i = 0; i < inventoryEditors.count(); i++)
+  {
+    InventoryEditor* editor = inventoryEditors[i];
+    editor->Load(mhwRaw, saveslot);
+  }
+}
+
 void MHWISaveEditor::Slot(int slot)
 {
   qInfo("Selected slot index %d.", slot);
+  saveslot = slot;
+
+  for (size_t i = 0; i < slotActions.count(); i++)
+  {
+    slotActions[i]->setChecked(i == saveslot);
+  }
+
+  LoadSaveSlot();
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)

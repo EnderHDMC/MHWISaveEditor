@@ -37,10 +37,14 @@ public:
 private:
   Ui::MHWISaveEditor* ui;
   mhw_save_raw* mhwRaw;
+  int saveslot = 0;
 
   QSignalMapper* slotSignalMapper;
   QSignalMapper* openSignalMapper;
 
+  QList<QAction*> slotActions;
   QList<InventoryEditor*> inventoryEditors;
+
+  void LoadSaveSlot();
 };
 #endif // MHWISAVEEDITOR_H
