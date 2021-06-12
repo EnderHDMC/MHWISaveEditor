@@ -1501,6 +1501,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MasterItemList.json" />
-    <None Include="res\SAVEDATA1000.ksy" />
+    <None Include="res\FileMapping\SAVEDATA1000.ksy" />
+    <None Include="res\FileMapping\itm.ksy" />
   </ItemGroup>
 </Project>
