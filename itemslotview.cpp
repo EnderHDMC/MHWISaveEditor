@@ -52,11 +52,10 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int saveslot)
 
 void ItemSlotView::UpdateItemDisplay(itemInfo* info)
 {
-  QString path = QString("res/ItemIcons/%1_%2.png").arg(info->icon_id).arg(info->icon_color);
-  QIcon* bmp = bitmapDB->Pixmap(path);
+  QIcon* icon = bitmapDB->ItemIcon(info);
 
-  if (bmp)
-    ui->toolButton->setIcon(*bmp);
+  if (icon)
+    ui->toolButton->setIcon(*icon);
 
   ui->toolButton->setText(QString::fromUtf8(info->name));
 }

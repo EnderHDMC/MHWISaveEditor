@@ -17,9 +17,7 @@ int main(int argc, char* argv[])
   for (size_t i = 0; i < itemDB->count(); i++)
   {
     itemInfo* info = itemDB->GetItemById(i);
-
-    QString path = QString("res/ItemIcons/%1_%2.png").arg(info->icon_id).arg(info->icon_color);
-    QIcon* bmp = bitmapDB->Pixmap(path);
+    QIcon* icon = bitmapDB->ItemIcon(info);
   }
 
   QTranslator translator;

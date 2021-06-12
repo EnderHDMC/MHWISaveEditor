@@ -5,8 +5,11 @@
 
 #include <unordered_map>
 
+#include "ItemDB.h"
+
 class BitmapDB
 {
+private:
   static BitmapDB* instance;
   std::unordered_map<QString, QIcon*> images;
 
@@ -17,5 +20,5 @@ public:
   void Free();
 
   QIcon* Pixmap(QString path);
-
+  QIcon* ItemIcon(itemInfo* info);
 };

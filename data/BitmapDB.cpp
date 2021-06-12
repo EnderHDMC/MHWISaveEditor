@@ -38,3 +38,10 @@ QIcon* BitmapDB::Pixmap(QString path)
 
   return result;
 }
+
+QIcon* BitmapDB::ItemIcon(itemInfo* info)
+{
+  QString path = QString("res/ItemIcons/%1_%2.png").arg(info->icon_id).arg(info->icon_color);
+  QIcon* icon = Pixmap(path);
+  return icon;
+}
