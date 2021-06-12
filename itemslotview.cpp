@@ -1,7 +1,6 @@
 #include "itemslotview.h"
 #include "ui_itemslotview.h"
-#include "data/BitmapDB.h"
-#include "data/ItemDB.h"
+
 #include <QMessageBox>
 
 ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent)
@@ -12,6 +11,9 @@ ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent
 
   ui->toolButton->setIconSize({ 64, 64 });
   ui->toolButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+  bitmapDB = bitmapDB->GetInstance();
+  itemDB = itemDB->GetInstance();
 
   this->area = area;
   this->invslot = slot;
@@ -24,11 +26,10 @@ ItemSlotView::~ItemSlotView()
 
 void ItemSlotView::Load(mhw_save_raw* mhwSave, int saveslot)
 {
+  loading = true;
+
   this->mhwSave = mhwSave;
   this->saveslot = saveslot;
-
-  BitmapDB* bitmapDB = bitmapDB->GetInstance();
-  ItemDB* itemDB = itemDB->GetInstance();
 
   u8* slot = ((u8*)(&mhwSave->save.section3.Saves[saveslot])) + area->localoffset;
   mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
@@ -43,10 +44,40 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int saveslot)
     return;
   }
 
-  QString path = QString("res/ItemIcons/%1_%2.png").arg(info->iconID).arg(info->iconColor);
-  QPixmap* bmp = bitmapDB->Pixmap(path);
+  UpdateItemDisplay(info);
+  UpdateMaxAmount(info, itemSlot);
 
-  ui->toolButton->setIcon(QIcon(*bmp));
+  loading = false;
+}
+
+void ItemSlotView::UpdateItemDisplay(itemInfo* info)
+{
+  QString path = QString("res/ItemIcons/%1_%2.png").arg(info->icon_id).arg(info->icon_color);
+  QIcon* bmp = bitmapDB->Pixmap(path);
+
+  if (bmp)
+    ui->toolButton->setIcon(*bmp);
+
   ui->toolButton->setText(QString::fromUtf8(info->name));
-  ui->spinBox->setValue(itemSlot->amount);
+}
+
+void ItemSlotView::UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot)
+{
+  int max = (area->storage) ? 9999 : info->carry_limit;
+  ui->spinBox->setMaximum(max);
+  ui->spinBox->setValue(item_slot->amount);
+}
+
+void ItemSlotView::AmountChanged(int amount)
+{
+  if (!loading) {
+    u8* slot = ((u8*)(&mhwSave->save.section3.Saves[saveslot])) + area->localoffset;
+    mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
+
+    itemSlot->amount = amount;
+    if (amount == 0) {
+      itemSlot->id = 0;
+      // TODO: More here
+    }
+  }
 }

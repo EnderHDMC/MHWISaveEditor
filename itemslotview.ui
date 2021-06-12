@@ -58,5 +58,25 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ItemSlotView</receiver>
+   <slot>AmountChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>155</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>122</x>
+     <y>83</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>AmountChanged(int)</slot>
+ </slots>
 </ui>

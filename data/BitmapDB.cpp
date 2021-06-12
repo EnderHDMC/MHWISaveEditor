@@ -1,4 +1,5 @@
 #include "BitmapDB.h"
+#include <QDir>
 
 BitmapDB* BitmapDB::instance = nullptr;
 
@@ -17,20 +18,22 @@ void BitmapDB::Free()
   instance = nullptr;
 }
 
-QPixmap* BitmapDB::Pixmap(QString path)
+QIcon* BitmapDB::Pixmap(QString path)
 {
-  QPixmap* result = nullptr;
+  QIcon* result = nullptr;
+
+  if (!QFile::exists(path)) return nullptr;
 
   if (images.find(path) == images.end()) {
     qInfo("Loading %s", qUtf8Printable(path));
 
-    result = new QPixmap(path);
+    result = new QIcon(path);
     images[path] = result;
   }
   else {
     qInfo("Re-using %s", qUtf8Printable(path));
 
-    result = (QPixmap*)images.at(path);
+    result = images.at(path);
   }
 
   return result;

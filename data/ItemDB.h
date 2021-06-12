@@ -8,35 +8,33 @@ using json = nlohmann::json;
 
 struct itemInfo {
   i32 id;
-  i32 subType;
-  i32 storageID;
+  i32 sub_type;
+  i32 type;
   i32 rarity;
-  i32 carryLimit;
+  i32 carry_limit;
   i32 unk;
-  i32 sortOrder;
+  i32 sort_order;
   i32 flags;
-  i32 iconID;
-  i32 iconColor;
-  i32 carryItem;
-  i32 sellPrice;
-  i32 buyPrice;
+  i32 icon_id;
+  i32 icon_color;
+  i32 sell_price;
+  i32 buy_price;
   std::string name;
   std::string description;
 
   itemInfo() {
     id = 0;
-    subType = 0;
-    storageID = 0;
+    sub_type = 0;
+    type = 0;
     rarity = 0;
-    carryLimit = 0;
+    carry_limit = 0;
     unk = 0;
-    sortOrder = 0;
+    sort_order = 0;
     flags = 0;
-    iconID = 0;
-    iconColor = 0;
-    carryItem = 0;
-    sellPrice = 0;
-    buyPrice = 0;
+    icon_id = 0;
+    icon_color = 0;
+    sell_price = 0;
+    buy_price = 0;
   }
 };
 
@@ -56,7 +54,7 @@ static bool operator==(const itemInfo& lhs, const itemInfo& rhs) {
       && lhs.buyPrice == rhs.buyPrice; */
 }
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(itemInfo, id, subType, storageID, rarity, carryLimit, unk, sortOrder, flags, iconID, iconColor, carryItem, sellPrice, buyPrice, name, description)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(itemInfo, id, sub_type, type, rarity, carry_limit, unk, sort_order, flags, icon_id, icon_color, sell_price, buy_price, name, description)
 
 class ItemDB
 {
