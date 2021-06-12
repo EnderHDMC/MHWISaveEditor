@@ -54,15 +54,19 @@ void ItemSlotView::UpdateItemDisplay(itemInfo* info)
 {
   QIcon* icon = bitmapDB->ItemIcon(info);
 
-  if (icon)
-    ui->toolButton->setIcon(*icon);
-
+  ui->toolButton->setIcon(icon ? *icon : QIcon());
   ui->toolButton->setText(QString::fromUtf8(info->name));
 }
 
 void ItemSlotView::UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot)
 {
+  Q_ASSERT(info->id == item_slot->id);
+  
   int max = (area->storage) ? 9999 : info->carry_limit;
+  if (info->id == 0) max = 0;
+  Q_ASSERT((item_slot->amount == 0 && item_slot->id == 0)
+    || (item_slot->amount <= max && item_slot->amount > 0 && item_slot->id > 0));
+
   ui->spinBox->setMaximum(max);
   ui->spinBox->setValue(item_slot->amount);
 }
@@ -76,7 +80,10 @@ void ItemSlotView::AmountChanged(int amount)
     itemSlot->amount = amount;
     if (amount == 0) {
       itemSlot->id = 0;
-      // TODO: More here
+
+      itemInfo* info = itemDB->GetItemById(itemSlot->id);
+      UpdateItemDisplay(info);
+      UpdateMaxAmount(info, itemSlot);
     }
   }
 }
