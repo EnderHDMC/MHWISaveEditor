@@ -1504,5 +1504,19 @@
     <None Include="res\FileMapping\SAVEDATA1000.ksy" />
     <None Include="res\FileMapping\itm.ksy" />
     <None Include="res\FileMapping\gmd.ksy" />
+    <None Include="res\GameData\item_ara.gmd" />
+    <None Include="res\GameData\item_chS.gmd" />
+    <None Include="res\GameData\item_chT.gmd" />
+    <None Include="res\GameData\item_eng.gmd" />
+    <None Include="res\GameData\item_fre.gmd" />
+    <None Include="res\GameData\item_ger.gmd" />
+    <None Include="res\GameData\item_ita.gmd" />
+    <None Include="res\GameData\item_jpn.gmd" />
+    <None Include="res\GameData\item_kor.gmd" />
+    <None Include="res\GameData\item_pol.gmd" />
+    <None Include="res\GameData\item_ptB.gmd" />
+    <None Include="res\GameData\item_rus.gmd" />
+    <None Include="res\GameData\item_spa.gmd" />
+    <None Include="res\GameData\itemData.itm" />
   </ItemGroup>
 </Project>

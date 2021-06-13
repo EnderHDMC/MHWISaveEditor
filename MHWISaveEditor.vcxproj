@@ -65,6 +65,48 @@
     <None Include="res\FileMapping\itm.ksy">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="res\GameData\itemData.itm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_ara.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_chS.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_chT.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_eng.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_fre.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_ger.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_ita.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_jpn.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_kor.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_pol.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_ptB.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_rus.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\GameData\item_spa.gmd">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="res\MasterItemList.json">
       <FileType>Text</FileType>
       <DeploymentContent>true</DeploymentContent>
