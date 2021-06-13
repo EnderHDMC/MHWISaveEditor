@@ -32,7 +32,7 @@ types:
         type: u1
       - id: carry_limit
         type: u1
-      - id: unknown
+      - id: carry_limit_twisted
         type: u1
       - id: sort_order
         type: u2

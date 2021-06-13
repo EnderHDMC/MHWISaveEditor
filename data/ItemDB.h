@@ -12,7 +12,7 @@ struct itemInfo {
   i32 type;
   i32 rarity;
   i32 carry_limit;
-  i32 unk;
+  i32 carry_limit_twisted;
   i32 sort_order;
   i32 flags;
   i32 icon_id;
@@ -28,7 +28,7 @@ struct itemInfo {
     type = 0;
     rarity = 0;
     carry_limit = 0;
-    unk = 0;
+    carry_limit_twisted = 0;
     sort_order = 0;
     flags = 0;
     icon_id = 0;
@@ -39,22 +39,13 @@ struct itemInfo {
 };
 
 static bool operator==(const itemInfo& lhs, const itemInfo& rhs) {
-  return lhs.id == rhs.id; /*
-      && lhs.subType == rhs.subType
-      && lhs.storageID == rhs.storageID
-      && lhs.rarity == rhs.rarity
-      && lhs.carryLimit == rhs.carryLimit
-      && lhs.unk == rhs.unk
-      && lhs.sortOrder == rhs.sortOrder
-      && lhs.flags == rhs.flags
-      && lhs.iconID == rhs.iconID
-      && lhs.iconColor == rhs.iconColor
-      && lhs.carryItem == rhs.carryItem
-      && lhs.sellPrice == rhs.sellPrice
-      && lhs.buyPrice == rhs.buyPrice; */
+  return lhs.id == rhs.id;
 }
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(itemInfo, id, sub_type, type, rarity, carry_limit, unk, sort_order, flags, icon_id, icon_color, sell_price, buy_price, name, description)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(itemInfo,
+    id, sub_type, type, rarity, carry_limit, carry_limit_twisted,
+    sort_order, flags, icon_id, icon_color, sell_price, buy_price,
+    name, description)
 
 class ItemDB
 {
