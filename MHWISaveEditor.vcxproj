@@ -59,6 +59,9 @@
     <QtUic Include="mhwisaveeditor.ui" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\FileMapping\gmd.ksy">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="res\FileMapping\itm.ksy">
       <DeploymentContent>true</DeploymentContent>
     </None>
