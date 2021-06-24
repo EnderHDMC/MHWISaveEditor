@@ -7,17 +7,18 @@
 #include <QDesktopServices>
 #include <QGridLayout>
 
-// Encryption
-#include "crypto/iceborne_crypt.h"
-// Save paths
-#include "utility/paths.h"
-#include "utility/system/FileUtils.h"
-// Inventory Layout
-#include "types/inventory_areas.h"
-// Item Data
-#include "data/ItemDB.h"
-#include "data/BitmapDB.h"
 #include "inventoryeditor.h"
+
+// Encryption
+#include "../crypto/iceborne_crypt.h"
+// Save paths
+#include "../utility/paths.h"
+#include "../utility/system/FileUtils.h"
+// Inventory Layout
+#include "../types/inventory_areas.h"
+// Item Data
+#include "../data/ItemDB.h"
+#include "../data/BitmapDB.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent)

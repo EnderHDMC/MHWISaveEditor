@@ -1,4 +1,4 @@
-#include "mhwisaveeditor.h"
+#include "gui/mhwisaveeditor.h"
 
 #include <QApplication>
 #include <QLocale>

@@ -22,10 +22,10 @@
     <ClInclude Include="crypto\blowfish.h" />
     <ClInclude Include="crypto\iceborne_crypt.h" />
     <ClInclude Include="crypto\sha1.h" />
-    <QtMoc Include="itemslotview.h" />
+    <QtMoc Include="gui\itemslotview.h" />
     <ClInclude Include="data\BitmapDB.h" />
     <ClInclude Include="data\ItemDB.h" />
-    <QtMoc Include="inventoryeditor.h" />
+    <QtMoc Include="gui\inventoryeditor.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\inventory_areas.h" />
     <ClInclude Include="types\mhw_enums.h" />
@@ -33,16 +33,16 @@
     <ClInclude Include="types\types.h" />
     <ClInclude Include="utility\paths.h" />
     <ClInclude Include="utility\system\FileUtils.h" />
-    <QtMoc Include="mhwisaveeditor.h" />
+    <QtMoc Include="gui\mhwisaveeditor.h" />
     <ClInclude Include="utility\endian.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
-    <ClCompile Include="inventoryeditor.cpp" />
-    <ClCompile Include="itemslotview.cpp" />
+    <ClCompile Include="gui\inventoryeditor.cpp" />
+    <ClCompile Include="gui\itemslotview.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mhwisaveeditor.cpp">
+    <ClCompile Include="gui\mhwisaveeditor.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).moc</QtMocFileName>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -54,9 +54,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="inventoryeditor.ui" />
-    <QtUic Include="itemslotview.ui" />
-    <QtUic Include="mhwisaveeditor.ui" />
+    <QtUic Include="gui\inventoryeditor.ui" />
+    <QtUic Include="gui\itemslotview.ui" />
+    <QtUic Include="gui\mhwisaveeditor.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\FileMapping\gmd.ksy">

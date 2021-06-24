@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QSignalMapper>
-#include "types/mhw_save.h"
+#include "../types/mhw_save.h"
 
 #include "itemslotview.h"
 #include "inventoryeditor.h"

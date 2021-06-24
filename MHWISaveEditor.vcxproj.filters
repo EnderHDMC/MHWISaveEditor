@@ -67,10 +67,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mhwisaveeditor.cpp">
+    <ClCompile Include="gui\mhwisaveeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="itemslotview.cpp">
+    <ClCompile Include="gui\itemslotview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="data\BitmapDB.cpp">
@@ -79,29 +79,29 @@
     <ClCompile Include="data\ItemDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="inventoryeditor.cpp">
+    <ClCompile Include="gui\inventoryeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="mhwisaveeditor.h">
+    <QtMoc Include="gui\mhwisaveeditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="itemslotview.h">
+    <QtMoc Include="gui\itemslotview.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="inventoryeditor.h">
+    <QtMoc Include="gui\inventoryeditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="mhwisaveeditor.ui">
+    <QtUic Include="gui\mhwisaveeditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="itemslotview.ui">
+    <QtUic Include="gui\itemslotview.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="inventoryeditor.ui">
+    <QtUic Include="gui\inventoryeditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

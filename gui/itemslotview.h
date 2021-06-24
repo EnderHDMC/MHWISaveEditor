@@ -1,9 +1,9 @@
 #pragma once
 
 #include <QWidget>
-#include "types/inventory_areas.h"
-#include "data/ItemDB.h"
-#include "data/BitmapDB.h"
+#include "../types/inventory_areas.h"
+#include "../data/ItemDB.h"
+#include "../data/BitmapDB.h"
 
 namespace Ui { class ItemSlotView; };
 
