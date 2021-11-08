@@ -155,12 +155,6 @@ void MHWISaveEditor::Save()
     }
     qInfo("%s", qUtf8Printable(filepath));
 
-    QSaveFile file(filepath);
-    if (!file.open(QIODevice::WriteOnly)) {
-      qWarning("File: %s, cannot be written.", qUtf8Printable(filepath));
-      return;
-    }
-
     mhw_save_raw* saveWrite = nullptr;
     if (selectedFilter == tr(ENCRYPTED_SAVE) || selectedFilter == tr(ALL_SAVE)) {
       saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
@@ -168,14 +162,26 @@ void MHWISaveEditor::Save()
         qInfo("Error allocating memory.");
         return;
       }
+
+      // TODO: Consider making something like this a feature
+      // Make you look exactly like first person in your guild card
+      // After running this with guildcard 41, my character has a black face.
+      // memcpy(&mhwRaw->save.section3.Saves[0].appearance, &mhwRaw->save.section3.Saves[0].collected_guild_card[0], sizeof(mhw_character_appearance));
+      
       memcpy(saveWrite, mhwRaw, sizeof(mhw_save_raw));
       EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
     }
     else if (selectedFilter == tr(UNENCRYPTED_SAVE)) {
       saveWrite = mhwRaw;
     }
-
     assert(saveWrite);
+
+    QSaveFile file(filepath);
+    if (!file.open(QIODevice::WriteOnly)) {
+      qWarning("File: %s, cannot be written.", qUtf8Printable(filepath));
+      return;
+    }
+
     int length = file.write((char*)saveWrite->data, sizeof(mhw_save_raw));
     if (length != sizeof(mhw_save_raw)) {
       qWarning("File: %s, cannot be written.", qUtf8Printable(filepath));

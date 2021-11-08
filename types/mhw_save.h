@@ -240,7 +240,13 @@ struct mhw_section0
 struct mhw_section1
 {
   mhw_section_header header;
-  u8 data[4096];
+  u8 unknown0[56];
+  u8 character_edit_voucher;
+  u8 unknown1[1096];
+  u8 character_edit_voucher_free;
+  u8 unknown2[11];
+  u8 palico_edit_voucher;
+  u8 unknown3[2930];
 };
 
 struct mhw_section2

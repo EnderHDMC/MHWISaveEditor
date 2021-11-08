@@ -5,16 +5,22 @@ meta:
 seq:
   - id: header
     type: mhw_save_header
+    doc: "Offset: 0"
   - id: section_offsets
     type: mhw_section_offsets
+    doc: "Offset: 64"
   - id: section0
     type: mhw_section
+    doc: "Offset: 96"
   - id: section1
-    type: mhw_section
+    type: mhw_section1
+    doc: "Offset: 3145840"
   - id: section2
     type: mhw_section
+    doc: "Offset: 3149952"
   - id: section3
     type: mhw_section3
+    doc: "Offset: 3150024"
 
 types:
   mhw_save_header:
@@ -57,6 +63,25 @@ types:
         type: mhw_section_header
       - id: data
         size: header.size
+
+  mhw_section1:
+    seq:
+      - id: header
+        type: mhw_section_header
+      - id: unknown0
+        size: 56
+      - id: character_edit_voucher
+        type: u1
+      - id: unknown1
+        size: 1096
+      - id: character_edit_voucher_free
+        type: u1
+      - id: unknown2
+        size: 11
+      - id: palico_edit_voucher
+        type: u1
+      - id: unknown3
+        size: 2930
 
   mhw_section3:
     seq:
