@@ -1,0 +1,38 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: 
+//   Authors: See Credits
+//   Version: 
+//   Purpose: 
+//  Category: Game
+// File Mask: *.itm
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+#include "types.bt"
+
+typedef struct {
+  u32 magic1;
+  u16 magic2;
+  u32 entry_count;
+} itm_header;
+
+typedef struct {
+  u32 id;
+  u8 subtype;
+  u32 type;
+  u8 rarity;
+  u8 carry_limit;
+  u8 carry_limit_twisted;
+  u16 sort_order;
+  u32 flags;
+  u32 icon_id;
+  u16 icon_color;
+  u32 sell_price;
+  u32 buy_price;
+} itm_entry;
+
+itm_header header;
+itm_entry items[header.entry_count];

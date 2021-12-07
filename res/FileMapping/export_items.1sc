@@ -1,0 +1,92 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: export_items.1sc
+//   Authors: EnderHDMC
+//   Version: 
+//   Purpose: 
+//  Category: 
+//   History: 
+//------------------------------------------------
+
+#include <types.bt>
+
+typedef struct {
+  u32 id;
+  u8 subtype;
+  u32 type;
+  u8 rarity;
+  u8 carry_limit;
+  u8 carry_limit_twisted;
+  u16 sort_order;
+  u32 flags;
+  u32 icon_id;
+  u16 icon_color;
+  u32 sell_price;
+  u32 buy_price;
+  string name;
+  string description;
+} item_record;
+
+int item_names = GetFileNum();
+string path = FileNameGetPath(GetFileName());
+string export_path = path + "..\\MasterItemList.csv";
+int item_data = FileOpen(path + "itemData.itm", true, "Hex", false);
+int csv = FileNew();
+
+FileSelect(item_data);
+
+local item_record item;
+int item_count = header.entry_count;
+int i, comp;
+
+FPrintf(csv, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
+  "id", "subtype", "type", "rarity",
+  "carry_limit", "carry_limit_twisted", "sort_order", "flags",
+  "icon_id", "icon_color", "sell_price", "buy_price",
+  "name", "description");
+
+for(i = 0; i < item_count; i++)
+{
+  FileSelect(item_data);
+  item.id                  = items[i].id;
+  item.subtype             = items[i].subtype;
+  item.type                = items[i].type;
+  item.rarity              = items[i].rarity;
+  item.carry_limit         = items[i].carry_limit;
+  item.carry_limit_twisted = items[i].carry_limit_twisted;
+  item.sort_order          = items[i].sort_order;
+  item.flags               = items[i].flags;
+  item.icon_id             = items[i].icon_id;
+  item.icon_color          = items[i].icon_color;
+  item.sell_price          = items[i].sell_price;
+  item.buy_price           = items[i].buy_price;
+
+  FileSelect(item_names);
+  item.name        = strings.str[i * 2].value;
+  item.description = strings.str[i * 2 + 1].value;
+
+  while ((comp = Strstr(item.description, "\x0D\x0A")) > -1)
+  {
+    item.description = StrDel(item.description, comp, 1);
+    item.description[comp] = ' ';
+  }
+
+  comp = Strchr(item.description, '"');
+  if (comp > -1) {
+    item.description = SubStr(item.description, 0, comp) + '\\' + SubStr(item.description, comp);
+    comp += Strchr(SubStr(item.description, comp+2), '"') + 2;
+    item.description = SubStr(item.description, 0, comp) + '\\' + SubStr(item.description, comp);
+  }
+  // while (()
+
+  FPrintf(csv, "%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s\n",
+  item.id, item.subtype, item.type, item.rarity,
+  item.carry_limit, item.carry_limit_twisted, item.sort_order, item.flags,
+  item.icon_id, item.icon_color, item.sell_price, item.buy_price,
+  item.name, item.description);
+}
+
+FileSelect(csv);
+FileSave(export_path);
+FileClose();

@@ -1,0 +1,47 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: 
+//   Authors: See Credits
+//   Version: 
+//   Purpose: 
+//  Category: Game
+// File Mask: *.gmd
+//  ID Bytes: 47 4D 44 00
+//   History: 
+//------------------------------------------------
+
+#include "types.bt"
+
+struct gmd_info_entry {
+  u32 string_index;
+  u32 hash_key_2x; // signed_crc32(key_value + key_value)
+  u32 hash_key_3x; // signed_crc32(key_value + key_value + key_value)
+  u32 pad; // always 0xCDCDCDCD
+  u64 key_offset;
+  u64 bucket_index;
+};
+
+struct gmd_header {
+  u32 magic;
+  u32 version;
+  u8 unknown[12];
+  u32 key_count;
+  u32 string_count;
+  u32 key_block_size;
+  u32 string_block_size;
+  u32 name_length;
+  u8 filename[name_length + 1]; // Assuming null byte terminated
+};
+
+gmd_header header;
+gmd_info_entry gmd_info[header.key_count];
+u64 buckets[256];
+
+string_count = header.key_count;
+string_max = header.key_block_size;
+string_block keys;
+
+string_count = header.string_count;
+string_max = header.string_block_size;
+string_block strings;
