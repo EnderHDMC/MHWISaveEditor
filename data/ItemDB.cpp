@@ -1,5 +1,6 @@
 #include "ItemDB.h"
 
+#include <QApplication>
 #include <QtGlobal>
 #include <QString>
 
@@ -9,6 +10,10 @@ ItemDB::ItemDB()
 {
   // read a JSON file
   std::ifstream file("res/MasterItemList.json");
+  if (!file) {
+    qFatal("Cannot open file: res/MasterItemList.json");
+    QApplication::exit(1);
+  }
   json json;
   file >> json;
 
