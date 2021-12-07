@@ -8,7 +8,7 @@ using json = nlohmann::json;
 
 struct itemInfo {
   i32 id;
-  i32 sub_type;
+  i32 subtype;
   i32 type;
   i32 rarity;
   i32 carry_limit;
@@ -24,7 +24,7 @@ struct itemInfo {
 
   itemInfo() {
     id = 0;
-    sub_type = 0;
+    subtype = 0;
     type = 0;
     rarity = 0;
     carry_limit = 0;
@@ -43,7 +43,7 @@ static bool operator==(const itemInfo& lhs, const itemInfo& rhs) {
 }
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(itemInfo,
-    id, sub_type, type, rarity, carry_limit, carry_limit_twisted,
+    id, subtype, type, rarity, carry_limit, carry_limit_twisted,
     sort_order, flags, icon_id, icon_color, sell_price, buy_price,
     name, description)
 

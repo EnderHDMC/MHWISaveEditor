@@ -40,7 +40,7 @@ local item_record item;
 int item_count = header.entry_count;
 int i, comp;
 
-FPrintf(csv, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
+FPrintf(csv, "%s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s\n",
   "id", "subtype", "type", "rarity",
   "carry_limit", "carry_limit_twisted", "sort_order", "flags",
   "icon_id", "icon_color", "sell_price", "buy_price",
@@ -78,9 +78,8 @@ for(i = 0; i < item_count; i++)
     comp += Strchr(SubStr(item.description, comp+2), '"') + 2;
     item.description = SubStr(item.description, 0, comp) + '\\' + SubStr(item.description, comp);
   }
-  // while (()
 
-  FPrintf(csv, "%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s\n",
+  FPrintf(csv, "%u; %u; %u; %u; %u; %u; %u; %u; %u; %u; %u; %u; %s; %s\n",
   item.id, item.subtype, item.type, item.rarity,
   item.carry_limit, item.carry_limit_twisted, item.sort_order, item.flags,
   item.icon_id, item.icon_color, item.sell_price, item.buy_price,
