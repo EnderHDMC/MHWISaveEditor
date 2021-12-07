@@ -1603,11 +1603,25 @@
     <ClCompile>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
+set VCINSTALLDIR=$(VCInstallDir)
+xcopy /E /Y "$(ProjectDir)res\" "$(OutDirFullPath)Deploy\res\"
+xcopy /Y "$(TargetPath)" "$(OutDirFullPath)Deploy\"
+windeployqt "$(TargetPath)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
+set VCINSTALLDIR=$(VCInstallDir)
+xcopy /E /Y "$(ProjectDir)res\" "$(OutDirFullPath)Deploy\res\"
+xcopy /Y "$(TargetPath)" "$(OutDirFullPath)Deploy\"
+windeployqt "$(TargetPath)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>

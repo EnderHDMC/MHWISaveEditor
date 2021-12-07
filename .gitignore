@@ -1,6 +1,7 @@
 # Build files
 [Dd]ebug
 [Rr]elease
+Deploy
 
 # User files
 *.user
