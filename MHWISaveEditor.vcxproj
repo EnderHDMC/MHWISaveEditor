@@ -1620,7 +1620,7 @@ windeployqt "$(TargetPath)"</Command>
 set VCINSTALLDIR=$(VCInstallDir)
 xcopy /E /Y "$(ProjectDir)res\" "$(OutDirFullPath)Deploy\res\"
 xcopy /Y "$(TargetPath)" "$(OutDirFullPath)Deploy\"
-windeployqt "$(TargetPath)"</Command>
+windeployqt "$(OutDirFullPath)Deploy\$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
