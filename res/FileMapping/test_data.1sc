@@ -1,0 +1,26 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+//   History: 
+//------------------------------------------------
+
+int i, value;
+int zero = 0;
+int max = 1724360 / 8;
+
+for (i = 0; i < max; i++) {
+  value = mhw_save.save.section3.zero[i];
+
+  if (value == 0) zero++;
+  else Printf("Nonzero, %u, %u\n", i, value);
+
+  if (i % 50000 == 0) Printf("Progress: %u / %u\n", i, max);
+}
+
+Printf("Zero: %u\n", zero);
+Printf("Nonzero: %u\n\n", max - zero);

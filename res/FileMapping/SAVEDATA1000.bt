@@ -62,8 +62,8 @@ enum <u8> mhw_toggle
 
 enum <u8> mhw_bool
 {
-  BoolOff = 0,
-  BoolOn = 1
+  BoolFalse = 0,
+  BoolTrue = 1
 };
 
 enum <u8> mhw_language
@@ -106,6 +106,68 @@ enum <u8> mhw_gamepad_glyphs
   XBOX        = 0,
   Playstation = 1,
   OtherXBOX   = 2
+};
+
+enum <i32> mhw_monster_index
+{
+  I_None                 = -1,
+  I_Anjanath             =  0,
+  I_Rathalos             =  1,
+  I_Great_Jagras         =  7,
+  I_Rathian              =  9,
+  I_Pink_Rathian         =  10,
+  I_Azure_Rathalos       =  11,
+  I_Diablos              =  12,
+  I_Black_Diablos        =  13,
+  I_Kirin                =  14,
+  I_Kushala_Daora        =  16,
+  I_Lunastra             =  17,
+  I_Teostra              =  18,
+  I_Lavasioth            =  19,
+  I_Deviljho             =  20,
+  I_Barroth              =  21,
+  I_Uragaan              =  22,
+  I_Pukei_Pukei          =  24,
+  I_Nergigante           =  25,
+  I_Kulu_Ya_Ku           =  27,
+  I_Tzitzi_Ya_Ku         =  28,
+  I_Jyaratodus           =  29,
+  I_Tobi_Kadachi         =  30,
+  I_Paolumu              =  31,
+  I_Legiana              =  32,
+  I_Great_Girros         =  33,
+  I_Odogaron             =  34,
+  I_Radobaan             =  35,
+  I_Vaal_Hazak           =  36,
+  I_Dodogama             =  37,
+  I_Bazelgeuse           =  39,
+  I_Tigrex               =  61,
+  I_Nargacuga            =  62,
+  I_Barioth              =  63,
+  I_Savage_Deviljho      =  64,
+  I_Brachydios           =  65,
+  I_Glavenus             =  66,
+  I_Acidic_Glavenus      =  67,
+  I_Fulgur_Anjanath      =  68,
+  I_Coral_Pukei_Pukei    =  69,
+  I_Ruiner_Nergigante    =  70,
+  I_Viper_Tobi_Kadachi   =  71,
+  I_Nightshade_Paolumu   =  72,
+  I_Shrieking_Legiana    =  73,
+  I_Ebony_Odogaron       =  74,
+  I_Blackveil_Vaal_Hazak =  75,
+  I_Seething_Bazelgeuse  =  76,
+  I_Beotodus             =  77,
+  I_Banbaro              =  78,
+  I_Velkhana             =  79,
+  I_Namielle             =  80,
+  I_Gold_Rathian         =  88,
+  I_Silver_Rathalos      =  89,
+  I_Yian_Garuga          =  90,
+  I_Rajang               =  91,
+  I_Brute_Tigrex         =  93,
+  I_Zinogre              =  94,
+  I_Stygian_Zinogre      =  95
 };
 
 struct mhw_save_header
@@ -314,6 +376,29 @@ struct mhw_storage {
   mhw_item_slot decorations[500];
 };
 
+struct mhw_investigation {
+  u32 filled; // 30 75 00 00
+  u8 selected;
+  u32 attempts;
+  u32 seen; // 3 = true, 0 = false
+  u8 locale;
+  u8 rank;
+  mhw_monster_index mon[3];
+  mhw_bool tempered[3];
+  u8 hp;
+  u8 attack;
+  u8 defense;
+  u8 size_modifier;
+  u8 unknown0;
+  u8 flourish_index;
+  u8 goal_index;
+  u8 unknown1;
+  u8 faint_index;
+  u8 player_count_index;
+  u8 bonus_rewards;
+  u8 zenny_multiplyer;
+};
+
 struct mhw_save_slot
 {
   u32 unknown0;
@@ -331,15 +416,16 @@ struct mhw_save_slot
   u8 unknown3[285483];
   u8 palico_name[64];
 
-  // u8 unknown4[366688];
-  u8 unknown4[233226];
+  u8 unknown4[1484];
+  mhw_investigation investigations[400];
+  u8 unknown5[214942];
   mhw_item_slot harvest[50];
-  u8 unknown5[133062];
+  u8 unknown6[133062];
 
   u32 guiding_lands_levels[6];
-  u8 unknown6[8];
+  u8 unknown7[8];
   u32 guiding_lands_level_total;
-  u8 unknown7[12329];
+  u8 unknown8[12329];
   u8 hash_table[512];
 };
 
@@ -399,7 +485,7 @@ struct mhw_section3
 {
   mhw_section_header header;
   mhw_save_slot saves[3];
-  u8 data[1724360];
+  u64 zero[1724360 / 8]; // Unused? Seems to be all zero.
 };
 
 struct mhw_ib_save
