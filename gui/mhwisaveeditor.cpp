@@ -64,8 +64,6 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 
     ui->tabWidget->addTab(newTab, tr(areas[i].area));
   }
-
-  mhwRaw = nullptr;
 }
 
 MHWISaveEditor::~MHWISaveEditor()
@@ -84,6 +82,81 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
   bitmapDB->Free();
 }
 
+void MHWISaveEditor::SaveFile(const QString& path, mhw_save_raw** save, bool encrypt = true)
+{
+  qInfo("Saving: %s", qUtf8Printable(path));
+  qInfo("Encrypted: %s", encrypt ? "True" : "False");
+
+  mhw_save_raw* savep = *save;
+  mhw_save_raw* saveWrite = savep;
+  if (encrypt) {
+    saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+    if (!saveWrite) {
+      qInfo("Error allocating memory.");
+      return;
+    }
+
+    memcpy(saveWrite, savep, sizeof(mhw_save_raw));
+    EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
+  }
+  assert(saveWrite);
+
+  QSaveFile file(path);
+  if (!file.open(QIODevice::WriteOnly)) {
+    qWarning("File: %s, cannot be written.", qUtf8Printable(path));
+    return;
+  }
+
+  int length = file.write((char*)saveWrite->data, sizeof(mhw_save_raw));
+  if (length != sizeof(mhw_save_raw)) {
+    qWarning("File: %s, cannot be written.", qUtf8Printable(path));
+    return;
+  }
+  file.commit();
+
+  if (saveWrite != savep) free(saveWrite);
+}
+
+void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
+{
+  qInfo("Loading %s", qUtf8Printable(path));
+  mhw_save_raw* savep = *save;
+
+  QFile file(path, this);
+  if (!file.open(QIODevice::ReadOnly)) {
+    qWarning("File: %s, cannot be read.", qUtf8Printable(path));
+    return;
+  }
+
+  QByteArray saveBlob = file.readAll();
+  if (saveBlob.length() != sizeof(mhw_save_raw)) {
+    qWarning("File: %s, cannot be read.", qUtf8Printable(path));
+    return;
+  }
+  file.close();
+
+  if (savep) free(savep);
+  savep = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+  if (!savep) {
+    qWarning("Error allocating memory.");
+    return;
+  };
+
+  memcpy(savep->data, saveBlob.constData(), saveBlob.length());
+  if (!IsBlowfishDecrypted(&savep->save)) {
+    DecryptSave(savep->data, sizeof(mhw_save_raw));
+  }
+  *save = savep;
+}
+
+void MHWISaveEditor::Dump()
+{
+  mhw_save_raw* buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+  LoadFile(GetDefaultSavePath() + "/" + QString::fromUtf8(SAVE_NAME), &buffer);
+  SaveFile(GetDefaultSavePath() + "/" + QString::fromUtf8(SAVE_NAME) + ".bin", &buffer, false);
+  free(buffer);
+}
+
 void MHWISaveEditor::Open()
 {
   QString path = GetDefaultSavePath();
@@ -91,39 +164,14 @@ void MHWISaveEditor::Open()
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
-  dialog.selectFile("SAVEDATA1000");
+  dialog.selectFile(QString::fromUtf8(SAVE_NAME));
   dialog.setFileMode(QFileDialog::ExistingFile);
-  int result = dialog.exec();
 
-  if (result) {
+  if (dialog.exec()) {
     QStringList files = dialog.selectedFiles();
     filepath = files[0];
-    qInfo("%s", qUtf8Printable(filepath));
 
-    QFile file(filepath, this);
-    if (!file.open(QIODevice::ReadOnly)) {
-      qWarning("File: %s, cannot be read.", qUtf8Printable(filepath));
-      return;
-    }
-
-    QByteArray saveBlob = file.readAll();
-    if (saveBlob.length() != sizeof(mhw_save_raw)) {
-      qWarning("File: %s, cannot be read.", qUtf8Printable(filepath));
-      return;
-    }
-    file.close();
-
-    if (mhwRaw) free(mhwRaw);
-    mhwRaw = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
-    if (!mhwRaw) {
-      qWarning("Error allocating memory.");
-      return;
-    };
-
-    memcpy(mhwRaw->data, saveBlob.constData(), saveBlob.length());
-    if (!IsBlowfishDecrypted(&mhwRaw->save)) {
-      DecryptSave(mhwRaw->data, sizeof(mhw_save_raw));
-    }
+    LoadFile(filepath, &mhwRaw);
   }
 
   // Load the save into the inventory slots
@@ -134,11 +182,20 @@ void MHWISaveEditor::Save()
 {
   if (!mhwRaw) return;
   QString path = GetDefaultSavePath();
-  QString filepath = QString();
 
   const QStringList filters({ tr(ALL_SAVE),
                               tr(ENCRYPTED_SAVE),
                               tr(UNENCRYPTED_SAVE) });
+
+  QMap<QString, QString> ext_map;
+  ext_map.insert(tr(ALL_SAVE), "");
+  ext_map.insert(tr(ENCRYPTED_SAVE), ".raw");
+  ext_map.insert(tr(UNENCRYPTED_SAVE), ".bin");
+
+  QMap<QString, bool> encrypt_map;
+  encrypt_map.insert(tr(ALL_SAVE), false);
+  encrypt_map.insert(tr(ENCRYPTED_SAVE), false);
+  encrypt_map.insert(tr(UNENCRYPTED_SAVE), true);
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
@@ -148,48 +205,14 @@ void MHWISaveEditor::Save()
   if (dialog.exec()) {
     QString selectedFilter = dialog.selectedNameFilter();
     QStringList files = dialog.selectedFiles();
-    filepath = files[0];
-    if (selectedFilter == tr(ALL_SAVE)) {
-      QFileInfo fileInfo(filepath);
-      filepath = fileInfo.absolutePath() + "/" + fileInfo.baseName();
-    }
-    qInfo("%s", qUtf8Printable(filepath));
 
-    mhw_save_raw* saveWrite = nullptr;
-    if (selectedFilter == tr(ENCRYPTED_SAVE) || selectedFilter == tr(ALL_SAVE)) {
-      saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
-      if (!saveWrite) {
-        qInfo("Error allocating memory.");
-        return;
-      }
+    QFileInfo fi(files[0]);
+    QString ext = fi.completeSuffix();
+    if (ext.isEmpty()) fi.setFile(fi.filePath() + ext_map.value(selectedFilter, ""));
+    QString filepath = fi.absoluteFilePath();
 
-      // TODO: Consider making something like this a feature
-      // Make you look exactly like first person in your guild card
-      // After running this with guildcard 41, my character has a black face.
-      // memcpy(&mhwRaw->save.section3.Saves[0].appearance, &mhwRaw->save.section3.Saves[0].collected_guild_card[0], sizeof(mhw_character_appearance));
-      
-      memcpy(saveWrite, mhwRaw, sizeof(mhw_save_raw));
-      EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
-    }
-    else if (selectedFilter == tr(UNENCRYPTED_SAVE)) {
-      saveWrite = mhwRaw;
-    }
-    assert(saveWrite);
-
-    QSaveFile file(filepath);
-    if (!file.open(QIODevice::WriteOnly)) {
-      qWarning("File: %s, cannot be written.", qUtf8Printable(filepath));
-      return;
-    }
-
-    int length = file.write((char*)saveWrite->data, sizeof(mhw_save_raw));
-    if (length != sizeof(mhw_save_raw)) {
-      qWarning("File: %s, cannot be written.", qUtf8Printable(filepath));
-      return;
-    }
-    file.commit();
-
-    if (saveWrite != mhwRaw) free(saveWrite);
+    bool encrypt = encrypt_map.value(selectedFilter);
+    SaveFile(filepath, &mhwRaw, encrypt);
   }
 }
 

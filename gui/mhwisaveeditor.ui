@@ -45,6 +45,7 @@
     </property>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
+    <addaction name="actionDump"/>
     <addaction name="separator"/>
     <addaction name="actionOpenGameLocation"/>
     <addaction name="actionOpenSaveLocation"/>
@@ -103,6 +104,14 @@
   <action name="actionOpenSaveLocation">
    <property name="text">
     <string>Open save location</string>
+   </property>
+  </action>
+  <action name="actionDump">
+   <property name="text">
+    <string>Dump</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+O</string>
    </property>
   </action>
  </widget>
@@ -188,6 +197,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionDump</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>Dump()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>568</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -195,5 +220,6 @@
   <slot>Slot(int)</slot>
   <slot>Backup()</slot>
   <slot>Restore()</slot>
+  <slot>Dump()</slot>
  </slots>
 </ui>

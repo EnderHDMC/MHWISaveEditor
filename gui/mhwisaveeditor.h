@@ -27,6 +27,7 @@ public slots:
   void OpenLocation(const QString& location);
   void Backup();
   void Restore();
+  void Dump();
 
 public:
   MHWISaveEditor(QWidget* parent = nullptr);
@@ -35,8 +36,11 @@ public:
   void closeEvent(QCloseEvent* event);
 
 private:
+  void SaveFile(const QString& path, mhw_save_raw** save, bool encrypt);
+  void LoadFile(const QString& path, mhw_save_raw** save);
+
   Ui::MHWISaveEditor* ui;
-  mhw_save_raw* mhwRaw;
+  mhw_save_raw* mhwRaw = nullptr;
   int saveslot = 0;
 
   QSignalMapper* slotSignalMapper;
