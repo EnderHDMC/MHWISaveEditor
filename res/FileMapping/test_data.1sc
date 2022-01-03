@@ -1,26 +1,57 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Script File
 //
-//      File: 
-//   Authors: 
+//      File: test_data.1sc
+//   Authors: EnderHDMC
 //   Version: 
-//   Purpose: 
-//  Category: 
+//   Purpose: Check save structure assumptions
+//  Category: Binary
 //   History: 
 //------------------------------------------------
 
-int i, value;
-int zero = 0;
-int max = 1724360 / 8;
+int x, y, value;
+int asumption = 0, max = 0, prog = 0;
 
-for (i = 0; i < max; i++) {
-  value = mhw_save.save.section3.zero[i];
-
-  if (value == 0) zero++;
-  else Printf("Nonzero, %u, %u\n", i, value);
-
-  if (i % 50000 == 0) Printf("Progress: %u / %u\n", i, max);
+int RoundDownPow10(int num) {
+  return Pow(10, Floor(Log10(num)));
 }
 
-Printf("Zero: %u\n", zero);
-Printf("Nonzero: %u\n\n", max - zero);
+void PrintResults(int asumption, int max) {
+  Printf("Pass: %u\n", asumption);
+  Printf("Fail: %u\n\n", max - asumption);
+}
+
+
+
+// Test if section0.zero0 is indeed all zero
+Printf("Check: 'mhw_save.section0.zero0'\n");
+asumption = 0;
+max = sizeof(mhw_save.section0.zero0) / sizeof(mhw_save.section0.zero0[0]);
+prog = RoundDownPow10(max);
+for (x = 0; x < max; x++) {
+  value = mhw_save.section0.zero0[x];
+
+  if (value == 0) asumption++;
+  else Printf("Nonzero, %u, %u\n", x, value);
+
+  if (x % prog == 0) Printf("Progress: %u / %u\n", x, max);
+}
+PrintResults(asumption, max);
+
+
+
+// Test if section3.zero is indeed all zero
+Printf("Check: 'mhw_save.section3.zero'\n");
+asumption = 0;
+max = sizeof(mhw_save.section3.zero) / sizeof(mhw_save.section3.zero[0]);
+prog = RoundDownPow10(max);
+for (x = 0; x < max; x++) {
+  value = mhw_save.section3.zero[x];
+
+  if (value == 0) asumption++;
+  else Printf("Nonzero, %u, %u\n", x, value);
+
+  if (x % prog == 0) Printf("Progress: %u / %u\n", x, max);
+}
+PrintResults(asumption, max);
+Printf("three: %d\n", mhw_save.section0.unknown1);

@@ -11,6 +11,22 @@
 //   History: 
 //------------------------------------------------
 
+// TODO:  mhw_guild_card
+//          tailraider_unity
+//          medals
+// TODO:  mhw_item_pouch
+//          investigate the struct
+// TODO:  mhw_section1
+//          dlc
+// TODO:  mhw_save_slot
+//          dlc_claimed
+//          slot_active
+//          bounties
+//          layered armor
+//          seliana room
+//          endemic life
+//          monster stats
+
 #include "types.bt"
 
 enum <u32> mhw_gender
@@ -108,6 +124,27 @@ enum <u8> mhw_gamepad_glyphs
   OtherXBOX   = 2
 };
 
+enum <u8> mhw_handler_outfit
+{
+  O_The_Handlers_Outfit = 0,
+  O_Guildmarms_Outfit = 1,
+  O_Astera_3_Star_Chef_Coat = 2,
+  O_Chun_Li_Costume = 3,
+  O_Busy_Bee_Dress = 4,
+  O_Sunshine_Pareo = 5,
+  O_Mischievous_Dress = 6,
+  O_Winter_Spirit_Coat = 7,
+  O_Friendly_Felyne = 8,
+  O_Winter_Outfit = 9,
+  O_Kokoto_Gals_Costume = 10,
+  O_Terrifying_Tyrant = 11,
+  O_Graceful_ShortDress = 12,
+  O_Techno_Handler = 13,
+  O_Rose_Vestido = 14,
+  O_Festive_Samba = 15,
+  O_Cute_Demoness = 16
+};
+
 enum <i32> mhw_monster_index
 {
   I_None                 = -1,
@@ -170,6 +207,50 @@ enum <i32> mhw_monster_index
   I_Stygian_Zinogre      =  95
 };
 
+struct monsters16 {
+  u16 great_jagras,         kulu_ya_ku,       pukei_pukei,        barroth,
+      jyaratodus,           tobi_kadachi,     anjanath,           rathian,
+      tzitzi_ya_ku,         paolumu,          great_girros,       radobaan,
+      legiana,              odogaron,         rathalos,           diablos,
+      kirin,                zorah_magdaros,   dodogama,           pink_rathian,
+      bazelgeuse,           lavasioth,        uragaan,            azure_rathalos,
+      black_diablos,        nergigante,       teostra,            kushala_daora,
+      vaal_hazak,           xeno_jiiva,       deviljho,           kulve_taroth,
+      lunastra,             behemoth,         leshen,             ancient_leshen,
+      beotodus,             banbaro,          viper_tobi_kadachi, nightshade_paolumu,
+      coral_pukei_pukei,    barioth,          nargacuga,          glavenus,
+      tigrex,               brachydios,       acidic_glavenus,    shrieking_legiana,
+      fulgur_anjanath,      ebony_odogaron,   velkhana,           seething_bazelgeuse,
+      blackveil_vaal_hazak, namielle,         savage_deviljho,    ruiner_nergigante,
+      shara_ishvalda,       zinogre,          yian_garuga,        scarred_yian_garuga,
+      brute_tigrex,         gold_rathian,     silver_rathalos,    rajang,
+      stygian_zinogre,      safi_jiiva,       furious_rajang,     raging_brachydios,
+      frostfang_barioth,    alatreon,         fatalis;
+  u16 monster[25];
+};
+
+struct monsters8 {
+  u8  great_jagras,         kulu_ya_ku,       pukei_pukei,        barroth,
+      jyaratodus,           tobi_kadachi,     anjanath,           rathian,
+      tzitzi_ya_ku,         paolumu,          great_girros,       radobaan,
+      legiana,              odogaron,         rathalos,           diablos,
+      kirin,                zorah_magdaros,   dodogama,           pink_rathian,
+      bazelgeuse,           lavasioth,        uragaan,            azure_rathalos,
+      black_diablos,        nergigante,       teostra,            kushala_daora,
+      vaal_hazak,           xeno_jiiva,       deviljho,           kulve_taroth,
+      lunastra,             behemoth,         leshen,             ancient_leshen,
+      beotodus,             banbaro,          viper_tobi_kadachi, nightshade_paolumu,
+      coral_pukei_pukei,    barioth,          nargacuga,          glavenus,
+      tigrex,               brachydios,       acidic_glavenus,    shrieking_legiana,
+      fulgur_anjanath,      ebony_odogaron,   velkhana,           seething_bazelgeuse,
+      blackveil_vaal_hazak, namielle,         savage_deviljho,    ruiner_nergigante,
+      shara_ishvalda,       zinogre,          yian_garuga,        scarred_yian_garuga,
+      brute_tigrex,         gold_rathian,     silver_rathalos,    rajang,
+      stygian_zinogre,      safi_jiiva,       furious_rajang,     raging_brachydios,
+      frostfang_barioth,    alatreon,         fatalis;
+  u8 monster[25];
+};
+
 struct mhw_save_header
 {
   u32 magic; // 0x01_00_00_00
@@ -217,7 +298,7 @@ struct mhw_dimension
 
 struct mhw_hunter
 {
-  u8 name[64];
+  str64 name;
   u32 hunter_rank;
   u32 master_rank;
   u32 zeni;
@@ -245,8 +326,8 @@ struct mhw_character_appearance
 
   mhw_color left_eye_color;
   mhw_color right_eye_color;
-  mhw_color EyebrowColor;
-  mhw_color FacialHairColor;
+  mhw_color eyebrow_color;
+  mhw_color facial_hair_color;
 
   u8 eye_width;
   u8 eye_height;
@@ -295,7 +376,47 @@ struct mhw_palico_appearance
   u16 unknown0;
 };
 
-struct mhw_weapon_usage {
+struct mhw_equipment_ref
+{
+  u32 type;
+  u32 id;
+};
+
+struct mhw_palico_equipment
+{
+  mhw_equipment_ref weapon;
+  mhw_equipment_ref helmet;
+  mhw_equipment_ref body;
+  mhw_equipment_ref gadget;
+};
+
+struct mhw_palico
+{
+  str64 name;
+  u32 rank; // Base 1
+  u32 unknown0;
+  mhw_palico_equipment equipment;
+  u8 unknown1[8];
+  u8 gadget[6];
+};
+
+struct mhw_palico_loadout
+{
+  u32 slot_id;
+  str256 name;
+  u32 weapon_index;
+  u32 mask_index;
+  u32 coat_index;
+  u32 tool_index;
+  u32 unknown0;
+  u32 bitmask_custom_color; // 000000mc
+  u32 bitmask_rainbow; // 000000mc
+  mhw_color mask_color;
+  mhw_color coat_color;
+};
+
+struct mhw_weapon_usage
+{
   u16 greatsword;
   u16 longsword;
   u16 sword_and_shield;
@@ -312,6 +433,34 @@ struct mhw_weapon_usage {
   u16 bow;
 };
 
+struct mhw_hunter_equipment
+{
+  mhw_equipment_ref weapon;
+  mhw_equipment_ref helmet;
+  mhw_equipment_ref torso;
+  mhw_equipment_ref arms;
+  mhw_equipment_ref coil;
+  mhw_equipment_ref feet;
+  mhw_equipment_ref charm;
+  mhw_equipment_ref tool1;
+  mhw_equipment_ref tool2;
+};
+
+struct mhw_arena_record
+{
+  u32 unknown0;
+  str32 partner_name;
+  u64 partner_steamid;
+  u64 partner_created;
+  u64 date;
+};
+
+struct mhw_arena_stats
+{
+  u16 unknown0;
+  mhw_arena_record records[5];
+};
+
 struct mhw_guild_card
 {
   u64 steam_id;
@@ -322,20 +471,28 @@ struct mhw_guild_card
   u64 last_update; // Timestamp
   u32 unknown1;
 
-  u8 name[64];
-  u8 primary_group[54];
+  str64 name;
+  str54 primary_group;
   u8 unknown2[16];
 
   mhw_character_appearance appearance;
+  mhw_palico_appearance palico_appearance;
+  mhw_hunter_equipment hunter_equipment;
+  u8 unknown3[96];
 
-  u8 unknown3[212];
+  mhw_palico palico;
+  u32 unity;
+  u8 unknown4[16];
+  u16 quests_lr;
+  u16 quests_hr;
+  u16 investigations;
+  u16 quests_arena;
+  u16 quests_mr;
+  u16 quests_guiding_lands;
+  u8 unknown5[12];
 
-  u8 palico_name[64];
-  u32 palico_rank; // Actual rank minus 1?
-
-  u8 unknown4[94];
   u32 guiding_lands_levels[6];
-  u8 unknown5[76];
+  u8 unknown6[76];
   mhw_weapon_usage low_rank_usage;
   mhw_weapon_usage high_rank_usage;
   mhw_weapon_usage investigation_usage;
@@ -346,37 +503,48 @@ struct mhw_guild_card
   u8 background_id;
   u8 sticker_id;
 
-  u8 greeting[256];
-  u8 title[256];
+  str256 greeting;
+  str256 title;
 
-  u8 unknown6[5454];
-  u16 monster_captured[96];
-  u16 monster_slayed[96];
-  u16 monster_largest[96];
-  u16 monster_smallest[96];
-  u8 monster_research_level[96];
+  u16 title_first;
+  u16 title_mid;
+  u16 title_last;
+
+  mhw_pos camera_pos;
+  f32 zoom;
+
+  mhw_arena_stats arena_stats[18];
+  monsters16 monster_captured;
+  monsters16 monster_slayed;
+  monsters16 monster_largest;
+  monsters16 monster_smallest;
+  monsters8 monster_research_level;
 };
 
-struct mhw_item_slot {
+struct mhw_item_slot
+{
   u32 id;
   u32 amount;
 };
 
-struct mhw_item_pouch {
+struct mhw_item_pouch
+{
   u8 unknown0[16];
   mhw_item_slot items[24];
   mhw_item_slot ammo[16];
   u8 unknown1[296];
 };
 
-struct mhw_storage {
+struct mhw_storage
+{
   mhw_item_slot items[200];
   mhw_item_slot ammo[200];
   mhw_item_slot materials[1250];
   mhw_item_slot decorations[500];
 };
 
-struct mhw_investigation {
+struct mhw_investigation
+{
   u32 filled; // 30 75 00 00
   u8 selected;
   u32 attempts;
@@ -399,6 +567,158 @@ struct mhw_investigation {
   u8 zenny_multiplyer;
 };
 
+struct mhw_radial_item
+{
+  u32 category_id;
+  u32 entry_id;
+  u32 unknown0;
+};
+
+struct mhw_radial
+{
+  str32 name;
+  mhw_radial_item items[8];
+};
+
+struct mhw_item_loadout
+{
+  str32 name;
+  mhw_item_slot items[24];
+  mhw_item_slot ammo[16];
+  u32 unknown0[320 / 4];
+  mhw_radial radial[4];
+};
+
+struct mhw_item_loadouts
+{
+  mhw_item_loadout loadout[120];
+  u8 order[120];
+};
+
+struct mhw_pigments
+{
+  u32 bitmask_custom_color; // 000htacf
+  u32 bitmask_rainbow; // 000htacf
+  mhw_color head;
+  mhw_color torso;
+  mhw_color arms;
+  mhw_color coil;
+  mhw_color feet;
+  mhw_color whole;
+};
+
+struct mhw_equipment_loadout
+{
+  u32 slot_id;
+  str256 name;
+  u32 weapon_index;
+  u32 helmet_index;
+  u32 torso_index;
+  u32 arms_index;
+  u32 coil_index;
+  u32 feet_index;
+  u32 charm_index;
+  u32 tool1_index;
+  u32 tool2_index;
+  u32 weapon_decos[3];
+  u32 helmet_decos[3];
+  u32 torso_decos[3];
+  u32 arms_decos[3];
+  u32 coil_decos[3];
+  u32 feet_decos[3];
+  u32 charm_decos[3];
+  u32 tool1_decos[3];
+  u32 tool2_decos[3];
+  u32 unknown0[45];
+  mhw_pigments armor;
+  u32 unknown1[6];
+  mhw_pigments layered;
+  u32 unknown2;
+};
+
+struct mhw_layered_loadout
+{
+  u32 slot_id;
+  str256 name;
+  u32 unknown0[6];
+  mhw_pigments layered;
+};
+
+struct mhw_equipment
+{
+  u32 sort_index;
+  u32 serial_item_category;
+  u32 type;
+  u32 id;
+  u32 level;
+  u32 points;
+  u32 decos[3];
+  u32 bowgun_mods[5];
+  u32 augments[3];
+  u32 unknown0[2];
+  u32 pendant;
+  u8 extra_slots;
+  u8 attack_increase;
+  u8 affinity_increase;
+  u8 defense_increase;
+  u8 slot_upgrade;
+  u8 health_regen;
+  u8 element_status_effect_up;
+  u8 unknown1[11];
+  u8 custom_upgrades[12];
+  u16 base;
+  u16 parts;
+  u16 awakens[5];
+  u16 awakened_checksum;
+};
+
+struct mhw_shoutout
+{
+  u32 length;
+  str128 shoutout; //  40 usable, init with nonsense data pattern
+};
+
+struct mhw_botanical_fertilizer
+{
+  u32 effect;
+  u32 duration;
+};
+
+struct mhw_botanical_research
+{
+  mhw_item_slot cultivating[4];
+  mhw_botanical_fertilizer fertilizer[5];
+  mhw_item_slot harvest[50];
+};
+
+struct mhw_save_quests
+{
+  u32 investigations;
+  u32 arena_quests;
+  u32 unknown0[3];
+  u32 high_rank;
+  u32 low_rank;
+  u32 unknown1;
+  u32 master_rank;
+  u32 lr_hr_sos;
+};
+
+struct mhw_safari_member
+{
+  u64 steam_id;
+  u32 unknown0[9];
+  str64 palico;
+  str64 character;
+  u32 unknown1[29];
+};
+
+struct mhw_safari
+{
+  u8 unknown0;
+  u32 unknown1[24/4];
+  mhw_safari_member members[3];
+};
+
 struct mhw_save_slot
 {
   u32 unknown0;
@@ -406,40 +726,91 @@ struct mhw_save_slot
   mhw_character_appearance appearance;
   u8 unknown1[382];
   mhw_palico_appearance palico_appearance;
+
   mhw_guild_card guild_card;
   mhw_guild_card collected_guild_card[100];
-  u8 unknown2[209447];
-  u8 item_loadouts[142200];
+  u16 guild_card_order[100];
+
+  u8 unknown2[205889];
+  str32s room_config_names[24];
+  u8 unknown3[2579];
+  u8 room_status;
+  u16 passcode;
+  u32 unknown3a[2];
+  mhw_item_loadouts item_loadouts;
   mhw_item_pouch item_pouch;
   mhw_storage storage;
-  u8 equipment[315000];
-  u8 unknown3[285483];
-  u8 palico_name[64];
+  mhw_equipment equipment[2500];
+  u8 unknown4[221760];
+  u32 equipment_index_table[2500];
+  u8 unknown4a[53723];
+  str64 palico_name;
 
-  u8 unknown4[1484];
+  u8 unknown5[1484];
   mhw_investigation investigations[400];
-  u8 unknown5[214942];
-  mhw_item_slot harvest[50];
-  u8 unknown6[133062];
+  u8 unknown6[20950];
+  mhw_equipment_loadout equipment_loadouts[224];
+  mhw_layered_loadout layered_loadouts[112];
+  mhw_palico_loadout palico_loadouts[24];
+  mhw_botanical_research botanist;
+  u8 unknown8[213];
+  mhw_safari safaris[4];
+  u8 unknown8a[284];
+  mhw_shoutout shoutout_manual[32]; // 30 usable
+  mhw_shoutout shoutout_custom[32]; // 24 usable
+  mhw_shoutout shoutout_auto[32]; // 18 usable
+  u8 unknown9[769];
+  mhw_save_quests completed;
+  u8 unknown9a[3496];
+  u8 gallery_unseen[8];
+  u8 unknown10[110823];
+  mhw_handler_outfit handler_outfit;
+  u8 unknown10a[1036];
+  u32 lynian_observatory[30];
+  u8 unknown11[44];
 
   u32 guiding_lands_levels[6];
-  u8 unknown7[8];
+  u8 unknown12[8];
   u32 guiding_lands_level_total;
-  u8 unknown8[12329];
+  u8 unknown13[12329];
   u8 hash_table[512];
+};
+
+struct mhw_keybind
+{
+  u8 main_key;
+  u8 subkey;
+};
+
+struct mhw_control_loadout
+{
+  u8 saved;
+  u8 index; // 1-based
+  u16 unknown0;
+  str64 name;
+  mhw_keybind keybinds[200];
 };
 
 struct mhw_section0
 {
   mhw_section_header header;
-  u8 data[0x300000];
+  u8 unknown0[1661];
+  mhw_control_loadout main_controls[16];
+  mhw_control_loadout melee_controls[16];
+  mhw_control_loadout ranged_controls[16];
+  u32 unknown1[256];
+  u8 unknown2;
+  u16 zero0[30738 / 2];
+  u16 unknown3[256];
+  u64 zero1[3089328 / 8];
 };
 
 struct mhw_section1
 {
   mhw_section_header header;
   
-  u8 unknown0[8];
+  u32 unknown0;
+  u32 last_active_slot;
   mhw_sound_device sound_device;
   mhw_dynamic_range dynamic_range;
   mhw_toggle audio_3d;
@@ -454,7 +825,7 @@ struct mhw_section1
   mhw_toggle voice_chat;
   mhw_text_size text_size_subtitles;
   mhw_text_size text_size_hud;
-  u8 unknown2;
+  mhw_toggle data_collection;
   mhw_bool msi_ambient_link;
   u8 unknown3[8];
   mhw_gamepad_glyphs gamepad_glyphs;
@@ -462,17 +833,19 @@ struct mhw_section1
   mhw_toggle camera_mouse_controls;
   mhw_confirm_button confirmation_button;
   u8 volume_voice_chat;
-  u8 unknown5[18];
+  u8 unknown4[2];
+  f32 brightness;
+  u8 unknown5[12];
   u8 character_edit_voucher;
   u8 unknown6[1096];
   u8 character_edit_voucher_free;
   u8 unknown7[11];
   u8 palico_edit_voucher;
-  u8 unknown8[451];
-  u32 guiding_lands_levels[6];
-  u8 unknown9[8];
-  u32 guiding_lands_total;
-  u8 unknown10[2443];
+
+  // Working memory?
+  // What's in it keeps changing, one moment it's save[0]'s
+  // guiding lands levels, the next it's names.
+  u8 unknown8[2930];
 };
 
 struct mhw_section2
@@ -493,7 +866,7 @@ struct mhw_ib_save
   mhw_save_header header;
   mhw_section_offsets offsets;
 
-  // Section 0: content unknown
+  // Section 0: Keybinds and others
   mhw_section0 section0;
   // Section 1: Settings and things
   mhw_section1 section1;
@@ -509,4 +882,6 @@ union mhw_save_raw
   u8 data[sizeof(mhw_ib_save)];
 };
 
-mhw_save_raw mhw_save;
+mhw_ib_save mhw_save;
+
+Assert(11284704 == sizeof(mhw_ib_save), "Save file size invalid");

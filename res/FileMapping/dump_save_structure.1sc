@@ -1,0 +1,41 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+//   History: 
+//------------------------------------------------
+string filename = GetFileName();
+Printf("%s %d\n", filename, GetFileNum());
+string script_path = FileNameGetPath(GetScriptFileName());
+Printf("Script Path: %s\n", script_path);
+SetWorkingDirectory(script_path);
+Printf("Working Directory: %s\n", GetWorkingDirectory());
+
+i32 y, x, i;
+i8 printed;
+
+for (y = 0; y < 3; y++) {
+  for (x = 0; x < 100; x++) {
+    printed = false;
+
+    for (i = 0; i < 256; i++) {
+      if (mhw_save.section3.saves[y].collected_guild_card[x].greeting[i] == '\n')
+      {
+        if (!printed) {
+          Printf("Blame %s for this:\n\"%s\"\n",
+            mhw_save.section3.saves[y].collected_guild_card[x].name,
+            mhw_save.section3.saves[y].collected_guild_card[x].greeting);
+          printed = true;
+        }
+        mhw_save.section3.saves[y].collected_guild_card[x].greeting[i] = ' ';
+      }
+    }
+  }
+}
+
+ExpandAll();
+ExportCSV(script_path + "SAVEDATA1000.csv");

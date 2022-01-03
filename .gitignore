@@ -12,3 +12,9 @@ Deploy
 # Game files
 itemData.itm
 item_*.gmd
+
+# Specific files
+/res/FileMapping/SAVEDATA1000.csv
+
+# Other
+.ipynb_checkpoints
