@@ -2,8 +2,7 @@
 
 #include <QPixmap>
 #include <QIcon>
-
-#include <unordered_map>
+#include <QMap>
 
 #include "ItemDB.h"
 
@@ -11,14 +10,15 @@ class BitmapDB
 {
 private:
   static BitmapDB* instance;
-  std::unordered_map<QString, QIcon*> images;
+  QMap<u64, QIcon*> icons;
 
-  BitmapDB() { }
+  BitmapDB();
 
 public:
   static BitmapDB* GetInstance();
   void Free();
 
-  QIcon* Pixmap(QString path);
+  QIcon* ItemPixmap(u32 icon, u32 color);
+  QIcon* LoadItemIcon(itemInfo* info);
   QIcon* ItemIcon(itemInfo* info);
 };

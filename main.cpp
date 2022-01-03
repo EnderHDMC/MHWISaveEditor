@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
   for (size_t i = 0; i < itemDB->count(); i++)
   {
     itemInfo* info = itemDB->GetItemById(i);
-    QIcon* icon = bitmapDB->ItemIcon(info);
+    QIcon* icon = bitmapDB->LoadItemIcon(info);
   }
 
   QTranslator translator;
