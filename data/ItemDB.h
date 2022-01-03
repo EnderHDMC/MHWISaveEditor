@@ -7,18 +7,18 @@
 using json = nlohmann::json;
 
 struct itemInfo {
-  i32 id;
-  i32 subtype;
-  i32 type;
-  i32 rarity;
-  i32 carry_limit;
-  i32 carry_limit_twisted;
-  i32 sort_order;
-  i32 flags;
-  i32 icon_id;
-  i32 icon_color;
-  i32 sell_price;
-  i32 buy_price;
+  u32 id;
+  u8 subtype;
+  u32 type;
+  u8 rarity;
+  u8 carry_limit;
+  u8 carry_limit_twisted;
+  u16 sort_order;
+  u32 flags;
+  u32 icon_id;
+  u16 icon_color;
+  u32 sell_price;
+  u32 buy_price;
   std::string name;
   std::string description;
 
