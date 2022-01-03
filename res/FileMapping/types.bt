@@ -26,6 +26,13 @@ typedef hfloat f16;
 typedef float  f32;
 typedef double f64;
 
+typedef struct { char str[32]; } str32s  <read=Str("%s", this.str)>;
+typedef char str32 [ 32] <read=Str("%s", this)>;
+typedef char str64 [ 64] <read=Str("%s", this)>;
+typedef char str128[128] <read=Str("%s", this)>;
+typedef char str256[256] <read=Str("%s", this)>;
+typedef char str54 [ 54] <read=Str("%s", this)>;
+
 // NOTE: you can configure the maximum string length by setting this variable
 local u32 string_max = -1;
 typedef struct {
