@@ -193,9 +193,9 @@ void MHWISaveEditor::Save()
   ext_map.insert(tr(UNENCRYPTED_SAVE), ".bin");
 
   QMap<QString, bool> encrypt_map;
-  encrypt_map.insert(tr(ALL_SAVE), false);
-  encrypt_map.insert(tr(ENCRYPTED_SAVE), false);
-  encrypt_map.insert(tr(UNENCRYPTED_SAVE), true);
+  encrypt_map.insert(tr(ALL_SAVE), true);
+  encrypt_map.insert(tr(ENCRYPTED_SAVE), true);
+  encrypt_map.insert(tr(UNENCRYPTED_SAVE), false);
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
