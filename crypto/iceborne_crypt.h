@@ -526,10 +526,9 @@ static bool DecryptRegion(u8* save, int offset, int length, int saveSlot)
     }
 
     u8* checksum = GenerateSlotChecksum(save, offset, length, saveSlot);
-    if (!CheckChecksum(save, checksum, offset, length))
-      return false;
+    bool match = CheckChecksum(save, checksum, offset, length);
     free(checksum);
-    return true;
+    return match;
 }
 
 static u8* DecryptSave(u8* save, int length)
