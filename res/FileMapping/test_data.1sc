@@ -40,6 +40,23 @@ PrintResults(asumption, max);
 
 
 
+// Test if section0.zero0 is indeed all zero
+Printf("Check: 'mhw_save.section0.zero1'\n");
+asumption = 0;
+max = sizeof(mhw_save.section0.zero1) / sizeof(mhw_save.section0.zero1[0]);
+prog = RoundDownPow10(max);
+for (x = 0; x < max; x++) {
+  value = mhw_save.section0.zero1[x];
+
+  if (value == 0) asumption++;
+  else Printf("Nonzero, %u, %u\n", x, value);
+
+  if (x % prog == 0) Printf("Progress: %u / %u\n", x, max);
+}
+PrintResults(asumption, max);
+
+
+
 // Test if section3.zero is indeed all zero
 Printf("Check: 'mhw_save.section3.zero'\n");
 asumption = 0;
@@ -54,4 +71,4 @@ for (x = 0; x < max; x++) {
   if (x % prog == 0) Printf("Progress: %u / %u\n", x, max);
 }
 PrintResults(asumption, max);
-Printf("three: %d\n", mhw_save.section0.unknown1);
+Printf("Random Thing: %d\n", mhw_save.section0.unknown2);
