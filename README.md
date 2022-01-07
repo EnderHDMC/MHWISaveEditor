@@ -9,3 +9,4 @@
 - [AsteriskAmpersand/MHW-Python-Save-Editor](https://github.com/AsteriskAmpersand/MHW-Python-Save-Editor)
 - [TheCrazyT/MHW-Research](https://github.com/TheCrazyT/MHW-Research)
 - [Ezekial711/MonsterHunterWorldModding](https://github.com/Ezekial711/MonsterHunterWorldModding/wiki)
+- [Aradi147/MHW-Quest](https://github.com/Aradi147/MHW-Quest)
