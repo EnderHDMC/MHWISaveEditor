@@ -22,11 +22,12 @@ ItemDB::ItemDB()
   for (u32 i = 0; i < items.size(); i++)
   {
     names.push_back(items[i].name);
-    qInfo("Loaded Item[%d]: \"%s\".", i, qUtf8Printable(QString::fromUtf8(items[i].name)));
+    // qInfo("Loaded Item[%d]: \"%s\".", i, qUtf8Printable(QString::fromUtf8(items[i].name)));
 
     if (items[i].id != i)
       qWarning("Item[%d]: Id(%d), name: \"%s\", item index does not match id.", i, items[i].id, items[i].name);
   }
+  qInfo("Loaded %d items.", items.size());
 }
 
 ItemDB* ItemDB::GetInstance()
