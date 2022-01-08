@@ -236,9 +236,11 @@ void MHWISaveEditor::Save()
     if (ext.isEmpty()) {
       fi.setFile(fi.filePath() + ext_map.value(selectedFilter));
     }
+    else {
+      ext = '.' + ext;
+    }
 
     QString filepath = fi.absoluteFilePath();
-    ext = '.' + ext;
 
     bool encrypt = encrypt_map.value(ext, false);
     SaveFile(filepath, &mhwRaw, encrypt);
