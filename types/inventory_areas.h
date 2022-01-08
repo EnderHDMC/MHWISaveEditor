@@ -17,7 +17,7 @@ struct inventory_area {
   int count;
   item_type type;
   bool storage;
-  char* area;
+  const char* area;
 };
 
 const inventory_area areas[] = {

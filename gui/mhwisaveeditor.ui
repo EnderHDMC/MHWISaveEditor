@@ -43,12 +43,29 @@
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuDump">
+     <property name="title">
+      <string>Dump</string>
+     </property>
+     <addaction name="actionSAVEDATA1000bin"/>
+     <addaction name="actionSAVEDATA1001bin"/>
+     <addaction name="actionSAVEDATA1002bin"/>
+     <addaction name="actionSAVEDATA1003bin"/>
+     <addaction name="actionSAVEDATA1004bin"/>
+     <addaction name="actionSAVEDATA1005bin"/>
+     <addaction name="actionSAVEDATA1006bin"/>
+     <addaction name="actionSAVEDATA1007bin"/>
+     <addaction name="actionSAVEDATA1008bin"/>
+     <addaction name="actionSAVEDATA1009bin"/>
+    </widget>
     <addaction name="actionOpen"/>
+    <addaction name="actionOpenSAVEDATA1000"/>
     <addaction name="actionSave"/>
-    <addaction name="actionDump"/>
     <addaction name="separator"/>
     <addaction name="actionOpenGameLocation"/>
     <addaction name="actionOpenSaveLocation"/>
+    <addaction name="separator"/>
+    <addaction name="menuDump"/>
     <addaction name="separator"/>
     <addaction name="actionRestore"/>
     <addaction name="actionBackup"/>
@@ -59,7 +76,9 @@
     <property name="title">
      <string>Slot</string>
     </property>
-    <addaction name="separator"/>
+    <addaction name="actionSlot1"/>
+    <addaction name="actionSlot2"/>
+    <addaction name="actionSlot3"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSlot"/>
@@ -106,12 +125,125 @@
     <string>Open save location</string>
    </property>
   </action>
-  <action name="actionDump">
+  <action name="actionOpenSAVEDATA1000">
    <property name="text">
-    <string>Dump</string>
+    <string>Open SAVEDATA1000</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+O</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1000bin">
+   <property name="text">
+    <string>SAVEDATA1000.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+0</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1001bin">
+   <property name="text">
+    <string>SAVEDATA1001.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1002bin">
+   <property name="text">
+    <string>SAVEDATA1002.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+2</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1003bin">
+   <property name="text">
+    <string>SAVEDATA1003.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+3</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1004bin">
+   <property name="text">
+    <string>SAVEDATA1004.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+4</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1005bin">
+   <property name="text">
+    <string>SAVEDATA1005.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+5</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1006bin">
+   <property name="text">
+    <string>SAVEDATA1006.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+6</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1007bin">
+   <property name="text">
+    <string>SAVEDATA1007.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+7</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1008bin">
+   <property name="text">
+    <string>SAVEDATA1008.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+8</string>
+   </property>
+  </action>
+  <action name="actionSAVEDATA1009bin">
+   <property name="text">
+    <string>SAVEDATA1009.bin</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+9</string>
+   </property>
+  </action>
+  <action name="actionSlot1">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Slot 1</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionSlot2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Slot 2</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionSlot3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Slot 3</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
  </widget>
@@ -198,10 +330,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionDump</sender>
+   <sender>actionOpenSAVEDATA1000</sender>
    <signal>triggered()</signal>
    <receiver>MHWISaveEditor</receiver>
-   <slot>Dump()</slot>
+   <slot>OpenSAVEDATA1000()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -220,6 +352,7 @@
   <slot>Slot(int)</slot>
   <slot>Backup()</slot>
   <slot>Restore()</slot>
-  <slot>Dump()</slot>
+  <slot>Dump(int)</slot>
+  <slot>OpenSAVEDATA1000()</slot>
  </slots>
 </ui>

@@ -32,7 +32,7 @@ static QString GetGamePath()
   return path;
 }
 
-static QString GetDefaultSavePath()
+static QString GetDefaultSaveDir()
 {
   QSettings regUsers(R"(HKEY_CURRENT_USER\SOFTWARE\Valve\Steam\Users)", QSettings::NativeFormat);
   QStringList users = regUsers.childGroups();
@@ -59,4 +59,19 @@ static QString GetDefaultSavePath()
 
   qDebug(qUtf8Printable(path));
   return path;
+}
+
+static QString GetDefaultSavePath()
+{
+  return GetDefaultSaveDir() + "/" + QString::fromUtf8(SAVE_NAME);
+}
+
+
+static QString GetDefaultDumpPath(int slot)
+{
+  assert(slot >= 0 && slot <= 9);
+  QString path = GetDefaultSavePath();
+  int last = path.length() - 1;
+  path[last] = QChar('0' + slot);
+  return path + ".bin";
 }

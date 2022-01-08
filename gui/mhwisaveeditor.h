@@ -8,9 +8,9 @@
 #include "itemslotview.h"
 #include "inventoryeditor.h"
 
-constexpr char* ALL_SAVE = "All Files (*)";
-constexpr char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
-constexpr char* UNENCRYPTED_SAVE = "Unencrypted Save(*.bin)";
+constexpr const char* ALL_SAVE = "All Files (*)";
+constexpr const char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
+constexpr const char* UNENCRYPTED_SAVE = "Unencrypted Save(*.bin)";
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MHWISaveEditor; }
@@ -22,12 +22,13 @@ class MHWISaveEditor : public QMainWindow
 
 public slots:
   void Open();
+  void OpenSAVEDATA1000();
   void Save();
   void Slot(int slot);
   void OpenLocation(const QString& location);
   void Backup();
   void Restore();
-  void Dump();
+  void Dump(int number);
 
 public:
   MHWISaveEditor(QWidget* parent = nullptr);
@@ -45,6 +46,7 @@ private:
 
   QSignalMapper* slotSignalMapper;
   QSignalMapper* openSignalMapper;
+  QSignalMapper* dumpSignalMapper;
 
   QList<QAction*> slotActions;
   QList<InventoryEditor*> inventoryEditors;

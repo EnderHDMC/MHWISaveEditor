@@ -27,15 +27,12 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
 
   slotSignalMapper = new QSignalMapper(this);
-  slotActions.resize(3);
+  slotActions = { ui->actionSlot1 , ui->actionSlot2, ui->actionSlot3 };
   for (int i = 0; i < slotActions.size(); ++i) {
-    slotActions[i] = new QAction("Slot " + QString::number(i + 1));
-    slotActions[i]->setCheckable(true);
     slotActions[i]->setChecked(i == saveslot);
 
     connect(slotActions[i], SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
     slotSignalMapper->setMapping(slotActions[i], i);
-    ui->menuSlot->addAction(slotActions[i]);
   }
   connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Slot(int)));
 
@@ -43,9 +40,23 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(ui->actionOpenGameLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
   openSignalMapper->setMapping(ui->actionOpenGameLocation, GetGamePath());
   connect(ui->actionOpenSaveLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
-  openSignalMapper->setMapping(ui->actionOpenSaveLocation, GetDefaultSavePath() + "/" + QString::fromUtf8(SAVE_NAME));
-
+  openSignalMapper->setMapping(ui->actionOpenSaveLocation, GetDefaultSaveDir() + "/" + QString::fromUtf8(SAVE_NAME));
   connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
+
+  dumpSignalMapper = new QSignalMapper(this);
+  QList<QAction*> slotDump = {
+    ui->actionSAVEDATA1000bin, ui->actionSAVEDATA1001bin,
+    ui->actionSAVEDATA1002bin, ui->actionSAVEDATA1003bin,
+    ui->actionSAVEDATA1004bin, ui->actionSAVEDATA1005bin,
+    ui->actionSAVEDATA1006bin, ui->actionSAVEDATA1007bin,
+    ui->actionSAVEDATA1008bin, ui->actionSAVEDATA1009bin
+  };
+
+  for (int i = 0; i < slotDump.size(); ++i) {
+    connect(slotDump[i], SIGNAL(triggered()), dumpSignalMapper, SLOT(map()));
+    dumpSignalMapper->setMapping(slotDump[i], i);
+  }
+  connect(dumpSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Dump(int)));
 
   int count = COUNTOF(areas);
   inventoryEditors.resize(count);
@@ -149,17 +160,22 @@ void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
   *save = savep;
 }
 
-void MHWISaveEditor::Dump()
+void MHWISaveEditor::Dump(int number)
 {
-  mhw_save_raw* buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
-  LoadFile(GetDefaultSavePath() + "/" + QString::fromUtf8(SAVE_NAME), &buffer);
-  SaveFile(GetDefaultSavePath() + "/" + QString::fromUtf8(SAVE_NAME) + ".bin", &buffer, false);
-  free(buffer);
+  if (mhwRaw) {
+    SaveFile(GetDefaultDumpPath(number), &mhwRaw, false);
+  }
+  else {
+    mhw_save_raw* buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+    LoadFile(GetDefaultSavePath(), &buffer);
+    SaveFile(GetDefaultDumpPath(number), &buffer, false);
+    free(buffer);
+  }
 }
 
 void MHWISaveEditor::Open()
 {
-  QString path = GetDefaultSavePath();
+  QString path = GetDefaultSaveDir();
   QString filepath = QString();
 
   QFileDialog dialog(this);
@@ -178,10 +194,19 @@ void MHWISaveEditor::Open()
   LoadSaveSlot();
 }
 
+void MHWISaveEditor::OpenSAVEDATA1000()
+{
+  QString path = GetDefaultSavePath();
+  LoadFile(path, &mhwRaw);
+
+  // Load the save into the inventory slots
+  LoadSaveSlot();
+}
+
 void MHWISaveEditor::Save()
 {
   if (!mhwRaw) return;
-  QString path = GetDefaultSavePath();
+  QString path = GetDefaultSaveDir();
 
   const QStringList filters({ tr(ALL_SAVE),
                               tr(ENCRYPTED_SAVE),
@@ -193,9 +218,9 @@ void MHWISaveEditor::Save()
   ext_map.insert(tr(UNENCRYPTED_SAVE), ".bin");
 
   QMap<QString, bool> encrypt_map;
-  encrypt_map.insert(tr(ALL_SAVE), true);
-  encrypt_map.insert(tr(ENCRYPTED_SAVE), true);
-  encrypt_map.insert(tr(UNENCRYPTED_SAVE), false);
+  encrypt_map.insert("", true);
+  encrypt_map.insert(".raw", true);
+  encrypt_map.insert(".bin", false);
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
@@ -208,10 +233,14 @@ void MHWISaveEditor::Save()
 
     QFileInfo fi(files[0]);
     QString ext = fi.completeSuffix();
-    if (ext.isEmpty()) fi.setFile(fi.filePath() + ext_map.value(selectedFilter, ""));
-    QString filepath = fi.absoluteFilePath();
+    if (ext.isEmpty()) {
+      fi.setFile(fi.filePath() + ext_map.value(selectedFilter));
+    }
 
-    bool encrypt = encrypt_map.value(selectedFilter);
+    QString filepath = fi.absoluteFilePath();
+    ext = '.' + ext;
+
+    bool encrypt = encrypt_map.value(ext, false);
     SaveFile(filepath, &mhwRaw, encrypt);
   }
 }
