@@ -13,12 +13,7 @@ int main(int argc, char* argv[])
 
   ItemDB* itemDB = itemDB->GetInstance();
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
-
-  for (size_t i = 0; i < itemDB->count(); i++)
-  {
-    itemInfo* info = itemDB->GetItemById(i);
-    QIcon* icon = bitmapDB->LoadItemIcon(info);
-  }
+  bitmapDB->Init(itemDB);
 
   QTranslator translator;
   const QStringList uiLanguages = QLocale::system().uiLanguages();
