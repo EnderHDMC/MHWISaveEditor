@@ -1,0 +1,47 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: max_all_items.1sc
+//   Authors: 
+//   Version: 
+//   Purpose: Max all items, ammo, materials and decorations
+//            so they don't change much during a play-through.
+//  Category: Misc
+//   History: 
+//------------------------------------------------
+
+i32 slot = 2;
+i32 amount;
+i32 i, max;
+
+max = sizeof(mhw_save.section3.saves[slot].storage.items) / sizeof(mhw_save.section3.saves[slot].storage.items[0]);
+for (i = 0; i < max; i++) {
+  amount = mhw_save.section3.saves[slot].storage.items[i].amount;
+  if (amount != 0) {
+    mhw_save.section3.saves[slot].storage.items[i].amount = 9999;
+  }
+}
+
+max = sizeof(mhw_save.section3.saves[slot].storage.ammo) / sizeof(mhw_save.section3.saves[slot].storage.ammo[0]);
+for (i = 0; i < max; i++) {
+  amount = mhw_save.section3.saves[slot].storage.ammo[i].amount;
+  if (amount != 0) {
+    mhw_save.section3.saves[slot].storage.ammo[i].amount = 9999;
+  }
+}
+
+max = sizeof(mhw_save.section3.saves[slot].storage.materials) / sizeof(mhw_save.section3.saves[slot].storage.materials[0]);
+for (i = 0; i < max; i++) {
+  amount = mhw_save.section3.saves[slot].storage.materials[i].amount;
+  if (amount != 0) {
+    mhw_save.section3.saves[slot].storage.materials[i].amount = 9999;
+  }
+}
+
+max = sizeof(mhw_save.section3.saves[slot].storage.decorations) / sizeof(mhw_save.section3.saves[slot].storage.decorations[0]);
+for (i = 0; i < max; i++) {
+  amount = mhw_save.section3.saves[slot].storage.decorations[i].amount;
+  if (amount != 0) {
+    mhw_save.section3.saves[slot].storage.decorations[i].amount = 7;
+  }
+}
