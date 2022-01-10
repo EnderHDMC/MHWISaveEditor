@@ -14,7 +14,7 @@ BitmapDB* BitmapDB::GetInstance()
   return instance;
 }
 
-void BitmapDB::Init(ItemDB* itemDB, bool writeFiles = false)
+void BitmapDB::Init(ItemDB* itemDB)
 {
   items = QImage("res/items.png");
   itemsMask = QImage("res/items_mask.png");
@@ -61,9 +61,6 @@ void BitmapDB::Init(ItemDB* itemDB, bool writeFiles = false)
     p.end();
 
     iconTints.insert(key, tint);
-    
-    if (writeFiles)
-      tint->save(QString("res/sample/items_p%1.png").arg(key));
   }
 
   for (size_t i = 0; i < itemDB->count(); i++)
@@ -83,19 +80,52 @@ void BitmapDB::Init(ItemDB* itemDB, bool writeFiles = false)
       QPixmap iconPixmap = QPixmap::fromImage(iconImage);
       QIcon* icon = new QIcon(iconPixmap);
       icons.insert(key, icon);
-
-      if (writeFiles)
-        iconImage.save(QString("res/sample/item_%1_%2.png").arg(icon_id).arg(icon_color));
     }
+  }
+}
+
+void BitmapDB::OutputIcons(const QString& path, ItemDB* itemDB)
+{
+  QDir outDir = QDir(path);
+  QString outPath = outDir.path();
+
+  QMapIterator<u32, QImage*> tinter(iconTints);
+  while (tinter.hasNext()) {
+    tinter.next();
+    u32 key = tinter.key();
+
+    QImage* tint = iconTints.value(key);
+    if (tint)
+      tint->save(QString("%1/items_p%2.png").arg(outPath).arg(key));
+  }
+
+  for (size_t i = 0; i < itemDB->count(); i++)
+  {
+    itemInfo* info = itemDB->GetItemById(i);
+    int icon_id = info->icon_id;
+    int icon_color = info->icon_color;
+    u64 key = BuildKey(icon_id, icon_color);
+
+    QIcon* icon = icons.value(key);
+    QPixmap iconPixmap = icon->pixmap(icon->availableSizes().first());
+
+    if (icon)
+      iconPixmap.save(QString("%1/item_%2_%3.png").arg(outPath).arg(icon_id).arg(icon_color));
   }
 }
 
 void BitmapDB::Free()
 {
-  QMapIterator<u64, QIcon*> i(icons);
-  while (i.hasNext()) {
-    i.next();
-    free(i.value());
+  QMapIterator<u64, QIcon*> iconMap(icons);
+  while (iconMap.hasNext()) {
+    iconMap.next();
+    delete(iconMap.value());
+  }
+
+  QMapIterator<u32, QImage*> tinter(iconTints);
+  while (tinter.hasNext()) {
+    tinter.next();
+    delete(tinter.value());
   }
 
   delete(instance);

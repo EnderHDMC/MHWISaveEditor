@@ -19,7 +19,8 @@ private:
 
 public:
   static BitmapDB* GetInstance();
-  void Init(ItemDB* itemDB, bool writeFiles = false);
+  void Init(ItemDB* itemDB);
+  void OutputIcons(const QString& path, ItemDB* itemDB);
   void Free();
 
   inline u64 BuildKey(u32 id, u32 color)
