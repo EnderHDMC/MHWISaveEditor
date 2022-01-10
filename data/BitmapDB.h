@@ -19,7 +19,7 @@ private:
 
 public:
   static BitmapDB* GetInstance();
-  void Init(ItemDB* itemDB);
+  void Init(ItemDB* itemDB, bool writeFiles = false);
   void Free();
 
   inline u64 BuildKey(u32 id, u32 color)

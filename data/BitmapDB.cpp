@@ -14,7 +14,7 @@ BitmapDB* BitmapDB::GetInstance()
   return instance;
 }
 
-void BitmapDB::Init(ItemDB* itemDB)
+void BitmapDB::Init(ItemDB* itemDB, bool writeFiles = false)
 {
   items = QImage("res/items.png");
   itemsMask = QImage("res/items_mask.png");
@@ -22,43 +22,48 @@ void BitmapDB::Init(ItemDB* itemDB)
   int imageHeight = items.height();
   QPainter p;
 
-  QColor palletes[] = {
-    QColor::fromRgb(0xEB, 0xEB, 0xEB, 0xFF), QColor::fromRgb(0xE1, 0x50, 0x5C, 0xFF),
-    QColor::fromRgb(0x47, 0xB2, 0x67, 0xFF), QColor::fromRgb(0x57, 0x7B, 0xFF, 0xFF),
-    QColor::fromRgb(0xE8, 0xC5, 0x06, 0xFF), QColor::fromRgb(0x97, 0x88, 0xD1, 0xFF),
-    QColor::fromRgb(0x4E, 0xC3, 0xE5, 0xFF), QColor::fromRgb(0xDF, 0x9C, 0x65, 0xFF),
-    QColor::fromRgb(0xD9, 0x8B, 0x94, 0xFF), QColor::fromRgb(0xDF, 0xE5, 0x00, 0xFF),
-    QColor::fromRgb(0xAF, 0xAF, 0xAF, 0xFF), QColor::fromRgb(0xBA, 0x95, 0x4B, 0xFF),
-    QColor::fromRgb(0x3D, 0x7F, 0x3A, 0xFF), QColor::fromRgb(0xAD, 0x15, 0x47, 0xFF),
-    QColor::fromRgb(0x4C, 0x4C, 0xD9, 0xFF), QColor::fromRgb(0xD7, 0xC1, 0x8D, 0xFF),
-    QColor::fromRgb(0xD7, 0xC1, 0x8D, 0xFF), QColor::fromRgb(0x86, 0xB2, 0x39, 0xFF)
+  // 0xaarrggbb
+  u32 palletes[] = {
+    0xFFEBEBEB, 0xFFE1505C, 0xFF47B267, 0xFF577BFF,
+    0xFFE8C506, 0xFF9788D1, 0xFF4EC3E5, 0xFFDF9C65,
+    0xFFD98B94, 0xFFDFE500, 0xFFAFAFAF, 0xFFBA954B,
+    0xFF92D0C1, 0xFF3D7F3A, 0xFFAD1547, 0xFF4C4CD9,
+    0xFF56379E, 0xFF909BB0, 0xFFD464A2, 0xFF685ECD,
+    0xFF3257A7, 0xFF2A8D61, 0xFF9A5C45, 0xFF9EC09A,
+    0xFFD7C18D, 0xFFE16D44, 0xFF86B239, 0xFFFFFFFF
   };
 
-  iconTints.insert( 0, nullptr); iconTints.insert( 1, nullptr);
-  iconTints.insert( 2, nullptr); iconTints.insert( 3, nullptr);
-  iconTints.insert( 4, nullptr); iconTints.insert( 5, nullptr);
-  iconTints.insert( 6, nullptr); iconTints.insert( 7, nullptr);
-  iconTints.insert( 8, nullptr); iconTints.insert( 9, nullptr);
-  iconTints.insert(10, nullptr); iconTints.insert(11, nullptr);
-  iconTints.insert(13, nullptr); iconTints.insert(14, nullptr);
-  iconTints.insert(15, nullptr); iconTints.insert(24, nullptr);
-  iconTints.insert(25, nullptr); iconTints.insert(26, nullptr);
+  iconTints.insert(0, &items); iconTints.insert(1, &items);
+  iconTints.insert(2, &items); iconTints.insert(3, &items);
+  iconTints.insert(4, &items); iconTints.insert(5, &items);
+  iconTints.insert(6, &items); iconTints.insert(7, &items);
+  iconTints.insert(8, &items); iconTints.insert(9, &items);
+  iconTints.insert(10, &items); iconTints.insert(11, &items);
+  iconTints.insert(13, &items); iconTints.insert(14, &items);
+  iconTints.insert(15, &items); iconTints.insert(24, &items);
+  iconTints.insert(25, &items); iconTints.insert(26, &items);
 
   int count = 0;
   QMapIterator<u32, QImage*> tinter(iconTints);
   while (tinter.hasNext()) {
     tinter.next();
-    QImage* tint = new QImage(itemsMask);
-    QColor pallete = palletes[count++];
+    u32 key = tinter.key();
+
+    QImage* tint = new QImage(1024, 1024, QImage::Format_ARGB32);
+    QColor pallete = palletes[key];
+    tint->fill(pallete);
 
     p.begin(tint);
+    p.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+    p.fillRect(0, 0, imageWidth, imageHeight, itemsMask);
     p.setCompositionMode(QPainter::CompositionMode_Multiply);
-    p.fillRect(0, 0, imageWidth, imageHeight, pallete);
-    p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
     p.fillRect(0, 0, imageWidth, imageHeight, items);
     p.end();
 
-    iconTints.insert(tinter.key(), tint);
+    iconTints.insert(key, tint);
+    
+    if (writeFiles)
+      tint->save(QString("res/sample/items_p%1.png").arg(key));
   }
 
   for (size_t i = 0; i < itemDB->count(); i++)
@@ -78,6 +83,9 @@ void BitmapDB::Init(ItemDB* itemDB)
       QPixmap iconPixmap = QPixmap::fromImage(iconImage);
       QIcon* icon = new QIcon(iconPixmap);
       icons.insert(key, icon);
+
+      if (writeFiles)
+        iconImage.save(QString("res/sample/item_%1_%2.png").arg(icon_id).arg(icon_color));
     }
   }
 }
