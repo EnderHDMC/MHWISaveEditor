@@ -1,0 +1,43 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: 
+//   Authors: See Credits
+//   Version: 
+//   Purpose: 
+//  Category: Game
+// File Mask: *.uct
+//  ID Bytes: 01 10 09 18
+//   History: 
+//------------------------------------------------
+
+#include "types.bt"
+
+struct mhw_color
+{
+  u8 r, g, b, a;
+};
+
+struct uct_header
+{
+  u32 magic;
+  u32 extension;
+  u32 version;
+  u32 color_count;
+};
+
+struct color_info
+{
+  u32 unknown0;
+  mhw_color color;
+  f32 unknown1[5];
+};
+
+uct_header header;
+color_info ui_color[header.color_count];
+u32 unknown0_count;
+color_info unknown0[unknown0_count];
+u32 unknown1_count;
+color_info unknown1[unknown1_count];
+u32 unknown2_count;
+color_info unknown2[unknown2_count];
