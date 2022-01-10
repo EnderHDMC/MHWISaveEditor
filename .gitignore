@@ -14,7 +14,7 @@ itemData.itm
 item_*.gmd
 
 # Specific files
-/res/FileMapping/SAVEDATA1000.csv
+/res/mapping/SAVEDATA1000.csv
 
 # Other
 .ipynb_checkpoints

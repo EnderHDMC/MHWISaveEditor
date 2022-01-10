@@ -115,9 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MasterItemList.json" />
-    <None Include="res\FileMapping\SAVEDATA1000.ksy" />
-    <None Include="res\FileMapping\itm.ksy" />
-    <None Include="res\FileMapping\gmd.ksy" />
     <None Include="res\GameData\item_ara.gmd" />
     <None Include="res\GameData\item_chS.gmd" />
     <None Include="res\GameData\item_chT.gmd" />
@@ -132,5 +129,17 @@
     <None Include="res\GameData\item_rus.gmd" />
     <None Include="res\GameData\item_spa.gmd" />
     <None Include="res\GameData\itemData.itm" />
+    <None Include="res\MasterItemList.csv" />
+    <None Include="res\mapping\CalcUnknown.ipynb" />
+    <None Include="res\mapping\dump_save_structure.1sc" />
+    <None Include="res\mapping\export_items.1sc" />
+    <None Include="res\mapping\export_save_equipment.1sc" />
+    <None Include="res\mapping\gmd.bt" />
+    <None Include="res\mapping\itm.bt" />
+    <None Include="res\mapping\Mapping.ods" />
+    <None Include="res\mapping\max_all_items.1sc" />
+    <None Include="res\mapping\SAVEDATA1000.bt" />
+    <None Include="res\mapping\test_data.1sc" />
+    <None Include="res\mapping\types.bt" />
   </ItemGroup>
 </Project>

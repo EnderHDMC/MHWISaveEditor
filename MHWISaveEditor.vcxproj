@@ -59,12 +59,6 @@
     <QtUic Include="gui\mhwisaveeditor.ui" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\FileMapping\gmd.ksy">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\FileMapping\itm.ksy">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
     <None Include="res\GameData\itemData.itm">
       <DeploymentContent>true</DeploymentContent>
     </None>
@@ -107,11 +101,22 @@
     <None Include="res\GameData\item_spa.gmd">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="res\mapping\CalcUnknown.ipynb" />
+    <None Include="res\mapping\dump_save_structure.1sc" />
+    <None Include="res\mapping\export_items.1sc" />
+    <None Include="res\mapping\export_save_equipment.1sc" />
+    <None Include="res\mapping\gmd.bt" />
+    <None Include="res\mapping\itm.bt" />
+    <None Include="res\mapping\Mapping.ods" />
+    <None Include="res\mapping\max_all_items.1sc" />
+    <None Include="res\mapping\SAVEDATA1000.bt" />
+    <None Include="res\mapping\test_data.1sc" />
+    <None Include="res\mapping\types.bt" />
+    <None Include="res\MasterItemList.csv">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+    </None>
     <None Include="res\MasterItemList.json">
       <FileType>Text</FileType>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\FileMapping\SAVEDATA1000.ksy">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>
