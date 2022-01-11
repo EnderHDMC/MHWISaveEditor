@@ -93,24 +93,22 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
   bitmapDB->Free();
 }
 
-void MHWISaveEditor::SaveFile(const QString& path, mhw_save_raw** save, bool encrypt = true)
+void MHWISaveEditor::SaveFile(const QString& path, mhw_save_raw** save, bool encrypt, bool validate)
 {
   qInfo("Saving: %s", qUtf8Printable(path));
+  qInfo("Validate: %s", validate ? "True" : "False");
   qInfo("Encrypted: %s", encrypt ? "True" : "False");
 
   mhw_save_raw* savep = *save;
-  mhw_save_raw* saveWrite = savep;
-  if (encrypt) {
-    saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
-    if (!saveWrite) {
-      qInfo("Error allocating memory.");
-      return;
-    }
-
-    memcpy(saveWrite, savep, sizeof(mhw_save_raw));
-    EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
+  mhw_save_raw* saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+  if (!saveWrite) {
+    qInfo("Error allocating memory.");
+    return;
   }
-  assert(saveWrite);
+
+  memcpy(saveWrite, savep, sizeof(mhw_save_raw));
+  if (validate) ValidateSaveFile(&saveWrite->save);
+  if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
 
   QSaveFile file(path);
   if (!file.open(QIODevice::WriteOnly)) {
@@ -243,7 +241,7 @@ void MHWISaveEditor::Save()
     QString filepath = fi.absoluteFilePath();
 
     bool encrypt = encrypt_map.value(ext, false);
-    SaveFile(filepath, &mhwRaw, encrypt);
+    SaveFile(filepath, &mhwRaw, encrypt, true);
   }
 }
 

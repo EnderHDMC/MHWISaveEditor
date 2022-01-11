@@ -37,7 +37,7 @@ public:
   void closeEvent(QCloseEvent* event);
 
 private:
-  void SaveFile(const QString& path, mhw_save_raw** save, bool encrypt);
+  void SaveFile(const QString& path, mhw_save_raw** save, bool encrypt = true, bool validate = false);
   void LoadFile(const QString& path, mhw_save_raw** save);
 
   Ui::MHWISaveEditor* ui;
