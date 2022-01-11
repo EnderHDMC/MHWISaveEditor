@@ -25,6 +25,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   , ui(new Ui::MHWISaveEditor)
 {
   ui->setupUi(this);
+  setWindowIcon(QIcon("res/icon.ico"));
 
   slotSignalMapper = new QSignalMapper(this);
   switchSignalMapper = new QSignalMapper(this);

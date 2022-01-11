@@ -62,6 +62,9 @@
     <ClInclude Include="data\BitmapDB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,6 +115,9 @@
     <Image Include="res\items_mask.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\MasterItemList.json" />
@@ -143,5 +149,10 @@
     <None Include="res\mapping\types.bt" />
     <None Include="res\mapping\uct.bt" />
     <None Include="res\ui_colortable.uct" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MHWISaveEditor.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
