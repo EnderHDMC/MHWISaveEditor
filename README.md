@@ -5,9 +5,9 @@ A save editor for Monster Hunter World: Iceborne.
 - Add a function to allow unlocking items from past events, such as Assassin's Hood.
 
 ## Credits
-[AsteriskAmpersand](https://github.com/AsteriskAmpersand/) - for the previous save editor and the python rewrite.
-[LEGENDFF](https://github.com/LEGENDFF/) - for the reference implementation for decrypting/encrypting the save files.
-[Synthlight](Synthlight/MHW-Editor) - for the .itm template that I adapted to dump the items.
+- [AsteriskAmpersand](https://github.com/AsteriskAmpersand/) - for the previous save editor and the python rewrite.
+- [LEGENDFF](https://github.com/LEGENDFF/) - for the reference implementation for decrypting/encrypting the save files.
+- [Synthlight](Synthlight/MHW-Editor) - for the .itm template that I adapted to dump the items.
 
 ### Important Links:
 - [LEGENDFF/mhw-Savecrypt](https://github.com/LEGENDFF/mhw-Savecrypt)
