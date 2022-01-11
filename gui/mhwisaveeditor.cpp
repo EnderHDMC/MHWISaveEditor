@@ -27,14 +27,22 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
 
   slotSignalMapper = new QSignalMapper(this);
+  switchSignalMapper = new QSignalMapper(this);
   slotActions = { ui->actionSlot1 , ui->actionSlot2, ui->actionSlot3 };
+  switchActions = { ui->actionSwitchSlot1 , ui->actionSwitchSlot2, ui->actionSwitchSlot3 };
   for (int i = 0; i < slotActions.size(); ++i) {
     slotActions[i]->setChecked(i == saveslot);
 
     connect(slotActions[i], SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
     slotSignalMapper->setMapping(slotActions[i], i);
+
+    switchActions[i]->setEnabled(i != saveslot);
+
+    connect(switchActions[i], SIGNAL(triggered()), switchSignalMapper, SLOT(map()));
+    switchSignalMapper->setMapping(switchActions[i], i);
   }
   connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Slot(int)));
+  connect(switchSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SwitchSlot(int)));
 
   openSignalMapper = new QSignalMapper(this);
   connect(ui->actionOpenGameLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
@@ -264,7 +272,28 @@ void MHWISaveEditor::Slot(int slot)
   for (size_t i = 0; i < slotActions.count(); i++)
   {
     slotActions[i]->setChecked(i == saveslot);
+    switchActions[i]->setEnabled(i != saveslot);
   }
+
+  LoadSaveSlot();
+}
+
+void MHWISaveEditor::SwitchSlot(int slot)
+{
+  if (!mhwRaw) return;
+
+  mhw_save_slot* temp = (mhw_save_slot*)malloc(sizeof(mhw_save_slot));
+  mhw_save_slot* saveA = &mhwRaw->save.section3.Saves[saveslot];
+  mhw_save_slot* saveB = &mhwRaw->save.section3.Saves[slot];
+  if (!temp) {
+    qWarning("Error allocating memory.");
+    return;
+  };
+
+  memcpy_s(temp, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
+  memcpy_s(saveA, sizeof(mhw_save_slot), saveB, sizeof(mhw_save_slot));
+  memcpy_s(saveB, sizeof(mhw_save_slot), temp, sizeof(mhw_save_slot));
+  free(temp);
 
   LoadSaveSlot();
 }

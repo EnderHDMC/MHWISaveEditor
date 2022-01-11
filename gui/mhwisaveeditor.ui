@@ -76,9 +76,19 @@
     <property name="title">
      <string>Slot</string>
     </property>
+    <widget class="QMenu" name="menuSwitchWith">
+     <property name="title">
+      <string>Switch with</string>
+     </property>
+     <addaction name="actionSwitchSlot1"/>
+     <addaction name="actionSwitchSlot2"/>
+     <addaction name="actionSwitchSlot3"/>
+    </widget>
     <addaction name="actionSlot1"/>
     <addaction name="actionSlot2"/>
     <addaction name="actionSlot3"/>
+    <addaction name="separator"/>
+    <addaction name="menuSwitchWith"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSlot"/>
@@ -244,6 +254,21 @@
    </property>
    <property name="shortcut">
     <string>F3</string>
+   </property>
+  </action>
+  <action name="actionSwitchSlot1">
+   <property name="text">
+    <string>Slot 1</string>
+   </property>
+  </action>
+  <action name="actionSwitchSlot2">
+   <property name="text">
+    <string>Slot 2</string>
+   </property>
+  </action>
+  <action name="actionSwitchSlot3">
+   <property name="text">
+    <string>Slot 3</string>
    </property>
   </action>
  </widget>

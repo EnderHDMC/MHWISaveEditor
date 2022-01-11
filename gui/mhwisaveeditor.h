@@ -25,6 +25,7 @@ public slots:
   void OpenSAVEDATA1000();
   void Save();
   void Slot(int slot);
+  void SwitchSlot(int slot);
   void OpenLocation(const QString& location);
   void Backup();
   void Restore();
@@ -45,10 +46,12 @@ private:
   int saveslot = 0;
 
   QSignalMapper* slotSignalMapper;
+  QSignalMapper* switchSignalMapper;
   QSignalMapper* openSignalMapper;
   QSignalMapper* dumpSignalMapper;
 
   QList<QAction*> slotActions;
+  QList<QAction*> switchActions;
   QList<InventoryEditor*> inventoryEditors;
 
   void LoadSaveSlot();
