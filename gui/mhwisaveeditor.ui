@@ -111,11 +111,17 @@
    </property>
   </action>
   <action name="actionBackup">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Backup</string>
    </property>
   </action>
   <action name="actionRestore">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Restore</string>
    </property>
@@ -257,16 +263,25 @@
    </property>
   </action>
   <action name="actionSwitchSlot1">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Slot 1</string>
    </property>
   </action>
   <action name="actionSwitchSlot2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Slot 2</string>
    </property>
   </action>
   <action name="actionSwitchSlot3">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Slot 3</string>
    </property>
