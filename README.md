@@ -1,4 +1,4 @@
-# MHW Iceborne SaveEditor
+# MHW Iceborne Save Editor
 A save editor for Monster Hunter World: Iceborne.
 
 ## TODO
