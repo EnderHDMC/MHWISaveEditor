@@ -3,6 +3,8 @@ A save editor for Monster Hunter World: Iceborne.
 
 ## TODO
 - Add a function to allow unlocking items from past events, such as Assassin's Hood.
+- Name change function.
+- Change save Steam ID.
 
 ## Credits
 - [AsteriskAmpersand](https://github.com/AsteriskAmpersand/) - for the previous save editor and the python rewrite.
