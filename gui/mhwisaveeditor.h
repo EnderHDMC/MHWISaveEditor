@@ -12,6 +12,12 @@ constexpr const char* ALL_SAVE = "All Files (*)";
 constexpr const char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
 constexpr const char* UNENCRYPTED_SAVE = "Unencrypted Save(*.bin)";
 
+struct editor_tab {
+  QWidget* widget;
+  QWidget** binding;
+  QString name;
+};
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MHWISaveEditor; }
 QT_END_NAMESPACE
@@ -45,6 +51,8 @@ private:
   mhw_save_raw* mhwRaw = nullptr;
   int saveslot = 0;
 
+  InventoryEditor* inventoryEditor = nullptr;
+
   QSignalMapper* slotSignalMapper;
   QSignalMapper* switchSignalMapper;
   QSignalMapper* openSignalMapper;
@@ -52,7 +60,6 @@ private:
 
   QList<QAction*> slotActions;
   QList<QAction*> switchActions;
-  QList<InventoryEditor*> inventoryEditors;
 
   void LoadSaveSlot();
 };

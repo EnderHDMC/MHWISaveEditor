@@ -1,34 +1,35 @@
 #include "inventoryeditor.h"
 #include "ui_inventoryeditor.h"
 
-#include <QScrollBar>
+#include <QGridLayout>
 
-InventoryEditor::InventoryEditor(const inventory_area* area, QWidget* parent)
-  : QWidget(parent)
+InventoryEditor::InventoryEditor(QWidget *parent)
+    : QWidget(parent)
 {
-  ui = new Ui::InventoryEditor();
-  ui->setupUi(this);
+    ui = new Ui::InventoryEditor();
+    ui->setupUi(this);
 
-  slotViews.resize(area->count);
+    int areaCount = COUNTOF(inventory_areas);
+    editorTabs.resize(areaCount);
+    for (size_t i = 0; i < areaCount; i++)
+    {
+      InventoryEditorTab* editor = new InventoryEditorTab(&inventory_areas[i]);
+      editorTabs[i] = editor;
 
-  for (size_t i = 0; i < slotViews.size(); i++)
-  {
-    slotViews[i] = new ItemSlotView(area, i, this);
-    slotViews[i]->setFixedSize(128, 128);
-    ui->gridLayoutScroll->addWidget(slotViews[i], i / 8, i % 8);
-  }
+      ui->tabWidget->addTab(editor, tr(inventory_areas[i].area));
+    }
 }
 
 InventoryEditor::~InventoryEditor()
 {
-  delete ui;
+    delete ui;
 }
 
 void InventoryEditor::Load(mhw_save_raw* save, int saveslot)
 {
-  for (size_t i = 0; i < slotViews.count(); i++)
+  for (size_t i = 0; i < editorTabs.count(); i++)
   {
-    ItemSlotView* slotView = slotViews[i];
-    slotView->Load(save, saveslot);
+    InventoryEditorTab* editor = editorTabs[i];
+    editor->Load(save, saveslot);
   }
 }

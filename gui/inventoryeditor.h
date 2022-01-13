@@ -1,26 +1,23 @@
 #pragma once
 
 #include <QWidget>
-#include <QSignalMapper>
 
-#include "itemslotview.h"
-
-#include "../types/inventory_areas.h"
+#include "inventoryeditortab.h"
 
 namespace Ui { class InventoryEditor; };
 
 class InventoryEditor : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  InventoryEditor(const inventory_area* area, QWidget* parent = Q_NULLPTR);
-  ~InventoryEditor();
+    InventoryEditor(QWidget *parent = Q_NULLPTR);
+    ~InventoryEditor();
 
-  void Load(mhw_save_raw *save, int saveslot);
+    void Load(mhw_save_raw* save, int saveslot);
 
 private:
-  Ui::InventoryEditor* ui;
+    Ui::InventoryEditor *ui;
 
-  QList<ItemSlotView*> slotViews;
+    QList<InventoryEditorTab*> editorTabs;
 };

@@ -82,6 +82,9 @@
     <ClCompile Include="data\ItemDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gui\inventoryeditortab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="gui\inventoryeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -93,6 +96,9 @@
     <QtMoc Include="gui\itemslotview.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="gui\inventoryeditortab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="gui\inventoryeditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -102,6 +108,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="gui\itemslotview.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gui\inventoryeditortab.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="gui\inventoryeditor.ui">

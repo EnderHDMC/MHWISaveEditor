@@ -31,7 +31,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   switchSignalMapper = new QSignalMapper(this);
   slotActions = { ui->actionSlot1 , ui->actionSlot2, ui->actionSlot3 };
   switchActions = { ui->actionSwitchSlot1 , ui->actionSwitchSlot2, ui->actionSwitchSlot3 };
-  for (int i = 0; i < slotActions.size(); ++i) {
+  for (int i = 0; i < slotActions.size(); i++) {
     slotActions[i]->setChecked(i == saveslot);
 
     connect(slotActions[i], SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
@@ -61,28 +61,24 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
     ui->actionSAVEDATA1008bin, ui->actionSAVEDATA1009bin
   };
 
-  for (int i = 0; i < slotDump.size(); ++i) {
+  for (int i = 0; i < slotDump.size(); i++) {
     connect(slotDump[i], SIGNAL(triggered()), dumpSignalMapper, SLOT(map()));
     dumpSignalMapper->setMapping(slotDump[i], i);
   }
   connect(dumpSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Dump(int)));
 
-  int count = COUNTOF(areas);
-  inventoryEditors.resize(count);
-  for (size_t i = 0; i < count; i++)
+  editor_tab editors[] = {
+    {new InventoryEditor(), (QWidget**)&inventoryEditor, tr("Inventory Editor")}
+  };
+
+  for (int i = 0; i < COUNTOF(editors); i++)
   {
-    QWidget* newTab = new QWidget(ui->tabWidget);
+    editor_tab* tab = &editors[i];
+    QWidget* editor = tab->widget;
 
-    QGridLayout* layout = new QGridLayout();
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->setSpacing(0);
-
-    InventoryEditor* editor = new InventoryEditor(&areas[i], newTab);
-    layout->addWidget(editor);
-    newTab->setLayout(layout);
-    inventoryEditors[i] = editor;
-
-    ui->tabWidget->addTab(newTab, tr(areas[i].area));
+    ui->tabWidget->addTab(editor, tab->name);
+    if (tab->binding)
+      *tab->binding = editor;
   }
 }
 
@@ -258,11 +254,7 @@ void MHWISaveEditor::LoadSaveSlot()
 {
   if (!mhwRaw) return;
 
-  for (size_t i = 0; i < inventoryEditors.count(); i++)
-  {
-    InventoryEditor* editor = inventoryEditors[i];
-    editor->Load(mhwRaw, saveslot);
-  }
+  inventoryEditor->Load(mhwRaw, saveslot);
 }
 
 void MHWISaveEditor::Slot(int slot)
