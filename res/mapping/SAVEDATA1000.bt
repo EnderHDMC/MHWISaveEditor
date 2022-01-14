@@ -30,8 +30,6 @@
 //          Seliana room
 //          Pets in each room
 //          flags for kjarr melding?
-//          Flags for mantle/tool unlocks
-//            especially assassins hood
 //          Pendants
 //          Canteen Ingriedients
 //          Palico Status
@@ -694,17 +692,17 @@ struct mhw_layered_loadout
 
 struct mhw_equipment
 {
-  u32 sort_index;
-  u32 serial_item_category;
-  u32 type;
+  i32 sort_index;
+  i32 serial_item_category;
+  i32 type;
   u32 id;
   u32 level;
   u32 points;
-  u32 decos[3];
-  u32 bowgun_mods[5];
+  i32 decos[3];
+  i32 bowgun_mods[5];
   u32 augments[3];
   u32 unknown0[2];
-  u32 pendant;
+  i32 pendant;
   u8 extra_slots;
   u8 attack_increase;
   u8 affinity_increase;
@@ -713,9 +711,9 @@ struct mhw_equipment
   u8 health_regen;
   u8 element_status_effect_up;
   u8 unknown1[11];
-  u8 custom_upgrades[12];
-  u16 base;
-  u16 parts;
+  i8 custom_upgrades[12];
+  i16 base;
+  i16 parts;
   u16 awakens[5];
   u16 awakened_checksum;
 };
@@ -954,8 +952,8 @@ struct mhw_save_slot
 
   u8 unknown9[1416];
   mhw_investigation investigations[400];
-  // NOTE: mantle unlocks are somewhere in here
-  u8 unknown10[2630];
+  u8 unknown10[2614];
+  u32 tool_unlocks[4];
   mhw_equipment tools[128];
   u8 unknown11[2192];
   mhw_equipment_loadout equipment_loadouts[224];

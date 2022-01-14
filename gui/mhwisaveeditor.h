@@ -5,8 +5,8 @@
 #include <QSignalMapper>
 #include "../types/mhw_save.h"
 
-#include "itemslotview.h"
 #include "inventoryeditor.h"
+#include "limitedunlocks.h"
 
 constexpr const char* ALL_SAVE = "All Files (*)";
 constexpr const char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
@@ -52,6 +52,7 @@ private:
   int saveslot = 0;
 
   InventoryEditor* inventoryEditor = nullptr;
+  LimitedUnlocks* limitedUnlocks = nullptr;
 
   QSignalMapper* slotSignalMapper;
   QSignalMapper* switchSignalMapper;

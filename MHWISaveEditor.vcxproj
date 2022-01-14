@@ -27,6 +27,7 @@
     <ClInclude Include="data\ItemDB.h" />
     <QtMoc Include="gui\inventoryeditortab.h" />
     <QtMoc Include="gui\inventoryeditor.h" />
+    <QtMoc Include="gui\limitedunlocks.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\inventory_areas.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="gui\inventoryeditortab.cpp" />
     <ClCompile Include="gui\itemslotview.cpp" />
     <ClCompile Include="gui\inventoryeditor.cpp" />
+    <ClCompile Include="gui\limitedunlocks.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="gui\mhwisaveeditor.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
@@ -61,6 +63,7 @@
     <QtUic Include="gui\itemslotview.ui" />
     <QtUic Include="gui\mhwisaveeditor.ui" />
     <QtUic Include="gui\inventoryeditor.ui" />
+    <QtUic Include="gui\limitedunlocks.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GameData\itemData.itm">

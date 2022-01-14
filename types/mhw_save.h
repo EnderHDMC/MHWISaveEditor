@@ -1,6 +1,7 @@
 #pragma once
 #include "types.h"
 #include "mhw_enums.h"
+#include "constants.h"
 
 #pragma pack(push, 1)
 struct mhw_save_header
@@ -180,15 +181,6 @@ struct mhw_guild_card
   u8 greeting[256];
   u8 title[256];
 
-  //  TODO: Expand Unknown5, since the some of the structure is known
-  //  5454 + 864 = 6318
-  //  Skip 5454 // Unknown
-  //  Monsters: (864)
-  //      Skip 2 * 96 // u16 * MaxMonsterCount = Captured monsters
-  //      Skip 2 * 96 // u16 * MaxMonsterCount = Slayed monsters
-  //      Skip 2 * 96 // u16 * MaxMonsterCount = largest
-  //      Skip 2 * 96 // u16 * MaxMonsterCount = smallest
-  //      Skip 1 * 96 // u8 * MaxMonsterCount = researchLevel
   u8 unknown5[6318];
 };
 
@@ -211,6 +203,34 @@ struct mhw_storage {
   mhw_item_slot decorations[500];
 };
 
+struct mhw_equipment
+{
+  i32 sort_index;
+  i32 serial_item_category;
+  i32 type;
+  u32 id;
+  u32 level;
+  u32 points;
+  i32 decos[3];
+  i32 bowgun_mods[5];
+  u32 augments[3];
+  u32 unknown0[2];
+  i32 pendant;
+  u8 extra_slots;
+  u8 attack_increase;
+  u8 affinity_increase;
+  u8 defense_increase;
+  u8 slot_upgrade;
+  u8 health_regen;
+  u8 element_status_effect_up;
+  u8 unknown1[11];
+  i8 custom_upgrades[12];
+  i16 base;
+  i16 parts;
+  u16 awakens[5];
+  u16 awakened_checksum;
+};
+
 struct mhw_save_slot
 {
   u32 unknown0;
@@ -224,10 +244,15 @@ struct mhw_save_slot
   u8 item_loadouts[142200];
   mhw_item_pouch item_pouch;
   mhw_storage storage;
-  u8 equipment[315000];
-  u8 unknown3[285483];
+  mhw_equipment equipment[2500];
+  u8 unknown_equipment[221760];
+  u32 equipment_index_table[2500];
+  u8 unknown4[53723];
   u8 palico_name[64];
-  u8 unknown4[379053];
+  u8 unknown5[20898];
+  u32 tool_unlocks[4];
+  mhw_equipment tools[128];
+  u8 unknown6[342011];
   u8 hash_table[512];
 };
 
@@ -288,6 +313,43 @@ static bool IsBlowfishDecrypted(mhw_ib_save* save) {
   return save->header.magic == 0x00000001;
 }
 
+static mhw_item_slot* FindItemMaterial(mhw_ib_save* save, int slot, u32 item_id) {
+  mhw_save_slot* save_slot = &save->section3.Saves[slot];
+  mhw_storage* storage = &save_slot->storage;
+  
+  mhw_item_slot* result = nullptr;
+  for (int i = 0; i < COUNTOF(storage->materials); i++)
+  {
+    mhw_item_slot* slot = &storage->materials[i];
+    if (slot->id == item_id) {
+      result = slot;
+      break;
+    }
+  }
+
+  return result;
+}
+
+static mhw_equipment* FindEquipment(mhw_ib_save* save, int slot, i32 type, u32 id) {
+  mhw_save_slot* save_slot = &save->section3.Saves[slot];
+  mhw_equipment* equipment = save_slot->equipment;
+  u32* index_table = save_slot->equipment_index_table;
+  int count = COUNTOF(save_slot->equipment);
+  
+  mhw_equipment* result = nullptr;
+  for (int i = 0; i < count; i++)
+  {
+    int lookup = index_table[i];
+    mhw_equipment* slot = &equipment[lookup];
+    if (slot->type == type && slot->id == id) {
+      result = slot;
+      break;
+    }
+  }
+
+  return result;
+}
+
 static void ValidateSaveFile(mhw_ib_save* save) {
   for (int slot = 0; slot < COUNTOF(save->section3.Saves); slot++)
   {
@@ -333,4 +395,5 @@ static void ValidateSaveFile(mhw_ib_save* save) {
   }
 }
 
-static_assert(sizeof(mhw_ib_save) == 11284704, "Size of MHW:IB Save is not as expected.");
+static_assert(sizeof(mhw_ib_save) == MHW_IB_SAVE_SIZE, "Size of MHW:IB Save is not as expected.");
+static_assert(sizeof(mhw_equipment) == sizeof(B_EMPTY_EQUIPMENT), "Size of constant B_EMPTY_EQUIPMENT is invalid.");

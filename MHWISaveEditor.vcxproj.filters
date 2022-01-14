@@ -88,6 +88,9 @@
     <ClCompile Include="gui\inventoryeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gui\limitedunlocks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="gui\mhwisaveeditor.h">
@@ -102,6 +105,9 @@
     <QtMoc Include="gui\inventoryeditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="gui\limitedunlocks.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\mhwisaveeditor.ui">
@@ -114,6 +120,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="gui\inventoryeditor.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gui\limitedunlocks.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
