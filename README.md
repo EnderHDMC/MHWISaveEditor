@@ -2,10 +2,14 @@
 A save editor for Monster Hunter World: Iceborne.
 
 ## TODO
-- Name change function.
-- Change save Steam ID.
-- Make the editor not silently fail.
-- Item Search.
+- Name change function
+- Make the editor not silently fail
+- Gear Box Editor
+- Research Points
+- Crown Size normalisation
+- Guiding Lands editing
+- Clear arena records
+- Layered armors (including Artemis and Bayek)
 
 ## Credits
 - [AsteriskAmpersand](https://github.com/AsteriskAmpersand/) - for the previous save editor and the python rewrite.
