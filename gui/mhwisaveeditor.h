@@ -34,6 +34,7 @@ public slots:
   void Save();
   void Slot(int slot);
   void SwitchSlot(int slot);
+  void CloneSlot(int slot);
   void OpenLocation(const QString& location);
   void Backup();
   void Restore();
@@ -63,10 +64,12 @@ private:
 
   QSignalMapper* slotSignalMapper;
   QSignalMapper* switchSignalMapper;
+  QSignalMapper* cloneSignalMapper;
   QSignalMapper* openSignalMapper;
   QSignalMapper* dumpSignalMapper;
 
   QList<QAction*> slotActions;
   QList<QAction*> switchActions;
+  QList<QAction*> cloneActions;
 };
 #endif // MHWISAVEEDITOR_H

@@ -27,21 +27,28 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 
   slotSignalMapper = new QSignalMapper(this);
   switchSignalMapper = new QSignalMapper(this);
+  cloneSignalMapper = new QSignalMapper(this);
   slotActions = { ui->actionSlot1 , ui->actionSlot2, ui->actionSlot3 };
   switchActions = { ui->actionSwitchSlot1 , ui->actionSwitchSlot2, ui->actionSwitchSlot3 };
+  cloneActions = { ui->actionCloneSlot1, ui->actionCloneSlot2, ui->actionCloneSlot3 };
   for (int i = 0; i < slotActions.size(); i++) {
     slotActions[i]->setChecked(i == saveslot);
 
     connect(slotActions[i], SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
     slotSignalMapper->setMapping(slotActions[i], i);
 
-    switchActions[i]->setEnabled(i != saveslot);
-
     connect(switchActions[i], SIGNAL(triggered()), switchSignalMapper, SLOT(map()));
     switchSignalMapper->setMapping(switchActions[i], i);
+
+    connect(cloneActions[i], SIGNAL(triggered()), cloneSignalMapper, SLOT(map()));
+    cloneSignalMapper->setMapping(cloneActions[i], i);
+
+    switchActions[i]->setEnabled(i != saveslot);
+    cloneActions[i]->setEnabled(i != saveslot);
   }
   connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Slot(int)));
   connect(switchSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SwitchSlot(int)));
+  connect(cloneSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(CloneSlot(int)));
 
   openSignalMapper = new QSignalMapper(this);
   connect(ui->actionOpenGameLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
@@ -306,6 +313,16 @@ void MHWISaveEditor::SwitchSlot(int slot)
   free(temp);
 
   LoadSaveSlot();
+}
+
+void MHWISaveEditor::CloneSlot(int slot)
+{
+  if (!mhwRaw) return;
+
+  mhw_save_slot* saveA = &mhwRaw->save.section3.Saves[saveslot];
+  mhw_save_slot* saveB = &mhwRaw->save.section3.Saves[slot];
+
+  memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)
