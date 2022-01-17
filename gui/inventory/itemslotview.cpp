@@ -2,6 +2,7 @@
 #include "ui_itemslotview.h"
 
 #include <QMessageBox>
+#include "wheelguard.h"
 
 ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent)
   : QWidget(parent), SaveLoader()
@@ -11,6 +12,9 @@ ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent
 
   bitmapDB = bitmapDB->GetInstance();
   itemDB = itemDB->GetInstance();
+
+  WheelGuard* guard = new WheelGuard(ui->spnCount);
+  ui->spnCount->installEventFilter(guard);
 
   this->area = area;
   this->invslot = slot;
@@ -31,7 +35,7 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
   itemInfo* info = itemDB->GetItemById(itemSlot->id);
   if (!info) {
     QMessageBox msgBox;
-    msgBox.setText("Invalid item. This is probably an Iceborne item not in the database");
+    msgBox.setText("Invalid item.");
     msgBox.setInformativeText("You may still edit your save, you just won't be able to see the invalid item.");
     msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
     msgBox.setDefaultButton(QMessageBox::Ok);

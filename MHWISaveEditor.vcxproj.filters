@@ -68,6 +68,9 @@
     <ClInclude Include="gui\common\saveloader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gui\inventory\wheelguard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,6 +98,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\generalinfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\inventory\wheelguard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
