@@ -34,12 +34,11 @@ void GeneralInfo::ChangeSteamID()
       ui->btnSteamID->setText(text);
       mhwSave->save.header.steam_id = steamID;
     }
-  }
-
-  if (!ok) {
-    QMessageBox msgBox;
-    msgBox.setText("Invalid steam ID format.");
-    msgBox.exec();
+    else {
+      QMessageBox msgBox;
+      msgBox.setText("Invalid steam ID format.");
+      msgBox.exec();
+    }
   }
 }
 
@@ -53,7 +52,7 @@ void GeneralInfo::ResetEditVouchers()
   mhwSave->save.section1.palico_edit_voucher = 0;
 
   QMessageBox msgBox;
-  msgBox.setText("Edit vouchers have been reset.");
+  msgBox.setText("Free edit vouchers have been reset.");
   msgBox.exec();
 }
 
