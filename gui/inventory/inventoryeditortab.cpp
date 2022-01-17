@@ -4,7 +4,7 @@
 #include <QScrollBar>
 
 InventoryEditorTab::InventoryEditorTab(const inventory_area* area, QWidget* parent)
-  : QWidget(parent)
+  : QWidget(parent), SaveLoader()
 {
   ui = new Ui::InventoryEditorTab();
   ui->setupUi(this);
@@ -23,11 +23,13 @@ InventoryEditorTab::~InventoryEditorTab()
   delete ui;
 }
 
-void InventoryEditorTab::Load(mhw_save_raw* save, int saveslot)
+void InventoryEditorTab::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
 {
+  SaveLoader::Load(mhwSave, mhwSaveSlot);
+
   for (size_t i = 0; i < slotViews.count(); i++)
   {
     ItemSlotView* slotView = slotViews[i];
-    slotView->Load(save, saveslot);
+    slotView->Load(mhwSave, mhwSaveSlot);
   }
 }

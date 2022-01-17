@@ -4,7 +4,7 @@
 #include <QMessageBox>
 
 ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent)
-  : QWidget(parent)
+  : QWidget(parent), SaveLoader()
 {
   ui = new Ui::ItemSlotView();
   ui->setupUi(this);
@@ -21,14 +21,12 @@ ItemSlotView::~ItemSlotView()
   delete ui;
 }
 
-void ItemSlotView::Load(mhw_save_raw* mhwSave, int saveslot)
+void ItemSlotView::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
 {
+  SaveLoader::Load(mhwSave, mhwSaveSlot);
   loading = true;
 
-  this->mhwSave = mhwSave;
-  this->saveslot = saveslot;
-
-  u8* slot = ((u8*)(&mhwSave->save.section3.Saves[saveslot])) + area->localoffset;
+  u8* slot = ((u8*)(&mhwSave->save.section3.Saves[mhwSaveSlot])) + area->localoffset;
   mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
   itemInfo* info = itemDB->GetItemById(itemSlot->id);
   if (!info) {
@@ -73,7 +71,7 @@ void ItemSlotView::AmountChanged(int amount)
   }
 
   if (!loading) {
-    u8* slot = ((u8*)(&mhwSave->save.section3.Saves[saveslot])) + area->localoffset;
+    u8* slot = ((u8*)(&mhwSave->save.section3.Saves[mhwSaveSlot])) + area->localoffset;
     mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
     mhw_item_slot dummy = { itemSlot->id, itemSlot->amount };
 

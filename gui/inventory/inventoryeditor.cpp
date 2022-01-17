@@ -4,7 +4,7 @@
 #include <QGridLayout>
 
 InventoryEditor::InventoryEditor(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent), SaveLoader()
 {
     ui = new Ui::InventoryEditor();
     ui->setupUi(this);
@@ -25,11 +25,13 @@ InventoryEditor::~InventoryEditor()
     delete ui;
 }
 
-void InventoryEditor::Load(mhw_save_raw* save, int saveslot)
+void InventoryEditor::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
 {
+  SaveLoader::Load(mhwSave, mhwSaveSlot);
+
   for (size_t i = 0; i < editorTabs.count(); i++)
   {
     InventoryEditorTab* editor = editorTabs[i];
-    editor->Load(save, saveslot);
+    editor->Load(mhwSave, mhwSaveSlot);
   }
 }

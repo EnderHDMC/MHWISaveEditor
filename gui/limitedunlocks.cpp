@@ -15,15 +15,13 @@ LimitedUnlocks::~LimitedUnlocks()
     delete ui;
 }
 
-void LimitedUnlocks::Load(mhw_save_raw* mhwSave, int saveslot)
+void LimitedUnlocks::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
 {
+  SaveLoader::Load(mhwSave, mhwSaveSlot);
   loading = true;
 
-  this->mhwSave = mhwSave;
-  this->saveslot = saveslot;
-
-  u32 assassinHoodUnlocked = (mhwSave->save.section3.Saves[saveslot].tool_unlocks[0] >> ASSASSIN_HOOD_INDEX) & 0x01;
-  u32 assassinHoodUpgraded = mhwSave->save.section3.Saves[saveslot].tools[ASSASSIN_HOOD_INDEX].level;
+  u32 assassinHoodUnlocked = (mhwSave->save.section3.Saves[mhwSaveSlot].tool_unlocks[0] >> ASSASSIN_HOOD_INDEX) & 0x01;
+  u32 assassinHoodUpgraded = mhwSave->save.section3.Saves[mhwSaveSlot].tools[ASSASSIN_HOOD_INDEX].level;
   ui->chkAssassinHoodUnlock->setChecked(assassinHoodUnlocked);
   ui->chkAssassinHoodUpgrade->setChecked(assassinHoodUpgraded);
 
@@ -37,9 +35,9 @@ void LimitedUnlocks::UnlockAssassinHood(int checked)
   checked = checked != 0;
 
   u8 n = ASSASSIN_HOOD_INDEX;
-  u32 unlock = mhwSave->save.section3.Saves[saveslot].tool_unlocks[0];
+  u32 unlock = mhwSave->save.section3.Saves[mhwSaveSlot].tool_unlocks[0];
   unlock = (unlock & ~(1UL << n)) | (checked << n);
-  mhwSave->save.section3.Saves[saveslot].tool_unlocks[0] = unlock;
+  mhwSave->save.section3.Saves[mhwSaveSlot].tool_unlocks[0] = unlock;
 }
 
 
@@ -49,7 +47,7 @@ void LimitedUnlocks::UpgradeAssassinHood(int checked)
   if (loading) return;
   checked = checked != 0;
 
-  mhwSave->save.section3.Saves[saveslot].tools[ASSASSIN_HOOD_INDEX].level = checked;
+  mhwSave->save.section3.Saves[mhwSaveSlot].tools[ASSASSIN_HOOD_INDEX].level = checked;
 }
 
 void LimitedUnlocks::GiveArtemisGear()
@@ -58,7 +56,7 @@ void LimitedUnlocks::GiveArtemisGear()
 
   for (int type = 0; type < 5; type++)
   {
-    mhw_equipment* equipment = FindEquipment((mhw_ib_save*)mhwSave, saveslot, -1, 0);
+    mhw_equipment* equipment = FindEquipment(mhwSaveIB, mhwSaveSlot, -1, 0);
     if (equipment) {
       u32 sort_index = equipment->sort_index;
       memcpy_s(equipment, sizeof(mhw_equipment), B_EMPTY_EQUIPMENT, sizeof(mhw_equipment));

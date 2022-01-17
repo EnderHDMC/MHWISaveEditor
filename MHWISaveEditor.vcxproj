@@ -29,6 +29,7 @@
     <QtMoc Include="gui\inventory\inventoryeditor.h" />
     <QtMoc Include="gui\limitedunlocks.h" />
     <QtMoc Include="gui\generalinfo.h" />
+    <ClInclude Include="gui\common\saveloader.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\inventory_areas.h" />

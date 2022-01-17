@@ -3,10 +3,11 @@
 #include <QWidget>
 
 #include "../types/mhw_save.h"
+#include "common/saveloader.h"
 
 namespace Ui { class LimitedUnlocks; };
 
-class LimitedUnlocks : public QWidget
+class LimitedUnlocks : public QWidget, public SaveLoader
 {
     Q_OBJECT
 
@@ -19,13 +20,11 @@ public:
     LimitedUnlocks(QWidget *parent = Q_NULLPTR);
     ~LimitedUnlocks();
 
-    void Load(mhw_save_raw* mhwSave, int saveslot);
+    // Inherited via SaveLoader
+    virtual void Load(mhw_save_raw* mhwSave, int mhwSaveSlot) override;
 
 private:
     Ui::LimitedUnlocks *ui;
-
-    mhw_save_raw* mhwSave = nullptr;
-    int saveslot = 0;
 
     bool loading = false;
 };

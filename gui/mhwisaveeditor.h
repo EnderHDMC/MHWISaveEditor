@@ -15,8 +15,8 @@ constexpr const char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
 constexpr const char* UNENCRYPTED_SAVE = "Unencrypted Save(*.bin)";
 
 struct editor_tab {
-  QWidget* widget;
-  QWidget** binding;
+  SaveLoader* widget;
+  SaveLoader** binding;
   QString name;
 };
 
@@ -38,6 +38,7 @@ public slots:
   void Backup();
   void Restore();
   void Dump(int number);
+  void EditorTabChange(int editorIndex);
 
 public:
   MHWISaveEditor(QWidget* parent = nullptr);
@@ -49,6 +50,8 @@ private:
   void SaveFile(const QString& path, mhw_save_raw** save, bool encrypt = true, bool validate = false);
   void LoadFile(const QString& path, mhw_save_raw** save);
 
+  void LoadSaveSlot();
+
   Ui::MHWISaveEditor* ui;
   mhw_save_raw* mhwRaw = nullptr;
   int saveslot = 0;
@@ -56,6 +59,7 @@ private:
   InventoryEditor* inventoryEditor = nullptr;
   LimitedUnlocks* limitedUnlocks = nullptr;
   GeneralInfo* generalInfo = nullptr;
+  QList<SaveLoader*> editors;
 
   QSignalMapper* slotSignalMapper;
   QSignalMapper* switchSignalMapper;
@@ -64,7 +68,5 @@ private:
 
   QList<QAction*> slotActions;
   QList<QAction*> switchActions;
-
-  void LoadSaveSlot();
 };
 #endif // MHWISAVEEDITOR_H

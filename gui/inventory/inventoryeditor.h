@@ -6,7 +6,7 @@
 
 namespace Ui { class InventoryEditor; };
 
-class InventoryEditor : public QWidget
+class InventoryEditor : public QWidget, public SaveLoader
 {
     Q_OBJECT
 
@@ -14,7 +14,8 @@ public:
     InventoryEditor(QWidget *parent = Q_NULLPTR);
     ~InventoryEditor();
 
-    void Load(mhw_save_raw* save, int saveslot);
+    // Inherited via SaveLoader
+    virtual void Load(mhw_save_raw* mhwSave, int mhwSaveSlot) override;
 
 private:
     Ui::InventoryEditor *ui;

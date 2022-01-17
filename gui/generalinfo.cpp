@@ -18,7 +18,7 @@ GeneralInfo::~GeneralInfo()
 
 void GeneralInfo::ChangeSteamID()
 {
-  if (!mhwSave) return;
+  if (!this->mhwSave) return;
   u64 steamID = mhwSave->save.header.steam_id;
   QString id = QString::number(steamID);
 
@@ -57,10 +57,9 @@ void GeneralInfo::ResetEditVouchers()
   msgBox.exec();
 }
 
-void GeneralInfo::Load(mhw_save_raw* mhwSave, int saveslot)
+void GeneralInfo::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
 {
-  this->mhwSave = mhwSave;
-  this->saveslot = saveslot;
+  SaveLoader::Load(mhwSave, mhwSaveSlot);
 
   u64 steamID = mhwSave->save.header.steam_id;
   ui->btnSteamID->setText(QString::number(steamID));

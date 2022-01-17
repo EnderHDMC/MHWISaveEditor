@@ -65,20 +65,24 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   }
   connect(dumpSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Dump(int)));
 
-  editor_tab editors[] = {
-    {new GeneralInfo(), (QWidget**)&generalInfo, tr("General")},
-    {new InventoryEditor(), (QWidget**)&inventoryEditor, tr("Inventory Editor")},
-    {new LimitedUnlocks(), (QWidget**)&limitedUnlocks, tr("Limited Unlocks")}
+  editor_tab editorTabs[] = {
+    {new GeneralInfo(), (SaveLoader**)&generalInfo, tr("General")},
+    {new InventoryEditor(), (SaveLoader**)&inventoryEditor, tr("Inventory Editor")},
+    {new LimitedUnlocks(), (SaveLoader**)&limitedUnlocks, tr("Limited Unlocks")}
   };
+  int editorCount = COUNTOF(editorTabs);
+  editors.resize(editorCount);
 
-  for (int i = 0; i < COUNTOF(editors); i++)
+  for (int i = 0; i < editorCount; i++)
   {
-    editor_tab* tab = &editors[i];
-    QWidget* editor = tab->widget;
+    editor_tab* tab = &editorTabs[i];
+    SaveLoader* loader = (SaveLoader*)tab->widget;
+    QWidget* editor = dynamic_cast<QWidget*>(loader);
 
     ui->tabWidget->addTab(editor, tab->name);
     if (tab->binding)
-      *tab->binding = editor;
+      *tab->binding = loader;
+    editors[i] = loader;
   }
 }
 
@@ -161,6 +165,8 @@ void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
     DecryptSave(savep->data, sizeof(mhw_save_raw));
   }
   *save = savep;
+
+  ui->tabWidget->setEnabled(true);
 }
 
 void MHWISaveEditor::Dump(int number)
@@ -254,9 +260,18 @@ void MHWISaveEditor::LoadSaveSlot()
 {
   if (!mhwRaw) return;
 
-  generalInfo->Load(mhwRaw, saveslot);
-  inventoryEditor->Load(mhwRaw, saveslot);
-  limitedUnlocks->Load(mhwRaw, saveslot);
+  int index = ui->tabWidget->currentIndex();
+  SaveLoader* loader = editors[index];
+  loader->Load(mhwRaw, saveslot);
+}
+
+void MHWISaveEditor::EditorTabChange(int editorIndex)
+{
+  if (!mhwRaw) return;
+
+  int index = editorIndex;
+  SaveLoader* loader = editors[index];
+  loader->Load(mhwRaw, saveslot);
 }
 
 void MHWISaveEditor::Slot(int slot)

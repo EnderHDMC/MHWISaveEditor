@@ -29,6 +29,9 @@
     </property>
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -397,6 +400,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tabWidget</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>EditorTabChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>577</x>
+     <y>300</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -406,5 +425,6 @@
   <slot>Restore()</slot>
   <slot>Dump(int)</slot>
   <slot>OpenSAVEDATA1000()</slot>
+  <slot>EditorTabChange(int)</slot>
  </slots>
 </ui>
