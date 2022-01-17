@@ -16,8 +16,6 @@
 //          medals
 // TODO:  mhw_item_pouch
 //          investigate the struct
-// TODO:  mhw_section1
-//          dlc
 // TODO:  mhw_save_slot
 //          Cutscenes unlocked
 //          Achievements
@@ -27,7 +25,6 @@
 //          Weapon Usage
 //          Bounties
 //          Layered armor
-//          Seliana room
 //          Pets in each room
 //          flags for kjarr melding?
 //          Pendants
@@ -35,6 +32,7 @@
 //          Palico Status
 //          Inspect Palico Gadget, think it's wrong
 //          Poogie!
+//          Guild card background unlocks
 
 #include "types.bt"
 
@@ -156,67 +154,153 @@ enum <u8> mhw_handler_outfit
 
 enum <i32> mhw_monster_index
 {
-  I_None                 = -1,
-  I_Anjanath             =  0,
-  I_Rathalos             =  1,
-  I_Great_Jagras         =  7,
-  I_Rathian              =  9,
-  I_Pink_Rathian         =  10,
-  I_Azure_Rathalos       =  11,
-  I_Diablos              =  12,
-  I_Black_Diablos        =  13,
-  I_Kirin                =  14,
-  I_Kushala_Daora        =  16,
-  I_Lunastra             =  17,
-  I_Teostra              =  18,
-  I_Lavasioth            =  19,
-  I_Deviljho             =  20,
-  I_Barroth              =  21,
-  I_Uragaan              =  22,
-  I_Pukei_Pukei          =  24,
-  I_Nergigante           =  25,
-  I_Kulu_Ya_Ku           =  27,
-  I_Tzitzi_Ya_Ku         =  28,
-  I_Jyaratodus           =  29,
-  I_Tobi_Kadachi         =  30,
-  I_Paolumu              =  31,
-  I_Legiana              =  32,
-  I_Great_Girros         =  33,
-  I_Odogaron             =  34,
-  I_Radobaan             =  35,
-  I_Vaal_Hazak           =  36,
-  I_Dodogama             =  37,
-  I_Bazelgeuse           =  39,
-  I_Tigrex               =  61,
-  I_Nargacuga            =  62,
-  I_Barioth              =  63,
-  I_Savage_Deviljho      =  64,
-  I_Brachydios           =  65,
-  I_Glavenus             =  66,
-  I_Acidic_Glavenus      =  67,
-  I_Fulgur_Anjanath      =  68,
-  I_Coral_Pukei_Pukei    =  69,
-  I_Ruiner_Nergigante    =  70,
-  I_Viper_Tobi_Kadachi   =  71,
-  I_Nightshade_Paolumu   =  72,
-  I_Shrieking_Legiana    =  73,
-  I_Ebony_Odogaron       =  74,
-  I_Blackveil_Vaal_Hazak =  75,
-  I_Seething_Bazelgeuse  =  76,
-  I_Beotodus             =  77,
-  I_Banbaro              =  78,
-  I_Velkhana             =  79,
-  I_Namielle             =  80,
-  I_Gold_Rathian         =  88,
-  I_Silver_Rathalos      =  89,
-  I_Yian_Garuga          =  90,
-  I_Rajang               =  91,
-  I_Brute_Tigrex         =  93,
-  I_Zinogre              =  94,
-  I_Stygian_Zinogre      =  95
+  I_None                 =  -1, I_Anjanath             =   0, I_Rathalos             =   1,
+  I_Aptonoth             =   2, I_Jagras               =   3, I_Zorah_Magdaros       =   4,
+  I_Mosswine             =   5, I_Gajau                =   6, I_Great_Jagras         =   7,
+  I_Kestodon_Male        =   8, I_Rathian              =   9, I_Pink_Rathian         =  10,
+  I_Azure_Rathalos       =  11, I_Diablos              =  12, I_Black_Diablos        =  13,
+  I_Kirin                =  14, I_Behemoth             =  15, I_Kushala_Daora        =  16,
+  I_Lunastra             =  17, I_Teostra              =  18, I_Lavasioth            =  19,
+  I_Deviljho             =  20, I_Barroth              =  21, I_Uragaan              =  22,
+  I_Leshen               =  23, I_Pukei_Pukei          =  24, I_Nergigante           =  25,
+  I_Xeno_Jiiva           =  26, I_Kulu_Ya_Ku           =  27, I_Tzitzi_Ya_Ku         =  28,
+  I_Jyaratodus           =  29, I_Tobi_Kadachi         =  30, I_Paolumu              =  31,
+  I_Legiana              =  32, I_Great_Girros         =  33, I_Odogaron             =  34,
+  I_Radobaan             =  35, I_Vaal_Hazak           =  36, I_Dodogama             =  37,
+  I_Kulve_Taroth         =  38, I_Bazelgeuse           =  39, I_Apceros              =  40,
+  I_KelbiA               =  41, I_KelbiB               =  42, I_Hornetaur            =  43,
+  I_Vespoid              =  44, I_Mernos               =  45, I_Kestodon_Female      =  46,
+  I_Raphinos             =  47, I_Shamos               =  48, I_Barnos               =  49,
+  I_Girros               =  50, I_Ancient_Leshen       =  51, I_Gastodon             =  52,
+  I_Noios                =  53, I_Gajalaka             =  56, I_Tigrex               =  61,
+  I_Nargacuga            =  62, I_Barioth              =  63, I_Savage_Deviljho      =  64,
+  I_Brachydios           =  65, I_Glavenus             =  66, I_Acidic_Glavenus      =  67,
+  I_Fulgur_Anjanath      =  68, I_Coral_Pukei_Pukei    =  69, I_Ruiner_Nergigante    =  70,
+  I_Viper_Tobi_Kadachi   =  71, I_Nightshade_Paolumu   =  72, I_Shrieking_Legiana    =  73,
+  I_Ebony_Odogaron       =  74, I_Blackveil_Vaal_Hazak =  75, I_Seething_Bazelgeuse  =  76,
+  I_Beotodus             =  77, I_Banbaro              =  78, I_Velkhana             =  79,
+  I_Namielle             =  80, I_Shara_Ishvalda       =  81, I_Popo                 =  82,
+  I_Anteka               =  83, I_Wulg                 =  84, I_Cortos               =  85,
+  I_Boaboa               =  86, I_Alatreon             =  87, I_Gold_Rathian         =  88,
+  I_Silver_Rathalos      =  89, I_Yian_Garuga          =  90, I_Rajang               =  91,
+  I_Furious_Rajang       =  92, I_Brute_Tigrex         =  93, I_Zinogre              =  94,
+  I_Stygian_Zinogre      =  95, I_Raging_Brachydios    =  96, I_Safi_jiiva           =  97,
+  I_Scarred_Yian_Garuga  =  99, I_Frostfang_Barioth    = 100, I_Fatalis              = 101
 };
 
-struct monsters16 {
+struct monsters128_u32 {
+  u32 anjanath,            rathalos,          aptonoth,          jagras,
+      zorah_magdaros,      mosswine,          gajau,             great_jagras,
+      kestodon_male,       rathian,           pink_rathian,      azure_rathalos,
+      diablos,             black_diablos,     kirin,             behemoth,
+      kushala_daora,       lunastra,          teostra,           lavasioth,
+      deviljho,            barroth,           uragaan,           leshen,
+      pukei_pukei,         nergigante,        xeno_jiiva,        kulu_ya_ku,
+      tzitzi_ya_ku,        jyaratodus,        tobi_kadachi,      paolumu,
+      legiana,             great_girros,      odogaron,          radobaan,
+      vaal_hazak,          dodogama,          kulve_taroth,      bazelgeuse,
+      apceros,             kelbia,            kelbib,            hornetaur,
+      vespoid,             mernos,            kestodon_female,   raphinos,
+      shamos,              barnos,            girros,            ancient_leshen,
+      gastodon,            noios,             unknown0[2],       gajalaka,
+      unknown1[4],         tigrex,            nargacuga,         barioth,
+      savage_deviljho,     brachydios,        glavenus,          acidic_glavenus,
+      fulgur_anjanath,     coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
+      nightshade_paolumu,  shrieking_legiana, ebony_odogaron,    blackveil_vaal_hazak,
+      seething_bazelgeuse, beotodus,          banbaro,           velkhana,
+      namielle,            shara_ishvalda,    popo,              anteka,
+      wulg,                cortos,            boaboa,            alatreon,
+      gold_rathian,        silver_rathalos,   yian_garuga,       rajang,
+      furious_rajang,      brute_tigrex,      zinogre,           stygian_zinogre,
+      raging_brachydios,   safi_jiiva,        unknown2,          scarred_yian_garuga,
+      frostfang_barioth,   fatalis,           unknown3[26];
+};
+
+struct monsters128_u16 {
+  u16 anjanath,            rathalos,          aptonoth,          jagras,
+      zorah_magdaros,      mosswine,          gajau,             great_jagras,
+      kestodon_male,       rathian,           pink_rathian,      azure_rathalos,
+      diablos,             black_diablos,     kirin,             behemoth,
+      kushala_daora,       lunastra,          teostra,           lavasioth,
+      deviljho,            barroth,           uragaan,           leshen,
+      pukei_pukei,         nergigante,        xeno_jiiva,        kulu_ya_ku,
+      tzitzi_ya_ku,        jyaratodus,        tobi_kadachi,      paolumu,
+      legiana,             great_girros,      odogaron,          radobaan,
+      vaal_hazak,          dodogama,          kulve_taroth,      bazelgeuse,
+      apceros,             kelbia,            kelbib,            hornetaur,
+      vespoid,             mernos,            kestodon_female,   raphinos,
+      shamos,              barnos,            girros,            ancient_leshen,
+      gastodon,            noios,             unknown0[2],       gajalaka,
+      unknown1[4],         tigrex,            nargacuga,         barioth,
+      savage_deviljho,     brachydios,        glavenus,          acidic_glavenus,
+      fulgur_anjanath,     coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
+      nightshade_paolumu,  shrieking_legiana, ebony_odogaron,    blackveil_vaal_hazak,
+      seething_bazelgeuse, beotodus,          banbaro,           velkhana,
+      namielle,            shara_ishvalda,    popo,              anteka,
+      wulg,                cortos,            boaboa,            alatreon,
+      gold_rathian,        silver_rathalos,   yian_garuga,       rajang,
+      furious_rajang,      brute_tigrex,      zinogre,           stygian_zinogre,
+      raging_brachydios,   safi_jiiva,        unknown2,          scarred_yian_garuga,
+      frostfang_barioth,   fatalis,           unknown3[26];
+};
+
+struct monsters128_u8 {
+  u8  anjanath,            rathalos,          aptonoth,          jagras,
+      zorah_magdaros,      mosswine,          gajau,             great_jagras,
+      kestodon_male,       rathian,           pink_rathian,      azure_rathalos,
+      diablos,             black_diablos,     kirin,             behemoth,
+      kushala_daora,       lunastra,          teostra,           lavasioth,
+      deviljho,            barroth,           uragaan,           leshen,
+      pukei_pukei,         nergigante,        xeno_jiiva,        kulu_ya_ku,
+      tzitzi_ya_ku,        jyaratodus,        tobi_kadachi,      paolumu,
+      legiana,             great_girros,      odogaron,          radobaan,
+      vaal_hazak,          dodogama,          kulve_taroth,      bazelgeuse,
+      apceros,             kelbia,            kelbib,            hornetaur,
+      vespoid,             mernos,            kestodon_female,   raphinos,
+      shamos,              barnos,            girros,            ancient_leshen,
+      gastodon,            noios,             unknown0[2],       gajalaka,
+      unknown1[4],         tigrex,            nargacuga,         barioth,
+      savage_deviljho,     brachydios,        glavenus,          acidic_glavenus,
+      fulgur_anjanath,     coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
+      nightshade_paolumu,  shrieking_legiana, ebony_odogaron,    blackveil_vaal_hazak,
+      seething_bazelgeuse, beotodus,          banbaro,           velkhana,
+      namielle,            shara_ishvalda,    popo,              anteka,
+      wulg,                cortos,            boaboa,            alatreon,
+      gold_rathian,        silver_rathalos,   yian_garuga,       rajang,
+      furious_rajang,      brute_tigrex,      zinogre,           stygian_zinogre,
+      raging_brachydios,   safi_jiiva,        unknown2,          scarred_yian_garuga,
+      frostfang_barioth,   fatalis,           unknown3[26];
+};
+
+struct monsters128_f32 {
+  f32 anjanath,            rathalos,          aptonoth,          jagras,
+      zorah_magdaros,      mosswine,          gajau,             great_jagras,
+      kestodon_male,       rathian,           pink_rathian,      azure_rathalos,
+      diablos,             black_diablos,     kirin,             behemoth,
+      kushala_daora,       lunastra,          teostra,           lavasioth,
+      deviljho,            barroth,           uragaan,           leshen,
+      pukei_pukei,         nergigante,        xeno_jiiva,        kulu_ya_ku,
+      tzitzi_ya_ku,        jyaratodus,        tobi_kadachi,      paolumu,
+      legiana,             great_girros,      odogaron,          radobaan,
+      vaal_hazak,          dodogama,          kulve_taroth,      bazelgeuse,
+      apceros,             kelbia,            kelbib,            hornetaur,
+      vespoid,             mernos,            kestodon_female,   raphinos,
+      shamos,              barnos,            girros,            ancient_leshen,
+      gastodon,            noios,             unknown0[2],       gajalaka,
+      unknown1[4],         tigrex,            nargacuga,         barioth,
+      savage_deviljho,     brachydios,        glavenus,          acidic_glavenus,
+      fulgur_anjanath,     coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
+      nightshade_paolumu,  shrieking_legiana, ebony_odogaron,    blackveil_vaal_hazak,
+      seething_bazelgeuse, beotodus,          banbaro,           velkhana,
+      namielle,            shara_ishvalda,    popo,              anteka,
+      wulg,                cortos,            boaboa,            alatreon,
+      gold_rathian,        silver_rathalos,   yian_garuga,       rajang,
+      furious_rajang,      brute_tigrex,      zinogre,           stygian_zinogre,
+      raging_brachydios,   safi_jiiva,        unknown2,          scarred_yian_garuga,
+      frostfang_barioth,   fatalis,           unknown3[26];
+};
+
+struct monsters96_16 {
   u16 great_jagras,         kulu_ya_ku,       pukei_pukei,        barroth,
       jyaratodus,           tobi_kadachi,     anjanath,           rathian,
       tzitzi_ya_ku,         paolumu,          great_girros,       radobaan,
@@ -234,11 +318,10 @@ struct monsters16 {
       shara_ishvalda,       zinogre,          yian_garuga,        scarred_yian_garuga,
       brute_tigrex,         gold_rathian,     silver_rathalos,    rajang,
       stygian_zinogre,      safi_jiiva,       furious_rajang,     raging_brachydios,
-      frostfang_barioth,    alatreon,         fatalis;
-  u16 monster[25];
+      frostfang_barioth,    alatreon,         fatalis,            monster[25];
 };
 
-struct monsters8 {
+struct monsters96_8 {
   u8  great_jagras,         kulu_ya_ku,       pukei_pukei,        barroth,
       jyaratodus,           tobi_kadachi,     anjanath,           rathian,
       tzitzi_ya_ku,         paolumu,          great_girros,       radobaan,
@@ -256,8 +339,7 @@ struct monsters8 {
       shara_ishvalda,       zinogre,          yian_garuga,        scarred_yian_garuga,
       brute_tigrex,         gold_rathian,     silver_rathalos,    rajang,
       stygian_zinogre,      safi_jiiva,       furious_rajang,     raging_brachydios,
-      frostfang_barioth,    alatreon,         fatalis;
-  u8 monster[25];
+      frostfang_barioth,    alatreon,         fatalis,            monster[25];
 };
 
 struct mhw_save_header
@@ -560,11 +642,11 @@ struct mhw_guild_card
   f32 zoom;
 
   mhw_arena_stats arena_stats[18];
-  monsters16 monster_captured;
-  monsters16 monster_slayed;
-  monsters16 monster_largest;
-  monsters16 monster_smallest;
-  monsters8 monster_research_level;
+  monsters96_16 monster_captured;
+  monsters96_16 monster_slayed;
+  monsters96_16 monster_largest;
+  monsters96_16 monster_smallest;
+  monsters96_8 monster_research_level;
 };
 
 struct mhw_item_slot
@@ -866,6 +948,60 @@ struct mhw_slot_settings
   u8 swap_keys_while_mounted;
 };
 
+struct mhw_seliana_room_deco {
+  u32 id;
+  u32 color_type; // 0 = color, 1 = pattern, 2 = mat
+  mhw_color color;
+  u32 pattern;
+  u32 material;
+};
+
+struct mhw_seliana_room_shelf_item {
+  u32 position;
+  u32 item;
+};
+
+struct mhw_seliana_room_config {
+  u8 theme;
+  u8 wallpaper;
+  u8 floor;
+  mhw_seliana_room_deco unused0;
+  mhw_seliana_room_deco basic_curtains_small;
+  mhw_seliana_room_deco basic_curtains_large;
+  mhw_seliana_room_deco f1_sofa;
+  mhw_seliana_room_deco f1_bed_bed;
+  mhw_seliana_room_deco f1_maintable_maintable;
+  mhw_seliana_room_deco f1_maintable_chairs;
+  mhw_seliana_room_deco f1_maintable_tabletop;
+  mhw_seliana_room_deco flower_bed1;
+  mhw_seliana_room_deco music_player;
+  mhw_seliana_room_deco f2_long_desk_long_desk;
+  mhw_seliana_room_deco basic_lights;
+  mhw_seliana_room_deco f2_long_desk_desktop;
+  mhw_seliana_room_deco f1_shelf;
+  mhw_seliana_room_deco f1_bed_shelf;
+  mhw_seliana_room_deco unused1;
+  mhw_seliana_room_deco f2_deco_shelves_shelf2;
+  mhw_seliana_room_deco f2_deco_shelves_shelf1;
+  mhw_seliana_room_deco flower_bed2;
+  mhw_seliana_room_deco f1_staircase_special_decor1;
+  mhw_seliana_room_deco wall_0_large;
+  mhw_seliana_room_deco wall_3_large;
+  mhw_seliana_room_deco f1_staircase_special_decor2;
+  mhw_seliana_room_deco f1_bed_lamp;
+  mhw_seliana_room_deco wall_1_small;
+  mhw_seliana_room_deco wall_2_small;
+  mhw_seliana_room_deco f2_deco_shelves_wall_decor;
+  mhw_seliana_room_deco f2_hanging_ornament1;
+  mhw_seliana_room_deco f2_hanging_ornament2;
+  mhw_seliana_room_deco f2_hanging_ornament3;
+  mhw_seliana_room_deco f1_rugs;
+  mhw_seliana_room_deco f2_rugs;
+  mhw_seliana_room_deco unused2[8];
+  mhw_seliana_room_shelf_item shelf_items[64];
+};
+Printf("mhw_seliana_room_config size: %d/%d\n", sizeof(mhw_seliana_room_config), 1315);
+
 struct mhw_save_slot
 {
   u32 unknown0;
@@ -882,30 +1018,38 @@ struct mhw_save_slot
   mhw_guild_card receive_guild_card[20];
   u32 unknown2;
   mhw_current_equipment current_equipment;
-  u8 unknown3a[408];
+  u32 unknown3a[24 / 4];
+  monsters128_u16 unknown_monster_a;
+  monsters128_u8 unknown_monster_b;
   u8 unknown_monster_flags_a[16];
   u8 unknown_monster_flags_b[16];
   u8 unknown_monster_flags_c[16];
-  u8 monster_master_rank_flags[16];
-  u32 monsters_captured[128];
-  u32 monsters_slain[128];
-  u32 unknown3c[128];
-  u32 unknown3d[128];
-  u32 unknown3e[128];
-  u32 unknown3f[128];
+  u8 unknown_monster_flags_d[16];
+  monsters128_u32 monsters_captured;
+  monsters128_u32 monsters_slain;
+  monsters128_u32 unknown_monster_c;
+  monsters128_u32 unknown_monster_d;
+  monsters128_u32 unknown_monster_e; // MR slain?
+  monsters128_u32 unknown_monster_f;
   u32 unknown3_[28 / 4];
-  u32 monster_largest[128];
-  u32 monster_smallest[128];
-  f32 monster_xp[128];
-  u32 monster_level[128];
+  monsters128_u32 monster_largest;
+  monsters128_u32 monster_smallest;
+  monsters128_f32 monster_xp;
+  monsters128_u32 monster_level;
+  monsters128_f32 unknown_monster_g;
 
-  u8 unknown4a[1090];
+  u8 unknown4a[578];
   u8 discovered_items[400];
   mhw_endemic_life endemic_life;
-  u8 unknown4_[33391];
+  u8 unknown4b[512];
+
+  mhw_seliana_room_config room_config;
+  u8 unknown4_[4];
+  mhw_seliana_room_config room_configs[24];
 
   str32s room_config_names[24];
-  u8 unknown5[2579];
+  u8 seliana_music_player_song;
+  u8 unknown5[2578];
   u8 room_status;
   u16 passcode;
 
@@ -976,9 +1120,10 @@ struct mhw_save_slot
   mhw_weapon_usage32 guiding_lands_usage;
   u8 addons_unseen[64];
   u8 addons_claimed[64];
-  u8 unknown15_[1040];
-  u8 gallery_unseen[8];
-  u8 unknown16a[110483];
+  u16 addons[512];
+  u8 gallery_unlocked[16];
+  u8 gallery_unseen[16];
+  u8 unknown16a[110475];
   str64 poogie_name;
   u8 unknown16_[276];
   mhw_handler_outfit handler_outfit;
@@ -1021,7 +1166,7 @@ struct mhw_section0
   u32 unknown1[256];
   u8 unknown2;
   u16 zero0[30738 / 2];
-  u16 unknown3[256];
+  u16 hash_table[256];
   u64 zero1[3089328 / 8];
 };
 
@@ -1058,15 +1203,17 @@ struct mhw_section1
   f32 brightness;
   u8 unknown4[12];
   u8 character_edit_voucher;
-  u8 unknown5[1096];
+  u8 unknown5[3];
+  u16 dlc[512];
+  u8 unknown6[69];
   u8 character_edit_voucher_free;
-  u8 unknown6[11];
+  u8 unknown7[11];
   u8 palico_edit_voucher;
 
   // Working memory?
   // What's in it keeps changing, one moment it's save[0]'s
   // guiding lands levels, the next it's names.
-  u8 unknown7[2930];
+  u8 unknown8[2930];
 };
 
 struct mhw_section2
