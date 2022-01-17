@@ -71,7 +71,7 @@ void ItemSlotView::AmountChanged(int amount)
   }
 
   if (!loading) {
-    u8* slot = ((u8*)(&mhwSave->save.section3.Saves[mhwSaveSlot])) + area->localoffset;
+    u8* slot = ((u8*)(&mhwSaveIB->section3.Saves[mhwSaveSlot])) + area->localoffset;
     mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
     mhw_item_slot dummy = { itemSlot->id, itemSlot->amount };
 

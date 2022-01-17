@@ -10,6 +10,9 @@ class InventoryEditor : public QWidget, public SaveLoader
 {
     Q_OBJECT
 
+public slots:
+  void SearchIndexChange(int index);
+
 public:
     InventoryEditor(QWidget *parent = Q_NULLPTR);
     ~InventoryEditor();

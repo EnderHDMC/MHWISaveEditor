@@ -18,6 +18,8 @@ public:
   InventoryEditorTab(const inventory_area* area, QWidget* parent = Q_NULLPTR);
   ~InventoryEditorTab();
 
+  void ScrollToIndex(int index);
+
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int mhwSaveSlot) override;
 

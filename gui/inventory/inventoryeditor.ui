@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>InventoryEditor</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -32,7 +32,50 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item row="0" column="0">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="lblSearch">
+       <property name="maximumSize">
+        <size>
+         <width>64</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Search</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cmbSearchItem">
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Item Search</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chkAllTabs">
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>All Tabs</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QTabWidget" name="tabEditors">
      <property name="currentIndex">
       <number>-1</number>
@@ -43,5 +86,41 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmbSearchItem</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>InventoryEditor</receiver>
+   <slot>SearchIndexChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>94</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbSearchItem</sender>
+   <signal>activated(int)</signal>
+   <receiver>InventoryEditor</receiver>
+   <slot>SearchIndexChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SearchIndexChange(int)</slot>
+ </slots>
 </ui>

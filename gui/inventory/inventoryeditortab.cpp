@@ -23,6 +23,12 @@ InventoryEditorTab::~InventoryEditorTab()
   delete ui;
 }
 
+void InventoryEditorTab::ScrollToIndex(int index)
+{
+  ItemSlotView *itemView = slotViews[index];
+  ui->scrollArea->ensureWidgetVisible(itemView);
+}
+
 void InventoryEditorTab::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
 {
   SaveLoader::Load(mhwSave, mhwSaveSlot);
