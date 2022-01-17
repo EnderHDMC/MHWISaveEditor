@@ -22,11 +22,11 @@
     <ClInclude Include="crypto\blowfish.h" />
     <ClInclude Include="crypto\iceborne_crypt.h" />
     <ClInclude Include="crypto\sha1.h" />
-    <QtMoc Include="gui\itemslotview.h" />
+    <QtMoc Include="gui\inventory\itemslotview.h" />
     <ClInclude Include="data\BitmapDB.h" />
     <ClInclude Include="data\ItemDB.h" />
-    <QtMoc Include="gui\inventoryeditortab.h" />
-    <QtMoc Include="gui\inventoryeditor.h" />
+    <QtMoc Include="gui\inventory\inventoryeditortab.h" />
+    <QtMoc Include="gui\inventory\inventoryeditor.h" />
     <QtMoc Include="gui\limitedunlocks.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="types\constants.h" />
@@ -42,9 +42,9 @@
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
-    <ClCompile Include="gui\inventoryeditortab.cpp" />
-    <ClCompile Include="gui\itemslotview.cpp" />
-    <ClCompile Include="gui\inventoryeditor.cpp" />
+    <ClCompile Include="gui\inventory\inventoryeditortab.cpp" />
+    <ClCompile Include="gui\inventory\itemslotview.cpp" />
+    <ClCompile Include="gui\inventory\inventoryeditor.cpp" />
     <ClCompile Include="gui\limitedunlocks.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="gui\mhwisaveeditor.cpp">
@@ -59,10 +59,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="gui\inventoryeditortab.ui" />
-    <QtUic Include="gui\itemslotview.ui" />
+    <QtUic Include="gui\inventory\inventoryeditortab.ui" />
+    <QtUic Include="gui\inventory\itemslotview.ui" />
     <QtUic Include="gui\mhwisaveeditor.ui" />
-    <QtUic Include="gui\inventoryeditor.ui" />
+    <QtUic Include="gui\inventory\inventoryeditor.ui" />
     <QtUic Include="gui\limitedunlocks.ui" />
   </ItemGroup>
   <ItemGroup>

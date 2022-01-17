@@ -5,7 +5,7 @@
 #include <QSignalMapper>
 #include "../types/mhw_save.h"
 
-#include "inventoryeditor.h"
+#include "inventory/inventoryeditor.h"
 #include "limitedunlocks.h"
 
 constexpr const char* ALL_SAVE = "All Files (*)";

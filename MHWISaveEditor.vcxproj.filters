@@ -73,7 +73,7 @@
     <ClCompile Include="gui\mhwisaveeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\itemslotview.cpp">
+    <ClCompile Include="gui\inventory\itemslotview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="data\BitmapDB.cpp">
@@ -82,10 +82,10 @@
     <ClCompile Include="data\ItemDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\inventoryeditortab.cpp">
+    <ClCompile Include="gui\inventory\inventoryeditortab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\inventoryeditor.cpp">
+    <ClCompile Include="gui\inventory\inventoryeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\limitedunlocks.cpp">
@@ -96,13 +96,13 @@
     <QtMoc Include="gui\mhwisaveeditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="gui\itemslotview.h">
+    <QtMoc Include="gui\inventory\itemslotview.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="gui\inventoryeditortab.h">
+    <QtMoc Include="gui\inventory\inventoryeditortab.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="gui\inventoryeditor.h">
+    <QtMoc Include="gui\inventory\inventoryeditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="gui\limitedunlocks.h">
@@ -113,13 +113,13 @@
     <QtUic Include="gui\mhwisaveeditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="gui\itemslotview.ui">
+    <QtUic Include="gui\inventory\itemslotview.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="gui\inventoryeditortab.ui">
+    <QtUic Include="gui\inventory\inventoryeditortab.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="gui\inventoryeditor.ui">
+    <QtUic Include="gui\inventory\inventoryeditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="gui\limitedunlocks.ui">

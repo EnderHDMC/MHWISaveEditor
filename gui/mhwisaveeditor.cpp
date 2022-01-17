@@ -7,8 +7,6 @@
 #include <QDesktopServices>
 #include <QGridLayout>
 
-#include "inventoryeditor.h"
-
 // Encryption
 #include "../crypto/iceborne_crypt.h"
 // Save paths
