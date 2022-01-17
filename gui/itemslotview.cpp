@@ -9,9 +9,6 @@ ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent
   ui = new Ui::ItemSlotView();
   ui->setupUi(this);
 
-  ui->toolButton->setIconSize({ 64, 64 });
-  ui->toolButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-
   bitmapDB = bitmapDB->GetInstance();
   itemDB = itemDB->GetInstance();
 
@@ -54,8 +51,8 @@ void ItemSlotView::UpdateItemDisplay(itemInfo* info)
 {
   QIcon* icon = bitmapDB->ItemIcon(info);
 
-  ui->toolButton->setIcon(icon ? *icon : QIcon());
-  ui->toolButton->setText(QString::fromUtf8(info->name));
+  ui->btnIcon->setIcon(icon ? *icon : QIcon());
+  ui->btnIcon->setText(QString::fromUtf8(info->name));
 }
 
 void ItemSlotView::UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot)
@@ -63,15 +60,15 @@ void ItemSlotView::UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot)
   Q_ASSERT(info->id == item_slot->id);
   int max = (area->storage) ? 9999 : info->carry_limit;
 
-  ui->spinBox->setMaximum(max);
-  ui->spinBox->setValue(item_slot->amount);
+  ui->spnCount->setMaximum(max);
+  ui->spnCount->setValue(item_slot->amount);
 }
 
 void ItemSlotView::AmountChanged(int amount)
 {
   if (!mhwSave)
   {
-    ui->spinBox->setValue(0);
+    ui->spnCount->setValue(0);
     return;
   }
 

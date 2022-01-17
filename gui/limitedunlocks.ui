@@ -36,7 +36,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="lblInfo">
      <property name="text">
       <string>I'm still working on finding out how to unlock Artemis layered.</string>
      </property>

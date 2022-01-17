@@ -10,7 +10,6 @@ InventoryEditorTab::InventoryEditorTab(const inventory_area* area, QWidget* pare
   ui->setupUi(this);
 
   slotViews.resize(area->count);
-
   for (size_t i = 0; i < slotViews.size(); i++)
   {
     slotViews[i] = new ItemSlotView(area, i, this);

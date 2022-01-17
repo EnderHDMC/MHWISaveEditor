@@ -39,7 +39,7 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QToolButton" name="toolButton">
+    <widget class="QToolButton" name="btnIcon">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -49,10 +49,19 @@
      <property name="text">
       <string>...</string>
      </property>
+     <property name="iconSize">
+      <size>
+       <width>64</width>
+       <height>64</height>
+      </size>
+     </property>
+     <property name="toolButtonStyle">
+      <enum>Qt::ToolButtonTextUnderIcon</enum>
+     </property>
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QSpinBox" name="spinBox"/>
+    <widget class="QSpinBox" name="spnCount"/>
    </item>
   </layout>
  </widget>
@@ -60,7 +69,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>spinBox</sender>
+   <sender>spnCount</sender>
    <signal>valueChanged(int)</signal>
    <receiver>ItemSlotView</receiver>
    <slot>AmountChanged(int)</slot>
