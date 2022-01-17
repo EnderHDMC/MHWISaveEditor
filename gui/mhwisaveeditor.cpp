@@ -66,6 +66,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(dumpSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Dump(int)));
 
   editor_tab editors[] = {
+    {new GeneralInfo(), (QWidget**)&generalInfo, tr("General")},
     {new InventoryEditor(), (QWidget**)&inventoryEditor, tr("Inventory Editor")},
     {new LimitedUnlocks(), (QWidget**)&limitedUnlocks, tr("Limited Unlocks")}
   };
@@ -253,6 +254,7 @@ void MHWISaveEditor::LoadSaveSlot()
 {
   if (!mhwRaw) return;
 
+  generalInfo->Load(mhwRaw, saveslot);
   inventoryEditor->Load(mhwRaw, saveslot);
   limitedUnlocks->Load(mhwRaw, saveslot);
 }

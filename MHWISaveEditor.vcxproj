@@ -28,6 +28,7 @@
     <QtMoc Include="gui\inventory\inventoryeditortab.h" />
     <QtMoc Include="gui\inventory\inventoryeditor.h" />
     <QtMoc Include="gui\limitedunlocks.h" />
+    <QtMoc Include="gui\generalinfo.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\inventory_areas.h" />
@@ -42,6 +43,7 @@
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
+    <ClCompile Include="gui\generalinfo.cpp" />
     <ClCompile Include="gui\inventory\inventoryeditortab.cpp" />
     <ClCompile Include="gui\inventory\itemslotview.cpp" />
     <ClCompile Include="gui\inventory\inventoryeditor.cpp" />
@@ -59,6 +61,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="gui\generalinfo.ui" />
     <QtUic Include="gui\inventory\inventoryeditortab.ui" />
     <QtUic Include="gui\inventory\itemslotview.ui" />
     <QtUic Include="gui\mhwisaveeditor.ui" />

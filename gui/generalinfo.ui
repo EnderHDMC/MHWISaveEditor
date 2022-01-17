@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GeneralInfo</class>
+ <widget class="QWidget" name="GeneralInfo">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GeneralInfo</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="lblSteamID">
+     <property name="text">
+      <string>Steam ID:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="btnSteamID">
+     <property name="text">
+      <string>SteamID</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="lblEditVouchers">
+     <property name="text">
+      <string>Edit Vouchers:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="btnEditVouchers">
+     <property name="text">
+      <string>Reset Vouchers</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnSteamID</sender>
+   <signal>clicked()</signal>
+   <receiver>GeneralInfo</receiver>
+   <slot>ChangeSteamID()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnEditVouchers</sender>
+   <signal>clicked()</signal>
+   <receiver>GeneralInfo</receiver>
+   <slot>ResetEditVouchers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ChangeSteamID()</slot>
+  <slot>ResetEditVouchers()</slot>
+ </slots>
+</ui>
