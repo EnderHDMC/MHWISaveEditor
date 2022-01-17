@@ -290,6 +290,7 @@ void MHWISaveEditor::Slot(int slot)
   {
     slotActions[i]->setChecked(i == saveslot);
     switchActions[i]->setEnabled(i != saveslot);
+    cloneActions[i]->setEnabled(i != saveslot);
   }
 
   LoadSaveSlot();
