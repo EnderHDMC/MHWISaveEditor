@@ -172,8 +172,6 @@ void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
     DecryptSave(savep->data, sizeof(mhw_save_raw));
   }
   *save = savep;
-
-  ui->tabWidget->setEnabled(true);
 }
 
 void MHWISaveEditor::Dump(int number)
@@ -208,6 +206,7 @@ void MHWISaveEditor::Open()
 
   // Load the save into the inventory slots
   LoadSaveSlot();
+  ui->tabWidget->setEnabled(true);
 }
 
 void MHWISaveEditor::OpenSAVEDATA1000()
@@ -217,6 +216,7 @@ void MHWISaveEditor::OpenSAVEDATA1000()
 
   // Load the save into the inventory slots
   LoadSaveSlot();
+  ui->tabWidget->setEnabled(true);
 }
 
 void MHWISaveEditor::Save()
