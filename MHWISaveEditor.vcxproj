@@ -134,6 +134,9 @@
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="res\ui_colortable.uct" />
+    <None Include="setup.iss">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\icon.ico" />
@@ -256,9 +259,9 @@ windeployqt "$(TargetPath)"</Command>
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
 set VCINSTALLDIR=$(VCInstallDir)
-xcopy /E /Y "$(ProjectDir)res\" "$(OutDirFullPath)Deploy\res\"
-xcopy /Y "$(TargetPath)" "$(OutDirFullPath)Deploy\"
-windeployqt "$(OutDirFullPath)Deploy\$(TargetFileName)"</Command>
+xcopy /E /Y "$(ProjectDir)res\" "$(OutDirFullPath)..\Deploy\res\"
+xcopy /Y "$(TargetPath)" "$(OutDirFullPath)..\Deploy\"
+windeployqt "$(OutDirFullPath)..\Deploy\$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">

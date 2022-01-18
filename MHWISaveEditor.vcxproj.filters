@@ -185,6 +185,7 @@
     <None Include="res\mapping\types.bt" />
     <None Include="res\mapping\uct.bt" />
     <None Include="res\ui_colortable.uct" />
+    <None Include="setup.iss" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">
