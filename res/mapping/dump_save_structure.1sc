@@ -18,23 +18,38 @@ Printf("Working Directory: %s\n", GetWorkingDirectory());
 
 i32 y, x, i;
 i8 printed;
+char current;
+
+void ReplaceNewLine32(str32 str) {
+  int i; char ch;
+  for (i = 0; i < 32; i++) { ch = str[i]; if (ch == '\0') return; if (ch == '\n') str[i] = ' '; }
+}
+void ReplaceNewLine64(str64 str) {
+  int i; char ch;
+  for (i = 0; i < 64; i++) { ch = str[i]; if (ch == '\0') return; if (ch == '\n') str[i] = ' '; }
+}
+void ReplaceNewLine128(str128 str) {
+  int i; char ch;
+  for (i = 0; i < 128; i++) { ch = str[i]; if (ch == '\0') return; if (ch == '\n') str[i] = ' '; }
+}
+void ReplaceNewLine256(str256 str) {
+  int i; char ch;
+  for (i = 0; i < 256; i++) { ch = str[i]; if (ch == '\0') return; if (ch == '\n') str[i] = ' '; }
+}
+void ReplaceNewLine54(str54 str) {
+  int i; char ch;
+  for (i = 0; i < 54; i++) { ch = str[i]; if (ch == '\0') return; if (ch == '\n') str[i] = ' '; }
+}
 
 for (y = 0; y < 3; y++) {
-  for (x = 0; x < 100; x++) {
-    printed = false;
+  ReplaceNewLine64(mhw_save.section3.saves[y].hunter.name);
+  ReplaceNewLine64(mhw_save.section3.saves[y].palico_name);
 
-    for (i = 0; i < 256; i++) {
-      if (mhw_save.section3.saves[y].collected_guild_card[x].greeting[i] == '\n')
-      {
-        if (!printed) {
-          Printf("Blame %s for this:\n\"%s\"\n",
-            mhw_save.section3.saves[y].collected_guild_card[x].name,
-            mhw_save.section3.saves[y].collected_guild_card[x].greeting);
-          printed = true;
-        }
-        mhw_save.section3.saves[y].collected_guild_card[x].greeting[i] = ' ';
-      }
-    }
+  ReplaceNewLine64(mhw_save.section3.saves[y].guild_card.name);
+  ReplaceNewLine64(mhw_save.section3.saves[y].guild_card.palico.name);
+
+  for (x = 0; x < 100; x++) {
+    ReplaceNewLine256(mhw_save.section3.saves[y].collected_guild_card[x].greeting);
   }
 }
 

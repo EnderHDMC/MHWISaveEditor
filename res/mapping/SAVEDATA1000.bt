@@ -793,7 +793,7 @@ struct mhw_equipment
   u8 health_regen;
   u8 element_status_effect_up;
   u8 unknown1[11];
-  i8 custom_upgrades[12];
+  u8 custom_upgrades[12]; // u8 so it doesn't print funny.
   i16 base;
   i16 parts;
   u16 awakens[5];
