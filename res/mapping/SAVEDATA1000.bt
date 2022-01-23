@@ -3,7 +3,7 @@
 //
 //      File: SAVEDATA1000.bt
 //   Authors: EnderHDMC, AsteriskAmpersand
-//   Version: 
+//   Version: 0.1.3
 //   Purpose: MHW Save file
 //  Category: Game
 // File Mask: *.bin
@@ -17,22 +17,21 @@
 // TODO:  mhw_item_pouch
 //          investigate the struct
 // TODO:  mhw_save_slot
-//          Cutscenes unlocked
 //          Achievements
 //            in guild card too
 //          Steamworks
-//          NPC chat flags
-//          Weapon Usage
+//          NPC chat flags?
 //          Bounties
 //          Layered armor
 //          Pets in each room
 //          flags for kjarr melding?
-//          Pendants
 //          Canteen Ingriedients
 //          Palico Status
 //          Inspect Palico Gadget, think it's wrong
 //          Poogie!
 //          Guild card background unlocks
+//          Treasure Tips
+//          Crafting List
 
 #include "types.bt"
 
@@ -600,12 +599,18 @@ struct mhw_guild_card
   mhw_character_appearance appearance;
   mhw_palico_appearance palico_appearance;
   mhw_hunter_equipment hunter_equipment;
-  u8 unknown3a[60];
-  u32 layered_color_helmet;
-  u32 layered_color_torso;
-  u32 layered_color_arms;
-  u32 layered_color_coil;
-  u32 layered_color_feet;
+  u8 unknown3a[12];
+  mhw_equipment_ref layered_helmet;
+  mhw_equipment_ref layered_torso;
+  mhw_equipment_ref layered_arms;
+  mhw_equipment_ref layered_coil;
+  mhw_equipment_ref layered_feet;
+  u8 unknown3b[8];
+  mhw_color layered_color_helmet;
+  mhw_color layered_color_torso;
+  mhw_color layered_color_arms;
+  mhw_color layered_color_coil;
+  mhw_color layered_color_feet;
   u8 unknown3_[16];
 
   mhw_palico palico;
@@ -657,7 +662,6 @@ struct mhw_item_slot
 
 struct mhw_item_pouch
 {
-  u8 unknown0[16];
   mhw_item_slot items[24];
   mhw_item_slot ammo[16];
   u8 unknown1[296];
@@ -721,6 +725,8 @@ struct mhw_item_loadouts
 {
   mhw_item_loadout loadout[120];
   u8 order[120];
+  // bitmask of which loadouts have data saved.
+  u8 registered[16];
 };
 
 struct mhw_pigments
@@ -856,6 +862,19 @@ struct mhw_safari
   mhw_safari_member members[3];
 };
 
+struct mhw_lynian_observatory
+{
+  u32 unknown0;
+  u8 lynian_research_reward_flags_a[8];
+  u8 lynian_research_reward_flags_b[8];
+  u8 lynian_research_reward_flags_c[8];
+  u32 unknown1;
+  u8 lynian_research_unseen_flags[8];
+  u8 unknown_lynian_research_flags[8];
+  u8 lynian_research_unlock_flags[8];
+  u32 lynian_research_level[40];
+};
+
 struct mhw_guiding_lands_analysis
 {
   u32 monster;
@@ -865,13 +884,14 @@ struct mhw_guiding_lands_analysis
 
 struct mhw_guiding_lands
 {
+  u32 unknown0;
   u32 region_levels[8];
   u32 level_total;
-  u32 unknown0[128 / 4];
+  u32 unknown1[128 / 4];
   u32 monsters[3];
   u32 regions[3];
   u32 monster_levels[3];
-  u32 unknown1[3];
+  u32 unknown2[3];
   u8 region_level_unlocked[8];
   mhw_guiding_lands_analysis analyses[8];
 };
@@ -1000,89 +1020,563 @@ struct mhw_seliana_room_config {
   mhw_seliana_room_deco unused2[8];
   mhw_seliana_room_shelf_item shelf_items[64];
 };
-Printf("mhw_seliana_room_config size: %d/%d\n", sizeof(mhw_seliana_room_config), 1315);
+
+struct mhw_npc_chat_entry
+{
+  u32 npc;
+  u32 dialogue_id;
+};
+
+struct mhw_smithy
+{
+  // Weapons
+  u8 seen_greatsword[64];
+  u8 seen_sword_and_shield[64];
+  u8 seen_dual_blades[64];
+  u8 seen_longsword[64];
+  u8 seen_hammer[64];
+  u8 seen_hunting_horn[64];
+  u8 seen_lance[64];
+  u8 seen_gunlance[64];
+  u8 seen_switchaxe[64];
+  u8 seen_charge_blade[64];
+  u8 seen_insect_glaive[64];
+  u8 seen_light_bowgun[64];
+  u8 seen_heavy_bowgun[64];
+  u8 seen_bow[64];
+
+  // Armor (includes layered)
+  u8 seen_helmet[128];
+  u8 seen_torso[128];
+  u8 seen_arms[128];
+  u8 seen_coil[128];
+  u8 seen_feet[128];
+
+  // Other
+  u8 unknown0[448];
+  u8 seen_palico_weapon[64];
+  u8 seen_palico_hood[64];
+  u8 unknown1[64];
+  u8 seen_palico_coat[64];
+  u8 unknown2[128];
+  u8 seen_kinsects[16];
+};
+
+struct mhw_wishlist_item
+{
+  // 1 = Armor, layered, full armor
+  // 2 = Weapon
+  // 9 = Pendant
+  u32 type;
+  mhw_equipment_ref equipment;
+  u32 pendant_id;
+};
+
+struct mhw_progress_flags
+{
+  u8 unknown0[14];
+  u8 unknown1a : 1;
+  u8 delivery_completed_setting_up_camp_ancient_forest_i : 1;
+  u8 unknown1b : 1;
+  u8 delivery_completed_setting_up_camp_ancient_forest_ii : 1;
+  u8 unknown1c : 4;
+  u8 unknown2a : 1;
+  u8 delivery_completed_setting_up_camp_coral_highlands : 1;
+  u8 unknown2b : 6;
+  u8 unknown3[27];
+  u8 unknown4a : 7;
+  u8 delivery_obtained_a_great_help : 1;
+  u8 delivery_completed_a_great_help : 1;
+  u8 unknown5a : 7;
+  u8 unknown6[58];
+  u8 unknown7a : 1;
+  u8 npc_chat_arena_lass_introduction : 1;
+  u8 unknown7b : 6;
+  u8 unknown8[25];
+  u8 unknown9a : 4;
+  u8 event_astera_gathering_hub_celestial_pursuit : 1;
+  u8 unknown9b : 3;
+  u8 unknown10[24];
+  u8 unknown11a : 4;
+  u8 misc_can_craft_bushi_layered : 1;
+  u8 layered_bushi_kabuto_sabi : 1;
+  u8 layered_bushi_muneate_sabi : 1;
+  u8 layered_bushi_kote_sabi : 1;
+  u8 layered_bushi_koshiate_sabi : 1;
+  u8 layered_bushi_suneate_sabi : 1;
+  u8 layered_bushi_kabuto_homare : 1;
+  u8 layered_bushi_muneate_homare : 1;
+  u8 layered_bushi_kote_homare : 1;
+  u8 layered_bushi_koshiate_homare : 1;
+  u8 layered_bushi_suneate_homare : 1;
+  u8 layered_brigade : 1;
+  u8 misc_layered_butterfly_unknown : 1;
+  u8 layered_butterfly : 1;
+  u8 misc_layered_death_stench_unknown : 1;
+  u8 layered_death_stench : 1;
+  u8 layered_shadow_shades : 1;
+  u8 misc_layered_guild_cross_unknown : 1;
+  u8 layered_guild_cross : 1;
+  u8 misc_layered_dante_unknown : 1;
+  u8 layered_dante : 1;
+  u8 misc_layered_drachen_unknown : 1;
+  u8 layered_drachen : 1;
+  u8 misc_layered_blossom_unknown : 1;
+  u8 layered_blossom : 1;
+  u8 misc_layered_mosswine_mask_or_faux_felyne_unknown : 1;
+  u8 layered_mosswine_mask : 1;
+  u8 layered_faux_felyne : 1;
+  u8 unknown12a : 1;
+  u8 misc_layered_diver_or_shadow_shades_unknown : 1;
+  u8 layered_diver : 1;
+  u8 unknown12b : 1;
+  u8 misc_layered_sakura_unknown : 1;
+  u8 layered_sakura : 1;
+  u8 misc_layered_sealed_eyepatch_or_wiggler_head_unknown : 1;
+  u8 misc_layered_harvest_unknown : 1;
+  u8 layered_harvest : 1;
+  u8 layered_sealed_eyepatch : 1;
+  u8 layered_wiggler_head : 1;
+  u8 misc_layered_origin_unknown : 1;
+  u8 layered_origin : 1;
+  u8 misc_layered_orion_unknown : 1;
+  u8 layered_orion : 1;
+  u8 unknown13a : 1;
+  u8 layered_skull_mask : 1;
+  u8 misc_layered_beetle_unknown : 1;
+  u8 layered_beetle : 1;
+  u8 misc_layered_gala_suit_unknown : 1;
+  u8 layered_gala_suit : 1;
+  u8 misc_layered_ryu_unknown : 1;
+  u8 layered_ryu : 1;
+  u8 misc_layered_zorah_gamma_unknown : 1;
+  u8 unknown14a : 3;
+  u8 misc_layered_skull_mask_or_kulu_ya_ku_head : 1;
+  u8 layered_kulu_ya_ku_head : 1;
+  u8 misc_layered_commision_unknown : 1;
+  u8 layered_commision : 1;
+  u8 unknown14b : 1;
+  u8 unknown15[2];
+  u8 unknown16a : 2;
+  u8 layered_bayek : 1;
+  u8 unknown16b : 1;
+  u8 misc_layered_geralt_of_rivia_or_ciri : 1;
+  u8 unknown16c : 1;
+  u8 layered_geralt_of_rivia : 1;
+  u8 layered_ciri : 1;
+  u8 unknown17[144];
+  u8 unknown18a : 1;
+  u8 npc_chat_lynian_researcher_started_surveyor_set_tutorial : 1;
+  u8 npc_chat_lynian_researcher_completed_surveyor_set_tutorial : 1;
+  u8 unknown18b : 2;
+  u8 npc_chat_lynian_researcher_did_surveyor_set_tutorial : 1;
+  u8 unknown18c : 2;
+  u8 unknown19a : 2;
+  u8 npc_chat_lynian_researcher_received_surveyor_set : 1;
+  u8 unknown19b : 5;
+  u8 unknown20[28];
+  u8 misc_layered_a_unknown : 1;
+  u8 misc_can_craft_layered_armor : 1;
+  u8 misc_used_a_guiding_lands_material : 1;
+  u8 unknown21a : 5;
+  u8 unknown22[2];
+  u8 npc_chat_housekeeper_purr_oject_stone : 1;
+  u8 unknown23a : 4;
+  u8 npc_chat_seliana_armory_ghillie_mantle_idea : 1;
+  u8 unknown23b : 2;
+  u8 npc_chat_seliana_armory_glider_mantle_idea : 1;
+  u8 unknown24a : 7;
+  u8 unknown25a : 7;
+  u8 npc_chat_seliana_sailor_introduction : 1;
+  u8 unknown26a : 2;
+  u8 npc_chat_grammeowster_chef_this_here_ladle : 1;
+  u8 unknown26b : 5;
+  u8 unknown27[5];
+  u8 unknown28a : 4;
+  u8 delivery_obtained_happy_little_trees : 1;
+  u8 delivery_obtained_desert_but_not_deserted : 1;
+  u8 delivery_obtained_refreshing_colors : 1;
+  u8 delivery_obtained_creepy_canvas : 1;
+  u8 delivery_obtained_where_elders_play : 1;
+  u8 delivery_obtained_snowy_spectacle : 1;
+  u8 delivery_obtained_silent_hunter_swift_as_the_wind : 1;
+  u8 delivery_completed_happy_little_trees : 1;
+  u8 delivery_completed_desert_but_not_deserted : 1;
+  u8 delivery_completed_refreshing_colors : 1;
+  u8 delivery_completed_creepy_canvas : 1;
+  u8 delivery_completed_where_elders_play : 1;
+  u8 delivery_completed_snowy_spectacle : 1;
+  u8 delivery_completed_silent_hunter_swift_as_the_wind : 1;
+  u8 delivery_obtained_magnificent_magdaros : 1;
+  u8 delivery_completed_magnificent_magdaros : 1;
+  u8 unknown29a : 4;
+  u8 unknown30[7];
+  u8 unknown31a : 6;
+  u8 misc_layered_b_unknown : 1;
+  u8 unknown31b : 1;
+  u8 unknown32[29];
+  u8 unknown33a : 4;
+  u8 guiding_lands_unlock_volcanic : 1;
+  u8 unknown33b : 3;
+  u8 unknown34[12];
+  u8 guiding_lands_unlock_tundra : 1;
+  u8 unknown35a : 7;
+  u8 unknown36;
+  u8 unknown37a : 3;
+  u8 delivery_completed_the_house_of_holiday_joy : 1;
+  u8 delivery_completed_lighting_up_the_place : 1;
+  u8 unknown37b : 3;
+  u8 unknown38[9];
+  u8 unknown39a : 7;
+  u8 layered_direwolf_plus : 1;
+  u8 unknown40a : 1;
+  u8 layered_thermae : 1;
+  u8 layered_clockwork_alpha_plus : 1;
+  u8 layered_dragonking_eyepatch : 1;
+  u8 layered_strategist_spectacles : 1;
+  u8 layered_pulverizing_feather : 1;
+  u8 layered_crystal_earring : 1;
+  u8 layered_leather : 1;
+  u8 layered_chain : 1;
+  u8 layered_hunter_alpha : 1;
+  u8 layered_hunter_beta : 1;
+  u8 layered_bone : 1;
+  u8 layered_alloy : 1;
+  u8 layered_vespoid : 1;
+  u8 layered_hornetaur : 1;
+  u8 layered_kestodon : 1;
+  u8 layered_gajau : 1;
+  u8 layered_shamos : 1;
+  u8 layered_jagras : 1;
+  u8 layered_kulu_ya_ku : 1;
+  u8 layered_tzitzi_ya_ku : 1;
+  u8 layered_great_girros : 1;
+  u8 layered_pukei_pukei_alpha : 1;
+  u8 layered_pukei_pukei_beta : 1;
+  u8 layered_barroth : 1;
+  u8 layered_anjanath_alpha : 1;
+  u8 layered_anjanath_beta : 1;
+  u8 layered_jyaratodus : 1;
+  u8 layered_tobi_kadachi : 1;
+  u8 layered_paolumu : 1;
+  u8 layered_rathian_alpha : 1;
+  u8 layered_rathian_beta : 1;
+  u8 layered_rath_heart_alpha : 1;
+  u8 layered_rath_heart_beta : 1;
+  u8 layered_radobaan_alpha : 1;
+  u8 layered_radobaan_beta : 1;
+  u8 layered_gastodon : 1;
+  u8 layered_barnos : 1;
+  u8 layered_dodogama : 1;
+  u8 layered_zorah_alpha : 1;
+  u8 layered_zorah_beta : 1;
+  u8 layered_zorah_gamma : 1;
+  u8 layered_high_metal : 1;
+  u8 layered_ingot : 1;
+  u8 layered_lavasioth_alpha : 1;
+  u8 layered_lavasioth_beta : 1;
+  u8 layered_legiana_alpha : 1;
+  u8 layered_legiana_beta : 1;
+  u8 layered_odogaron_alpha : 1;
+  u8 layered_odogaron_beta : 1;
+  u8 layered_rathalos_alpha : 1;
+  u8 layered_rathalos_beta : 1;
+  u8 layered_rath_soul_alpha : 1;
+  u8 layered_rath_soul_beta : 1;
+  u8 layered_diablos_alpha : 1;
+  u8 layered_diablos_beta : 1;
+  u8 layered_diablos_nero_alpha : 1;
+  u8 layered_diablos_nero_beta : 1;
+  u8 layered_uragaan_alpha : 1;
+  u8 layered_uragaan_beta : 1;
+  u8 layered_bazelguese_alpha : 1;
+  u8 layered_bazelguese_beta : 1;
+  u8 layered_dober_alpha : 1;
+  u8 layered_dober_beta : 1;
+  u8 layered_damascus_alpha : 1;
+  u8 layered_damascus_beta : 1;
+  u8 layered_nergigante_alpha : 1;
+  u8 layered_nergigante_beta : 1;
+  u8 layered_nergigante_gamma : 1;
+  u8 layered_teostra_alpha : 1;
+  u8 layered_teostra_beta : 1;
+  u8 layered_teostra_gamma : 1;
+  u8 layered_kushala_alpha : 1;
+  u8 layered_kushala_beta : 1;
+  u8 layered_kushala_gamma : 1;
+  u8 layered_vaal_hazak_alpha : 1;
+  u8 layered_vaal_hazak_beta : 1;
+  u8 layered_vaal_hazak_gamma : 1;
+  u8 layered_kirin_alpha : 1;
+  u8 layered_kirin_beta : 1;
+  u8 layered_kirin_gamma : 1;
+  u8 layered_xeno_alpha : 1;
+  u8 layered_xeno_beta : 1;
+  u8 layered_xeno_gamma : 1;
+  u8 layered_deviljho_alpha : 1;
+  u8 layered_deviljho_beta : 1;
+  u8 layered_kulve_alpha : 1;
+  u8 layered_kulve_beta : 1;
+  u8 layered_kulve_gamma : 1;
+  u8 layered_lunastra_alpha : 1;
+  u8 layered_lunastra_beta : 1;
+  u8 layered_lunastra_gamma : 1;
+  u8 unknown41a : 4;
+  u8 unknown42;
+  u8 unknown43a : 2;
+  u8 layered_rose : 1;
+  u8 layered_passion : 1;
+  u8 layered_demonlord : 1;
+  u8 layered_oolong : 1;
+  u8 layered_astral : 1;
+  u8 layered_azure_starlord : 1;
+  u8 layered_azure_age : 1;
+  u8 unknown44a : 2;
+  u8 layered_leon_plus : 1;
+  u8 layered_claire_plus : 1;
+  u8 layered_faux_kelbi : 1;
+  u8 layered_skull_scarf : 1;
+  u8 layered_sealed_dragon_cloth : 1;
+  u8 layered_wyverian_ears : 1;
+  u8 layered_faux_aptonoth : 1;
+  u8 layered_duffel_penguin_plus : 1;
+  u8 layered_hare_band : 1;
+  u8 layered_downy_crake : 1;
+  u8 layered_pearlspring_plus : 1;
+  u8 layered_goldspring_macaque : 1;
+  u8 layered_kadachi_scarf : 1;
+  u8 layered_buff_body_alpha_plus : 1;
+  u8 layered_velkhana_gamma_plus : 1;
+  u8 layered_namielle_gamma_plus : 1;
+  u8 unknown45a : 1;
+  u8 layered_buff_body_gamma_plus : 1;
+  u8 layered_innerwear_alpha : 1;
+  u8 layered_guardian : 1;
+  u8 layered_artian : 1;
+  u8 unknown46a : 1;
+  u8 layered_clockwork_beta_plus : 1;
+  u8 layered_black_belt : 1;
+  u8 layered_guild_palace_plus : 1;
+  u8 layered_guildwork_plus : 1;
+  u8 layered_acrobat : 1;
+  u8 layered_showman : 1;
+  u8 layered_innerwear_beta : 1;
+  u8 layered_artemis : 1;
+  u8 unknown47a : 7;
+  u8 unknown48[41];
+  u8 unknown49a : 7;
+  u8 layered_vespoid_plus : 1;
+  u8 layered_hornetaur_plus : 1;
+  u8 layered_wulg_plus : 1;
+  u8 layered_cortos_plus : 1;
+  u8 layered_jagras_plus : 1;
+  u8 layered_tzitzi_ya_ku_plus : 1;
+  u8 layered_great_girros_plus : 1;
+  u8 layered_dodogama_plus : 1;
+  u8 layered_kulu_ya_ku_plus : 1;
+  u8 layered_pukei_pukei_plus : 1;
+  u8 layered_coral_pukei_plus : 1;
+  u8 layered_barroth_plus : 1;
+  u8 layered_jyaratodus_plus : 1;
+  u8 layered_beotodus_plus : 1;
+  u8 layered_tobi_kadachi_plus : 1;
+  u8 layered_viper_kadachi_plus : 1;
+  u8 layered_banbaro_alpha_plus : 1;
+  u8 layered_banbaro_beta_plus : 1;
+  u8 layered_anjanath_alpha_plus : 1;
+  u8 layered_anjanath_beta_plus : 1;
+  u8 layered_fulgur_anja_alpha_plus : 1;
+  u8 layered_fulgur_anja_beta_plus : 1;
+  u8 layered_rathian_alpha_plus : 1;
+  u8 layered_rathian_beta_plus : 1;
+  u8 layered_rath_heart_alpha_plus : 1;
+  u8 layered_rath_heart_beta_plus : 1;
+  u8 layered_paolumu_plus : 1;
+  u8 layered_lumu_phantasm_plus : 1;
+  u8 layered_radobaan_plus : 1;
+  u8 layered_barioth_alpha_plus : 1;
+  u8 layered_barioth_beta_plus : 1;
+  u8 layered_rathalos_alpha_plus : 1;
+  u8 layered_rathalos_beta_plus : 1;
+  u8 layered_rath_soul_alpha_plus : 1;
+  u8 layered_rath_soul_beta_plus : 1;
+  u8 layered_diablos_alpha_plus : 1;
+  u8 layered_diablos_beta_plus : 1;
+  u8 layered_diablos_nero_alpha_plus : 1;
+  u8 layered_diablos_nero_beta_plus : 1;
+  u8 layered_legiana_alpha_plus : 1;
+  u8 layered_legiana_beta_plus : 1;
+  u8 layered_shrieking_legia_alpha_plus : 1;
+  u8 layered_shrieking_legia_beta_plus : 1;
+  u8 layered_odogaron_alpha_plus : 1;
+  u8 layered_odogaron_beta_plus : 1;
+  u8 layered_death_garon_alpha_plus : 1;
+  u8 layered_death_garon_beta_plus : 1;
+  u8 layered_lavasioth_plus : 1;
+  u8 layered_uragaan_plus : 1;
+  u8 layered_nargacuga_alpha_plus : 1;
+  u8 layered_nargacuga_beta_plus : 1;
+  u8 layered_glavenus_alpha_plus : 1;
+  u8 layered_glavenus_beta_plus : 1;
+  u8 layered_acidic_glavenus_alpha_plus : 1;
+  u8 layered_acidic_glavenus_beta_plus : 1;
+  u8 layered_brachydios_alpha_plus : 1;
+  u8 layered_brachydios_beta_plus : 1;
+  u8 layered_tigrex_alpha_plus : 1;
+  u8 layered_tigrex_beta_plus : 1;
+  u8 layered_brute_tigrex_alpha_plus : 1;
+  u8 layered_brute_tigrex_beta_plus : 1;
+  u8 layered_seething_bazel_alpha_plus : 1;
+  u8 layered_seething_bazel_beta_plus : 1;
+  u8 layered_savage_jho_alpha_plus : 1;
+  u8 layered_savage_jho_beta_plus : 1;
+  u8 layered_velkhana_alpha_plus : 1;
+  u8 layered_velkhana_beta_plus : 1;
+  u8 layered_blackveil_hazak_alpha_plus : 1;
+  u8 layered_blackveil_hazak_beta_plus : 1;
+  u8 layered_teostra_alpha_plus : 1;
+  u8 layered_teostra_beta_plus : 1;
+  u8 layered_kushala_alpha_plus : 1;
+  u8 layered_kushala_beta_plus : 1;
+  u8 layered_kirin_alpha_plus : 1;
+  u8 layered_kirin_beta_plus : 1;
+  u8 layered_namielle_alpha_plus : 1;
+  u8 layered_namielle_beta_plus : 1;
+  u8 layered_shara_ishvalda_alpha_plus : 1;
+  u8 layered_shara_ishvalda_beta_plus : 1;
+  u8 layered_yian_garuga_alpha_plus : 1;
+  u8 layered_yian_garuga_beta_plus : 1;
+  u8 layered_zinogre_alpha_plus : 1;
+  u8 layered_zinogre_beta_plus : 1;
+  u8 layered_golden_lune_alpha_plus : 1;
+  u8 layered_golden_lune_beta_plus : 1;
+  u8 layered_silver_sol_alpha_plus : 1;
+  u8 layered_silver_sol_beta_plus : 1;
+  u8 layered_lunastra_alpha_plus : 1;
+  u8 layered_lunastra_beta_plus : 1;
+  u8 layered_ruiner_nergi_alpha_plus : 1;
+  u8 layered_ruiner_nergi_beta_plus : 1;
+  u8 layered_rajang_alpha_plus : 1;
+  u8 layered_rajang_beta_plus : 1;
+  u8 layered_stygian_zin_alpha_plus : 1;
+  u8 layered_stygian_zin_beta_plus : 1;
+  u8 layered_safi_jiiva_alpha_plus : 1;
+  u8 layered_safi_jiiva_beta_plus : 1;
+  u8 layered_furious_rajang_alpha_plus : 1;
+  u8 layered_furious_rajang_beta_plus : 1;
+  u8 layered_raging_brachy_alpha_plus : 1;
+  u8 layered_raging_brachy_beta_plus : 1;
+  u8 layered_frostfang_barioth_alpha_plus : 1;
+  u8 layered_frostfang_barioth_beta_plus : 1;
+  u8 layered_alatreon_alpha_plus : 1;
+  u8 layered_alatreon_beta_plus : 1;
+  u8 layered_fatalis_alpha_plus : 1;
+  u8 layered_fatalis_beta_plus : 1;
+  u8 layered_kulve_taroth_alpha_plus : 1;
+  u8 layered_kulve_taroth_beta_plus : 1;
+  u8 unknown50a : 4;
+  u8 event_seliana_gathering_hub_grand_appreciation : 1;
+  u8 unknown51a : 7;
+  u8 unknown52[11];
+};
+
+Printf("Sizeof progress: %d\n", sizeof(mhw_progress_flags));
 
 struct mhw_save_slot
 {
   u32 unknown0;
   mhw_hunter hunter;
   mhw_character_appearance appearance;
-  u8 unknown0a[382];
+  u8 unknown1[382];
   mhw_palico_appearance palico_appearance;
 
   mhw_guild_card guild_card;
   mhw_guild_card collected_guild_card[100];
   u16 guild_card_order[100];
 
-  u8 unknown1[516];
+  u8 unknown2[516];
   mhw_guild_card receive_guild_card[20];
-  u32 unknown2;
+  u32 unknown3;
   mhw_current_equipment current_equipment;
-  u32 unknown3a[24 / 4];
-  monsters128_u16 unknown_monster_a;
-  monsters128_u8 unknown_monster_b;
+  u8 unknown4[sizeof(u32) * 6];
+  u8 unknown_monster_a[sizeof(monsters128_u16)];
+  u8 unknown_monster_b[sizeof(monsters128_u8)];
   u8 unknown_monster_flags_a[16];
   u8 unknown_monster_flags_b[16];
   u8 unknown_monster_flags_c[16];
   u8 unknown_monster_flags_d[16];
   monsters128_u32 monsters_captured;
   monsters128_u32 monsters_slain;
-  monsters128_u32 unknown_monster_c;
-  monsters128_u32 unknown_monster_d;
-  monsters128_u32 unknown_monster_e; // MR slain?
-  monsters128_u32 unknown_monster_f;
-  u32 unknown3_[28 / 4];
+  u8 unknown_monster_c[sizeof(monsters128_u32)];
+  u8 unknown_monster_d[sizeof(monsters128_u32)];
+  u8 unknown_monster_e[sizeof(monsters128_u32)]; // MR slain?
+  u8 unknown_monster_f[sizeof(monsters128_u32)];
+  u8 unknown5[sizeof(u32) * 7];
   monsters128_u32 monster_largest;
   monsters128_u32 monster_smallest;
   monsters128_f32 monster_xp;
   monsters128_u32 monster_level;
-  monsters128_f32 unknown_monster_g;
-
-  u8 unknown4a[578];
+  monsters128_f32 monster_xp_cap;
+  
+  u8 unknown6a[548];
+  mhw_monster_index capture_monster_index;
+  u32 capture_monster_size;
+  u8 unknown6b[22];
   u8 discovered_items[400];
   mhw_endemic_life endemic_life;
-  u8 unknown4b[512];
+  u8 unknown6c[512];
 
   mhw_seliana_room_config room_config;
-  u8 unknown4_[4];
+  u8 unknown7[4];
   mhw_seliana_room_config room_configs[24];
 
   str32s room_config_names[24];
   u8 seliana_music_player_song;
-  u8 unknown5[2578];
+  u8 unknown8[2578];
   u8 room_status;
   u16 passcode;
 
-  u32 unknown6[2];
+  u8 unknown9[sizeof(u32) * 2];
 
   mhw_item_loadouts item_loadouts;
   mhw_item_pouch item_pouch;
   mhw_storage storage;
 
   mhw_equipment equipment[2500];
-  // mhw_equipment unknown_equipment[1760];
   u8 unknown_equipment[sizeof(mhw_equipment) * 1760];
   u32 equipment_index_table[2500];
-  u8 unknown7a[11096];
+  u8 unknown10a[11096];
   u32 gesture_order[512];
   u32 pose_order[256];
-  u8 unknown7b[6116];
+  u8 unknown10b[sizeof(u32) * 256];
+  u32 unknown10c_a;
+  mhw_wishlist_item wishlist[36];
+  u8 unknown10c_[2628 - 4 - sizeof(mhw_wishlist_item) * 36];
+  mhw_smithy smithy;
+  u8 unknown10d[80];
   u32 layered_helmet;
   u32 layered_torso;
   u32 layered_arms;
   u32 layered_coil;
   u32 layered_feet;
-  u8 unknown7c[2196];
+  u8 unknown10e[68];
+  u32 favourite_stickers[10];
+  u32 sticker_count[256];
+  u8 unknown10f[1064];
   u32 layered_color_helmet;
   u32 layered_color_torso;
   u32 layered_color_arms;
   u32 layered_color_coil;
   u32 layered_color_feet;
   u32 layered_color_whole;
-  u8 unknown7d[14164];
-  u64 unknown7table[2048];
+  u8 unknown10g[20];
+  mhw_radial radial_menu[8];
+  u8 unknown10h[sizeof(u32) * 3280];
+  mhw_npc_chat_entry npc_chat_progress[2048];
   mhw_slot_settings settings;
-  u8 unknown7_[557];
+  u8 unknown10i[34];
+  mhw_progress_flags progress;
+  u8 unknown10_[19];
 
   str64 palico_name;
   u32 palico_xp;
@@ -1092,52 +1586,80 @@ struct mhw_save_slot
   u32 coral_orchestra;
   u32 plunderblade;
   u32 meowlotov_cocktail;
-  u32 unknown8[10];
+  u8 unknown11[sizeof(u32) * 10];
 
-  u8 unknown9[1416];
+  u8 unknown12a[336];
+  u8 unlocked_optionals[64];
+  u8 unknown12b[64];
+  u8 seen_optionals[64];
+  u8 unknown12c[84];
+  u8 unknown12_[sizeof(u32) * 201];
+
   mhw_investigation investigations[400];
-  u8 unknown10[2614];
+  u8 unknown13[2614];
+
   u32 tool_unlocks[4];
   mhw_equipment tools[128];
-  u8 unknown11[2192];
+
+  u8 pendants_unlocked[32];
+  u8 pendants_seen[32];
+  u8 unknown14a[24];
+  u32 registered_bounties[6];
+  u8 unknown14b[2024 - 24 - 24];
+  u32 steamworks_natural_fuel;
+  u32 steamworks_stored_fuel;
+  // [92] unlocks for hub functions?
+  u8 unknown14c[96];
+
   mhw_equipment_loadout equipment_loadouts[224];
   mhw_layered_loadout layered_loadouts[112];
   mhw_palico_loadout palico_loadouts[24];
   mhw_botanical_research botanist;
-  u8 unknown12[213];
+  u8 unknown15[213];
   mhw_safari safaris[4];
-  u8 unknown13[284];
+  u8 unknown16[284];
 
   mhw_shoutout_settings shoutout_settings;
 
-  u8 unknown14_[761];
+  u8 unknown17[761];
   mhw_save_quests completed;
-  u8 unknown15a[2048];
+  u8 unknown18[2048];
   mhw_weapon_usage32 high_rank_usage;
   mhw_weapon_usage32 low_rank_usage;
   mhw_weapon_usage32 investigations_usage;
   mhw_weapon_usage32 master_rank_usage;
   mhw_weapon_usage32 guiding_lands_usage;
+
   u8 addons_unseen[64];
   u8 addons_claimed[64];
   u16 addons[512];
   u8 gallery_unlocked[16];
   u8 gallery_unseen[16];
-  u8 unknown16a[110475];
-  str64 poogie_name;
-  u8 unknown16_[276];
-  mhw_handler_outfit handler_outfit;
-  u8 unknown17[1036]; // Seen flags for appearance, maybe more
-  u32 lynian_observatory[30];
-  u8 unknown18[44];
 
+  u8 unknown19a[260];
+  u64 daily_bonus_collect_time;
+  u8 unknown19b[30000];
+  u8 unknown19c[400];
+  u8 unknown19d[79728];
+  // Contains tutorial flags
+  u8 unknown19_[79];
+
+  str64 poogie_name;
+  u8 poogie_costumes[4];
+  u8 unknown20a[264];
+  u32 poogie_love;
+  u8 unknown20_[4];
+  mhw_handler_outfit handler_outfit;
+  u8 unknown21[980]; // Seen flags for appearance, maybe more
+
+  mhw_lynian_observatory lynian_observatory;
   mhw_guiding_lands guiding_lands;
 
-  u8 unknown19a[1708];
+  u8 unknown22a[1708];
   mhw_toggle shoutout_manual_auto_translation;
-  u8 unknown19_[762];
+  u8 unknown22_[762];
 
-  u16 unknown20[4741]; // Zero?
+  u8 unknown23[sizeof(u16) * 4741]; // Zero?
   u8 hash_table[512];
 };
 
@@ -1213,6 +1735,8 @@ struct mhw_section1
   // Working memory?
   // What's in it keeps changing, one moment it's save[0]'s
   // guiding lands levels, the next it's names.
+  // From [319] to the end usually.
+  // It seems to just change intermittently.
   u8 unknown8[2930];
 };
 

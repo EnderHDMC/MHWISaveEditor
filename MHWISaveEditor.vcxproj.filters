@@ -186,6 +186,11 @@
     <None Include="res\mapping\uct.bt" />
     <None Include="res\ui_colortable.uct" />
     <None Include="setup.iss" />
+    <None Include="res\mapping\copy_unknown.1sc" />
+    <None Include="res\mapping\armor_items.1sc" />
+    <None Include="res\mapping\MonsterHunterWorld.CT" />
+    <None Include="res\mapping\allow_layered_crafts.1sc" />
+    <None Include="res\mapping\ProgressStructGenerator.ipynb" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">

@@ -3,10 +3,14 @@
 //
 //      File: test_data.1sc
 //   Authors: EnderHDMC
-//   Version: 
-//   Purpose: Check save structure assumptions
+//   Version: 0.1.3
+//   Purpose: Test a bunch of saves to see if
+//            my assumptions of the save structure actually
+//            hold across all of them.
 //  Category: Binary
-//   History: 
+//   History: 0.1.3:
+//            Added more block checks
+//            Initial Version
 //------------------------------------------------
 
 int x, y, value;
@@ -72,3 +76,60 @@ for (x = 0; x < max; x++) {
 }
 PrintResults(asumption, max);
 Printf("Random Thing: %d\n", mhw_save.section0.unknown2);
+
+
+
+// Test if section3.saves[y].unknown19b is indeed all zero
+for (y = 0; y < 3; y++) {
+  Printf("Check: 'mhw_save.section3.saves[%d].unknown19b'\n", y);
+  asumption = 0;
+  max = sizeof(mhw_save.section3.saves[y].unknown19b) / sizeof(mhw_save.section3.saves[y].unknown19b[0]);
+  prog = RoundDownPow10(max);
+  for (x = 0; x < max; x++) {
+    value = mhw_save.section3.saves[y].unknown19b[x];
+  
+    if (value == 0) asumption++;
+    else Printf("Nonzero, %u, %u\n", x, value);
+  
+    if (x % prog == 0) Printf("Progress: %u / %u\n", x, max);
+  }
+  PrintResults(asumption, max);
+}
+
+
+
+// Test if section3.saves[y].unknown19d is indeed all zero
+for (y = 0; y < 3; y++) {
+  Printf("Check: 'mhw_save.section3.saves[%d].unknown19d'\n", y);
+  asumption = 0;
+  max = sizeof(mhw_save.section3.saves[y].unknown19d) / sizeof(mhw_save.section3.saves[y].unknown19d[0]);
+  prog = RoundDownPow10(max);
+  for (x = 0; x < max; x++) {
+    value = mhw_save.section3.saves[y].unknown19d[x];
+  
+    if (value == 0) asumption++;
+    else Printf("Nonzero, %u, %u\n", x, value);
+  
+    if (x % prog == 0) Printf("Progress: %u / %u\n", x, max);
+  }
+  PrintResults(asumption, max);
+}
+
+
+
+// Test if section3.saves[y].unknown23 is indeed all zero
+for (y = 0; y < 3; y++) {
+  Printf("Check: 'mhw_save.section3.saves[%d].unknown23'\n", y);
+  asumption = 0;
+  max = sizeof(mhw_save.section3.saves[y].unknown23) / sizeof(mhw_save.section3.saves[y].unknown23[0]);
+  prog = RoundDownPow10(max);
+  for (x = 0; x < max; x++) {
+    value = mhw_save.section3.saves[y].unknown23[x];
+  
+    if (value == 0) asumption++;
+    else Printf("Nonzero, %u, %u\n", x, value);
+  
+    if (x % prog == 0) Printf("Progress: %u / %u\n", x, max);
+  }
+  PrintResults(asumption, max);
+}

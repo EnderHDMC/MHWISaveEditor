@@ -3376,6 +3376,7 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101513</ID>
                   <Description>"Start"</Description>
                   <DropDownListLink>listItems</DropDownListLink>
+                  <LastState Value="727" RealAddress="BD6335D8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"MonsterHunterWorld.exe"+05072538</Address>
@@ -3390,6 +3391,7 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101515</ID>
                   <Description>"End"</Description>
                   <DropDownListLink>listItems</DropDownListLink>
+                  <LastState Value="2275" RealAddress="BD63FF58"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"MonsterHunterWorld.exe"+05072538</Address>
@@ -9045,6 +9047,3445 @@ print("Duplicated Save Complete: ",slot_destination_index)
               </CheatEntries>
             </CheatEntry>
             <CheatEntry>
+              <ID>1337101521</ID>
+              <Description>"Progression"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <GroupHeader>1</GroupHeader>
+              <Address>[gSave]+102424</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1337101842</ID>
+                  <Description>"Deliveries"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>+0</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1337101860</ID>
+                      <Description>"Completed: Setting Up Camp: Ancient Forest I"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*0+E</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101861</ID>
+                      <Description>"Completed: Setting Up Camp: Ancient Forest II"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*0+E</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101862</ID>
+                      <Description>"Completed: Setting Up Camp: Coral Highlands"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*0+F</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101843</ID>
+                      <Description>"Completed: A Great Help"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*1+14</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101864</ID>
+                      <Description>"Completed: Happy Little Trees"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101865</ID>
+                      <Description>"Completed: Desert But Not Deserted"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101866</ID>
+                      <Description>"Completed: Refreshing Colors"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101867</ID>
+                      <Description>"Completed: Creepy Canvas"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101868</ID>
+                      <Description>"Completed: Where Elders Play"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101869</ID>
+                      <Description>"Completed: Snowy Spectacle"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+11</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101870</ID>
+                      <Description>"Completed: Silent Hunter, Swift as the Wind"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+11</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101871</ID>
+                      <Description>"Completed: Magnificent Magdaros"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+11</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101872</ID>
+                      <Description>"Completed: The House of Holiday Joy!"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*10+16</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101873</ID>
+                      <Description>"Completed: Lighting Up The Place"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*10+16</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101863</ID>
+                      <Description>"Obtained: A Great Help"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*1+13</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101847</ID>
+                      <Description>"Obtained: Happy Little Trees"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+F</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101848</ID>
+                      <Description>"Obtained: Desert But Not Deserted"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+F</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101849</ID>
+                      <Description>"Obtained: Refreshing Colors"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+F</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101850</ID>
+                      <Description>"Obtained: Creepy Canvas"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+F</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101851</ID>
+                      <Description>"Obtained: Where Elders Play"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101852</ID>
+                      <Description>"Obtained: Snowy Spectacle"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101853</ID>
+                      <Description>"Obtained: Silent Hunter, Swift as the Wind"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101854</ID>
+                      <Description>"Obtained: Magnificent Magdaros"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+11</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1337101882</ID>
+                  <Description>"Guiding Lands"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>+0</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1337101883</ID>
+                      <Description>"Unlock Volcanic"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*10+7</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101884</ID>
+                      <Description>"Unlock Tundra"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*10+14</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1337101844</ID>
+                  <Description>"NPC Chat"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>+0</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1337101845</ID>
+                      <Description>"Arena Lass: Introduction"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*4+7</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101880</ID>
+                      <Description>"Housekeeper: Purr-oject: Stone"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+6</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101855</ID>
+                      <Description>"Seliana Armory: Ghillie Mantle Idea"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+6</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101856</ID>
+                      <Description>"Seliana Armory: Glider Mantle Idea"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+7</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101846</ID>
+                      <Description>"Seliana Sailor: Introduction"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+8</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101857</ID>
+                      <Description>"Grammeowster Chef: This Here Ladle"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+9</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101874</ID>
+                      <Description>"Lynian Researcher: Started Surveyor Set Tutorial"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*C+15</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101875</ID>
+                      <Description>"Lynian Researcher: Did Surveyor Set Tutorial"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*C+15</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101876</ID>
+                      <Description>"Lynian Researcher: Completed Surveyor Set Tutorial"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*C+15</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101877</ID>
+                      <Description>"Lynian Researcher: Received Surveyor Set"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*C+16</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1337101878</ID>
+                  <Description>"Events"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>+0</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1337101879</ID>
+                      <Description>"Astera Gathering Hub: Celestial Pursuit"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*5+9</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101881</ID>
+                      <Description>"Seliana Gathering Hub: Grand Appreciation"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*14+C</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1337101841</ID>
+                  <Description>"Misc"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>+0</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1337101543</ID>
+                      <Description>"Can Craft Bushi Layered"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+A</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101588</ID>
+                      <Description>"Can Craft Layered Armor"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+3</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101618</ID>
+                      <Description>"Used a Guiding Lands Material"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+3</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101828</ID>
+                      <Description>"Layered: Butterfly ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101552</ID>
+                      <Description>"Layered: Death Stench ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101550</ID>
+                      <Description>"Layered: Guild Cross ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101580</ID>
+                      <Description>"Layered: Dante ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101582</ID>
+                      <Description>"Layered: Drachen ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+D</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101554</ID>
+                      <Description>"Layered: Blossom ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+D</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101564</ID>
+                      <Description>"Layered : Mosswine Mask or Faux Felyne ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+D</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101556</ID>
+                      <Description>"Layered: Diver or Shadow Shades ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+E</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101576</ID>
+                      <Description>"Layered: Sakura ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+E</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101569</ID>
+                      <Description>"Layered: Sealed Eyepatch or Wiggler Head ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+E</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101558</ID>
+                      <Description>"Layered" Harvest ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+E</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101572</ID>
+                      <Description>"Layered: Origin ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+F</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101560</ID>
+                      <Description>"Layered: Orion ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+F</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101548</ID>
+                      <Description>"Layered: Beetle ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101562</ID>
+                      <Description>"Layered: Gala Suit ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101578</ID>
+                      <Description>"Layered: Ryu ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101651</ID>
+                      <Description>"Layered: Zorah γ ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101568</ID>
+                      <Description>"Layered: Skull Mask or Kulu-Ya-Ku Head"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+11</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101546</ID>
+                      <Description>"Layered: Commision ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+11</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101584</ID>
+                      <Description>"Layered: Geralt of Rivia or Ciri"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*6+14</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101587</ID>
+                      <Description>"Layered: A ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*E+3</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101678</ID>
+                      <Description>"Layered: B ???"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>+18*F+1</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1337101840</ID>
+                  <Description>"Layered"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>+0</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>1337101858</ID>
+                      <Description>"Low Rank / High Rank"</Description>
+                      <Options moHideChildren="1"/>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <GroupHeader>1</GroupHeader>
+                      <Address>+0</Address>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>1337101829</ID>
+                          <Description>"Bushi Kabuto "Sabi""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101830</ID>
+                          <Description>"Bushi Muneate "Sabi""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101831</ID>
+                          <Description>"Bushi Kote "Sabi""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101832</ID>
+                          <Description>"Bushi Koshiate "Sabi""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101833</ID>
+                          <Description>"Bushi Suneate "Sabi""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101835</ID>
+                          <Description>"Bushi Kabuto "Homare""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101836</ID>
+                          <Description>"Bushi Muneate "Homare""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101837</ID>
+                          <Description>"Bushi Kote "homare""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101838</ID>
+                          <Description>"Bushi Koshiate "Homare""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101839</ID>
+                          <Description>"Bushi Suneate "Homare""</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101538</ID>
+                          <Description>"Origin"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101834</ID>
+                          <Description>"Brigade"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101551</ID>
+                          <Description>"Guild Cross"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101547</ID>
+                          <Description>"Commision"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101549</ID>
+                          <Description>"Beetle"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101545</ID>
+                          <Description>"Butterfly"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101553</ID>
+                          <Description>"Death Stench"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101555</ID>
+                          <Description>"Blossom"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101557</ID>
+                          <Description>"Diver"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101537</ID>
+                          <Description>"Harvest"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101561</ID>
+                          <Description>"Orion"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101563</ID>
+                          <Description>"Gala Suit"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101565</ID>
+                          <Description>"Mosswine Mask"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101566</ID>
+                          <Description>"Faux Felyne"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101567</ID>
+                          <Description>"Skull Mask"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101570</ID>
+                          <Description>"Sealed Eyepatch"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101571</ID>
+                          <Description>"Shadow Shades"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101559</ID>
+                          <Description>"Wiggler Head"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101573</ID>
+                          <Description>"Kulu-Ya-Ku Head"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101577</ID>
+                          <Description>"Sakura"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101579</ID>
+                          <Description>"Ryu"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101581</ID>
+                          <Description>"Dante"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101583</ID>
+                          <Description>"Drachen"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101574</ID>
+                          <Description>"Bayek"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+14</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101585</ID>
+                          <Description>"Geralt of Rivia"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+14</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101586</ID>
+                          <Description>"Ciri"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*6+14</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101575</ID>
+                          <Description>"Artemis"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101680</ID>
+                          <Description>"Leather"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101590</ID>
+                          <Description>"Chain"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101591</ID>
+                          <Description>"Hunter α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101592</ID>
+                          <Description>"Hunter β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101593</ID>
+                          <Description>"Bone"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101594</ID>
+                          <Description>"Alloy"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101595</ID>
+                          <Description>"Vespoid"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101596</ID>
+                          <Description>"Hornetaur"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101597</ID>
+                          <Description>"Kestodon"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101598</ID>
+                          <Description>"Gajau"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101599</ID>
+                          <Description>"Shamos"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101600</ID>
+                          <Description>"Jagras"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101601</ID>
+                          <Description>"Kulu-Ya-Ku"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101602</ID>
+                          <Description>"Tzitzi-Ya-Ku"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101603</ID>
+                          <Description>"Great Girros"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101604</ID>
+                          <Description>"Pukei-Pukei α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101605</ID>
+                          <Description>"Pukei-Pukei β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101606</ID>
+                          <Description>"Barroth"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101607</ID>
+                          <Description>"Anjanath α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101614</ID>
+                          <Description>"Anjanath β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101613</ID>
+                          <Description>"Jyaratodus"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101612</ID>
+                          <Description>"Tobi-Kadachi"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101611</ID>
+                          <Description>"Paolumu"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101610</ID>
+                          <Description>"Rathian α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101609</ID>
+                          <Description>"Rathian β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+C</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101619</ID>
+                          <Description>"Radobaan α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101616</ID>
+                          <Description>"Radobaan β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101617</ID>
+                          <Description>"High Metal"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101623</ID>
+                          <Description>"Gastodon"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101620</ID>
+                          <Description>"Barnos"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101621</ID>
+                          <Description>"Dodogama"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101622</ID>
+                          <Description>"Ingot"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101615</ID>
+                          <Description>"Rath Heart α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101624</ID>
+                          <Description>"Rath Heart β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101625</ID>
+                          <Description>"Lavasioth α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101626</ID>
+                          <Description>"Lavasioth β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101627</ID>
+                          <Description>"Legiana α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101628</ID>
+                          <Description>"Legiana β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101629</ID>
+                          <Description>"Odogaron α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101630</ID>
+                          <Description>"Odogaron β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101631</ID>
+                          <Description>"Rathalos α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101632</ID>
+                          <Description>"Rathalos β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101633</ID>
+                          <Description>"Rath Soul α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101634</ID>
+                          <Description>"Rath Soul β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101635</ID>
+                          <Description>"Diablos α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101636</ID>
+                          <Description>"Diablos β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+F</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101637</ID>
+                          <Description>"Diablos Nero α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101638</ID>
+                          <Description>"Diablos Nero β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101639</ID>
+                          <Description>"Uragaan α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101640</ID>
+                          <Description>"Uragaan β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101641</ID>
+                          <Description>"Bazelguese α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101642</ID>
+                          <Description>"Bazelguese β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101643</ID>
+                          <Description>"Deviljho α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+13</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101644</ID>
+                          <Description>"Deviljho β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+13</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101645</ID>
+                          <Description>"Dober α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101646</ID>
+                          <Description>"Dober β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+10</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101647</ID>
+                          <Description>"Damascus α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101648</ID>
+                          <Description>"Damascus β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101649</ID>
+                          <Description>"Zorah α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+D</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101650</ID>
+                          <Description>"Zorah β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101652</ID>
+                          <Description>"Zorah γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+E</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101653</ID>
+                          <Description>"Nergigante α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101654</ID>
+                          <Description>"Nergigante β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101655</ID>
+                          <Description>"Nergigante γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101656</ID>
+                          <Description>"Teostra α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101657</ID>
+                          <Description>"Teostra β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101658</ID>
+                          <Description>"Teostra γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+11</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101659</ID>
+                          <Description>"Kushala α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+12</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101661</ID>
+                          <Description>"Kushala β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+12</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101660</ID>
+                          <Description>"Kushala γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+12</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101662</ID>
+                          <Description>"Vaal Hazak α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+12</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101663</ID>
+                          <Description>"Vaal Hazak β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+12</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101664</ID>
+                          <Description>"Vaal Hazak γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+12</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101665</ID>
+                          <Description>"Kirin α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+12</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101666</ID>
+                          <Description>"Kirin β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+12</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101667</ID>
+                          <Description>"Kirin γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+13</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101668</ID>
+                          <Description>"Xeno α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+13</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101669</ID>
+                          <Description>"Xeno β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+13</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101670</ID>
+                          <Description>"Xeno γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+13</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101676</ID>
+                          <Description>"Lunastra α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+14</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101673</ID>
+                          <Description>"Lunastra β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+14</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101672</ID>
+                          <Description>"Lunastra γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+14</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101674</ID>
+                          <Description>"Kulve α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+13</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101675</ID>
+                          <Description>"Kulve β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+13</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101671</ID>
+                          <Description>"Kulve γ"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+14</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101804</ID>
+                          <Description>"Azure Starlord"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101679</ID>
+                          <Description>"Guardian"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+1</Address>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101859</ID>
+                      <Description>"Master Rank"</Description>
+                      <Options moHideChildren="1"/>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <GroupHeader>1</GroupHeader>
+                      <Address>+0</Address>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>1337101827</ID>
+                          <Description>"Direwolf+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101589</ID>
+                          <Description>"Thermae"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101681</ID>
+                          <Description>"Dragonking Eyepatch"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101682</ID>
+                          <Description>"Strategist Spectacles"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101683</ID>
+                          <Description>"Pulverizing Feather"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101684</ID>
+                          <Description>"Crystal Earring"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101685</ID>
+                          <Description>"Vespoid+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+15</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101686</ID>
+                          <Description>"Hornetaur+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101687</ID>
+                          <Description>"Wulg+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101688</ID>
+                          <Description>"Cortos+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101689</ID>
+                          <Description>"Jagras+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101690</ID>
+                          <Description>"Tzitzi-Ya-Ku+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101691</ID>
+                          <Description>"Great Girros+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101692</ID>
+                          <Description>"Dodogama+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101693</ID>
+                          <Description>"Kulu-Ya-Ku+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101694</ID>
+                          <Description>"Pukei-Pukei+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101695</ID>
+                          <Description>"Coral Pukei+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101696</ID>
+                          <Description>"Barroth+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101697</ID>
+                          <Description>"Jyaratodus+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101698</ID>
+                          <Description>"Beotodus+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101699</ID>
+                          <Description>"Tobi-Kadachi+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101700</ID>
+                          <Description>"Viper Kadachi+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101701</ID>
+                          <Description>"Banbaro α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101702</ID>
+                          <Description>"Banbaro β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*13+18</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101703</ID>
+                          <Description>"Anjanath α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101704</ID>
+                          <Description>"Anjanath β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101705</ID>
+                          <Description>"Fulgur Anja α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101706</ID>
+                          <Description>"Fulgur Anja β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101707</ID>
+                          <Description>"Rathian α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101708</ID>
+                          <Description>"Rathian β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101709</ID>
+                          <Description>"Rath Heart α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101710</ID>
+                          <Description>"Rath Heart β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101711</ID>
+                          <Description>"Paolumu+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101712</ID>
+                          <Description>"Lumu Phantasm+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101713</ID>
+                          <Description>"Radobaan+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101802</ID>
+                          <Description>"Artian"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101715</ID>
+                          <Description>"Clockwork α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101716</ID>
+                          <Description>"Clockwork β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101717</ID>
+                          <Description>"Barioth α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101718</ID>
+                          <Description>"Barioth β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101719</ID>
+                          <Description>"Rathalos α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101720</ID>
+                          <Description>"Rathalos β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101721</ID>
+                          <Description>"Rath Soul α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101722</ID>
+                          <Description>"Rath Soul β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101723</ID>
+                          <Description>"Diablos α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101724</ID>
+                          <Description>"Diablos β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101725</ID>
+                          <Description>"Diablos Nero α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101726</ID>
+                          <Description>"Diablos Nero β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101727</ID>
+                          <Description>"Legiana α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101728</ID>
+                          <Description>"Legiana β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101729</ID>
+                          <Description>"Shrieking Legia α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101730</ID>
+                          <Description>"Shrieking Legia β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101731</ID>
+                          <Description>"Odogaron α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101732</ID>
+                          <Description>"Odogaron β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101733</ID>
+                          <Description>"Death Garon α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101734</ID>
+                          <Description>"Death Garon β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101735</ID>
+                          <Description>"Lavasioth+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101736</ID>
+                          <Description>"Uragaan+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+3</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101737</ID>
+                          <Description>"Nargacuga α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+4</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101738</ID>
+                          <Description>"Nargacuga β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+4</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101739</ID>
+                          <Description>"Glavenus α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+4</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101740</ID>
+                          <Description>"Glavenus β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+4</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101741</ID>
+                          <Description>"Acidic Glavenus α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+4</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101742</ID>
+                          <Description>"Acidic Glavenus β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+4</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101743</ID>
+                          <Description>"Brachydios α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+4</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101744</ID>
+                          <Description>"Brachydios β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+4</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101745</ID>
+                          <Description>"Tigrex α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+5</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101746</ID>
+                          <Description>"Tigrex β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+5</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101747</ID>
+                          <Description>"Brute Tigrex α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+5</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101748</ID>
+                          <Description>"Brute Tigrex β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+5</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101749</ID>
+                          <Description>"Black Belt"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101750</ID>
+                          <Description>"Seething Bazel α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+5</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101751</ID>
+                          <Description>"Seething Bazel β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+5</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101752</ID>
+                          <Description>"Savage Jho α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+5</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101753</ID>
+                          <Description>"Savage Jho β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+5</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101754</ID>
+                          <Description>"Velkhana α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+6</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101755</ID>
+                          <Description>"Velkhana β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+6</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101756</ID>
+                          <Description>"Blackveil Hazak α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+6</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101757</ID>
+                          <Description>"Blackveil Hazak β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+6</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101758</ID>
+                          <Description>"Teostra α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+6</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101759</ID>
+                          <Description>"Teostra β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+6</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101760</ID>
+                          <Description>"Kushala α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+6</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101761</ID>
+                          <Description>"Kushala β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+6</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101762</ID>
+                          <Description>"Kirin α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+7</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101763</ID>
+                          <Description>"Kirin β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+7</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101764</ID>
+                          <Description>"Namielle α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+7</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101765</ID>
+                          <Description>"Namielle β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+7</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101766</ID>
+                          <Description>"Guild Palace+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101767</ID>
+                          <Description>"Acrobat"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101768</ID>
+                          <Description>"Showman"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101769</ID>
+                          <Description>"Shara Ishvalda α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+7</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101770</ID>
+                          <Description>"Shara Ishvalda β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+7</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101771</ID>
+                          <Description>"Yian Garuga α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+7</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101772</ID>
+                          <Description>"Yian Garuga β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+7</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101773</ID>
+                          <Description>"Zinogre α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101774</ID>
+                          <Description>"Zinogre β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101775</ID>
+                          <Description>"Golden Lune α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101776</ID>
+                          <Description>"Golden Lune β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101777</ID>
+                          <Description>"Silver Sol α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101778</ID>
+                          <Description>"Silver Sol β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101779</ID>
+                          <Description>"Lunastra α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101780</ID>
+                          <Description>"Lunastra β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+8</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101781</ID>
+                          <Description>"Ruiner Nergi α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101782</ID>
+                          <Description>"Ruiner Nergi β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101783</ID>
+                          <Description>"Guildwork+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+2</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101784</ID>
+                          <Description>"Rajang α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101785</ID>
+                          <Description>"Rajang β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101786</ID>
+                          <Description>"Furious Rajang α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101787</ID>
+                          <Description>"Furious Rajang β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101788</ID>
+                          <Description>"Stygian Zin α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101789</ID>
+                          <Description>"Stygian Zin β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101790</ID>
+                          <Description>"Safi`jiiva α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101791</ID>
+                          <Description>"Safi`jiiva β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+9</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101792</ID>
+                          <Description>"Raging Brachy α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101793</ID>
+                          <Description>"Raging Brachy β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101794</ID>
+                          <Description>"Frostfang Barioth α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101795</ID>
+                          <Description>"Frostfang Barioth β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101796</ID>
+                          <Description>"Alatreon α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101797</ID>
+                          <Description>"Alatreon β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+A</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101798</ID>
+                          <Description>"Fatalis α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101799</ID>
+                          <Description>"Fatalis β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101800</ID>
+                          <Description>"Kulve Taroth α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101801</ID>
+                          <Description>"Kulve Taroth β +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*14+B</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101803</ID>
+                          <Description>"Namielle γ +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101814</ID>
+                          <Description>"Velkhana γ +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101806</ID>
+                          <Description>"Oolong"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101805</ID>
+                          <Description>"Astral"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101677</ID>
+                          <Description>"Rose"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101807</ID>
+                          <Description>"Passion"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101808</ID>
+                          <Description>"Demonlord"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+16</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101811</ID>
+                          <Description>"Leon+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101810</ID>
+                          <Description>"Claire+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101809</ID>
+                          <Description>"Azure Age"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101812</ID>
+                          <Description>"Faux Kelbi"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101813</ID>
+                          <Description>"Skull Scarf"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101714</ID>
+                          <Description>"Faux Aptonoth"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>1</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101815</ID>
+                          <Description>"Hare Band"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>3</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101816</ID>
+                          <Description>"Downy Crake"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101823</ID>
+                          <Description>"Kadachi Scarf"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101818</ID>
+                          <Description>"Sealed Dragon Cloth"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*11+17</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101819</ID>
+                          <Description>"Wyverian Ears"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101820</ID>
+                          <Description>"Duffel Penguin+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>2</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101821</ID>
+                          <Description>"Pearlspring+"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101822</ID>
+                          <Description>"Goldspring Macaque"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>6</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+0</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101817</ID>
+                          <Description>"Buff Body α +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>0</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101824</ID>
+                          <Description>"Buff Body γ +"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>4</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101825</ID>
+                          <Description>"Innerwear α"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>5</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+1</Address>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>1337101826</ID>
+                          <Description>"Innerwear β"</Description>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <VariableType>Binary</VariableType>
+                          <BitStart>7</BitStart>
+                          <BitLength>1</BitLength>
+                          <ShowAsBinary>0</ShowAsBinary>
+                          <Address>+18*12+2</Address>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
               <ID>19412</ID>
               <Description>"Monster Stats"</Description>
               <Options moHideChildren="1"/>
@@ -9638,6 +13079,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092405</ID>
                       <Description>"??"</Description>
+                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>0</BitStart>
                       <BitLength>1</BitLength>
@@ -9647,6 +13089,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092406</ID>
                       <Description>"??"</Description>
+                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>1</BitStart>
                       <BitLength>1</BitLength>
@@ -9656,6 +13099,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092407</ID>
                       <Description>"??"</Description>
+                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>2</BitStart>
                       <BitLength>1</BitLength>
@@ -9665,6 +13109,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092408</ID>
                       <Description>"??"</Description>
+                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>3</BitStart>
                       <BitLength>1</BitLength>
@@ -9674,6 +13119,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092409</ID>
                       <Description>"??"</Description>
+                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>4</BitStart>
                       <BitLength>1</BitLength>
@@ -9683,6 +13129,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092410</ID>
                       <Description>"??"</Description>
+                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>5</BitStart>
                       <BitLength>1</BitLength>
@@ -9692,6 +13139,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092411</ID>
                       <Description>"??"</Description>
+                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>6</BitStart>
                       <BitLength>1</BitLength>
@@ -9701,6 +13149,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092412</ID>
                       <Description>"??"</Description>
+                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>7</BitStart>
                       <BitLength>1</BitLength>
@@ -31842,6 +35291,7 @@ unregistersymbol(gDLCMHW)
                 <CheatEntry>
                   <ID>1337101382</ID>
                   <Description>"??"</Description>
+                  <LastState Value="0" RealAddress="66DB499B"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
                   <Address>MonsterHunterWorld.exe+52247F8</Address>
@@ -31852,6 +35302,7 @@ unregistersymbol(gDLCMHW)
                 <CheatEntry>
                   <ID>1337101383</ID>
                   <Description>"??"</Description>
+                  <LastState Value="00000000" RealAddress="66DB49D8"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
@@ -31880,6 +35331,7 @@ unregistersymbol(gDLCMHW)
 https://api.slg.capcom.jp/prod/:Real Server
 https://api.slgdev.capcom.jp/dev:Developer
 </DropDownList>
+              <LastState RealAddress="143445788"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>32</Length>
@@ -31908,6 +35360,7 @@ https://api.slgdev.capcom.jp/dev:Developer
             <CheatEntry>
               <ID>1337101518</ID>
               <Description>"String"</Description>
+              <LastState RealAddress="64672F5B"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>14</Length>
@@ -31924,6 +35377,7 @@ https://api.slgdev.capcom.jp/dev:Developer
             <CheatEntry>
               <ID>1337101519</ID>
               <Description>"M1"</Description>
+              <LastState RealAddress="6476BDEC"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>13</Length>
@@ -31940,6 +35394,7 @@ https://api.slgdev.capcom.jp/dev:Developer
             <CheatEntry>
               <ID>1337101520</ID>
               <Description>"M2"</Description>
+              <LastState RealAddress="6476BEA3"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>10</Length>
@@ -33209,6 +36664,60 @@ dealloc(newmem)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Increase Max GL Level A</Description>
+      <AddressString>MonsterHunterWorld.exe+13581FE</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>10</Byte>
+        <Byte>8B</Byte>
+        <Byte>14</Byte>
+        <Byte>84</Byte>
+      </Before>
+      <Actual>
+        <Byte>01</Byte>
+        <Byte>91</Byte>
+        <Byte>48</Byte>
+        <Byte>B9</Byte>
+        <Byte>27</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>BA</Byte>
+        <Byte>70</Byte>
+        <Byte>F3</Byte>
+        <Byte>05</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Increase Max GL Level B</Description>
+      <AddressString>MonsterHunterWorld.exe+1358214</AddressString>
+      <Before>
+        <Byte>3B</Byte>
+        <Byte>C2</Byte>
+        <Byte>0F</Byte>
+        <Byte>4F</Byte>
+        <Byte>C2</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+        <Byte>48</Byte>
+        <Byte>B9</Byte>
+        <Byte>27</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>28</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name>pot_vhigh</Name>
@@ -33696,7 +37205,7 @@ dealloc(newmem)
     </SymbolEntry>
     <SymbolEntry>
       <Name>gSaveData</Name>
-      <Address>06F60000</Address>
+      <Address>67DB0000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
   <Comments>v1.9

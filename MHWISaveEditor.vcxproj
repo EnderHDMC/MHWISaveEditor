@@ -114,7 +114,10 @@
     <None Include="res\GameData\item_spa.gmd">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="res\mapping\allow_layered_crafts.1sc" />
+    <None Include="res\mapping\armor_items.1sc" />
     <None Include="res\mapping\CalcUnknown.ipynb" />
+    <None Include="res\mapping\copy_unknown.1sc" />
     <None Include="res\mapping\dump_save_structure.1sc" />
     <None Include="res\mapping\export_items.1sc" />
     <None Include="res\mapping\export_save_equipment.1sc" />
@@ -122,6 +125,10 @@
     <None Include="res\mapping\itm.bt" />
     <None Include="res\mapping\Mapping.ods" />
     <None Include="res\mapping\max_all_items.1sc" />
+    <None Include="res\mapping\MonsterHunterWorld.CT" />
+    <None Include="res\mapping\ProgressStructGenerator.ipynb">
+      <FileType>Document</FileType>
+    </None>
     <None Include="res\mapping\SAVEDATA1000.bt" />
     <None Include="res\mapping\test_data.1sc" />
     <None Include="res\mapping\types.bt" />
