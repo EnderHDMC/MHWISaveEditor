@@ -2,12 +2,12 @@
 //--- 010 Editor v12.0.1 Script File
 //
 //      File: max_all_items.1sc
-//   Authors: 
-//   Version: 
+//   Authors: EnderHDMC
+//   Version: 0.1.0
 //   Purpose: Max all items, ammo, materials and decorations
 //            so they don't change much during a play-through.
 //  Category: Misc
-//   History: 
+//   History: Initial Version
 //------------------------------------------------
 
 i32 slot = 2;

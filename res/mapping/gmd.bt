@@ -1,14 +1,14 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Binary Template
 //
-//      File: 
+//      File: gmd.bt
 //   Authors: See Credits
-//   Version: 
-//   Purpose: 
+//   Version: 0.1.0
+//   Purpose: Store text data for different languages
 //  Category: Game
 // File Mask: *.gmd
 //  ID Bytes: 47 4D 44 00
-//   History: 
+//   History: Initial Version
 //------------------------------------------------
 
 #include "types.bt"

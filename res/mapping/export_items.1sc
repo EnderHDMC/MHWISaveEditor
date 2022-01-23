@@ -3,10 +3,11 @@
 //
 //      File: export_items.1sc
 //   Authors: EnderHDMC
-//   Version: 
-//   Purpose: 
-//  Category: 
-//   History: 
+//   Version: 0.1.0
+//   Purpose: Dump itemData.item, with names from currently
+//            selected gmd file.
+//  Category: Game
+//   History: Initial Version
 //------------------------------------------------
 
 #include <types.bt>

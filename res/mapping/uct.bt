@@ -1,14 +1,14 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Binary Template
 //
-//      File: 
+//      File: uct.bt
 //   Authors: See Credits
-//   Version: 
-//   Purpose: 
+//   Version: 0.1.3
+//   Purpose: View MHW color pallete files.
 //  Category: Game
 // File Mask: *.uct
 //  ID Bytes: 01 10 09 18
-//   History: 
+//   History: Initial Version
 //------------------------------------------------
 
 #include "types.bt"

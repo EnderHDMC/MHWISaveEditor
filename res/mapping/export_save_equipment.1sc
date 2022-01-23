@@ -1,12 +1,13 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Script File
 //
-//      File: 
-//   Authors: 
-//   Version: 
-//   Purpose: 
-//  Category: 
-//   History: 
+//      File: export_save_equipment.1sc
+//   Authors: EnderHDMC
+//   Version: 0.1.0
+//   Purpose: Dump the unknown bits of equipment data,
+//            the hope is to see what they are.
+//  Category: Game
+//   History: Initial Version
 //------------------------------------------------
 
 // Export unknown bits plus sort index
