@@ -896,6 +896,15 @@ struct mhw_guiding_lands
   mhw_guiding_lands_analysis analyses[8];
 };
 
+struct mhw_endemic_placement
+{
+  u32 endemic;
+  u8 regular;
+  u8 gold;
+  u8 mini;
+  u8 padding;
+};
+
 struct mhw_endemic_life
 {
   u32 endemic_count[568];
@@ -903,6 +912,7 @@ struct mhw_endemic_life
   u32 endemic_small_count[568];
   u16 endemic_largest[568];
   u16 endemic_smallest[568];
+  mhw_endemic_placement endemic_placement[64];
 };
 
 struct mhw_slot_settings
@@ -966,6 +976,7 @@ struct mhw_slot_settings
   u8 obtained_item_placement;
   mhw_toggle surveyor_set_controls;
   u8 swap_keys_while_mounted;
+  u8 unknown7[34];
 };
 
 struct mhw_seliana_room_deco {
@@ -1019,6 +1030,21 @@ struct mhw_seliana_room_config {
   mhw_seliana_room_deco f2_rugs;
   mhw_seliana_room_deco unused2[8];
   mhw_seliana_room_shelf_item shelf_items[64];
+};
+
+struct mhw_seliana_room
+{
+  mhw_seliana_room_config room_config;
+  u8 unknown0[4];
+  mhw_seliana_room_config room_configs[24];
+
+  str32s room_config_names[24];
+  u8 seliana_music_player_song;
+  u8 unknown1[2578];
+  u8 room_status;
+  u16 passcode;
+
+  u8 unknown2[sizeof(u32) * 2];
 };
 
 struct mhw_npc_chat_entry
@@ -1480,8 +1506,6 @@ struct mhw_progress_flags
   u8 unknown52[11];
 };
 
-Printf("Sizeof progress: %d\n", sizeof(mhw_progress_flags));
-
 struct mhw_save_slot
 {
   u32 unknown0;
@@ -1524,19 +1548,7 @@ struct mhw_save_slot
   u8 unknown6b[22];
   u8 discovered_items[400];
   mhw_endemic_life endemic_life;
-  u8 unknown6c[512];
-
-  mhw_seliana_room_config room_config;
-  u8 unknown7[4];
-  mhw_seliana_room_config room_configs[24];
-
-  str32s room_config_names[24];
-  u8 seliana_music_player_song;
-  u8 unknown8[2578];
-  u8 room_status;
-  u16 passcode;
-
-  u8 unknown9[sizeof(u32) * 2];
+  mhw_seliana_room seliana_room;
 
   mhw_item_loadouts item_loadouts;
   mhw_item_pouch item_pouch;
@@ -1546,13 +1558,16 @@ struct mhw_save_slot
   u8 unknown_equipment[sizeof(mhw_equipment) * 1760];
   u32 equipment_index_table[2500];
   u8 unknown10a[11096];
+
   u32 gesture_order[512];
   u32 pose_order[256];
   u8 unknown10b[sizeof(u32) * 256];
+
   u32 unknown10c_a;
   mhw_wishlist_item wishlist[36];
   u8 unknown10c_[2628 - 4 - sizeof(mhw_wishlist_item) * 36];
   mhw_smithy smithy;
+
   u8 unknown10d[80];
   u32 layered_helmet;
   u32 layered_torso;
@@ -1570,11 +1585,11 @@ struct mhw_save_slot
   u32 layered_color_feet;
   u32 layered_color_whole;
   u8 unknown10g[20];
+
   mhw_radial radial_menu[8];
   u8 unknown10h[sizeof(u32) * 3280];
   mhw_npc_chat_entry npc_chat_progress[2048];
   mhw_slot_settings settings;
-  u8 unknown10i[34];
   mhw_progress_flags progress;
   u8 unknown10_[19];
 
@@ -1600,12 +1615,12 @@ struct mhw_save_slot
 
   u32 tool_unlocks[4];
   mhw_equipment tools[128];
-
   u8 pendants_unlocked[32];
   u8 pendants_seen[32];
+
   u8 unknown14a[24];
   u32 registered_bounties[6];
-  u8 unknown14b[2024 - 24 - 24];
+  u8 unknown14b[1976];
   u32 steamworks_natural_fuel;
   u32 steamworks_stored_fuel;
   // [92] unlocks for hub functions?
@@ -1729,15 +1744,20 @@ struct mhw_section1
   u16 dlc[512];
   u8 unknown6[69];
   u8 character_edit_voucher_free;
-  u8 unknown7[11];
+  u8 character_edit_voucher_1_pack;
+  u8 character_edit_voucher_2_pack;
+  u8 character_edit_voucher_3_pack;
+  u8 unknown7[8];
   u8 palico_edit_voucher;
+  u8 unknown8[3];
+  u8 palico_edit_voucher_3_pack;
 
   // Working memory?
   // What's in it keeps changing, one moment it's save[0]'s
   // guiding lands levels, the next it's names.
   // From [319] to the end usually.
   // It seems to just change intermittently.
-  u8 unknown8[2930];
+  u8 unknown9[2926];
 };
 
 struct mhw_section2
