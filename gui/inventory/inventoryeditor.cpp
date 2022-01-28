@@ -52,7 +52,7 @@ void InventoryEditor::SearchIndexChange(int index)
 
   for (int tab = startTab; tab < endTab; tab++) {
     const inventory_area* area = &inventory_areas[tab];
-    u8* slot = ((u8*)(&mhwSaveIB->section3.Saves[mhwSaveSlot])) + area->localoffset;
+    u8* slot = ((u8*)(&mhwSaveIB->section3.saves[mhwSaveSlot])) + area->localoffset;
     mhw_item_slot* baseItemSlot = (mhw_item_slot*)slot;
 
     for (int i = 0; i < area->count; i++)

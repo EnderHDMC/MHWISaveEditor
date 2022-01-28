@@ -30,7 +30,7 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
   SaveLoader::Load(mhwSave, mhwSaveSlot);
   loading = true;
 
-  u8* slot = ((u8*)(&mhwSave->save.section3.Saves[mhwSaveSlot])) + area->localoffset;
+  u8* slot = ((u8*)(&mhwSave->save.section3.saves[mhwSaveSlot])) + area->localoffset;
   mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
   itemInfo* info = itemDB->GetItemById(itemSlot->id);
   if (!info) {
@@ -75,7 +75,7 @@ void ItemSlotView::AmountChanged(int amount)
   }
 
   if (!loading) {
-    u8* slot = ((u8*)(&mhwSaveIB->section3.Saves[mhwSaveSlot])) + area->localoffset;
+    u8* slot = ((u8*)(&mhwSaveIB->section3.saves[mhwSaveSlot])) + area->localoffset;
     mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
     mhw_item_slot dummy = { itemSlot->id, itemSlot->amount };
 

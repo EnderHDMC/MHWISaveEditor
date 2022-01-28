@@ -28,5 +28,11 @@ typedef u8 byte;
 typedef float f32;
 typedef double f64;
 
+typedef char str32[32];
+typedef char str64[64];
+typedef char str128[128];
+typedef char str256[256];
+typedef char str54[54];
+
 #define SIZEOF(arr) (*(&arr + 1) - arr)
 #define COUNTOF(arr) sizeof(arr) / sizeof(arr[0])
