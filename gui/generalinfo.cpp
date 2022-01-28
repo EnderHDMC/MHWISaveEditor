@@ -62,4 +62,6 @@ void GeneralInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
 
   u64 steamID = mhwSave->save.header.steam_id;
   ui->btnSteamID->setText(QString::number(steamID));
+
+  SaveLoader::FinishLoad();
 }

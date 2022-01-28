@@ -38,4 +38,6 @@ void InventoryEditorTab::Load(mhw_save_raw* mhwSave, int slotIndex)
     ItemSlotView* slotView = slotViews[i];
     slotView->Load(mhwSave, slotIndex);
   }
+
+  SaveLoader::FinishLoad();
 }

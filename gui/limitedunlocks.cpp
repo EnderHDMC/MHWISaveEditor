@@ -18,14 +18,13 @@ LimitedUnlocks::~LimitedUnlocks()
 void LimitedUnlocks::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
-  loading = true;
 
   u32 assassinHoodUnlocked = (mhwSaveSlot->tool_unlocks[0] >> ASSASSIN_HOOD_INDEX) & 0x01;
   u32 assassinHoodUpgraded = mhwSaveSlot->tools[ASSASSIN_HOOD_INDEX].level;
   ui->chkAssassinHoodUnlock->setChecked(assassinHoodUnlocked);
   ui->chkAssassinHoodUpgrade->setChecked(assassinHoodUpgraded);
 
-  loading = false;
+  SaveLoader::FinishLoad();
 }
 
 void LimitedUnlocks::UnlockAssassinHood(int checked)

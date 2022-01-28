@@ -83,4 +83,6 @@ void InventoryEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
     InventoryEditorTab* editor = editorTabs[i];
     editor->Load(mhwSave, slotIndex);
   }
+
+  SaveLoader::FinishLoad();
 }

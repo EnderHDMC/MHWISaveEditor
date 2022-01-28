@@ -28,7 +28,6 @@ ItemSlotView::~ItemSlotView()
 void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
-  loading = true;
 
   u8* slot = ((u8*)mhwSaveSlot) + area->localoffset;
   mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
@@ -46,7 +45,7 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   UpdateItemDisplay(info);
   UpdateMaxAmount(info, itemSlot);
 
-  loading = false;
+  SaveLoader::FinishLoad();
 }
 
 void ItemSlotView::UpdateItemDisplay(itemInfo* info)

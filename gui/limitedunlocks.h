@@ -25,6 +25,4 @@ public:
 
 private:
     Ui::LimitedUnlocks *ui;
-
-    bool loading = false;
 };
