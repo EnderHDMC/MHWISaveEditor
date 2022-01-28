@@ -5,7 +5,7 @@
 #include <QMessageBox>
 
 GeneralInfo::GeneralInfo(QWidget* parent)
-  : QWidget(parent)
+  : QWidget(parent), SaveLoader()
 {
   ui = new Ui::GeneralInfo();
   ui->setupUi(this);

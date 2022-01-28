@@ -2,7 +2,6 @@
 
 #include <QWidget>
 
-#include "../types/mhw_save.h"
 #include "common/saveloader.h"
 
 namespace Ui { class GeneralInfo; };

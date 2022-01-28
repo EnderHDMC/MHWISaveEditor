@@ -4,7 +4,7 @@
 #include "../types/constants.h"
 
 LimitedUnlocks::LimitedUnlocks(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent), SaveLoader()
 {
     ui = new Ui::LimitedUnlocks();
     ui->setupUi(this);

@@ -5,6 +5,7 @@
 #define MHWIAppExeName "MHWISaveEditor.exe"
 #define MHWISubversion "0"
 
+; The relative directory where the app is located.
 #define RelDir "x64\Deploy"
 
 [Setup]
@@ -25,6 +26,7 @@ AllowNoIcons=yes
 PrivilegesRequired=lowest
 OutputDir={#RelDir}
 OutputBaseFilename={#MHWIAppName}Setup-v{#MHWIAppVersion}
+; NOTE: The app needs to be compiled in release mode before this script will work.
 SetupIconFile={#RelDir}\res\icon.ico
 Compression=lzma
 SolidCompression=yes
