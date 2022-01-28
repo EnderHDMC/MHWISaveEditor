@@ -1633,8 +1633,7 @@ static mhw_item_slot* FindItemMaterial(mhw_ib_save* save, int slot, u32 item_id)
   return result;
 }
 
-static mhw_equipment* FindEquipment(mhw_ib_save* save, int slot, i32 type, u32 id) {
-  mhw_save_slot* save_slot = &save->section3.saves[slot];
+static mhw_equipment* FindEquipment(mhw_save_slot* save_slot, i32 type, u32 id) {
   mhw_equipment* equipment = save_slot->equipment;
   u32* index_table = save_slot->equipment_index_table;
   int count = COUNTOF(save_slot->equipment);

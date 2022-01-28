@@ -18,7 +18,7 @@ public:
   ~ItemSlotView();
 
   // Inherited via SaveLoader
-  virtual void Load(mhw_save_raw* mhwSave, int mhwSaveSlot) override;
+  virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
 
   void UpdateItemDisplay(itemInfo *info);
   void UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot);

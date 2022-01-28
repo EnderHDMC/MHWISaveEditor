@@ -29,13 +29,13 @@ void InventoryEditorTab::ScrollToIndex(int index)
   ui->scrollArea->ensureWidgetVisible(itemView);
 }
 
-void InventoryEditorTab::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
+void InventoryEditorTab::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
-  SaveLoader::Load(mhwSave, mhwSaveSlot);
+  SaveLoader::Load(mhwSave, slotIndex);
 
   for (size_t i = 0; i < slotViews.count(); i++)
   {
     ItemSlotView* slotView = slotViews[i];
-    slotView->Load(mhwSave, mhwSaveSlot);
+    slotView->Load(mhwSave, slotIndex);
   }
 }

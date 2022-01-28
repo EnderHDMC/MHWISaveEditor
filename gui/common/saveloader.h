@@ -6,15 +6,18 @@ class SaveLoader {
 protected:
   mhw_save_raw* mhwSave = nullptr;
   mhw_ib_save* mhwSaveIB = nullptr;
-  int mhwSaveSlot = 0;
+  mhw_save_slot* mhwSaveSlot = nullptr;
+  int _mhwSaveIndex = 0;
 
 public:
   virtual ~SaveLoader() {}
 
-  virtual void Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
+  virtual void Load(mhw_save_raw* mhwSave, int slotIndex)
   {
-    this->mhwSave = mhwSave;
+    this->_mhwSaveIndex = slotIndex;
+
+    this->mhwSave = (mhwSave) ? mhwSave : nullptr;
     this->mhwSaveIB = (mhwSave) ? &mhwSave->save : nullptr;
-    this->mhwSaveSlot = mhwSaveSlot;
+    this->mhwSaveSlot= (mhwSaveIB) ? &mhwSaveIB->section3.saves[_mhwSaveIndex] : nullptr;
   }
 };

@@ -52,7 +52,7 @@ void InventoryEditor::SearchIndexChange(int index)
 
   for (int tab = startTab; tab < endTab; tab++) {
     const inventory_area* area = &inventory_areas[tab];
-    u8* slot = ((u8*)(&mhwSaveIB->section3.saves[mhwSaveSlot])) + area->localoffset;
+    u8* slot = ((u8*)mhwSaveSlot) + area->localoffset;
     mhw_item_slot* baseItemSlot = (mhw_item_slot*)slot;
 
     for (int i = 0; i < area->count; i++)
@@ -74,13 +74,13 @@ void InventoryEditor::SearchIndexChange(int index)
   }
 }
 
-void InventoryEditor::Load(mhw_save_raw* mhwSave, int mhwSaveSlot)
+void InventoryEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
-  SaveLoader::Load(mhwSave, mhwSaveSlot);
+  SaveLoader::Load(mhwSave, slotIndex);
 
   for (size_t i = 0; i < editorTabs.count(); i++)
   {
     InventoryEditorTab* editor = editorTabs[i];
-    editor->Load(mhwSave, mhwSaveSlot);
+    editor->Load(mhwSave, slotIndex);
   }
 }

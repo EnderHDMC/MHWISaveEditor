@@ -19,7 +19,7 @@ public:
     ~GeneralInfo();
 
     // Inherited via SaveLoader
-    virtual void Load(mhw_save_raw* mhwSave, int mhwSaveSlot) override;
+    virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
 
 private:
     Ui::GeneralInfo *ui;
