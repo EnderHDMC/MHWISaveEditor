@@ -30,3 +30,5 @@ A save editor for Monster Hunter World: Iceborne.
 - [Ezekial711/MonsterHunterWorldModding](https://github.com/Ezekial711/MonsterHunterWorldModding/wiki)
 - [Aradi147/MHW-Quest](https://github.com/Aradi147/MHW-Quest)
 - [Marcus101RR/MHW Tables](https://www.nexusmods.com/monsterhunterworld/mods/2161)
+- [ChaosFred/Guiding Lands Level Cap Analysis](https://steamcommunity.com/app/582010/discussions/0/3974929535247630028/)
+- [ChaosFred/Guiding Lands Level Cap Analysis Backup](https://gamefaqs.gamespot.com/boards/211368-monster-hunter-world/78477208)
