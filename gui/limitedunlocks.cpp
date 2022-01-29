@@ -1,7 +1,7 @@
 #include "limitedunlocks.h"
 #include "ui_limitedunlocks.h"
 
-#include "../types/constants.h"
+#include "../types/mhw_struct_constants.h"
 
 LimitedUnlocks::LimitedUnlocks(QWidget *parent)
     : QWidget(parent), SaveLoader()
@@ -77,7 +77,7 @@ void LimitedUnlocks::GiveArtemisGear()
     mhw_equipment* equipment = FindEquipment(mhwSaveSlot, -1, 0);
     if (equipment) {
       u32 sort_index = equipment->sort_index;
-      memcpy_s(equipment, sizeof(mhw_equipment), B_EMPTY_EQUIPMENT, sizeof(mhw_equipment));
+      memcpy_s(equipment, sizeof(mhw_equipment), &MHW_EQUIPMENT_EMPTY, sizeof(mhw_equipment));
       equipment->sort_index = sort_index;
       equipment->serial_item_category = 0;
       equipment->type = type;

@@ -35,6 +35,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="gui\common\StringByteLengthValidator.h" />
     <ClInclude Include="types\constants.h" />
+    <ClInclude Include="types\mhw_struct_constants.h" />
     <ClInclude Include="types\inventory_areas.h" />
     <ClInclude Include="types\mhw_enums.h" />
     <ClInclude Include="types\mhw_save.h" />

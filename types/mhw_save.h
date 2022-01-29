@@ -1698,4 +1698,3 @@ static void ValidateSaveFile(mhw_ib_save* save) {
 }
 
 static_assert(sizeof(mhw_ib_save) == MHW_IB_SAVE_SIZE, "Size of MHW:IB Save is not as expected.");
-static_assert(sizeof(mhw_equipment) == sizeof(B_EMPTY_EQUIPMENT), "Size of constant B_EMPTY_EQUIPMENT is invalid.");
