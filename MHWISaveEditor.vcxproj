@@ -31,13 +31,16 @@
     <QtMoc Include="gui\generalinfo.h" />
     <ClInclude Include="gui\inventory\wheelguard.h" />
     <ClInclude Include="gui\common\saveloader.h" />
+    <QtMoc Include="gui\hunterinfo.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="gui\common\StringByteLengthValidator.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\inventory_areas.h" />
     <ClInclude Include="types\mhw_enums.h" />
     <ClInclude Include="types\mhw_save.h" />
     <ClInclude Include="types\types.h" />
     <ClInclude Include="utility\paths.h" />
+    <ClInclude Include="utility\settype.h" />
     <ClInclude Include="utility\system\FileUtils.h" />
     <QtMoc Include="gui\mhwisaveeditor.h" />
     <ClInclude Include="utility\endian.h" />
@@ -51,6 +54,7 @@
     <ClCompile Include="gui\inventory\itemslotview.cpp" />
     <ClCompile Include="gui\inventory\inventoryeditor.cpp" />
     <ClCompile Include="gui\limitedunlocks.cpp" />
+    <ClCompile Include="gui\hunterinfo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="gui\mhwisaveeditor.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
@@ -62,6 +66,7 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
+    <ClCompile Include="gui\common\StringByteLengthValidator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\generalinfo.ui" />
@@ -70,6 +75,7 @@
     <QtUic Include="gui\mhwisaveeditor.ui" />
     <QtUic Include="gui\inventory\inventoryeditor.ui" />
     <QtUic Include="gui\limitedunlocks.ui" />
+    <QtUic Include="gui\hunterinfo.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GameData\itemData.itm">

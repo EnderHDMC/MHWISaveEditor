@@ -9,6 +9,7 @@
 #include "inventory/inventoryeditor.h"
 #include "limitedunlocks.h"
 #include "generalinfo.h"
+#include "hunterinfo.h"
 
 constexpr const char* ALL_SAVE = "All Files (*)";
 constexpr const char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
@@ -58,6 +59,7 @@ private:
   int saveslot = 0;
 
   InventoryEditor* inventoryEditor = nullptr;
+  HunterInfo* hunterInfo = nullptr;
   LimitedUnlocks* limitedUnlocks = nullptr;
   GeneralInfo* generalInfo = nullptr;
   QList<SaveLoader*> editors;

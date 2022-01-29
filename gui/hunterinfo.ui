@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HunterInfo</class>
+ <widget class="QWidget" name="HunterInfo">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>366</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>HunterInfo</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="lblHunterName">
+     <property name="text">
+      <string>Hunter Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="edtHunterName">
+     <property name="maxLength">
+      <number>63</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="lblPalicoName">
+     <property name="text">
+      <string>Palico Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="edtPalicoName">
+     <property name="maxLength">
+      <number>63</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="lblZenny">
+     <property name="text">
+      <string>Zenny:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QSpinBox" name="spnZenny">
+     <property name="maximum">
+      <number>99999999</number>
+     </property>
+     <property name="singleStep">
+      <number>1000</number>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="lblResearchPoints">
+     <property name="text">
+      <string>Research Points:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QSpinBox" name="spnResearchPoints">
+     <property name="maximum">
+      <number>99999999</number>
+     </property>
+     <property name="singleStep">
+      <number>1000</number>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="lblLevelCapGL">
+     <property name="text">
+      <string>Guiding Lands:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QPushButton" name="btnLevelCapGL">
+     <property name="text">
+      <string>Uncap Guiding Lands Levels</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>edtHunterName</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>HunterNameChange(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>edtPalicoName</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>PalicoNameChange(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnZenny</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>ZennyChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnResearchPoints</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>ResearchPointsChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLevelCapGL</sender>
+   <signal>clicked()</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>UncapGuidingLands()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>HunterNameChange(QString)</slot>
+  <slot>PalicoNameChange(QString)</slot>
+  <slot>ZennyChange(int)</slot>
+  <slot>ResearchPointsChange(int)</slot>
+  <slot>UncapGuidingLands()</slot>
+ </slots>
+</ui>

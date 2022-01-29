@@ -74,8 +74,9 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 
   editor_tab editorTabs[] = {
     {new GeneralInfo(), (SaveLoader**)&generalInfo, tr("General")},
+    {new HunterInfo(), (SaveLoader**)&hunterInfo, tr("Information")},
     {new InventoryEditor(), (SaveLoader**)&inventoryEditor, tr("Inventory Editor")},
-    {new LimitedUnlocks(), (SaveLoader**)&limitedUnlocks, tr("Limited Unlocks")}
+    {new LimitedUnlocks(), (SaveLoader**)&limitedUnlocks, tr("Limited Unlocks")},
   };
   int editorCount = COUNTOF(editorTabs);
   editors.resize(editorCount);

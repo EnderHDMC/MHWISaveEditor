@@ -71,6 +71,12 @@
     <ClInclude Include="gui\inventory\wheelguard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gui\common\StringByteLengthValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\settype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -103,6 +109,12 @@
     <ClCompile Include="gui\inventory\wheelguard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gui\hunterinfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\common\StringByteLengthValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="gui\mhwisaveeditor.h">
@@ -123,6 +135,9 @@
     <QtMoc Include="gui\generalinfo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="gui\hunterinfo.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\mhwisaveeditor.ui">
@@ -141,6 +156,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="gui\generalinfo.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gui\hunterinfo.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
