@@ -29,7 +29,7 @@
     <QtMoc Include="gui\inventory\inventoryeditor.h" />
     <QtMoc Include="gui\limitedunlocks.h" />
     <QtMoc Include="gui\generalinfo.h" />
-    <ClInclude Include="gui\inventory\wheelguard.h" />
+    <ClInclude Include="gui\common\WheelGuard.h" />
     <ClInclude Include="gui\common\saveloader.h" />
     <QtMoc Include="gui\hunterinfo.h" />
     <ClInclude Include="resource.h" />
@@ -48,7 +48,7 @@
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
-    <ClCompile Include="gui\inventory\wheelguard.cpp" />
+    <ClCompile Include="gui\common\WheelGuard.cpp" />
     <ClCompile Include="gui\generalinfo.cpp" />
     <ClCompile Include="gui\inventory\inventoryeditortab.cpp" />
     <ClCompile Include="gui\inventory\itemslotview.cpp" />

@@ -2,7 +2,7 @@
 #include "ui_itemslotview.h"
 
 #include <QMessageBox>
-#include "wheelguard.h"
+#include "../common/WheelGuard.h"
 
 ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent)
   : QWidget(parent), SaveLoader()

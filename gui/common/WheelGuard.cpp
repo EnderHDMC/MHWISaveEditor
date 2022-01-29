@@ -2,7 +2,7 @@
 #include <QWidget>
 
 // Thanks to StackOverflow: https://stackoverflow.com/a/37460760
-#include "wheelguard.h"
+#include "WheelGuard.h"
 
 WheelGuard::WheelGuard(QObject* parent) : QObject(parent)
 {

@@ -68,7 +68,7 @@
     <ClInclude Include="gui\common\saveloader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\inventory\wheelguard.h">
+    <ClInclude Include="gui\common\WheelGuard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gui\common\StringByteLengthValidator.h">
@@ -106,7 +106,7 @@
     <ClCompile Include="gui\generalinfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\inventory\wheelguard.cpp">
+    <ClCompile Include="gui\common\WheelGuard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\hunterinfo.cpp">
