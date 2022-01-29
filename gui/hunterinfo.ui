@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>366</height>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -83,20 +83,6 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="lblLevelCapGL">
-     <property name="text">
-      <string>Guiding Lands:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QPushButton" name="btnLevelCapGL">
-     <property name="text">
-      <string>Uncap Guiding Lands Levels</string>
-     </property>
-    </widget>
-   </item>
    <item row="4" column="1">
     <widget class="QSpinBox" name="spnSteamworksFuel">
      <property name="maximum">
@@ -105,6 +91,144 @@
      <property name="singleStep">
       <number>1000</number>
      </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QGroupBox" name="grpGuidingLands">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Guiding Lands</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblLevelCapGL">
+        <property name="text">
+         <string>Level Cap:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="btnLevelCapGL">
+        <property name="text">
+         <string>Uncap Guiding Lands Levels</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblAncientForestGL">
+        <property name="text">
+         <string>Ancient Forest:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblWildspireWasteGL">
+        <property name="text">
+         <string>Wildspire Waste:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lblCoralHighlandsGL">
+        <property name="text">
+         <string>Coral Highlands:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="lblRottenVeilGL">
+        <property name="text">
+         <string>Rotten Veil:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lblEldersRecessGL">
+        <property name="text">
+         <string>Elder's Recess:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="lblHoarfrostReachGL">
+        <property name="text">
+         <string>Hoarfrost Reach:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="spnAncientForestGL">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="spnWildspireWasteGL">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="spnCoralHighlandsGL">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="spnRottenVeilGL">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QSpinBox" name="spnEldersRecessGL">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QSpinBox" name="spnHoarfrostReachGL">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0" colspan="2">
+       <widget class="QLabel" name="lblNoteGL">
+        <property name="text">
+         <string>NOTE: The level caps for each region are the highest you've previously unlocked.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
@@ -208,6 +332,102 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>spnAncientForestGL</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>RegionalLevelGLChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnWildspireWasteGL</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>RegionalLevelGLChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnCoralHighlandsGL</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>RegionalLevelGLChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnRottenVeilGL</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>RegionalLevelGLChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>286</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnEldersRecessGL</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>RegionalLevelGLChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>311</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnHoarfrostReachGL</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>RegionalLevelGLChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>336</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>HunterNameChange(QString)</slot>
@@ -216,5 +436,6 @@
   <slot>ResearchPointsChange(int)</slot>
   <slot>UncapGuidingLands()</slot>
   <slot>SteamworksFuelChange(int)</slot>
+  <slot>RegionalLevelGLChange(int)</slot>
  </slots>
 </ui>

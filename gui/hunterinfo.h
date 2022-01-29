@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QSpinBox>
 
 #include "common/saveloader.h"
 
@@ -16,6 +17,7 @@ public slots:
   void ZennyChange(int value);
   void ResearchPointsChange(int value);
   void SteamworksFuelChange(int value);
+  void RegionalLevelGLChange(int value);
   void UncapGuidingLands();
 
 public:
@@ -27,4 +29,6 @@ public:
 
 private:
   Ui::HunterInfo* ui;
+
+  QMap<QSpinBox*, u8> regionIndexMapping;
 };
