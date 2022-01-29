@@ -50,6 +50,27 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="btnGiveYukumoLoadout">
+     <property name="text">
+      <string>Add Yukumo Loadout</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnGiveSilverKnightLoadout">
+     <property name="text">
+      <string>Add Silver Knight Loadout</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnGiveSamuraiLoadout">
+     <property name="text">
+      <string>Add Samurai Loadout</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -147,6 +168,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnGiveYukumoLoadout</sender>
+   <signal>clicked()</signal>
+   <receiver>LimitedUnlocks</receiver>
+   <slot>GiveYukumoLoadout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnGiveSilverKnightLoadout</sender>
+   <signal>clicked()</signal>
+   <receiver>LimitedUnlocks</receiver>
+   <slot>GiveSilverKnightLoadout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>184</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnGiveSamuraiLoadout</sender>
+   <signal>clicked()</signal>
+   <receiver>LimitedUnlocks</receiver>
+   <slot>GiveSamuraiLoadout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>UnlockAssassinHood(int)</slot>
@@ -154,5 +223,8 @@
   <slot>GiveArtemisGear()</slot>
   <slot>UnlockLayeredArtemis(int)</slot>
   <slot>UnlockLayeredBayek(int)</slot>
+  <slot>GiveYukumoLoadout()</slot>
+  <slot>GiveSilverKnightLoadout()</slot>
+  <slot>GiveSamuraiLoadout()</slot>
  </slots>
 </ui>

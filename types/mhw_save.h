@@ -558,6 +558,17 @@ struct mhw_pigments
   mhw_color whole;
 };
 
+struct mhw_layered_equipment
+{
+  i32 head;
+  i32 torso;
+  i32 arms;
+  i32 coil;
+  i32 feet;
+  i32 unused;
+  mhw_pigments pigments;
+};
+
 struct mhw_equipment_loadout
 {
   u32 slot_id;
@@ -582,8 +593,7 @@ struct mhw_equipment_loadout
   u32 tool2_decos[3];
   u32 unknown0[45];
   mhw_pigments armor;
-  u32 unknown1[6];
-  mhw_pigments layered;
+  mhw_layered_equipment layered;
   u32 unknown2;
 };
 
@@ -591,8 +601,7 @@ struct mhw_layered_loadout
 {
   u32 slot_id;
   str256 name;
-  u32 unknown0[6];
-  mhw_pigments layered;
+  mhw_layered_equipment layered;
 };
 
 struct mhw_equipment
@@ -1611,90 +1620,5 @@ union mhw_save_raw
   u8 data[sizeof(mhw_ib_save)];
 };
 #pragma pack(pop)
-
-static bool IsBlowfishDecrypted(mhw_ib_save* save) {
-  return save->header.magic == 0x00000001;
-}
-
-static mhw_item_slot* FindItemMaterial(mhw_ib_save* save, int slot, u32 item_id) {
-  mhw_save_slot* save_slot = &save->section3.saves[slot];
-  mhw_storage* storage = &save_slot->storage;
-  
-  mhw_item_slot* result = nullptr;
-  for (int i = 0; i < COUNTOF(storage->materials); i++)
-  {
-    mhw_item_slot* slot = &storage->materials[i];
-    if (slot->id == item_id) {
-      result = slot;
-      break;
-    }
-  }
-
-  return result;
-}
-
-static mhw_equipment* FindEquipment(mhw_save_slot* save_slot, i32 type, u32 id) {
-  mhw_equipment* equipment = save_slot->equipment;
-  u32* index_table = save_slot->equipment_index_table;
-  int count = COUNTOF(save_slot->equipment);
-  
-  mhw_equipment* result = nullptr;
-  for (int i = 0; i < count; i++)
-  {
-    int lookup = index_table[i];
-    mhw_equipment* slot = &equipment[lookup];
-    if (slot->type == type && slot->id == id) {
-      result = slot;
-      break;
-    }
-  }
-
-  return result;
-}
-
-static void ValidateSaveFile(mhw_ib_save* save) {
-  for (int slot = 0; slot < COUNTOF(save->section3.saves); slot++)
-  {
-    mhw_save_slot* save_slot = &save->section3.saves[slot];
-    mhw_item_pouch* pouch = &save_slot->item_pouch;
-    mhw_storage* storage = &save_slot->storage;
-
-    for (int item_index = 0; item_index < COUNTOF(pouch->ammo); item_index++) {
-      if (pouch->ammo[item_index].amount == 0) {
-        pouch->ammo[item_index].id = 0;
-      }
-    }
-
-    for (int item_index = 0; item_index < COUNTOF(pouch->items); item_index++) {
-      if (pouch->items[item_index].amount == 0) {
-        pouch->items[item_index].id = 0;
-      }
-    }
-
-    for (int item_index = 0; item_index < COUNTOF(storage->ammo); item_index++) {
-      if (storage->ammo[item_index].amount == 0) {
-        storage->ammo[item_index].id = 0;
-      }
-    }
-
-    for (int item_index = 0; item_index < COUNTOF(storage->decorations); item_index++) {
-      if (storage->decorations[item_index].amount == 0) {
-        storage->decorations[item_index].id = 0;
-      }
-    }
-
-    for (int item_index = 0; item_index < COUNTOF(storage->items); item_index++) {
-      if (storage->items[item_index].amount == 0) {
-        storage->items[item_index].id = 0;
-      }
-    }
-
-    for (int item_index = 0; item_index < COUNTOF(storage->materials); item_index++) {
-      if (storage->materials[item_index].amount == 0) {
-        storage->materials[item_index].id = 0;
-      }
-    }
-  }
-}
 
 static_assert(sizeof(mhw_ib_save) == MHW_IB_SAVE_SIZE, "Size of MHW:IB Save is not as expected.");

@@ -40,6 +40,7 @@
     <ClInclude Include="types\mhw_enums.h" />
     <ClInclude Include="types\mhw_save.h" />
     <ClInclude Include="types\types.h" />
+    <ClInclude Include="utility\mhw_save_utils.h" />
     <ClInclude Include="utility\paths.h" />
     <ClInclude Include="utility\settype.h" />
     <ClInclude Include="utility\system\FileUtils.h" />

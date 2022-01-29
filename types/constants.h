@@ -11,7 +11,17 @@ const std::string MHW_FOLDER_NAME = "Monster Hunter World";
 
 const u32 MHW_IB_SAVE_SIZE = 11284704;
 
+
+const std::string LAYERED_YUKUMO_NAME = "Yukumo";
+const std::string LAYERED_SILVER_KNIGHT_NAME = "Silver Knight";
+const std::string LAYERED_SAMURAI_NAME = "Samurai";
+
+const i32 LAYERED_YUKUMO_ID = 471;
+const i32 LAYERED_SILVER_KNIGHT_ID = 472;
+const i32 LAYERED_SAMURAI_ID = 190;
+
 const u8 ASSASSIN_HOOD_INDEX = 19;
+const u32 ARTEMIS_GEAR_ID = 725;
 
 // 390000 obtained from:
 // https://steamcommunity.com/app/582010/discussions/0/3974929535247630028/

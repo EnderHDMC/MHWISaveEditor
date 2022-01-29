@@ -45,7 +45,7 @@ void HunterInfo::PalicoNameChange(const QString& text)
 
 void HunterInfo::ZennyChange(int value)
 {
-  if (loading) return;
+  MHW_LOADING_GUARD;
 
   u32 zeni = value;
   mhwSaveSlot->hunter.zeni = zeni;
@@ -53,7 +53,7 @@ void HunterInfo::ZennyChange(int value)
 
 void HunterInfo::ResearchPointsChange(int value)
 {
-  if (loading) return;
+  MHW_LOADING_GUARD;
 
   u32 researchPoints = value;
   mhwSaveSlot->hunter.research_points = researchPoints;
@@ -61,7 +61,7 @@ void HunterInfo::ResearchPointsChange(int value)
 
 void HunterInfo::SteamworksFuelChange(int value)
 {
-  if (loading) return;
+  MHW_LOADING_GUARD;
 
   u32 steamworksFuel = value;
   mhwSaveSlot->steamworks_stored_fuel = value;
@@ -69,7 +69,7 @@ void HunterInfo::SteamworksFuelChange(int value)
 
 void HunterInfo::RegionalLevelGLChange(int value)
 {
-  if (loading) return;
+  MHW_LOADING_GUARD;
 
   QSpinBox* senderSpin = qobject_cast<QSpinBox*>(sender());
   int index = regionIndexMapping.value(senderSpin, -1);

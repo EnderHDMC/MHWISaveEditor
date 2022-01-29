@@ -18,7 +18,7 @@ GeneralInfo::~GeneralInfo()
 
 void GeneralInfo::ChangeSteamID()
 {
-  if (!this->mhwSave) return;
+  MHW_SAVE_GUARD;
   u64 steamID = mhwSave->save.header.steam_id;
   QString id = QString::number(steamID);
 
@@ -44,7 +44,7 @@ void GeneralInfo::ChangeSteamID()
 
 void GeneralInfo::ResetEditVouchers()
 {
-  if (!mhwSave) return;
+  MHW_SAVE_GUARD;
 
   // TODO: Map out the other edit vouchers and add them here.
   mhwSave->save.section1.character_edit_voucher = 0;

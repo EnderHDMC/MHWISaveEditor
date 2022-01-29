@@ -17,6 +17,9 @@ public slots:
   void UnlockLayeredArtemis(int checked);
   void UnlockLayeredBayek(int checked);
   void GiveArtemisGear();
+  void GiveYukumoLoadout();
+  void GiveSilverKnightLoadout();
+  void GiveSamuraiLoadout();
 
 public:
     LimitedUnlocks(QWidget *parent = Q_NULLPTR);
@@ -27,4 +30,6 @@ public:
 
 private:
     Ui::LimitedUnlocks *ui;
+
+    void GiveLayeredLoadout(i32 layered, const QString &name);
 };

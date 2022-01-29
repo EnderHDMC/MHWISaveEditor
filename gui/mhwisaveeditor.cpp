@@ -12,6 +12,7 @@
 // Save paths
 #include "../utility/paths.h"
 #include "../utility/system/FileUtils.h"
+#include "../utility/mhw_save_utils.h"
 // Inventory Layout
 #include "../types/inventory_areas.h"
 // Item Data

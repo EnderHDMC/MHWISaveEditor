@@ -2,6 +2,9 @@
 
 #include "../../types/mhw_save.h"
 
+#define MHW_SAVE_GUARD if (!this->mhwSave) return
+#define MHW_LOADING_GUARD if (loading) return
+
 class SaveLoader {
 protected:
   mhw_save_raw* mhwSave = nullptr;
