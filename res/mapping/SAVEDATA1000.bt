@@ -22,7 +22,6 @@
 //          Steamworks
 //          NPC chat flags?
 //          Bounties
-//          Layered armor
 //          Pets in each room
 //          flags for kjarr melding?
 //          Canteen Ingriedients
@@ -741,6 +740,17 @@ struct mhw_pigments
   mhw_color whole;
 };
 
+struct mhw_layered_equipment
+{
+  i32 head;
+  i32 torso;
+  i32 arms;
+  i32 coil;
+  i32 feet;
+  i32 unused;
+  mhw_pigments pigments;
+};
+
 struct mhw_equipment_loadout
 {
   u32 slot_id;
@@ -765,8 +775,7 @@ struct mhw_equipment_loadout
   u32 tool2_decos[3];
   u32 unknown0[45];
   mhw_pigments armor;
-  u32 unknown1[6];
-  mhw_pigments layered;
+  mhw_layered_equipment layered;
   u32 unknown2;
 };
 
@@ -774,8 +783,7 @@ struct mhw_layered_loadout
 {
   u32 slot_id;
   str256 name;
-  u32 unknown0[6];
-  mhw_pigments layered;
+  mhw_layered_equipment layered;
 };
 
 struct mhw_equipment
@@ -1555,9 +1563,12 @@ struct mhw_save_slot
   mhw_storage storage;
 
   mhw_equipment equipment[2500];
-  u8 unknown_equipment[sizeof(mhw_equipment) * 1760];
+  mhw_equipment unused_equipment[510];
+  mhw_equipment palico_equipment[1250]; // Only 750 used
   u32 equipment_index_table[2500];
-  u8 unknown10a[11096];
+  u32 unused_equipment_index_table[500]; // 510 - 500 = 10?
+  u32 palico_equipment_index_table[1250];
+  u8 unknown10a_[11096 - 2000 - sizeof(u32) * 1250];
 
   u32 gesture_order[512];
   u32 pose_order[256];
