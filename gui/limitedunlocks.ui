@@ -29,16 +29,23 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="btnGiveArtemisGear">
+    <widget class="QCheckBox" name="chkLayeredArtemis">
      <property name="text">
-      <string>Give Artemis Gear</string>
+      <string>Layered: Artemis</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="lblInfo">
+    <widget class="QCheckBox" name="chkLayeredBayek">
      <property name="text">
-      <string>I'm still working on finding out how to unlock Artemis layered.</string>
+      <string>Layered: Bayek</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnGiveArtemisGear">
+     <property name="text">
+      <string>Give Artemis Gear</string>
      </property>
     </widget>
    </item>
@@ -108,10 +115,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>chkLayeredArtemis</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>LimitedUnlocks</receiver>
+   <slot>UnlockLayeredArtemis(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkLayeredBayek</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>LimitedUnlocks</receiver>
+   <slot>UnlockLayeredBayek(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>UnlockAssassinHood(int)</slot>
   <slot>UpgradeAssassinHood(int)</slot>
   <slot>GiveArtemisGear()</slot>
+  <slot>UnlockLayeredArtemis(int)</slot>
+  <slot>UnlockLayeredBayek(int)</slot>
  </slots>
 </ui>

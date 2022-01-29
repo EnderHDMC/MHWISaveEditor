@@ -24,12 +24,16 @@ void LimitedUnlocks::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->chkAssassinHoodUnlock->setChecked(assassinHoodUnlocked);
   ui->chkAssassinHoodUpgrade->setChecked(assassinHoodUpgraded);
 
+  u8 layeredArtemis = mhwSaveSlot->progress.layered_artemis;
+  u8 layeredBayek = mhwSaveSlot->progress.layered_bayek;
+  ui->chkLayeredArtemis ->setChecked(layeredArtemis);
+  ui->chkLayeredBayek ->setChecked(layeredBayek);
+
   SaveLoader::FinishLoad();
 }
 
 void LimitedUnlocks::UnlockAssassinHood(int checked)
 {
-  if (!mhwSave) return;
   if (loading) return;
   checked = checked != 0;
 
@@ -42,11 +46,26 @@ void LimitedUnlocks::UnlockAssassinHood(int checked)
 
 void LimitedUnlocks::UpgradeAssassinHood(int checked)
 {
-  if (!mhwSave) return;
   if (loading) return;
   checked = checked != 0;
 
   mhwSaveSlot->tools[ASSASSIN_HOOD_INDEX].level = checked;
+}
+
+void LimitedUnlocks::UnlockLayeredArtemis(int checked)
+{
+  if (loading) return;
+  checked = checked != 0;
+
+  mhwSaveSlot->progress.layered_artemis = checked & 0x1;
+}
+
+void LimitedUnlocks::UnlockLayeredBayek(int checked)
+{
+  if (loading) return;
+  checked = checked != 0;
+
+  mhwSaveSlot->progress.layered_bayek = checked & 0x1;
 }
 
 void LimitedUnlocks::GiveArtemisGear()

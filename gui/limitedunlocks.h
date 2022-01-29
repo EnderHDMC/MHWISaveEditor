@@ -14,6 +14,8 @@ class LimitedUnlocks : public QWidget, public SaveLoader
 public slots:
   void UnlockAssassinHood(int checked);
   void UpgradeAssassinHood(int checked);
+  void UnlockLayeredArtemis(int checked);
+  void UnlockLayeredBayek(int checked);
   void GiveArtemisGear();
 
 public:
