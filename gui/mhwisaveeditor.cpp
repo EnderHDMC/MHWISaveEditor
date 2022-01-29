@@ -20,8 +20,8 @@
 #include "../data/BitmapDB.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
-  : QMainWindow(parent)
-  , ui(new Ui::MHWISaveEditor)
+  : QMainWindow(parent), ui(new Ui::MHWISaveEditor),
+  SaveLoader()
 {
   ui->setupUi(this);
   setWindowIcon(QIcon("res/icon.ico"));
@@ -33,8 +33,6 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   switchActions = { ui->actionSwitchSlot1 , ui->actionSwitchSlot2, ui->actionSwitchSlot3 };
   cloneActions = { ui->actionCloneSlot1, ui->actionCloneSlot2, ui->actionCloneSlot3 };
   for (int i = 0; i < slotActions.size(); i++) {
-    slotActions[i]->setChecked(i == saveslot);
-
     connect(slotActions[i], SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
     slotSignalMapper->setMapping(slotActions[i], i);
 
@@ -44,8 +42,9 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
     connect(cloneActions[i], SIGNAL(triggered()), cloneSignalMapper, SLOT(map()));
     cloneSignalMapper->setMapping(cloneActions[i], i);
 
-    switchActions[i]->setEnabled(i != saveslot);
-    cloneActions[i]->setEnabled(i != saveslot);
+    slotActions[i]->setChecked(i == _mhwSaveIndex);
+    switchActions[i]->setEnabled(i != _mhwSaveIndex);
+    cloneActions[i]->setEnabled(i != _mhwSaveIndex);
   }
   connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Slot(int)));
   connect(switchSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SwitchSlot(int)));
@@ -99,8 +98,7 @@ MHWISaveEditor::~MHWISaveEditor()
 {
   delete ui;
 
-  free(mhwRaw);
-  mhwRaw = nullptr;
+  SaveLoader::Unload(true);
 }
 
 void MHWISaveEditor::closeEvent(QCloseEvent* event)
@@ -178,8 +176,8 @@ void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
 
 void MHWISaveEditor::Dump(int number)
 {
-  if (mhwRaw) {
-    SaveFile(GetDefaultDumpPath(number), &mhwRaw, false);
+  if (MHW_SAVE_CHECK) {
+    SaveFile(GetDefaultDumpPath(number), mhwSavePtr, false);
   }
   else {
     mhw_save_raw* buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
@@ -203,27 +201,20 @@ void MHWISaveEditor::Open()
     QStringList files = dialog.selectedFiles();
     filepath = files[0];
 
-    LoadFile(filepath, &mhwRaw);
+    LoadFile(filepath);
   }
-
-  // Load the save into the inventory slots
-  LoadSaveSlot();
-  ui->tabWidget->setEnabled(true);
 }
 
 void MHWISaveEditor::OpenSAVEDATA1000()
 {
   QString path = GetDefaultSavePath();
-  LoadFile(path, &mhwRaw);
-
-  // Load the save into the inventory slots
-  LoadSaveSlot();
-  ui->tabWidget->setEnabled(true);
+  LoadFile(path);
 }
 
 void MHWISaveEditor::Save()
 {
-  if (!mhwRaw) return;
+  MHW_SAVE_GUARD;
+
   QString path = GetDefaultSaveDir();
 
   const QStringList filters({ tr(ALL_SAVE),
@@ -261,50 +252,65 @@ void MHWISaveEditor::Save()
     QString filepath = fi.absoluteFilePath();
 
     bool encrypt = encrypt_map.value(ext, false);
-    SaveFile(filepath, &mhwRaw, encrypt, true);
+    SaveFile(filepath, mhwSavePtr, encrypt, true);
   }
+}
+
+void MHWISaveEditor::LoadFile(const QString& file)
+{
+  SaveLoader::LoadFile(file);
+  mhw_save_raw* save = nullptr;
+  LoadFile(file, &save);
+  SaveLoader::Load(save, _mhwSaveIndex);
+
+  // Load the save into the inventory slots
+  LoadSaveSlot();
+  ui->tabWidget->setEnabled(true);
+
+  SaveLoader::FinishLoad();
 }
 
 void MHWISaveEditor::LoadSaveSlot()
 {
-  if (!mhwRaw) return;
+  MHW_SAVE_GUARD;
 
   int index = ui->tabWidget->currentIndex();
   SaveLoader* loader = editors[index];
-  loader->Load(mhwRaw, saveslot);
+  loader->Load(this->_mhwSave, _mhwSaveIndex);
 }
 
 void MHWISaveEditor::EditorTabChange(int editorIndex)
 {
-  if (!mhwRaw) return;
+  MHW_SAVE_GUARD;
 
   int index = editorIndex;
   SaveLoader* loader = editors[index];
-  loader->Load(mhwRaw, saveslot);
+  loader->Load(this->_mhwSave, _mhwSaveIndex);
 }
 
 void MHWISaveEditor::Slot(int slot)
 {
+  SaveLoader::LoadSlot(slot);
   qInfo("Selected slot index %d.", slot);
-  saveslot = slot;
 
   for (size_t i = 0; i < slotActions.count(); i++)
   {
-    slotActions[i]->setChecked(i == saveslot);
-    switchActions[i]->setEnabled(i != saveslot);
-    cloneActions[i]->setEnabled(i != saveslot);
+    slotActions[i]->setChecked(i == _mhwSaveIndex);
+    switchActions[i]->setEnabled(i != _mhwSaveIndex);
+    cloneActions[i]->setEnabled(i != _mhwSaveIndex);
   }
 
   LoadSaveSlot();
+  SaveLoader::FinishLoad();
 }
 
 void MHWISaveEditor::SwitchSlot(int slot)
 {
-  if (!mhwRaw) return;
+  MHW_SAVE_GUARD;
 
   mhw_save_slot* temp = (mhw_save_slot*)malloc(sizeof(mhw_save_slot));
-  mhw_save_slot* saveA = &mhwRaw->save.section3.saves[saveslot];
-  mhw_save_slot* saveB = &mhwRaw->save.section3.saves[slot];
+  mhw_save_slot* saveA = &mhwSaveIB->section3.saves[_mhwSaveIndex];
+  mhw_save_slot* saveB = &mhwSaveIB->section3.saves[slot];
   if (!temp) {
     qWarning("Error allocating memory.");
     return;
@@ -320,10 +326,10 @@ void MHWISaveEditor::SwitchSlot(int slot)
 
 void MHWISaveEditor::CloneSlot(int slot)
 {
-  if (!mhwRaw) return;
+  MHW_SAVE_GUARD;
 
-  mhw_save_slot* saveA = &mhwRaw->save.section3.saves[saveslot];
-  mhw_save_slot* saveB = &mhwRaw->save.section3.saves[slot];
+  mhw_save_slot* saveA = &mhwSaveIB->section3.saves[_mhwSaveIndex];
+  mhw_save_slot* saveB = &mhwSaveIB->section3.saves[slot];
 
   memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
 }

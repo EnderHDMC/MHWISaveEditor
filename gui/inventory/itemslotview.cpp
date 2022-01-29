@@ -67,7 +67,7 @@ void ItemSlotView::UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot)
 
 void ItemSlotView::AmountChanged(int amount)
 {
-  if (!mhwSave)
+  if (MHW_SAVE_GUARD_CHECK)
   {
     ui->spnCount->setValue(0);
     return;

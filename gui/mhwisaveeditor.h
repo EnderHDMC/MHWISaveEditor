@@ -25,7 +25,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MHWISaveEditor; }
 QT_END_NAMESPACE
 
-class MHWISaveEditor : public QMainWindow
+class MHWISaveEditor : public QMainWindow, private SaveLoader
 {
   Q_OBJECT
 
@@ -54,9 +54,10 @@ private:
 
   void LoadSaveSlot();
 
+  // Inherited via SaveLoader
+  virtual void LoadFile(const QString& file) override;
+
   Ui::MHWISaveEditor* ui;
-  mhw_save_raw* mhwRaw = nullptr;
-  int saveslot = 0;
 
   InventoryEditor* inventoryEditor = nullptr;
   HunterInfo* hunterInfo = nullptr;

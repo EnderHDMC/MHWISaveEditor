@@ -19,7 +19,7 @@ GeneralInfo::~GeneralInfo()
 void GeneralInfo::ChangeSteamID()
 {
   MHW_SAVE_GUARD;
-  u64 steamID = mhwSave->save.header.steam_id;
+  u64 steamID = mhwSaveIB->header.steam_id;
   QString id = QString::number(steamID);
 
   bool ok;
@@ -32,7 +32,7 @@ void GeneralInfo::ChangeSteamID()
     steamID = text.toULongLong(&ok);
     if (ok) {
       ui->btnSteamID->setText(text);
-      mhwSave->save.header.steam_id = steamID;
+      mhwSaveIB->header.steam_id = steamID;
     }
     else {
       QMessageBox msgBox;
@@ -47,9 +47,9 @@ void GeneralInfo::ResetEditVouchers()
   MHW_SAVE_GUARD;
 
   // TODO: Map out the other edit vouchers and add them here.
-  mhwSave->save.section1.character_edit_voucher = 0;
-  mhwSave->save.section1.character_edit_voucher_free = 0;
-  mhwSave->save.section1.palico_edit_voucher = 0;
+  mhwSaveIB->section1.character_edit_voucher = 0;
+  mhwSaveIB->section1.character_edit_voucher_free = 0;
+  mhwSaveIB->section1.palico_edit_voucher = 0;
 
   QMessageBox msgBox;
   msgBox.setText("Free edit vouchers have been reset.");
