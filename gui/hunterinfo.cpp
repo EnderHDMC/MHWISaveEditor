@@ -50,6 +50,14 @@ void HunterInfo::ResearchPointsChange(int value)
   mhwSaveSlot->hunter.research_points = researchPoints;
 }
 
+void HunterInfo::SteamworksFuelChange(int value)
+{
+  if (loading) return;
+
+  u32 steamworksFuel = value;
+  mhwSaveSlot->steamworks_stored_fuel = value;
+}
+
 void HunterInfo::UncapGuidingLands()
 {
   // 390000 obtained from:
@@ -68,6 +76,7 @@ void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
   str64 palicoName = {};
   u32 zeni = mhwSaveSlot->hunter.zeni;
   u32 researchPoints = mhwSaveSlot->hunter.research_points;
+  u32 steamworksFuel = mhwSaveSlot->steamworks_stored_fuel;
 
   strncpy_s(hunterName, sizeof(hunterName), (char*)mhwSaveSlot->hunter.name, COUNTOF(hunterName));
   strncpy_s(palicoName, sizeof(palicoName), (char*)mhwSaveSlot->palico_name, COUNTOF(palicoName));
@@ -78,6 +87,7 @@ void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->edtPalicoName->setText(palicoName);
   ui->spnZenny->setValue(zeni);
   ui->spnResearchPoints->setValue(researchPoints);
+  ui->spnSteamworksFuel->setValue(steamworksFuel);
 
   SaveLoader::FinishLoad();
 }

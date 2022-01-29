@@ -15,6 +15,7 @@ public slots:
   void PalicoNameChange(const QString& text);
   void ZennyChange(int value);
   void ResearchPointsChange(int value);
+  void SteamworksFuelChange(int value);
   void UncapGuidingLands();
 
 public:

@@ -77,16 +77,33 @@
     </widget>
    </item>
    <item row="4" column="0">
+    <widget class="QLabel" name="lblSteamworksFuel">
+     <property name="text">
+      <string>Steamworks Fuel:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
     <widget class="QLabel" name="lblLevelCapGL">
      <property name="text">
       <string>Guiding Lands:</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
+   <item row="5" column="1">
     <widget class="QPushButton" name="btnLevelCapGL">
      <property name="text">
       <string>Uncap Guiding Lands Levels</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QSpinBox" name="spnSteamworksFuel">
+     <property name="maximum">
+      <number>99999999</number>
+     </property>
+     <property name="singleStep">
+      <number>1000</number>
      </property>
     </widget>
    </item>
@@ -175,6 +192,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>spnSteamworksFuel</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>SteamworksFuelChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>HunterNameChange(QString)</slot>
@@ -182,5 +215,6 @@
   <slot>ZennyChange(int)</slot>
   <slot>ResearchPointsChange(int)</slot>
   <slot>UncapGuidingLands()</slot>
+  <slot>SteamworksFuelChange(int)</slot>
  </slots>
 </ui>
