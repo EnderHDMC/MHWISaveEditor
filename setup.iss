@@ -1,5 +1,5 @@
 #define MHWIAppName "MHWISaveEditor"
-#define MHWIAppVersion "0.1.2"
+#define MHWIAppVersion "0.1.3"
 #define MHWIAppPublisher "EnderHDMC"
 #define MHWIAppURL "https://github.com/EnderHDMC/MHWISaveEditor"
 #define MHWIAppExeName "MHWISaveEditor.exe"
