@@ -52,21 +52,21 @@
    <item>
     <widget class="QPushButton" name="btnGiveYukumoLoadout">
      <property name="text">
-      <string>Add Yukumo Loadout</string>
+      <string>Add Yukumo Layered Loadout</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="btnGiveSilverKnightLoadout">
      <property name="text">
-      <string>Add Silver Knight Loadout</string>
+      <string>Add Silver Knight Layered Loadout</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="btnGiveSamuraiLoadout">
      <property name="text">
-      <string>Add Samurai Loadout</string>
+      <string>Add Samurai Layered Loadout</string>
      </property>
     </widget>
    </item>
