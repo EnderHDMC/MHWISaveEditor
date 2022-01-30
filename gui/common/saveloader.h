@@ -26,11 +26,14 @@ public:
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex)
   {
     loading = true;
-    this->_mhwSaveIndex = slotIndex;
 
     this->_mhwSave = (mhwSave) ? mhwSave : nullptr;
     this->mhwSavePtr = (mhwSave) ? &this->_mhwSave : nullptr;
     this->mhwSaveIB = (mhwSave) ? &mhwSave->save : nullptr;
+
+    this->_mhwSaveIndex = slotIndex;
+    if (slotIndex == -1 && mhwSaveIB)
+      _mhwSaveIndex = mhwSaveIB->section1.last_active_slot;
     this->mhwSaveSlot= (mhwSaveIB) ? &mhwSaveIB->section3.saves[_mhwSaveIndex] : nullptr;
   }
 

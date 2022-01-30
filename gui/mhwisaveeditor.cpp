@@ -49,10 +49,6 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 
     connect(cloneSlotActions[i], SIGNAL(triggered()), cloneSignalMapper, SLOT(map()));
     cloneSignalMapper->setMapping(cloneSlotActions[i], i);
-
-    selectSlotActions[i]->setChecked(i == _mhwSaveIndex);
-    switchSlotActions[i]->setEnabled(i != _mhwSaveIndex);
-    cloneSlotActions[i]->setEnabled(i != _mhwSaveIndex);
   }
   connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SelectSlot(int)));
   connect(switchSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SwitchSlot(int)));
@@ -298,11 +294,19 @@ void MHWISaveEditor::LoadFile(const QString& file)
   SaveLoader::LoadFile(file);
   mhw_save_raw* save = nullptr;
   LoadFile(file, &save);
-  SaveLoader::Load(save, _mhwSaveIndex);
+  SaveLoader::Load(save, -1);
 
   // Load the save into the inventory slots
   LoadSaveSlot();
+
   ui->tabWidget->setEnabled(true);
+  ui->actionSave->setEnabled(true);
+  ui->menuSwitchWith->setEnabled(true);
+  ui->menuCloneTo->setEnabled(true);
+  for (int i = 0; i < selectSlotActions.size(); i++) {
+    selectSlotActions[i]->setEnabled(true);
+  }
+
   statusFile->setText(QString("File: %1").arg(file));
 
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
@@ -316,6 +320,13 @@ void MHWISaveEditor::LoadFile(const QString& file)
 void MHWISaveEditor::LoadSaveSlot()
 {
   MHW_SAVE_GUARD;
+
+  for (size_t i = 0; i < selectSlotActions.count(); i++)
+  {
+    selectSlotActions[i]->setChecked(i == _mhwSaveIndex);
+    switchSlotActions[i]->setEnabled(i != _mhwSaveIndex);
+    cloneSlotActions[i]->setEnabled(i != _mhwSaveIndex);
+  }
 
   int index = ui->tabWidget->currentIndex();
   SaveLoader* loader = editors[index];
@@ -335,13 +346,6 @@ void MHWISaveEditor::SelectSlot(int slot)
 {
   SaveLoader::LoadSlot(slot);
   qInfo("Selected slot index %d.", slot);
-
-  for (size_t i = 0; i < selectSlotActions.count(); i++)
-  {
-    selectSlotActions[i]->setChecked(i == _mhwSaveIndex);
-    switchSlotActions[i]->setEnabled(i != _mhwSaveIndex);
-    cloneSlotActions[i]->setEnabled(i != _mhwSaveIndex);
-  }
 
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
   QString character = QString::fromUtf8(hunterName);

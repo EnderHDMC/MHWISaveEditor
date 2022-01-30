@@ -92,6 +92,9 @@
      <string>Slot</string>
     </property>
     <widget class="QMenu" name="menuSwitchWith">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Switch with</string>
      </property>
@@ -100,6 +103,9 @@
      <addaction name="actionSwitchSlot3"/>
     </widget>
     <widget class="QMenu" name="menuCloneTo">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Clone to</string>
      </property>
@@ -127,6 +133,9 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
@@ -257,6 +266,9 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Slot 1</string>
    </property>
@@ -268,6 +280,9 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Slot 2</string>
    </property>
@@ -278,6 +293,9 @@
   <action name="actionSlot3">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Slot 3</string>
@@ -311,16 +329,25 @@
    </property>
   </action>
   <action name="actionCloneSlot1">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Slot 1</string>
    </property>
   </action>
   <action name="actionCloneSlot2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Slot 2</string>
    </property>
   </action>
   <action name="actionCloneSlot3">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Slot 3</string>
    </property>
