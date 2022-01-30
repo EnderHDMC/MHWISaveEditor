@@ -33,13 +33,18 @@ public slots:
   void Open();
   void OpenSAVEDATA1000();
   void Save();
+  void SaveAs();
+  void Dump(int number);
+
   void SelectSlot(int slot);
   void SwitchSlot(int slot);
   void CloneSlot(int slot);
+  
   void OpenLocation(const QString& location);
+
   void Backup();
   void Restore();
-  void Dump(int number);
+  
   void EditorTabChange(int editorIndex);
 
 public:
@@ -49,8 +54,9 @@ public:
   void closeEvent(QCloseEvent* event);
 
 private:
-  bool SaveFile(const QString& path, mhw_save_raw* save, bool encrypt = true, bool validate = false);
+  bool SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt = true, bool validate = false);
   bool LoadFile(const QString& path, mhw_save_raw** save);
+  void SaveFile(const QString& path);
 
   void LoadSaveSlot();
 
@@ -75,4 +81,8 @@ private:
   QList<QAction*> selectSlotActions;
   QList<QAction*> switchSlotActions;
   QList<QAction*> cloneSlotActions;
+
+  QMap<QString, QString> ext_map;
+  QMap<QString, bool> encrypt_map;
+  QStringList filters;
 };

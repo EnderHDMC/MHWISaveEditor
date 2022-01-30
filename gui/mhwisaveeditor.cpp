@@ -96,6 +96,18 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
       *tab->binding = loader;
     editors[i] = loader;
   }
+
+  filters.append(tr(ALL_SAVE));
+  filters.append(tr(ENCRYPTED_SAVE));
+  filters.append(tr(UNENCRYPTED_SAVE));
+
+  ext_map.insert(tr(ALL_SAVE), "");
+  ext_map.insert(tr(ENCRYPTED_SAVE), ".raw");
+  ext_map.insert(tr(UNENCRYPTED_SAVE), ".bin");
+
+  encrypt_map.insert("", true);
+  encrypt_map.insert(".raw", true);
+  encrypt_map.insert(".bin", false);
 }
 
 MHWISaveEditor::~MHWISaveEditor()
@@ -113,7 +125,7 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
   bitmapDB->Free();
 }
 
-bool MHWISaveEditor::SaveFile(const QString& path, mhw_save_raw* save, bool encrypt, bool validate)
+bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt, bool validate)
 {
   qInfo("Saving: %s", qUtf8Printable(path));
   qInfo("Validate: %s", validate ? "True" : "False");
@@ -144,6 +156,23 @@ bool MHWISaveEditor::SaveFile(const QString& path, mhw_save_raw* save, bool encr
 
   if (saveWrite != save) free(saveWrite);
   return true;
+}
+
+void MHWISaveEditor::SaveFile(const QString& path)
+{
+  QFileInfo fi(path);
+  QString ext = fi.completeSuffix();
+  ext = ext.isEmpty() ? "" : '.' + ext;
+  QString filepath = fi.absoluteFilePath();
+
+  bool encrypt = encrypt_map.value(ext, false);
+  bool success = SaveFileEncrypt(filepath, _mhwSave, encrypt, true);
+
+  Notification* notification = notification->GetInstance();
+  if (success)
+    notification->ShowMessage("Saved file: " + path);
+  else
+    notification->ShowMessage("Could not save file: " + path);
 }
 
 bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
@@ -202,14 +231,14 @@ void MHWISaveEditor::Dump(int number)
   }
 
   if (success) {
-    success = SaveFile(path, savePtr, false);
+    success = SaveFileEncrypt(path, savePtr, false);
   }
 
   Notification* notification = notification->GetInstance();
   if (success)
-    notification->ShowMessage(QString("Dumped file: %1").arg(path));
+    notification->ShowMessage("Dumped file: " + path);
   else
-    notification->ShowMessage(QString("Could not dump file: %1").arg(path));
+    notification->ShowMessage("Could not dump file: " +path);
 
   if (buffer) free(buffer);
 }
@@ -242,21 +271,20 @@ void MHWISaveEditor::Save()
 {
   MHW_SAVE_GUARD;
 
+  QFileInfo fi(file);
+  QString ext = fi.completeSuffix();
+  ext = ext.isEmpty() ? "" : '.' + ext;
+
+  QString filepath = fi.absoluteFilePath();
+  bool encrypt = encrypt_map.value(ext, false);
+  SaveFile(filepath);
+}
+
+void MHWISaveEditor::SaveAs()
+{
+  MHW_SAVE_GUARD;
+
   QString path = GetDefaultSaveDir();
-
-  const QStringList filters({ tr(ALL_SAVE),
-                              tr(ENCRYPTED_SAVE),
-                              tr(UNENCRYPTED_SAVE) });
-
-  QMap<QString, QString> ext_map;
-  ext_map.insert(tr(ALL_SAVE), "");
-  ext_map.insert(tr(ENCRYPTED_SAVE), ".raw");
-  ext_map.insert(tr(UNENCRYPTED_SAVE), ".bin");
-
-  QMap<QString, bool> encrypt_map;
-  encrypt_map.insert("", true);
-  encrypt_map.insert(".raw", true);
-  encrypt_map.insert(".bin", false);
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
@@ -267,25 +295,13 @@ void MHWISaveEditor::Save()
     QString selectedFilter = dialog.selectedNameFilter();
     QStringList files = dialog.selectedFiles();
 
-    QFileInfo fi(files[0]);
+    QFileInfo fi(path);
     QString ext = fi.completeSuffix();
     if (ext.isEmpty()) {
       fi.setFile(fi.filePath() + ext_map.value(selectedFilter));
     }
-    else {
-      ext = '.' + ext;
-    }
 
-    QString filepath = fi.absoluteFilePath();
-
-    bool encrypt = encrypt_map.value(ext, false);
-    bool success = SaveFile(filepath, _mhwSave, encrypt, true);
-
-    Notification* notification = notification->GetInstance();
-    if (success)
-      notification->ShowMessage(QString("Saved file: %1").arg(path));
-    else
-      notification->ShowMessage(QString("Could not save file: %1").arg(path));
+    SaveFile(files[0]);
   }
 }
 
@@ -296,22 +312,28 @@ void MHWISaveEditor::LoadFile(const QString& file)
   LoadFile(file, &save);
   SaveLoader::Load(save, -1);
 
+  Notification* notification = notification->GetInstance();
+  if (MHW_SAVE_GUARD_CHECK) {
+    notification->ShowMessage("Failed to load file: " + file);
+    return;
+  }
+
   // Load the save into the inventory slots
   LoadSaveSlot();
 
   ui->tabWidget->setEnabled(true);
   ui->actionSave->setEnabled(true);
+  ui->actionSaveAs->setEnabled(true);
   ui->menuSwitchWith->setEnabled(true);
   ui->menuCloneTo->setEnabled(true);
   for (int i = 0; i < selectSlotActions.size(); i++) {
     selectSlotActions[i]->setEnabled(true);
   }
 
-  statusFile->setText(QString("File: %1").arg(file));
+  statusFile->setText("File: " + file);
 
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
   QString character = QString::fromUtf8(hunterName);
-  Notification* notification = notification->GetInstance();
   notification->ShowMessage(QString("Loaded character slot %1: %2").arg(_mhwSaveIndex + 1).arg(character));
 
   SaveLoader::FinishLoad();
