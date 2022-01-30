@@ -444,7 +444,6 @@
  <slots>
   <slot>Open()</slot>
   <slot>Save()</slot>
-  <slot>Slot(int)</slot>
   <slot>Backup()</slot>
   <slot>Restore()</slot>
   <slot>Dump(int)</slot>

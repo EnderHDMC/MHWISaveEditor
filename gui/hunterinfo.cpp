@@ -2,10 +2,10 @@
 #include "ui_hunterinfo.h"
 
 #include "common/StringByteLengthValidator.h"
+#include "common/Notification.h"
 #include "../utility/settype.h"
 
 #include <QSignalMapper>
-#include <QMessageBox>
 
 HunterInfo::HunterInfo(QWidget* parent)
   : QWidget(parent), SaveLoader()
@@ -89,9 +89,8 @@ void HunterInfo::UncapGuidingLands()
 {
   mhwSaveSlot->guiding_lands.level_total = GUIDING_LANDS_LEVEL_UNCAP;
 
-  QMessageBox msgBox;
-  msgBox.setText("Guiding Lands Uncapped.");
-  msgBox.exec();
+  Notification* notification = notification->GetInstance();
+  notification->ShowMessage("Guiding Lands levels uncapped.", 5000);
 }
 
 void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)

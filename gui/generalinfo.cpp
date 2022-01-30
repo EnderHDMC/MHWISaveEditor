@@ -2,7 +2,7 @@
 #include "ui_generalinfo.h"
 
 #include <QInputDialog>
-#include <QMessageBox>
+#include "common/Notification.h"
 
 GeneralInfo::GeneralInfo(QWidget* parent)
   : QWidget(parent), SaveLoader()
@@ -29,15 +29,17 @@ void GeneralInfo::ChangeSteamID()
 
   if (ok && !text.isEmpty())
   {
+    Notification* notification = notification->GetInstance();
+
     steamID = text.toULongLong(&ok);
     if (ok) {
       ui->btnSteamID->setText(text);
       mhwSaveIB->header.steam_id = steamID;
+
+      notification->ShowMessage("Steam ID set.");
     }
     else {
-      QMessageBox msgBox;
-      msgBox.setText("Invalid steam ID format.");
-      msgBox.exec();
+      notification->ShowMessage("Invalid steam ID format.", 5000);
     }
   }
 }
@@ -51,9 +53,8 @@ void GeneralInfo::ResetEditVouchers()
   mhwSaveIB->section1.character_edit_voucher_free = 0;
   mhwSaveIB->section1.palico_edit_voucher = 0;
 
-  QMessageBox msgBox;
-  msgBox.setText("Free edit vouchers have been reset.");
-  msgBox.exec();
+  Notification* notification = notification->GetInstance();
+  notification->ShowMessage("Free edit vouchers have been reset.", 5000);
 }
 
 void GeneralInfo::Load(mhw_save_raw* mhwSave, int slotIndex)

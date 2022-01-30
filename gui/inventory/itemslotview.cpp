@@ -1,7 +1,6 @@
 #include "itemslotview.h"
 #include "ui_itemslotview.h"
 
-#include <QMessageBox>
 #include "../common/WheelGuard.h"
 
 ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent)
@@ -33,13 +32,7 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
   itemInfo* info = itemDB->GetItemById(itemSlot->id);
   if (!info) {
-    QMessageBox msgBox;
-    msgBox.setText("Invalid item.");
-    msgBox.setInformativeText("You may still edit your save, you just won't be able to see the invalid item.");
-    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    int ret = msgBox.exec();
-    return;
+    // TODO: Think about what we want to do here.
   }
 
   UpdateItemDisplay(info);

@@ -18,6 +18,7 @@
 // Item Data
 #include "../data/ItemDB.h"
 #include "../data/BitmapDB.h"
+#include "common/Notification.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent), ui(new Ui::MHWISaveEditor),
@@ -26,27 +27,34 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
   setWindowIcon(QIcon("res/icon.ico"));
 
+  Notification* notification = notification->GetInstance();
+  notification->Register(ui->statusbar);
+  notification->SetDefaultMode(NotificationMode::StatusBar);
+
+  statusFile = new QLabel("File: None", ui->statusbar);
+  ui->statusbar->addPermanentWidget(statusFile);
+
   slotSignalMapper = new QSignalMapper(this);
   switchSignalMapper = new QSignalMapper(this);
   cloneSignalMapper = new QSignalMapper(this);
-  slotActions = { ui->actionSlot1 , ui->actionSlot2, ui->actionSlot3 };
-  switchActions = { ui->actionSwitchSlot1 , ui->actionSwitchSlot2, ui->actionSwitchSlot3 };
-  cloneActions = { ui->actionCloneSlot1, ui->actionCloneSlot2, ui->actionCloneSlot3 };
-  for (int i = 0; i < slotActions.size(); i++) {
-    connect(slotActions[i], SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
-    slotSignalMapper->setMapping(slotActions[i], i);
+  selectSlotActions = { ui->actionSlot1 , ui->actionSlot2, ui->actionSlot3 };
+  switchSlotActions = { ui->actionSwitchSlot1 , ui->actionSwitchSlot2, ui->actionSwitchSlot3 };
+  cloneSlotActions = { ui->actionCloneSlot1, ui->actionCloneSlot2, ui->actionCloneSlot3 };
+  for (int i = 0; i < selectSlotActions.size(); i++) {
+    connect(selectSlotActions[i], SIGNAL(triggered()), slotSignalMapper, SLOT(map()));
+    slotSignalMapper->setMapping(selectSlotActions[i], i);
 
-    connect(switchActions[i], SIGNAL(triggered()), switchSignalMapper, SLOT(map()));
-    switchSignalMapper->setMapping(switchActions[i], i);
+    connect(switchSlotActions[i], SIGNAL(triggered()), switchSignalMapper, SLOT(map()));
+    switchSignalMapper->setMapping(switchSlotActions[i], i);
 
-    connect(cloneActions[i], SIGNAL(triggered()), cloneSignalMapper, SLOT(map()));
-    cloneSignalMapper->setMapping(cloneActions[i], i);
+    connect(cloneSlotActions[i], SIGNAL(triggered()), cloneSignalMapper, SLOT(map()));
+    cloneSignalMapper->setMapping(cloneSlotActions[i], i);
 
-    slotActions[i]->setChecked(i == _mhwSaveIndex);
-    switchActions[i]->setEnabled(i != _mhwSaveIndex);
-    cloneActions[i]->setEnabled(i != _mhwSaveIndex);
+    selectSlotActions[i]->setChecked(i == _mhwSaveIndex);
+    switchSlotActions[i]->setEnabled(i != _mhwSaveIndex);
+    cloneSlotActions[i]->setEnabled(i != _mhwSaveIndex);
   }
-  connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Slot(int)));
+  connect(slotSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SelectSlot(int)));
   connect(switchSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SwitchSlot(int)));
   connect(cloneSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(CloneSlot(int)));
 
@@ -109,40 +117,40 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
   bitmapDB->Free();
 }
 
-void MHWISaveEditor::SaveFile(const QString& path, mhw_save_raw** save, bool encrypt, bool validate)
+bool MHWISaveEditor::SaveFile(const QString& path, mhw_save_raw* save, bool encrypt, bool validate)
 {
   qInfo("Saving: %s", qUtf8Printable(path));
   qInfo("Validate: %s", validate ? "True" : "False");
   qInfo("Encrypted: %s", encrypt ? "True" : "False");
 
-  mhw_save_raw* savep = *save;
   mhw_save_raw* saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
   if (!saveWrite) {
-    qInfo("Error allocating memory.");
-    return;
+    qWarning("Error allocating memory.");
+    return false;
   }
 
-  memcpy(saveWrite, savep, sizeof(mhw_save_raw));
+  memcpy(saveWrite, save, sizeof(mhw_save_raw));
   if (validate) ValidateSaveFile(&saveWrite->save);
   if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
 
   QSaveFile file(path);
   if (!file.open(QIODevice::WriteOnly)) {
     qWarning("File: %s, cannot be written.", qUtf8Printable(path));
-    return;
+    return false;
   }
 
   int length = file.write((char*)saveWrite->data, sizeof(mhw_save_raw));
   if (length != sizeof(mhw_save_raw)) {
     qWarning("File: %s, cannot be written.", qUtf8Printable(path));
-    return;
+    return false;
   }
   file.commit();
 
-  if (saveWrite != savep) free(saveWrite);
+  if (saveWrite != save) free(saveWrite);
+  return true;
 }
 
-void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
+bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
 {
   qInfo("Loading %s", qUtf8Printable(path));
   mhw_save_raw* savep = *save;
@@ -150,13 +158,13 @@ void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
   QFile file(path, this);
   if (!file.open(QIODevice::ReadOnly)) {
     qWarning("File: %s, cannot be read.", qUtf8Printable(path));
-    return;
+    return false;
   }
 
   QByteArray saveBlob = file.readAll();
   if (saveBlob.length() != sizeof(mhw_save_raw)) {
     qWarning("File: %s, cannot be read.", qUtf8Printable(path));
-    return;
+    return false;
   }
   file.close();
 
@@ -164,7 +172,7 @@ void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
   savep = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
   if (!savep) {
     qWarning("Error allocating memory.");
-    return;
+    return false;
   };
 
   memcpy(savep->data, saveBlob.constData(), saveBlob.length());
@@ -172,19 +180,42 @@ void MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
     DecryptSave(savep->data, sizeof(mhw_save_raw));
   }
   *save = savep;
+  return true;
 }
 
 void MHWISaveEditor::Dump(int number)
 {
+  mhw_save_raw* savePtr = nullptr;
+  mhw_save_raw* buffer = nullptr;
+  QString path = GetDefaultDumpPath(number);
+  bool success = true;
+
   if (MHW_SAVE_CHECK) {
-    SaveFile(GetDefaultDumpPath(number), mhwSavePtr, false);
+    savePtr = this->_mhwSave;
   }
   else {
-    mhw_save_raw* buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
-    LoadFile(GetDefaultSavePath(), &buffer);
-    SaveFile(GetDefaultDumpPath(number), &buffer, false);
-    free(buffer);
+    buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+
+    if (!buffer) {
+      success = false;
+    }
+    else {
+      LoadFile(GetDefaultSavePath(), &buffer);
+      savePtr = buffer;
+    }
   }
+
+  if (success) {
+    success = SaveFile(path, savePtr, false);
+  }
+
+  Notification* notification = notification->GetInstance();
+  if (success)
+    notification->ShowMessage(QString("Dumped file: %1").arg(path));
+  else
+    notification->ShowMessage(QString("Could not dump file: %1").arg(path));
+
+  if (buffer) free(buffer);
 }
 
 void MHWISaveEditor::Open()
@@ -252,7 +283,13 @@ void MHWISaveEditor::Save()
     QString filepath = fi.absoluteFilePath();
 
     bool encrypt = encrypt_map.value(ext, false);
-    SaveFile(filepath, mhwSavePtr, encrypt, true);
+    bool success = SaveFile(filepath, _mhwSave, encrypt, true);
+
+    Notification* notification = notification->GetInstance();
+    if (success)
+      notification->ShowMessage(QString("Saved file: %1").arg(path));
+    else
+      notification->ShowMessage(QString("Could not save file: %1").arg(path));
   }
 }
 
@@ -266,6 +303,12 @@ void MHWISaveEditor::LoadFile(const QString& file)
   // Load the save into the inventory slots
   LoadSaveSlot();
   ui->tabWidget->setEnabled(true);
+  statusFile->setText(QString("File: %1").arg(file));
+
+  char* hunterName = (char*)&mhwSaveSlot->hunter.name;
+  QString character = QString::fromUtf8(hunterName);
+  Notification* notification = notification->GetInstance();
+  notification->ShowMessage(QString("Loaded character slot %1: %2").arg(_mhwSaveIndex + 1).arg(character));
 
   SaveLoader::FinishLoad();
 }
@@ -288,17 +331,22 @@ void MHWISaveEditor::EditorTabChange(int editorIndex)
   loader->Load(this->_mhwSave, _mhwSaveIndex);
 }
 
-void MHWISaveEditor::Slot(int slot)
+void MHWISaveEditor::SelectSlot(int slot)
 {
   SaveLoader::LoadSlot(slot);
   qInfo("Selected slot index %d.", slot);
 
-  for (size_t i = 0; i < slotActions.count(); i++)
+  for (size_t i = 0; i < selectSlotActions.count(); i++)
   {
-    slotActions[i]->setChecked(i == _mhwSaveIndex);
-    switchActions[i]->setEnabled(i != _mhwSaveIndex);
-    cloneActions[i]->setEnabled(i != _mhwSaveIndex);
+    selectSlotActions[i]->setChecked(i == _mhwSaveIndex);
+    switchSlotActions[i]->setEnabled(i != _mhwSaveIndex);
+    cloneSlotActions[i]->setEnabled(i != _mhwSaveIndex);
   }
+
+  char* hunterName = (char*)&mhwSaveSlot->hunter.name;
+  QString character = QString::fromUtf8(hunterName);
+  Notification* notification = notification->GetInstance();
+  notification->ShowMessage(QString("Loaded character slot %1: %2").arg(_mhwSaveIndex + 1).arg(character));
 
   LoadSaveSlot();
   SaveLoader::FinishLoad();
@@ -321,6 +369,9 @@ void MHWISaveEditor::SwitchSlot(int slot)
   memcpy_s(saveB, sizeof(mhw_save_slot), temp, sizeof(mhw_save_slot));
   free(temp);
 
+  Notification* notification = notification->GetInstance();
+  notification->ShowMessage(QString("Switched slots: %1 to slot: %2.").arg(_mhwSaveIndex + 1).arg(slot + 1));
+
   LoadSaveSlot();
 }
 
@@ -332,6 +383,9 @@ void MHWISaveEditor::CloneSlot(int slot)
   mhw_save_slot* saveB = &mhwSaveIB->section3.saves[slot];
 
   memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
+
+  Notification* notification = notification->GetInstance();
+  notification->ShowMessage(QString("Cloned slot: %1 to slot: %2.").arg(_mhwSaveIndex + 1).arg(slot + 1));
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)

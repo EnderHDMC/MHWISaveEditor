@@ -32,6 +32,7 @@
     <ClInclude Include="gui\common\WheelGuard.h" />
     <ClInclude Include="gui\common\saveloader.h" />
     <QtMoc Include="gui\hunterinfo.h" />
+    <ClInclude Include="gui\common\Notification.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="gui\common\StringByteLengthValidator.h" />
     <ClInclude Include="types\constants.h" />
@@ -69,6 +70,7 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
     <ClCompile Include="gui\common\StringByteLengthValidator.cpp" />
+    <ClCompile Include="gui\common\Notification.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\generalinfo.ui" />

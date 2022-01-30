@@ -1,9 +1,9 @@
 #include "limitedunlocks.h"
 #include "ui_limitedunlocks.h"
 
+#include "common/Notification.h"
 #include "../utility/mhw_save_utils.h"
 #include "../utility/settype.h"
-#include <QMessageBox>
 
 LimitedUnlocks::LimitedUnlocks(QWidget* parent)
   : QWidget(parent), SaveLoader()
@@ -74,7 +74,8 @@ void LimitedUnlocks::GiveArtemisGear()
 {
   MHW_SAVE_GUARD;
 
-  for (int type = 0; type < 5; type++)
+  int type;
+  for (type = 0; type < 5; type++)
   {
     mhw_equipment* equipment = FindEquipment(mhwSaveSlot, -1, 0);
     if (equipment) {
@@ -86,6 +87,14 @@ void LimitedUnlocks::GiveArtemisGear()
       equipment->id = ARTEMIS_GEAR_ID;
     }
     else break;
+  }
+
+  Notification* notification = notification->GetInstance();
+  if (type < 5) {
+    notification->ShowMessage("Failed to add all equipment, not enough storage.", 5000);
+  }
+  else {
+    notification->ShowMessage("Added Artemis gear.", 5000);
   }
 }
 
@@ -123,13 +132,11 @@ void LimitedUnlocks::GiveLayeredLoadout(i32 layered, const QString& name)
   if (loadout) {
     i32 index = SetLayeredLoadout(loadout, layered, name);
 
-    QMessageBox msgBox;
-    msgBox.setText(QString("Added layered loadout: '%1' at slot: %2").arg(name).arg(index + 1));
-    msgBox.exec();
+    Notification* notification = notification->GetInstance();
+    notification->ShowMessage(QString("Added layered loadout: '%1' at slot: %2").arg(name).arg(index + 1), 5000);
   }
   else {
-    QMessageBox msgBox;
-    msgBox.setText(QString("Failed to add layered loadout: '%1'. No empty loadouts.").arg(name));
-    msgBox.exec();
+    Notification* notification = notification->GetInstance();
+    notification->ShowMessage(QString("Failed to add layered loadout: '%1'. No empty loadouts.").arg(name), 5000);
   }
 }

@@ -1,7 +1,7 @@
-#ifndef MHWISAVEEDITOR_H
-#define MHWISAVEEDITOR_H
+#pragma once
 
 #include <QMainWindow>
+#include <QLabel>
 #include <QSignalMapper>
 
 #include "../types/mhw_save.h"
@@ -33,7 +33,7 @@ public slots:
   void Open();
   void OpenSAVEDATA1000();
   void Save();
-  void Slot(int slot);
+  void SelectSlot(int slot);
   void SwitchSlot(int slot);
   void CloneSlot(int slot);
   void OpenLocation(const QString& location);
@@ -49,8 +49,8 @@ public:
   void closeEvent(QCloseEvent* event);
 
 private:
-  void SaveFile(const QString& path, mhw_save_raw** save, bool encrypt = true, bool validate = false);
-  void LoadFile(const QString& path, mhw_save_raw** save);
+  bool SaveFile(const QString& path, mhw_save_raw* save, bool encrypt = true, bool validate = false);
+  bool LoadFile(const QString& path, mhw_save_raw** save);
 
   void LoadSaveSlot();
 
@@ -58,6 +58,7 @@ private:
   virtual void LoadFile(const QString& file) override;
 
   Ui::MHWISaveEditor* ui;
+  QLabel* statusFile = nullptr;
 
   InventoryEditor* inventoryEditor = nullptr;
   HunterInfo* hunterInfo = nullptr;
@@ -71,8 +72,7 @@ private:
   QSignalMapper* openSignalMapper;
   QSignalMapper* dumpSignalMapper;
 
-  QList<QAction*> slotActions;
-  QList<QAction*> switchActions;
-  QList<QAction*> cloneActions;
+  QList<QAction*> selectSlotActions;
+  QList<QAction*> switchSlotActions;
+  QList<QAction*> cloneSlotActions;
 };
-#endif // MHWISAVEEDITOR_H
