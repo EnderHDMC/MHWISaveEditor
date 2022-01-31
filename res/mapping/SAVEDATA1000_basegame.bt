@@ -1,0 +1,95 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: SAVEDATA1000.bt
+//   Authors: EnderHDMC, AsteriskAmpersand
+//   Version: 0.1.3
+//   Purpose: MHW Save file
+//  Category: Game
+// File Mask: *.bin
+//  ID Bytes: 01 00 00 00
+//   History: 
+//------------------------------------------------
+
+#include "types.bt"
+
+struct mhw_save_header
+{
+  u32 magic; // 0x01_00_00_00
+  u32 unknown0;
+  u32 unknown1;
+  u8 hash[20];
+
+  /// <summary>
+  /// Size of file minus header
+  /// Base Game Data Size = 9438368
+  /// Iceborne Data Size = 11284640
+  /// </summary>
+  u64 data_size;
+
+  u64 steam_id;
+  u8 padding[16];
+};
+
+struct mhw_section_offsets
+{
+  u64 section[4];
+};
+
+struct mhw_section_header
+{
+  u32 signature;
+  u32 unknown0;
+  u64 size;
+};
+
+struct mhw_section0
+{
+  mhw_section_header header;
+  u8 unknown0[3145728];
+};
+
+struct mhw_section1
+{
+  mhw_section_header header;
+  u8 unknown0[1024];
+};
+
+struct mhw_section2
+{
+  mhw_section_header header;
+  u8 unknown0[56];
+};
+
+struct mhw_section3
+{
+  mhw_section_header header;
+  u8 unknown0[6291456];
+};
+
+struct mhw_b_save
+{
+  mhw_save_header header;
+  mhw_section_offsets offsets;
+
+  // Section 0: Keybinds and others
+  mhw_section0 section0;
+  // Section 1: Settings and things
+  mhw_section1 section1;
+  // Section 2: content unknown
+  mhw_section2 section2;
+  // Section 3: contains save slots
+  mhw_section3 section3;
+
+  u8 unknown0[8];
+};
+
+union mhw_save_raw
+{
+  mhw_b_save save;
+  u8 data[sizeof(mhw_b_save)];
+};
+
+mhw_b_save mhw_save;
+
+Assert(9438432 == sizeof(mhw_b_save), "Base game save file size invalid.");

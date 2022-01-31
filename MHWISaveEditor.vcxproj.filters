@@ -221,10 +221,15 @@
     <None Include="res\mapping\MonsterHunterWorld.CT" />
     <None Include="res\mapping\allow_layered_crafts.1sc" />
     <None Include="res\mapping\ProgressStructGenerator.ipynb" />
+    <None Include="res\mapping\SAVEDATA1000_basegame.bt" />
+    <None Include="res\mapping\dlc.csv" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\mapping\note.txt" />
   </ItemGroup>
 </Project>
