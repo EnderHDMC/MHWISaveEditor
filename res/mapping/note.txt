@@ -1,0 +1,2 @@
+A helpful regex to remove all LastState entries in the Cheat Tables.
+^\s+<LastState( Value=".*")?( RealAddress="[0-9A-Z]+")?\/>\r\n

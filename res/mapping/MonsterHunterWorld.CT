@@ -4,7 +4,6 @@
     <CheatEntry>
       <ID>1337101501</ID>
       <Description>"Check Game Version"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{$lua}
 if syntaxcheck then return end
@@ -37,7 +36,6 @@ end
     <CheatEntry>
       <ID>7715</ID>
       <Description>"Compact CE Mode (F9) (Faith)"</Description>
-      <LastState/>
       <Color>FF0000</Color>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
@@ -59,7 +57,6 @@ LuaCall(cycleFullCompact(nil,false))
     <CheatEntry>
       <ID>19021</ID>
       <Description>"Allow VEH"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{$LUA}
 if syntaxcheck then return end
@@ -78,7 +75,6 @@ writeBytes(symbolName, bt)
       <ID>4340</ID>
       <Description>"[Marcus101RR's Scripts]"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <Color>FF0000</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
@@ -86,7 +82,6 @@ writeBytes(symbolName, bt)
           <ID>1337095004</ID>
           <Description>"Pointers"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version:
@@ -194,7 +189,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337101352</ID>
               <Description>"System"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -214,7 +208,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>5492</ID>
               <Description>"Player Data (pl_params)"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -249,7 +242,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>13124</ID>
                   <Description>"Health Header"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -312,7 +304,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337091677</ID>
                   <Description>"Stamina"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -465,7 +456,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337091686</ID>
                   <Description>"Limit Multipliers"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -651,7 +641,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337091724</ID>
                   <Description>"Motion Data"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -813,14 +802,12 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337091697</ID>
                   <Description>"Augments"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>1337091698</ID>
                       <Description>"Attack Increase"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -856,7 +843,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091701</ID>
                       <Description>"Affinity Increase"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -892,7 +878,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091705</ID>
                       <Description>"Defense Increase"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -928,7 +913,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091713</ID>
                       <Description>"Divine Blessing Chance"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -964,7 +948,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091709</ID>
                       <Description>"Divine Blessing Damage Reduction"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1000,7 +983,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091717</ID>
                       <Description>"Health Regen"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1038,14 +1020,12 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337091833</ID>
                   <Description>"Advanced Augments"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>1337091834</ID>
                       <Description>"Attack Increase"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1090,7 +1070,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091864</ID>
                       <Description>"Affinity Increase"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1135,7 +1114,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091859</ID>
                       <Description>"Defense Increase"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1180,7 +1158,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091869</ID>
                       <Description>"Divine Blessing Chance"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1225,7 +1202,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091874</ID>
                       <Description>"Divine Blessing Damage Reduction"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1270,7 +1246,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091879</ID>
                       <Description>"Health Regen"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1315,7 +1290,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091885</ID>
                       <Description>"Element/Status Effect Up"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1360,7 +1334,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091891</ID>
                       <Description>"??"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1405,7 +1378,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>1337091896</ID>
                       <Description>"??"</Description>
                       <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -1461,7 +1433,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337091683</ID>
                   <Description>"Slinger Capacity (Max)"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -1560,7 +1531,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337100012</ID>
                   <Description>"Dragon Seal"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <Address>pl_params</Address>
                   <Offsets>
@@ -1609,7 +1579,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337091681</ID>
                   <Description>"DragonKnightJump"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -1654,7 +1623,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337100006</ID>
                   <Description>"Claw"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <Address>pl_params</Address>
                   <Offsets>
@@ -1714,7 +1682,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>6160</ID>
               <Description>"Player Data (pl_item_params)"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -2247,7 +2214,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337092269</ID>
               <Description>"Player Data (pl_skill_params)"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -2269,7 +2235,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092278</ID>
                   <Description>"Latent Power"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2308,7 +2273,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101203</ID>
                   <Description>"Heroics"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2327,7 +2291,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101205</ID>
                   <Description>"Ammo Up"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2376,7 +2339,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101192</ID>
                   <Description>"Wide-Range"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2475,7 +2437,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092315</ID>
                   <Description>"Slinger Capacity"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2584,7 +2545,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337099959</ID>
                   <Description>"??"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <Address>pl_skill_params</Address>
                   <Offsets>
@@ -2606,7 +2566,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092290</ID>
                   <Description>"Health Boost (Food)"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2669,7 +2628,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092296</ID>
                   <Description>"Stamina Boost (Food)"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2705,7 +2663,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092300</ID>
                   <Description>"Attack Boost (Food)"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2750,7 +2707,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092305</ID>
                   <Description>"Defense Boost (Food)"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2795,7 +2751,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092310</ID>
                   <Description>"Elemental Boost (Food)"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2840,7 +2795,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092345</ID>
                   <Description>"Felyne Rider"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2858,7 +2812,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092342</ID>
                   <Description>"Felyne Defender"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2903,7 +2856,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092360</ID>
                   <Description>"Felyne Harvester"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2921,7 +2873,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092366</ID>
                   <Description>"Felyne Heroics"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2957,7 +2908,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337099965</ID>
                   <Description>"Felyne Slugger"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2975,7 +2925,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092347</ID>
                   <Description>"Felyne Booster"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -2993,7 +2942,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101188</ID>
                   <Description>"Frostcraft"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -3104,14 +3052,12 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337092449</ID>
               <Description>"Armor Skill Data (skill_dat)"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337099948</ID>
                   <Description>"Base"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <Address>armor_skills</Address>
                   <Offsets>
@@ -3163,13 +3109,11 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092451</ID>
                   <Description>"Commission Guidance"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>1337092454</ID>
                       <Description>"4 Sets"</Description>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -3191,13 +3135,11 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092455</ID>
                   <Description>"Geologist"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>1337092456</ID>
                       <Description>"Level 3"</Description>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -3241,13 +3183,11 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337093748</ID>
                   <Description>"Partbreaker"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>1337093749</ID>
                       <Description>"Level 0"</Description>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -3267,7 +3207,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                     <CheatEntry>
                       <ID>1337101121</ID>
                       <Description>"Level 3"</Description>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -3289,13 +3228,11 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101092</ID>
                   <Description>"Slugger"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>1337101093</ID>
                       <Description>"Level 5"</Description>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -3317,7 +3254,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101372</ID>
                   <Description>"Scentbound"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -3359,7 +3295,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                     <CheatEntry>
                       <ID>1337101373</ID>
                       <Description>"Level 5"</Description>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                     </CheatEntry>
                   </CheatEntries>
@@ -3369,14 +3304,12 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
             <CheatEntry>
               <ID>1337101514</ID>
               <Description>"Jewel Data"</Description>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337101513</ID>
                   <Description>"Start"</Description>
                   <DropDownListLink>listItems</DropDownListLink>
-                  <LastState Value="727" RealAddress="BD6335D8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"MonsterHunterWorld.exe"+05072538</Address>
@@ -3391,7 +3324,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101515</ID>
                   <Description>"End"</Description>
                   <DropDownListLink>listItems</DropDownListLink>
-                  <LastState Value="2275" RealAddress="BD63FF58"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"MonsterHunterWorld.exe"+05072538</Address>
@@ -3408,7 +3340,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337095989</ID>
               <Description>"Tool Data (askill_params)"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3799,7 +3730,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337101308</ID>
               <Description>"Armor Stat Data"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3845,7 +3775,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>19199</ID>
               <Description>"World"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3894,14 +3823,12 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337091797</ID>
               <Description>"Monsters"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337092200</ID>
                   <Description>"Monster 1"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -3979,7 +3906,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092201</ID>
                   <Description>"Monster 2"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -4034,7 +3960,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092202</ID>
                   <Description>"Monster 3"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -4091,7 +4016,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>12663</ID>
               <Description>"Player"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -4109,7 +4033,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101174</ID>
                   <Description>"Weapon"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -4266,7 +4189,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101425</ID>
                   <Description>"Vitality"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -4344,7 +4266,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092351</ID>
                   <Description>"Food Skills"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -4480,7 +4401,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101423</ID>
                   <Description>"Armor"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -4583,14 +4503,12 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>12719</ID>
                   <Description>"Buffs"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>12740</ID>
                       <Description>"Hunting Horn Buffs"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>0080FF</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
@@ -5120,7 +5038,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                       <ID>19382</ID>
                       <Description>"Palico Buffs"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>A00000</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
@@ -5794,7 +5711,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101441</ID>
                   <Description>"Tools"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -6089,7 +6005,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>13129</ID>
               <Description>"Item Capacity"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -6296,7 +6211,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337092076</ID>
               <Description>"Gathering Spots"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -6393,7 +6307,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>12661</ID>
               <Description>"Kulve Taroth"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <Color>000000</Color>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
@@ -6461,7 +6374,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>12680</ID>
                   <Description>"Objectives"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -6851,14 +6763,12 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337092488</ID>
               <Description>"Safi'Jiiva"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337093743</ID>
                   <Description>"Lobby"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -6948,7 +6858,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337093794</ID>
                   <Description>"Session"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -6987,7 +6896,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337092498</ID>
                   <Description>"Objectives"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -7196,7 +7104,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337094986</ID>
               <Description>"Quest Progress"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -7538,7 +7445,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337101339</ID>
                   <Description>"Weather Expeditions"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -7646,7 +7552,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337099941</ID>
                   <Description>"Gadget Gains"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <Address>session_quest</Address>
                   <Offsets>
@@ -7713,7 +7618,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
                   <ID>1337099946</ID>
                   <Description>"Tailraider Gain"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <Address>session_quest</Address>
                   <Offsets>
@@ -7836,7 +7740,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337095005</ID>
               <Description>"Steamworks"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -7939,7 +7842,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337101234</ID>
               <Description>"Harvest Box Data"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -7991,7 +7893,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
               <ID>1337101251</ID>
               <Description>"Steamworks Loot Table"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -8212,7 +8113,6 @@ define(session_quest,MonsterHunterWorld.exe+4EC70C0) //Broken
           <ID>19304</ID>
           <Description>"Save Editor"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 globalalloc(gSaveData,1024)
@@ -8333,7 +8233,6 @@ unregistersymbol(slot_destination_index)
             <CheatEntry>
               <ID>1337092061</ID>
               <Description>"Duplicate"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 {$lua}
@@ -8393,20 +8292,19 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19452</ID>
               <Description>"Voucher Data"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>19443</ID>
                   <Description>"Character Edit Voucher"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
-                      <ID>19444</ID>
-                      <Description>"MHW Voucher Used"</Description>
-                      <VariableType>4 Bytes</VariableType>
+                      <ID>1337101886</ID>
+                      <Description>"Character Edit Voucher"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
                       <Address>save_data</Address>
                       <Offsets>
                         <Offset>520</Offset>
@@ -8414,7 +8312,7 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     </CheatEntry>
                     <CheatEntry>
                       <ID>19445</ID>
-                      <Description>"Iceborne Voucher Used"</Description>
+                      <Description>"Character Edit Voucher: Free"</Description>
                       <VariableType>Byte</VariableType>
                       <Address>save_data</Address>
                       <Offsets>
@@ -8422,8 +8320,39 @@ print("Duplicated Save Complete: ",slot_destination_index)
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
-                      <ID>19446</ID>
-                      <Description>"1-Pack Used?"</Description>
+                      <ID>1337101891</ID>
+                      <Description>"Character Edit Voucher: Single Voucher"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>save_data</Address>
+                      <Offsets>
+                        <Offset>3A68</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101892</ID>
+                      <Description>"Character Edit Voucher: Two-Voucher Pack"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>save_data</Address>
+                      <Offsets>
+                        <Offset>3A69</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101893</ID>
+                      <Description>"Character Edit Voucher: Three-Voucher Pack"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>save_data</Address>
+                      <Offsets>
+                        <Offset>3A6A</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101894</ID>
+                      <Description>"Character &amp; Palico Edit Voucher: Single Voucher"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>Byte</VariableType>
                       <Address>save_data</Address>
                       <Offsets>
@@ -8431,8 +8360,9 @@ print("Duplicated Save Complete: ",slot_destination_index)
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
-                      <ID>19447</ID>
-                      <Description>"2-Pack Used?"</Description>
+                      <ID>1337101895</ID>
+                      <Description>"Character &amp; Palico Edit Voucher: Two-Voucher Pack"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>Byte</VariableType>
                       <Address>save_data</Address>
                       <Offsets>
@@ -8440,8 +8370,9 @@ print("Duplicated Save Complete: ",slot_destination_index)
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
-                      <ID>19448</ID>
-                      <Description>"3-Pack Used"</Description>
+                      <ID>1337101896</ID>
+                      <Description>"Character &amp; Palico Edit Voucher: Three-Voucher Pack"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
                       <VariableType>Byte</VariableType>
                       <Address>save_data</Address>
                       <Offsets>
@@ -8454,25 +8385,76 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>19449</ID>
                   <Description>"Palico Edit Voucher"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
-                      <ID>19450</ID>
-                      <Description>"MHW Voucher Used"</Description>
-                      <VariableType>4 Bytes</VariableType>
+                      <ID>1337101897</ID>
+                      <Description>"Palico Edit Voucher"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
                       <Address>save_data</Address>
                       <Offsets>
                         <Offset>3AB8</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
-                      <ID>19451</ID>
-                      <Description>"3-Pack Used"</Description>
-                      <VariableType>4 Bytes</VariableType>
+                      <ID>1337101898</ID>
+                      <Description>"Palico Edit Voucher: Single Voucher"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
                       <Address>save_data</Address>
                       <Offsets>
-                        <Offset>3ABC</Offset>
+                        <Offset>3AA1</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101899</ID>
+                      <Description>"Palico Edit Voucher: Two-Voucher Pack"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>save_data</Address>
+                      <Offsets>
+                        <Offset>3AA2</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101900</ID>
+                      <Description>"Palico Edit Voucher: Three-Voucher Pack"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>save_data</Address>
+                      <Offsets>
+                        <Offset>3AA3</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101901</ID>
+                      <Description>"Character &amp; Palico Edit Voucher: Single Voucher"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>save_data</Address>
+                      <Offsets>
+                        <Offset>3AB9</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101902</ID>
+                      <Description>"Character &amp; Palico Edit Voucher: Two-Voucher Pack"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>save_data</Address>
+                      <Offsets>
+                        <Offset>3ABA</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>1337101903</ID>
+                      <Description>"Character &amp; Palico Edit Voucher: Three-Voucher Pack"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>save_data</Address>
+                      <Offsets>
+                        <Offset>3ABB</Offset>
                       </Offsets>
                     </CheatEntry>
                   </CheatEntries>
@@ -8509,7 +8491,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19315</ID>
               <Description>"Character"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -8617,7 +8598,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337092159</ID>
               <Description>"Current Equipment Index"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -8695,7 +8675,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337098416</ID>
               <Description>"Appearance"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -8750,7 +8729,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101296</ID>
                   <Description>"Eyebrows"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -8794,7 +8772,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101300</ID>
                   <Description>"Eyes"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -8840,7 +8817,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337092152</ID>
               <Description>"Inventory"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -8859,7 +8835,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337092155</ID>
                   <Description>"Item Pouch"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -8881,7 +8856,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337092415</ID>
                   <Description>"Item Box"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -8903,7 +8877,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101314</ID>
                   <Description>"Materials Pouch"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -8927,7 +8900,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101506</ID>
                   <Description>"Materials Box"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -8951,7 +8923,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101509</ID>
                   <Description>"Decorations Box"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -8977,7 +8948,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337092146</ID>
               <Description>"Equipment"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -9000,7 +8970,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19538</ID>
               <Description>"Layered Armor"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <Color>FF8080</Color>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
@@ -9050,7 +9019,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337101521</ID>
               <Description>"Progression"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <ShowAsSigned>0</ShowAsSigned>
               <GroupHeader>1</GroupHeader>
               <Address>[gSave]+102424</Address>
@@ -9059,7 +9027,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101842</ID>
                   <Description>"Deliveries"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <GroupHeader>1</GroupHeader>
                   <Address>+0</Address>
@@ -9300,7 +9267,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101882</ID>
                   <Description>"Guiding Lands"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <GroupHeader>1</GroupHeader>
                   <Address>+0</Address>
@@ -9331,7 +9297,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101844</ID>
                   <Description>"NPC Chat"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <GroupHeader>1</GroupHeader>
                   <Address>+0</Address>
@@ -9442,7 +9407,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101878</ID>
                   <Description>"Events"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <GroupHeader>1</GroupHeader>
                   <Address>+0</Address>
@@ -9473,7 +9437,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101841</ID>
                   <Description>"Misc"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <GroupHeader>1</GroupHeader>
                   <Address>+0</Address>
@@ -9734,7 +9697,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101840</ID>
                   <Description>"Layered"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <GroupHeader>1</GroupHeader>
                   <Address>+0</Address>
@@ -9743,7 +9705,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                       <ID>1337101858</ID>
                       <Description>"Low Rank / High Rank"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <GroupHeader>1</GroupHeader>
                       <Address>+0</Address>
@@ -10994,7 +10955,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                       <ID>1337101859</ID>
                       <Description>"Master Rank"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <GroupHeader>1</GroupHeader>
                       <Address>+0</Address>
@@ -12489,7 +12449,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19412</ID>
               <Description>"Monster Stats"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -12550,7 +12509,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337092062</ID>
               <Description>"Discovered Items"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -12622,7 +12580,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19351</ID>
               <Description>"Endemic Life"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -12756,7 +12713,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337092103</ID>
               <Description>"Progression Flags"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -13001,7 +12957,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337092394</ID>
                   <Description>"Aquired Flags"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -13079,7 +13034,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092405</ID>
                       <Description>"??"</Description>
-                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>0</BitStart>
                       <BitLength>1</BitLength>
@@ -13089,7 +13043,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092406</ID>
                       <Description>"??"</Description>
-                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>1</BitStart>
                       <BitLength>1</BitLength>
@@ -13099,7 +13052,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092407</ID>
                       <Description>"??"</Description>
-                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>2</BitStart>
                       <BitLength>1</BitLength>
@@ -13109,7 +13061,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092408</ID>
                       <Description>"??"</Description>
-                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>3</BitStart>
                       <BitLength>1</BitLength>
@@ -13119,7 +13070,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092409</ID>
                       <Description>"??"</Description>
-                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>4</BitStart>
                       <BitLength>1</BitLength>
@@ -13129,7 +13079,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092410</ID>
                       <Description>"??"</Description>
-                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>5</BitStart>
                       <BitLength>1</BitLength>
@@ -13139,7 +13088,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092411</ID>
                       <Description>"??"</Description>
-                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>6</BitStart>
                       <BitLength>1</BitLength>
@@ -13149,7 +13097,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                     <CheatEntry>
                       <ID>1337092412</ID>
                       <Description>"??"</Description>
-                      <LastState Value="0" RealAddress="7F672503"/>
                       <VariableType>Binary</VariableType>
                       <BitStart>7</BitStart>
                       <BitLength>1</BitLength>
@@ -13162,7 +13109,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337092395</ID>
                   <Description>"Completed Flags"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -13686,7 +13632,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337101392</ID>
               <Description>"Cutscene Unlocked"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -13709,7 +13654,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19316</ID>
               <Description>"Palico"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -13806,7 +13750,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19331</ID>
               <Description>"Botanist"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -13901,7 +13844,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337101228</ID>
                   <Description>"Harvest Box"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -13926,14 +13868,12 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337092193</ID>
               <Description>"Achievements"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337092253</ID>
                   <Description>"Monster Hunter World"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -14392,7 +14332,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337092198</ID>
                   <Description>"Guild Card Display"</Description>
                   <Options moHideChildren="1" moManualExpandCollapse="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -14422,7 +14361,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19350</ID>
               <Description>"Steamworks"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -14455,7 +14393,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337092169</ID>
               <Description>"NPC Chat Flags"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -14480,7 +14417,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19419</ID>
               <Description>"Quests Completed"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -14531,7 +14467,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>19427</ID>
               <Description>"Weapon Usage"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -14599,7 +14534,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337092189</ID>
               <Description>"Guidling Lands Research Level"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -14626,7 +14560,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337101103</ID>
               <Description>"Iceborne Progression Flags"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -14662,7 +14595,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337091800</ID>
               <Description>"Unity / Pawswap / Treasure Hunt"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -14851,7 +14783,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337093796</ID>
               <Description>"Lynian Observatory"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -15035,14 +14966,12 @@ print("Duplicated Save Complete: ",slot_destination_index)
               <ID>1337091906</ID>
               <Description>"Guiding Lands"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337091910</ID>
                   <Description>"Region (Level)"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -15100,7 +15029,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337091915</ID>
                   <Description>"Mining Outcrops (Level)"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -15205,7 +15133,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337091921</ID>
                   <Description>"Bone Piles (Level)"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -15400,7 +15327,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337091939</ID>
                   <Description>"Region Level Unlocked"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -15451,7 +15377,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337091944</ID>
                   <Description>"Analysis Progress"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -15562,7 +15487,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
                   <ID>1337096040</ID>
                   <Description>"Completed Analysis"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -15699,7 +15623,6 @@ print("Duplicated Save Complete: ",slot_destination_index)
           <ID>1337099993</ID>
           <Description>"Get Selected Item (Item Box)"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version:
@@ -15824,7 +15747,6 @@ MonsterHunterWorld.exe+1D5B717: 4C 8D 44 24 40              - lea r8,[rsp+40]
           <ID>19052</ID>
           <Description>"Equipment Data Editor (Equipment Info)"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -15979,7 +15901,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
               <ID>19178</ID>
               <Description>"Decorations"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -16021,7 +15942,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
               <ID>19179</ID>
               <Description>"Bowgun Mods"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -16085,7 +16005,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
               <ID>19172</ID>
               <Description>"Augments"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -16124,7 +16043,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
               <ID>19383</ID>
               <Description>"Advanced Augments"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -16196,14 +16114,12 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
               <ID>1337091673</ID>
               <Description>"Custom Upgrades"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337099703</ID>
                   <Description>"Great Sword"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -16356,7 +16272,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099728</ID>
                   <Description>"Long Sword"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -16497,7 +16412,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099729</ID>
                   <Description>"Sword &amp; Shield"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -16638,7 +16552,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099742</ID>
                   <Description>"Dual Blades"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -16779,7 +16692,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099755</ID>
                   <Description>"Hammer"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -16920,7 +16832,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099768</ID>
                   <Description>"Hunting Horn"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -17061,7 +16972,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099781</ID>
                   <Description>"Lance"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -17202,7 +17112,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099794</ID>
                   <Description>"Gunlance"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -17343,7 +17252,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099807</ID>
                   <Description>"Switch Axe"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -17484,7 +17392,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099820</ID>
                   <Description>"Charge Blade"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -17625,7 +17532,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099833</ID>
                   <Description>"Insect Glaive"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -17766,7 +17672,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099846</ID>
                   <Description>"Light Bowgun"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -17907,7 +17812,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099859</ID>
                   <Description>"Heavy Bowgun"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18048,7 +17952,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099872</ID>
                   <Description>"Bow"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18191,7 +18094,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
               <ID>1337095991</ID>
               <Description>"Layered Weapon"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -18209,7 +18111,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099665</ID>
                   <Description>"Great Sword"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18240,7 +18141,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099666</ID>
                   <Description>"Long Sword"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18271,7 +18171,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099669</ID>
                   <Description>"Sword &amp; Shield"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18302,7 +18201,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099678</ID>
                   <Description>"Dual Blades"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18333,7 +18231,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099679</ID>
                   <Description>"Hammer"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18364,7 +18261,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099680</ID>
                   <Description>"Hunting Horn"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18395,7 +18291,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099687</ID>
                   <Description>"Lance"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18426,7 +18321,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099688</ID>
                   <Description>"Gunlance"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18457,7 +18351,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099689</ID>
                   <Description>"Switch Axe"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18488,7 +18381,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099692</ID>
                   <Description>"Charge Blade"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18519,7 +18411,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099695</ID>
                   <Description>"Insect Glaive"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18550,7 +18441,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099700</ID>
                   <Description>"Light Bowgun"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18581,7 +18471,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099701</ID>
                   <Description>"Heavy Bowgun"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18612,7 +18501,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
                   <ID>1337099702</ID>
                   <Description>"Bow"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -18645,7 +18533,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
               <ID>1337093734</ID>
               <Description>"Awakened Abilities"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -18726,7 +18613,6 @@ MonsterHunterWorld.exe+62E275: 41 8B 40 08  - mov eax,[r8+08]
           <ID>13052</ID>
           <Description>"Weapon Editor (View Equipment)"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <Color>000000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -18845,7 +18731,6 @@ unregistersymbol(gWeaponM)
               <ID>19153</ID>
               <Description>"Melee"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -19018,7 +18903,6 @@ unregistersymbol(gWeaponM)
               <ID>19154</ID>
               <Description>"Range"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -19191,7 +19075,6 @@ unregistersymbol(gWeaponM)
           <ID>13103</ID>
           <Description>"Armor Data Editor (Equipment Info)"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <Color>000000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -19412,7 +19295,6 @@ MonsterHunterWorld.exe+18C5F0A: E8 E1 8D FD FF     - call MonsterHunterWorld.exe
               <ID>13105</ID>
               <Description>"Resistances"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <Color>400080</Color>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
@@ -19589,7 +19471,6 @@ MonsterHunterWorld.exe+18C5F0A: E8 E1 8D FD FF     - call MonsterHunterWorld.exe
           <ID>1337101417</ID>
           <Description>"Palico Weapon Editor"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -19754,7 +19635,6 @@ MonsterHunterWorld.exe+18D67D0: E8 3B 22 FD FF        - call MonsterHunterWorld.
           <ID>1337101406</ID>
           <Description>"Palico Armor Editor"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -19880,7 +19760,6 @@ unregistersymbol(gPalicoArmor)
           <ID>1337101064</ID>
           <Description>"Jewel Data Editor"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version:
@@ -20027,7 +19906,6 @@ unregistersymbol(gJewelData)
           <ID>19101</ID>
           <Description>"Investigation Editor"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -20186,7 +20064,6 @@ unregistersymbol(getInvest)
               <ID>19453</ID>
               <Description>"Monster Data"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -20472,7 +20349,6 @@ unregistersymbol(getInvest)
           <ID>13027</ID>
           <Description>"Expedition Editor"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <Color>000000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -20618,7 +20494,6 @@ unregistersymbol(gExped)
           <ID>19471</ID>
           <Description>"Quest Editor"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -20726,7 +20601,6 @@ unregistersymbol(gMonSlot)
               <ID>19499</ID>
               <Description>"Quest Goals"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -21024,7 +20898,6 @@ unregistersymbol(gMonSlot)
               <ID>19474</ID>
               <Description>"Monsters"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -21152,7 +21025,6 @@ unregistersymbol(gMonSlot)
               <ID>19531</ID>
               <Description>"Small Monster"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -21197,7 +21069,6 @@ unregistersymbol(gMonSlot)
               <ID>19521</ID>
               <Description>"Spawn Rules"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -21279,7 +21150,6 @@ unregistersymbol(gMonSlot)
         <CheatEntry>
           <ID>6422</ID>
           <Description>"Bypass Player Limit (Quests)"</Description>
-          <LastState/>
           <Color>000000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -21352,7 +21222,6 @@ dealloc(newmem)
         <CheatEntry>
           <ID>19394</ID>
           <Description>"Bypass Armor Upgrade Limit"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version:
@@ -21423,7 +21292,6 @@ dealloc(newmem)
           <ID>1337091786</ID>
           <Description>"Force Selected Quest"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -21515,7 +21383,6 @@ unregistersymbol(gFQuest)
           <ID>1337096015</ID>
           <Description>"Force Monster Difficulty"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -21594,7 +21461,6 @@ unregistersymbol(gEmSet)
           <ID>1337092089</ID>
           <Description>"Get Lure Selection"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -21708,7 +21574,6 @@ unregistersymbol(gFMonster)
         <CheatEntry>
           <ID>1337099974</ID>
           <Description>"Activate Most Feyline Skills"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -21772,7 +21637,6 @@ dealloc(newmem)
         <CheatEntry>
           <ID>1337101108</ID>
           <Description>"Disable Crafting Material Consumption"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version:
@@ -21830,7 +21694,6 @@ unregistersymbol(gConsumeMat)
         <CheatEntry>
           <ID>1337101240</ID>
           <Description>"Larger Harvests Per Quest"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 aobscanmodule(getHarvestBox,MonsterHunterWorld.exe,8B 41 24 C3 8B 41 20) // should be unique
@@ -21897,7 +21760,6 @@ MonsterHunterWorld.exe+F2FA7C: CC                    - int 3
         <CheatEntry>
           <ID>1337101281</ID>
           <Description>"Arena Quests Bypass Gear"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 aobscanmodule(gBypassEquip,MonsterHunterWorld.exe,48 85 FF 0F 84 7E 02 00 00) // should be unique
@@ -21930,7 +21792,6 @@ unregistersymbol(gArenaQuest)
         <CheatEntry>
           <ID>1337101313</ID>
           <Description>"Bypass Give Rarity"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 aobscanmodule(gBypassRarity,MonsterHunterWorld.exe,83 F8 02 77 ?? E8 ?? ?? ?? ?? 84 C0) // should be unique
@@ -21951,7 +21812,6 @@ unregistersymbol(gBypassRarity)
         <CheatEntry>
           <ID>1337101317</ID>
           <Description>"Keep Materials Pouch"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -21973,7 +21833,6 @@ unregistersymbol(gKeepMaterials)
         <CheatEntry>
           <ID>1337101499</ID>
           <Description>"Infinite Item Usage"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -21994,7 +21853,6 @@ unregistersymbol(gInfiniteItems)
         <CheatEntry>
           <ID>1337101354</ID>
           <Description>"Infinite Special Ammo"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -22053,7 +21911,6 @@ MonsterHunterWorld.exe+216BA7D: CC                             - int 3
           <ID>1337101362</ID>
           <Description>"Enable Give Item/Material Scripts"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -22136,7 +21993,6 @@ MonsterHunterWorld.exe+1358FA3: 48 83 C4 20        - add rsp,20
             <CheatEntry>
               <ID>1337101399</ID>
               <Description>"Give All Items"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 
@@ -22149,7 +22005,6 @@ MonsterHunterWorld.exe+1358FA3: 48 83 C4 20        - add rsp,20
             <CheatEntry>
               <ID>1337101400</ID>
               <Description>"Give All Materials"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 
@@ -22162,7 +22017,6 @@ MonsterHunterWorld.exe+1358FA3: 48 83 C4 20        - add rsp,20
             <CheatEntry>
               <ID>1337101505</ID>
               <Description>"Give All Decorations"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 
@@ -22177,7 +22031,6 @@ MonsterHunterWorld.exe+1358FA3: 48 83 C4 20        - add rsp,20
         <CheatEntry>
           <ID>1337096048</ID>
           <Description>"Bypass Incorrect Value (Save Data)"</Description>
-          <LastState/>
           <Color>8000FF</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -22241,7 +22094,6 @@ dealloc(newmem)
         <CheatEntry>
           <ID>1337101330</ID>
           <Description>"Bypass 230-MW1 Code"</Description>
-          <LastState/>
           <Color>8000FF</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -22293,14 +22145,12 @@ MonsterHunterWorld.exe+1B1CADE: E8 ED 22 00 00              - call MonsterHunter
           <ID>12781</ID>
           <Description>"DEBUG"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <Color>0000FF</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>12782</ID>
               <Description>"INFORMATION"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 
@@ -22375,7 +22225,6 @@ Weapon Multiplier
               <ID>1337096017</ID>
               <Description>"Force Monster Stats"</Description>
               <Options moHideChildren="1"/>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -22525,7 +22374,6 @@ unregistersymbol(gEmDiff)
               <ID>4866</ID>
               <Description>"Quest Editor"</Description>
               <Options moHideChildren="1"/>
-              <LastState/>
               <Color>0000FF</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -22673,14 +22521,12 @@ Section 1
                   <ID>13036</ID>
                   <Description>"Display Information"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
                       <ID>13041</ID>
                       <Description>"Icons"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
@@ -23040,7 +22886,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                   <ID>4930</ID>
                   <Description>"quest goals"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <Color>8000FF</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
@@ -23322,7 +23167,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                       <ID>4947</ID>
                       <Description>"unused"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>808080</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
@@ -23460,7 +23304,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                   <ID>4915</ID>
                   <Description>"large monsters (queue)"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <Color>8000FF</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
@@ -23468,21 +23311,18 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                       <ID>12863</ID>
                       <Description>"large monster spawn-behavior"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>8000FF</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
                           <ID>12864</ID>
                           <Description>"0 = immediate spawn, 3 = no spawn?, 2 = replace dead?, 1 = ?, 4=?, 5=timed?"</Description>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>800040</Color>
                           <GroupHeader>1</GroupHeader>
                         </CheatEntry>
                         <CheatEntry>
                           <ID>12865</ID>
                           <Description>"maximum monsters/loot depends on quest type flags as well (slay quest for 5 monsters)"</Description>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>800040</Color>
                           <GroupHeader>1</GroupHeader>
                         </CheatEntry>
@@ -23629,7 +23469,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                           <ID>4972</ID>
                           <Description>"stats"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>8000FF</Color>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
@@ -23848,7 +23687,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                           <ID>12873</ID>
                           <Description>"stats"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>8000FF</Color>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
@@ -24067,7 +23905,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                           <ID>12889</ID>
                           <Description>"stats"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>8000FF</Color>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
@@ -24286,7 +24123,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                           <ID>12905</ID>
                           <Description>"stats"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>8000FF</Color>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
@@ -24505,7 +24341,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                           <ID>12921</ID>
                           <Description>"stats"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>8000FF</Color>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
@@ -24724,7 +24559,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                           <ID>12937</ID>
                           <Description>"stats"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>8000FF</Color>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
@@ -24943,7 +24777,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                           <ID>12953</ID>
                           <Description>"stats"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
                           <Color>8000FF</Color>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
@@ -25107,7 +24940,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                   <ID>5116</ID>
                   <Description>"small monsters"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <Color>8000FF</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
@@ -25209,7 +25041,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                   <ID>4904</ID>
                   <Description>"quest visuals"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <Color>8000FF</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
@@ -25225,7 +25056,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                       <ID>4911</ID>
                       <Description>"large monster icons"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>8000FF</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
@@ -25552,7 +25382,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                   <ID>12966</ID>
                   <Description>"map icons"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <Color>8000FF</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
@@ -26072,7 +25901,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                   <ID>5225</ID>
                   <Description>"arena lever"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <Color>8000FF</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
@@ -26143,7 +25971,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                   <ID>5211</ID>
                   <Description>"remaining unmapped"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <Color>8000FF</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
@@ -26151,7 +25978,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                       <ID>5230</ID>
                       <Description>"monster spawn modifiers"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>8000FF</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
@@ -26282,7 +26108,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                       <ID>5231</ID>
                       <Description>"group2 (quest type related?)"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>8000FF</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
@@ -26376,7 +26201,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                       <ID>5232</ID>
                       <Description>"group3 (unused?, section directly before arena fence-&gt;other special objects?)"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>8000FF</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
@@ -26764,7 +26588,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
                       <ID>5242</ID>
                       <Description>"group4 (unused?, unitialized memory)"</Description>
                       <Options moHideChildren="1"/>
-                      <LastState Value="" RealAddress="00000000"/>
                       <Color>8000FF</Color>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
@@ -27121,7 +26944,6 @@ C2 30 38 E7 3C 9B A6 44 00 00 00 00 00 00 00 00 38 01 00 00:30
             <CheatEntry>
               <ID>1337092131</ID>
               <Description>"Serious Handler Everywhere"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -27196,7 +27018,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>1337092151</ID>
               <Description>"Set Capacity"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{$lua}
 if syntaxcheck then return end
@@ -27225,7 +27046,6 @@ end
             <CheatEntry>
               <ID>1337092187</ID>
               <Description>"Fetch Base Addresses (Easy)"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{$lua}
 if syntaxcheck then return end
@@ -27293,14 +27113,12 @@ if syntaxcheck then return end
               <ID>1337092376</ID>
               <Description>"Definitions"</Description>
               <Options moHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337101003</ID>
                   <Description>"Upgrade Lists"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -28010,7 +27828,6 @@ if syntaxcheck then return end
                   <ID>1337101015</ID>
                   <Description>"Layered Weapon List"</Description>
                   <Options moHideChildren="1"/>
-                  <LastState Value="" RealAddress="00000000"/>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
@@ -35244,7 +35061,6 @@ A6 62 BB BA 92 A3 75 EC 00 00 00 00 00 00 00 00 63 00 00 00:Scarred Yian Garuga
             <CheatEntry>
               <ID>1337101361</ID>
               <Description>"Unbloat Script v2"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
 
@@ -35262,7 +35078,6 @@ unregistersymbol(unB_raw)
             <CheatEntry>
               <ID>1337101349</ID>
               <Description>"Unlock MHW DLCs"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>aobscanmodule(gDLCMHW,MonsterHunterWorld.exe,74 ?? 8B 53 50 48 8B)
 
@@ -35285,13 +35100,11 @@ unregistersymbol(gDLCMHW)
               <ID>1337101384</ID>
               <Description>"Unknown Pointers"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337101382</ID>
                   <Description>"??"</Description>
-                  <LastState Value="0" RealAddress="66DB499B"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
                   <Address>MonsterHunterWorld.exe+52247F8</Address>
@@ -35302,7 +35115,6 @@ unregistersymbol(gDLCMHW)
                 <CheatEntry>
                   <ID>1337101383</ID>
                   <Description>"??"</Description>
-                  <LastState Value="00000000" RealAddress="66DB49D8"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
@@ -35331,7 +35143,6 @@ unregistersymbol(gDLCMHW)
 https://api.slg.capcom.jp/prod/:Real Server
 https://api.slgdev.capcom.jp/dev:Developer
 </DropDownList>
-              <LastState RealAddress="143445788"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>32</Length>
@@ -35360,7 +35171,6 @@ https://api.slgdev.capcom.jp/dev:Developer
             <CheatEntry>
               <ID>1337101518</ID>
               <Description>"String"</Description>
-              <LastState RealAddress="64672F5B"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>14</Length>
@@ -35377,7 +35187,6 @@ https://api.slgdev.capcom.jp/dev:Developer
             <CheatEntry>
               <ID>1337101519</ID>
               <Description>"M1"</Description>
-              <LastState RealAddress="6476BDEC"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>13</Length>
@@ -35394,7 +35203,6 @@ https://api.slgdev.capcom.jp/dev:Developer
             <CheatEntry>
               <ID>1337101520</ID>
               <Description>"M2"</Description>
-              <LastState RealAddress="6476BEA3"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>10</Length>
@@ -35416,14 +35224,12 @@ https://api.slgdev.capcom.jp/dev:Developer
       <ID>1337097855</ID>
       <Description>"[Icon Five Scripts]"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <Color>808000</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>1337096550</ID>
           <Description>"Inf Stamina"</Description>
-          <LastState/>
           <Color>FF8000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35474,7 +35280,6 @@ unregistersymbol(InfStamina3)
         <CheatEntry>
           <ID>19027</ID>
           <Description>"Max Sharpness"</Description>
-          <LastState/>
           <Color>000000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35517,7 +35322,6 @@ dealloc(newmem)
         <CheatEntry>
           <ID>1337097852</ID>
           <Description>"Ignore Crafting Requirements "</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version:
@@ -35554,7 +35358,6 @@ dealloc( Hook )
         <CheatEntry>
           <ID>1337096500</ID>
           <Description>"Unlocking Equipment Manufacturing"</Description>
-          <LastState/>
           <Color>FF8080</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35594,14 +35397,12 @@ unregistersymbol( UnTeam )
           <ID>19041</ID>
           <Description>"[Weapon Buffs]"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <Color>000080</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>19030</ID>
               <Description>"Instantly Charged GS"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35643,7 +35444,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>19029</ID>
               <Description>"Inf Spirit Gauge"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35686,7 +35486,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>19031</ID>
               <Description>"Inf Demon Mode"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35728,7 +35527,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>19077</ID>
               <Description>"Fully Charged Switch Axe"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35769,7 +35567,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>10</ID>
               <Description>"Inf Switch Axe power"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -35839,7 +35636,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>19906</ID>
               <Description>"Inf GL Ammo/Wyrmstake"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35882,7 +35678,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>19907</ID>
               <Description>"No GL Cooldown"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35922,7 +35717,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>19032</ID>
               <Description>"Inf Charge Blade Phials + Always White"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -35964,7 +35758,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>1337101502</ID>
               <Description>"Inf Charge Blade Sword Charge"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -36005,7 +35798,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>1337101503</ID>
               <Description>"Inf Charge Blade Shield Charge"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -36046,7 +35838,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>19068</ID>
               <Description>"Inf Extract Duration"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -36087,7 +35878,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>19071</ID>
               <Description>"Inf Insect Glaive Stamina"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -36115,7 +35905,6 @@ unregistersymbol(infigstam)
             <CheatEntry>
               <ID>19072</ID>
               <Description>"Inf Insect Glaive Jumping Attack"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -36143,7 +35932,6 @@ unregistersymbol(infigja)
             <CheatEntry>
               <ID>1337101504</ID>
               <Description>"Bowgun No Reload"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : MonsterHunterWorld.exe
@@ -36187,13 +35975,11 @@ dealloc(newmem)
               <ID>1337096543</ID>
               <Description>"HBG Special Ammo Recharge Mult"</Description>
               <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>1337096542</ID>
                   <Description>"Inf Wyvernheart"</Description>
-                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version:
@@ -36253,7 +36039,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>1337096539</ID>
                   <Description>"Wyvernheart Multiplier"</Description>
-                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -36354,7 +36139,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>1337096541</ID>
                   <Description>"Wyvernsnipe Multiplier"</Description>
-                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -36455,7 +36239,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>1337096544</ID>
                   <Description>"Wyvernheart Rapidfire"</Description>
-                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>{ Game   : MonsterHunterWorld.exe
   Version: 
@@ -36561,7 +36344,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>1337097837</ID>
                   <Description>"No Recoil"</Description>
-                  <LastState/>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
 aobscanmodule(Bowngun,MonsterHunterWorld.exe,48 63 86 74 38 01 00) // should be unique
@@ -36627,7 +36409,6 @@ dealloc(BowHOCK)
             <CheatEntry>
               <ID>19080</ID>
               <Description>"Max Bow Charge"</Description>
-              <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[ENABLE]
@@ -37205,7 +36986,7 @@ dealloc(newmem)
     </SymbolEntry>
     <SymbolEntry>
       <Name>gSaveData</Name>
-      <Address>67DB0000</Address>
+      <Address>005F0000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
   <Comments>v1.9

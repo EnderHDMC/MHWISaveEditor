@@ -1753,22 +1753,31 @@ struct mhw_section1
   u8 character_edit_voucher;
   u8 unknown5[3];
   u16 dlc[512];
-  u8 unknown6[69];
+  u8 unknown6[4];
+  u8 character_edit_voucher_single_voucher;
+  u8 character_edit_voucher_two_voucher_pack;
+  u8 character_edit_voucher_three_voucher_pack;
+  u8 unknown7[51];
+  u8 palico_edit_voucher_single_voucher;
+  u8 palico_edit_voucher_two_voucher_pack;
+  u8 palico_edit_voucher_three_voucher_pack;
+  u8 unknown8[8];
   u8 character_edit_voucher_free;
-  u8 character_edit_voucher_1_pack;
-  u8 character_edit_voucher_2_pack;
-  u8 character_edit_voucher_3_pack;
-  u8 unknown7[8];
+  u8 character_c_palico_edit_voucher_single_voucher;
+  u8 character_c_palico_edit_two_voucher_pack;
+  u8 character_c_palico_edit_three_voucher_pack;
+  u8 unknown9[8];
   u8 palico_edit_voucher;
-  u8 unknown8[3];
-  u8 palico_edit_voucher_3_pack;
+  u8 character_p_palico_edit_voucher_single_voucher;
+  u8 character_p_palico_edit_two_voucher_pack;
+  u8 character_p_palico_edit_three_voucher_pack;
 
   // Working memory?
   // What's in it keeps changing, one moment it's save[0]'s
   // guiding lands levels, the next it's names.
-  // From [319] to the end usually.
+  // From [320] to the end usually.
   // It seems to just change intermittently.
-  u8 unknown9[2926];
+  u8 unknown10[2927];
 };
 
 struct mhw_section2
