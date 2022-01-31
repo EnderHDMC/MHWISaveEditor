@@ -5,157 +5,157 @@
 
 #pragma pack(push, 1)
 struct monsters128_u32 {
-  u32 anjanath, rathalos, aptonoth, jagras,
-    zorah_magdaros, mosswine, gajau, great_jagras,
-    kestodon_male, rathian, pink_rathian, azure_rathalos,
-    diablos, black_diablos, kirin, behemoth,
-    kushala_daora, lunastra, teostra, lavasioth,
-    deviljho, barroth, uragaan, leshen,
-    pukei_pukei, nergigante, xeno_jiiva, kulu_ya_ku,
-    tzitzi_ya_ku, jyaratodus, tobi_kadachi, paolumu,
-    legiana, great_girros, odogaron, radobaan,
-    vaal_hazak, dodogama, kulve_taroth, bazelgeuse,
-    apceros, kelbia, kelbib, hornetaur,
-    vespoid, mernos, kestodon_female, raphinos,
-    shamos, barnos, girros, ancient_leshen,
-    gastodon, noios, unknown0[2], gajalaka,
-    unknown1[4], tigrex, nargacuga, barioth,
-    savage_deviljho, brachydios, glavenus, acidic_glavenus,
-    fulgur_anjanath, coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
-    nightshade_paolumu, shrieking_legiana, ebony_odogaron, blackveil_vaal_hazak,
-    seething_bazelgeuse, beotodus, banbaro, velkhana,
-    namielle, shara_ishvalda, popo, anteka,
-    wulg, cortos, boaboa, alatreon,
-    gold_rathian, silver_rathalos, yian_garuga, rajang,
-    furious_rajang, brute_tigrex, zinogre, stygian_zinogre,
-    raging_brachydios, safi_jiiva, unknown2, scarred_yian_garuga,
-    frostfang_barioth, fatalis, unknown3[26];
+  u32 anjanath,            rathalos,          aptonoth,          jagras,
+      zorah_magdaros,      mosswine,          gajau,             great_jagras,
+      kestodon_male,       rathian,           pink_rathian,      azure_rathalos,
+      diablos,             black_diablos,     kirin,             behemoth,
+      kushala_daora,       lunastra,          teostra,           lavasioth,
+      deviljho,            barroth,           uragaan,           leshen,
+      pukei_pukei,         nergigante,        xeno_jiiva,        kulu_ya_ku,
+      tzitzi_ya_ku,        jyaratodus,        tobi_kadachi,      paolumu,
+      legiana,             great_girros,      odogaron,          radobaan,
+      vaal_hazak,          dodogama,          kulve_taroth,      bazelgeuse,
+      apceros,             kelbia,            kelbib,            hornetaur,
+      vespoid,             mernos,            kestodon_female,   raphinos,
+      shamos,              barnos,            girros,            ancient_leshen,
+      gastodon,            noios,             unknown0[2],       gajalaka,
+      unknown1[4],         tigrex,            nargacuga,         barioth,
+      savage_deviljho,     brachydios,        glavenus,          acidic_glavenus,
+      fulgur_anjanath,     coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
+      nightshade_paolumu,  shrieking_legiana, ebony_odogaron,    blackveil_vaal_hazak,
+      seething_bazelgeuse, beotodus,          banbaro,           velkhana,
+      namielle,            shara_ishvalda,    popo,              anteka,
+      wulg,                cortos,            boaboa,            alatreon,
+      gold_rathian,        silver_rathalos,   yian_garuga,       rajang,
+      furious_rajang,      brute_tigrex,      zinogre,           stygian_zinogre,
+      raging_brachydios,   safi_jiiva,        unknown2,          scarred_yian_garuga,
+      frostfang_barioth,   fatalis,           unknown3[26];
 };
 
 struct monsters128_u16 {
-  u16 anjanath, rathalos, aptonoth, jagras,
-    zorah_magdaros, mosswine, gajau, great_jagras,
-    kestodon_male, rathian, pink_rathian, azure_rathalos,
-    diablos, black_diablos, kirin, behemoth,
-    kushala_daora, lunastra, teostra, lavasioth,
-    deviljho, barroth, uragaan, leshen,
-    pukei_pukei, nergigante, xeno_jiiva, kulu_ya_ku,
-    tzitzi_ya_ku, jyaratodus, tobi_kadachi, paolumu,
-    legiana, great_girros, odogaron, radobaan,
-    vaal_hazak, dodogama, kulve_taroth, bazelgeuse,
-    apceros, kelbia, kelbib, hornetaur,
-    vespoid, mernos, kestodon_female, raphinos,
-    shamos, barnos, girros, ancient_leshen,
-    gastodon, noios, unknown0[2], gajalaka,
-    unknown1[4], tigrex, nargacuga, barioth,
-    savage_deviljho, brachydios, glavenus, acidic_glavenus,
-    fulgur_anjanath, coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
-    nightshade_paolumu, shrieking_legiana, ebony_odogaron, blackveil_vaal_hazak,
-    seething_bazelgeuse, beotodus, banbaro, velkhana,
-    namielle, shara_ishvalda, popo, anteka,
-    wulg, cortos, boaboa, alatreon,
-    gold_rathian, silver_rathalos, yian_garuga, rajang,
-    furious_rajang, brute_tigrex, zinogre, stygian_zinogre,
-    raging_brachydios, safi_jiiva, unknown2, scarred_yian_garuga,
-    frostfang_barioth, fatalis, unknown3[26];
+  u16 anjanath,            rathalos,          aptonoth,          jagras,
+      zorah_magdaros,      mosswine,          gajau,             great_jagras,
+      kestodon_male,       rathian,           pink_rathian,      azure_rathalos,
+      diablos,             black_diablos,     kirin,             behemoth,
+      kushala_daora,       lunastra,          teostra,           lavasioth,
+      deviljho,            barroth,           uragaan,           leshen,
+      pukei_pukei,         nergigante,        xeno_jiiva,        kulu_ya_ku,
+      tzitzi_ya_ku,        jyaratodus,        tobi_kadachi,      paolumu,
+      legiana,             great_girros,      odogaron,          radobaan,
+      vaal_hazak,          dodogama,          kulve_taroth,      bazelgeuse,
+      apceros,             kelbia,            kelbib,            hornetaur,
+      vespoid,             mernos,            kestodon_female,   raphinos,
+      shamos,              barnos,            girros,            ancient_leshen,
+      gastodon,            noios,             unknown0[2],       gajalaka,
+      unknown1[4],         tigrex,            nargacuga,         barioth,
+      savage_deviljho,     brachydios,        glavenus,          acidic_glavenus,
+      fulgur_anjanath,     coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
+      nightshade_paolumu,  shrieking_legiana, ebony_odogaron,    blackveil_vaal_hazak,
+      seething_bazelgeuse, beotodus,          banbaro,           velkhana,
+      namielle,            shara_ishvalda,    popo,              anteka,
+      wulg,                cortos,            boaboa,            alatreon,
+      gold_rathian,        silver_rathalos,   yian_garuga,       rajang,
+      furious_rajang,      brute_tigrex,      zinogre,           stygian_zinogre,
+      raging_brachydios,   safi_jiiva,        unknown2,          scarred_yian_garuga,
+      frostfang_barioth,   fatalis,           unknown3[26];
 };
 
 struct monsters128_u8 {
-  u8  anjanath, rathalos, aptonoth, jagras,
-    zorah_magdaros, mosswine, gajau, great_jagras,
-    kestodon_male, rathian, pink_rathian, azure_rathalos,
-    diablos, black_diablos, kirin, behemoth,
-    kushala_daora, lunastra, teostra, lavasioth,
-    deviljho, barroth, uragaan, leshen,
-    pukei_pukei, nergigante, xeno_jiiva, kulu_ya_ku,
-    tzitzi_ya_ku, jyaratodus, tobi_kadachi, paolumu,
-    legiana, great_girros, odogaron, radobaan,
-    vaal_hazak, dodogama, kulve_taroth, bazelgeuse,
-    apceros, kelbia, kelbib, hornetaur,
-    vespoid, mernos, kestodon_female, raphinos,
-    shamos, barnos, girros, ancient_leshen,
-    gastodon, noios, unknown0[2], gajalaka,
-    unknown1[4], tigrex, nargacuga, barioth,
-    savage_deviljho, brachydios, glavenus, acidic_glavenus,
-    fulgur_anjanath, coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
-    nightshade_paolumu, shrieking_legiana, ebony_odogaron, blackveil_vaal_hazak,
-    seething_bazelgeuse, beotodus, banbaro, velkhana,
-    namielle, shara_ishvalda, popo, anteka,
-    wulg, cortos, boaboa, alatreon,
-    gold_rathian, silver_rathalos, yian_garuga, rajang,
-    furious_rajang, brute_tigrex, zinogre, stygian_zinogre,
-    raging_brachydios, safi_jiiva, unknown2, scarred_yian_garuga,
-    frostfang_barioth, fatalis, unknown3[26];
+  u8  anjanath,            rathalos,          aptonoth,          jagras,
+      zorah_magdaros,      mosswine,          gajau,             great_jagras,
+      kestodon_male,       rathian,           pink_rathian,      azure_rathalos,
+      diablos,             black_diablos,     kirin,             behemoth,
+      kushala_daora,       lunastra,          teostra,           lavasioth,
+      deviljho,            barroth,           uragaan,           leshen,
+      pukei_pukei,         nergigante,        xeno_jiiva,        kulu_ya_ku,
+      tzitzi_ya_ku,        jyaratodus,        tobi_kadachi,      paolumu,
+      legiana,             great_girros,      odogaron,          radobaan,
+      vaal_hazak,          dodogama,          kulve_taroth,      bazelgeuse,
+      apceros,             kelbia,            kelbib,            hornetaur,
+      vespoid,             mernos,            kestodon_female,   raphinos,
+      shamos,              barnos,            girros,            ancient_leshen,
+      gastodon,            noios,             unknown0[2],       gajalaka,
+      unknown1[4],         tigrex,            nargacuga,         barioth,
+      savage_deviljho,     brachydios,        glavenus,          acidic_glavenus,
+      fulgur_anjanath,     coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
+      nightshade_paolumu,  shrieking_legiana, ebony_odogaron,    blackveil_vaal_hazak,
+      seething_bazelgeuse, beotodus,          banbaro,           velkhana,
+      namielle,            shara_ishvalda,    popo,              anteka,
+      wulg,                cortos,            boaboa,            alatreon,
+      gold_rathian,        silver_rathalos,   yian_garuga,       rajang,
+      furious_rajang,      brute_tigrex,      zinogre,           stygian_zinogre,
+      raging_brachydios,   safi_jiiva,        unknown2,          scarred_yian_garuga,
+      frostfang_barioth,   fatalis,           unknown3[26];
 };
 
 struct monsters128_f32 {
-  f32 anjanath, rathalos, aptonoth, jagras,
-    zorah_magdaros, mosswine, gajau, great_jagras,
-    kestodon_male, rathian, pink_rathian, azure_rathalos,
-    diablos, black_diablos, kirin, behemoth,
-    kushala_daora, lunastra, teostra, lavasioth,
-    deviljho, barroth, uragaan, leshen,
-    pukei_pukei, nergigante, xeno_jiiva, kulu_ya_ku,
-    tzitzi_ya_ku, jyaratodus, tobi_kadachi, paolumu,
-    legiana, great_girros, odogaron, radobaan,
-    vaal_hazak, dodogama, kulve_taroth, bazelgeuse,
-    apceros, kelbia, kelbib, hornetaur,
-    vespoid, mernos, kestodon_female, raphinos,
-    shamos, barnos, girros, ancient_leshen,
-    gastodon, noios, unknown0[2], gajalaka,
-    unknown1[4], tigrex, nargacuga, barioth,
-    savage_deviljho, brachydios, glavenus, acidic_glavenus,
-    fulgur_anjanath, coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
-    nightshade_paolumu, shrieking_legiana, ebony_odogaron, blackveil_vaal_hazak,
-    seething_bazelgeuse, beotodus, banbaro, velkhana,
-    namielle, shara_ishvalda, popo, anteka,
-    wulg, cortos, boaboa, alatreon,
-    gold_rathian, silver_rathalos, yian_garuga, rajang,
-    furious_rajang, brute_tigrex, zinogre, stygian_zinogre,
-    raging_brachydios, safi_jiiva, unknown2, scarred_yian_garuga,
-    frostfang_barioth, fatalis, unknown3[26];
+  f32 anjanath,            rathalos,          aptonoth,          jagras,
+      zorah_magdaros,      mosswine,          gajau,             great_jagras,
+      kestodon_male,       rathian,           pink_rathian,      azure_rathalos,
+      diablos,             black_diablos,     kirin,             behemoth,
+      kushala_daora,       lunastra,          teostra,           lavasioth,
+      deviljho,            barroth,           uragaan,           leshen,
+      pukei_pukei,         nergigante,        xeno_jiiva,        kulu_ya_ku,
+      tzitzi_ya_ku,        jyaratodus,        tobi_kadachi,      paolumu,
+      legiana,             great_girros,      odogaron,          radobaan,
+      vaal_hazak,          dodogama,          kulve_taroth,      bazelgeuse,
+      apceros,             kelbia,            kelbib,            hornetaur,
+      vespoid,             mernos,            kestodon_female,   raphinos,
+      shamos,              barnos,            girros,            ancient_leshen,
+      gastodon,            noios,             unknown0[2],       gajalaka,
+      unknown1[4],         tigrex,            nargacuga,         barioth,
+      savage_deviljho,     brachydios,        glavenus,          acidic_glavenus,
+      fulgur_anjanath,     coral_pukei_pukei, ruiner_nergigante, viper_tobi_kadachi,
+      nightshade_paolumu,  shrieking_legiana, ebony_odogaron,    blackveil_vaal_hazak,
+      seething_bazelgeuse, beotodus,          banbaro,           velkhana,
+      namielle,            shara_ishvalda,    popo,              anteka,
+      wulg,                cortos,            boaboa,            alatreon,
+      gold_rathian,        silver_rathalos,   yian_garuga,       rajang,
+      furious_rajang,      brute_tigrex,      zinogre,           stygian_zinogre,
+      raging_brachydios,   safi_jiiva,        unknown2,          scarred_yian_garuga,
+      frostfang_barioth,   fatalis,           unknown3[26];
 };
 
 struct monsters96_16 {
-  u16 great_jagras, kulu_ya_ku, pukei_pukei, barroth,
-    jyaratodus, tobi_kadachi, anjanath, rathian,
-    tzitzi_ya_ku, paolumu, great_girros, radobaan,
-    legiana, odogaron, rathalos, diablos,
-    kirin, zorah_magdaros, dodogama, pink_rathian,
-    bazelgeuse, lavasioth, uragaan, azure_rathalos,
-    black_diablos, nergigante, teostra, kushala_daora,
-    vaal_hazak, xeno_jiiva, deviljho, kulve_taroth,
-    lunastra, behemoth, leshen, ancient_leshen,
-    beotodus, banbaro, viper_tobi_kadachi, nightshade_paolumu,
-    coral_pukei_pukei, barioth, nargacuga, glavenus,
-    tigrex, brachydios, acidic_glavenus, shrieking_legiana,
-    fulgur_anjanath, ebony_odogaron, velkhana, seething_bazelgeuse,
-    blackveil_vaal_hazak, namielle, savage_deviljho, ruiner_nergigante,
-    shara_ishvalda, zinogre, yian_garuga, scarred_yian_garuga,
-    brute_tigrex, gold_rathian, silver_rathalos, rajang,
-    stygian_zinogre, safi_jiiva, furious_rajang, raging_brachydios,
-    frostfang_barioth, alatreon, fatalis, monster[25];
+  u16 great_jagras,         kulu_ya_ku,       pukei_pukei,        barroth,
+      jyaratodus,           tobi_kadachi,     anjanath,           rathian,
+      tzitzi_ya_ku,         paolumu,          great_girros,       radobaan,
+      legiana,              odogaron,         rathalos,           diablos,
+      kirin,                zorah_magdaros,   dodogama,           pink_rathian,
+      bazelgeuse,           lavasioth,        uragaan,            azure_rathalos,
+      black_diablos,        nergigante,       teostra,            kushala_daora,
+      vaal_hazak,           xeno_jiiva,       deviljho,           kulve_taroth,
+      lunastra,             behemoth,         leshen,             ancient_leshen,
+      beotodus,             banbaro,          viper_tobi_kadachi, nightshade_paolumu,
+      coral_pukei_pukei,    barioth,          nargacuga,          glavenus,
+      tigrex,               brachydios,       acidic_glavenus,    shrieking_legiana,
+      fulgur_anjanath,      ebony_odogaron,   velkhana,           seething_bazelgeuse,
+      blackveil_vaal_hazak, namielle,         savage_deviljho,    ruiner_nergigante,
+      shara_ishvalda,       zinogre,          yian_garuga,        scarred_yian_garuga,
+      brute_tigrex,         gold_rathian,     silver_rathalos,    rajang,
+      stygian_zinogre,      safi_jiiva,       furious_rajang,     raging_brachydios,
+      frostfang_barioth,    alatreon,         fatalis,            monster[25];
 };
 
 struct monsters96_8 {
-  u8  great_jagras, kulu_ya_ku, pukei_pukei, barroth,
-    jyaratodus, tobi_kadachi, anjanath, rathian,
-    tzitzi_ya_ku, paolumu, great_girros, radobaan,
-    legiana, odogaron, rathalos, diablos,
-    kirin, zorah_magdaros, dodogama, pink_rathian,
-    bazelgeuse, lavasioth, uragaan, azure_rathalos,
-    black_diablos, nergigante, teostra, kushala_daora,
-    vaal_hazak, xeno_jiiva, deviljho, kulve_taroth,
-    lunastra, behemoth, leshen, ancient_leshen,
-    beotodus, banbaro, viper_tobi_kadachi, nightshade_paolumu,
-    coral_pukei_pukei, barioth, nargacuga, glavenus,
-    tigrex, brachydios, acidic_glavenus, shrieking_legiana,
-    fulgur_anjanath, ebony_odogaron, velkhana, seething_bazelgeuse,
-    blackveil_vaal_hazak, namielle, savage_deviljho, ruiner_nergigante,
-    shara_ishvalda, zinogre, yian_garuga, scarred_yian_garuga,
-    brute_tigrex, gold_rathian, silver_rathalos, rajang,
-    stygian_zinogre, safi_jiiva, furious_rajang, raging_brachydios,
-    frostfang_barioth, alatreon, fatalis, monster[25];
+  u8  great_jagras,         kulu_ya_ku,       pukei_pukei,        barroth,
+      jyaratodus,           tobi_kadachi,     anjanath,           rathian,
+      tzitzi_ya_ku,         paolumu,          great_girros,       radobaan,
+      legiana,              odogaron,         rathalos,           diablos,
+      kirin,                zorah_magdaros,   dodogama,           pink_rathian,
+      bazelgeuse,           lavasioth,        uragaan,            azure_rathalos,
+      black_diablos,        nergigante,       teostra,            kushala_daora,
+      vaal_hazak,           xeno_jiiva,       deviljho,           kulve_taroth,
+      lunastra,             behemoth,         leshen,             ancient_leshen,
+      beotodus,             banbaro,          viper_tobi_kadachi, nightshade_paolumu,
+      coral_pukei_pukei,    barioth,          nargacuga,          glavenus,
+      tigrex,               brachydios,       acidic_glavenus,    shrieking_legiana,
+      fulgur_anjanath,      ebony_odogaron,   velkhana,           seething_bazelgeuse,
+      blackveil_vaal_hazak, namielle,         savage_deviljho,    ruiner_nergigante,
+      shara_ishvalda,       zinogre,          yian_garuga,        scarred_yian_garuga,
+      brute_tigrex,         gold_rathian,     silver_rathalos,    rajang,
+      stygian_zinogre,      safi_jiiva,       furious_rajang,     raging_brachydios,
+      frostfang_barioth,    alatreon,         fatalis,            monster[25];
 };
 
 struct mhw_save_header
@@ -864,7 +864,7 @@ struct mhw_seliana_room
   u8 unknown0[4];
   mhw_seliana_room_config room_configs[24];
 
-  str32 room_config_names[24];
+  str32s room_config_names[24];
   u8 seliana_music_player_song;
   u8 unknown1[2578];
   u8 room_status;
@@ -1367,7 +1367,7 @@ struct mhw_save_slot
   monsters128_f32 monster_xp;
   monsters128_u32 monster_level;
   monsters128_f32 monster_xp_cap;
-
+  
   u8 unknown6a[548];
   mhw_monster_index capture_monster_index;
   u32 capture_monster_size;
@@ -1381,9 +1381,12 @@ struct mhw_save_slot
   mhw_storage storage;
 
   mhw_equipment equipment[2500];
-  u8 unknown_equipment[sizeof(mhw_equipment) * 1760];
+  mhw_equipment unused_equipment[510];
+  mhw_equipment palico_equipment[1250]; // Only 750 used
   u32 equipment_index_table[2500];
-  u8 unknown10a[11096];
+  u32 unused_equipment_index_table[500]; // 510 - 500 = 10?
+  u32 palico_equipment_index_table[1250];
+  u8 unknown10a_[4096];
 
   u32 gesture_order[512];
   u32 pose_order[256];
@@ -1536,7 +1539,7 @@ struct mhw_section0
 struct mhw_section1
 {
   mhw_section_header header;
-
+  
   u32 unknown0;
   u32 last_active_slot;
   mhw_sound_device sound_device;
@@ -1568,22 +1571,31 @@ struct mhw_section1
   u8 character_edit_voucher;
   u8 unknown5[3];
   u16 dlc[512];
-  u8 unknown6[69];
+  u8 unknown6[4];
+  u8 character_edit_voucher_single_voucher;
+  u8 character_edit_voucher_two_voucher_pack;
+  u8 character_edit_voucher_three_voucher_pack;
+  u8 unknown7[51];
+  u8 palico_edit_voucher_single_voucher;
+  u8 palico_edit_voucher_two_voucher_pack;
+  u8 palico_edit_voucher_three_voucher_pack;
+  u8 unknown8[8];
   u8 character_edit_voucher_free;
-  u8 character_edit_voucher_1_pack;
-  u8 character_edit_voucher_2_pack;
-  u8 character_edit_voucher_3_pack;
-  u8 unknown7[8];
+  u8 character_c_palico_edit_voucher_single_voucher;
+  u8 character_c_palico_edit_two_voucher_pack;
+  u8 character_c_palico_edit_three_voucher_pack;
+  u8 unknown9[8];
   u8 palico_edit_voucher;
-  u8 unknown8[3];
-  u8 palico_edit_voucher_3_pack;
+  u8 character_p_palico_edit_voucher_single_voucher;
+  u8 character_p_palico_edit_two_voucher_pack;
+  u8 character_p_palico_edit_three_voucher_pack;
 
   // Working memory?
   // What's in it keeps changing, one moment it's save[0]'s
   // guiding lands levels, the next it's names.
-  // From [319] to the end usually.
+  // From [320] to the end usually.
   // It seems to just change intermittently.
-  u8 unknown9[2926];
+  u8 unknown10[2927];
 };
 
 struct mhw_section2

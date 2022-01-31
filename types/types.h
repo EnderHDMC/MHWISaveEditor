@@ -34,5 +34,7 @@ typedef char str128[128];
 typedef char str256[256];
 typedef char str54[54];
 
+typedef str32 str32s;
+
 #define SIZEOF(arr) (*(&arr + 1) - arr)
 #define COUNTOF(arr) sizeof(arr) / sizeof(arr[0])

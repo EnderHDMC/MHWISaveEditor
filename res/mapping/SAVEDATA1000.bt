@@ -866,7 +866,7 @@ struct mhw_safari_member
 struct mhw_safari
 {
   u8 unknown0;
-  u32 unknown1[24/4];
+  u32 unknown1[24 / 4];
   mhw_safari_member members[3];
 };
 
@@ -1568,7 +1568,7 @@ struct mhw_save_slot
   u32 equipment_index_table[2500];
   u32 unused_equipment_index_table[500]; // 510 - 500 = 10?
   u32 palico_equipment_index_table[1250];
-  u8 unknown10a_[11096 - 2000 - sizeof(u32) * 1250];
+  u8 unknown10a_[4096];
 
   u32 gesture_order[512];
   u32 pose_order[256];
