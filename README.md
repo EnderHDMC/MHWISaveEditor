@@ -29,3 +29,21 @@ A save editor for Monster Hunter World: Iceborne.
 - [Marcus101RR/MHW Tables](https://www.nexusmods.com/monsterhunterworld/mods/2161)
 - [ChaosFred/Guiding Lands Level Cap Analysis](https://steamcommunity.com/app/582010/discussions/0/3974929535247630028/)
 - [ChaosFred/Guiding Lands Level Cap Analysis Backup](https://gamefaqs.gamespot.com/boards/211368-monster-hunter-world/78477208)
+
+## Instructions for the curious
+
+To build this project you first need to install [vcpkg](https://vcpkg.io).<br/>
+Then you can install the required packages:
+```
+vcpkg install nlohmann-json:x64-windows cryptopp:x64-windows
+```
+In Visual Studio Installer you only need `Desktop Development with C++`
+
+Additionally you need to install a version of [QT](https://www.qt.io/), the project currently uses `QT 6.2.3`.<br/>
+In the QT installer you only need to install the component: `QT/QT 6.2.3/MSVC 2019 64-bit`.
+
+Next install the QT Visual Studio Tools extension.<br/>
+Then in the QT Version settings of the extension set version to `6.2.3_msvc2019_64` and set the path to wherever you installed QT.<br/>
+Restart Visual Studio once this is done, so QT sets up the appropriate environment variables.
+
+That's it, you should be able to build it now.
