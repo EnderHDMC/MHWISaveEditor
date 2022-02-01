@@ -3,6 +3,8 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QSignalMapper>
+#include <QFileSystemWatcher>
+#include <QSettings>
 
 #include "../types/mhw_save.h"
 
@@ -46,6 +48,7 @@ public slots:
   void Restore();
 
   void EditorTabChange(int editorIndex);
+  void WatchFileChanged(const QString& path);
 
 public:
   MHWISaveEditor(QWidget* parent = nullptr);
@@ -63,6 +66,7 @@ private:
   void LoadSaveSlot();
 
   void ReadSettings();
+  void SyncSettings(QSettings* settings);
   void WriteSettings();
 
   void TrimBackups();
@@ -95,6 +99,9 @@ private:
   QStringList filters;
 
   //////// Settings ////////
+  QSettings* editorSettings = nullptr;
+  QFileSystemWatcher watcher;
+
   // Backups
   bool doAutoBackups = true;
   int maxBackups = 64;
