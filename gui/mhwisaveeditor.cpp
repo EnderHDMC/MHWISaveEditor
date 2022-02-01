@@ -27,9 +27,9 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
   setWindowIcon(QIcon("res/icon.ico"));
 
-  Notification* notification = notification->GetInstance();
-  notification->Register(ui->statusbar);
-  notification->SetDefaultMode(NotificationMode::StatusBar);
+  Notification* notif = notif->GetInstance();
+  notif->Register(ui->statusbar);
+  notif->SetDefaultMode(NotificationMode::StatusBar);
 
   statusFile = new QLabel("File: None", ui->statusbar);
   ui->statusbar->addPermanentWidget(statusFile);
@@ -163,11 +163,11 @@ void MHWISaveEditor::SaveFile(const QString& path)
   bool encrypt = encrypt_map.value(ext, false);
   bool success = SaveFileEncrypt(filepath, MHW_Save(), encrypt, true);
 
-  Notification* notification = notification->GetInstance();
+  Notification* notif = notif->GetInstance();
   if (success)
-    notification->ShowMessage("Saved file: " + path);
+    notif->ShowMessage("Saved file: " + path);
   else
-    notification->ShowMessage("Could not save file: " + path);
+    notif->ShowMessage("Could not save file: " + path);
 }
 
 bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
@@ -223,11 +223,11 @@ void MHWISaveEditor::Dump(int number)
     success = SaveFileEncrypt(path, saveWrite, false);
   }
 
-  Notification* notification = notification->GetInstance();
+  Notification* notif = notif->GetInstance();
   if (success)
-    notification->ShowMessage("Dumped file: " + path);
+    notif->ShowMessage("Dumped file: " + path);
   else
-    notification->ShowMessage("Could not dump file: " + path);
+    notif->ShowMessage("Could not dump file: " + path);
 
   if (buffer) free(buffer);
 }
@@ -314,8 +314,8 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
   QString character = QString::fromUtf8(hunterName);
-  Notification* notification = notification->GetInstance();
-  notification->ShowMessage(QString("Loaded character slot %1: %2").arg(mhwSaveIndex + 1).arg(character));
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage(QString("Loaded character slot %1: %2").arg(mhwSaveIndex + 1).arg(character));
 
   statusFile->setText("File: " + EditorFile());
 
@@ -331,14 +331,14 @@ void MHWISaveEditor::LoadFile(const QString& file)
     Load(MHW_Save());
 
     if (doAutoBackups) {
-      Notification* notification = notification->GetInstance();
-      notification->Silence(1);
+      Notification* notif = notif->GetInstance();
+      notif->Silence(1);
       Backup();
     }
   }
   else {
-    Notification* notification = notification->GetInstance();
-    notification->ShowMessage("Failed to load file: " + file);
+    Notification* notif = notif->GetInstance();
+    notif->ShowMessage("Failed to load file: " + file);
   }
 }
 
@@ -398,8 +398,8 @@ void MHWISaveEditor::SelectSlot(int slot)
 
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
   QString character = QString::fromUtf8(hunterName);
-  Notification* notification = notification->GetInstance();
-  notification->ShowMessage(QString("Loaded character slot %1: %2").arg(mhwSaveIndex + 1).arg(character));
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage(QString("Loaded character slot %1: %2").arg(mhwSaveIndex + 1).arg(character));
 
   LoadSaveSlot();
   SaveLoader::FinishLoad();
@@ -424,8 +424,8 @@ void MHWISaveEditor::SwitchSlot(int slot)
   memcpy_s(saveB, sizeof(mhw_save_slot), temp, sizeof(mhw_save_slot));
   free(temp);
 
-  Notification* notification = notification->GetInstance();
-  notification->ShowMessage(QString("Switched slots: %1 to slot: %2.").arg(mhwSaveIndex + 1).arg(slot + 1));
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage(QString("Switched slots: %1 to slot: %2.").arg(mhwSaveIndex + 1).arg(slot + 1));
 
   LoadSaveSlot();
 }
@@ -441,8 +441,8 @@ void MHWISaveEditor::CloneSlot(int slot)
 
   memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
 
-  Notification* notification = notification->GetInstance();
-  notification->ShowMessage(QString("Cloned slot: %1 to slot: %2.").arg(mhwSaveIndex + 1).arg(slot + 1));
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage(QString("Cloned slot: %1 to slot: %2.").arg(mhwSaveIndex + 1).arg(slot + 1));
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)
@@ -488,12 +488,12 @@ void MHWISaveEditor::Backup() {
     success = WriteFile(path, (u8*)compressed.constData(), compressedSize);
   }
 
-  Notification* notification = notification->GetInstance();
+  Notification* notif = notif->GetInstance();
   if (success) {
-    notification->ShowMessage("Backup made: " + writeFile);
+    notif->ShowMessage("Backup made: " + writeFile);
   }
   else {
-    notification->ShowMessage("Failed to create backup: " + writeFile);
+    notif->ShowMessage("Failed to create backup: " + writeFile);
   }
   TrimBackups();
 }

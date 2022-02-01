@@ -31,17 +31,17 @@ void GeneralInfo::ChangeSteamID()
 
   if (ok && !text.isEmpty())
   {
-    Notification* notification = notification->GetInstance();
+    Notification* notif = notif->GetInstance();
 
     steamID = text.toULongLong(&ok);
     if (ok) {
       ui->btnSteamID->setText(text);
       mhwSaveIB->header.steam_id = steamID;
 
-      notification->ShowMessage("Steam ID set.");
+      notif->ShowMessage("Steam ID set.");
     }
     else {
-      notification->ShowMessage("Invalid steam ID format.", 5000);
+      notif->ShowMessage("Invalid steam ID format.", 5000);
     }
   }
 }
@@ -68,8 +68,8 @@ void GeneralInfo::ResetEditVouchers()
   mhwSection1->character_p_palico_edit_two_voucher_pack = 0;
   mhwSection1->character_p_palico_edit_three_voucher_pack = 0;
 
-  Notification* notification = notification->GetInstance();
-  notification->ShowMessage("All character and palico edit vouchers have been reset.", 5000);
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage("All character and palico edit vouchers have been reset.", 5000);
 }
 
 void GeneralInfo::Load(mhw_save_raw* mhwSave, int slotIndex)

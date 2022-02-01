@@ -102,8 +102,8 @@ void HunterInfo::UncapGuidingLands()
 
   mhwSaveSlot->guiding_lands.level_total = GUIDING_LANDS_LEVEL_UNCAP;
 
-  Notification* notification = notification->GetInstance();
-  notification->ShowMessage("Guiding Lands levels uncapped.", 5000);
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage("Guiding Lands levels uncapped.", 5000);
 }
 
 void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
