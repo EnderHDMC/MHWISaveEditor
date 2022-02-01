@@ -383,8 +383,8 @@ void MHWISaveEditor::SwitchSlot(int slot)
   MHW_SAVE_GUARD;
 
   mhw_save_slot* temp = (mhw_save_slot*)malloc(sizeof(mhw_save_slot));
-  mhw_save_slot* saveA = &mhwSaveIB->section3.saves[_mhwSaveIndex];
-  mhw_save_slot* saveB = &mhwSaveIB->section3.saves[slot];
+  mhw_save_slot* saveA = &mhwSection3->saves[_mhwSaveIndex];
+  mhw_save_slot* saveB = &mhwSection3->saves[slot];
   if (!temp) {
     qWarning("Error allocating memory.");
     return;
@@ -405,8 +405,8 @@ void MHWISaveEditor::CloneSlot(int slot)
 {
   MHW_SAVE_GUARD;
 
-  mhw_save_slot* saveA = &mhwSaveIB->section3.saves[_mhwSaveIndex];
-  mhw_save_slot* saveB = &mhwSaveIB->section3.saves[slot];
+  mhw_save_slot* saveA = &mhwSection3->saves[_mhwSaveIndex];
+  mhw_save_slot* saveB = &mhwSection3->saves[slot];
 
   memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
 

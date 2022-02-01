@@ -48,13 +48,25 @@ void GeneralInfo::ResetEditVouchers()
 {
   MHW_SAVE_GUARD;
 
-  // TODO: Map out the other edit vouchers and add them here.
-  mhwSaveIB->section1.character_edit_voucher = 0;
-  mhwSaveIB->section1.character_edit_voucher_free = 0;
-  mhwSaveIB->section1.palico_edit_voucher = 0;
+  mhwSection1->character_edit_voucher = 0;
+  mhwSection1->character_edit_voucher_free = 0;
+  mhwSection1->character_edit_voucher_single_voucher = 0;
+  mhwSection1->character_edit_voucher_two_voucher_pack = 0;
+  mhwSection1->character_edit_voucher_three_voucher_pack = 0;
+  mhwSection1->character_c_palico_edit_voucher_single_voucher = 0;
+  mhwSection1->character_c_palico_edit_two_voucher_pack = 0;
+  mhwSection1->character_c_palico_edit_three_voucher_pack = 0;
+
+  mhwSection1->palico_edit_voucher = 0;
+  mhwSection1->palico_edit_voucher_single_voucher = 0;
+  mhwSection1->palico_edit_voucher_two_voucher_pack = 0;
+  mhwSection1->palico_edit_voucher_three_voucher_pack = 0;
+  mhwSection1->character_p_palico_edit_voucher_single_voucher = 0;
+  mhwSection1->character_p_palico_edit_two_voucher_pack = 0;
+  mhwSection1->character_p_palico_edit_three_voucher_pack = 0;
 
   Notification* notification = notification->GetInstance();
-  notification->ShowMessage("Free edit vouchers have been reset.", 5000);
+  notification->ShowMessage("All character and palico edit vouchers have been reset.", 5000);
 }
 
 void GeneralInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
