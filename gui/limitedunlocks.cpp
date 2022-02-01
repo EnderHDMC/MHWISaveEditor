@@ -20,6 +20,7 @@ LimitedUnlocks::~LimitedUnlocks()
 void LimitedUnlocks::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   u32 assassinHoodUnlocked = (mhwSaveSlot->tool_unlocks[0] >> ASSASSIN_HOOD_INDEX) & 0x01;
   u32 assassinHoodUpgraded = mhwSaveSlot->tools[ASSASSIN_HOOD_INDEX].level;
@@ -37,8 +38,9 @@ void LimitedUnlocks::Load(mhw_save_raw* mhwSave, int slotIndex)
 void LimitedUnlocks::UnlockAssassinHood(int checked)
 {
   MHW_LOADING_GUARD;
-  checked = checked != 0;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
+  checked = checked != 0;
   u8 n = ASSASSIN_HOOD_INDEX;
   u32 unlock = mhwSaveSlot->tool_unlocks[0];
   unlock = (unlock & ~(1UL << n)) | (checked << n);
@@ -49,30 +51,34 @@ void LimitedUnlocks::UnlockAssassinHood(int checked)
 void LimitedUnlocks::UpgradeAssassinHood(int checked)
 {
   MHW_LOADING_GUARD;
-  checked = checked != 0;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
+  checked = checked != 0;
   mhwSaveSlot->tools[ASSASSIN_HOOD_INDEX].level = checked;
 }
 
 void LimitedUnlocks::UnlockLayeredArtemis(int checked)
 {
   MHW_LOADING_GUARD;
-  checked = checked != 0;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
+  checked = checked != 0;
   mhwSaveSlot->progress.layered_artemis = checked & 0x1;
 }
 
 void LimitedUnlocks::UnlockLayeredBayek(int checked)
 {
   MHW_LOADING_GUARD;
-  checked = checked != 0;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
+  checked = checked != 0;
   mhwSaveSlot->progress.layered_bayek = checked & 0x1;
 }
 
 void LimitedUnlocks::GiveArtemisGear()
 {
   MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   int type;
   for (type = 0; type < 5; type++)
@@ -127,6 +133,9 @@ void LimitedUnlocks::GiveSamuraiLoadout()
 
 void LimitedUnlocks::GiveLayeredLoadout(i32 layered, const QString& name)
 {
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  
   mhw_layered_loadout* loadout = FindEmptyLayeredLoadout(mhwSaveSlot);
 
   if (loadout) {

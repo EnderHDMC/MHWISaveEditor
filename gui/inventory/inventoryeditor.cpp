@@ -38,6 +38,9 @@ InventoryEditor::~InventoryEditor()
 
 void InventoryEditor::SearchIndexChange(int index)
 {
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
   QVariant data = ui->cmbSearchItem->itemData(index);
   itemInfo* info = data.value<itemInfo*>();
   if (!info || index == -1) return;
@@ -69,7 +72,8 @@ void InventoryEditor::SearchIndexChange(int index)
 
   if (index != -1) {
     ui->tabEditors->setCurrentIndex(areaIndex);
-    InventoryEditorTab* editor = dynamic_cast<InventoryEditorTab*>(ui->tabEditors->currentWidget());
+    QWidget* current = ui->tabEditors->currentWidget();
+    InventoryEditorTab* editor = dynamic_cast<InventoryEditorTab*>(current);
     editor->ScrollToIndex(index);
   }
 }

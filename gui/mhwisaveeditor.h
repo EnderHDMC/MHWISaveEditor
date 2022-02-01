@@ -60,7 +60,10 @@ private:
 
   void LoadSaveSlot();
 
+  bool WriteFile(const QString& path, u8* data, u32 size);
+
   // Inherited via SaveLoader
+  virtual void Load(mhw_save_raw* mhwSave, int slotIndex = -1) override;
   virtual void LoadFile(const QString& file) override;
 
   Ui::MHWISaveEditor* ui;

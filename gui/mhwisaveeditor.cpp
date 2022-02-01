@@ -141,21 +141,10 @@ bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bo
   if (validate) ValidateSaveFile(&saveWrite->save);
   if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
 
-  QSaveFile file(path);
-  if (!file.open(QIODevice::WriteOnly)) {
-    qWarning("File: %s, cannot be written.", qUtf8Printable(path));
-    return false;
-  }
-
-  int length = file.write((char*)saveWrite->data, sizeof(mhw_save_raw));
-  if (length != sizeof(mhw_save_raw)) {
-    qWarning("File: %s, cannot be written.", qUtf8Printable(path));
-    return false;
-  }
-  file.commit();
+  bool written = WriteFile(path, saveWrite->data, sizeof(mhw_save_raw));
 
   if (saveWrite != save) free(saveWrite);
-  return true;
+  return written;
 }
 
 void MHWISaveEditor::SaveFile(const QString& path)
@@ -166,7 +155,7 @@ void MHWISaveEditor::SaveFile(const QString& path)
   QString filepath = fi.absoluteFilePath();
 
   bool encrypt = encrypt_map.value(ext, false);
-  bool success = SaveFileEncrypt(filepath, _mhwSave, encrypt, true);
+  bool success = SaveFileEncrypt(filepath, MHW_Save(), encrypt, true);
 
   Notification* notification = notification->GetInstance();
   if (success)
@@ -187,20 +176,17 @@ bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
   }
 
   QByteArray saveBlob = file.readAll();
-  if (saveBlob.length() != sizeof(mhw_save_raw)) {
+  file.close();
+
+  mhw_save_raw* newsavep = (mhw_save_raw*)QByteArrayToU8(saveBlob, (u8*)savep, sizeof(mhw_save_raw));
+  if (savep != newsavep && savep) free(savep);
+  savep = newsavep;
+
+  if (!savep) {
     qWarning("File: %s, cannot be read.", qUtf8Printable(path));
     return false;
   }
-  file.close();
 
-  if (savep) free(savep);
-  savep = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
-  if (!savep) {
-    qWarning("Error allocating memory.");
-    return false;
-  };
-
-  memcpy(savep->data, saveBlob.constData(), saveBlob.length());
   if (!IsBlowfishDecrypted(&savep->save)) {
     DecryptSave(savep->data, sizeof(mhw_save_raw));
   }
@@ -210,15 +196,12 @@ bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
 
 void MHWISaveEditor::Dump(int number)
 {
-  mhw_save_raw* savePtr = nullptr;
+  mhw_save_raw* saveWrite = MHWS_Save();
   mhw_save_raw* buffer = nullptr;
   QString path = GetDefaultDumpPath(number);
   bool success = true;
 
-  if (MHW_SAVE_CHECK) {
-    savePtr = this->_mhwSave;
-  }
-  else {
+  if (MHW_SAVE_GUARD_CHECK) {
     buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
 
     if (!buffer) {
@@ -226,19 +209,19 @@ void MHWISaveEditor::Dump(int number)
     }
     else {
       LoadFile(GetDefaultSavePath(), &buffer);
-      savePtr = buffer;
+      saveWrite = buffer;
     }
   }
 
   if (success) {
-    success = SaveFileEncrypt(path, savePtr, false);
+    success = SaveFileEncrypt(path, saveWrite, false);
   }
 
   Notification* notification = notification->GetInstance();
   if (success)
     notification->ShowMessage("Dumped file: " + path);
   else
-    notification->ShowMessage("Could not dump file: " +path);
+    notification->ShowMessage("Could not dump file: " + path);
 
   if (buffer) free(buffer);
 }
@@ -248,7 +231,7 @@ void MHWISaveEditor::Open()
   QString path = GetDefaultSaveDir();
   QString filepath = QString();
 
-  QFileDialog dialog(this);
+  QFileDialog dialog(nullptr);
   dialog.setDirectory(path);
   dialog.selectFile(QString::fromUtf8(SAVE_NAME));
   dialog.setFileMode(QFileDialog::ExistingFile);
@@ -271,7 +254,7 @@ void MHWISaveEditor::Save()
 {
   MHW_SAVE_GUARD;
 
-  QFileInfo fi(file);
+  QFileInfo fi(EditorFile());
   QString ext = fi.completeSuffix();
   ext = ext.isEmpty() ? "" : '.' + ext;
 
@@ -305,18 +288,11 @@ void MHWISaveEditor::SaveAs()
   }
 }
 
-void MHWISaveEditor::LoadFile(const QString& file)
+void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
-  SaveLoader::LoadFile(file);
-  mhw_save_raw* save = nullptr;
-  LoadFile(file, &save);
-  SaveLoader::Load(save, -1);
-
-  Notification* notification = notification->GetInstance();
-  if (MHW_SAVE_GUARD_CHECK) {
-    notification->ShowMessage("Failed to load file: " + file);
-    return;
-  }
+  SaveLoader::Load(mhwSave, slotIndex);
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  int mhwSaveIndex = MHW_SaveIndex();
 
   // Load the save into the inventory slots
   LoadSaveSlot();
@@ -330,49 +306,88 @@ void MHWISaveEditor::LoadFile(const QString& file)
     selectSlotActions[i]->setEnabled(true);
   }
 
-  statusFile->setText("File: " + file);
-
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
   QString character = QString::fromUtf8(hunterName);
-  notification->ShowMessage(QString("Loaded character slot %1: %2").arg(_mhwSaveIndex + 1).arg(character));
+  Notification* notification = notification->GetInstance();
+  notification->ShowMessage(QString("Loaded character slot %1: %2").arg(mhwSaveIndex + 1).arg(character));
+
+  statusFile->setText("File: " + EditorFile());
 
   SaveLoader::FinishLoad();
+}
+
+void MHWISaveEditor::LoadFile(const QString& file)
+{
+  SaveLoader::LoadFile(file);
+  bool load = LoadFile(file, MHWS_SavePtr());
+
+  if (load) {
+    Load(MHW_Save());
+  }
+  else {
+    Notification* notification = notification->GetInstance();
+    notification->ShowMessage("Failed to load file: " + file);
+  }
 }
 
 void MHWISaveEditor::LoadSaveSlot()
 {
   MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  int mhwSaveIndex = MHW_SaveIndex();
 
   for (size_t i = 0; i < selectSlotActions.count(); i++)
   {
-    selectSlotActions[i]->setChecked(i == _mhwSaveIndex);
-    switchSlotActions[i]->setEnabled(i != _mhwSaveIndex);
-    cloneSlotActions[i]->setEnabled(i != _mhwSaveIndex);
+    selectSlotActions[i]->setChecked(i == mhwSaveIndex);
+    switchSlotActions[i]->setEnabled(i != mhwSaveIndex);
+    cloneSlotActions[i]->setEnabled(i != mhwSaveIndex);
   }
 
   int index = ui->tabWidget->currentIndex();
   SaveLoader* loader = editors[index];
-  loader->Load(this->_mhwSave, _mhwSaveIndex);
+  loader->Load(mhwSave, mhwSaveIndex);
+}
+
+bool MHWISaveEditor::WriteFile(const QString& path, u8* data, u32 size)
+{
+  QSaveFile file(path);
+  if (!file.open(QIODevice::WriteOnly)) {
+    qWarning("File: %s, cannot be written.", qUtf8Printable(path));
+    return false;
+  }
+
+  int length = file.write((char*)data, size);
+  if (length != size) {
+    qWarning("File: %s, cannot be written.", qUtf8Printable(path));
+    return false;
+  }
+  file.commit();
+  return true;
 }
 
 void MHWISaveEditor::EditorTabChange(int editorIndex)
 {
   MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  int mhwSaveIndex = MHW_SaveIndex();
 
   int index = editorIndex;
   SaveLoader* loader = editors[index];
-  loader->Load(this->_mhwSave, _mhwSaveIndex);
+  loader->Load(mhwSave, mhwSaveIndex);
 }
 
 void MHWISaveEditor::SelectSlot(int slot)
 {
   SaveLoader::LoadSlot(slot);
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  int mhwSaveIndex = MHW_SaveIndex();
+
   qInfo("Selected slot index %d.", slot);
 
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
   QString character = QString::fromUtf8(hunterName);
   Notification* notification = notification->GetInstance();
-  notification->ShowMessage(QString("Loaded character slot %1: %2").arg(_mhwSaveIndex + 1).arg(character));
+  notification->ShowMessage(QString("Loaded character slot %1: %2").arg(mhwSaveIndex + 1).arg(character));
 
   LoadSaveSlot();
   SaveLoader::FinishLoad();
@@ -381,9 +396,11 @@ void MHWISaveEditor::SelectSlot(int slot)
 void MHWISaveEditor::SwitchSlot(int slot)
 {
   MHW_SAVE_GUARD;
+  mhw_section3* mhwSection3 = MHW_Section3();
+  int mhwSaveIndex = MHW_SaveIndex();
 
   mhw_save_slot* temp = (mhw_save_slot*)malloc(sizeof(mhw_save_slot));
-  mhw_save_slot* saveA = &mhwSection3->saves[_mhwSaveIndex];
+  mhw_save_slot* saveA = &mhwSection3->saves[mhwSaveIndex];
   mhw_save_slot* saveB = &mhwSection3->saves[slot];
   if (!temp) {
     qWarning("Error allocating memory.");
@@ -396,7 +413,7 @@ void MHWISaveEditor::SwitchSlot(int slot)
   free(temp);
 
   Notification* notification = notification->GetInstance();
-  notification->ShowMessage(QString("Switched slots: %1 to slot: %2.").arg(_mhwSaveIndex + 1).arg(slot + 1));
+  notification->ShowMessage(QString("Switched slots: %1 to slot: %2.").arg(mhwSaveIndex + 1).arg(slot + 1));
 
   LoadSaveSlot();
 }
@@ -404,14 +421,16 @@ void MHWISaveEditor::SwitchSlot(int slot)
 void MHWISaveEditor::CloneSlot(int slot)
 {
   MHW_SAVE_GUARD;
+  mhw_section3* mhwSection3 = MHW_Section3();
+  int mhwSaveIndex = MHW_SaveIndex();
 
-  mhw_save_slot* saveA = &mhwSection3->saves[_mhwSaveIndex];
+  mhw_save_slot* saveA = &mhwSection3->saves[mhwSaveIndex];
   mhw_save_slot* saveB = &mhwSection3->saves[slot];
 
   memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
 
   Notification* notification = notification->GetInstance();
-  notification->ShowMessage(QString("Cloned slot: %1 to slot: %2.").arg(_mhwSaveIndex + 1).arg(slot + 1));
+  notification->ShowMessage(QString("Cloned slot: %1 to slot: %2.").arg(mhwSaveIndex + 1).arg(slot + 1));
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)
@@ -421,9 +440,76 @@ void MHWISaveEditor::OpenLocation(const QString& location)
 }
 
 void MHWISaveEditor::Backup() {
+  mhw_save_raw* saveWrite = MHWS_Save();
+  mhw_save_raw* buffer = nullptr;
+  bool success = true;
 
+  if (MHW_SAVE_GUARD_CHECK) {
+    buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+
+    if (!buffer) {
+      success = false;
+    }
+    else {
+      success = LoadFile(GetDefaultSavePath(), &buffer);
+      saveWrite = buffer;
+    }
+  }
+
+  QFileInfo fi = QFileInfo(EditorFile());
+  QString basename = fi.baseName();
+  QString ext = fi.completeSuffix();
+
+  if (basename.isEmpty()) basename = QString::fromUtf8(SAVE_NAME);
+  if (ext.isEmpty()) ext = "";
+  else ext = "_" + ext.replace('.', '_');
+
+  QDateTime date = QDateTime::currentDateTime();
+  QString datatime = date.toString("yyyy-MM-dd_hh-mm-ss");
+  QString writeFile = basename + ext + '_' + datatime + ".bak";
+  QString path = GetDataPathSaves() + writeFile;
+
+  if (success) {
+    QByteArray compressed = qCompress((u8*)saveWrite, sizeof(mhw_save_raw), 9);
+    int compressedSize = compressed.size();
+
+    success = WriteFile(path, (u8*)compressed.constData(), compressedSize);
+  }
+
+  Notification* notification = notification->GetInstance();
+  if (success) {
+    notification->ShowMessage("Backup made: " + writeFile);
+  }
+  else {
+    notification->ShowMessage("Failed to create backup: " + writeFile);
+  }
 }
 
 void MHWISaveEditor::Restore() {
+  QString path = GetDataPathSaves();
+  QFileDialog dialog(this);
+  dialog.setDirectory(path);
+  dialog.setFileMode(QFileDialog::ExistingFile);
+  if (!dialog.exec()) return;
+  QString filepath = dialog.selectedFiles()[0];
 
+  QFile file(filepath, this);
+  if (!file.open(QIODevice::ReadOnly)) {
+    qWarning("File: %s, cannot be read.", qUtf8Printable(path));
+    return;
+  }
+
+  QByteArray compressed = file.readAll();
+  QByteArray saveBlob = qUncompress(compressed);
+  file.close();
+
+  mhw_save_raw* savep = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+  if (!savep) {
+    qWarning("Error allocating memory.");
+    return;
+  };
+
+  memcpy(savep->data, saveBlob.constData(), saveBlob.length());
+  SaveLoader::LoadFile(GetDefaultSavePath());
+  Load(savep, -1);
 }

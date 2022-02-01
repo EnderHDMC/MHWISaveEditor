@@ -1,8 +1,9 @@
 #pragma once
 
+#include <QDir>
 #include <QString>
 #include <QSettings>
-#include <QDir>
+#include <QStandardPaths>
 
 #include "../types/constants.h"
 
@@ -66,7 +67,6 @@ static QString GetDefaultSavePath()
   return GetDefaultSaveDir() + "/" + QString::fromUtf8(SAVE_NAME);
 }
 
-
 static QString GetDefaultDumpPath(int slot)
 {
   assert(slot >= 0 && slot <= 9);
@@ -74,4 +74,24 @@ static QString GetDefaultDumpPath(int slot)
   int last = path.length() - 1;
   path[last] = QChar('0' + slot);
   return path + ".bin";
+}
+
+static QString GetDataPath()
+{
+  QString path = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation)[0];
+
+  QDir dir = QDir();
+  if (dir.mkpath(path)) return path;
+  else return "";
+}
+
+
+static QString GetDataPathSaves()
+{
+  QString path = GetDataPath();
+  path = path + "/backups/";
+
+  QDir dir = QDir();
+  if (dir.mkpath(path)) return path;
+  else return "";
 }

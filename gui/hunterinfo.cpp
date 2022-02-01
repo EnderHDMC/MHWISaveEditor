@@ -33,12 +33,18 @@ HunterInfo::~HunterInfo()
 
 void HunterInfo::HunterNameChange(const QString& text)
 {
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
   str64* hunterName = &mhwSaveSlot->hunter.name;
   SetStr(hunterName, text);
 }
 
 void HunterInfo::PalicoNameChange(const QString& text)
 {
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
   str64* palicoName = &mhwSaveSlot->palico_name;
   SetStr(palicoName, text);
 }
@@ -46,6 +52,7 @@ void HunterInfo::PalicoNameChange(const QString& text)
 void HunterInfo::ZennyChange(int value)
 {
   MHW_LOADING_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   u32 zeni = value;
   mhwSaveSlot->hunter.zeni = zeni;
@@ -54,6 +61,7 @@ void HunterInfo::ZennyChange(int value)
 void HunterInfo::ResearchPointsChange(int value)
 {
   MHW_LOADING_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   u32 researchPoints = value;
   mhwSaveSlot->hunter.research_points = researchPoints;
@@ -62,6 +70,7 @@ void HunterInfo::ResearchPointsChange(int value)
 void HunterInfo::SteamworksFuelChange(int value)
 {
   MHW_LOADING_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   u32 steamworksFuel = value;
   mhwSaveSlot->steamworks_stored_fuel = value;
@@ -70,6 +79,7 @@ void HunterInfo::SteamworksFuelChange(int value)
 void HunterInfo::RegionalLevelGLChange(int value)
 {
   MHW_LOADING_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   QSpinBox* senderSpin = qobject_cast<QSpinBox*>(sender());
   int index = regionIndexMapping.value(senderSpin, -1);
@@ -87,6 +97,9 @@ void HunterInfo::RegionalLevelGLChange(int value)
 
 void HunterInfo::UncapGuidingLands()
 {
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
   mhwSaveSlot->guiding_lands.level_total = GUIDING_LANDS_LEVEL_UNCAP;
 
   Notification* notification = notification->GetInstance();
@@ -96,6 +109,7 @@ void HunterInfo::UncapGuidingLands()
 void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   str64 hunterName = {};
   str64 palicoName = {};
@@ -119,10 +133,10 @@ void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
   QMapIterator<QSpinBox*, u8> i(regionIndexMapping);
   while (i.hasNext()) {
     i.next();
-    
+
     QSpinBox* spnLevelGL = i.key();
     u8 index = i.value();
-    
+
     u32 level = (guidingLandsLevels[index] / GUIDING_LANDS_XP_PER_LEVEL) + 1;
     u32 maxLevel = guidingLandsLevelsUnlocked[index];
     u32 minLevel = maxLevel > 0;

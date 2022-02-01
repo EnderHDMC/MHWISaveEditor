@@ -19,6 +19,8 @@ GeneralInfo::~GeneralInfo()
 void GeneralInfo::ChangeSteamID()
 {
   MHW_SAVE_GUARD;
+  mhw_ib_save* mhwSaveIB = MHW_SaveIB();
+
   u64 steamID = mhwSaveIB->header.steam_id;
   QString id = QString::number(steamID);
 
@@ -47,6 +49,7 @@ void GeneralInfo::ChangeSteamID()
 void GeneralInfo::ResetEditVouchers()
 {
   MHW_SAVE_GUARD;
+  mhw_section1* mhwSection1 = MHW_Section1();
 
   mhwSection1->character_edit_voucher = 0;
   mhwSection1->character_edit_voucher_free = 0;
