@@ -39,12 +39,12 @@ public slots:
   void SelectSlot(int slot);
   void SwitchSlot(int slot);
   void CloneSlot(int slot);
-  
+
   void OpenLocation(const QString& location);
 
   void Backup();
   void Restore();
-  
+
   void EditorTabChange(int editorIndex);
 
 public:
@@ -58,9 +58,14 @@ private:
   bool LoadFile(const QString& path, mhw_save_raw** save);
   void SaveFile(const QString& path);
 
+  bool WriteFile(const QString& path, u8* data, u32 size);
+
   void LoadSaveSlot();
 
-  bool WriteFile(const QString& path, u8* data, u32 size);
+  void ReadSettings();
+  void WriteSettings();
+
+  void TrimBackups();
 
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex = -1) override;
@@ -88,4 +93,9 @@ private:
   QMap<QString, QString> ext_map;
   QMap<QString, bool> encrypt_map;
   QStringList filters;
+
+  //////// Settings ////////
+  // Backups
+  bool doAutoBackups = true;
+  int maxBackups = 64;
 };

@@ -86,7 +86,7 @@ static QString GetDataPath()
 }
 
 
-static QString GetDataPathSaves()
+static QString GetDataPathBackups()
 {
   QString path = GetDataPath();
   path = path + "/backups/";

@@ -36,6 +36,8 @@ bool Notification::SetDefaultMode(NotificationMode mode)
 
 void Notification::ShowMessage(const QString& text, int timeout)
 {
+  if (silence) { silence--; return; }
+
   switch (defaultMode)
   {
   case NotificationMode::None: break;
@@ -62,4 +64,9 @@ void Notification::Register(QStatusBar* statusbar)
 {
   statusBar = statusbar;
   notificationModes.insert(NotificationMode::StatusBar, statusBar);
+}
+
+void Notification::Silence(unsigned int times)
+{
+  silence = times;
 }

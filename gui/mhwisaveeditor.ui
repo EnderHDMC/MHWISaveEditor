@@ -80,6 +80,7 @@
     <addaction name="separator"/>
     <addaction name="actionOpenGameLocation"/>
     <addaction name="actionOpenSaveLocation"/>
+    <addaction name="actionOpenEditorData"/>
     <addaction name="separator"/>
     <addaction name="menuDump"/>
     <addaction name="separator"/>
@@ -362,6 +363,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionOpenEditorData">
+   <property name="text">
+    <string>Open Editor Data</string>
    </property>
   </action>
  </widget>

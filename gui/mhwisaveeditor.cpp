@@ -58,7 +58,9 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(ui->actionOpenGameLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
   openSignalMapper->setMapping(ui->actionOpenGameLocation, GetGamePath());
   connect(ui->actionOpenSaveLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
-  openSignalMapper->setMapping(ui->actionOpenSaveLocation, GetDefaultSaveDir() + "/" + QString::fromUtf8(SAVE_NAME));
+  openSignalMapper->setMapping(ui->actionOpenSaveLocation, GetDefaultSavePath());
+  connect(ui->actionOpenEditorData, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
+  openSignalMapper->setMapping(ui->actionOpenEditorData, GetDataPath());
   connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
 
   dumpSignalMapper = new QSignalMapper(this);
@@ -108,6 +110,8 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   encrypt_map.insert("", true);
   encrypt_map.insert(".raw", true);
   encrypt_map.insert(".bin", false);
+
+  ReadSettings();
 }
 
 MHWISaveEditor::~MHWISaveEditor()
@@ -123,6 +127,8 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
   itemDB->Free();
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
   bitmapDB->Free();
+
+  WriteSettings();
 }
 
 bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt, bool validate)
@@ -323,6 +329,12 @@ void MHWISaveEditor::LoadFile(const QString& file)
 
   if (load) {
     Load(MHW_Save());
+
+    if (doAutoBackups) {
+      Notification* notification = notification->GetInstance();
+      notification->Silence(1);
+      Backup();
+    }
   }
   else {
     Notification* notification = notification->GetInstance();
@@ -467,7 +479,7 @@ void MHWISaveEditor::Backup() {
   QDateTime date = QDateTime::currentDateTime();
   QString datatime = date.toString("yyyy-MM-dd_hh-mm-ss");
   QString writeFile = basename + ext + '_' + datatime + ".bak";
-  QString path = GetDataPathSaves() + writeFile;
+  QString path = GetDataPathBackups() + writeFile;
 
   if (success) {
     QByteArray compressed = qCompress((u8*)saveWrite, sizeof(mhw_save_raw), 9);
@@ -483,10 +495,11 @@ void MHWISaveEditor::Backup() {
   else {
     notification->ShowMessage("Failed to create backup: " + writeFile);
   }
+  TrimBackups();
 }
 
 void MHWISaveEditor::Restore() {
-  QString path = GetDataPathSaves();
+  QString path = GetDataPathBackups();
   QFileDialog dialog(this);
   dialog.setDirectory(path);
   dialog.setFileMode(QFileDialog::ExistingFile);
@@ -512,4 +525,63 @@ void MHWISaveEditor::Restore() {
   memcpy(savep->data, saveBlob.constData(), saveBlob.length());
   SaveLoader::LoadFile(GetDefaultSavePath());
   Load(savep, -1);
+}
+
+void MHWISaveEditor::TrimBackups()
+{
+  if (!maxBackups) return;
+  QString path = GetDataPathBackups();
+  QDir dir(path);
+
+  QStringList nameFilters;
+  nameFilters << "*.bak";
+  dir.setNameFilters(nameFilters);
+  QDir::Filters filters = QDir::Filter::Files;
+  QDir::SortFlags sort = QDir::SortFlag::Time | QDir::SortFlag::Reversed;
+
+  QFileInfoList files = dir.entryInfoList(filters, sort);
+  int deleteTotal = files.size() - maxBackups;
+  int deleteCount = deleteTotal;
+  for (int i = 0; i < files.size(); i++) {
+    QFileInfo fileInfo = files.at(i);
+    QFile file = fileInfo.absoluteFilePath();
+    
+    if (deleteCount > 0) {
+      QString fileName = fileInfo.fileName();
+      qDebug() << QString("Delete [%1/%2]: %3").arg(deleteTotal - deleteCount + 1).arg(deleteTotal).arg(fileName);
+      file.remove();
+      deleteCount--;
+    }
+    else break;
+  }
+}
+
+void MHWISaveEditor::ReadSettings()
+{
+  QString path = GetDataPath() + "/settings.ini";
+  QSettings::Format format = QSettings::Format::IniFormat;
+  QSettings::setDefaultFormat(format);
+  QSettings settings(path, format, this);
+
+  settings.beginGroup("backups");
+  doAutoBackups = settings.value("doAutoBackups", doAutoBackups).toBool();
+  maxBackups = settings.value("maxBackups", maxBackups).toInt();
+  settings.endGroup();
+
+  qDebug() << "Read settings file: " + settings.fileName();
+}
+
+void MHWISaveEditor::WriteSettings()
+{
+  QString path = GetDataPath() + "/settings.ini";
+  QSettings::Format format = QSettings::Format::IniFormat;
+  QSettings::setDefaultFormat(format);
+  QSettings settings(path, format, this);
+
+  settings.beginGroup("backups");
+  settings.setValue("doAutoBackups", doAutoBackups);
+  settings.setValue("maxBackups", maxBackups);
+  settings.endGroup();
+
+  qDebug() << "Wrote settings file: " + settings.fileName();
 }

@@ -22,6 +22,7 @@ private:
   QStatusBar* statusBar = nullptr;
 
   QMap<NotificationMode, QObject*> notificationModes;
+  unsigned int silence = 0;
 
 public:
   static Notification* GetInstance();
@@ -30,5 +31,7 @@ public:
   bool SetDefaultMode(NotificationMode mode);
   void ShowMessage(const QString& text, int timeout = 0);
   void Register(QStatusBar* statusbar);
+
+  void Silence(unsigned int times);
 };
 
