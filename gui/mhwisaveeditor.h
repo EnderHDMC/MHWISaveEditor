@@ -61,7 +61,7 @@ private:
   bool LoadFile(const QString& path, mhw_save_raw** save);
   void SaveFile(const QString& path);
 
-  bool WriteFile(const QString& path, u8* data, u32 size);
+  bool WriteFile(const QString& path, u8* data, u64 size);
 
   void LoadSaveSlot();
 

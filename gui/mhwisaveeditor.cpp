@@ -185,10 +185,7 @@ bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
   QByteArray saveBlob = file.readAll();
   file.close();
 
-  mhw_save_raw* newsavep = (mhw_save_raw*)QByteArrayToU8(saveBlob, (u8*)savep, sizeof(mhw_save_raw));
-  if (savep != newsavep && savep) free(savep);
-  savep = newsavep;
-
+  savep = (mhw_save_raw*)QByteArrayToU8(saveBlob, (u8*)savep, sizeof(mhw_save_raw));
   if (!savep) {
     qWarning("File: %s, cannot be read.", qUtf8Printable(path));
     return false;
@@ -325,10 +322,10 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 
 void MHWISaveEditor::LoadFile(const QString& file)
 {
-  SaveLoader::LoadFile(file);
   bool load = LoadFile(file, MHWS_SavePtr());
 
   if (load) {
+    SaveLoader::LoadFile(file);
     Load(MHW_Save());
 
     if (doAutoBackups) {
@@ -361,7 +358,7 @@ void MHWISaveEditor::LoadSaveSlot()
   loader->Load(mhwSave, mhwSaveIndex);
 }
 
-bool MHWISaveEditor::WriteFile(const QString& path, u8* data, u32 size)
+bool MHWISaveEditor::WriteFile(const QString& path, u8* data, u64 size)
 {
   QSaveFile file(path);
   if (!file.open(QIODevice::WriteOnly)) {
@@ -369,11 +366,22 @@ bool MHWISaveEditor::WriteFile(const QString& path, u8* data, u32 size)
     return false;
   }
 
-  int length = file.write((char*)data, size);
-  if (length != size) {
-    qWarning("File: %s, cannot be written.", qUtf8Printable(path));
-    return false;
+  u64 bytesToWrite = size;
+  u64 bytesWritten = 0;
+  char* writeData = (char*)data;
+  while (bytesWritten < bytesToWrite)
+  {
+    u64 writeSize = bytesToWrite - bytesWritten;
+    i64 bytesWrite = file.write(writeData, writeSize);
+    if (bytesWrite < 0) {
+      qWarning("File: %s, cannot be written.", qUtf8Printable(path));
+      file.cancelWriting();
+      return false;
+    }
+    bytesWritten += bytesWrite;
+    writeData += bytesWrite;
   }
+
   file.commit();
   return true;
 }

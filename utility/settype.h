@@ -29,17 +29,19 @@ static void SetStr(str256* str, const QString& value) {
 }
 
 static u8* QByteArrayToU8(QByteArray arr, u8* dst, u32 size) {
+  u8* newdst = dst;
   if (arr.length() != size) {
     qWarning("Error: array size does not match desired size.");
-    return nullptr;
+    return newdst;
   }
 
-  if (!dst) dst = (u8*)malloc(size);
-  if (!dst) {
+  if (!newdst) newdst = (u8*)malloc(size);
+  if (!newdst) {
     qWarning("Error allocating memory.");
-    return nullptr;
+    return dst;
   };
-  memcpy(dst, arr.constData(), arr.length());
+  memcpy(newdst, arr.constData(), arr.length());
 
-  return dst;
+  if (dst != newdst && dst) free(dst);
+  return newdst;
 }
