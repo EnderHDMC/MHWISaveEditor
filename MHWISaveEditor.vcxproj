@@ -140,7 +140,6 @@
       <FileType>Text</FileType>
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="res\ui_colortable.uct" />
     <None Include="setup.iss">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
     </None>

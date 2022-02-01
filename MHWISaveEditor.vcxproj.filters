@@ -214,7 +214,6 @@
     <None Include="res\mapping\test_data.1sc" />
     <None Include="res\mapping\types.bt" />
     <None Include="res\mapping\uct.bt" />
-    <None Include="res\ui_colortable.uct" />
     <None Include="setup.iss" />
     <None Include="res\mapping\copy_unknown.1sc" />
     <None Include="res\mapping\armor_items.1sc" />
