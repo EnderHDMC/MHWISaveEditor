@@ -80,6 +80,10 @@ static void ValidateItemSlots(mhw_item_slot* items, int count) {
     if (items[i].amount == 0) {
       items[i].id = 0;
     }
+
+    if (items[i].id == 0) {
+      items[i].amount = 0;
+    }
   }
 }
 
