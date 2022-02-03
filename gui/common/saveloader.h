@@ -53,7 +53,6 @@ public:
 
   virtual void LoadFile(const QString& file)
   {
-    loading = true;
     this->file = file;
   }
 

@@ -165,8 +165,10 @@ void MHWISaveEditor::SaveFile(const QString& path)
   bool success = SaveFileEncrypt(filepath, MHW_Save(), encrypt, true);
 
   Notification* notif = notif->GetInstance();
-  if (success)
+  if (success) {
     notif->ShowMessage("Saved file: " + path);
+    statusFile->setText("File: " + EditorFile());
+  }
   else
     notif->ShowMessage("Could not save file: " + path);
 }
@@ -288,6 +290,7 @@ void MHWISaveEditor::SaveAs()
       fi.setFile(fi.filePath() + ext_map.value(selectedFilter));
     }
 
+    SaveLoader::LoadFile(files[0]);
     SaveFile(files[0]);
   }
 }
