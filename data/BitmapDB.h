@@ -25,9 +25,8 @@ public:
 
   inline u64 BuildKey(u32 id, u32 color)
   {
-    return (((u64)id) << 32) | color;
+    return (((u64)id) << 32) | (color & 0xFF);
   }
 
-  QIcon* ItemPixmap(u32 icon, u32 color);
   QIcon* ItemIcon(itemInfo* info);
 };

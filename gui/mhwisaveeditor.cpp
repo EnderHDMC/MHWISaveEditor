@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QDesktopServices>
 #include <QGridLayout>
+#include <QStyleFactory>
 
 // Encryption
 #include "../crypto/iceborne_crypt.h"
@@ -113,6 +114,8 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   encrypt_map.insert("", true);
   encrypt_map.insert(".raw", true);
   encrypt_map.insert(".bin", false);
+
+  SetupDarkMode();
 }
 
 MHWISaveEditor::~MHWISaveEditor()
@@ -582,5 +585,32 @@ void MHWISaveEditor::TrimBackups()
       deleteCount--;
     }
     else break;
+  }
+}
+
+void MHWISaveEditor::SetupDarkMode()
+{
+  bool darkMode = settings->darkMode;
+  if (darkMode) {
+    QPalette p;
+    qApp->setStyle("Fusion");
+    p.setColor(QPalette::Window, QColor(53, 53, 53));
+    p.setColor(QPalette::WindowText, Qt::white);
+    p.setColor(QPalette::Base, QColor(25, 25, 25));
+    p.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
+    p.setColor(QPalette::ToolTipBase, Qt::black);
+    p.setColor(QPalette::ToolTipText, Qt::white);
+    p.setColor(QPalette::Text, Qt::white);
+    p.setColor(QPalette::Button, QColor(53, 53, 53));
+    p.setColor(QPalette::ButtonText, Qt::white);
+    p.setColor(QPalette::BrightText, Qt::red);
+    p.setColor(QPalette::Link, QColor(42, 130, 218));
+    p.setColor(QPalette::Highlight, QColor(42, 130, 218));
+    p.setColor(QPalette::HighlightedText, Qt::black);
+    p.setColor(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Button, QColor(23, 23, 23));
+    p.setColor(QPalette::ColorGroup::Disabled, QPalette::ColorRole::WindowText, Qt::gray);
+    p.setColor(QPalette::ColorGroup::Disabled, QPalette::ColorRole::ButtonText, Qt::gray);
+    p.setColor(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Text, Qt::gray);
+    qApp->setPalette(p);
   }
 }

@@ -8,6 +8,7 @@ private:
   static Settings* instance;
   Settings();
 
+  QSettings* settings = nullptr;
   void ReadSettings();
 
 public:
@@ -26,8 +27,7 @@ public:
   static QString GetDefaultDumpPath(int slot);
   static QString GetDataPath();
   static QString GetDataPathBackups();
-
-  QSettings* settings = nullptr;
+  static QString GetIconDumpPath();
 
   // Backups
   bool doAutoBackups = true;
@@ -36,4 +36,7 @@ public:
   // Items
   bool matrixMode = false;
   bool showUnobtainable = true;
+
+  // Quality of Life
+  bool darkMode = false;
 };

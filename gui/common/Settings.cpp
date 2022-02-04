@@ -34,6 +34,7 @@ bool Settings::SyncSettings(bool sync)
   bool requireRestart = false;
   bool oldMatrixMode = matrixMode;
   bool oldShowUnobtainable = showUnobtainable;
+  bool oldDarkMode = darkMode;
 
   settings->beginGroup("backups");
   doAutoBackups = settings->value("doAutoBackups", doAutoBackups).toBool();
@@ -45,8 +46,13 @@ bool Settings::SyncSettings(bool sync)
   showUnobtainable = settings->value("showUnobtainable", showUnobtainable).toBool();
   settings->endGroup();
 
+  settings->beginGroup("qol");
+  darkMode = settings->value("darkMode", darkMode).toBool();
+  settings->endGroup();
+
   requireRestart |= oldMatrixMode != matrixMode;
   requireRestart |= oldShowUnobtainable != showUnobtainable;
+  requireRestart |= oldDarkMode != darkMode;
 
   return requireRestart && sync;
 }
@@ -72,6 +78,10 @@ void Settings::WriteSettings()
   settings->beginGroup("items");
   settings->setValue("matrixMode", matrixMode);
   settings->setValue("showUnobtainable", showUnobtainable);
+  settings->endGroup();
+
+  settings->beginGroup("qol");
+  settings->setValue("darkMode", darkMode);
   settings->endGroup();
 
   qDebug() << "Wrote settings file: " + settings->fileName();
@@ -165,6 +175,16 @@ QString Settings::GetDataPathBackups()
 {
   QString path = GetDataPath();
   path = path + "/backups/";
+
+  QDir dir = QDir();
+  if (dir.mkpath(path)) return path;
+  else return "";
+}
+
+QString Settings::GetIconDumpPath()
+{
+  QString path = GetDataPath();
+  path = path + "/icons/";
 
   QDir dir = QDir();
   if (dir.mkpath(path)) return path;

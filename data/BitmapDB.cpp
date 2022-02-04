@@ -41,14 +41,17 @@ void BitmapDB::Init(ItemDB* itemDB)
   iconTints.insert(6, &items); iconTints.insert(7, &items);
   iconTints.insert(8, &items); iconTints.insert(9, &items);
   iconTints.insert(10, &items); iconTints.insert(11, &items);
-  iconTints.insert(13, &items); iconTints.insert(14, &items);
-  iconTints.insert(15, &items); iconTints.insert(24, &items);
+  iconTints.insert(12, &items); iconTints.insert(13, &items);
+  iconTints.insert(14, &items); iconTints.insert(15, &items);
+  iconTints.insert(16, &items); iconTints.insert(19, &items);
+  iconTints.insert(22, &items); iconTints.insert(24, &items);
   iconTints.insert(25, &items); iconTints.insert(26, &items);
 
   Settings* settings = settings->GetInstance();
   QPainter::CompositionMode modeA = QPainter::CompositionMode_DestinationOut;
   QPainter::CompositionMode modeB = QPainter::CompositionMode_Multiply;
   bool matrixMode = settings->matrixMode;
+  bool darkMode = settings->darkMode;
   if (matrixMode) {
     modeA = QPainter::CompositionMode_DestinationIn;
     modeB = QPainter::CompositionMode_DestinationIn;
@@ -61,7 +64,7 @@ void BitmapDB::Init(ItemDB* itemDB)
     u32 key = tinter.key();
 
     QImage* tint = new QImage(1024, 1024, QImage::Format_ARGB32);
-    QColor pallete = (matrixMode) ? palletes[3] : palletes[key];
+    QColor pallete = (matrixMode && !darkMode) ? palletes[2] : palletes[key];
     tint->fill(pallete);
 
     p.begin(tint);
@@ -87,14 +90,12 @@ void BitmapDB::Init(ItemDB* itemDB)
       int x = (icon_id % 16) * iconWidth;
       int y = (icon_id / 16) * iconHeight;
 
-      QImage iconImage = iconTints.value(icon_color, &items)->copy(x, y, iconWidth, iconHeight);
+      QImage iconImage = iconTints.value(icon_color & 0xFF, &items)->copy(x, y, iconWidth, iconHeight);
       QPixmap iconPixmap = QPixmap::fromImage(iconImage);
       QIcon* icon = new QIcon(iconPixmap);
       icons.insert(key, icon);
     }
   }
-
-  // OutputIcons("temp", itemDB);
 }
 
 void BitmapDB::OutputIcons(const QString& path, ItemDB* itemDB)
@@ -115,15 +116,12 @@ void BitmapDB::OutputIcons(const QString& path, ItemDB* itemDB)
   for (size_t i = 0; i < itemDB->count(); i++)
   {
     itemInfo* info = itemDB->GetItemById(i);
-    int icon_id = info->icon_id;
-    int icon_color = info->icon_color;
-    u64 key = BuildKey(icon_id, icon_color);
+    QIcon* icon = ItemIcon(info);
 
-    QIcon* icon = icons.value(key);
-    QPixmap iconPixmap = icon->pixmap(icon->availableSizes().first());
-
-    if (icon)
-      iconPixmap.save(QString("%1/item_%2_%3.png").arg(outPath).arg(icon_id).arg(icon_color));
+    if (icon) {
+      QPixmap iconPixmap = icon->pixmap(icon->availableSizes().first());
+      iconPixmap.save(QString("%1/item_%2_%3.png").arg(outPath).arg(info->icon_id).arg(info->icon_color));
+    }
   }
 }
 
@@ -143,27 +141,6 @@ void BitmapDB::Free()
 
   delete(instance);
   instance = nullptr;
-}
-
-QIcon* BitmapDB::ItemPixmap(u32 icon_id, u32 icon_color)
-{
-  QIcon* result = nullptr;
-  u64 key = BuildKey(icon_id, icon_color);
-
-  if (!icons.contains(key)) {
-    QString path = QString("res/ItemIcons/%1_%2.png").arg(icon_id).arg(icon_color);
-    qInfo("Loading %s", qUtf8Printable(path));
-
-    if (QFile::exists(path))
-      result = new QIcon(path);
-    icons.insert(key, result);
-  }
-  else {
-    qInfo("Re-using icon id=%d, color=%d", icon_id, icon_color);
-    result = icons.value(key);
-  }
-
-  return result;
 }
 
 QIcon* BitmapDB::ItemIcon(itemInfo* info)

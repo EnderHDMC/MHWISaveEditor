@@ -67,6 +67,8 @@ private:
 
   void TrimBackups();
 
+  void SetupDarkMode();
+
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex = -1) override;
   virtual void LoadFile(const QString& file) override;
