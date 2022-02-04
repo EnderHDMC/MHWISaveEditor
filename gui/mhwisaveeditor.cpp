@@ -10,7 +10,6 @@
 // Encryption
 #include "../crypto/iceborne_crypt.h"
 // Save paths
-#include "../utility/paths.h"
 #include "../utility/system/FileUtils.h"
 #include "../utility/mhw_save_utils.h"
 // Inventory Layout
@@ -60,11 +59,11 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 
   openSignalMapper = new QSignalMapper(this);
   connect(ui->actionOpenGameLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
-  openSignalMapper->setMapping(ui->actionOpenGameLocation, GetGamePath());
+  openSignalMapper->setMapping(ui->actionOpenGameLocation, Settings::GetGamePath());
   connect(ui->actionOpenSaveLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
-  openSignalMapper->setMapping(ui->actionOpenSaveLocation, GetDefaultSavePath());
+  openSignalMapper->setMapping(ui->actionOpenSaveLocation, Settings::GetDefaultSavePath());
   connect(ui->actionOpenEditorData, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
-  openSignalMapper->setMapping(ui->actionOpenEditorData, GetDataPath());
+  openSignalMapper->setMapping(ui->actionOpenEditorData, Settings::GetDataPath());
   connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
 
   dumpSignalMapper = new QSignalMapper(this);
@@ -206,7 +205,7 @@ void MHWISaveEditor::Dump(int number)
 {
   mhw_save_raw* saveWrite = MHWS_Save();
   mhw_save_raw* buffer = nullptr;
-  QString path = GetDefaultDumpPath(number);
+  QString path = Settings::GetDefaultDumpPath(number);
   bool success = true;
 
   if (MHW_SAVE_GUARD_CHECK) {
@@ -216,7 +215,7 @@ void MHWISaveEditor::Dump(int number)
       success = false;
     }
     else {
-      LoadFile(GetDefaultSavePath(), &buffer);
+      LoadFile(Settings::GetDefaultSavePath(), &buffer);
       saveWrite = buffer;
     }
   }
@@ -236,7 +235,7 @@ void MHWISaveEditor::Dump(int number)
 
 void MHWISaveEditor::Open()
 {
-  QString path = GetDefaultSaveDir();
+  QString path = Settings::GetDefaultSaveDir();
   QString filepath = QString();
 
   QFileDialog dialog(nullptr);
@@ -254,7 +253,7 @@ void MHWISaveEditor::Open()
 
 void MHWISaveEditor::OpenSAVEDATA1000()
 {
-  QString path = GetDefaultSavePath();
+  QString path = Settings::GetDefaultSavePath();
   LoadFile(path);
 }
 
@@ -275,7 +274,7 @@ void MHWISaveEditor::SaveAs()
 {
   MHW_SAVE_GUARD;
 
-  QString path = GetDefaultSaveDir();
+  QString path = Settings::GetDefaultSaveDir();
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
@@ -491,7 +490,7 @@ void MHWISaveEditor::Backup() {
       success = false;
     }
     else {
-      success = LoadFile(GetDefaultSavePath(), &buffer);
+      success = LoadFile(Settings::GetDefaultSavePath(), &buffer);
       saveWrite = buffer;
     }
   }
@@ -507,7 +506,7 @@ void MHWISaveEditor::Backup() {
   QDateTime date = QDateTime::currentDateTime();
   QString datatime = date.toString("yyyy-MM-dd_hh-mm-ss");
   QString writeFile = basename + ext + '_' + datatime + ".bak";
-  QString path = GetDataPathBackups() + writeFile;
+  QString path = Settings::GetDataPathBackups() + writeFile;
 
   if (success) {
     QByteArray compressed = qCompress((u8*)saveWrite, sizeof(mhw_save_raw), 9);
@@ -527,7 +526,7 @@ void MHWISaveEditor::Backup() {
 }
 
 void MHWISaveEditor::Restore() {
-  QString path = GetDataPathBackups();
+  QString path = Settings::GetDataPathBackups();
   QFileDialog dialog(this);
   dialog.setDirectory(path);
   dialog.setFileMode(QFileDialog::ExistingFile);
@@ -551,7 +550,7 @@ void MHWISaveEditor::Restore() {
   };
 
   memcpy(savep->data, saveBlob.constData(), saveBlob.length());
-  SaveLoader::LoadFile(GetDefaultSavePath());
+  SaveLoader::LoadFile(Settings::GetDefaultSavePath());
   Load(savep, -1);
 }
 
@@ -559,7 +558,7 @@ void MHWISaveEditor::TrimBackups()
 {
   int maxBackups = settings->maxBackups;
   if (!maxBackups) return;
-  QString path = GetDataPathBackups();
+  QString path = Settings::GetDataPathBackups();
   QDir dir(path);
 
   QStringList nameFilters;

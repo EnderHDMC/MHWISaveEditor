@@ -18,6 +18,15 @@ public:
   void WriteSettings();
   QString FileName();
 
+  // Paths
+  static QString GetSteamPath();
+  static QString GetGamePath();
+  static QString GetDefaultSaveDir();
+  static QString GetDefaultSavePath();
+  static QString GetDefaultDumpPath(int slot);
+  static QString GetDataPath();
+  static QString GetDataPathBackups();
+
   QSettings* settings = nullptr;
 
   // Backups
