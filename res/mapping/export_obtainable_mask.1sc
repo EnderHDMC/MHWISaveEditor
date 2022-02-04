@@ -1,0 +1,95 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: export_obtainable_mask.1sc
+//   Authors: EnderHDMC
+//   Version: 0.1.4
+//   Purpose: Construct a mask of items that are obtainable legit.
+//  Category: Game
+//   History: Initial Version
+//------------------------------------------------
+#include <mask_generator.1sc>
+
+u8 obtainable_items[flags_size];
+u32 obtainable_index = Obtainable * flags_size;
+u8 discoverable_items[flags_size];
+u32 discoverable_index = Discoverable * flags_size;
+
+FileSelect(flags_file);
+ReadBytes(obtainable_items, obtainable_index, flags_size);
+ReadBytes(discoverable_items, discoverable_index, flags_size);
+FileSelect(working_file);
+
+// Should be run on a save file, preferably with only legit items.
+i32 x, y;
+u32 items = sizeof(mhw_save.section3.saves[0].storage.items)
+          / sizeof(mhw_save.section3.saves[0].storage.items[0]);
+u32 ammos = sizeof(mhw_save.section3.saves[0].storage.ammo)
+          / sizeof(mhw_save.section3.saves[0].storage.ammo[0]);
+u32 materials = sizeof(mhw_save.section3.saves[0].storage.materials)
+              / sizeof(mhw_save.section3.saves[0].storage.materials[0]);
+u32 decorations = sizeof(mhw_save.section3.saves[0].storage.decorations)
+                / sizeof(mhw_save.section3.saves[0].storage.decorations[0]);
+u32 item_id, item_count;
+
+for (y = 0; y < 2; y++)
+{
+  for (x = 0; x < flags_size; x++) {
+    discoverable_items[x] |= mhw_save.section3.saves[0].discovered_items.items[x];
+  }
+
+  for (x = 0; x < items; x++) {
+    item_id = mhw_save.section3.saves[y].storage.items[x].id;
+    item_count = mhw_save.section3.saves[y].storage.items[x].amount;
+
+    if (item_id != 0) {
+      byte_index = item_id / 8;
+      bit_index = item_id % 8;
+
+      obtainable_items[byte_index] |= 1 << bit_index;
+    }
+  }
+
+  for (x = 0; x < ammos; x++) {
+    item_id = mhw_save.section3.saves[y].storage.ammo[x].id;
+    item_count = mhw_save.section3.saves[y].storage.ammo[x].amount;
+
+    if (item_id != 0) {
+      byte_index = item_id / 8;
+      bit_index = item_id % 8;
+
+      obtainable_items[byte_index] |= 1 << bit_index;
+    }
+  }
+
+  for (x = 0; x < materials; x++) {
+    item_id = mhw_save.section3.saves[y].storage.materials[x].id;
+    item_count = mhw_save.section3.saves[y].storage.materials[x].amount;
+
+    if (item_id != 0) {
+      byte_index = item_id / 8;
+      bit_index = item_id % 8;
+
+      obtainable_items[byte_index] |= 1 << bit_index;
+    }
+  }
+
+  for (x = 0; x < decorations; x++) {
+    item_id = mhw_save.section3.saves[y].storage.decorations[x].id;
+    item_count = mhw_save.section3.saves[y].storage.decorations[x].amount;
+
+    if (item_id != 0) {
+      byte_index = item_id / 8;
+      bit_index = item_id % 8;
+
+      obtainable_items[byte_index] |= 1 << bit_index;
+    }
+  }
+}
+Printf("Obtainable mask generated.\n");
+
+FileSelect(flags_file);
+WriteBytes(obtainable_items, obtainable_index, flags_size);
+WriteBytes(discoverable_items, discoverable_index, flags_size);
+FileSave(flags_path);
+FileClose();

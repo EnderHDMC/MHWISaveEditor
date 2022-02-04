@@ -7,9 +7,10 @@ enum class item_type
 {
   Item = 0,
   Material = 1,
-
+  Account = 2,
   Ammo = 3,
-  Decoration = 4
+  Decoration = 4,
+  Furniture = 5
 };
 
 struct inventory_area {

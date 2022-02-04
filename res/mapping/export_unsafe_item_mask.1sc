@@ -1,0 +1,89 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: export_unsafe_item_mask.1sc
+//   Authors: EnderHDMC
+//   Version: 0.1.4
+//   Purpose: Construct a mask of unused items
+//  Category: Game
+//   History: Initial Version
+//------------------------------------------------
+#include <mask_generator.1sc>
+
+u8 slinger_ammo_items[flags_size];
+u32 slinger_ammo_index = SlingerAmmo * flags_size;
+u8 unavailable_items[flags_size];
+u32 unavailable_index = Unavailable * flags_size;
+u8 hardummy_items[flags_size];
+u32 hardummy_index = HARDUMMY * flags_size;
+u8 triple_q_items[flags_size];
+u32 triple_q_index = TripleQ * flags_size;
+u8 appraisal_items[flags_size];
+u32 appraisal_index = Appraisal * flags_size;
+
+FileSelect(flags_file);
+ReadBytes(slinger_ammo_items, slinger_ammo_index, flags_size);
+ReadBytes(appraisal_items, appraisal_index, flags_size);
+ReadBytes(unavailable_items, unavailable_index, flags_size);
+ReadBytes(hardummy_items, hardummy_index, flags_size);
+ReadBytes(triple_q_items, triple_q_index, flags_size);
+FileSelect(working_file);
+
+// Should be run on each item_*.gmd file.
+// Only one seems to be sufficient though.
+// It's sort of programmed to work with item_eng.gmd
+u32 i;
+u32 item_index_name, item_index_desc;
+u32 item_count = header.key_count / 2;
+
+string unavailable = "Unavailable";
+string harddummy = "HARDUMMY";
+string ammo_regex = "(?m)(Slinger ammo).*";
+string triple_q_regex = ".*\\?{3}.*";
+string appraisal_regex = "(?m).*(Apprais(ed|al)).*";
+string item_name, item_name_key;
+string item_desc, item_desc_key;
+
+for (i = 0; i < item_count; i++) {
+  item_index_name = i * 2;
+  item_index_desc = i * 2 + 1;
+  item_name = Str("%s", strings.str[item_index_name].value);
+  item_desc = Str("%s", strings.str[item_index_desc].value);
+  item_name_key = Str("%s", keys.str[item_index_name].value);
+  item_desc_key = Str("%s", keys.str[item_index_desc].value);
+  byte_index = i / 8;
+  bit_index = i % 8;
+
+  if (unavailable == item_name || unavailable == item_desc) {
+    unavailable_items[byte_index] |= 1 << bit_index;
+  }
+  
+  if (harddummy == item_name) {
+    hardummy_items[byte_index] |= 1 << bit_index;
+  }
+  
+  if (RegExMatch(item_desc, ammo_regex)) {
+    Printf("Ammo [ %d ]: %s\n", i, item_name);
+    slinger_ammo_items[byte_index] |= 1 << bit_index;
+  }
+  
+  if (RegExMatch(item_name, triple_q_regex)) {
+    Printf("??? [ %d ]: %s\n", i, item_name);
+    triple_q_items[byte_index] |= 1 << bit_index;
+  }
+  
+  if (RegExMatch(item_desc, appraisal_regex)) {
+    Printf("Appraisal [ %d ]: %s\n", i, item_name);
+    appraisal_items[byte_index] |= 1 << bit_index;
+  }
+}
+
+FileSelect(flags_file);
+WriteBytes(slinger_ammo_items, slinger_ammo_index, flags_size);
+WriteBytes(appraisal_items, appraisal_index, flags_size);
+WriteBytes(unavailable_items, unavailable_index, flags_size);
+WriteBytes(hardummy_items, hardummy_index, flags_size);
+WriteBytes(triple_q_items, triple_q_index, flags_size);
+FileSave(flags_path);
+FileClose();
+Printf("Generated masks.\n");

@@ -25,7 +25,8 @@ struct gmd_info_entry {
 struct gmd_header {
   u32 magic;
   u32 version;
-  u8 unknown[12];
+  u32 language_id;
+  u8 unknown[8];
   u32 key_count;
   u32 string_count;
   u32 key_block_size;

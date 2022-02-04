@@ -492,6 +492,11 @@ struct mhw_storage
   mhw_item_slot decorations[500];
 };
 
+struct mhw_items_discovered
+{
+  u8 items[400];
+};
+
 struct mhw_investigation
 {
   u32 filled; // 30 75 00 00
@@ -1372,7 +1377,7 @@ struct mhw_save_slot
   mhw_monster_index capture_monster_index;
   u32 capture_monster_size;
   u8 unknown6b[22];
-  u8 discovered_items[400];
+  mhw_items_discovered discovered_items;
   mhw_endemic_life endemic_life;
   mhw_seliana_room seliana_room;
 

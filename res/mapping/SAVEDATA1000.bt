@@ -674,6 +674,11 @@ struct mhw_storage
   mhw_item_slot decorations[500];
 };
 
+struct mhw_items_discovered
+{
+  u8 items[400];
+};
+
 struct mhw_investigation
 {
   u32 filled; // 30 75 00 00
@@ -902,6 +907,8 @@ struct mhw_guiding_lands
   u32 unknown2[3];
   u8 region_level_unlocked[8];
   mhw_guiding_lands_analysis analyses[8];
+  monsters128_u32 monster_lures;
+  u8 unknown3[sizeof(monsters128_u32)];
 };
 
 struct mhw_endemic_placement
@@ -1554,7 +1561,7 @@ struct mhw_save_slot
   mhw_monster_index capture_monster_index;
   u32 capture_monster_size;
   u8 unknown6b[22];
-  u8 discovered_items[400];
+  mhw_items_discovered discovered_items;
   mhw_endemic_life endemic_life;
   mhw_seliana_room seliana_room;
 
@@ -1641,7 +1648,15 @@ struct mhw_save_slot
   mhw_layered_loadout layered_loadouts[112];
   mhw_palico_loadout palico_loadouts[24];
   mhw_botanical_research botanist;
-  u8 unknown15[213];
+  u8 unknown15a[49];
+  u8 elder_melder_seen_items[32];
+  u8 unknown15b[9];
+  u8 elder_melder_seen_decos[16];
+  u8 unknown15c[73];
+  u8 argosy_purchased_slots;
+  u8 unknown15d;
+  u32 argosy_slot_requests[3];
+  u8 unknown15_[20];
   mhw_safari safaris[4];
   u8 unknown16[284];
 
@@ -1681,9 +1696,11 @@ struct mhw_save_slot
   mhw_lynian_observatory lynian_observatory;
   mhw_guiding_lands guiding_lands;
 
-  u8 unknown22a[1708];
+  u8 unknown22b[1196 - 512];
   mhw_toggle shoutout_manual_auto_translation;
-  u8 unknown22_[762];
+  u8 unknown22c[406];
+  u8 elder_melder_seen_awakening_alchemy;
+  u8 unknown22_[762 - 406 - 1];
 
   u8 unknown23[sizeof(u16) * 4741]; // Zero?
   u8 hash_table[512];

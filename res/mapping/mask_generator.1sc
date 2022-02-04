@@ -1,0 +1,47 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: export_obtainable_mask.1sc
+//   Authors: EnderHDMC
+//   Version: 0.1.4
+//   Purpose: Mask generation common code.
+//  Category: Game
+//   History: Initial Version
+//------------------------------------------------
+
+// Only uncomment if this script runs on its own.
+// #include "types.bt"
+
+enum <u32> FlagFileIndex {
+  Discoverable = 0,
+  Obtainable = 1,
+  SlingerAmmo = 2,
+  Appraisal = 3,
+  Unavailable = 4,
+  HARDUMMY = 5,
+  TripleQ = 6, // ??? items
+
+   // Assumes every other entry is seqential and starts at 0.
+  FlagFileIndexCount
+};
+
+u32 flags_size = 400; // Comes from sizeof(mhw_discovered_items) in SAVEDATA1000.bt
+
+int working_file = GetFileNum();
+string script_path = FileNameGetPath(GetScriptFileName());
+string flags_path = script_path + "..\\CustomFlags.bin";
+int flags_file = FileOpen(flags_path, false, "Hex", false);
+if (flags_file == -1) {
+  flags_file = FileNew("Hex", true);
+}
+
+FileSelect(flags_file);
+int flags_file_size = FileSize();
+if (flags_file_size != FlagFileIndexCount * flags_size) {
+  if (flags_file_size) {
+    DeleteBytes(0, flags_file_size);
+  }
+  InsertBytes(0, FlagFileIndexCount * flags_size, 0);
+}
+u32 byte_index, bit_index;
+FileSelect(working_file);

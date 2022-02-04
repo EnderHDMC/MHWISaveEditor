@@ -30,15 +30,15 @@ typedef struct {
 } item_record;
 
 int item_names = GetFileNum();
-string path = FileNameGetPath(GetFileName());
-string export_path = path + "..\\MasterItemList.csv";
-int item_data = FileOpen(path + "itemData.itm", true, "Hex", false);
+string script_path = FileNameGetPath(GetScriptFileName());
+string export_csv_path = script_path + "..\\MasterItemList.csv";
+int item_data = FileOpen(script_path + "itemData.itm", true, "Hex", false);
 int csv = FileNew();
 
 FileSelect(item_data);
 
 local item_record item;
-int item_count = header.entry_count;
+int entry_count = header.entry_count;
 int i, comp;
 
 FPrintf(csv, "%s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s\n",
@@ -47,7 +47,7 @@ FPrintf(csv, "%s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s; %s\n",
   "icon_id", "icon_color", "sell_price", "buy_price",
   "name", "description");
 
-for(i = 0; i < item_count; i++)
+for(i = 0; i < entry_count; i++)
 {
   FileSelect(item_data);
   item.id                  = items[i].id;
@@ -88,5 +88,5 @@ for(i = 0; i < item_count; i++)
 }
 
 FileSelect(csv);
-FileSave(export_path);
+FileSave(export_csv_path);
 FileClose();
