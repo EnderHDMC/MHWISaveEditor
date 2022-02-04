@@ -3,8 +3,58 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <iostream>
-#include "../types/types.h"
+
+#include <QString>
+
+#include "../types/mhw_save.h"
+
 using json = nlohmann::json;
+
+enum class itemFlag : u32 {
+  PermanentItem = 1 << 0,
+  SupplyItem = 1 << 1,
+  ItemBar = 1 << 3,
+  Feystone = 1 << 4,
+  LoadoutItem = 1 << 5,
+  PalicoGadget = 1 << 7,
+  AmmoLvl1 = 1 << 8,
+  AmmoLvl2 = 1 << 9,
+  AmmoLvl3 = 1 << 10,
+  GlowEffect = 1 << 11,
+
+  UnknownA = 1 << 2,
+  UnknownB = 1 << 6,
+  UnknownC = 1 << 13,
+  Unknown = UnknownA | UnknownB | UnknownC,
+
+  Unused = 0xFFFFFFFF
+  & ~(PermanentItem | SupplyItem | ItemBar
+    | Feystone | LoadoutItem | PalicoGadget
+    | AmmoLvl1 | AmmoLvl2 | AmmoLvl3 | GlowEffect
+    | Unknown),
+
+  CustomTripleQ = 1 << 25,
+  CustomHARDUMMY = 1 << 26,
+  CustomUnavailable = 1 << 27,
+  CustomAppraisal = 1 << 28,
+
+  CustomSlingerAmmo = 1 << 29,
+  CustomObtainable = 1 << 30,
+  CustomDiscoverable = ((u32)1) << 31,
+
+  CustomExclude = 0
+  | CustomTripleQ
+  | CustomHARDUMMY
+  | CustomUnavailable
+  | CustomAppraisal,
+
+  RejectFlag = 0
+  | PermanentItem
+  | SupplyItem
+  | LoadoutItem
+  | Feystone
+  | CustomExclude,
+};
 
 struct itemInfo {
   u32 id;
@@ -43,15 +93,17 @@ static bool operator==(const itemInfo& lhs, const itemInfo& rhs) {
 }
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(itemInfo,
-    id, subtype, type, rarity, carry_limit, carry_limit_twisted,
-    sort_order, flags, icon_id, icon_color, sell_price, buy_price,
-    name, description)
+  id, subtype, type, rarity, carry_limit, carry_limit_twisted,
+  sort_order, flags, icon_id, icon_color, sell_price, buy_price,
+  name, description);
 
 class ItemDB
 {
   static ItemDB* instance;
   std::vector<itemInfo> items;
-  std::vector<std::string> names;
+
+  bool loadError = false;
+  bool fatalError = false;
 
   ItemDB();
 
@@ -63,6 +115,13 @@ public:
   itemInfo* GetItemByIndex(int index);
   int count();
 
-  std::vector<itemInfo> itemVector();
-  std::vector<std::string> itemNamesVector();
+  QString ItemName(itemInfo* info);
+
+  // These two need special treatment.
+  // Survival jewel [2270] is unobtainable.
+  // Smoke jewel is survival jewel but is obtainable.
+  // But smoke jewel uses survival jewels name, so needs to be adjusted.
+  // Their names basically just need to be swapped.
+  static const u32 SurvivalJewelID = 2270;
+  static const u32 SmokeJewelID = 819;
 };

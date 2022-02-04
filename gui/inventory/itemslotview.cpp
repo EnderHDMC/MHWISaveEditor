@@ -45,9 +45,10 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
 void ItemSlotView::UpdateItemDisplay(itemInfo* info)
 {
   QIcon* icon = bitmapDB->ItemIcon(info);
+  QString itemName = itemDB->ItemName(info);
 
   ui->btnIcon->setIcon(icon ? *icon : QIcon());
-  ui->btnIcon->setText(QString::fromUtf8(info->name));
+  ui->btnIcon->setText(itemName);
 }
 
 void ItemSlotView::UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot)

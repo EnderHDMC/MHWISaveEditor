@@ -34,6 +34,11 @@ bool Notification::SetDefaultMode(NotificationMode mode)
   return system;
 }
 
+NotificationMode Notification::GetDefaultMode()
+{
+  return defaultMode;
+}
+
 void Notification::ShowMessage(const QString& text, int timeout)
 {
   if (silence) { silence--; return; }

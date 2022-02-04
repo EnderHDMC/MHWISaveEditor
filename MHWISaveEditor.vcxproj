@@ -27,6 +27,7 @@
     <ClInclude Include="gui\common\Notification.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="gui\common\StringByteLengthValidator.h" />
+    <ClInclude Include="gui\common\Settings.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\mhw_struct_constants.h" />
     <ClInclude Include="types\inventory_areas.h" />
@@ -59,6 +60,7 @@
     </ClCompile>
     <ClCompile Include="gui\common\StringByteLengthValidator.cpp" />
     <ClCompile Include="gui\common\Notification.cpp" />
+    <ClCompile Include="gui\common\Settings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\generalinfo.ui" />
@@ -70,6 +72,7 @@
     <QtUic Include="gui\hunterinfo.ui" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\CustomFlags.bin" />
     <None Include="res\GameData\itemData.itm">
       <DeploymentContent>true</DeploymentContent>
     </None>
@@ -119,7 +122,9 @@
     <None Include="res\mapping\dlc.csv" />
     <None Include="res\mapping\dump_save_structure.1sc" />
     <None Include="res\mapping\export_items.1sc" />
+    <None Include="res\mapping\export_obtainable_mask.1sc" />
     <None Include="res\mapping\export_save_equipment.1sc" />
+    <None Include="res\mapping\export_unsafe_item_mask.1sc" />
     <None Include="res\mapping\gmd.bt" />
     <None Include="res\mapping\itm.bt" />
     <None Include="res\mapping\Mapping.ods" />

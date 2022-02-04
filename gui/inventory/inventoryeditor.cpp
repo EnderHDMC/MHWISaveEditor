@@ -2,6 +2,7 @@
 #include "ui_inventoryeditor.h"
 
 #include <QGridLayout>
+#include "../common/Settings.h"
 
 InventoryEditor::InventoryEditor(QWidget* parent)
   : QWidget(parent), SaveLoader()
@@ -11,13 +12,31 @@ InventoryEditor::InventoryEditor(QWidget* parent)
 
   ItemDB* itemDB = itemDB->GetInstance();
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
+  Settings* settings = settings->GetInstance();
+  bool showUnobtainable = settings->showUnobtainable;
+
   for (int i = 0; i < itemDB->count(); i++)
   {
     itemInfo* info = itemDB->GetItemByIndex(i);
+    if (info->type == (u32)item_type::Furniture) continue;
+    if (info->type == (u32)item_type::Account) continue;
+    if (info->flags & (u32)itemFlag::RejectFlag) continue;
+
+    QString itemName = itemDB->ItemName(info);
+    if (!(info->flags & (u32)itemFlag::CustomObtainable) && info->id) {
+      if (info->flags & (u32)itemFlag::CustomSlingerAmmo) continue;
+
+      // Truly unobtainable items.
+      if (!(info->flags & (u32)itemFlag::CustomDiscoverable)) {
+        qInfo() << "Unobtainable Item[" << info->id << "]: " << itemName;
+        if (!showUnobtainable) continue;
+      }
+    }
+
     QIcon* icon = bitmapDB->ItemIcon(info);
     QVariant pass = QVariant::fromValue(info);
 
-    ui->cmbSearchItem->addItem(*icon, QString::fromUtf8(info->name), pass);
+    ui->cmbSearchItem->addItem(*icon, itemName, pass);
   }
 
   int areaCount = COUNTOF(inventory_areas);

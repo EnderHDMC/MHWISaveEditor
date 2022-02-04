@@ -1,8 +1,22 @@
 #include "ItemDB.h"
 
-#include <QApplication>
 #include <QtGlobal>
-#include <QString>
+#include <QFile>
+
+#include "../utility/settype.h"
+
+enum class FlagFileIndex : u32 {
+  Discoverable = 0,
+  Obtainable = 1,
+  SlingerAmmo = 2,
+  Appraisal = 3,
+  Unavailable = 4,
+  HARDUMMY = 5,
+  TripleQ = 6, // ??? items
+
+   // Assumes every other entry is seqential and starts at 0.
+   FlagFileIndexCount
+};
 
 ItemDB* ItemDB::instance = nullptr;
 
@@ -12,22 +26,59 @@ ItemDB::ItemDB()
   std::ifstream file("res/MasterItemList.json");
   if (!file) {
     qFatal("Cannot open file: res/MasterItemList.json");
-    QApplication::exit(1);
+    loadError = true;
+    fatalError = true;
+    return;
   }
   json json;
   file >> json;
 
   items = json.get<std::vector<itemInfo>>();
-
-  for (u32 i = 0; i < items.size(); i++)
-  {
-    names.push_back(items[i].name);
-    // qInfo("Loaded Item[%d]: \"%s\".", i, qUtf8Printable(QString::fromUtf8(items[i].name)));
-
-    if (items[i].id != i)
-      qWarning("Item[%d]: Id(%d), name: \"%s\", item index does not match id.", i, items[i].id, items[i].name);
-  }
   qInfo("Loaded %d items.", items.size());
+
+  QFile obtainFile("res/CustomFlags.bin");
+  if (!obtainFile.open(QIODevice::ReadOnly)) {
+    qWarning("Cannot open file: res/CustomFlags.bin");
+    loadError = true;
+    return;
+  }
+
+  // It just sounded like a cool name.
+  QByteArray blobtain = obtainFile.readAll();
+  file.close();
+  mhw_items_discovered flags[(u64)FlagFileIndex::FlagFileIndexCount] = {};
+  u8* obtain = QByteArrayToU8(blobtain, (u8*)flags, sizeof(flags));
+  if (!obtain) {
+    loadError = true;
+    return;
+  }
+
+  for (u32 i = 0; i != items.size(); i++) {
+    itemInfo* info = &items[i];
+
+    // Leave the null item as-is.
+    if (!info->id) continue;
+
+    u32 is = info->id / 8;
+    u32 isi = info->id % 8;
+    bool isDiscoverable = flags[(u32)FlagFileIndex::Discoverable].items[is] & (1 << isi);
+    bool isObtainable = flags[(u32)FlagFileIndex::Obtainable].items[is] & (1 << isi);
+    bool isSlingerAmmo = flags[(u32)FlagFileIndex::SlingerAmmo].items[is] & (1 << isi);
+    bool isAppraisalItem = flags[(u32)FlagFileIndex::Appraisal].items[is] & (1 << isi);
+    bool isUnavailable = flags[(u32)FlagFileIndex::Unavailable].items[is] & (1 << isi);
+    bool isHARDUMMY = flags[(u32)FlagFileIndex::HARDUMMY].items[is] & (1 << isi);
+    bool isTripleQ = flags[(u32)FlagFileIndex::TripleQ].items[is] & (1 << isi);
+
+    u32 customFlags = 0;
+    if (isDiscoverable)  customFlags |= (u32)itemFlag::CustomDiscoverable;
+    if (isObtainable)    customFlags |= (u32)itemFlag::CustomObtainable;
+    if (isSlingerAmmo)   customFlags |= (u32)itemFlag::CustomSlingerAmmo;
+    if (isAppraisalItem) customFlags |= (u32)itemFlag::CustomAppraisal;
+    if (isUnavailable)   customFlags |= (u32)itemFlag::CustomUnavailable;
+    if (isHARDUMMY)      customFlags |= (u32)itemFlag::CustomHARDUMMY;
+    if (isTripleQ)       customFlags |= (u32)itemFlag::CustomTripleQ;
+    info->flags |= customFlags;
+  }
 }
 
 ItemDB* ItemDB::GetInstance()
@@ -60,12 +111,16 @@ int ItemDB::count()
   return items.size();
 }
 
-std::vector<itemInfo> ItemDB::itemVector()
+QString ItemDB::ItemName(itemInfo* info)
 {
-  return items;
-}
+  switch (info->id) {
+  case SurvivalJewelID:
+    return QString::fromUtf8(GetItemById(SmokeJewelID)->name);
 
-std::vector<std::string> ItemDB::itemNamesVector()
-{
-  return names;
+  case SmokeJewelID:
+    return QString::fromUtf8(GetItemById(SurvivalJewelID)->name);
+
+  default:
+    return QString::fromUtf8(info->name);
+  }
 }

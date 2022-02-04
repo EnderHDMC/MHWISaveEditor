@@ -28,6 +28,7 @@ public:
   static Notification* GetInstance();
   void Free();
 
+  NotificationMode GetDefaultMode();
   bool SetDefaultMode(NotificationMode mode);
   void ShowMessage(const QString& text, int timeout = 0);
   void Register(QStatusBar* statusbar);

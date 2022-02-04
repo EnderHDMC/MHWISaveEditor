@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
   QCoreApplication::setOrganizationDomain("enderhdmc.github.io");
   QCoreApplication::setApplicationName("MHWI Save Editor");
 
+  Settings* settings = settings->GetInstance();
   ItemDB* itemDB = itemDB->GetInstance();
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
   bitmapDB->Init(itemDB);

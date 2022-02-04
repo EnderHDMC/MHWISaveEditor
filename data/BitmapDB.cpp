@@ -1,6 +1,8 @@
 #include "BitmapDB.h"
 #include <QDir>
 
+#include "../gui/common/Settings.h"
+
 BitmapDB* BitmapDB::instance = nullptr;
 
 BitmapDB::BitmapDB()
@@ -43,6 +45,15 @@ void BitmapDB::Init(ItemDB* itemDB)
   iconTints.insert(15, &items); iconTints.insert(24, &items);
   iconTints.insert(25, &items); iconTints.insert(26, &items);
 
+  Settings* settings = settings->GetInstance();
+  QPainter::CompositionMode modeA = QPainter::CompositionMode_DestinationOut;
+  QPainter::CompositionMode modeB = QPainter::CompositionMode_Multiply;
+  bool matrixMode = settings->matrixMode;
+  if (matrixMode) {
+    modeA = QPainter::CompositionMode_DestinationIn;
+    modeB = QPainter::CompositionMode_DestinationIn;
+  }
+
   int count = 0;
   QMapIterator<u32, QImage*> tinter(iconTints);
   while (tinter.hasNext()) {
@@ -50,13 +61,13 @@ void BitmapDB::Init(ItemDB* itemDB)
     u32 key = tinter.key();
 
     QImage* tint = new QImage(1024, 1024, QImage::Format_ARGB32);
-    QColor pallete = palletes[key];
+    QColor pallete = (matrixMode) ? palletes[3] : palletes[key];
     tint->fill(pallete);
 
     p.begin(tint);
-    p.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+    p.setCompositionMode(modeA);
     p.fillRect(0, 0, imageWidth, imageHeight, itemsMask);
-    p.setCompositionMode(QPainter::CompositionMode_Multiply);
+    p.setCompositionMode(modeB);
     p.fillRect(0, 0, imageWidth, imageHeight, items);
     p.end();
 
@@ -82,6 +93,8 @@ void BitmapDB::Init(ItemDB* itemDB)
       icons.insert(key, icon);
     }
   }
+
+  // OutputIcons("temp", itemDB);
 }
 
 void BitmapDB::OutputIcons(const QString& path, ItemDB* itemDB)

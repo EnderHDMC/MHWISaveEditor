@@ -4,7 +4,6 @@
 #include <QLabel>
 #include <QSignalMapper>
 #include <QFileSystemWatcher>
-#include <QSettings>
 
 #include "../types/mhw_save.h"
 
@@ -12,6 +11,7 @@
 #include "limitedunlocks.h"
 #include "generalinfo.h"
 #include "hunterinfo.h"
+#include "common/Settings.h"
 
 constexpr const char* ALL_SAVE = "All Files (*)";
 constexpr const char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
@@ -65,10 +65,6 @@ private:
 
   void LoadSaveSlot();
 
-  void ReadSettings();
-  void SyncSettings(QSettings* settings);
-  void WriteSettings();
-
   void TrimBackups();
 
   // Inherited via SaveLoader
@@ -99,10 +95,6 @@ private:
   QStringList filters;
 
   //////// Settings ////////
-  QSettings* editorSettings = nullptr;
   QFileSystemWatcher watcher;
-
-  // Backups
-  bool doAutoBackups = true;
-  int maxBackups = 64;
+  Settings *settings = nullptr;
 };

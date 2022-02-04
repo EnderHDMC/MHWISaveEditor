@@ -24,8 +24,12 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent), ui(new Ui::MHWISaveEditor),
   SaveLoader()
 {
+  settings = settings->GetInstance();
   ui->setupUi(this);
   setWindowIcon(QIcon("res/icon.ico"));
+
+  watcher.addPath(settings->FileName());
+  connect(&watcher, SIGNAL(fileChanged(QString)), this, SLOT(WatchFileChanged(QString)));
 
   Notification* notif = notif->GetInstance();
   notif->Register(ui->statusbar);
@@ -110,9 +114,6 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   encrypt_map.insert("", true);
   encrypt_map.insert(".raw", true);
   encrypt_map.insert(".bin", false);
-
-  ReadSettings();
-  connect(&watcher, SIGNAL(fileChanged(QString)), this, SLOT(WatchFileChanged(QString)));
 }
 
 MHWISaveEditor::~MHWISaveEditor()
@@ -129,7 +130,8 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
   bitmapDB->Free();
 
-  WriteSettings();
+  watcher.removePath(settings->FileName());
+  settings->Free();
 }
 
 bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt, bool validate)
@@ -331,7 +333,7 @@ void MHWISaveEditor::LoadFile(const QString& file)
     SaveLoader::LoadFile(file);
     Load(MHW_Save());
 
-    if (doAutoBackups) {
+    if (settings->doAutoBackups) {
       Notification* notif = notif->GetInstance();
       notif->Silence(1);
       Backup();
@@ -402,11 +404,15 @@ void MHWISaveEditor::EditorTabChange(int editorIndex)
 
 void MHWISaveEditor::WatchFileChanged(const QString& path)
 {
-  QSettings* settings = editorSettings;
-  if (settings) {
-    if (path == settings->fileName())
-      settings->sync();
-    SyncSettings(settings);
+  if (settings && path == settings->FileName()) {
+    bool restart = settings->SyncSettings(true);
+    if (restart) {
+      Notification* notif = notif->GetInstance();
+      NotificationMode notifMode = notif->GetDefaultMode();
+      notif->SetDefaultMode(NotificationMode::MessageBox);
+      notif->ShowMessage("The settings you have changed require a restart.");
+      notif->SetDefaultMode(notifMode);
+    }
   }
 }
 
@@ -551,6 +557,7 @@ void MHWISaveEditor::Restore() {
 
 void MHWISaveEditor::TrimBackups()
 {
+  int maxBackups = settings->maxBackups;
   if (!maxBackups) return;
   QString path = GetDataPathBackups();
   QDir dir(path);
@@ -570,43 +577,11 @@ void MHWISaveEditor::TrimBackups()
 
     if (deleteCount > 0) {
       QString fileName = fileInfo.fileName();
-      qDebug() << QString("Delete [%1/%2]: %3").arg(deleteTotal - deleteCount + 1).arg(deleteTotal).arg(fileName);
+      qDebug() << QString("Delete [%1/%2]: %3")
+        .arg(deleteTotal - deleteCount + 1).arg(deleteTotal).arg(fileName);
       file.remove();
       deleteCount--;
     }
     else break;
   }
-}
-
-void MHWISaveEditor::SyncSettings(QSettings* settings)
-{
-  settings->beginGroup("backups");
-  doAutoBackups = settings->value("doAutoBackups", doAutoBackups).toBool();
-  maxBackups = settings->value("maxBackups", maxBackups).toInt();
-  settings->endGroup();
-}
-
-void MHWISaveEditor::ReadSettings()
-{
-  QString path = GetDataPath() + "/settings.ini";
-  QSettings::Format format = QSettings::Format::IniFormat;
-  QSettings::setDefaultFormat(format);
-  QSettings* settings = new QSettings(path, format, this);
-  SyncSettings(settings);
-
-  qDebug() << "Read settings file: " + settings->fileName();
-  editorSettings = settings;
-  watcher.addPath(settings->fileName());
-}
-
-void MHWISaveEditor::WriteSettings()
-{
-  QSettings* settings = editorSettings;
-
-  settings->beginGroup("backups");
-  settings->setValue("doAutoBackups", doAutoBackups);
-  settings->setValue("maxBackups", maxBackups);
-  settings->endGroup();
-
-  qDebug() << "Wrote settings file: " + settings->fileName();
 }
