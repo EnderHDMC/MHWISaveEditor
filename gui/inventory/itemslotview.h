@@ -20,6 +20,8 @@ public:
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
 
+  void SetFocus();
+
   void UpdateItemDisplay(itemInfo *info);
   void UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot);
 

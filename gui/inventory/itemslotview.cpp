@@ -24,6 +24,11 @@ ItemSlotView::~ItemSlotView()
   delete ui;
 }
 
+void ItemSlotView::SetFocus()
+{
+  ui->spnCount->setFocus(Qt::FocusReason::ShortcutFocusReason);
+}
+
 void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);

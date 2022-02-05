@@ -116,12 +116,21 @@ public:
   int count();
 
   QString ItemName(itemInfo* info);
+  QString ItemName(u32 id);
 
-  // These two need special treatment.
+  //////////////////////////////////////////////
+  //////// Items with special treatment ////////
+  //////////////////////////////////////////////
+
   // Survival jewel [2270] is unobtainable.
   // Smoke jewel is survival jewel but is obtainable.
   // But smoke jewel uses survival jewels name, so needs to be adjusted.
-  // Their names basically just need to be swapped.
+  // Their names basically just need to be swapped, did you enjoy this rant?
   static const u32 SurvivalJewelID = 2270;
   static const u32 SmokeJewelID = 819;
+
+  // Mega Dash Juice is a material, but needs to be an item.
+  // Exhaust Coating is a material, but needs to be an ammo.
+  static const u32 MegaDashJuiceID = 19;
+  static const u32 ExhaustCoatingID = 179;
 };

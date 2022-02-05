@@ -56,6 +56,11 @@ public:
     this->file = file;
   }
 
+  virtual void LoadIndex(int index)
+  {
+    loading = true;
+  }
+
   virtual void LoadSlot(int slotIndex)
   {
     loading = true;

@@ -8,19 +8,43 @@ static bool IsBlowfishDecrypted(mhw_ib_save* save) {
   return save->header.magic == 0x00000001;
 }
 
-static mhw_item_slot* FindItemMaterial(mhw_ib_save* save, int slot, u32 item_id) {
+static mhw_item_slot* FindItem(mhw_item_slot* items, int count, u32 id) {
+  mhw_item_slot* result = nullptr;
+  for (int i = 0; i < count; i++)
+  {
+    if (items->id == id) {
+      result = items;
+      break;
+    }
+    items++;
+  }
+
+  return result;
+}
+
+static mhw_item_slot* FindItemOrEmpty(mhw_item_slot* items, int count, u32 id) {
+  mhw_item_slot* result = nullptr;
+  mhw_item_slot* empty = nullptr;
+  for (int i = 0; i < count; i++)
+  {
+    if (!empty && !items->id) empty = items;
+
+    if (items->id == id) {
+      result = items;
+      break;
+    }
+    items++;
+  }
+
+  if (!result) result = empty;
+  return result;
+}
+
+static mhw_item_slot* FindItemMaterial(mhw_ib_save* save, int slot, u32 id) {
   mhw_save_slot* save_slot = &save->section3.saves[slot];
   mhw_storage* storage = &save_slot->storage;
 
-  mhw_item_slot* result = nullptr;
-  for (int i = 0; i < COUNTOF(storage->materials); i++)
-  {
-    mhw_item_slot* slot = &storage->materials[i];
-    if (slot->id == item_id) {
-      result = slot;
-      break;
-    }
-  }
+  mhw_item_slot* result = FindItem(storage->materials, COUNTOF(storage->materials), id);
 
   return result;
 }

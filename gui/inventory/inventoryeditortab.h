@@ -22,6 +22,7 @@ public:
 
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
+  virtual void LoadIndex(int index) override;
 
 private:
   Ui::InventoryEditorTab* ui;

@@ -4,6 +4,7 @@
 #include <QFile>
 
 #include "../utility/settype.h"
+#include "../types/inventory_areas.h"
 
 enum class FlagFileIndex : u32 {
   Discoverable = 0,
@@ -58,6 +59,10 @@ ItemDB::ItemDB()
 
     // Leave the null item as-is.
     if (!info->id) continue;
+
+    // Set stuff for special case items.
+    if (info->id == MegaDashJuiceID) info->type = (u32)item_type::Item;
+    if (info->id == ExhaustCoatingID) info->type = (u32)item_type::Ammo;
 
     u32 is = info->id / 8;
     u32 isi = info->id % 8;
@@ -123,4 +128,10 @@ QString ItemDB::ItemName(itemInfo* info)
   default:
     return QString::fromUtf8(info->name);
   }
+}
+
+QString ItemDB::ItemName(u32 id)
+{
+  itemInfo* info = GetItemById(id);
+  return ItemName(info);
 }

@@ -3,6 +3,8 @@
 
 #include <QGridLayout>
 #include "../common/Settings.h"
+#include "../common/Notification.h"
+#include "../../utility/mhw_save_utils.h"
 
 InventoryEditor::InventoryEditor(QWidget* parent)
   : QWidget(parent), SaveLoader()
@@ -28,7 +30,7 @@ InventoryEditor::InventoryEditor(QWidget* parent)
 
       // Truly unobtainable items.
       if (!(info->flags & (u32)itemFlag::CustomDiscoverable)) {
-        qInfo() << "Unobtainable Item[" << info->id << "]: " << itemName;
+        qInfo() << "Unobtainable Item[" << info->id << ":" << info->type << "]: " << itemName;
         if (!showUnobtainable) continue;
       }
     }
@@ -72,28 +74,75 @@ void InventoryEditor::SearchIndexChange(int index)
   int areaIndex = -1;
   index = -1;
 
+  mhw_item_slot* baseItemSlot = nullptr;
+  mhw_item_slot* findItem = nullptr;
   for (int tab = startTab; tab < endTab; tab++) {
     const inventory_area* area = &inventory_areas[tab];
     u8* slot = ((u8*)mhwSaveSlot) + area->localoffset;
-    mhw_item_slot* baseItemSlot = (mhw_item_slot*)slot;
+    baseItemSlot = (mhw_item_slot*)slot;
 
-    for (int i = 0; i < area->count; i++)
-    {
-      mhw_item_slot* itemSlot = baseItemSlot + i;
-      if (itemSlot->id == info->id) {
-        areaIndex = tab;
-        index = i;
-        break;
-      }
+    findItem = FindItem(baseItemSlot, area->count, info->id);
+    if (findItem) {
+      areaIndex = tab;
+      break;
     }
-    if (index != -1) break;
   }
 
-  if (index != -1) {
+  if (findItem) {
+    int index = findItem - baseItemSlot;
     ui->tabEditors->setCurrentIndex(areaIndex);
     QWidget* current = ui->tabEditors->currentWidget();
     InventoryEditorTab* editor = dynamic_cast<InventoryEditorTab*>(current);
     editor->ScrollToIndex(index);
+  }
+}
+
+void InventoryEditor::ItemAdd()
+{
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  ItemDB* itemDB = itemDB->GetInstance();
+
+  QVariant data = ui->cmbSearchItem->currentData();
+  itemInfo* info = data.value<itemInfo*>();
+  if (!info || !info->id) return;
+
+  const inventory_area* storageArea = nullptr;
+  int areaCount = COUNTOF(inventory_areas);
+  int areaIndex = -1;
+
+  for (int tab = 0; tab < areaCount; tab++) {
+    const inventory_area* area = &inventory_areas[tab];
+    if (!area->storage) continue;
+    if ((u32)area->type != info->type) continue;
+    storageArea = area;
+    areaIndex = tab;
+  }
+
+  Notification* notif = notif->GetInstance();
+  if (!storageArea) {
+    notif->ShowMessage("Failed to find place to add " + itemDB->ItemName(info));
+    return;
+  }
+  u8* slot = ((u8*)mhwSaveSlot) + storageArea->localoffset;
+  mhw_item_slot* baseItemSlot = (mhw_item_slot*)slot;
+  mhw_item_slot* findItem = FindItemOrEmpty(baseItemSlot, storageArea->count, info->id);
+
+  if (findItem) {
+    findItem->id = info->id;
+    findItem->amount++;
+    if (findItem->amount > 9999) findItem->amount = 9999;
+
+    int index = findItem - baseItemSlot;
+    ui->tabEditors->setCurrentIndex(areaIndex);
+    QWidget* current = ui->tabEditors->currentWidget();
+    InventoryEditorTab* editor = dynamic_cast<InventoryEditorTab*>(current);
+    editor->LoadIndex(index);
+    editor->ScrollToIndex(index);
+    notif->ShowMessage("Added item: " + itemDB->ItemName(info));
+  }
+  else {
+    notif->ShowMessage("Failed to find place to add " + itemDB->ItemName(info));
   }
 }
 

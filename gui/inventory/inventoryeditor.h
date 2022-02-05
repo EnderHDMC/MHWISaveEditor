@@ -12,6 +12,7 @@ class InventoryEditor : public QWidget, public SaveLoader
 
 public slots:
   void SearchIndexChange(int index);
+  void ItemAdd();
 
 public:
     InventoryEditor(QWidget *parent = Q_NULLPTR);
