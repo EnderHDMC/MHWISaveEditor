@@ -51,11 +51,17 @@
    </item>
    <item row="2" column="1">
     <widget class="QSpinBox" name="spnZenny">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
      <property name="maximum">
       <number>99999999</number>
      </property>
      <property name="singleStep">
       <number>1000</number>
+     </property>
+     <property name="stepType">
+      <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
      </property>
     </widget>
    </item>
@@ -68,11 +74,17 @@
    </item>
    <item row="3" column="1">
     <widget class="QSpinBox" name="spnResearchPoints">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
      <property name="maximum">
       <number>99999999</number>
      </property>
      <property name="singleStep">
       <number>1000</number>
+     </property>
+     <property name="stepType">
+      <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
      </property>
     </widget>
    </item>
@@ -85,11 +97,17 @@
    </item>
    <item row="4" column="1">
     <widget class="QSpinBox" name="spnSteamworksFuel">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
      <property name="maximum">
       <number>99999999</number>
      </property>
      <property name="singleStep">
       <number>1000</number>
+     </property>
+     <property name="stepType">
+      <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
      </property>
     </widget>
    </item>
