@@ -36,6 +36,7 @@ public:
   // Items
   bool matrixMode = false;
   bool showUnobtainable = true;
+  bool searchAllTabsIncludeItemPouch = false;
 
   // Quality of Life
   bool darkMode = false;

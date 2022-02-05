@@ -44,6 +44,8 @@ bool Settings::SyncSettings(bool sync)
   settings->beginGroup("items");
   matrixMode = settings->value("matrixMode", matrixMode).toBool();
   showUnobtainable = settings->value("showUnobtainable", showUnobtainable).toBool();
+  searchAllTabsIncludeItemPouch =
+    settings->value("searchAllTabsIncludeItemPouch", searchAllTabsIncludeItemPouch).toBool();
   settings->endGroup();
 
   settings->beginGroup("qol");
@@ -78,6 +80,7 @@ void Settings::WriteSettings()
   settings->beginGroup("items");
   settings->setValue("matrixMode", matrixMode);
   settings->setValue("showUnobtainable", showUnobtainable);
+  settings->setValue("searchAllTabsIncludeItemPouch", searchAllTabsIncludeItemPouch);
   settings->endGroup();
 
   settings->beginGroup("qol");

@@ -75,10 +75,15 @@ void InventoryEditor::SearchIndexChange(int index)
   int areaIndex = -1;
   index = -1;
 
+  Settings* settings = settings->GetInstance();
+  bool searchAllTabsIncludeItemPouch = settings->searchAllTabsIncludeItemPouch;
+
   mhw_item_slot* baseItemSlot = nullptr;
   mhw_item_slot* findItem = nullptr;
   for (int tab = startTab; tab < endTab; tab++) {
     const inventory_area* area = &inventory_areas[tab];
+    if (allTabs && !searchAllTabsIncludeItemPouch && !area->storage) continue;
+
     u8* slot = ((u8*)mhwSaveSlot) + area->localoffset;
     baseItemSlot = (mhw_item_slot*)slot;
 
