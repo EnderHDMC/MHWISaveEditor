@@ -80,12 +80,13 @@
     <addaction name="separator"/>
     <addaction name="actionOpenGameLocation"/>
     <addaction name="actionOpenSaveLocation"/>
-    <addaction name="actionOpenEditorData"/>
     <addaction name="separator"/>
     <addaction name="menuDump"/>
     <addaction name="separator"/>
     <addaction name="actionBackup"/>
     <addaction name="actionRestore"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpenEditorData"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -367,7 +368,7 @@
   </action>
   <action name="actionOpenEditorData">
    <property name="text">
-    <string>Open Editor Data</string>
+    <string>Open editor data</string>
    </property>
   </action>
  </widget>
