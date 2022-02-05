@@ -61,6 +61,7 @@ void InventoryEditor::SearchIndexChange(int index)
 {
   MHW_SAVE_GUARD;
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  ItemDB* itemDB = itemDB->GetInstance();
 
   QVariant data = ui->cmbSearchItem->itemData(index);
   itemInfo* info = data.value<itemInfo*>();
@@ -95,6 +96,10 @@ void InventoryEditor::SearchIndexChange(int index)
     InventoryEditorTab* editor = dynamic_cast<InventoryEditorTab*>(current);
     editor->ScrollToIndex(index);
   }
+  else {
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage("Failed to find item: " + itemDB->ItemName(info));
+  }
 }
 
 void InventoryEditor::ItemAdd()
@@ -121,7 +126,7 @@ void InventoryEditor::ItemAdd()
 
   Notification* notif = notif->GetInstance();
   if (!storageArea) {
-    notif->ShowMessage("Failed to find place to add " + itemDB->ItemName(info));
+    notif->ShowMessage("Failed to find place to add: " + itemDB->ItemName(info));
     return;
   }
   u8* slot = ((u8*)mhwSaveSlot) + storageArea->localoffset;
@@ -142,7 +147,7 @@ void InventoryEditor::ItemAdd()
     notif->ShowMessage("Added item: " + itemDB->ItemName(info));
   }
   else {
-    notif->ShowMessage("Failed to find place to add " + itemDB->ItemName(info));
+    notif->ShowMessage("Failed to find place to add: " + itemDB->ItemName(info));
   }
 }
 
