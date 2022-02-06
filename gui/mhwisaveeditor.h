@@ -13,10 +13,6 @@
 #include "hunterinfo.h"
 #include "common/Settings.h"
 
-constexpr const char* ALL_SAVE = "All Files (*)";
-constexpr const char* ENCRYPTED_SAVE = "Encrypted Save (*.raw)";
-constexpr const char* UNENCRYPTED_SAVE = "Unencrypted Save(*.bin)";
-
 struct editor_tab {
   SaveLoader* widget;
   SaveLoader** binding;

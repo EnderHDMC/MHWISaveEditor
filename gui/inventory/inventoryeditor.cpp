@@ -41,14 +41,23 @@ InventoryEditor::InventoryEditor(QWidget* parent)
     ui->cmbSearchItem->addItem(*icon, itemName, pass);
   }
 
+  QStringList names;
+  names << tr("Item Pouch");
+  names << tr("Ammo Pouch");
+  names << tr("Item Box");
+  names << tr("Ammo Box");
+  names << tr("Material Box");
+  names << tr("Deco Box");
+
   int areaCount = COUNTOF(inventory_areas);
+  Q_ASSERT(areaCount == names.length());
   editorTabs.resize(areaCount);
   for (size_t i = 0; i < areaCount; i++)
   {
     InventoryEditorTab* editor = new InventoryEditorTab(&inventory_areas[i]);
     editorTabs[i] = editor;
 
-    ui->tabEditors->addTab(editor, tr(inventory_areas[i].area));
+    ui->tabEditors->addTab(editor, names[i]);
   }
 }
 
@@ -102,8 +111,8 @@ void InventoryEditor::SearchIndexChange(int index)
     editor->ScrollToIndex(index);
   }
   else {
-  Notification* notif = notif->GetInstance();
-  notif->ShowMessage("Failed to find item: " + itemDB->ItemName(info));
+    Notification* notif = notif->GetInstance();
+    notif->ShowMessage(tr("Failed to find item: %1").arg(itemDB->ItemName(info)));
   }
 }
 
@@ -131,7 +140,7 @@ void InventoryEditor::ItemAdd()
 
   Notification* notif = notif->GetInstance();
   if (!storageArea) {
-    notif->ShowMessage("Failed to find place to add: " + itemDB->ItemName(info));
+    notif->ShowMessage(tr("Failed to find place to add: %1").arg(itemDB->ItemName(info)));
     return;
   }
   u8* slot = ((u8*)mhwSaveSlot) + storageArea->localoffset;
@@ -149,10 +158,10 @@ void InventoryEditor::ItemAdd()
     InventoryEditorTab* editor = dynamic_cast<InventoryEditorTab*>(current);
     editor->LoadIndex(index);
     editor->ScrollToIndex(index);
-    notif->ShowMessage("Added item: " + itemDB->ItemName(info));
+    notif->ShowMessage(tr("Added item: %1").arg(itemDB->ItemName(info)));
   }
   else {
-    notif->ShowMessage("Failed to find place to add: " + itemDB->ItemName(info));
+    notif->ShowMessage(tr("Failed to find place to add: %1").arg(itemDB->ItemName(info)));
   }
 }
 

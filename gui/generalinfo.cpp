@@ -38,10 +38,10 @@ void GeneralInfo::ChangeSteamID()
       ui->btnSteamID->setText(text);
       mhwSaveIB->header.steam_id = steamID;
 
-      notif->ShowMessage("Steam ID set.");
+      notif->ShowMessage(tr("Steam ID set."));
     }
     else {
-      notif->ShowMessage("Invalid steam ID format.", 5000);
+      notif->ShowMessage(tr("Invalid steam ID format."), 5000);
     }
   }
 }
@@ -69,7 +69,7 @@ void GeneralInfo::ResetEditVouchers()
   mhwSection1->character_p_palico_edit_three_voucher_pack = 0;
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage("All character and palico edit vouchers have been reset.", 5000);
+  notif->ShowMessage(tr("All character and palico edit vouchers have been reset."), 5000);
 }
 
 void GeneralInfo::Load(mhw_save_raw* mhwSave, int slotIndex)

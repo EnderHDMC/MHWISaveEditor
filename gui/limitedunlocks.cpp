@@ -97,10 +97,10 @@ void LimitedUnlocks::GiveArtemisGear()
 
   Notification* notif = notif->GetInstance();
   if (type < 5) {
-    notif->ShowMessage("Failed to add all equipment, not enough storage.", 5000);
+    notif->ShowMessage(tr("Failed to add all equipment, not enough storage."), 5000);
   }
   else {
-    notif->ShowMessage("Added Artemis gear.", 5000);
+    notif->ShowMessage(tr("Added Artemis gear."), 5000);
   }
 }
 
@@ -135,16 +135,16 @@ void LimitedUnlocks::GiveLayeredLoadout(i32 layered, const QString& name)
 {
   MHW_SAVE_GUARD;
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
-  
+
   mhw_layered_loadout* loadout = FindEmptyLayeredLoadout(mhwSaveSlot);
 
   Notification* notif = notif->GetInstance();
   if (loadout) {
     i32 index = SetLayeredLoadout(loadout, layered, name);
 
-    notif->ShowMessage(QString("Added layered loadout: '%1' at slot: %2").arg(name).arg(index + 1), 5000);
+    notif->ShowMessage(tr("Added layered loadout: '%1' at slot: %2").arg(name).arg(index + 1), 5000);
   }
   else {
-    notif->ShowMessage(QString("Failed to add layered loadout: '%1'. No empty loadouts.").arg(name), 5000);
+    notif->ShowMessage(tr("Failed to add layered loadout: '%1'. No empty loadouts.").arg(name), 5000);
   }
 }
