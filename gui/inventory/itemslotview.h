@@ -22,8 +22,8 @@ public:
 
   void SetFocus();
 
-  void UpdateItemDisplay(itemInfo *info);
-  void UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot);
+  void UpdateItemDisplay(itm_entry* info);
+  void UpdateMaxAmount(itm_entry* info, mhw_item_slot* item_slot);
 
 public slots:
   void AmountChanged(int amount);

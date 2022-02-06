@@ -19,7 +19,7 @@ InventoryEditor::InventoryEditor(QWidget* parent)
 
   for (int i = 0; i < itemDB->count(); i++)
   {
-    itemInfo* info = itemDB->GetItemByIndex(i);
+    itm_entry* info = itemDB->GetItemById(i);
     if (info->type == (u32)item_type::Furniture) continue;
     if (info->type == (u32)item_type::Account) continue;
     if (info->flags & (u32)itemFlag::RejectFlag) continue;
@@ -73,7 +73,7 @@ void InventoryEditor::SearchIndexChange(int index)
   ItemDB* itemDB = itemDB->GetInstance();
 
   QVariant data = ui->cmbSearchItem->itemData(index);
-  itemInfo* info = data.value<itemInfo*>();
+  itm_entry* info = data.value<itm_entry*>();
   if (!info || index == -1) return;
 
   int areaCount = COUNTOF(inventory_areas);
@@ -123,7 +123,7 @@ void InventoryEditor::ItemAdd()
   ItemDB* itemDB = itemDB->GetInstance();
 
   QVariant data = ui->cmbSearchItem->currentData();
-  itemInfo* info = data.value<itemInfo*>();
+  itm_entry* info = data.value<itm_entry*>();
   if (!info || !info->id) return;
 
   const inventory_area* storageArea = nullptr;

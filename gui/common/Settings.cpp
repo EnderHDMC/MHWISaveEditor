@@ -52,6 +52,10 @@ bool Settings::SyncSettings(bool sync)
   darkMode = settings->value("darkMode", darkMode).toBool();
   settings->endGroup();
 
+  settings->beginGroup("language");
+  itemLanguage = settings->value("itemLanguage", itemLanguage).toString();
+  settings->endGroup();
+
   requireRestart |= oldMatrixMode != matrixMode;
   requireRestart |= oldShowUnobtainable != showUnobtainable;
   requireRestart |= oldDarkMode != darkMode;
@@ -85,6 +89,10 @@ void Settings::WriteSettings()
 
   settings->beginGroup("qol");
   settings->setValue("darkMode", darkMode);
+  settings->endGroup();
+
+  settings->beginGroup("language");
+  settings->setValue("itemLanguage", itemLanguage);
   settings->endGroup();
 
   qDebug() << "Wrote settings file: " + settings->fileName();

@@ -9,10 +9,6 @@ Deploy
 # Visual Studio Cache
 .vs/
 
-# Game files
-itemData.itm
-item_*.gmd
-
 # Specific files
 /res/mapping/outputs/
 

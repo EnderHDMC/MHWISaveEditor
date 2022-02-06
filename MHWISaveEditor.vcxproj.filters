@@ -86,6 +86,12 @@
     <ClInclude Include="gui\common\Settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="types\file\itm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\file\gmd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -189,7 +195,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\MasterItemList.json" />
     <None Include="res\GameData\item_ara.gmd" />
     <None Include="res\GameData\item_chS.gmd" />
     <None Include="res\GameData\item_chT.gmd" />
@@ -204,7 +209,6 @@
     <None Include="res\GameData\item_rus.gmd" />
     <None Include="res\GameData\item_spa.gmd" />
     <None Include="res\GameData\itemData.itm" />
-    <None Include="res\MasterItemList.csv" />
     <None Include="res\mapping\CalcUnknown.ipynb" />
     <None Include="res\mapping\dump_save_structure.1sc" />
     <None Include="res\mapping\export_items.1sc" />
@@ -230,6 +234,20 @@
     <None Include="res\CustomFlags.bin">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\game\item_ara.gmd" />
+    <None Include="res\game\item_chS.gmd" />
+    <None Include="res\game\item_chT.gmd" />
+    <None Include="res\game\item_eng.gmd" />
+    <None Include="res\game\item_fre.gmd" />
+    <None Include="res\game\item_ger.gmd" />
+    <None Include="res\game\item_ita.gmd" />
+    <None Include="res\game\item_jpn.gmd" />
+    <None Include="res\game\item_kor.gmd" />
+    <None Include="res\game\item_pol.gmd" />
+    <None Include="res\game\item_ptB.gmd" />
+    <None Include="res\game\item_rus.gmd" />
+    <None Include="res\game\item_spa.gmd" />
+    <None Include="res\game\itemData.itm" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">

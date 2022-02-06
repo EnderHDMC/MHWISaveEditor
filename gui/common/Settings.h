@@ -40,4 +40,7 @@ public:
 
   // Quality of Life
   bool darkMode = false;
+
+  // Language
+  QString itemLanguage = "eng";
 };

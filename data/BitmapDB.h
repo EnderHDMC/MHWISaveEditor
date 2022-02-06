@@ -28,5 +28,5 @@ public:
     return (((u64)id) << 32) | (color & 0xFF);
   }
 
-  QIcon* ItemIcon(itemInfo* info);
+  QIcon* ItemIcon(itm_entry* info);
 };

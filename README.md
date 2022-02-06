@@ -35,7 +35,7 @@ A save editor for Monster Hunter World: Iceborne.
 To build this project you first need to install [vcpkg](https://vcpkg.io).<br/>
 Then you can install the required packages:
 ```
-vcpkg install nlohmann-json:x64-windows cryptopp:x64-windows
+vcpkg install cryptopp:x64-windows
 ```
 In Visual Studio Installer you only need `Desktop Development with C++`
 

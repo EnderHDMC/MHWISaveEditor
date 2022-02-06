@@ -1,10 +1,11 @@
 #include "ItemDB.h"
 
-#include <QtGlobal>
+#include <QDebug>
 #include <QFile>
 
 #include "../utility/settype.h"
 #include "../types/inventory_areas.h"
+#include "../gui/common/Settings.h"
 
 enum class FlagFileIndex : u32 {
   Discoverable = 0,
@@ -23,39 +24,75 @@ ItemDB* ItemDB::instance = nullptr;
 
 ItemDB::ItemDB()
 {
-  // read a JSON file
-  std::ifstream file("res/MasterItemList.json");
-  if (!file) {
-    qFatal("Cannot open file: res/MasterItemList.json");
-    loadError = true;
-    fatalError = true;
-    return;
-  }
-  json json;
-  file >> json;
+  Settings* settings = settings->GetInstance();
+  QString language = settings->itemLanguage;
 
-  items = json.get<std::vector<itemInfo>>();
-  qInfo("Loaded %d items.", items.size());
+  itmLoad = ReadItemData(&itm);
+  gmdLoad = ReadGMD(&gmd, language);
 
-  QFile obtainFile("res/CustomFlags.bin");
-  if (!obtainFile.open(QIODevice::ReadOnly)) {
-    qWarning("Cannot open file: res/CustomFlags.bin");
-    loadError = true;
-    return;
+  if (itm.header)
+    flagsLoad = ReadCustomFlags(&itm);
+}
+
+bool ItemDB::ReadItemData(itm_meta* meta) {
+  QString itemPath = "res/game/itemData.itm";
+  QFile itemFile(itemPath);
+  if (!itemFile.open(QIODevice::ReadOnly)) {
+    qWarning() << "Cannot open file: " + itemPath;
+    return false;
   }
 
-  // It just sounded like a cool name.
-  QByteArray blobtain = obtainFile.readAll();
-  file.close();
+  QByteArray itmBlob = itemFile.readAll();
+  itemFile.close();
+
+  itm_header* itmHeader = (itm_header*)QByteArrayToU8(itmBlob, nullptr, itmBlob.size());
+  if (!itmHeader) {
+    return false;
+  }
+
+  InitMeta_itm(meta, itmHeader);
+  return true;
+}
+
+bool ItemDB::ReadGMD(gmd_meta* meta, const QString& language)
+{
+  QString namePath = QString("res/game/item_%1.gmd").arg(language);
+  QFile nameFile(namePath);
+  if (!nameFile.open(QIODevice::ReadOnly)) {
+    qWarning() << "Cannot open file: " + namePath;
+    return false;
+  }
+
+  QByteArray nameBlob = nameFile.readAll();
+  nameFile.close();
+
+  gmd_header* gmdHeader = (gmd_header*)QByteArrayToU8(nameBlob, nullptr, nameBlob.size());
+  if (!gmdHeader) {
+    return false;
+  }
+
+  InitMeta_gmd(meta, gmdHeader);
+  return true;
+}
+
+bool ItemDB::ReadCustomFlags(itm_meta* itm) {
+  QString flagsPath = "res/CustomFlags.bin";
+  QFile flagsFile(flagsPath);
+  if (!flagsFile.open(QIODevice::ReadOnly)) {
+    qWarning() << "Cannot open file: " + flagsPath;
+    return false;
+  }
+
+  QByteArray flagsBlob = flagsFile.readAll();
+  flagsFile.close();
   mhw_items_discovered flags[(u64)FlagFileIndex::FlagFileIndexCount] = {};
-  u8* obtain = QByteArrayToU8(blobtain, (u8*)flags, sizeof(flags));
+  u8* obtain = QByteArrayToU8(flagsBlob, (u8*)flags, sizeof(flags));
   if (!obtain) {
-    loadError = true;
-    return;
+    return false;
   }
 
-  for (u32 i = 0; i != items.size(); i++) {
-    itemInfo* info = &items[i];
+  for (u32 i = 0; i < itm->header->entry_count; i++) {
+    itm_entry* info = &itm->items[i];
 
     // Leave the null item as-is.
     if (!info->id) continue;
@@ -84,6 +121,7 @@ ItemDB::ItemDB()
     if (isTripleQ)       customFlags |= (u32)itemFlag::CustomTripleQ;
     info->flags |= customFlags;
   }
+  return true;
 }
 
 ItemDB* ItemDB::GetInstance()
@@ -94,44 +132,53 @@ ItemDB* ItemDB::GetInstance()
 
 void ItemDB::Free()
 {
-  items.~vector();
+  FreeMeta_itm(&itm);
+  FreeMeta_gmd(&gmd);
+
   delete(instance);
   instance = nullptr;
 }
 
-// TODO: Right now we're assuming item id = item index
-itemInfo* ItemDB::GetItemById(u32 id)
+itm_entry* ItemDB::GetItemByIdSafe(u32 id)
 {
-  if (id >= items.size()) return nullptr;
-  return &items[id];
+  if (!itmLoad) return nullptr;
+
+  if (id >= itm.header->entry_count) return nullptr;
+  return &itm.items[id];
 }
 
-itemInfo* ItemDB::GetItemByIndex(int index)
+itm_entry* ItemDB::GetItemById(u32 id)
 {
-  return &items[index];
+  return &itm.items[id];
 }
 
 int ItemDB::count()
 {
-  return items.size();
-}
-
-QString ItemDB::ItemName(itemInfo* info)
-{
-  switch (info->id) {
-  case SurvivalJewelID:
-    return QString::fromUtf8(GetItemById(SmokeJewelID)->name);
-
-  case SmokeJewelID:
-    return QString::fromUtf8(GetItemById(SurvivalJewelID)->name);
-
-  default:
-    return QString::fromUtf8(info->name);
-  }
+  return itmLoad ? itm.header->entry_count : 0;
 }
 
 QString ItemDB::ItemName(u32 id)
 {
-  itemInfo* info = GetItemById(id);
-  return ItemName(info);
+  if (!gmdLoad) return "GMD Failure";
+
+  switch (id) {
+  case SurvivalJewelID:
+    id = SmokeJewelID;
+    break;
+
+  case SmokeJewelID:
+    id = SurvivalJewelID;
+    break;
+
+  default:
+    break;
+  }
+
+  return QString::fromUtf8(gmd.strings[id * 2]);
+}
+
+QString ItemDB::ItemName(itm_entry* info)
+{
+  if (itmLoad) return ItemName(info->id);
+  else return "ITM Failure";
 }

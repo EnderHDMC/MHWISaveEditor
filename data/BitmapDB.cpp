@@ -79,7 +79,7 @@ void BitmapDB::Init(ItemDB* itemDB)
 
   for (size_t i = 0; i < itemDB->count(); i++)
   {
-    itemInfo* info = itemDB->GetItemById(i);
+    itm_entry* info = itemDB->GetItemById(i);
     int icon_id = info->icon_id;
     int icon_color = info->icon_color;
 
@@ -115,7 +115,7 @@ void BitmapDB::OutputIcons(const QString& path, ItemDB* itemDB)
 
   for (size_t i = 0; i < itemDB->count(); i++)
   {
-    itemInfo* info = itemDB->GetItemById(i);
+    itm_entry* info = itemDB->GetItemById(i);
     QIcon* icon = ItemIcon(info);
 
     if (icon) {
@@ -143,8 +143,10 @@ void BitmapDB::Free()
   instance = nullptr;
 }
 
-QIcon* BitmapDB::ItemIcon(itemInfo* info)
+QIcon* BitmapDB::ItemIcon(itm_entry* info)
 {
+  if (!info) return nullptr;
+
   u64 key = BuildKey(info->icon_id, info->icon_color);
   return icons.value(key, nullptr);
 }

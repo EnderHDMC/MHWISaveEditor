@@ -36,7 +36,7 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
 
   u8* slot = ((u8*)mhwSaveSlot) + area->localoffset;
   mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
-  itemInfo* info = itemDB->GetItemById(itemSlot->id);
+  itm_entry* info = itemDB->GetItemByIdSafe(itemSlot->id);
   if (!info) {
     // TODO: Think about what we want to do here.
   }
@@ -47,7 +47,7 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   SaveLoader::FinishLoad();
 }
 
-void ItemSlotView::UpdateItemDisplay(itemInfo* info)
+void ItemSlotView::UpdateItemDisplay(itm_entry* info)
 {
   QIcon* icon = bitmapDB->ItemIcon(info);
   QString itemName = itemDB->ItemName(info);
@@ -56,10 +56,18 @@ void ItemSlotView::UpdateItemDisplay(itemInfo* info)
   ui->btnIcon->setText(itemName);
 }
 
-void ItemSlotView::UpdateMaxAmount(itemInfo* info, mhw_item_slot* item_slot)
+void ItemSlotView::UpdateMaxAmount(itm_entry* info, mhw_item_slot* item_slot)
 {
+  const int maxStorage = 9999;
+  if (!info) {
+    ui->spnCount->setEnabled(false);
+    ui->spnCount->setMaximum(maxStorage);
+    ui->spnCount->setValue(item_slot->amount);
+    return;
+  };
+
   Q_ASSERT(info->id == item_slot->id);
-  int max = (area->storage) ? 9999 : info->carry_limit;
+  int max = (area->storage) ? maxStorage : info->carry_limit;
 
   ui->spnCount->setMaximum(max);
   ui->spnCount->setValue(item_slot->amount);
@@ -84,8 +92,8 @@ void ItemSlotView::AmountChanged(int amount)
     if (amount == 0) dummy.id = 0;
 
     if (update) {
-      itemInfo* dummyInfo = itemDB->GetItemById(dummy.id);
-      itemInfo* info = itemDB->GetItemById(itemSlot->id);
+      itm_entry* dummyInfo = itemDB->GetItemById(dummy.id);
+      itm_entry* info = itemDB->GetItemById(itemSlot->id);
 
       UpdateItemDisplay(dummyInfo);
       UpdateMaxAmount(info, itemSlot);
