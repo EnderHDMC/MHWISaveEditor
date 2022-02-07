@@ -1,5 +1,6 @@
 #include "ItemDB.h"
 
+#include <QRegularExpression>
 #include <QDebug>
 #include <QFile>
 
@@ -174,7 +175,9 @@ QString ItemDB::ItemName(u32 id)
     break;
   }
 
-  return QString::fromUtf8(gmd.strings[id * 2]);
+  const QRegularExpression regex("(<STYL.*>)(.*)(</STYL>)");
+  QString name = QString::fromUtf8(gmd.strings[id * 2]);
+  return name.replace(regex, "\\2");
 }
 
 QString ItemDB::ItemName(itm_entry* info)
