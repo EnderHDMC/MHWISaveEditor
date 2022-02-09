@@ -99,8 +99,8 @@ bool ItemDB::ReadCustomFlags(itm_meta* itm) {
     if (!info->id) continue;
 
     // Set stuff for special case items.
-    if (info->id == MegaDashJuiceID) info->type = (u32)item_type::Item;
-    if (info->id == ExhaustCoatingID) info->type = (u32)item_type::Ammo;
+    if (info->id == MegaDashJuiceID) info->type = (u32)itemCategory::Item;
+    if (info->id == ExhaustCoatingID) info->type = (u32)itemCategory::Ammo;
 
     u32 is = info->id / 8;
     u32 isi = info->id % 8;

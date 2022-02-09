@@ -48,6 +48,16 @@ enum class itemFlag : u32 {
   | CustomExclude,
 };
 
+enum class itemCategory : u32
+{
+  Item = 0,
+  Material = 1,
+  Account = 2,
+  Ammo = 3,
+  Decoration = 4,
+  Furniture = 5
+};
+
 #pragma pack(push, 1)
 typedef struct {
   u32 id;

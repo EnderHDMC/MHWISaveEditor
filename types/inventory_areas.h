@@ -1,29 +1,20 @@
 #pragma once
 
 #include "mhw_save.h"
-
-enum class item_type
-{
-  Item = 0,
-  Material = 1,
-  Account = 2,
-  Ammo = 3,
-  Decoration = 4,
-  Furniture = 5
-};
+#include "file/itm.h"
 
 struct inventory_area {
   int localoffset;
   int count;
-  item_type type;
+  itemCategory type;
   bool storage;
 };
 
 const inventory_area inventory_areas[] = {
-  {offsetof(mhw_save_slot, item_pouch) + offsetof(mhw_item_pouch, items      ), COUNTOF(mhw_item_pouch::items   ), item_type::Item,       false },
-  {offsetof(mhw_save_slot, item_pouch) + offsetof(mhw_item_pouch, ammo       ), COUNTOF(mhw_item_pouch::ammo    ), item_type::Ammo,       false },
-  {offsetof(mhw_save_slot,    storage) + offsetof(mhw_storage,    items      ), COUNTOF(mhw_storage::items      ), item_type::Item,       true  },
-  {offsetof(mhw_save_slot,    storage) + offsetof(mhw_storage,    ammo       ), COUNTOF(mhw_storage::ammo       ), item_type::Ammo,       true  },
-  {offsetof(mhw_save_slot,    storage) + offsetof(mhw_storage,    materials  ), COUNTOF(mhw_storage::materials  ), item_type::Material,   true  },
-  {offsetof(mhw_save_slot,    storage) + offsetof(mhw_storage,    decorations), COUNTOF(mhw_storage::decorations), item_type::Decoration, true  }
+  {offsetof(mhw_save_slot, item_pouch) + offsetof(mhw_item_pouch, items      ), COUNTOF(mhw_item_pouch::items   ), itemCategory::Item,       false },
+  {offsetof(mhw_save_slot, item_pouch) + offsetof(mhw_item_pouch, ammo       ), COUNTOF(mhw_item_pouch::ammo    ), itemCategory::Ammo,       false },
+  {offsetof(mhw_save_slot,    storage) + offsetof(mhw_storage,    items      ), COUNTOF(mhw_storage::items      ), itemCategory::Item,       true  },
+  {offsetof(mhw_save_slot,    storage) + offsetof(mhw_storage,    ammo       ), COUNTOF(mhw_storage::ammo       ), itemCategory::Ammo,       true  },
+  {offsetof(mhw_save_slot,    storage) + offsetof(mhw_storage,    materials  ), COUNTOF(mhw_storage::materials  ), itemCategory::Material,   true  },
+  {offsetof(mhw_save_slot,    storage) + offsetof(mhw_storage,    decorations), COUNTOF(mhw_storage::decorations), itemCategory::Decoration, true  }
 };

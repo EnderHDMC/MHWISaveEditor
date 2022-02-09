@@ -20,8 +20,8 @@ InventoryEditor::InventoryEditor(QWidget* parent)
   for (int i = 0; i < itemDB->count(); i++)
   {
     itm_entry* info = itemDB->GetItemById(i);
-    if (info->type == (u32)item_type::Furniture) continue;
-    if (info->type == (u32)item_type::Account) continue;
+    if (info->type == (u32)itemCategory::Furniture) continue;
+    if (info->type == (u32)itemCategory::Account) continue;
     if (info->flags & (u32)itemFlag::RejectFlag) continue;
 
     QString itemName = itemDB->ItemName(info);
@@ -145,12 +145,11 @@ void InventoryEditor::ItemAdd()
   }
   u8* slot = ((u8*)mhwSaveSlot) + storageArea->localoffset;
   mhw_item_slot* baseItemSlot = (mhw_item_slot*)slot;
-  mhw_item_slot* findItem = FindItemOrEmpty(baseItemSlot, storageArea->count, info->id);
+  mhw_item_slot* findItem = FindCategoryItemOrEmpty(mhwSaveSlot, info);
 
   if (findItem) {
-    findItem->id = info->id;
-    findItem->amount++;
-    if (findItem->amount > 9999) findItem->amount = 9999;
+    DiscoverItem(mhwSaveSlot, info);
+    GiveItem(findItem, info);
 
     int index = findItem - baseItemSlot;
     ui->tabEditors->setCurrentIndex(areaIndex);
