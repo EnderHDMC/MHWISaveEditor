@@ -2,7 +2,7 @@
 #include "ui_generalinfo.h"
 
 #include <QInputDialog>
-#include "common/Notification.h"
+#include "../common/Notification.h"
 
 GeneralInfo::GeneralInfo(QWidget* parent)
   : QWidget(parent), SaveLoader()

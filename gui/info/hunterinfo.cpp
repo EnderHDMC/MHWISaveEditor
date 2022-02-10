@@ -1,9 +1,9 @@
 #include "hunterinfo.h"
 #include "ui_hunterinfo.h"
 
-#include "common/StringByteLengthValidator.h"
-#include "common/Notification.h"
-#include "../utility/settype.h"
+#include "../common/StringByteLengthValidator.h"
+#include "../common/Notification.h"
+#include "../../utility/settype.h"
 
 #include <QSignalMapper>
 

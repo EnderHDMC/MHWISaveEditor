@@ -10,6 +10,7 @@ Settings* Settings::instance = nullptr;
 Settings::Settings()
 {
   ReadSettings();
+  _requireRestart = false;
 }
 
 Settings* Settings::GetInstance()
@@ -31,36 +32,27 @@ bool Settings::SyncSettings(bool sync)
 {
   if (sync) settings->sync();
 
-  bool requireRestart = false;
-  bool oldMatrixMode = matrixMode;
-  bool oldShowUnobtainable = showUnobtainable;
-  bool oldDarkMode = darkMode;
-
   settings->beginGroup("backups");
-  doAutoBackups = settings->value("doAutoBackups", doAutoBackups).toBool();
-  maxBackups = settings->value("maxBackups", maxBackups).toInt();
+  SetDoAutoBackups(settings->value("doAutoBackups", _doAutoBackups).toBool());
+  SetMaxBackups(settings->value("maxBackups", _maxBackups).toInt());
   settings->endGroup();
 
   settings->beginGroup("items");
-  matrixMode = settings->value("matrixMode", matrixMode).toBool();
-  showUnobtainable = settings->value("showUnobtainable", showUnobtainable).toBool();
-  searchAllTabsIncludeItemPouch =
-    settings->value("searchAllTabsIncludeItemPouch", searchAllTabsIncludeItemPouch).toBool();
+  SetMatrixMode(settings->value("matrixMode", _matrixMode).toBool());
+  SetShowUnobtainable(settings->value("showUnobtainable", _showUnobtainable).toBool());
+  SetItemPouchSearchAll(settings->value("itemPouchSearchAll", _itemPouchSearchAll).toBool());
   settings->endGroup();
 
   settings->beginGroup("qol");
-  darkMode = settings->value("darkMode", darkMode).toBool();
+  SetDarkMode(settings->value("darkMode", _darkMode).toBool());
   settings->endGroup();
 
   settings->beginGroup("language");
-  itemLanguage = settings->value("itemLanguage", itemLanguage).toString();
+  SetUiLanguage((mhw_language)settings->value("uiLanguage", (u8)_uiLanguage).toInt());
+  SetItemLanguage((mhw_language)settings->value("itemLanguage", (u8)_itemLanguage).toInt());
   settings->endGroup();
 
-  requireRestart |= oldMatrixMode != matrixMode;
-  requireRestart |= oldShowUnobtainable != showUnobtainable;
-  requireRestart |= oldDarkMode != darkMode;
-
-  return requireRestart && sync;
+  return GetRequireRestart() && sync;
 }
 
 void Settings::ReadSettings()
@@ -77,22 +69,23 @@ void Settings::ReadSettings()
 void Settings::WriteSettings()
 {
   settings->beginGroup("backups");
-  settings->setValue("doAutoBackups", doAutoBackups);
-  settings->setValue("maxBackups", maxBackups);
+  settings->setValue("doAutoBackups", _doAutoBackups);
+  settings->setValue("maxBackups", _maxBackups);
   settings->endGroup();
 
   settings->beginGroup("items");
-  settings->setValue("matrixMode", matrixMode);
-  settings->setValue("showUnobtainable", showUnobtainable);
-  settings->setValue("searchAllTabsIncludeItemPouch", searchAllTabsIncludeItemPouch);
+  settings->setValue("matrixMode", _matrixMode);
+  settings->setValue("showUnobtainable", _showUnobtainable);
+  settings->setValue("itemPouchSearchAll", _itemPouchSearchAll);
   settings->endGroup();
 
   settings->beginGroup("qol");
-  settings->setValue("darkMode", darkMode);
+  settings->setValue("darkMode", _darkMode);
   settings->endGroup();
 
   settings->beginGroup("language");
-  settings->setValue("itemLanguage", itemLanguage);
+  settings->setValue("uiLanguage", (u8)_uiLanguage);
+  settings->setValue("itemLanguage", (u8)_itemLanguage);
   settings->endGroup();
 
   qDebug() << "Wrote settings file: " + settings->fileName();
@@ -200,4 +193,41 @@ QString Settings::GetIconDumpPath()
   QDir dir = QDir();
   if (dir.mkpath(path)) return path;
   else return "";
+}
+
+QString Settings::GetLanguageCode(mhw_language language)
+{
+  QString result = "eng";
+  switch (language) {
+  case mhw_language::Japanese:            result = "jpn"; break;
+  case mhw_language::English:             result = "eng"; break;
+  case mhw_language::French:              result = "fre"; break;
+  case mhw_language::Spanish:             result = "spa"; break;
+  case mhw_language::Dutch:               result = "ger"; break;
+  case mhw_language::Italian:             result = "ita"; break;
+  case mhw_language::Korean:              result = "kor"; break;
+  case mhw_language::TraditionalChinese:  result = "chT"; break;
+  case mhw_language::SimplifiedChinese:   result = "chS"; break;
+  case mhw_language::Russian:             result = "rus"; break;
+  case mhw_language::Polish:              result = "pol"; break;
+  case mhw_language::PortugueseBrazil:    result = "ptB"; break;
+  case mhw_language::Arabic:              result = "ara"; break;
+  }
+  return result;
+}
+
+mhw_language Settings::LanguageIndexToEnum(int index)
+{
+  return Languages(index);
+}
+
+int Settings::LanguageEnumToIndex(mhw_language language)
+{
+  int index = -1;
+  for (int i = 0; (u8)Languages(i) != 0xFF; i++) {
+    if (Languages(i) == language) {
+      index = i;
+    }
+  }
+  return index;
 }

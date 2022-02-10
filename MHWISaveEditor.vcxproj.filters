@@ -115,16 +115,16 @@
     <ClCompile Include="gui\inventory\inventoryeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\limitedunlocks.cpp">
+    <ClCompile Include="gui\info\limitedunlocks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\generalinfo.cpp">
+    <ClCompile Include="gui\info\generalinfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\common\WheelGuard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui\hunterinfo.cpp">
+    <ClCompile Include="gui\info\hunterinfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\common\StringByteLengthValidator.cpp">
@@ -134,6 +134,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\common\Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\settings\settingsui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -150,13 +153,16 @@
     <QtMoc Include="gui\inventory\inventoryeditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="gui\limitedunlocks.h">
+    <QtMoc Include="gui\info\limitedunlocks.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="gui\generalinfo.h">
+    <QtMoc Include="gui\info\generalinfo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="gui\hunterinfo.h">
+    <QtMoc Include="gui\info\hunterinfo.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="gui\settings\settingsui.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -173,13 +179,16 @@
     <QtUic Include="gui\inventory\inventoryeditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="gui\limitedunlocks.ui">
+    <QtUic Include="gui\info\limitedunlocks.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="gui\generalinfo.ui">
+    <QtUic Include="gui\info\generalinfo.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="gui\hunterinfo.ui">
+    <QtUic Include="gui\info\hunterinfo.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gui\settings\settingsui.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

@@ -50,8 +50,8 @@ void BitmapDB::Init(ItemDB* itemDB)
   Settings* settings = settings->GetInstance();
   QPainter::CompositionMode modeA = QPainter::CompositionMode_DestinationOut;
   QPainter::CompositionMode modeB = QPainter::CompositionMode_Multiply;
-  bool matrixMode = settings->matrixMode;
-  bool darkMode = settings->darkMode;
+  bool matrixMode = settings->GetMatrixMode();
+  bool darkMode = settings->GetDarkMode();
   if (matrixMode) {
     modeA = QPainter::CompositionMode_DestinationIn;
     modeB = QPainter::CompositionMode_DestinationIn;

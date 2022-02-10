@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SettingsUI</class>
+ <widget class="QWidget" name="SettingsUI">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>399</width>
+    <height>404</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SettingsUI</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout_5">
+   <property name="labelAlignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <item row="0" column="0" colspan="2">
+    <widget class="QPushButton" name="btnPlaceholderBackups">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string>Backups</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="lblAutoBackups">
+     <property name="text">
+      <string>Do Auto Backups:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="chkAutoBackups">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="lvlMaxBackups">
+     <property name="text">
+      <string>Maximum Backups</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QSpinBox" name="spnMaxBackups">
+     <property name="specialValueText">
+      <string>Unlimited</string>
+     </property>
+     <property name="minimum">
+      <number>0</number>
+     </property>
+     <property name="maximum">
+      <number>1024</number>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QPushButton" name="btnPlaceholderItems">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string>Items</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="lblMatrixMode">
+     <property name="text">
+      <string>*Matrix Mode:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="chkMatrixMode">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="lblShowUnobtainable">
+     <property name="text">
+      <string>*Show Unobtainable Items:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QCheckBox" name="chkShowUnobtainable">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="lblSearchAllTabsIncludeItemPouch">
+     <property name="text">
+      <string>Include Pouch in Search All Tabs:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QCheckBox" name="chkSearchAllTabsIncludeItemPouch">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0" colspan="2">
+    <widget class="QPushButton" name="btnPlaceholderLanguage">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string>Language</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="lblUILanguage">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>*UI Language:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="QComboBox" name="cmbUILanguage">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="currentText">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>No Translations</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="lblItemLanguage">
+     <property name="text">
+      <string>*Item Language:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="QComboBox" name="cmbItemLanguage">
+     <property name="currentText">
+      <string/>
+     </property>
+     <property name="currentIndex">
+      <number>-1</number>
+     </property>
+     <property name="placeholderText">
+      <string>---</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>日本語</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>English</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Français</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Italiano</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Deutsch</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Español</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Português do Brasil</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Polski</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Русский</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>한국어</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>繁體中文</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>简体中文</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Arabic</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="13" column="0" colspan="2">
+    <widget class="QPushButton" name="btnPlaceholderQualityOfLife">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string>Quality of Life</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="0">
+    <widget class="QLabel" name="lblDarkMode">
+     <property name="text">
+      <string>*Dark Mode:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1">
+    <widget class="QCheckBox" name="chkDarkMode">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="0" colspan="2">
+    <widget class="QLabel" name="lblRestartDisclaimer">
+     <property name="text">
+      <string>* Will apply on restart.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>chkAutoBackups</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetAutoBackups(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>272</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnMaxBackups</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetMaxBackups(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>272</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkMatrixMode</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetMatrixMode(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>307</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkDarkMode</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetDarkMode(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>363</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkShowUnobtainable</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetShowUnobtainableItems(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>307</x>
+     <y>183</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkSearchAllTabsIncludeItemPouch</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetIncludePouchInSearch(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>307</x>
+     <y>205</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbUILanguage</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetUILanguage(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbItemLanguage</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetItemLanguage(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>309</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SetAutoBackups(int)</slot>
+  <slot>SetMaxBackups(int)</slot>
+  <slot>SetMatrixMode(int)</slot>
+  <slot>SetShowUnobtainableItems(int)</slot>
+  <slot>SetIncludePouchInSearch(int)</slot>
+  <slot>SetDarkMode(int)</slot>
+  <slot>SetItemLanguage(int)</slot>
+  <slot>SetUILanguage(int)</slot>
+ </slots>
+</ui>

@@ -19,6 +19,7 @@
 #include "../data/ItemDB.h"
 #include "../data/BitmapDB.h"
 #include "common/Notification.h"
+#include "settings/settingsui.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent), ui(new Ui::MHWISaveEditor),
@@ -335,7 +336,7 @@ void MHWISaveEditor::LoadFile(const QString& file)
     SaveLoader::LoadFile(file);
     Load(MHW_Save());
 
-    if (settings->doAutoBackups) {
+    if (settings->GetDoAutoBackups()) {
       Notification* notif = notif->GetInstance();
       notif->Silence(1);
       Backup();
@@ -412,7 +413,7 @@ void MHWISaveEditor::WatchFileChanged(const QString& path)
       Notification* notif = notif->GetInstance();
       NotificationMode notifMode = notif->GetDefaultMode();
       notif->SetDefaultMode(NotificationMode::MessageBox);
-      notif->ShowMessage(tr("The settings you have changed require a restart."));
+      notif->ShowMessage(tr("Some settings you have changed will apply on restart."));
       notif->SetDefaultMode(notifMode);
     }
   }
@@ -479,6 +480,21 @@ void MHWISaveEditor::OpenLocation(const QString& location)
 {
   qInfo("Opening: %s", qUtf8Printable(location));
   FileUtils::showInGraphicalShell(location);
+}
+
+void MHWISaveEditor::OpenSettings()
+{
+  SettingsUI *settingsUI = new SettingsUI();
+  settingsUI->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+  settingsUI->exec();
+
+  if (settings->GetRequireRestart()) {
+      Notification* notif = notif->GetInstance();
+      NotificationMode notifMode = notif->GetDefaultMode();
+      notif->SetDefaultMode(NotificationMode::MessageBox);
+      notif->ShowMessage(tr("Some settings you have changed will apply on restart."));
+      notif->SetDefaultMode(notifMode);
+  }
 }
 
 void MHWISaveEditor::Backup() {
@@ -559,7 +575,7 @@ void MHWISaveEditor::Restore() {
 
 void MHWISaveEditor::TrimBackups()
 {
-  int maxBackups = settings->maxBackups;
+  int maxBackups = settings->GetMaxBackups();
   if (!maxBackups) return;
   QString path = Settings::GetDataPathBackups();
   QDir dir(path);
@@ -590,7 +606,7 @@ void MHWISaveEditor::TrimBackups()
 
 void MHWISaveEditor::SetupDarkMode()
 {
-  bool darkMode = settings->darkMode;
+  bool darkMode = settings->GetDarkMode();
   if (darkMode) {
     QPalette p;
     qApp->setStyle("Fusion");

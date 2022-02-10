@@ -1,9 +1,9 @@
 #include "limitedunlocks.h"
 #include "ui_limitedunlocks.h"
 
-#include "common/Notification.h"
-#include "../utility/mhw_save_utils.h"
-#include "../utility/settype.h"
+#include "../common/Notification.h"
+#include "../../utility/mhw_save_utils.h"
+#include "../../utility/settype.h"
 
 LimitedUnlocks::LimitedUnlocks(QWidget* parent)
   : QWidget(parent), SaveLoader()

@@ -15,7 +15,7 @@ InventoryEditor::InventoryEditor(QWidget* parent)
   ItemDB* itemDB = itemDB->GetInstance();
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
   Settings* settings = settings->GetInstance();
-  bool showUnobtainable = settings->showUnobtainable;
+  bool showUnobtainable = settings->GetShowUnobtainable();
 
   for (int i = 0; i < itemDB->count(); i++)
   {
@@ -85,7 +85,7 @@ void InventoryEditor::SearchIndexChange(int index)
   index = -1;
 
   Settings* settings = settings->GetInstance();
-  bool searchAllTabsIncludeItemPouch = settings->searchAllTabsIncludeItemPouch;
+  bool searchAllTabsIncludeItemPouch = settings->GetItemPouchSearchAll();
 
   mhw_item_slot* baseItemSlot = nullptr;
   mhw_item_slot* findItem = nullptr;

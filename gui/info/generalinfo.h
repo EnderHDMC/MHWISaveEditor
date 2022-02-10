@@ -2,7 +2,7 @@
 
 #include <QWidget>
 
-#include "common/saveloader.h"
+#include "../common/saveloader.h"
 
 namespace Ui { class GeneralInfo; };
 

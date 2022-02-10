@@ -19,15 +19,16 @@
     <ClInclude Include="data\ItemDB.h" />
     <QtMoc Include="gui\inventory\inventoryeditortab.h" />
     <QtMoc Include="gui\inventory\inventoryeditor.h" />
-    <QtMoc Include="gui\limitedunlocks.h" />
-    <QtMoc Include="gui\generalinfo.h" />
+    <QtMoc Include="gui\info\limitedunlocks.h" />
+    <QtMoc Include="gui\info\generalinfo.h" />
     <ClInclude Include="gui\common\WheelGuard.h" />
     <ClInclude Include="gui\common\saveloader.h" />
-    <QtMoc Include="gui\hunterinfo.h" />
+    <QtMoc Include="gui\info\hunterinfo.h" />
     <ClInclude Include="gui\common\Notification.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="gui\common\StringByteLengthValidator.h" />
     <ClInclude Include="gui\common\Settings.h" />
+    <QtMoc Include="gui\settings\settingsui.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\file\gmd.h" />
     <ClInclude Include="types\file\itm.h" />
@@ -46,12 +47,12 @@
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
     <ClCompile Include="gui\common\WheelGuard.cpp" />
-    <ClCompile Include="gui\generalinfo.cpp" />
+    <ClCompile Include="gui\info\generalinfo.cpp" />
     <ClCompile Include="gui\inventory\inventoryeditortab.cpp" />
     <ClCompile Include="gui\inventory\itemslotview.cpp" />
     <ClCompile Include="gui\inventory\inventoryeditor.cpp" />
-    <ClCompile Include="gui\limitedunlocks.cpp" />
-    <ClCompile Include="gui\hunterinfo.cpp" />
+    <ClCompile Include="gui\info\limitedunlocks.cpp" />
+    <ClCompile Include="gui\info\hunterinfo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="gui\mhwisaveeditor.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -62,15 +63,17 @@
     <ClCompile Include="gui\common\StringByteLengthValidator.cpp" />
     <ClCompile Include="gui\common\Notification.cpp" />
     <ClCompile Include="gui\common\Settings.cpp" />
+    <ClCompile Include="gui\settings\settingsui.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="gui\generalinfo.ui" />
+    <QtUic Include="gui\info\generalinfo.ui" />
     <QtUic Include="gui\inventory\inventoryeditortab.ui" />
     <QtUic Include="gui\inventory\itemslotview.ui" />
     <QtUic Include="gui\mhwisaveeditor.ui" />
     <QtUic Include="gui\inventory\inventoryeditor.ui" />
-    <QtUic Include="gui\limitedunlocks.ui" />
-    <QtUic Include="gui\hunterinfo.ui" />
+    <QtUic Include="gui\info\limitedunlocks.ui" />
+    <QtUic Include="gui\info\hunterinfo.ui" />
+    <QtUic Include="gui\settings\settingsui.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\CustomFlags.bin" />

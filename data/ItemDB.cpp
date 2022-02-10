@@ -26,7 +26,8 @@ ItemDB* ItemDB::instance = nullptr;
 ItemDB::ItemDB()
 {
   Settings* settings = settings->GetInstance();
-  QString language = settings->itemLanguage;
+  mhw_language itemLanguage = settings->GetItemLanguage();
+  QString language =  Settings::GetLanguageCode(itemLanguage);
 
   itmLoad = ReadItemData(&itm);
   gmdLoad = ReadGMD(&gmd, language);

@@ -8,9 +8,9 @@
 #include "../types/mhw_save.h"
 
 #include "inventory/inventoryeditor.h"
-#include "limitedunlocks.h"
-#include "generalinfo.h"
-#include "hunterinfo.h"
+#include "info/limitedunlocks.h"
+#include "info/generalinfo.h"
+#include "info/hunterinfo.h"
 #include "common/Settings.h"
 
 struct editor_tab {
@@ -39,6 +39,7 @@ public slots:
   void CloneSlot(int slot);
 
   void OpenLocation(const QString& location);
+  void OpenSettings();
 
   void Backup();
   void Restore();
