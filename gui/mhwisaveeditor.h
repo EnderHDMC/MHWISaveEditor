@@ -54,7 +54,7 @@ public:
   void closeEvent(QCloseEvent* event);
 
   // Inherited via SaveLoader
-  virtual void LoadResources(ItemDB* itemDB) override;
+  virtual void LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB) override;
 
 private:
   bool SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt = true, bool validate = false);

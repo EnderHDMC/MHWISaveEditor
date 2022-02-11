@@ -3,20 +3,7 @@
 
 #include "../gui/common/Settings.h"
 
-BitmapDB* BitmapDB::instance = nullptr;
-
-BitmapDB::BitmapDB()
-{
-
-}
-
-BitmapDB* BitmapDB::GetInstance()
-{
-  if (!instance) instance = new BitmapDB();
-  return instance;
-}
-
-void BitmapDB::Init(ItemDB* itemDB)
+BitmapDB::BitmapDB(ItemDB* itemDB)
 {
   items = QImage("res/items.png");
   itemsMask = QImage("res/items_mask.png");
@@ -24,22 +11,11 @@ void BitmapDB::Init(ItemDB* itemDB)
   int imageHeight = items.height();
   QPainter p;
 
-  // 0xaarrggbb
-  u32 palletes[] = {
-    0xFFEBEBEB, 0xFFE1505C, 0xFF47B267, 0xFF577BFF,
-    0xFFE8C506, 0xFF9788D1, 0xFF4EC3E5, 0xFFDF9C65,
-    0xFFD98B94, 0xFFDFE500, 0xFFAFAFAF, 0xFFBA954B,
-    0xFF92D0C1, 0xFF3D7F3A, 0xFFAD1547, 0xFF4C4CD9,
-    0xFF56379E, 0xFF909BB0, 0xFFD464A2, 0xFF685ECD,
-    0xFF3257A7, 0xFF2A8D61, 0xFF9A5C45, 0xFF9EC09A,
-    0xFFD7C18D, 0xFFE16D44, 0xFF86B239, 0xFFFFFFFF
-  };
-
-  iconTints.insert(0, &items); iconTints.insert(1, &items);
-  iconTints.insert(2, &items); iconTints.insert(3, &items);
-  iconTints.insert(4, &items); iconTints.insert(5, &items);
-  iconTints.insert(6, &items); iconTints.insert(7, &items);
-  iconTints.insert(8, &items); iconTints.insert(9, &items);
+  iconTints.insert( 0, &items); iconTints.insert( 1, &items);
+  iconTints.insert( 2, &items); iconTints.insert( 3, &items);
+  iconTints.insert( 4, &items); iconTints.insert( 5, &items);
+  iconTints.insert( 6, &items); iconTints.insert( 7, &items);
+  iconTints.insert( 8, &items); iconTints.insert( 9, &items);
   iconTints.insert(10, &items); iconTints.insert(11, &items);
   iconTints.insert(12, &items); iconTints.insert(13, &items);
   iconTints.insert(14, &items); iconTints.insert(15, &items);
@@ -125,7 +101,7 @@ void BitmapDB::OutputIcons(const QString& path, ItemDB* itemDB)
   }
 }
 
-void BitmapDB::Free()
+BitmapDB::~BitmapDB()
 {
   QMapIterator<u64, QIcon*> iconMap(icons);
   while (iconMap.hasNext()) {
@@ -138,9 +114,6 @@ void BitmapDB::Free()
     tinter.next();
     delete(tinter.value());
   }
-
-  delete(instance);
-  instance = nullptr;
 }
 
 QIcon* BitmapDB::ItemIcon(itm_entry* info)

@@ -16,8 +16,7 @@ int main(int argc, char* argv[])
 
   Settings* settings = settings->GetInstance();
   ItemDB* itemDB = new ItemDB();
-  BitmapDB* bitmapDB = bitmapDB->GetInstance();
-  bitmapDB->Init(itemDB);
+  BitmapDB* bitmapDB = new BitmapDB(itemDB);
 
   QTranslator translator;
   const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -29,11 +28,12 @@ int main(int argc, char* argv[])
     }
   }
   MHWISaveEditor w;
-  w.LoadResources(itemDB);
+  w.LoadResources(itemDB, bitmapDB);
   w.show();
   int ret = a.exec();
 
   delete itemDB;
+  delete bitmapDB;
 
   return ret;
 }

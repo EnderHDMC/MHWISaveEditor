@@ -128,9 +128,6 @@ MHWISaveEditor::~MHWISaveEditor()
 
 void MHWISaveEditor::closeEvent(QCloseEvent* event)
 {
-  BitmapDB* bitmapDB = bitmapDB->GetInstance();
-  bitmapDB->Free();
-
   watcher.removePath(settings->FileName());
   settings->Free();
 }
@@ -346,10 +343,10 @@ void MHWISaveEditor::LoadFile(const QString& file)
   }
 }
 
-void MHWISaveEditor::LoadResources(ItemDB* itemDB)
+void MHWISaveEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 {
-  SaveLoader::LoadResources(itemDB);
-  inventoryEditor->LoadResources(itemDB);
+  SaveLoader::LoadResources(itemDB, bitmapDB);
+  inventoryEditor->LoadResources(itemDB, bitmapDB);
 }
 
 void MHWISaveEditor::LoadSaveSlot()
@@ -505,7 +502,7 @@ void MHWISaveEditor::OpenSettings()
   mhw_language itemLanguage = settings->GetItemLanguage();
   if (oldItemLanguage != itemLanguage) {
     itemDB->LoadGMD(itemLanguage);
-    inventoryEditor->LoadResources(itemDB);
+    inventoryEditor->LoadResources(itemDB, bitmapDB);
     LoadSaveSlot();
   }
 }

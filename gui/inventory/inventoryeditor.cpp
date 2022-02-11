@@ -146,12 +146,11 @@ void InventoryEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   SaveLoader::FinishLoad();
 }
 
-void InventoryEditor::LoadResources(ItemDB* itemDB)
+void InventoryEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 {
-  SaveLoader::LoadResources(itemDB);
+  SaveLoader::LoadResources(itemDB, bitmapDB);
 
   ui->cmbSearchItem->clear();
-  BitmapDB* bitmapDB = bitmapDB->GetInstance();
   Settings* settings = settings->GetInstance();
   bool showUnobtainable = settings->GetShowUnobtainable();
 
@@ -182,6 +181,6 @@ void InventoryEditor::LoadResources(ItemDB* itemDB)
   for (size_t i = 0; i < editorTabs.count(); i++)
   {
     InventoryEditorTab* editor = editorTabs[i];
-    editor->LoadResources(itemDB);
+    editor->LoadResources(itemDB, bitmapDB);
   }
 }

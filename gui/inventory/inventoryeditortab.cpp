@@ -55,11 +55,11 @@ void InventoryEditorTab::LoadIndex(int index)
   SaveLoader::FinishLoad();
 }
 
-void InventoryEditorTab::LoadResources(ItemDB* itemDB)
+void InventoryEditorTab::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 {
   for (size_t i = 0; i < slotViews.count(); i++)
   {
     ItemSlotView* slotView = slotViews[i];
-    slotView->LoadResources(itemDB);
+    slotView->LoadResources(itemDB, bitmapDB);
   }
 }

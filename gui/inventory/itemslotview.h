@@ -33,6 +33,4 @@ private:
 
   const inventory_area* area;
   int invslot = 0;
-
-  BitmapDB* bitmapDB = nullptr;
 };
