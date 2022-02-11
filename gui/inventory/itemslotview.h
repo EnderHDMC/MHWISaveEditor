@@ -35,5 +35,4 @@ private:
   int invslot = 0;
 
   BitmapDB* bitmapDB = nullptr;
-  ItemDB* itemDB = nullptr;
 };

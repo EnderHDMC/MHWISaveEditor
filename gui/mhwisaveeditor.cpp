@@ -84,10 +84,10 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(dumpSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Dump(int)));
 
   editor_tab editorTabs[] = {
-    {new GeneralInfo(), (SaveLoader**)&generalInfo, tr("General")},
-    {new HunterInfo(), (SaveLoader**)&hunterInfo, tr("Information")},
-    {new InventoryEditor(), (SaveLoader**)&inventoryEditor, tr("Inventory Editor")},
-    {new LimitedUnlocks(), (SaveLoader**)&limitedUnlocks, tr("Limited Unlocks")},
+    {new GeneralInfo(),     &generalInfo,     tr("General")         },
+    {new HunterInfo(),      &hunterInfo,      tr("Information")     },
+    {new InventoryEditor(), &inventoryEditor, tr("Inventory Editor")},
+    {new LimitedUnlocks(),  &limitedUnlocks,  tr("Limited Unlocks") },
   };
   int editorCount = COUNTOF(editorTabs);
   editors.resize(editorCount);
@@ -128,8 +128,6 @@ MHWISaveEditor::~MHWISaveEditor()
 
 void MHWISaveEditor::closeEvent(QCloseEvent* event)
 {
-  ItemDB* itemDB = itemDB->GetInstance();
-  itemDB->Free();
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
   bitmapDB->Free();
 
@@ -348,6 +346,12 @@ void MHWISaveEditor::LoadFile(const QString& file)
   }
 }
 
+void MHWISaveEditor::LoadResources(ItemDB* itemDB)
+{
+  SaveLoader::LoadResources(itemDB);
+  inventoryEditor->LoadResources(itemDB);
+}
+
 void MHWISaveEditor::LoadSaveSlot()
 {
   MHW_SAVE_GUARD;
@@ -500,8 +504,8 @@ void MHWISaveEditor::OpenSettings()
 
   mhw_language itemLanguage = settings->GetItemLanguage();
   if (oldItemLanguage != itemLanguage) {
-    ItemDB* itemDB = itemDB->GetInstance();
     itemDB->LoadGMD(itemLanguage);
+    inventoryEditor->LoadResources(itemDB);
     LoadSaveSlot();
   }
 }

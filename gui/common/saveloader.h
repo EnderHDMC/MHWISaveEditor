@@ -3,6 +3,7 @@
 #include <QString>
 
 #include "../../types/mhw_save.h"
+#include "../../data/ItemDB.h"
 
 #define MHW_SAVE_CHECK MHW_SaveCheck()
 #define MHW_SAVE_GUARD_CHECK (!MHW_SAVE_CHECK)
@@ -26,6 +27,9 @@ private:
 
   QString file;
   bool loading = false;
+
+protected:
+  ItemDB* itemDB = nullptr;
 
 public:
   virtual ~SaveLoader() {}
@@ -86,6 +90,10 @@ public:
   virtual void FinishLoad()
   {
     loading = false;
+  }
+
+  virtual void LoadResources(ItemDB* itemDB) {
+    this->itemDB = itemDB;
   }
 
   // All of these should be preceeded by a guard.

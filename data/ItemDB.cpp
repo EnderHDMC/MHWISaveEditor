@@ -21,8 +21,6 @@ enum class FlagFileIndex : u32 {
    FlagFileIndexCount
 };
 
-ItemDB* ItemDB::instance = nullptr;
-
 ItemDB::ItemDB()
 {
   Settings* settings = settings->GetInstance();
@@ -33,6 +31,12 @@ ItemDB::ItemDB()
 
   if (itm.header)
     flagsLoad = ReadCustomFlags(&itm);
+}
+
+ItemDB::~ItemDB()
+{
+  FreeMeta_itm(&itm);
+  FreeMeta_gmd(&gmd);
 }
 
 bool ItemDB::ReadItemData(itm_meta* meta) {
@@ -128,21 +132,6 @@ bool ItemDB::ReadCustomFlags(itm_meta* itm) {
     info->flags |= customFlags;
   }
   return true;
-}
-
-ItemDB* ItemDB::GetInstance()
-{
-  if (!instance) instance = new ItemDB();
-  return instance;
-}
-
-void ItemDB::Free()
-{
-  FreeMeta_itm(&itm);
-  FreeMeta_gmd(&gmd);
-
-  delete(instance);
-  instance = nullptr;
 }
 
 itm_entry* ItemDB::GetItemByIdSafe(u32 id)

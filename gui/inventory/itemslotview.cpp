@@ -10,7 +10,6 @@ ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent
   ui->setupUi(this);
 
   bitmapDB = bitmapDB->GetInstance();
-  itemDB = itemDB->GetInstance();
 
   WheelGuard* guard = new WheelGuard(ui->spnCount);
   ui->spnCount->installEventFilter(guard);

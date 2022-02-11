@@ -13,7 +13,6 @@
 class ItemDB
 {
 private:
-  static ItemDB* instance;
   itm_meta itm = {};
   gmd_meta gmd = {};
 
@@ -21,15 +20,13 @@ private:
   bool gmdLoad = false;
   bool flagsLoad = false;
 
-  ItemDB();
-
   bool ReadItemData(itm_meta* meta);
   bool ReadGMD(gmd_meta* meta, const QString& language);
   bool ReadCustomFlags(itm_meta* itm);
 
 public:
-  static ItemDB* GetInstance();
-  void Free();
+  ItemDB();
+  ~ItemDB();
 
   itm_entry* GetItemByIdSafe(u32 id);
   itm_entry* GetItemById(u32 id);

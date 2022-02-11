@@ -12,35 +12,6 @@ InventoryEditor::InventoryEditor(QWidget* parent)
   ui = new Ui::InventoryEditor();
   ui->setupUi(this);
 
-  ItemDB* itemDB = itemDB->GetInstance();
-  BitmapDB* bitmapDB = bitmapDB->GetInstance();
-  Settings* settings = settings->GetInstance();
-  bool showUnobtainable = settings->GetShowUnobtainable();
-
-  for (int i = 0; i < itemDB->count(); i++)
-  {
-    itm_entry* info = itemDB->GetItemById(i);
-    if (info->type == (u32)itemCategory::Furniture) continue;
-    if (info->type == (u32)itemCategory::Account) continue;
-    if (info->flags & (u32)itemFlag::RejectFlag) continue;
-
-    QString itemName = itemDB->ItemName(info);
-    if (!(info->flags & (u32)itemFlag::CustomObtainable) && info->id) {
-      if (info->flags & (u32)itemFlag::CustomSlingerAmmo) continue;
-
-      // Truly unobtainable items.
-      if (!(info->flags & (u32)itemFlag::CustomDiscoverable)) {
-        qInfo() << "Unobtainable Item[" << info->id << ":" << info->type << "]: " << itemName;
-        if (!showUnobtainable) continue;
-      }
-    }
-
-    QIcon* icon = bitmapDB->ItemIcon(info);
-    QVariant pass = QVariant::fromValue(info);
-
-    ui->cmbSearchItem->addItem(*icon, itemName, pass);
-  }
-
   QStringList names;
   names << tr("Item Pouch");
   names << tr("Ammo Pouch");
@@ -70,7 +41,6 @@ void InventoryEditor::SearchIndexChange(int index)
 {
   MHW_SAVE_GUARD;
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
-  ItemDB* itemDB = itemDB->GetInstance();
 
   QVariant data = ui->cmbSearchItem->itemData(index);
   itm_entry* info = data.value<itm_entry*>();
@@ -120,7 +90,6 @@ void InventoryEditor::ItemAdd()
 {
   MHW_SAVE_GUARD;
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
-  ItemDB* itemDB = itemDB->GetInstance();
 
   QVariant data = ui->cmbSearchItem->currentData();
   itm_entry* info = data.value<itm_entry*>();
@@ -175,4 +144,44 @@ void InventoryEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   }
 
   SaveLoader::FinishLoad();
+}
+
+void InventoryEditor::LoadResources(ItemDB* itemDB)
+{
+  SaveLoader::LoadResources(itemDB);
+
+  ui->cmbSearchItem->clear();
+  BitmapDB* bitmapDB = bitmapDB->GetInstance();
+  Settings* settings = settings->GetInstance();
+  bool showUnobtainable = settings->GetShowUnobtainable();
+
+  for (int i = 0; i < itemDB->count(); i++)
+  {
+    itm_entry* info = itemDB->GetItemById(i);
+    if (info->type == (u32)itemCategory::Furniture) continue;
+    if (info->type == (u32)itemCategory::Account) continue;
+    if (info->flags & (u32)itemFlag::RejectFlag) continue;
+
+    QString itemName = itemDB->ItemName(info);
+    if (!(info->flags & (u32)itemFlag::CustomObtainable) && info->id) {
+      if (info->flags & (u32)itemFlag::CustomSlingerAmmo) continue;
+
+      // Truly unobtainable items.
+      if (!(info->flags & (u32)itemFlag::CustomDiscoverable)) {
+        qInfo() << "Unobtainable Item[" << info->id << ":" << info->type << "]: " << itemName;
+        if (!showUnobtainable) continue;
+      }
+    }
+
+    QIcon* icon = bitmapDB->ItemIcon(info);
+    QVariant pass = QVariant::fromValue(info);
+
+    ui->cmbSearchItem->addItem(*icon, itemName, pass);
+  }
+
+  for (size_t i = 0; i < editorTabs.count(); i++)
+  {
+    InventoryEditorTab* editor = editorTabs[i];
+    editor->LoadResources(itemDB);
+  }
 }

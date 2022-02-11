@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
   QCoreApplication::setApplicationName("MHWI Save Editor");
 
   Settings* settings = settings->GetInstance();
-  ItemDB* itemDB = itemDB->GetInstance();
+  ItemDB* itemDB = new ItemDB();
   BitmapDB* bitmapDB = bitmapDB->GetInstance();
   bitmapDB->Init(itemDB);
 
@@ -29,6 +29,11 @@ int main(int argc, char* argv[])
     }
   }
   MHWISaveEditor w;
+  w.LoadResources(itemDB);
   w.show();
-  return a.exec();
+  int ret = a.exec();
+
+  delete itemDB;
+
+  return ret;
 }
