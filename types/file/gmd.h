@@ -39,7 +39,23 @@ struct gmd_meta {
 };
 #pragma pack(pop)
 
-static void InitMeta_gmd(gmd_meta* meta, gmd_header* header) {
+static void FreeMeta_gmd(gmd_meta* meta) {
+  if (meta->header) free(meta->header);
+  if (meta->keys) free(meta->keys);
+  if (meta->strings) free(meta->strings);
+
+  meta->header = nullptr;
+  meta->filename = nullptr;
+  meta->gmd_info = nullptr;
+  meta->buckets = nullptr;
+  meta->first_key = nullptr;
+  meta->first_string = nullptr;
+
+  meta->keys = nullptr;
+  meta->strings = nullptr;
+}
+
+static bool InitMeta_gmd(gmd_meta* meta, gmd_header* header) {
   u8* base = (u8*)header;
   meta->header = (gmd_header*)base;
   meta->filename = base + sizeof(gmd_header);
@@ -50,10 +66,14 @@ static void InitMeta_gmd(gmd_meta* meta, gmd_header* header) {
 
   meta->keys = (u8**)malloc(sizeof(u8*) * header->key_count);
   meta->strings = (u8**)malloc(sizeof(u8*) * header->string_count);
+  if (!meta->keys || !meta->strings) {
+    FreeMeta_gmd(meta);
+    return false;
+  }
 
   u32 key_index = 0;
   u8* key_end = meta->first_key + header->key_block_size;
-  for (u8* key = meta->first_key; key < key_end; key++) {
+  for (u8* key = meta->first_key; key < key_end && key_index < header->key_count; key++) {
     meta->keys[key_index] = key;
     key_index++;
     key += strlen((char*)key);
@@ -61,25 +81,16 @@ static void InitMeta_gmd(gmd_meta* meta, gmd_header* header) {
 
   u32 str_index = 0;
   u8* str_end = meta->first_string + header->string_block_size;
-  for (u8* str = meta->first_string; str < str_end; str++) {
+  for (u8* str = meta->first_string; str < str_end && str_index < header->string_count; str++) {
     meta->strings[str_index] = str;
     str_index++;
     str += strlen((char*)str);
   }
-}
 
-static void FreeMeta_gmd(gmd_meta* meta) {
-  free(meta->header);
-  free(meta->keys);
-  free(meta->strings);
+  if (key_index != header->key_count || str_index != header->string_count) {
+    FreeMeta_gmd(meta);
+    return false;
+  }
 
-  meta->header = nullptr;
-  meta->filename = nullptr;
-  meta->gmd_info = nullptr;
-  meta->buckets = nullptr;
-  meta->first_key = nullptr;
-  meta->first_string = nullptr;
-  
-  meta->keys = nullptr;
-  meta->strings = nullptr;
+  return true;
 }

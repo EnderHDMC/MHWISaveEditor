@@ -52,8 +52,7 @@ bool ItemDB::ReadItemData(itm_meta* meta) {
     return false;
   }
 
-  InitMeta_itm(meta, itmHeader);
-  return true;
+  return InitMeta_itm(meta, itmHeader);
 }
 
 bool ItemDB::ReadGMD(gmd_meta* meta, const QString& language)
@@ -73,8 +72,7 @@ bool ItemDB::ReadGMD(gmd_meta* meta, const QString& language)
     return false;
   }
 
-  InitMeta_gmd(meta, gmdHeader);
-  return true;
+  return InitMeta_gmd(meta, gmdHeader);
 }
 
 bool ItemDB::ReadCustomFlags(itm_meta* itm) {
