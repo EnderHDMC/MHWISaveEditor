@@ -152,7 +152,7 @@
    <item row="11" column="0">
     <widget class="QLabel" name="lblItemLanguage">
      <property name="text">
-      <string>*Item Language:</string>
+      <string>Item Language:</string>
      </property>
     </widget>
    </item>

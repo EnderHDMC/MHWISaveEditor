@@ -35,6 +35,8 @@ public:
   itm_entry* GetItemById(u32 id);
   int count();
 
+  void LoadGMD(mhw_language itemLanguage);
+
   QString ItemName(u32 id);
   QString ItemName(itm_entry* info);
 

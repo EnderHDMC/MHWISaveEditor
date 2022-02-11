@@ -79,7 +79,7 @@ public:
   mhw_language GetUiLanguage() { return _uiLanguage; }
   void SetUiLanguage(mhw_language value) { if (_uiLanguage != value) _requireRestart = true; _uiLanguage = value; }
   mhw_language GetItemLanguage() { return _itemLanguage; }
-  void SetItemLanguage(mhw_language value) { if (_itemLanguage != value) _requireRestart = true; _itemLanguage = value; }
+  void SetItemLanguage(mhw_language value) { _itemLanguage = value; }
 #pragma endregion
 
   // Needs to match up with the settings UI options.

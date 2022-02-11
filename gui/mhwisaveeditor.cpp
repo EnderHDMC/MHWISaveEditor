@@ -484,16 +484,25 @@ void MHWISaveEditor::OpenLocation(const QString& location)
 
 void MHWISaveEditor::OpenSettings()
 {
-  SettingsUI *settingsUI = new SettingsUI();
+  mhw_language oldItemLanguage = settings->GetItemLanguage();
+
+  SettingsUI* settingsUI = new SettingsUI();
   settingsUI->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
   settingsUI->exec();
 
   if (settings->GetRequireRestart()) {
-      Notification* notif = notif->GetInstance();
-      NotificationMode notifMode = notif->GetDefaultMode();
-      notif->SetDefaultMode(NotificationMode::MessageBox);
-      notif->ShowMessage(tr("Some settings you have changed will apply on restart."));
-      notif->SetDefaultMode(notifMode);
+    Notification* notif = notif->GetInstance();
+    NotificationMode notifMode = notif->GetDefaultMode();
+    notif->SetDefaultMode(NotificationMode::MessageBox);
+    notif->ShowMessage(tr("Some settings you have changed will apply on restart."));
+    notif->SetDefaultMode(notifMode);
+  }
+
+  mhw_language itemLanguage = settings->GetItemLanguage();
+  if (oldItemLanguage != itemLanguage) {
+    ItemDB* itemDB = itemDB->GetInstance();
+    itemDB->LoadGMD(itemLanguage);
+    LoadSaveSlot();
   }
 }
 

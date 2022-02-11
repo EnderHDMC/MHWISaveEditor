@@ -27,10 +27,9 @@ ItemDB::ItemDB()
 {
   Settings* settings = settings->GetInstance();
   mhw_language itemLanguage = settings->GetItemLanguage();
-  QString language =  Settings::GetLanguageCode(itemLanguage);
 
   itmLoad = ReadItemData(&itm);
-  gmdLoad = ReadGMD(&gmd, language);
+  LoadGMD(itemLanguage);
 
   if (itm.header)
     flagsLoad = ReadCustomFlags(&itm);
@@ -73,6 +72,13 @@ bool ItemDB::ReadGMD(gmd_meta* meta, const QString& language)
   }
 
   return InitMeta_gmd(meta, gmdHeader);
+}
+
+void ItemDB::LoadGMD(mhw_language itemLanguage)
+{
+  FreeMeta_gmd(&gmd);
+  QString language = Settings::GetLanguageCode(itemLanguage);
+  gmdLoad = ReadGMD(&gmd, language);
 }
 
 bool ItemDB::ReadCustomFlags(itm_meta* itm) {
