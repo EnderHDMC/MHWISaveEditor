@@ -106,6 +106,33 @@ void HunterInfo::UncapGuidingLands()
   notif->ShowMessage(tr("Guiding Lands levels uncapped."), 5000);
 }
 
+void HunterInfo::PlaytimeChange(double value)
+{
+  u32 playtime = value;
+
+  u32 seconds = (playtime) % 60;
+  u32 minutes = (playtime / 60) % 60;
+  u32 hours = (playtime / 3600);
+  u32 secondsG = hours >= 10000 ? 59 : seconds;
+  u32 minutesG = hours >= 10000 ? 59 : minutes;
+  u32 hoursG = hours >= 10000 ? 9999 : hours;
+
+  QChar fill0 = '0';
+  QString format = "%1:%2";
+  QString minsec = format.arg(minutes, 2, 10, fill0).arg(seconds, 2, 10, fill0);
+  QString minsecG = format.arg(minutesG, 2, 10, fill0).arg(secondsG, 2, 10, fill0);
+  QString time = format.arg(hours).arg(minsec);
+  QString timeG = format.arg(hoursG).arg(minsecG);
+
+  QString suffix = tr(" seconds, time = %1, game = %2").arg(time).arg(timeG);
+  ui->spnPlaytime->setSuffix(suffix);
+
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
+  mhwSaveSlot->hunter.playtime = playtime;
+}
+
 void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
@@ -118,6 +145,7 @@ void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
   u32 steamworksFuel = mhwSaveSlot->steamworks_stored_fuel;
   u32* guidingLandsLevels = mhwSaveSlot->guiding_lands.region_levels;
   u8* guidingLandsLevelsUnlocked = mhwSaveSlot->guiding_lands.region_level_unlocked;
+  u32 playtime = mhwSaveSlot->hunter.playtime;
 
   strncpy_s(hunterName, sizeof(hunterName), (char*)mhwSaveSlot->hunter.name, COUNTOF(hunterName));
   strncpy_s(palicoName, sizeof(palicoName), (char*)mhwSaveSlot->palico_name, COUNTOF(palicoName));
@@ -129,6 +157,7 @@ void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->spnZenny->setValue(zeni);
   ui->spnResearchPoints->setValue(researchPoints);
   ui->spnSteamworksFuel->setValue(steamworksFuel);
+  ui->spnPlaytime->setValue(playtime);
 
   QMapIterator<QSpinBox*, u8> i(regionIndexMapping);
   while (i.hasNext()) {

@@ -19,6 +19,7 @@ public slots:
   void SteamworksFuelChange(int value);
   void RegionalLevelGLChange(int value);
   void UncapGuidingLands();
+  void PlaytimeChange(double value);
 
 public:
   HunterInfo(QWidget* parent = Q_NULLPTR);
