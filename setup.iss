@@ -1,5 +1,5 @@
 #define MHWIAppName "MHWISaveEditor"
-#define MHWIAppVersion "0.1.3"
+#define MHWIAppVersion "0.1.4"
 #define MHWIAppPublisher "EnderHDMC"
 #define MHWIAppURL "https://github.com/EnderHDMC/MHWISaveEditor"
 #define MHWIAppExeName "MHWISaveEditor.exe"
@@ -48,12 +48,13 @@ Source: "{#RelDir}\Qt6Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#RelDir}\vc_redist.x64.exe"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "{#RelDir}\vc_redist.x64.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#RelDir}\res\*"; DestDir: "{app}\res"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#RelDir}\res\*"; DestDir: "{app}\res"; Flags: ignoreversion recursesubdirs createallsubdirs       
 Source: "{#RelDir}\styles\*"; DestDir: "{app}\styles"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#RelDir}\translations\*"; DestDir: "{app}\translations"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Run]
