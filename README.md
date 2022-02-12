@@ -5,7 +5,6 @@ A save editor for Monster Hunter World: Iceborne.
 - Equipment Box Editor (Delete those pesky Guardian Armors)
 - Crown Size normalisation
 - Clear arena records
-- Give items
 - A way to open multiple saves?
 
 ## Credits
