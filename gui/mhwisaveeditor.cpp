@@ -534,7 +534,7 @@ void MHWISaveEditor::Backup() {
 
   QDateTime date = QDateTime::currentDateTime();
   QString datatime = date.toString("yyyy-MM-dd_hh-mm-ss");
-  QString writeFile = basename + ext + '_' + datatime + ".bak";
+  QString writeFile = basename + ext + '_' + datatime + ".zlib";
   QString path = Settings::GetDataPathBackups() + writeFile;
 
   if (success) {
@@ -591,7 +591,7 @@ void MHWISaveEditor::TrimBackups()
   QDir dir(path);
 
   QStringList nameFilters;
-  nameFilters << "*.bak";
+  nameFilters << "*.zlib";
   dir.setNameFilters(nameFilters);
   QDir::Filters filters = QDir::Filter::Files;
   QDir::SortFlags sort = QDir::SortFlag::Time | QDir::SortFlag::Reversed;
