@@ -7,6 +7,24 @@ A save editor for Monster Hunter World: Iceborne.
 - Clear arena records
 - A way to open multiple saves?
 
+## Translation
+If you would like to help translate the editor into other languages, you can follow these instructions:
+1. Download and install the QT Linguist package.
+2. Goto `res/translations/` in the Save Editor's files (where the exe is located).
+3. Make a copy of the file `mhwisaveeditor_template.ts` and name it `mhwisaveeditor_<language>.ts`, where `<language>` is the language you're translating to.
+4. In QT Linguist open the file: `mhwisaveeditor_<language>.ts`
+5. Goto `Edit->Translation File Settings...`
+6. Change the `Target Language` to the language you want to translate to.
+7. `Country/Region` can be left as `Any Country`.
+8. Press OK.
+9. Translate all the strings you can.
+11. Repeat step 9 until satisfied.
+
+To load the translation into the editor:
+1. In QT Linguist with the file loaded.
+2. Goto `File->Release`, this will create a file called `mhwisaveeditor_<language>.qm`.
+3. Now in the save editor, goto `Tools->Settings` and change the UI language to the language you're working on.
+
 ## Credits
 - [AsteriskAmpersand](https://github.com/AsteriskAmpersand/) - for the previous save editor and the python rewrite.
 - [LEGENDFF](https://github.com/LEGENDFF/) - for the reference implementation for decrypting/encrypting the save files.
