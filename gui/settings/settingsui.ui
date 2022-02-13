@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SettingsUI</string>
+   <string comment="The title of the settings menu.">Settings</string>
   </property>
   <layout class="QFormLayout" name="formLayout_5">
    <property name="labelAlignment">
@@ -26,35 +26,31 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
-      <string>Backups</string>
+      <string comment="&quot;Backups&quot; section of the Settings.">Backups</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="lblAutoBackups">
      <property name="text">
-      <string>Do Auto Backups:</string>
+      <string comment="Whether to do automatic backups when opening a save.">Do Auto Backups:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QCheckBox" name="chkAutoBackups">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
+    <widget class="QCheckBox" name="chkAutoBackups"/>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="lvlMaxBackups">
      <property name="text">
-      <string>Maximum Backups</string>
+      <string comment="The maximum amount of backups the editor will keep.">Maximum Backups</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QSpinBox" name="spnMaxBackups">
      <property name="specialValueText">
-      <string>Unlimited</string>
+      <string comment="An indication when the max backups is unlimited.">Unlimited</string>
      </property>
      <property name="minimum">
       <number>0</number>
@@ -70,51 +66,39 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
-      <string>Items</string>
+      <string comment="&quot;Items&quot; section of the Settings.">Items</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="lblMatrixMode">
      <property name="text">
-      <string>*Matrix Mode:</string>
+      <string comment="Whether the editor will render all item icons like a neon sign.">*Matrix Mode:</string>
      </property>
     </widget>
    </item>
    <item row="5" column="1">
-    <widget class="QCheckBox" name="chkMatrixMode">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
+    <widget class="QCheckBox" name="chkMatrixMode"/>
    </item>
    <item row="6" column="0">
     <widget class="QLabel" name="lblShowUnobtainable">
      <property name="text">
-      <string>*Show Unobtainable Items:</string>
+      <string comment="Show items that are normally unobtainable such as Pure Dracolites or Mega Dash Juice in item search.">*Show Unobtainable Items:</string>
      </property>
     </widget>
    </item>
    <item row="6" column="1">
-    <widget class="QCheckBox" name="chkShowUnobtainable">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
+    <widget class="QCheckBox" name="chkShowUnobtainable"/>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="lblSearchAllTabsIncludeItemPouch">
      <property name="text">
-      <string>Include Pouch in Search All Tabs:</string>
+      <string comment="Whether to search the player pouch when Search All Tabs is checked.">Include Pouch in Search All Tabs:</string>
      </property>
     </widget>
    </item>
    <item row="7" column="1">
-    <widget class="QCheckBox" name="chkSearchAllTabsIncludeItemPouch">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
+    <widget class="QCheckBox" name="chkSearchAllTabsIncludeItemPouch"/>
    </item>
    <item row="9" column="0" colspan="2">
     <widget class="QPushButton" name="btnPlaceholderLanguage">
@@ -122,7 +106,7 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
-      <string>Language</string>
+      <string comment="&quot;Language&quot; section of the Settings.">Language</string>
      </property>
     </widget>
    </item>
@@ -132,7 +116,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>*UI Language:</string>
+      <string comment="The language the Editor UI will show in.">*UI Language:</string>
      </property>
     </widget>
    </item>
@@ -141,95 +125,94 @@
      <property name="enabled">
       <bool>false</bool>
      </property>
-     <property name="currentText">
-      <string/>
-     </property>
      <property name="placeholderText">
-      <string>No Translations</string>
+      <string comment="Appears when no UI translations are loaded.">No Translations</string>
      </property>
     </widget>
    </item>
    <item row="11" column="0">
     <widget class="QLabel" name="lblItemLanguage">
      <property name="text">
-      <string>Item Language:</string>
+      <string comment="The language the items will show in.">Item Language:</string>
      </property>
     </widget>
    </item>
    <item row="11" column="1">
     <widget class="QComboBox" name="cmbItemLanguage">
      <property name="currentText">
-      <string/>
+      <string notr="true">Use game language</string>
      </property>
      <property name="currentIndex">
-      <number>-1</number>
-     </property>
-     <property name="placeholderText">
-      <string>---</string>
+      <number>0</number>
      </property>
      <item>
       <property name="text">
-       <string>日本語</string>
+       <string comment="Whether the items should be displayed in the game's language.">Use game language</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>English</string>
+       <string notr="true">日本語</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Français</string>
+       <string notr="true">English</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Italiano</string>
+       <string notr="true">Français</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Deutsch</string>
+       <string notr="true">Italiano</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Español</string>
+       <string notr="true">Deutsch</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Português do Brasil</string>
+       <string notr="true">Español</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Polski</string>
+       <string notr="true">Português do Brasil</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Русский</string>
+       <string notr="true">Polski</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>한국어</string>
+       <string notr="true">Русский</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>繁體中文</string>
+       <string notr="true">한국어</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>简体中文</string>
+       <string notr="true">繁體中文</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Arabic</string>
+       <string notr="true">简体中文</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">Arabic</string>
       </property>
      </item>
     </widget>
@@ -240,28 +223,24 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
-      <string>Quality of Life</string>
+      <string comment="&quot;Quality of Life&quot; section of the Settings.">Quality of Life</string>
      </property>
     </widget>
    </item>
    <item row="14" column="0">
     <widget class="QLabel" name="lblDarkMode">
      <property name="text">
-      <string>*Dark Mode:</string>
+      <string comment="Dark mode for the editor UI.">*Dark Mode:</string>
      </property>
     </widget>
    </item>
    <item row="14" column="1">
-    <widget class="QCheckBox" name="chkDarkMode">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
+    <widget class="QCheckBox" name="chkDarkMode"/>
    </item>
    <item row="16" column="0" colspan="2">
     <widget class="QLabel" name="lblRestartDisclaimer">
      <property name="text">
-      <string>* Will apply on restart.</string>
+      <string comment="Indicate options which need a restart.">* Will apply on restart.</string>
      </property>
     </widget>
    </item>

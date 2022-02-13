@@ -13,12 +13,12 @@ InventoryEditor::InventoryEditor(QWidget* parent)
   ui->setupUi(this);
 
   QStringList names;
-  names << tr("Item Pouch");
-  names << tr("Ammo Pouch");
-  names << tr("Item Box");
-  names << tr("Ammo Box");
-  names << tr("Material Box");
-  names << tr("Deco Box");
+  names << tr("Item Pouch", "Title for the 'Item Pouch' tab of the inventory editor.");
+  names << tr("Ammo Pouch", "Title for the 'Ammo Pouch' tab of the inventory editor.");
+  names << tr("Item Box", "Title for the 'Item Box' tab of the inventory editor.");
+  names << tr("Ammo Box", "Title for the 'Ammo Box' tab of the inventory editor.");
+  names << tr("Material Box", "Title for the 'Material Box' tab of the inventory editor.");
+  names << tr("Deco Box", "Title for the 'Deco Box' tab of the inventory editor.");
 
   int areaCount = COUNTOF(inventory_areas);
   Q_ASSERT(areaCount == names.length());
@@ -82,7 +82,7 @@ void InventoryEditor::SearchIndexChange(int index)
   }
   else {
     Notification* notif = notif->GetInstance();
-    notif->ShowMessage(tr("Failed to find item: %1").arg(itemDB->ItemName(info)));
+    notif->ShowMessage(tr("Failed to find item: %1", "Indicate failed item search, %1 is the item that was being searched for.").arg(itemDB->ItemName(info)));
   }
 }
 
@@ -109,7 +109,7 @@ void InventoryEditor::ItemAdd()
 
   Notification* notif = notif->GetInstance();
   if (!storageArea) {
-    notif->ShowMessage(tr("Failed to find place to add: %1").arg(itemDB->ItemName(info)));
+    notif->ShowMessage(tr("Failed to find place to add: %1", "Indicate failed item add, %1 is the item to be added.").arg(itemDB->ItemName(info)));
     return;
   }
   u8* slot = ((u8*)mhwSaveSlot) + storageArea->localoffset;
@@ -126,10 +126,10 @@ void InventoryEditor::ItemAdd()
     InventoryEditorTab* editor = dynamic_cast<InventoryEditorTab*>(current);
     editor->LoadIndex(index);
     editor->ScrollToIndex(index);
-    notif->ShowMessage(tr("Added item: %1").arg(itemDB->ItemName(info)));
+    notif->ShowMessage(tr("Added item: %1", "Added an item, %1 is the name of the item that was added.").arg(itemDB->ItemName(info)));
   }
   else {
-    notif->ShowMessage(tr("Failed to find place to add: %1").arg(itemDB->ItemName(info)));
+    notif->ShowMessage(tr("Failed to find place to add: %1", "Indicate failed item add, %1 is the item to be added.").arg(itemDB->ItemName(info)));
   }
 }
 

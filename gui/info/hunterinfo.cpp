@@ -103,7 +103,7 @@ void HunterInfo::UncapGuidingLands()
   mhwSaveSlot->guiding_lands.level_total = GUIDING_LANDS_LEVEL_UNCAP;
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Guiding Lands levels uncapped."), 5000);
+  notif->ShowMessage(tr("Guiding Lands levels uncapped.", "Notify that the Guiding Lands region levels have been uncapped."), 5000);
 }
 
 void HunterInfo::PlaytimeChange(double value)
@@ -124,7 +124,7 @@ void HunterInfo::PlaytimeChange(double value)
   QString time = format.arg(hours).arg(minsec);
   QString timeG = format.arg(hoursG).arg(minsecG);
 
-  QString suffix = tr(" seconds, time = %1, game = %2").arg(time).arg(timeG);
+  QString suffix = tr(" seconds, time = %1, game = %2", "display playtime, %1 is the actual playtime, %2 is the playtime the game will show.").arg(time).arg(timeG);
   ui->spnPlaytime->setSuffix(suffix);
 
   MHW_SAVE_GUARD;

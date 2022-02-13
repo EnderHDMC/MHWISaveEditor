@@ -11,62 +11,62 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>LimitedUnlocks</string>
+   <string comment="The title of the 'Limited Unlocks' tab in the editor.">Limited Unlocks</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QCheckBox" name="chkAssassinHoodUnlock">
      <property name="text">
-      <string>Assassin's Hood Unlocked</string>
+      <string comment="Whether the Assassin's Hood is unlocked.">Assassin's Hood Unlocked</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="chkAssassinHoodUpgrade">
      <property name="text">
-      <string>Assassin's Hood Upgraded</string>
+      <string comment="Whether the Assassin's Hood is upgraded.">Assassin's Hood Upgraded</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="chkLayeredArtemis">
      <property name="text">
-      <string>Layered: Artemis</string>
+      <string comment="Whether the Artemis Layered is unlocked.">Layered: Artemis</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="chkLayeredBayek">
      <property name="text">
-      <string>Layered: Bayek</string>
+      <string comment="Whether the Bayek Layered is unlocked.">Layered: Bayek</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="btnGiveArtemisGear">
      <property name="text">
-      <string>Give Artemis Gear</string>
+      <string comment="Add Artemis Gear in the player's equipment box.">Give Artemis Gear</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="btnGiveYukumoLoadout">
      <property name="text">
-      <string>Add Yukumo Layered Loadout</string>
+      <string comment="Add a preset layered loadout for Yukumo.">Add Yukumo Layered Loadout</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="btnGiveSilverKnightLoadout">
      <property name="text">
-      <string>Add Silver Knight Layered Loadout</string>
+      <string comment="Add a preset layered loadout for Silver Knight.">Add Silver Knight Layered Loadout</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="btnGiveSamuraiLoadout">
      <property name="text">
-      <string>Add Samurai Layered Loadout</string>
+      <string comment="Add a preset layered loadout for Samurai.">Add Samurai Layered Loadout</string>
      </property>
     </widget>
    </item>

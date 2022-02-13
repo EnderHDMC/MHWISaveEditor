@@ -16,7 +16,6 @@
 struct editor_tab {
   SaveLoader* widget;
   SaveLoader** binding;
-  QString name;
 };
 
 QT_BEGIN_NAMESPACE

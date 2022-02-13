@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>InventoryEditorTab</string>
+   <string notr="true">InventoryEditorTab</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

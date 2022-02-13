@@ -11,34 +11,30 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>GeneralInfo</string>
+   <string comment="The title of the 'General' tab in the editor.">General</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="lblSteamID">
      <property name="text">
-      <string>Steam ID:</string>
+      <string comment="Label for user's steam id.">Steam ID:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QPushButton" name="btnSteamID">
-     <property name="text">
-      <string>SteamID</string>
-     </property>
-    </widget>
+    <widget class="QPushButton" name="btnSteamID"/>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="lblEditVouchers">
      <property name="text">
-      <string>Edit Vouchers:</string>
+      <string comment="Label for edit vouchers reset.">Edit Vouchers:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
     <widget class="QPushButton" name="btnEditVouchers">
      <property name="text">
-      <string>Reset Character and Palico Edit Vouchers</string>
+      <string comment="Button to reset the Character and Palico Edit Vouchers.">Reset Character and Palico Edit Vouchers</string>
      </property>
     </widget>
    </item>

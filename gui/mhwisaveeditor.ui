@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MHWISaveEditor</string>
+   <string comment="The title of the editor.">MHWI Save Editor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -56,11 +56,11 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string comment="File menu" extracomment="Contains Save, Open, etc.">File</string>
     </property>
     <widget class="QMenu" name="menuDump">
      <property name="title">
-      <string>Dump</string>
+      <string comment="File -&gt; Dump" extracomment="Allows the user to dump a decrypted copy of SAVEDATA1000 or the currently loaded file into the save file location.">Dump</string>
      </property>
      <addaction name="actionSAVEDATA1000bin"/>
      <addaction name="actionSAVEDATA1001bin"/>
@@ -90,14 +90,14 @@
    </widget>
    <widget class="QMenu" name="menuSlot">
     <property name="title">
-     <string>Slot</string>
+     <string comment="Slot menu" extracomment="For doing save slot operations, like selecting a slot, switching one or cloning one.">Slot</string>
     </property>
     <widget class="QMenu" name="menuSwitchWith">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="title">
-      <string>Switch with</string>
+      <string comment="Slot -&gt; Switch with" extracomment="Allows the user to switch the current slot with a selected slot.">Switch with</string>
      </property>
      <addaction name="actionSwitchSlot1"/>
      <addaction name="actionSwitchSlot2"/>
@@ -108,7 +108,7 @@
       <bool>false</bool>
      </property>
      <property name="title">
-      <string>Clone to</string>
+      <string comment="Slot -&gt; Clone to" extracomment="Allows the user to clone the current slot to a selected slot.">Clone to</string>
      </property>
      <addaction name="actionCloneSlot1"/>
      <addaction name="actionCloneSlot2"/>
@@ -123,7 +123,7 @@
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>Tools</string>
+     <string comment="Tools menu" extracomment="Contains editor settings and shortcuts.">Tools</string>
     </property>
     <addaction name="actionOpenEditorData"/>
     <addaction name="separator"/>
@@ -136,10 +136,10 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
    <property name="text">
-    <string>Open</string>
+    <string comment="File -&gt; Open" extracomment="Allows the user to open a file.">Open</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string comment="Hotkey for: File -&gt; Open">Ctrl+O</string>
    </property>
   </action>
   <action name="actionSave">
@@ -147,10 +147,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string comment="File -&gt; Save" extracomment="Saves the currently loaded file, overwriting what was loaded.">Save</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string comment="Hotkey for: File -&gt; Save">Ctrl+S</string>
    </property>
   </action>
   <action name="actionBackup">
@@ -158,7 +158,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Backup</string>
+    <string comment="File -&gt; Backup" extracomment="Makes a backup of the currently loaded file or SAVEDATA1000 if none is loaded.">Backup</string>
    </property>
   </action>
   <action name="actionRestore">
@@ -166,110 +166,110 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Restore</string>
+    <string comment="File -&gt; Restore" extracomment="Like open, but specifically opens a previous backup.">Restore</string>
    </property>
   </action>
   <action name="actionExit">
    <property name="text">
-    <string>Exit</string>
+    <string comment="File -&gt; Exit" extracomment="Exit the application.">Exit</string>
    </property>
   </action>
   <action name="actionOpenGameLocation">
    <property name="text">
-    <string>Open game location</string>
+    <string comment="File -&gt; Open game location" extracomment="Open the folder where the game is located.">Open game location</string>
    </property>
   </action>
   <action name="actionOpenSaveLocation">
    <property name="text">
-    <string>Open save location</string>
+    <string comment="File -&gt; Open save location" extracomment="Open the folder that contains the game save files.">Open save location</string>
    </property>
   </action>
   <action name="actionOpenSAVEDATA1000">
    <property name="text">
-    <string>Open SAVEDATA1000</string>
+    <string comment="File -&gt; Open SAVEDATA1000" extracomment="Acts as a shortcut to open the save file of the user.">Open SAVEDATA1000</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+O</string>
+    <string comment="Hotkey for: File -&gt; Open SAVEDATA1000">Ctrl+Shift+O</string>
    </property>
   </action>
   <action name="actionSAVEDATA1000bin">
    <property name="text">
-    <string>SAVEDATA1000.bin</string>
+    <string notr="true">SAVEDATA1000.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+0</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1000.bin">Ctrl+0</string>
    </property>
   </action>
   <action name="actionSAVEDATA1001bin">
    <property name="text">
-    <string>SAVEDATA1001.bin</string>
+    <string notr="true">SAVEDATA1001.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+1</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1001.bin">Ctrl+1</string>
    </property>
   </action>
   <action name="actionSAVEDATA1002bin">
    <property name="text">
-    <string>SAVEDATA1002.bin</string>
+    <string notr="true">SAVEDATA1002.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+2</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1002.bin">Ctrl+2</string>
    </property>
   </action>
   <action name="actionSAVEDATA1003bin">
    <property name="text">
-    <string>SAVEDATA1003.bin</string>
+    <string notr="true">SAVEDATA1003.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+3</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1003.bin">Ctrl+3</string>
    </property>
   </action>
   <action name="actionSAVEDATA1004bin">
    <property name="text">
-    <string>SAVEDATA1004.bin</string>
+    <string notr="true">SAVEDATA1004.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+4</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1004.bin">Ctrl+4</string>
    </property>
   </action>
   <action name="actionSAVEDATA1005bin">
    <property name="text">
-    <string>SAVEDATA1005.bin</string>
+    <string notr="true">SAVEDATA1005.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+5</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1005.bin">Ctrl+5</string>
    </property>
   </action>
   <action name="actionSAVEDATA1006bin">
    <property name="text">
-    <string>SAVEDATA1006.bin</string>
+    <string notr="true">SAVEDATA1006.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+6</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1006.bin">Ctrl+6</string>
    </property>
   </action>
   <action name="actionSAVEDATA1007bin">
    <property name="text">
-    <string>SAVEDATA1007.bin</string>
+    <string notr="true">SAVEDATA1007.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+7</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1007.bin">Ctrl+7</string>
    </property>
   </action>
   <action name="actionSAVEDATA1008bin">
    <property name="text">
-    <string>SAVEDATA1008.bin</string>
+    <string notr="true">SAVEDATA1008.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+8</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1008.bin">Ctrl+8</string>
    </property>
   </action>
   <action name="actionSAVEDATA1009bin">
    <property name="text">
-    <string>SAVEDATA1009.bin</string>
+    <string notr="true">SAVEDATA1009.bin</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+9</string>
+    <string comment="Hotkey for File -&gt; Dump -&gt; SAVEDATA1009.bin">Ctrl+9</string>
    </property>
   </action>
   <action name="actionSlot1">
@@ -280,10 +280,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 1</string>
+    <string comment="Slot -&gt; Slot 1">Slot 1</string>
    </property>
    <property name="shortcut">
-    <string>F1</string>
+    <string comment="Hotkey for: Slot -&gt; Slot 1">F1</string>
    </property>
   </action>
   <action name="actionSlot2">
@@ -294,10 +294,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 2</string>
+    <string comment="Slot -&gt; Slot 2">Slot 2</string>
    </property>
    <property name="shortcut">
-    <string>F2</string>
+    <string comment="Hotkey for: Slot -&gt; Slot 2">F2</string>
    </property>
   </action>
   <action name="actionSlot3">
@@ -308,10 +308,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 3</string>
+    <string comment="Slot -&gt; Slot 3">Slot 3</string>
    </property>
    <property name="shortcut">
-    <string>F3</string>
+    <string comment="Hotkey for: Slot -&gt; Slot 3">F3</string>
    </property>
   </action>
   <action name="actionSwitchSlot1">
@@ -319,7 +319,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 1</string>
+    <string comment="Slot -&gt; Switch with -&gt; Slot 1">Slot 1</string>
    </property>
   </action>
   <action name="actionSwitchSlot2">
@@ -327,7 +327,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 2</string>
+    <string comment="Slot -&gt; Switch with -&gt; Slot 2">Slot 2</string>
    </property>
   </action>
   <action name="actionSwitchSlot3">
@@ -335,7 +335,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 3</string>
+    <string comment="Slot -&gt; Switch with -&gt; Slot 3">Slot 3</string>
    </property>
   </action>
   <action name="actionCloneSlot1">
@@ -343,7 +343,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 1</string>
+    <string comment="Slot -&gt; Clone to -&gt; Slot 1">Slot 1</string>
    </property>
   </action>
   <action name="actionCloneSlot2">
@@ -351,7 +351,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 2</string>
+    <string comment="Slot -&gt; Clone to -&gt; Slot 2">Slot 2</string>
    </property>
   </action>
   <action name="actionCloneSlot3">
@@ -359,7 +359,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Slot 3</string>
+    <string comment="Slot -&gt; Clone to -&gt; Slot 3">Slot 3</string>
    </property>
   </action>
   <action name="actionSaveAs">
@@ -367,20 +367,20 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Save As</string>
+    <string comment="File -&gt; Save As" extracomment="Allows the user to save to a specific file.">Save As</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
+    <string comment="Hotkey for: File -&gt; Save As">Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionOpenEditorData">
    <property name="text">
-    <string>Open editor data</string>
+    <string comment="Tools -&gt; Open editor data" extracomment="Opens location that contains the editor settings and backups.">Open editor data</string>
    </property>
   </action>
   <action name="actionSettings">
    <property name="text">
-    <string>Settings</string>
+    <string comment="Tools -&gt; Settings" extracomment="Opens the settings menu for the editor.">Settings</string>
    </property>
   </action>
  </widget>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
+    <width>355</width>
     <height>312</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>InventoryEditor</string>
+   <string comment="The title of the 'Inventory Editor' tab in the editor.">Inventory Editor</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -43,7 +43,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Search / Add:</string>
+        <string comment="Search/Add label, for searching/adding items.">Search / Add:</string>
        </property>
       </widget>
      </item>
@@ -58,9 +58,6 @@
        <property name="editable">
         <bool>true</bool>
        </property>
-       <property name="placeholderText">
-        <string>Item Search</string>
-       </property>
       </widget>
      </item>
      <item>
@@ -72,7 +69,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Add</string>
+        <string comment="Item add button." extracomment="Inserts the item into the users item box, in the appropriate section.">Add</string>
        </property>
       </widget>
      </item>
@@ -85,7 +82,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Search All Tabs</string>
+        <string comment="Whether to search all tabs or just the currently selected tab.">Search All Tabs</string>
        </property>
        <property name="checked">
         <bool>false</bool>

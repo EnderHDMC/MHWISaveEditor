@@ -84,10 +84,10 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(dumpSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Dump(int)));
 
   editor_tab editorTabs[] = {
-    {new GeneralInfo(),     &generalInfo,     tr("General")         },
-    {new HunterInfo(),      &hunterInfo,      tr("Information")     },
-    {new InventoryEditor(), &inventoryEditor, tr("Inventory Editor")},
-    {new LimitedUnlocks(),  &limitedUnlocks,  tr("Limited Unlocks") },
+    {new GeneralInfo(),     &generalInfo    },
+    {new HunterInfo(),      &hunterInfo     },
+    {new InventoryEditor(), &inventoryEditor},
+    {new LimitedUnlocks(),  &limitedUnlocks },
   };
   int editorCount = COUNTOF(editorTabs);
   editors.resize(editorCount);
@@ -98,15 +98,15 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
     SaveLoader* loader = (SaveLoader*)tab->widget;
     QWidget* editor = dynamic_cast<QWidget*>(loader);
 
-    ui->tabWidget->addTab(editor, tab->name);
+    ui->tabWidget->addTab(editor, editor->windowTitle());
     if (tab->binding)
       *tab->binding = loader;
     editors[i] = loader;
   }
 
-  filters.append(tr("All Files (*)"));
-  filters.append(tr("Encrypted Save (*.raw)"));
-  filters.append(tr("Unencrypted Save(*.bin)"));
+  filters.append(tr("All Files", "Open/Save filter, show all files.") + " (*)");
+  filters.append(tr("Encrypted Save", "Open/Save filter, show only *.raw files.") + " (*.raw)");
+  filters.append(tr("Unencrypted Save", "Open/Save filter, show only *.bin files.") + " (*.bin)");
 
   ext_map.insert(filters[0], "");
   ext_map.insert(filters[1], ".raw");
@@ -166,11 +166,11 @@ void MHWISaveEditor::SaveFile(const QString& path)
 
   Notification* notif = notif->GetInstance();
   if (success) {
-    notif->ShowMessage(tr("Saved file: %1").arg(path));
-    statusFile->setText(tr("File: %1").arg(EditorFile()));
+    notif->ShowMessage(tr("Saved file: %1", "Indicate sucessful file save, %1 is the path where the file was saved to.").arg(path));
+    statusFile->setText(tr("File: %1", "Indicate the currently open file.").arg(EditorFile()));
   }
   else
-    notif->ShowMessage(tr("Could not save file: %1").arg(path));
+    notif->ShowMessage(tr("Could not save file: %1", "Indicate failed file save, %1 is the path where the file was supposed to be saved to.").arg(path));
 }
 
 bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
@@ -225,9 +225,9 @@ void MHWISaveEditor::Dump(int number)
 
   Notification* notif = notif->GetInstance();
   if (success)
-    notif->ShowMessage(tr("Dumped file: %1").arg(path));
+    notif->ShowMessage(tr("Dumped file: %1", "Indicate a successful file dump, %1 is the path where the file was dumped to.").arg(path));
   else
-    notif->ShowMessage(tr("Could not dump file: %1").arg(path));
+    notif->ShowMessage(tr("Could not dump file: %1", "Indicate a failed file dump, %1 is the path where the file was supposed to be dumped to.").arg(path));
 
   if (buffer) free(buffer);
 }
@@ -316,7 +316,7 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
   QString character = QString::fromUtf8(hunterName);
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Loaded character slot %1: %2").arg(mhwSaveIndex + 1).arg(character));
+  notif->ShowMessage(tr("Loaded character slot %1: %2", "Indicate a character slot change, %1 is the slot number, %2 is the character name.").arg(mhwSaveIndex + 1).arg(character));
 
   statusFile->setText("File: " + EditorFile());
 
@@ -339,7 +339,7 @@ void MHWISaveEditor::LoadFile(const QString& file)
   }
   else {
     Notification* notif = notif->GetInstance();
-    notif->ShowMessage(tr("Failed to load file: %1").arg(file));
+    notif->ShowMessage(tr("Failed to load file: %1", "Indicate a failed file load, %1 is the path to the file that was to be loaded.").arg(file));
   }
 }
 
@@ -414,7 +414,7 @@ void MHWISaveEditor::WatchFileChanged(const QString& path)
       Notification* notif = notif->GetInstance();
       NotificationMode notifMode = notif->GetDefaultMode();
       notif->SetDefaultMode(NotificationMode::MessageBox);
-      notif->ShowMessage(tr("Some settings you have changed will apply on restart."));
+      notif->ShowMessage(tr("Some settings you have changed will apply on restart.", "Tell the user they have some settings that will only be applied on restart."));
       notif->SetDefaultMode(notifMode);
     }
   }
@@ -431,7 +431,7 @@ void MHWISaveEditor::SelectSlot(int slot)
   char* hunterName = (char*)&mhwSaveSlot->hunter.name;
   QString character = QString::fromUtf8(hunterName);
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Loaded character slot %1: %2").arg(mhwSaveIndex + 1).arg(character));
+  notif->ShowMessage(tr("Loaded character slot %1: %2", "Indicate a character slot change, %1 is the slot number, %2 is the character name.").arg(mhwSaveIndex + 1).arg(character));
 
   LoadSaveSlot();
   SaveLoader::FinishLoad();
@@ -457,7 +457,7 @@ void MHWISaveEditor::SwitchSlot(int slot)
   free(temp);
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Switched slots: %1 to slot: %2.").arg(mhwSaveIndex + 1).arg(slot + 1));
+  notif->ShowMessage(tr("Switched slots: %1 to slot: %2.", "Indicate a successful slot switch, %1 is the current slot, %2 is the target slot.").arg(mhwSaveIndex + 1).arg(slot + 1));
 
   LoadSaveSlot();
 }
@@ -474,7 +474,7 @@ void MHWISaveEditor::CloneSlot(int slot)
   memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Cloned slot: %1 to slot: %2.").arg(mhwSaveIndex + 1).arg(slot + 1));
+  notif->ShowMessage(tr("Cloned slot: %1 to slot: %2.", "Indicate a slot was cloned, %1 is the current slot, %2 is the target slot.").arg(mhwSaveIndex + 1).arg(slot + 1));
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)
@@ -495,7 +495,7 @@ void MHWISaveEditor::OpenSettings()
     Notification* notif = notif->GetInstance();
     NotificationMode notifMode = notif->GetDefaultMode();
     notif->SetDefaultMode(NotificationMode::MessageBox);
-    notif->ShowMessage(tr("Some settings you have changed will apply on restart."));
+    notif->ShowMessage(tr("Some settings you have changed will apply on restart.", "Tell the user they have some settings that will only be applied on restart."));
     notif->SetDefaultMode(notifMode);
   }
 
@@ -546,10 +546,10 @@ void MHWISaveEditor::Backup() {
 
   Notification* notif = notif->GetInstance();
   if (success) {
-    notif->ShowMessage(tr("Backup made: %1").arg(writeFile));
+    notif->ShowMessage(tr("Backup made: %1", "Notify of a backup being made, %1 is the path to where it is.").arg(writeFile));
   }
   else {
-    notif->ShowMessage(tr("Failed to create backup: %1").arg(writeFile));
+    notif->ShowMessage(tr("Failed to create backup: %1", "Notify of a backup failure, %1 is the path to where it was supposed to be.").arg(writeFile));
   }
   TrimBackups();
 }

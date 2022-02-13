@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>HunterInfo</string>
+   <string comment="The title of the 'Information' tab in the editor.">Information</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="lblHunterName">
      <property name="text">
-      <string>Hunter Name:</string>
+      <string comment="Label for the hunter's name.">Hunter Name:</string>
      </property>
     </widget>
    </item>
@@ -31,7 +31,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="lblPalicoName">
      <property name="text">
-      <string>Palico Name:</string>
+      <string comment="Label for the palico's name.">Palico Name:</string>
      </property>
     </widget>
    </item>
@@ -45,7 +45,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="lblZenny">
      <property name="text">
-      <string>Zenny:</string>
+      <string comment="Label for zenny.">Zenny:</string>
      </property>
     </widget>
    </item>
@@ -68,7 +68,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="lblResearchPoints">
      <property name="text">
-      <string>Research Points:</string>
+      <string comment="Label for research points.">Research Points:</string>
      </property>
     </widget>
    </item>
@@ -91,7 +91,7 @@
    <item row="4" column="0">
     <widget class="QLabel" name="lblSteamworksFuel">
      <property name="text">
-      <string>Steamworks Fuel:</string>
+      <string comment="Label for steamworks fuel.">Steamworks Fuel:</string>
      </property>
     </widget>
    </item>
@@ -139,62 +139,62 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Guiding Lands</string>
+      <string comment="Label for Guiding Lands section.">Guiding Lands</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="lblLevelCapGL">
         <property name="text">
-         <string>Level Cap:</string>
+         <string comment="Label for guiding lands level cap.">Level Cap:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="btnLevelCapGL">
         <property name="text">
-         <string>Uncap Guiding Lands Levels</string>
+         <string comment="Button to uncap the guiding lands levels.">Uncap Guiding Lands Levels</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="lblAncientForestGL">
         <property name="text">
-         <string>Ancient Forest:</string>
+         <string comment="Label for Ancient Forest level.">Ancient Forest:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="lblWildspireWasteGL">
         <property name="text">
-         <string>Wildspire Waste:</string>
+         <string comment="Label for Wildspire Waste level.">Wildspire Waste:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="lblCoralHighlandsGL">
         <property name="text">
-         <string>Coral Highlands:</string>
+         <string comment="Label for Coral Highlands level.">Coral Highlands:</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="lblRottenVeilGL">
         <property name="text">
-         <string>Rotten Veil:</string>
+         <string comment="Label for Rotten Veil level.">Rotten Veil:</string>
         </property>
        </widget>
       </item>
       <item row="5" column="0">
        <widget class="QLabel" name="lblEldersRecessGL">
         <property name="text">
-         <string>Elder's Recess:</string>
+         <string comment="Label for Elder's Recess level.">Elder's Recess:</string>
         </property>
        </widget>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="lblHoarfrostReachGL">
         <property name="text">
-         <string>Hoarfrost Reach:</string>
+         <string comment="Label for Hoarfrost Reach level.">Hoarfrost Reach:</string>
         </property>
        </widget>
       </item>
@@ -261,7 +261,7 @@
       <item row="7" column="0" colspan="2">
        <widget class="QLabel" name="lblNoteGL">
         <property name="text">
-         <string>NOTE: The level caps for each region are the highest you've previously unlocked.</string>
+         <string comment="Note on the caps for each region level.">NOTE: The level caps for each region are the highest you've previously unlocked.</string>
         </property>
        </widget>
       </item>
@@ -271,7 +271,7 @@
    <item row="5" column="0">
     <widget class="QLabel" name="lblPlaytime">
      <property name="text">
-      <string>Playtime:</string>
+      <string comment="Label for hunter playtime.">Playtime:</string>
      </property>
     </widget>
    </item>

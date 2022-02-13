@@ -9,7 +9,7 @@ namespace Ui { class LimitedUnlocks; };
 
 class LimitedUnlocks : public QWidget, public SaveLoader
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public slots:
   void UnlockAssassinHood(int checked);
@@ -22,14 +22,18 @@ public slots:
   void GiveSamuraiLoadout();
 
 public:
-    LimitedUnlocks(QWidget *parent = Q_NULLPTR);
-    ~LimitedUnlocks();
+  LimitedUnlocks(QWidget* parent = Q_NULLPTR);
+  ~LimitedUnlocks();
 
-    // Inherited via SaveLoader
-    virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
+  // Inherited via SaveLoader
+  virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
 
 private:
-    Ui::LimitedUnlocks *ui;
+  Ui::LimitedUnlocks* ui;
 
-    void GiveLayeredLoadout(i32 layered, const QString &name);
+  void GiveLayeredLoadout(i32 layered, const QString& name);
+
+  QString layeredYukumoName;
+  QString layeredSilverKnightName;
+  QString layeredSamuraiName;
 };

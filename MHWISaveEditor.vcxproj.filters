@@ -257,6 +257,7 @@
     <None Include="res\game\item_rus.gmd" />
     <None Include="res\game\item_spa.gmd" />
     <None Include="res\game\itemData.itm" />
+    <None Include="res\translations\mhwisaveeditor_template.qm" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">
@@ -265,5 +266,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\mapping\note.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="res\translations\mhwisaveeditor_template.ts">
+      <Filter>Translation Files</Filter>
+    </QtTranslation>
   </ItemGroup>
 </Project>

@@ -10,6 +10,10 @@ LimitedUnlocks::LimitedUnlocks(QWidget* parent)
 {
   ui = new Ui::LimitedUnlocks();
   ui->setupUi(this);
+
+  layeredYukumoName = tr("Yukumo", "Name of the Yukumo layered set.");
+  layeredSilverKnightName = tr("Silver Knight", "Name of the Silver Knight layered set.");
+  layeredSamuraiName = tr("Samurai", "Name of the Samurai layered set.");
 }
 
 LimitedUnlocks::~LimitedUnlocks()
@@ -97,10 +101,10 @@ void LimitedUnlocks::GiveArtemisGear()
 
   Notification* notif = notif->GetInstance();
   if (type < 5) {
-    notif->ShowMessage(tr("Failed to add all equipment, not enough storage."), 5000);
+    notif->ShowMessage(tr("Failed to add all equipment, not enough storage.", "Indicate that the equipment cannot be added, since the user does not have space in their equipment box."), 5000);
   }
   else {
-    notif->ShowMessage(tr("Added Artemis gear."), 5000);
+    notif->ShowMessage(tr("Added Artemis gear.", "Indicate equipment has been successfully added."), 5000);
   }
 }
 
@@ -109,7 +113,7 @@ void LimitedUnlocks::GiveYukumoLoadout()
   MHW_SAVE_GUARD;
 
   i32 layered_id = LAYERED_YUKUMO_ID;
-  QString name = QString::fromUtf8(LAYERED_YUKUMO_NAME);
+  QString name = layeredYukumoName;
   GiveLayeredLoadout(layered_id, name);
 }
 
@@ -118,7 +122,7 @@ void LimitedUnlocks::GiveSilverKnightLoadout()
   MHW_SAVE_GUARD;
 
   i32 layered_id = LAYERED_SILVER_KNIGHT_ID;
-  QString name = QString::fromUtf8(LAYERED_SILVER_KNIGHT_NAME);
+  QString name = layeredSilverKnightName;
   GiveLayeredLoadout(layered_id, name);
 }
 
@@ -127,7 +131,7 @@ void LimitedUnlocks::GiveSamuraiLoadout()
   MHW_SAVE_GUARD;
 
   i32 layered_id = LAYERED_SAMURAI_ID;
-  QString name = QString::fromUtf8(LAYERED_SAMURAI_NAME);
+  QString name = layeredSamuraiName;
   GiveLayeredLoadout(layered_id, name);
 }
 
@@ -142,9 +146,9 @@ void LimitedUnlocks::GiveLayeredLoadout(i32 layered, const QString& name)
   if (loadout) {
     i32 index = SetLayeredLoadout(loadout, layered, name);
 
-    notif->ShowMessage(tr("Added layered loadout: '%1' at slot: %2").arg(name).arg(index + 1), 5000);
+    notif->ShowMessage(tr("Added layered loadout: '%1' at slot: %2", "Indicate a layered loadout has been added, %1 is the loadout name, %2 is the index it was added in.").arg(name).arg(index + 1), 5000);
   }
   else {
-    notif->ShowMessage(tr("Failed to add layered loadout: '%1'. No empty loadouts.").arg(name), 5000);
+    notif->ShowMessage(tr("Failed to add layered loadout: '%1'. No empty loadouts.", "Indicate the layered loadout cannot be added, since the user has no open slots.").arg(name), 5000);
   }
 }

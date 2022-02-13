@@ -26,7 +26,7 @@ void GeneralInfo::ChangeSteamID()
 
   bool ok;
   QString text = QInputDialog::getText(
-    this, tr("Enter Steam ID"), tr("Steam ID:"),
+    this, tr("Enter Steam ID", "Steam id prompt title."), tr("Steam ID:", "Steam id prompt text."),
     QLineEdit::Normal, id, &ok);
 
   if (ok && !text.isEmpty())
@@ -38,10 +38,10 @@ void GeneralInfo::ChangeSteamID()
       ui->btnSteamID->setText(text);
       mhwSaveIB->header.steam_id = steamID;
 
-      notif->ShowMessage(tr("Steam ID set."));
+      notif->ShowMessage(tr("Steam ID set.", "Notify a successful steam id change."));
     }
     else {
-      notif->ShowMessage(tr("Invalid steam ID format."), 5000);
+      notif->ShowMessage(tr("Invalid steam ID format.", "Nofify that the steam id is invalid."), 5000);
     }
   }
 }
@@ -69,7 +69,7 @@ void GeneralInfo::ResetEditVouchers()
   mhwSection1->character_p_palico_edit_three_voucher_pack = 0;
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("All character and palico edit vouchers have been reset."), 5000);
+  notif->ShowMessage(tr("All character and palico edit vouchers have been reset.", "Notify that all character and palico edit vouchers have been reset."), 5000);
 }
 
 void GeneralInfo::Load(mhw_save_raw* mhwSave, int slotIndex)

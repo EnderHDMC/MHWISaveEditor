@@ -20,7 +20,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>ItemSlotView</string>
+   <string notr="true">ItemSlotView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -48,9 +48,6 @@
      </property>
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string>...</string>
      </property>
      <property name="iconSize">
       <size>

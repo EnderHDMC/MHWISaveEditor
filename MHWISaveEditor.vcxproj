@@ -156,6 +156,7 @@
     <None Include="res\mapping\test_data.1sc" />
     <None Include="res\mapping\types.bt" />
     <None Include="res\mapping\uct.bt" />
+    <None Include="res\translations\mhwisaveeditor_template.qm" />
     <None Include="setup.iss">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
     </None>
@@ -174,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\mapping\note.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="res\translations\mhwisaveeditor_template.ts" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AA92CA46-D39D-4501-A111-671AD0FFEB42}</ProjectGuid>

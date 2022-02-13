@@ -199,6 +199,7 @@ QString Settings::GetLanguageCode(mhw_language language)
 {
   QString result = "eng";
   switch (language) {
+  case (mhw_language)0xFE:                result = NULL; break;  // Use game language
   case mhw_language::Japanese:            result = "jpn"; break;
   case mhw_language::English:             result = "eng"; break;
   case mhw_language::French:              result = "fre"; break;
@@ -212,6 +213,7 @@ QString Settings::GetLanguageCode(mhw_language language)
   case mhw_language::Polish:              result = "pol"; break;
   case mhw_language::PortugueseBrazil:    result = "ptB"; break;
   case mhw_language::Arabic:              result = "ara"; break;
+  case (mhw_language)0xFF:                result = ""; break;    // Invalid language
   }
   return result;
 }

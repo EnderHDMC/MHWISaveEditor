@@ -85,6 +85,7 @@ public:
   // Needs to match up with the settings UI options.
   static const mhw_language Languages(u32 index) {
     mhw_language languages[] = {
+    (mhw_language)0xFE,             // Special value to indicate to use the game's language.
     mhw_language::Japanese,
     mhw_language::English,
     mhw_language::French,
@@ -98,6 +99,7 @@ public:
     mhw_language::TraditionalChinese,
     mhw_language::SimplifiedChinese,
     mhw_language::Arabic,
+    (mhw_language)0xFF                // Sentinel value for end of array
     };
 
     if (index >= COUNTOF(languages)) return (mhw_language)0xFF;
