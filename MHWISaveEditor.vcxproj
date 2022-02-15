@@ -243,6 +243,9 @@ for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
 )
 </Command>
     </PostBuildEvent>
+    <QtTranslation>
+      <NoObsolete>true</NoObsolete>
+    </QtTranslation>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

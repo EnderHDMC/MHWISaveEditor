@@ -30,6 +30,11 @@ SettingsUI::SettingsUI(QWidget* parent)
 
   ui->chkDarkMode->setChecked(settings->GetDarkMode());
 
+  ui->lblMatrixMode->setText("*" + ui->lblMatrixMode->text());
+  ui->lblShowUnobtainable->setText("*" + ui->lblShowUnobtainable->text());
+  ui->lblUILanguage->setText("*" + ui->lblUILanguage->text());
+  ui->lblDarkMode->setText("*" + ui->lblDarkMode->text());
+
   init = true;
 }
 

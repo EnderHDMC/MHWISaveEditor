@@ -788,13 +788,13 @@
     </message>
     <message>
         <location filename="../../gui/settings/settingsui.ui" line="76"/>
-        <source>*Matrix Mode:</source>
+        <source>Matrix Mode:</source>
         <comment>Whether the editor will render all item icons like a neon sign.</comment>
         <translation>发光图标样式：</translation>
     </message>
     <message>
         <location filename="../../gui/settings/settingsui.ui" line="86"/>
-        <source>*Show Unobtainable Items:</source>
+        <source>Show Unobtainable Items:</source>
         <comment>Show items that are normally unobtainable such as Pure Dracolites or Mega Dash Juice in item search.</comment>
         <translation>显示正常无法获得的道具：</translation>
     </message>
@@ -812,7 +812,7 @@
     </message>
     <message>
         <location filename="../../gui/settings/settingsui.ui" line="116"/>
-        <source>*UI Language:</source>
+        <source>UI Language:</source>
         <comment>The language the Editor UI will show in.</comment>
         <translation>界面语言：</translation>
     </message>
@@ -842,7 +842,7 @@
     </message>
     <message>
         <location filename="../../gui/settings/settingsui.ui" line="227"/>
-        <source>*Dark Mode:</source>
+        <source>Dark Mode:</source>
         <comment>Dark mode for the editor UI.</comment>
         <translation>深色模式：</translation>
     </message>

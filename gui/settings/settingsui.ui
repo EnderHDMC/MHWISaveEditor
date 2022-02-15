@@ -73,7 +73,7 @@
    <item row="5" column="0">
     <widget class="QLabel" name="lblMatrixMode">
      <property name="text">
-      <string comment="Whether the editor will render all item icons like a neon sign.">*Matrix Mode:</string>
+      <string comment="Whether the editor will render all item icons like a neon sign.">Matrix Mode:</string>
      </property>
     </widget>
    </item>
@@ -83,7 +83,7 @@
    <item row="6" column="0">
     <widget class="QLabel" name="lblShowUnobtainable">
      <property name="text">
-      <string comment="Show items that are normally unobtainable such as Pure Dracolites or Mega Dash Juice in item search.">*Show Unobtainable Items:</string>
+      <string comment="Show items that are normally unobtainable such as Pure Dracolites or Mega Dash Juice in item search.">Show Unobtainable Items:</string>
      </property>
     </widget>
    </item>
@@ -113,7 +113,7 @@
    <item row="10" column="0">
     <widget class="QLabel" name="lblUILanguage">
      <property name="text">
-      <string comment="The language the Editor UI will show in.">*UI Language:</string>
+      <string comment="The language the Editor UI will show in.">UI Language:</string>
      </property>
     </widget>
    </item>
@@ -224,7 +224,7 @@
    <item row="14" column="0">
     <widget class="QLabel" name="lblDarkMode">
      <property name="text">
-      <string comment="Dark mode for the editor UI.">*Dark Mode:</string>
+      <string comment="Dark mode for the editor UI.">Dark Mode:</string>
      </property>
     </widget>
    </item>
