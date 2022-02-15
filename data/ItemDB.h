@@ -9,6 +9,7 @@
 #include "../types/mhw_save.h"
 #include "../types/file/itm.h"
 #include "../types/file/gmd.h"
+#include "../types/editor_enums.h"
 
 class ItemDB
 {
@@ -32,7 +33,7 @@ public:
   itm_entry* GetItemById(u32 id);
   int count();
 
-  void LoadGMD(mhw_language itemLanguage);
+  void LoadGMD(item_language itemLanguage);
 
   QString ItemName(u32 id);
   QString ItemName(itm_entry* info);

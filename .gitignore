@@ -14,3 +14,7 @@ Deploy
 
 # Other
 .ipynb_checkpoints
+
+# Translation files
+# These are deployed on build, so don't need to be included in git.
+*.qm

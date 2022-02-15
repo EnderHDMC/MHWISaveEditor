@@ -92,6 +92,9 @@
     <ClInclude Include="types\file\gmd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="types\editor_enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -269,6 +272,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtTranslation Include="res\translations\mhwisaveeditor_template.ts">
+      <Filter>Translation Files</Filter>
+    </QtTranslation>
+    <QtTranslation Include="res\translations\mhwisaveeditor_zh_CN.ts">
       <Filter>Translation Files</Filter>
     </QtTranslation>
   </ItemGroup>

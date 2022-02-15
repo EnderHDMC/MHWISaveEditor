@@ -26,12 +26,14 @@ public slots:
 
 
 public:
-    SettingsUI(QWidget *parent = Q_NULLPTR);
-    ~SettingsUI();
+  SettingsUI(QWidget* parent = Q_NULLPTR);
+  ~SettingsUI();
 
 private:
-    Ui::SettingsUI *ui;
+  Ui::SettingsUI* ui;
 
-    Settings* settings = nullptr;
-    bool init = false;
+  void PopulateUILanguageSelection();
+
+  Settings* settings = nullptr;
+  bool init = false;
 };

@@ -32,6 +32,7 @@
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\file\gmd.h" />
     <ClInclude Include="types\file\itm.h" />
+    <ClInclude Include="types\editor_enums.h" />
     <ClInclude Include="types\mhw_struct_constants.h" />
     <ClInclude Include="types\inventory_areas.h" />
     <ClInclude Include="types\mhw_enums.h" />
@@ -178,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtTranslation Include="res\translations\mhwisaveeditor_template.ts" />
+    <QtTranslation Include="res\translations\mhwisaveeditor_zh_CN.ts" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AA92CA46-D39D-4501-A111-671AD0FFEB42}</ProjectGuid>
@@ -231,6 +233,16 @@
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
+set VCINSTALLDIR=$(VCInstallDir)
+
+for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
+  echo "%%~nf%%~xf"
+  if not "%%~nf%%~xf" == "mhwisaveeditor_template.ts" (lrelease "%%f")
+)
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -239,9 +251,16 @@
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
 set VCINSTALLDIR=$(VCInstallDir)
+
+for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
+  echo "%%~nf%%~xf"
+  if not "%%~nf%%~xf" == "mhwisaveeditor_template.ts" (lrelease "%%f")
+)
+
 xcopy /E /Y "$(ProjectDir)res\" "$(OutDirFullPath)..\Deploy\res\"
 xcopy /Y "$(TargetPath)" "$(OutDirFullPath)..\Deploy\"
-windeployqt "$(OutDirFullPath)..\Deploy\$(TargetFileName)"</Command>
+windeployqt "$(OutDirFullPath)..\Deploy\$(TargetFileName)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">

@@ -18,15 +18,15 @@ int main(int argc, char* argv[])
   ItemDB* itemDB = new ItemDB();
   BitmapDB* bitmapDB = new BitmapDB(itemDB);
 
+  QString uiLanguage = settings->GetUiLanguage();
   QTranslator translator;
-  const QStringList uiLanguages = QLocale::system().uiLanguages();
-  for (const QString& locale : uiLanguages) {
-    const QString baseName = "MHWISaveEditor_" + QLocale(locale).name();
-    if (translator.load(":/i18n/" + baseName)) {
+  if (!uiLanguage.isEmpty()) {
+    const QString trFile = "mhwisaveeditor_" + uiLanguage + ".qm";
+    if (translator.load("res/translations/" + trFile)) {
       a.installTranslator(&translator);
-      break;
     }
   }
+
   MHWISaveEditor w;
   w.LoadResources(itemDB, bitmapDB);
   w.show();

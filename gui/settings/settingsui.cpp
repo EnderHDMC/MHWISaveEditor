@@ -1,6 +1,9 @@
 #include "settingsui.h"
 #include "ui_settingsui.h"
 
+#include <QDir>
+#include <QRegularExpression>
+
 SettingsUI::SettingsUI(QWidget* parent)
   : QDialog(parent)
 {
@@ -8,7 +11,6 @@ SettingsUI::SettingsUI(QWidget* parent)
   ui->setupUi(this);
 
   settings = settings->GetInstance();
-  int uiLanguageIndex = Settings::LanguageEnumToIndex(settings->GetUiLanguage());
   int itemLanguageIndex = Settings::LanguageEnumToIndex(settings->GetItemLanguage());
 
   ui->chkAutoBackups->setChecked(settings->GetDoAutoBackups());
@@ -18,7 +20,12 @@ SettingsUI::SettingsUI(QWidget* parent)
   ui->chkShowUnobtainable->setChecked(settings->GetShowUnobtainable());
   ui->chkSearchAllTabsIncludeItemPouch->setChecked(settings->GetItemPouchSearchAll());
 
-  ui->cmbUILanguage->setCurrentIndex(uiLanguageIndex);
+  PopulateUILanguageSelection();
+  QString uiLanguage = settings->GetUiLanguage();
+  int index = ui->cmbUILanguage->findData(uiLanguage);
+  if (index > -1) {
+    ui->cmbUILanguage->setCurrentIndex(index);
+  }
   ui->cmbItemLanguage->setCurrentIndex(itemLanguageIndex);
 
   ui->chkDarkMode->setChecked(settings->GetDarkMode());
@@ -29,6 +36,37 @@ SettingsUI::SettingsUI(QWidget* parent)
 SettingsUI::~SettingsUI()
 {
   delete ui;
+}
+
+void SettingsUI::PopulateUILanguageSelection()
+{
+  QDir dir("res/translations/");
+  QStringList nameFilters;
+  nameFilters << "*.qm";
+  dir.setNameFilters(nameFilters);
+  QDir::Filters filters = QDir::Filter::Files;
+  QDir::SortFlags sort = QDir::SortFlag::Name;
+  QFileInfoList files = dir.entryInfoList(filters, sort);
+  int translationCount = files.size();
+
+  QString appname = QCoreApplication::applicationName();
+  appname = appname.replace(" ", "").toLower();
+  const QRegularExpression re(QString("(.*%1_)(.*)(\\.qm)").arg(appname));
+
+  ui->cmbUILanguage->clear();
+  ui->cmbUILanguage->addItem("Default", "");
+  ui->cmbUILanguage->setCurrentIndex(0);
+
+  for (int i = 0; i < translationCount; i++)
+  {
+    QString trPath = files[i].absoluteFilePath();
+    QString trCode = trPath;
+    trCode.replace(re, "\\2");
+    QLocale trLocale = QLocale(trCode);
+    QString trName = trLocale.nativeLanguageName();
+    qInfo() << QString("Detect language: %1 (%2)").arg(trName).arg(QLocale::languageToString(trLocale.language()));
+    ui->cmbUILanguage->addItem(trName, trCode);
+  }
 }
 
 void SettingsUI::SetAutoBackups(int checked)
@@ -76,13 +114,13 @@ void SettingsUI::SetDarkMode(int checked)
 void SettingsUI::SetItemLanguage(int index)
 {
   if (!init) return;
-  mhw_language itemLanguage = Settings::LanguageIndexToEnum(index);
+  item_language itemLanguage = Settings::LanguageIndexToEnum(index);
   settings->SetItemLanguage(itemLanguage);
 }
 
 void SettingsUI::SetUILanguage(int index)
 {
   if (!init) return;
-  mhw_language uiLanguage = Settings::LanguageIndexToEnum(index);
+  QString uiLanguage = ui->cmbUILanguage->itemData(index).toString();
   settings->SetUiLanguage(uiLanguage);
 }

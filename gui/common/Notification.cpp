@@ -8,7 +8,7 @@ Notification::Notification()
 {
   messageBox = new QMessageBox();
   messageBox->setIcon(QMessageBox::Icon::Information);
-  messageBox->setWindowTitle("Notification");
+  messageBox->setWindowTitle(QObject::tr("Notification"));
 
   notificationModes.insert(NotificationMode::None, nullptr);
   notificationModes.insert(NotificationMode::StatusBar, statusBar);

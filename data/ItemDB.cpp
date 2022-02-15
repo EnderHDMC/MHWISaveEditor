@@ -24,7 +24,7 @@ enum class FlagFileIndex : u32 {
 ItemDB::ItemDB()
 {
   Settings* settings = settings->GetInstance();
-  mhw_language itemLanguage = settings->GetItemLanguage();
+  item_language itemLanguage = settings->GetItemLanguage();
 
   itmLoad = ReadItemData(&itm);
   LoadGMD(itemLanguage);
@@ -78,7 +78,7 @@ bool ItemDB::ReadGMD(gmd_meta* meta, const QString& language)
   return InitMeta_gmd(meta, gmdHeader);
 }
 
-void ItemDB::LoadGMD(mhw_language itemLanguage)
+void ItemDB::LoadGMD(item_language itemLanguage)
 {
   FreeMeta_gmd(&gmd);
   QString language = Settings::GetLanguageCode(itemLanguage);

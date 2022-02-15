@@ -48,8 +48,8 @@ bool Settings::SyncSettings(bool sync)
   settings->endGroup();
 
   settings->beginGroup("language");
-  SetUiLanguage((mhw_language)settings->value("uiLanguage", (u8)_uiLanguage).toInt());
-  SetItemLanguage((mhw_language)settings->value("itemLanguage", (u8)_itemLanguage).toInt());
+  SetUiLanguage(settings->value("uiLanguage", _uiLanguage).toString());
+  SetItemLanguage((item_language)settings->value("itemLanguage", (u8)_itemLanguage).toInt());
   settings->endGroup();
 
   return GetRequireRestart() && sync;
@@ -84,7 +84,7 @@ void Settings::WriteSettings()
   settings->endGroup();
 
   settings->beginGroup("language");
-  settings->setValue("uiLanguage", (u8)_uiLanguage);
+  settings->setValue("uiLanguage", _uiLanguage);
   settings->setValue("itemLanguage", (u8)_itemLanguage);
   settings->endGroup();
 
@@ -193,43 +193,4 @@ QString Settings::GetIconDumpPath()
   QDir dir = QDir();
   if (dir.mkpath(path)) return path;
   else return "";
-}
-
-QString Settings::GetLanguageCode(mhw_language language)
-{
-  QString result = "eng";
-  switch (language) {
-  case (mhw_language)0xFE:                result = NULL; break;  // Use game language
-  case mhw_language::Japanese:            result = "jpn"; break;
-  case mhw_language::English:             result = "eng"; break;
-  case mhw_language::French:              result = "fre"; break;
-  case mhw_language::Spanish:             result = "spa"; break;
-  case mhw_language::Dutch:               result = "ger"; break;
-  case mhw_language::Italian:             result = "ita"; break;
-  case mhw_language::Korean:              result = "kor"; break;
-  case mhw_language::TraditionalChinese:  result = "chT"; break;
-  case mhw_language::SimplifiedChinese:   result = "chS"; break;
-  case mhw_language::Russian:             result = "rus"; break;
-  case mhw_language::Polish:              result = "pol"; break;
-  case mhw_language::PortugueseBrazil:    result = "ptB"; break;
-  case mhw_language::Arabic:              result = "ara"; break;
-  case (mhw_language)0xFF:                result = ""; break;    // Invalid language
-  }
-  return result;
-}
-
-mhw_language Settings::LanguageIndexToEnum(int index)
-{
-  return Languages(index);
-}
-
-int Settings::LanguageEnumToIndex(mhw_language language)
-{
-  int index = -1;
-  for (int i = 0; (u8)Languages(i) != 0xFF; i++) {
-    if (Languages(i) == language) {
-      index = i;
-    }
-  }
-  return index;
 }

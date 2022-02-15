@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QSettings>
 
-#include "../../types/mhw_enums.h"
+#include "../../types/editor_enums.h"
 
 class Settings
 {
@@ -32,8 +32,8 @@ private:
   bool _darkMode = false;
 
   // Language
-  mhw_language _uiLanguage = mhw_language::English;
-  mhw_language _itemLanguage = mhw_language::English;
+  QString _uiLanguage = "";
+  item_language _itemLanguage = item_language::English;
 
 public:
   static Settings* GetInstance();
@@ -53,11 +53,6 @@ public:
   static QString GetDataPathBackups();
   static QString GetIconDumpPath();
 
-  // Language
-  static QString GetLanguageCode(mhw_language language);
-  static mhw_language LanguageIndexToEnum(int index);
-  static int LanguageEnumToIndex(mhw_language language);
-
 #pragma region Settings Access
   bool GetRequireRestart() { return _requireRestart; }
 
@@ -76,33 +71,90 @@ public:
   bool GetDarkMode() { return _darkMode; }
   void SetDarkMode(bool value) { if (_darkMode != value) _requireRestart = true; _darkMode = value; }
 
-  mhw_language GetUiLanguage() { return _uiLanguage; }
-  void SetUiLanguage(mhw_language value) { if (_uiLanguage != value) _requireRestart = true; _uiLanguage = value; }
-  mhw_language GetItemLanguage() { return _itemLanguage; }
-  void SetItemLanguage(mhw_language value) { _itemLanguage = value; }
+  QString GetUiLanguage() { return _uiLanguage; }
+  void SetUiLanguage(QString value) { if (_uiLanguage != value) _requireRestart = true; _uiLanguage = value; }
+  item_language GetItemLanguage() { return _itemLanguage; }
+  void SetItemLanguage(item_language value) { _itemLanguage = value; }
 #pragma endregion
 
   // Needs to match up with the settings UI options.
-  static const mhw_language Languages(u32 index) {
-    mhw_language languages[] = {
-    (mhw_language)0xFE,             // Special value to indicate to use the game's language.
-    mhw_language::Japanese,
-    mhw_language::English,
-    mhw_language::French,
-    mhw_language::Italian,
-    mhw_language::Dutch,
-    mhw_language::Spanish,
-    mhw_language::PortugueseBrazil,
-    mhw_language::Polish,
-    mhw_language::Russian,
-    mhw_language::Korean,
-    mhw_language::TraditionalChinese,
-    mhw_language::SimplifiedChinese,
-    mhw_language::Arabic,
-    (mhw_language)0xFF                // Sentinel value for end of array
+  static const item_language Languages(u32 index) {
+    item_language languages[] = {
+    item_language::GameLanguage,
+    item_language::Japanese,
+    item_language::English,
+    item_language::French,
+    item_language::Italian,
+    item_language::Dutch,
+    item_language::Spanish,
+    item_language::PortugueseBrazil,
+    item_language::Polish,
+    item_language::Russian,
+    item_language::Korean,
+    item_language::TraditionalChinese,
+    item_language::SimplifiedChinese,
+    item_language::Arabic,
+    item_language::InvalidLanguage
     };
 
-    if (index >= COUNTOF(languages)) return (mhw_language)0xFF;
+    if (index >= COUNTOF(languages)) return item_language::InvalidLanguage;
     return languages[index];
+  }
+
+  static QString GetLanguageCode(item_language language)
+  {
+    QString result = "eng";
+    switch (language) {
+    case item_language::Japanese:            result = "jpn"; break;
+    case item_language::English:             result = "eng"; break;
+    case item_language::French:              result = "fre"; break;
+    case item_language::Spanish:             result = "spa"; break;
+    case item_language::Dutch:               result = "ger"; break;
+    case item_language::Italian:             result = "ita"; break;
+    case item_language::Korean:              result = "kor"; break;
+    case item_language::TraditionalChinese:  result = "chT"; break;
+    case item_language::SimplifiedChinese:   result = "chS"; break;
+    case item_language::Russian:             result = "rus"; break;
+    case item_language::Polish:              result = "pol"; break;
+    case item_language::PortugueseBrazil:    result = "ptB"; break;
+    case item_language::Arabic:              result = "ara"; break;
+
+    case item_language::InvalidLanguage:     result = NULL;  break;
+    case item_language::GameLanguage:        result = NULL;  break;
+    case item_language::EditorUILanguage:    result = NULL;  break;
+    }
+    return result;
+  }
+
+  static item_language LanguageFromCode(const QString& code)
+  {
+    item_language result = item_language::InvalidLanguage;
+    for (int i = 0; Languages(i) != item_language::InvalidLanguage; i++) {
+      item_language language = Languages(i);
+      QString languageCode = GetLanguageCode(language);
+
+      if (languageCode == code) {
+        result = language;
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  static item_language LanguageIndexToEnum(int index)
+  {
+    return Languages(index);
+  }
+
+  static int LanguageEnumToIndex(item_language language)
+  {
+    int index = -1;
+    for (int i = 0; (u8)Languages(i) != 0xFF; i++) {
+      if (Languages(i) == language) {
+        index = i;
+      }
+    }
+    return index;
   }
 };

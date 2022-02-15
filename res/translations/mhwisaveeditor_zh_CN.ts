@@ -641,6 +641,12 @@
         <translation>设置</translation>
     </message>
     <message>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="39"/>
+        <source>File: None</source>
+        <comment>Indicate the currently open file (no file).</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../gui/mhwisaveeditor.cpp" line="107"/>
         <source>All Files</source>
         <comment>Open/Save filter, show all files.</comment>
@@ -666,6 +672,7 @@
     </message>
     <message>
         <location filename="../../gui/mhwisaveeditor.cpp" line="170"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="321"/>
         <source>File: %1</source>
         <comment>Indicate the currently open file.</comment>
         <translation>文件: %1</translation>
@@ -734,6 +741,14 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../../gui/common/Notification.cpp" line="11"/>
+        <source>Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsUI</name>
     <message>
         <location filename="../../gui/settings/settingsui.ui" line="17"/>
@@ -796,43 +811,43 @@
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../../gui/settings/settingsui.ui" line="119"/>
+        <location filename="../../gui/settings/settingsui.ui" line="116"/>
         <source>*UI Language:</source>
         <comment>The language the Editor UI will show in.</comment>
         <translation>界面语言：</translation>
     </message>
     <message>
-        <location filename="../../gui/settings/settingsui.ui" line="129"/>
+        <location filename="../../gui/settings/settingsui.ui" line="123"/>
         <source>No Translations</source>
         <comment>Appears when no UI translations are loaded.</comment>
         <translation>无翻译</translation>
     </message>
     <message>
-        <location filename="../../gui/settings/settingsui.ui" line="136"/>
+        <location filename="../../gui/settings/settingsui.ui" line="130"/>
         <source>Item Language:</source>
         <comment>The language the items will show in.</comment>
         <translation>道具名称：</translation>
     </message>
     <message>
-        <location filename="../../gui/settings/settingsui.ui" line="150"/>
+        <location filename="../../gui/settings/settingsui.ui" line="144"/>
         <source>Use game language</source>
         <comment>Whether the items should be displayed in the game&apos;s language.</comment>
         <translation>使用游戏内语言</translation>
     </message>
     <message>
-        <location filename="../../gui/settings/settingsui.ui" line="226"/>
+        <location filename="../../gui/settings/settingsui.ui" line="220"/>
         <source>Quality of Life</source>
         <comment>&quot;Quality of Life&quot; section of the Settings.</comment>
         <translation>用户体验</translation>
     </message>
     <message>
-        <location filename="../../gui/settings/settingsui.ui" line="233"/>
+        <location filename="../../gui/settings/settingsui.ui" line="227"/>
         <source>*Dark Mode:</source>
         <comment>Dark mode for the editor UI.</comment>
         <translation>深色模式：</translation>
     </message>
     <message>
-        <location filename="../../gui/settings/settingsui.ui" line="243"/>
+        <location filename="../../gui/settings/settingsui.ui" line="237"/>
         <source>* Will apply on restart.</source>
         <comment>Indicate options which need a restart.</comment>
         <translation>带 * 的选项需要重启生效。</translation>

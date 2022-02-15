@@ -112,9 +112,6 @@
    </item>
    <item row="10" column="0">
     <widget class="QLabel" name="lblUILanguage">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
      <property name="text">
       <string comment="The language the Editor UI will show in.">*UI Language:</string>
      </property>
@@ -122,9 +119,6 @@
    </item>
    <item row="10" column="1">
     <widget class="QComboBox" name="cmbUILanguage">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
      <property name="placeholderText">
       <string comment="Appears when no UI translations are loaded.">No Translations</string>
      </property>

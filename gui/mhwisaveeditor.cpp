@@ -36,7 +36,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   notif->Register(ui->statusbar);
   notif->SetDefaultMode(NotificationMode::StatusBar);
 
-  statusFile = new QLabel("File: None", ui->statusbar);
+  statusFile = new QLabel(tr("File: None", "Indicate the currently open file (no file)."), ui->statusbar);
   ui->statusbar->addPermanentWidget(statusFile);
 
   slotSignalMapper = new QSignalMapper(this);
@@ -318,7 +318,7 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   Notification* notif = notif->GetInstance();
   notif->ShowMessage(tr("Loaded character slot %1: %2", "Indicate a character slot change, %1 is the slot number, %2 is the character name.").arg(mhwSaveIndex + 1).arg(character));
 
-  statusFile->setText("File: " + EditorFile());
+  statusFile->setText(tr("File: %1", "Indicate the currently open file.").arg(EditorFile()));
 
   SaveLoader::FinishLoad();
 }
@@ -485,7 +485,7 @@ void MHWISaveEditor::OpenLocation(const QString& location)
 
 void MHWISaveEditor::OpenSettings()
 {
-  mhw_language oldItemLanguage = settings->GetItemLanguage();
+  item_language oldItemLanguage = settings->GetItemLanguage();
 
   SettingsUI* settingsUI = new SettingsUI();
   settingsUI->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
@@ -499,7 +499,7 @@ void MHWISaveEditor::OpenSettings()
     notif->SetDefaultMode(notifMode);
   }
 
-  mhw_language itemLanguage = settings->GetItemLanguage();
+  item_language itemLanguage = settings->GetItemLanguage();
   if (oldItemLanguage != itemLanguage) {
     itemDB->LoadGMD(itemLanguage);
     inventoryEditor->LoadResources(itemDB, bitmapDB);
