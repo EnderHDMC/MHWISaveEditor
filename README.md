@@ -9,13 +9,13 @@ A save editor for Monster Hunter World: Iceborne.
 
 ## Translation
 If you would like to help translate the editor into other languages, you can follow these instructions:
-1. Download and install the QT Linguist package.
+1. Download and install the [QT Linguist package](https://download.qt.io/linguist_releases/).
 2. Goto `res/translations/` in the Save Editor's files (where the exe is located).
 3. Make a copy of the file `mhwisaveeditor_template.ts` and name it `mhwisaveeditor_<language>.ts`, where `<language>` is the language you're translating to.
 4. In QT Linguist open the file: `mhwisaveeditor_<language>.ts`
 5. Goto `Edit->Translation File Settings...`
 6. Change the `Target Language` to the language you want to translate to.
-7. `Country/Region` can be left as `Any Country`.
+7. Optional: Change `Country/Region` to an appropriate value.
 8. Press OK.
 9. Translate all the strings you can.
 11. Repeat step 9 until satisfied.
