@@ -34,6 +34,7 @@ public:
   int count();
 
   void LoadGMD(item_language itemLanguage);
+  item_language CurrentLanguage();
 
   QString ItemName(u32 id);
   QString ItemName(itm_entry* info);

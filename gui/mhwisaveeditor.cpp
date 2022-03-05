@@ -29,9 +29,6 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
   setWindowIcon(QIcon("res/icon.ico"));
 
-  watcher.addPath(settings->FileName());
-  connect(&watcher, SIGNAL(fileChanged(QString)), this, SLOT(WatchFileChanged(QString)));
-
   Notification* notif = notif->GetInstance();
   notif->Register(ui->statusbar);
   notif->SetDefaultMode(NotificationMode::StatusBar);
@@ -128,7 +125,6 @@ MHWISaveEditor::~MHWISaveEditor()
 
 void MHWISaveEditor::closeEvent(QCloseEvent* event)
 {
-  watcher.removePath(settings->FileName());
   settings->Free();
 }
 
@@ -301,6 +297,9 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   int mhwSaveIndex = MHW_SaveIndex();
 
+  item_language itemLanguage = settings->GetItemLanguage();
+  LoadItemLanguage(itemLanguage);
+
   // Load the save into the inventory slots
   LoadSaveSlot();
 
@@ -406,20 +405,6 @@ void MHWISaveEditor::EditorTabChange(int editorIndex)
   loader->Load(mhwSave, mhwSaveIndex);
 }
 
-void MHWISaveEditor::WatchFileChanged(const QString& path)
-{
-  if (settings && path == settings->FileName()) {
-    bool restart = settings->SyncSettings(true);
-    if (restart) {
-      Notification* notif = notif->GetInstance();
-      NotificationMode notifMode = notif->GetDefaultMode();
-      notif->SetDefaultMode(NotificationMode::MessageBox);
-      notif->ShowMessage(tr("Some settings you have changed will apply on restart.", "Tell the user they have some settings that will only be applied on restart."));
-      notif->SetDefaultMode(notifMode);
-    }
-  }
-}
-
 void MHWISaveEditor::SelectSlot(int slot)
 {
   SaveLoader::LoadSlot(slot);
@@ -485,8 +470,6 @@ void MHWISaveEditor::OpenLocation(const QString& location)
 
 void MHWISaveEditor::OpenSettings()
 {
-  item_language oldItemLanguage = settings->GetItemLanguage();
-
   SettingsUI* settingsUI = new SettingsUI();
   settingsUI->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
   settingsUI->exec();
@@ -500,8 +483,17 @@ void MHWISaveEditor::OpenSettings()
   }
 
   item_language itemLanguage = settings->GetItemLanguage();
-  if (oldItemLanguage != itemLanguage) {
-    itemDB->LoadGMD(itemLanguage);
+  LoadItemLanguage(itemLanguage, true);
+}
+
+void MHWISaveEditor::LoadItemLanguage(item_language language, bool doReload) {
+  item_language current = itemDB->CurrentLanguage();
+
+  if (language == item_language::GameLanguage && MHW_SAVE_CHECK)
+    language = (item_language)MHW_Section1()->text_language;
+
+  if (language != current) {
+    itemDB->LoadGMD(language);
     inventoryEditor->LoadResources(itemDB, bitmapDB);
     LoadSaveSlot();
   }

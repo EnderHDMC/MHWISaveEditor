@@ -40,11 +40,12 @@ public slots:
   void OpenLocation(const QString& location);
   void OpenSettings();
 
+  void LoadItemLanguage(item_language language, bool doReload = false);
+
   void Backup();
   void Restore();
 
   void EditorTabChange(int editorIndex);
-  void WatchFileChanged(const QString& path);
 
 public:
   MHWISaveEditor(QWidget* parent = nullptr);
@@ -96,6 +97,5 @@ private:
   QStringList filters;
 
   //////// Settings ////////
-  QFileSystemWatcher watcher;
   Settings *settings = nullptr;
 };

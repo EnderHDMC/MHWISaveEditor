@@ -179,3 +179,9 @@ QString ItemDB::ItemName(itm_entry* info)
   if (itmLoad) return ItemName(info->id);
   else return "ITM Failure";
 }
+
+item_language ItemDB::CurrentLanguage()
+{
+  if (gmdLoad) return (item_language)gmd.header->language_id;
+  else return item_language::InvalidLanguage;
+}
