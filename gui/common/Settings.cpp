@@ -49,7 +49,7 @@ bool Settings::SyncSettings(bool sync)
 
   settings->beginGroup("language");
   SetUiLanguage(settings->value("uiLanguage", _uiLanguage).toString());
-  SetItemLanguage((item_language)settings->value("itemLanguage", (u8)_itemLanguage).toInt());
+  SetItemLanguage((game_language)settings->value("itemLanguage", (u8)_itemLanguage).toInt());
   settings->endGroup();
 
   return GetRequireRestart() && sync;

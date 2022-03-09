@@ -119,8 +119,8 @@ void SettingsUI::SetDarkMode(int checked)
 void SettingsUI::SetItemLanguage(int index)
 {
   if (!init) return;
-  item_language itemLanguage = Settings::LanguageIndexToEnum(index);
-  settings->SetItemLanguage(itemLanguage);
+  game_language language = Settings::LanguageIndexToEnum(index);
+  settings->SetItemLanguage(language);
 }
 
 void SettingsUI::SetUILanguage(int index)

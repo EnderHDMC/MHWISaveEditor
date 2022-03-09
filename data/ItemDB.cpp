@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QFile>
 
-#include "../utility/settype.h"
+#include "../utility/read_bin_file.h"
 #include "../types/inventory_areas.h"
 #include "../gui/common/Settings.h"
 
@@ -24,13 +24,14 @@ enum class FlagFileIndex : u32 {
 ItemDB::ItemDB()
 {
   Settings* settings = settings->GetInstance();
-  item_language itemLanguage = settings->GetItemLanguage();
+  game_language itemLanguage = settings->GetItemLanguage();
 
-  itmLoad = ReadItemData(&itm);
+  QString itemPath = "res/game/itemData.itm";
+  success_itm = Read_itm(&itm, itemPath);
   LoadGMD(itemLanguage);
 
   if (itm.header)
-    flagsLoad = ReadCustomFlags(&itm);
+    success_flags = ReadCustomFlags(&itm);
 }
 
 ItemDB::~ItemDB()
@@ -39,34 +40,13 @@ ItemDB::~ItemDB()
   FreeMeta_gmd(&gmd);
 }
 
-bool ItemDB::ReadItemData(itm_meta* meta) {
-  QString itemPath = "res/game/itemData.itm";
-
-  itm_header* itmHeader = (itm_header*)ReadEntireFile(itemPath);
-  if (!itmHeader) {
-    return false;
-  }
-
-  return InitMeta_itm(meta, itmHeader);
-}
-
-bool ItemDB::ReadGMD(gmd_meta* meta, const QString& language)
-{
-  QString namePath = QString("res/game/item_%1.gmd").arg(language);
-
-  gmd_header* gmdHeader = (gmd_header*)ReadEntireFile(namePath);
-  if (!gmdHeader) {
-    return false;
-  }
-
-  return InitMeta_gmd(meta, gmdHeader);
-}
-
-void ItemDB::LoadGMD(item_language itemLanguage)
+void ItemDB::LoadGMD(game_language language)
 {
   FreeMeta_gmd(&gmd);
-  QString language = Settings::GetLanguageCode(itemLanguage);
-  gmdLoad = ReadGMD(&gmd, language);
+  QString languageCode = Settings::GetLanguageCode(language);
+
+  QString namePath = QString("res/game/item_%1.gmd").arg(languageCode);
+  success_gmd = Read_gmd(&gmd, namePath);
 }
 
 bool ItemDB::ReadCustomFlags(itm_meta* itm) {
@@ -113,7 +93,7 @@ bool ItemDB::ReadCustomFlags(itm_meta* itm) {
 
 itm_entry* ItemDB::GetItemByIdSafe(u32 id)
 {
-  if (!itmLoad) return nullptr;
+  if (!success_itm) return nullptr;
 
   if (id >= itm.header->entry_count) return nullptr;
   return &itm.items[id];
@@ -126,12 +106,12 @@ itm_entry* ItemDB::GetItemById(u32 id)
 
 int ItemDB::count()
 {
-  return itmLoad ? itm.header->entry_count : 0;
+  return success_itm ? itm.header->entry_count : 0;
 }
 
 QString ItemDB::ItemName(u32 id)
 {
-  if (!gmdLoad) return "GMD Failure";
+  if (!success_gmd) return "GMD Failure";
 
   switch (id) {
   case SurvivalJewelID:
@@ -153,12 +133,12 @@ QString ItemDB::ItemName(u32 id)
 
 QString ItemDB::ItemName(itm_entry* info)
 {
-  if (itmLoad) return ItemName(info->id);
+  if (success_itm) return ItemName(info->id);
   else return "ITM Failure";
 }
 
-item_language ItemDB::CurrentLanguage()
+game_language ItemDB::CurrentLanguage()
 {
-  if (gmdLoad) return (item_language)gmd.header->language_id;
-  else return item_language::InvalidLanguage;
+  if (success_gmd) return (game_language)gmd.header->language_id;
+  else return game_language::InvalidLanguage;
 }

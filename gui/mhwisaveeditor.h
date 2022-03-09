@@ -40,7 +40,7 @@ public slots:
   void OpenLocation(const QString& location);
   void OpenSettings();
 
-  void LoadItemLanguage(item_language language, bool doReload = false);
+  void LoadItemLanguage(game_language language, bool doReload = false);
 
   void Backup();
   void Restore();

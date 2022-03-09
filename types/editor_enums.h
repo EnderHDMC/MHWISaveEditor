@@ -2,7 +2,7 @@
 
 #include "mhw_enums.h"
 
-enum class item_language : i8
+enum class game_language : i8
 {
   Japanese = mhw_language::Japanese,
   English = mhw_language::English,

@@ -17,12 +17,10 @@ private:
   itm_meta itm = {};
   gmd_meta gmd = {};
 
-  bool itmLoad = false;
-  bool gmdLoad = false;
-  bool flagsLoad = false;
+  bool success_itm = false;
+  bool success_gmd = false;
+  bool success_flags = false;
 
-  bool ReadItemData(itm_meta* meta);
-  bool ReadGMD(gmd_meta* meta, const QString& language);
   bool ReadCustomFlags(itm_meta* itm);
 
 public:
@@ -33,8 +31,8 @@ public:
   itm_entry* GetItemById(u32 id);
   int count();
 
-  void LoadGMD(item_language itemLanguage);
-  item_language CurrentLanguage();
+  void LoadGMD(game_language language);
+  game_language CurrentLanguage();
 
   QString ItemName(u32 id);
   QString ItemName(itm_entry* info);

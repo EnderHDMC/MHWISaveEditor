@@ -10,15 +10,23 @@
 
 // Encryption
 #include "../crypto/iceborne_crypt.h"
+
 // Save paths
 #include "../utility/system/FileUtils.h"
 #include "../utility/mhw_save_utils.h"
+#include "../utility/read_bin_file.h"
+
 // Inventory Layout
 #include "../types/inventory_areas.h"
+
 // Item Data
 #include "../data/ItemDB.h"
 #include "../data/BitmapDB.h"
+
+// Notification system
 #include "common/Notification.h"
+
+// Other forms
 #include "settings/settingsui.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
@@ -288,8 +296,8 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   int mhwSaveIndex = MHW_SaveIndex();
 
-  item_language itemLanguage = settings->GetItemLanguage();
-  LoadItemLanguage(itemLanguage);
+  game_language language = settings->GetItemLanguage();
+  LoadItemLanguage(language);
 
   // Load the save into the inventory slots
   LoadSaveSlot();
@@ -473,15 +481,15 @@ void MHWISaveEditor::OpenSettings()
     notif->SetDefaultMode(notifMode);
   }
 
-  item_language itemLanguage = settings->GetItemLanguage();
-  LoadItemLanguage(itemLanguage, true);
+  game_language language = settings->GetItemLanguage();
+  LoadItemLanguage(language, true);
 }
 
-void MHWISaveEditor::LoadItemLanguage(item_language language, bool doReload) {
-  item_language current = itemDB->CurrentLanguage();
+void MHWISaveEditor::LoadItemLanguage(game_language language, bool doReload) {
+  game_language current = itemDB->CurrentLanguage();
 
-  if (language == item_language::GameLanguage && MHW_SAVE_CHECK)
-    language = (item_language)MHW_Section1()->text_language;
+  if (language == game_language::GameLanguage && MHW_SAVE_CHECK)
+    language = (game_language)MHW_Section1()->text_language;
 
   if (language != current) {
     itemDB->LoadGMD(language);

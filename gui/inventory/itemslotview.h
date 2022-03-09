@@ -22,14 +22,14 @@ public:
 
   void SetFocus();
 
-  void UpdateItemDisplay(itm_entry* info);
-  void UpdateMaxAmount(itm_entry* info, mhw_item_slot* item_slot);
-
 public slots:
   void AmountChanged(int amount);
 
 private:
   Ui::ItemSlotView* ui;
+
+  void UpdateItemDisplay(itm_entry* info);
+  void UpdateMaxAmount(itm_entry* info, mhw_item_slot* item_slot);
 
   const inventory_area* area;
   int invslot = 0;
