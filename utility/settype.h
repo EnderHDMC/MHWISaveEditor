@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QString>
+#include <QFile>
 
 #include "../types/types.h"
 
@@ -32,16 +33,30 @@ static u8* QByteArrayToU8(QByteArray arr, u8* dst, u32 size) {
   u8* newdst = dst;
   if (arr.length() != size) {
     qWarning("Error: array size does not match desired size.");
-    return newdst;
+    return nullptr;
   }
 
   if (!newdst) newdst = (u8*)malloc(size);
   if (!newdst) {
     qWarning("Error allocating memory.");
-    return dst;
+    return nullptr;
   };
   memcpy(newdst, arr.constData(), arr.length());
 
   if (dst != newdst && dst) free(dst);
   return newdst;
+}
+
+static u8* ReadEntireFile(const QString& path, u8* dst = nullptr, u32 size = 0) {
+  QFile file(path);
+  if (!file.open(QIODevice::ReadOnly)) {
+    qWarning() << "Cannot open file: " + path;
+    return nullptr;
+  }
+
+  QByteArray blob = file.readAll();
+  if (size == 0) size = blob.size();
+  file.close();
+
+  return QByteArrayToU8(blob, dst, size);
 }

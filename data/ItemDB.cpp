@@ -41,16 +41,8 @@ ItemDB::~ItemDB()
 
 bool ItemDB::ReadItemData(itm_meta* meta) {
   QString itemPath = "res/game/itemData.itm";
-  QFile itemFile(itemPath);
-  if (!itemFile.open(QIODevice::ReadOnly)) {
-    qWarning() << "Cannot open file: " + itemPath;
-    return false;
-  }
 
-  QByteArray itmBlob = itemFile.readAll();
-  itemFile.close();
-
-  itm_header* itmHeader = (itm_header*)QByteArrayToU8(itmBlob, nullptr, itmBlob.size());
+  itm_header* itmHeader = (itm_header*)ReadEntireFile(itemPath);
   if (!itmHeader) {
     return false;
   }
@@ -61,16 +53,8 @@ bool ItemDB::ReadItemData(itm_meta* meta) {
 bool ItemDB::ReadGMD(gmd_meta* meta, const QString& language)
 {
   QString namePath = QString("res/game/item_%1.gmd").arg(language);
-  QFile nameFile(namePath);
-  if (!nameFile.open(QIODevice::ReadOnly)) {
-    qWarning() << "Cannot open file: " + namePath;
-    return false;
-  }
 
-  QByteArray nameBlob = nameFile.readAll();
-  nameFile.close();
-
-  gmd_header* gmdHeader = (gmd_header*)QByteArrayToU8(nameBlob, nullptr, nameBlob.size());
+  gmd_header* gmdHeader = (gmd_header*)ReadEntireFile(namePath);
   if (!gmdHeader) {
     return false;
   }
@@ -87,16 +71,9 @@ void ItemDB::LoadGMD(item_language itemLanguage)
 
 bool ItemDB::ReadCustomFlags(itm_meta* itm) {
   QString flagsPath = "res/CustomFlags.bin";
-  QFile flagsFile(flagsPath);
-  if (!flagsFile.open(QIODevice::ReadOnly)) {
-    qWarning() << "Cannot open file: " + flagsPath;
-    return false;
-  }
-
-  QByteArray flagsBlob = flagsFile.readAll();
-  flagsFile.close();
   mhw_items_discovered flags[(u64)FlagFileIndex::FlagFileIndexCount] = {};
-  u8* obtain = QByteArrayToU8(flagsBlob, (u8*)flags, sizeof(flags));
+
+  u8* obtain = ReadEntireFile(flagsPath, (u8*)flags, sizeof(flags));
   if (!obtain) {
     return false;
   }

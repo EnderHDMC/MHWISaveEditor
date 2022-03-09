@@ -174,18 +174,9 @@ bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
   qInfo("Loading %s", qUtf8Printable(path));
   mhw_save_raw* savep = *save;
 
-  QFile file(path, this);
-  if (!file.open(QIODevice::ReadOnly)) {
-    qWarning("File: %s, cannot be read.", qUtf8Printable(path));
-    return false;
-  }
-
-  QByteArray saveBlob = file.readAll();
-  file.close();
-
-  savep = (mhw_save_raw*)QByteArrayToU8(saveBlob, (u8*)savep, sizeof(mhw_save_raw));
+  savep = (mhw_save_raw*)ReadEntireFile(path, (u8*)savep, sizeof(mhw_save_raw));
   if (!savep) {
-    qWarning("File: %s, cannot be read.", qUtf8Printable(path));
+    qWarning("Save: %s, cannot be read.", qUtf8Printable(path));
     return false;
   }
 
