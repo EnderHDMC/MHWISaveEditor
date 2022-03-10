@@ -5,8 +5,6 @@
 
 # Explicitly declare text files you want to always be normalized and converted
 # to native line endings on checkout.
-*.cpp text
-*.h text
 
 # Declare files that will always have LF line endings on checkout.
 *.csv text eol=lf
@@ -14,6 +12,9 @@
 *.ipynb text eol=lf
 *.1sc text eol=lf
 *.bt text eol=lf
+
+*.cpp text eol=lf
+*.h text eol=lf
 
 # Declare files that will always have CRLF line endings on checkout.
 *.sln text eol=crlf
