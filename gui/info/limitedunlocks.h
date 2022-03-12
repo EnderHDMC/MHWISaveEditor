@@ -3,7 +3,7 @@
 #include <QWidget>
 
 #include "../../types/mhw_save.h"
-#include "../common/saveloader.h"
+#include "../../utility/common/saveloader.h"
 
 namespace Ui { class LimitedUnlocks; };
 

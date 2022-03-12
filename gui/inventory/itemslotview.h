@@ -5,7 +5,7 @@
 #include "../../types/inventory_areas.h"
 #include "../../data/ItemDB.h"
 #include "../../data/BitmapDB.h"
-#include "../common/saveloader.h"
+#include "../../utility/common/saveloader.h"
 
 namespace Ui { class ItemSlotView; };
 

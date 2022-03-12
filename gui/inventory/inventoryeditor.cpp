@@ -2,8 +2,8 @@
 #include "ui_inventoryeditor.h"
 
 #include <QGridLayout>
-#include "../common/Settings.h"
 #include "../common/Notification.h"
+#include "../../utility/common/Settings.h"
 #include "../../utility/mhw_save_utils.h"
 
 InventoryEditor::InventoryEditor(QWidget* parent)

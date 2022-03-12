@@ -3,7 +3,7 @@
 #include <QWidget>
 #include <QSpinBox>
 
-#include "../common/saveloader.h"
+#include "../../utility/common/saveloader.h"
 
 namespace Ui { class HunterInfo; };
 

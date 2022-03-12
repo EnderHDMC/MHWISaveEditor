@@ -35,7 +35,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 {
   settings = settings->GetInstance();
   ui->setupUi(this);
-  setWindowIcon(QIcon("res/icon.ico"));
+  setWindowIcon(QIcon(Settings::GetResourcesPath("icon.ico")));
 
   Notification* notif = notif->GetInstance();
   notif->Register(ui->statusbar);

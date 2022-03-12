@@ -5,7 +5,7 @@
 
 #include "itemslotview.h"
 
-#include "../common/saveloader.h"
+#include "../../utility/common/saveloader.h"
 #include "../../types/inventory_areas.h"
 
 namespace Ui { class InventoryEditorTab; };

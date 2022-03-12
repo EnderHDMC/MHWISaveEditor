@@ -1,12 +1,12 @@
 #include "BitmapDB.h"
 #include <QDir>
 
-#include "../gui/common/Settings.h"
+#include "../utility/common/Settings.h"
 
 BitmapDB::BitmapDB(ItemDB* itemDB)
 {
-  items = QImage("res/items.png");
-  itemsMask = QImage("res/items_mask.png");
+  items = QImage(Settings::GetResourcesPath("items.png"));
+  itemsMask = QImage(Settings::GetResourcesPath("items_mask.png"));
   int imageWidth = items.width();
   int imageHeight = items.height();
   QPainter p;

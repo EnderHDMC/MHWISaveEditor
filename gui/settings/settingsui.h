@@ -2,7 +2,7 @@
 
 #include <QDialog>
 
-#include "../common/Settings.h"
+#include "../../utility/common/Settings.h"
 
 namespace Ui { class SettingsUI; };
 

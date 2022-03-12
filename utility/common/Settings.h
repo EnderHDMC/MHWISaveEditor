@@ -53,6 +53,8 @@ public:
   static QString GetDataPathBackups();
   static QString GetIconDumpPath();
 
+  static QString GetResourcesPath(const QString &subpath);
+
 #pragma region Settings Access
   bool GetRequireRestart() { return _requireRestart; }
 

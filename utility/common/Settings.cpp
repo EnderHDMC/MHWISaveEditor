@@ -2,6 +2,8 @@
 
 #include <QDir>
 #include <QStandardPaths>
+#include <QCoreApplication>
+#include <QLibraryInfo>
 
 #include "../../types/constants.h"
 
@@ -193,4 +195,9 @@ QString Settings::GetIconDumpPath()
   QDir dir = QDir();
   if (dir.mkpath(path)) return path;
   else return "";
+}
+
+QString Settings::GetResourcesPath(const QString& subpath)
+{
+  return "res/" + subpath;
 }

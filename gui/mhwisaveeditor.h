@@ -11,7 +11,7 @@
 #include "info/limitedunlocks.h"
 #include "info/generalinfo.h"
 #include "info/hunterinfo.h"
-#include "common/Settings.h"
+#include "../utility/common/Settings.h"
 
 struct editor_tab {
   SaveLoader* widget;

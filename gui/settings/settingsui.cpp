@@ -45,7 +45,7 @@ SettingsUI::~SettingsUI()
 
 void SettingsUI::PopulateUILanguageSelection()
 {
-  QDir dir("res/translations/");
+  QDir dir(Settings::GetResourcesPath("translations/"));
   QStringList nameFilters;
   nameFilters << "*.qm";
   dir.setNameFilters(nameFilters);

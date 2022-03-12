@@ -6,7 +6,7 @@
 
 #include "../utility/read_bin_file.h"
 #include "../types/inventory_areas.h"
-#include "../gui/common/Settings.h"
+#include "../utility/common/Settings.h"
 
 enum class FlagFileIndex : u32 {
   Discoverable = 0,
@@ -26,7 +26,7 @@ ItemDB::ItemDB()
   Settings* settings = settings->GetInstance();
   game_language itemLanguage = settings->GetItemLanguage();
 
-  QString itemPath = "res/game/itemData.itm";
+  QString itemPath = Settings::GetResourcesPath("game/itemData.itm");
   success_itm = Read_itm(&itm, itemPath);
   LoadGMD(itemLanguage);
 
@@ -45,12 +45,12 @@ void ItemDB::LoadGMD(game_language language)
   FreeMeta_gmd(&gmd);
   QString languageCode = Settings::GetLanguageCode(language);
 
-  QString namePath = QString("res/game/item_%1.gmd").arg(languageCode);
+  QString namePath = QString(Settings::GetResourcesPath("game/item_%1.gmd")).arg(languageCode);
   success_gmd = Read_gmd(&gmd, namePath);
 }
 
 bool ItemDB::ReadCustomFlags(itm_meta* itm) {
-  QString flagsPath = "res/CustomFlags.bin";
+  QString flagsPath = Settings::GetResourcesPath("CustomFlags.bin");
   mhw_items_discovered flags[(u64)FlagFileIndex::FlagFileIndexCount] = {};
 
   u8* obtain = ReadEntireFile(flagsPath, (u8*)flags, sizeof(flags));

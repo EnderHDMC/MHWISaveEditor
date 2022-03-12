@@ -14,112 +14,65 @@
     <ClInclude Include="crypto\blowfish.h" />
     <ClInclude Include="crypto\iceborne_crypt.h" />
     <ClInclude Include="crypto\sha1.h" />
-    <QtMoc Include="gui\inventory\itemslotview.h" />
     <ClInclude Include="data\BitmapDB.h" />
     <ClInclude Include="data\ItemDB.h" />
-    <QtMoc Include="gui\inventory\inventoryeditortab.h" />
-    <QtMoc Include="gui\inventory\inventoryeditor.h" />
-    <QtMoc Include="gui\info\limitedunlocks.h" />
-    <QtMoc Include="gui\info\generalinfo.h" />
-    <ClInclude Include="gui\common\WheelGuard.h" />
-    <ClInclude Include="gui\common\saveloader.h" />
-    <QtMoc Include="gui\info\hunterinfo.h" />
     <ClInclude Include="gui\common\Notification.h" />
+    <ClInclude Include="gui\common\WheelGuard.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="gui\common\StringByteLengthValidator.h" />
-    <ClInclude Include="gui\common\Settings.h" />
-    <QtMoc Include="gui\settings\settingsui.h" />
     <ClInclude Include="types\constants.h" />
+    <ClInclude Include="types\editor_enums.h" />
     <ClInclude Include="types\file\gmd.h" />
     <ClInclude Include="types\file\itm.h" />
-    <ClInclude Include="types\editor_enums.h" />
-    <ClInclude Include="types\mhw_struct_constants.h" />
     <ClInclude Include="types\inventory_areas.h" />
     <ClInclude Include="types\mhw_enums.h" />
     <ClInclude Include="types\mhw_save.h" />
+    <ClInclude Include="types\mhw_struct_constants.h" />
     <ClInclude Include="types\types.h" />
+    <ClInclude Include="utility\common\Settings.h" />
+    <ClInclude Include="utility\common\StringByteLengthValidator.h" />
+    <ClInclude Include="utility\common\saveloader.h" />
+    <ClInclude Include="utility\endian.h" />
     <ClInclude Include="utility\mhw_save_utils.h" />
     <ClInclude Include="utility\settype.h" />
     <ClInclude Include="utility\system\FileUtils.h" />
+    <QtMoc Include="gui\info\generalinfo.h" />
+    <QtMoc Include="gui\info\hunterinfo.h" />
+    <QtMoc Include="gui\info\limitedunlocks.h" />
+    <QtMoc Include="gui\inventory\inventoryeditor.h" />
+    <QtMoc Include="gui\inventory\inventoryeditortab.h" />
+    <QtMoc Include="gui\inventory\itemslotview.h" />
     <QtMoc Include="gui\mhwisaveeditor.h" />
-    <ClInclude Include="utility\endian.h" />
+    <QtMoc Include="gui\settings\settingsui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
+    <ClCompile Include="gui\common\Notification.cpp" />
     <ClCompile Include="gui\common\WheelGuard.cpp" />
     <ClCompile Include="gui\info\generalinfo.cpp" />
+    <ClCompile Include="gui\info\hunterinfo.cpp" />
+    <ClCompile Include="gui\info\limitedunlocks.cpp" />
+    <ClCompile Include="gui\inventory\inventoryeditor.cpp" />
     <ClCompile Include="gui\inventory\inventoryeditortab.cpp" />
     <ClCompile Include="gui\inventory\itemslotview.cpp" />
-    <ClCompile Include="gui\inventory\inventoryeditor.cpp" />
-    <ClCompile Include="gui\info\limitedunlocks.cpp" />
-    <ClCompile Include="gui\info\hunterinfo.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="gui\mhwisaveeditor.cpp">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
-    </ClCompile>
-    <ClCompile Include="gui\common\StringByteLengthValidator.cpp" />
-    <ClCompile Include="gui\common\Notification.cpp" />
-    <ClCompile Include="gui\common\Settings.cpp" />
+    <ClCompile Include="gui\mhwisaveeditor.cpp" />
     <ClCompile Include="gui\settings\settingsui.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="utility\common\Settings.cpp" />
+    <ClCompile Include="utility\common\StringByteLengthValidator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\info\generalinfo.ui" />
+    <QtUic Include="gui\info\hunterinfo.ui" />
+    <QtUic Include="gui\info\limitedunlocks.ui" />
+    <QtUic Include="gui\inventory\inventoryeditor.ui" />
     <QtUic Include="gui\inventory\inventoryeditortab.ui" />
     <QtUic Include="gui\inventory\itemslotview.ui" />
     <QtUic Include="gui\mhwisaveeditor.ui" />
-    <QtUic Include="gui\inventory\inventoryeditor.ui" />
-    <QtUic Include="gui\info\limitedunlocks.ui" />
-    <QtUic Include="gui\info\hunterinfo.ui" />
     <QtUic Include="gui\settings\settingsui.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\CustomFlags.bin" />
-    <None Include="res\GameData\itemData.itm">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_ara.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_chS.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_chT.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_eng.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_fre.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_ger.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_ita.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_jpn.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_kor.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_pol.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_ptB.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_rus.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="res\GameData\item_spa.gmd">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
     <None Include="res\game\itemData.itm" />
     <None Include="res\game\item_ara.gmd" />
     <None Include="res\game\item_chS.gmd" />
@@ -134,9 +87,14 @@
     <None Include="res\game\item_ptB.gmd" />
     <None Include="res\game\item_rus.gmd" />
     <None Include="res\game\item_spa.gmd" />
+    <None Include="res\mapping\CalcUnknown.ipynb" />
+    <None Include="res\mapping\Mapping.ods" />
+    <None Include="res\mapping\MonsterHunterWorld.CT" />
+    <None Include="res\mapping\ProgressStructGenerator.ipynb" />
+    <None Include="res\mapping\SAVEDATA1000.bt" />
+    <None Include="res\mapping\SAVEDATA1000_basegame.bt" />
     <None Include="res\mapping\allow_layered_crafts.1sc" />
     <None Include="res\mapping\armor_items.1sc" />
-    <None Include="res\mapping\CalcUnknown.ipynb" />
     <None Include="res\mapping\copy_unknown.1sc" />
     <None Include="res\mapping\dlc.csv" />
     <None Include="res\mapping\dump_save_structure.1sc" />
@@ -146,30 +104,17 @@
     <None Include="res\mapping\export_unsafe_item_mask.1sc" />
     <None Include="res\mapping\gmd.bt" />
     <None Include="res\mapping\itm.bt" />
-    <None Include="res\mapping\Mapping.ods" />
     <None Include="res\mapping\max_all_items.1sc" />
-    <None Include="res\mapping\MonsterHunterWorld.CT" />
-    <None Include="res\mapping\ProgressStructGenerator.ipynb">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="res\mapping\SAVEDATA1000.bt" />
-    <None Include="res\mapping\SAVEDATA1000_basegame.bt" />
     <None Include="res\mapping\test_data.1sc" />
     <None Include="res\mapping\types.bt" />
     <None Include="res\mapping\uct.bt" />
     <None Include="res\translations\mhwisaveeditor_template.qm" />
-    <None Include="setup.iss">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-    </None>
+    <None Include="setup.iss" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\icon.ico" />
-    <Image Include="res\items.png">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-    </Image>
-    <Image Include="res\items_mask.png">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="res\items.png" />
+    <Image Include="res\items_mask.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc" />
@@ -268,7 +213,6 @@ windeployqt "$(OutDirFullPath)..\Deploy\$(TargetFileName)"
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -281,7 +225,6 @@ windeployqt "$(OutDirFullPath)..\Deploy\$(TargetFileName)"
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ClCompile>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>MaxSpeed</Optimization>
