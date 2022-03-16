@@ -65,7 +65,7 @@ void Settings::ReadSettings()
   settings = new QSettings(path, format, nullptr);
   SyncSettings(false);
 
-  qDebug() << "Read settings file: " + settings->fileName();
+  qDebug() << "Read settings file:" << settings->fileName();
 }
 
 void Settings::WriteSettings()
@@ -90,7 +90,7 @@ void Settings::WriteSettings()
   settings->setValue("itemLanguage", (u8)_itemLanguage);
   settings->endGroup();
 
-  qDebug() << "Wrote settings file: " + settings->fileName();
+  qDebug() << "Wrote settings file:" << settings->fileName();
 }
 
 QString Settings::FileName()
@@ -128,6 +128,7 @@ QString Settings::GetDefaultSaveDir()
 {
   QSettings regUsers(R"(HKEY_CURRENT_USER\SOFTWARE\Valve\Steam\Users)", QSettings::NativeFormat);
   QStringList users = regUsers.childGroups();
+  bool steam = true;
 
   QString path = GetSteamPath(), user;
   if (users.length() > 0)
@@ -140,8 +141,10 @@ QString Settings::GetDefaultSaveDir()
     if (cd) cd &= fullpath.cd(user);
     if (cd) cd &= fullpath.cd(QString::fromUtf8(MHW_ID));
     if (cd) cd &= fullpath.cd("remote");
-    if (!cd) cd |= fullpath.cd(QDir::homePath());
-    assert(cd);
+    if (!cd) {
+      cd |= fullpath.cd(QDir::homePath());
+      steam = false;
+    }
 
     path = fullpath.path();
   }
@@ -149,7 +152,7 @@ QString Settings::GetDefaultSaveDir()
     path = QDir::homePath();
   }
 
-  qDebug(qUtf8Printable(path));
+  qDebug() << "Save Path:" << path << (steam ? "(steam)" : "(home)");
   return path;
 }
 

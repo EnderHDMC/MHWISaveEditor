@@ -167,7 +167,7 @@ void InventoryEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 
       // Truly unobtainable items.
       if (!(info->flags & (u32)itemFlag::CustomDiscoverable)) {
-        qInfo() << "Unobtainable Item[" << info->id << ":" << info->type << "]: " << itemName;
+        qInfo().nospace() << "Unobtainable Item[" << info->id << "](" << info->type << "): " << itemName;
         if (!showUnobtainable) continue;
       }
     }

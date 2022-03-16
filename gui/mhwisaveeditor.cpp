@@ -596,7 +596,7 @@ void MHWISaveEditor::TrimBackups()
 
     if (deleteCount > 0) {
       QString fileName = fileInfo.fileName();
-      qDebug() << QString("Delete [%1/%2]: %3")
+      qDebug().noquote() << QString("Delete [%1/%2]: %3")
         .arg(deleteTotal - deleteCount + 1).arg(deleteTotal).arg(fileName);
       file.remove();
       deleteCount--;

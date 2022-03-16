@@ -69,7 +69,8 @@ void SettingsUI::PopulateUILanguageSelection()
     trCode.replace(re, "\\2");
     QLocale trLocale = QLocale(trCode);
     QString trName = trLocale.nativeLanguageName();
-    qInfo() << QString("Detect language: %1 (%2)").arg(trName).arg(QLocale::languageToString(trLocale.language()));
+    QString trLanguage = QLocale::languageToString(trLocale.language());
+    qInfo().noquote() << QString("Detect language: %1 (%2)").arg(trName).arg(trLanguage);
     ui->cmbUILanguage->addItem(trName, trCode);
   }
 }

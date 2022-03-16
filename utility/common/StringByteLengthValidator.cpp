@@ -23,7 +23,8 @@ QValidator::State StringByteLengthValidator::validate(QString& text, int& pos) c
       byteSize = textArray.size();
     }
   }
-  qDebug() << QString("%1[%3/%4]: %2").arg(name).arg(text).arg(byteSize).arg(maxSize);
+
+  qDebug().noquote() << QString("%1[%3/%4]: %2").arg(name).arg(text).arg(byteSize).arg(maxSize);
 
   return ret;
 }

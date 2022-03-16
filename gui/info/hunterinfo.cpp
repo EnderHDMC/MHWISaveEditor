@@ -113,9 +113,9 @@ void HunterInfo::PlaytimeChange(double value)
   u32 seconds = (playtime) % 60;
   u32 minutes = (playtime / 60) % 60;
   u32 hours = (playtime / 3600);
-  u32 secondsG = hours >= 10000 ? 59 : seconds;
-  u32 minutesG = hours >= 10000 ? 59 : minutes;
-  u32 hoursG = hours >= 10000 ? 9999 : hours;
+  u32 secondsG = hours > 9999 ? 59 : seconds;
+  u32 minutesG = hours > 9999 ? 59 : minutes;
+  u32 hoursG = hours > 9999 ? 9999 : hours;
 
   QChar fill0 = '0';
   QString format = "%1:%2";
