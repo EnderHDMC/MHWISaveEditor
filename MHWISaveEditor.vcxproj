@@ -16,13 +16,20 @@
     <ClInclude Include="crypto\sha1.h" />
     <ClInclude Include="data\BitmapDB.h" />
     <ClInclude Include="data\ItemDB.h" />
+    <ClInclude Include="data\EquipmentDB.h" />
     <ClInclude Include="gui\common\Notification.h" />
     <ClInclude Include="gui\common\WheelGuard.h" />
+    <ClInclude Include="types\file\wp_dat_g.h" />
+    <ClInclude Include="types\file\wp_dat.h" />
+    <ClInclude Include="types\file\rod_inse.h" />
+    <ClInclude Include="utility\system\paths.h" />
+    <ClInclude Include="types\language.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\editor_enums.h" />
     <ClInclude Include="types\file\gmd.h" />
     <ClInclude Include="types\file\itm.h" />
+    <ClInclude Include="types\file\am_dat.h" />
     <ClInclude Include="types\inventory_areas.h" />
     <ClInclude Include="types\mhw_enums.h" />
     <ClInclude Include="types\mhw_save.h" />
@@ -33,8 +40,9 @@
     <ClInclude Include="utility\common\saveloader.h" />
     <ClInclude Include="utility\endian.h" />
     <ClInclude Include="utility\mhw_save_utils.h" />
+    <ClInclude Include="utility\read_bin_file.h" />
     <ClInclude Include="utility\settype.h" />
-    <ClInclude Include="utility\system\FileUtils.h" />
+    <ClInclude Include="utility\system\file_utils.h" />
     <QtMoc Include="gui\info\generalinfo.h" />
     <QtMoc Include="gui\info\hunterinfo.h" />
     <QtMoc Include="gui\info\limitedunlocks.h" />
@@ -47,6 +55,7 @@
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
+    <ClCompile Include="data\EquipmentDB.cpp" />
     <ClCompile Include="gui\common\Notification.cpp" />
     <ClCompile Include="gui\common\WheelGuard.cpp" />
     <ClCompile Include="gui\info\generalinfo.cpp" />
@@ -87,10 +96,13 @@
     <None Include="res\game\item_ptB.gmd" />
     <None Include="res\game\item_rus.gmd" />
     <None Include="res\game\item_spa.gmd" />
+    <None Include="res\mapping\am_dat.bt" />
     <None Include="res\mapping\CalcUnknown.ipynb" />
     <None Include="res\mapping\Mapping.ods" />
+    <None Include="res\mapping\mask_generator.1sc" />
     <None Include="res\mapping\MonsterHunterWorld.CT" />
     <None Include="res\mapping\ProgressStructGenerator.ipynb" />
+    <None Include="res\mapping\rod_inse.bt" />
     <None Include="res\mapping\SAVEDATA1000.bt" />
     <None Include="res\mapping\SAVEDATA1000_basegame.bt" />
     <None Include="res\mapping\allow_layered_crafts.1sc" />
@@ -108,6 +120,8 @@
     <None Include="res\mapping\test_data.1sc" />
     <None Include="res\mapping\types.bt" />
     <None Include="res\mapping\uct.bt" />
+    <None Include="res\mapping\wp_dat.bt" />
+    <None Include="res\mapping\wp_dat_g.bt" />
     <None Include="res\translations\mhwisaveeditor_template.qm" />
     <None Include="setup.iss" />
   </ItemGroup>

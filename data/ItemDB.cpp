@@ -26,7 +26,7 @@ ItemDB::ItemDB()
   Settings* settings = settings->GetInstance();
   game_language itemLanguage = settings->GetItemLanguage();
 
-  QString itemPath = Settings::GetResourcesPath("game/itemData.itm");
+  QString itemPath = Paths::GetResourcesPath("game/itemData.itm");
   success_itm = Read_itm(&itm, itemPath);
   LoadGMD(itemLanguage);
 
@@ -42,15 +42,11 @@ ItemDB::~ItemDB()
 
 void ItemDB::LoadGMD(game_language language)
 {
-  FreeMeta_gmd(&gmd);
-  QString languageCode = Settings::GetLanguageCode(language);
-
-  QString namePath = QString(Settings::GetResourcesPath("game/item_%1.gmd")).arg(languageCode);
-  success_gmd = Read_gmd(&gmd, namePath);
+  success_gmd = ReadLanguage_gmd(&gmd, "game/item_%1.gmd", language);
 }
 
 bool ItemDB::ReadCustomFlags(itm_meta* itm) {
-  QString flagsPath = Settings::GetResourcesPath("CustomFlags.bin");
+  QString flagsPath = Paths::GetResourcesPath("CustomFlags.bin");
   mhw_items_discovered flags[(u64)FlagFileIndex::FlagFileIndexCount] = {};
 
   u8* obtain = ReadEntireFile(flagsPath, (u8*)flags, sizeof(flags));
@@ -127,7 +123,7 @@ QString ItemDB::ItemName(u32 id)
   }
 
   const QRegularExpression regex("(<STYL.*>)(.*)(</STYL>)");
-  QString name = QString::fromUtf8(gmd.strings[id * 2]);
+  QString name = QString::fromUtf8(gmd.value(id * 2));
   return name.replace(regex, "\\2");
 }
 

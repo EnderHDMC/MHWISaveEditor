@@ -4,7 +4,10 @@
 
 #include "types.h"
 
-const std::string BLOWFISH_KEY = "xieZjoe#P2134-3zmaghgpqoe0z8$3azeq";
+const std::string KEY_SAVEDATA1000 = "xieZjoe#P2134-3zmaghgpqoe0z8$3azeq";
+
+const std::string KEY_ROD_INSE     = "SFghFQVFJycHnypExurPwut98ZZq1cwvm7lpDpASeP4biRhstQgULzlb";
+
 const std::string MHW_ID = "582010";
 const std::string SAVE_NAME = "SAVEDATA1000";
 const std::string MHW_FOLDER_NAME = "Monster Hunter World";

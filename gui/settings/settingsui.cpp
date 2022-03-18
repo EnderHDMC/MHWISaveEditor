@@ -4,6 +4,10 @@
 #include <QDir>
 #include <QRegularExpression>
 
+#include "../../types/language.h"
+
+#include "../../utility/system/paths.h"
+
 SettingsUI::SettingsUI(QWidget* parent)
   : QDialog(parent)
 {
@@ -11,7 +15,7 @@ SettingsUI::SettingsUI(QWidget* parent)
   ui->setupUi(this);
 
   settings = settings->GetInstance();
-  int itemLanguageIndex = Settings::LanguageEnumToIndex(settings->GetItemLanguage());
+  int itemLanguageIndex = Language::LanguageEnumToIndex(settings->GetItemLanguage());
 
   ui->chkAutoBackups->setChecked(settings->GetDoAutoBackups());
   ui->spnMaxBackups->setValue(settings->GetMaxBackups());
@@ -48,7 +52,7 @@ SettingsUI::~SettingsUI()
 
 void SettingsUI::PopulateUILanguageSelection()
 {
-  QDir dir(Settings::GetResourcesPath("translations/"));
+  QDir dir(Paths::GetResourcesPath("translations/"));
   QStringList nameFilters;
   nameFilters << "*.qm";
   dir.setNameFilters(nameFilters);
@@ -123,7 +127,7 @@ void SettingsUI::SetDarkMode(int checked)
 void SettingsUI::SetItemLanguage(int index)
 {
   if (!init) return;
-  game_language language = Settings::LanguageIndexToEnum(index);
+  game_language language = Language::LanguageIndexToEnum(index);
   settings->SetItemLanguage(language);
 }
 

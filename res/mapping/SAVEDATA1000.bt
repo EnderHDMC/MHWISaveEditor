@@ -802,7 +802,7 @@ struct mhw_equipment
   i32 decos[3];
   i32 bowgun_mods[5];
   u32 augments[3];
-  u32 unknown0[2];
+  u32 unknown0[2]; // Always: ffff ffff ffff ffff
   i32 pendant;
   u8 extra_slots;
   u8 attack_increase;
@@ -811,7 +811,7 @@ struct mhw_equipment
   u8 slot_upgrade;
   u8 health_regen;
   u8 element_status_effect_up;
-  u8 unknown1[11];
+  u8 unknown1[11]; // Always: 00 00 00 00 00 00 00 00 00 00 00
   u8 custom_upgrades[12]; // u8 so it doesn't print funny.
   i16 base;
   i16 parts;

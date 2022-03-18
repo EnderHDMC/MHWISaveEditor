@@ -89,6 +89,8 @@ typedef struct {
 #pragma pack(pop)
 
 static bool InitMeta_itm(itm_meta* meta, itm_header* header) {
+  if (!meta) return false;
+
   u8* base = (u8*)header;
   if (!base) return false;
 
@@ -98,6 +100,8 @@ static bool InitMeta_itm(itm_meta* meta, itm_header* header) {
 }
 
 static void FreeMeta_itm(itm_meta* meta) {
+  if (!meta) return;
+
   if (meta->header) free(meta->header);
   meta->header = nullptr;
   meta->items = nullptr;

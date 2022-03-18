@@ -6,6 +6,7 @@
 #include <QDir>
 
 #include "data/BitmapDB.h"
+#include "data/EquipmentDB.h"
 #include "data/ItemDB.h"
 
 #ifdef Q_OS_WIN
@@ -66,18 +67,18 @@ int main(int argc, char* argv[])
   QCoreApplication::setOrganizationDomain("enderhdmc.github.io");
   QCoreApplication::setApplicationName("MHWI Save Editor");
 
-  if (!debugger) {
-    QDir::setCurrent(qApp->applicationDirPath());
-  }
+  QDir::setCurrent(qApp->applicationDirPath());
+  qInfo("Current path: %s", qUtf8Printable(QDir::currentPath()));
 
   ItemDB* itemDB = new ItemDB();
   BitmapDB* bitmapDB = new BitmapDB(itemDB);
+  EquipmentDB* equipmentDB = equipmentDB->GetInstance();
 
   QString uiLanguage = settings->GetUiLanguage();
   QTranslator translator;
   if (!uiLanguage.isEmpty()) {
     QString trFile = "mhwisaveeditor_" + uiLanguage + ".qm";
-    QString translationPath = Settings::GetResourcesPath("translations/");
+    QString translationPath = Paths::GetResourcesPath("translations/");
     if (translator.load(translationPath + trFile)) {
       a.installTranslator(&translator);
     }
@@ -90,6 +91,7 @@ int main(int argc, char* argv[])
 
   delete itemDB;
   delete bitmapDB;
+  equipmentDB->Free();
 
   return ret;
 }

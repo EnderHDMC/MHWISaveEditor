@@ -39,10 +39,18 @@ struct gmd_meta {
   u8* first_string;
   u8** keys;
   u8** strings;
+
+  u8* value(i32 index) {
+    u8* str = nullptr;
+    if (index < header->string_count) str = strings[index];
+    return str;
+  }
 };
 #pragma pack(pop)
 
 static void FreeMeta_gmd(gmd_meta* meta) {
+  if (!meta) return;
+
   if (meta->header) free(meta->header);
   if (meta->keys) free(meta->keys);
   if (meta->strings) free(meta->strings);
@@ -59,6 +67,8 @@ static void FreeMeta_gmd(gmd_meta* meta) {
 }
 
 static bool InitMeta_gmd(gmd_meta* meta, gmd_header* header) {
+  if (!meta) return false;
+
   u8* base = (u8*)header;
   meta->header = (gmd_header*)base;
   meta->filename = base + sizeof(gmd_header);

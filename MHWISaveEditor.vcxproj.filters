@@ -92,7 +92,31 @@
     <ClInclude Include="utility\settype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utility\system\FileUtils.h">
+    <ClInclude Include="utility\system\file_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\file\am_dat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data\EquipmentDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\read_bin_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\language.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\system\paths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\file\wp_dat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\file\wp_dat_g.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\file\rod_inse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,6 +164,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utility\common\StringByteLengthValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data\EquipmentDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -245,6 +272,11 @@
     <None Include="res\mapping\uct.bt" />
     <None Include="res\translations\mhwisaveeditor_template.qm" />
     <None Include="setup.iss" />
+    <None Include="res\mapping\am_dat.bt" />
+    <None Include="res\mapping\mask_generator.1sc" />
+    <None Include="res\mapping\wp_dat.bt" />
+    <None Include="res\mapping\wp_dat_g.bt" />
+    <None Include="res\mapping\rod_inse.bt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">

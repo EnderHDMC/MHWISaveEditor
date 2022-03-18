@@ -1,0 +1,42 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: rod_inse.bt
+//   Authors: See Credits
+//   Version: 0.1.5
+//   Purpose: Store data for kinsects
+//  Category: Game
+// File Mask: *.rod_inse
+//  ID Bytes: 01 10 09 18
+//   History: Initial Version
+//------------------------------------------------
+
+#include "types.bt"
+
+struct rod_inse_header {
+  u32 magic;
+  u16 version;
+  u32 entry_count;
+};
+
+// Entries
+struct rod_inse_entry {
+  u32 index;
+  u8 attack_type;
+  u8 id;
+  u8 tree_position_id;
+  u16 base_model_id;
+  u8 tree_id;
+  u32 craft_cost;
+  u8 rarity;
+  u16 power;
+  u16 speed;
+  u16 heal;
+  u16 element;
+  u16 dust_effect;
+  u8 tree_position;
+  u16 equip_id;
+};
+
+rod_inse_header header;
+rod_inse_entry entries[header.entry_count];

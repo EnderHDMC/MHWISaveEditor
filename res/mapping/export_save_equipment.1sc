@@ -13,43 +13,29 @@
 // Export unknown bits plus sort index
 local struct mhw_equipment
 {
-  u32 sort_index;
-  u32 unknown0[2];
-  u8 unknown1[11];
+  i32 sort_index;
+  i32 serial_item_category;
+  i32 type;
+  u32 id;
 };
 
+u32 target = 0;
 local i32 i;
 local i32 max = sizeof(mhw_save.section3.saves[0].equipment) / sizeof(mhw_save.section3.saves[0].equipment[0]);
 local mhw_equipment equip;
 
 Printf("index; "
 + "sort_index; "
-+ "unknown0[5]; "
-+ "unknown1[11]\n");
++ "serial_item_category; "
++ "type; "
++ "id\n");
 
 for (i = 0; i < max; i++) {
-  equip.sort_index   = mhw_save.section3.saves[0].equipment[i].sort_index;
-  equip.unknown0[0]  = mhw_save.section3.saves[0].equipment[i].unknown0[0];
-  equip.unknown0[1]  = mhw_save.section3.saves[0].equipment[i].unknown0[1];
-  equip.unknown1[ 0] = mhw_save.section3.saves[0].equipment[i].unknown1[ 0];
-  equip.unknown1[ 1] = mhw_save.section3.saves[0].equipment[i].unknown1[ 1];
-  equip.unknown1[ 2] = mhw_save.section3.saves[0].equipment[i].unknown1[ 2];
-  equip.unknown1[ 3] = mhw_save.section3.saves[0].equipment[i].unknown1[ 3];
-  equip.unknown1[ 4] = mhw_save.section3.saves[0].equipment[i].unknown1[ 4];
-  equip.unknown1[ 5] = mhw_save.section3.saves[0].equipment[i].unknown1[ 5];
-  equip.unknown1[ 6] = mhw_save.section3.saves[0].equipment[i].unknown1[ 6];
-  equip.unknown1[ 7] = mhw_save.section3.saves[0].equipment[i].unknown1[ 7];
-  equip.unknown1[ 8] = mhw_save.section3.saves[0].equipment[i].unknown1[ 8];
-  equip.unknown1[ 9] = mhw_save.section3.saves[0].equipment[i].unknown1[ 9];
-  equip.unknown1[10] = mhw_save.section3.saves[0].equipment[i].unknown1[10];
+  equip.sort_index           = mhw_save.section3.saves[target].equipment[i].sort_index;
+  equip.serial_item_category = mhw_save.section3.saves[target].equipment[i].serial_item_category;
+  equip.type                 = mhw_save.section3.saves[target].equipment[i].type;
+  equip.id                   = mhw_save.section3.saves[target].equipment[i].id;
 
-    
-
-  Printf("%d; %d; %s; %s\n", i,
-    equip.sort_index,
-    Str("%08x%08x", equip.unknown0[0], equip.unknown0[1]),
-    Str("%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
-            equip.unknown1[0], equip.unknown1[1], equip.unknown1[2], equip.unknown1[3],
-            equip.unknown1[4], equip.unknown1[5], equip.unknown1[6], equip.unknown1[7],
-            equip.unknown1[8], equip.unknown1[9], equip.unknown1[10]));
+  Printf("%d; %d; %d; %d; %d\n", i,
+    equip.sort_index, equip.serial_item_category, equip.type, equip.id);
 }

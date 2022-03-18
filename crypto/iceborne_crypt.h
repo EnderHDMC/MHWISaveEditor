@@ -533,7 +533,7 @@ static bool DecryptRegion(u8* save, int offset, int length, int saveSlot)
 
 static u8* DecryptSave(u8* save, int length)
 {
-  blowfish_decrypt(save, length);
+  blowfish_decrypt(save, length, KEY_SAVEDATA1000);
 
   u8* checksum = GenerateHash(save, length, 64);
   byteswap(checksum, 20);
@@ -616,6 +616,6 @@ static u8* EncryptSave(u8* save, int length)
   SetHash(save, checksum);
   free(checksum);
 
-  blowfish_encrypt(save, length);
+  blowfish_encrypt(save, length, KEY_SAVEDATA1000);
   return save;
 }
