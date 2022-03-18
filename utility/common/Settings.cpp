@@ -7,6 +7,10 @@
 
 #include "../../types/constants.h"
 
+#ifdef Q_OS_WIN
+#include <Windows.h>
+#endif // Q_OS_WIN
+
 Settings* Settings::instance = nullptr;
 
 Settings::Settings()
@@ -54,6 +58,10 @@ bool Settings::SyncSettings(bool sync)
   SetItemLanguage((game_language)settings->value("itemLanguage", (u8)_itemLanguage).toInt());
   settings->endGroup();
 
+  settings->beginGroup("debug");
+  SetShowConsole(settings->value("showConsole", _showConsole).toBool());
+  settings->endGroup();
+
   return GetRequireRestart() && sync;
 }
 
@@ -64,8 +72,6 @@ void Settings::ReadSettings()
   QSettings::setDefaultFormat(format);
   settings = new QSettings(path, format, nullptr);
   SyncSettings(false);
-
-  qDebug() << "Read settings file:" << settings->fileName();
 }
 
 void Settings::WriteSettings()
@@ -90,12 +96,21 @@ void Settings::WriteSettings()
   settings->setValue("itemLanguage", (u8)_itemLanguage);
   settings->endGroup();
 
+  settings->beginGroup("debug");
+  settings->setValue("showConsole", _showConsole);
+  settings->endGroup();
+
   qDebug() << "Wrote settings file:" << settings->fileName();
 }
 
 QString Settings::FileName()
 {
   return settings->fileName();
+}
+
+void Settings::LogReadPath()
+{
+  qDebug() << "Read settings file (log delayed):" << settings->fileName();
 }
 
 QString Settings::GetSteamPath()
@@ -203,4 +218,15 @@ QString Settings::GetIconDumpPath()
 QString Settings::GetResourcesPath(const QString& subpath)
 {
   return "res/" + subpath;
+}
+
+bool Settings::DebuggerPresent()
+{
+  bool debugger = false;
+
+#ifdef Q_OS_WIN
+  debugger = IsDebuggerPresent();
+#endif // Q_OS_WIN
+
+  return debugger;
 }

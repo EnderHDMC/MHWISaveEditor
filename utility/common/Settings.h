@@ -35,6 +35,9 @@ private:
   QString _uiLanguage = "";
   game_language _itemLanguage = game_language::English;
 
+  // Debug
+  bool _showConsole = false;
+
 public:
   static Settings* GetInstance();
   void Free();
@@ -43,7 +46,11 @@ public:
   void WriteSettings();
   QString FileName();
 
-  // Paths
+  void LogReadPath();
+
+  static bool DebuggerPresent();
+
+#pragma region Paths
   static QString GetSteamPath();
   static QString GetGamePath();
   static QString GetDefaultSaveDir();
@@ -53,7 +60,8 @@ public:
   static QString GetDataPathBackups();
   static QString GetIconDumpPath();
 
-  static QString GetResourcesPath(const QString &subpath);
+  static QString GetResourcesPath(const QString& subpath);
+#pragma endregion
 
 #pragma region Settings Access
   bool GetRequireRestart() { return _requireRestart; }
@@ -77,6 +85,9 @@ public:
   void SetUiLanguage(QString value) { if (_uiLanguage != value) _requireRestart = true; _uiLanguage = value; }
   game_language GetItemLanguage() { return _itemLanguage; }
   void SetItemLanguage(game_language value) { _itemLanguage = value; }
+
+  bool GetShowConsole() { return _showConsole; }
+  void SetShowConsole(bool value) { if (_showConsole != value) _requireRestart = true; _showConsole = value; }
 #pragma endregion
 
   // Needs to match up with the settings UI options.

@@ -23,6 +23,8 @@ public slots:
   // Language
   void SetItemLanguage(int index);
   void SetUILanguage(int index);
+  // Debug
+  void SetShowConsole(int checked);
 
 
 public:

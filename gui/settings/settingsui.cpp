@@ -30,10 +30,13 @@ SettingsUI::SettingsUI(QWidget* parent)
 
   ui->chkDarkMode->setChecked(settings->GetDarkMode());
 
+  ui->chkShowConsole->setChecked(settings->GetShowConsole());
+
   ui->lblMatrixMode->setText("*" + ui->lblMatrixMode->text());
   ui->lblShowUnobtainable->setText("*" + ui->lblShowUnobtainable->text());
   ui->lblUILanguage->setText("*" + ui->lblUILanguage->text());
   ui->lblDarkMode->setText("*" + ui->lblDarkMode->text());
+  ui->lblShowConsole->setText("*" + ui->lblShowConsole->text());
 
   init = true;
 }
@@ -129,4 +132,11 @@ void SettingsUI::SetUILanguage(int index)
   if (!init) return;
   QString uiLanguage = ui->cmbUILanguage->itemData(index).toString();
   settings->SetUiLanguage(uiLanguage);
+}
+
+void SettingsUI::SetShowConsole(int checked)
+{
+  if (!init) return;
+  bool showConsole = checked;
+  settings->SetShowConsole(showConsole);
 }

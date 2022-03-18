@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>399</width>
-    <height>404</height>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -231,14 +231,14 @@
    <item row="14" column="1">
     <widget class="QCheckBox" name="chkDarkMode"/>
    </item>
-   <item row="16" column="0" colspan="2">
+   <item row="19" column="0" colspan="2">
     <widget class="QLabel" name="lblRestartDisclaimer">
      <property name="text">
       <string comment="Indicate options which need a restart.">* Will apply on restart.</string>
      </property>
     </widget>
    </item>
-   <item row="15" column="0">
+   <item row="18" column="0">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -250,6 +250,30 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="15" column="0" colspan="2">
+    <widget class="QPushButton" name="btnPlaceholderDebug">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string comment="&quot;Debug&quot; section of the Settings.">Debug</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="0">
+    <widget class="QLabel" name="lblShowConsole">
+     <property name="text">
+      <string comment="Whether to show the console or not">Show Console:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="1">
+    <widget class="QCheckBox" name="chkShowConsole">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -384,6 +408,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>chkShowConsole</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>SettingsUI</receiver>
+   <slot>SetShowConsole(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>288</x>
+     <y>377</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>SetAutoBackups(int)</slot>
@@ -394,5 +434,6 @@
   <slot>SetDarkMode(int)</slot>
   <slot>SetItemLanguage(int)</slot>
   <slot>SetUILanguage(int)</slot>
+  <slot>SetShowConsole(int)</slot>
  </slots>
 </ui>

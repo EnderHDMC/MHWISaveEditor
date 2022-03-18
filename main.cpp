@@ -10,10 +10,14 @@
 
 #ifdef Q_OS_WIN
 #include <Windows.h>
+#endif // Q_OS_WIN
 
-void OpenConsole()
+bool OpenConsole()
 {
-  bool console = AllocConsole();
+  bool console = false;
+
+#ifdef Q_OS_WIN
+  console = AllocConsole();
   if (console) {
     UINT codepage = CP_UTF8;
     SetConsoleCP(codepage);
@@ -41,19 +45,21 @@ void OpenConsole()
     SetWindowLongW(consoleHandle, GWL_EXSTYLE, newLong);
     SetLayeredWindowAttributes(consoleHandle, 0, 0xf0, LWA_ALPHA);
   }
-}
 #endif // Q_OS_WIN
+
+  return console;
+}
 
 int main(int argc, char* argv[])
 {
-  bool debugger = false;
+  Settings* settings = settings->GetInstance();
 
-#ifdef Q_OS_WIN
-  debugger = IsDebuggerPresent();
-  if (!debugger) OpenConsole();
+  bool debugger = Settings::DebuggerPresent();
+  bool showConsole = settings->GetShowConsole();
+  if (!debugger && showConsole) OpenConsole();
 
   qInfo("Debugger present: %d", debugger);
-#endif // Q_OS_WIN
+  settings->LogReadPath();
 
   QApplication a(argc, argv);
   QCoreApplication::setOrganizationName("EnderHDMC");
@@ -64,7 +70,6 @@ int main(int argc, char* argv[])
     QDir::setCurrent(qApp->applicationDirPath());
   }
 
-  Settings* settings = settings->GetInstance();
   ItemDB* itemDB = new ItemDB();
   BitmapDB* bitmapDB = new BitmapDB(itemDB);
 
