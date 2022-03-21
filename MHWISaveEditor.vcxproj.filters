@@ -235,20 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\CustomFlags.bin" />
-    <None Include="res\game\itemData.itm" />
-    <None Include="res\game\item_ara.gmd" />
-    <None Include="res\game\item_chS.gmd" />
-    <None Include="res\game\item_chT.gmd" />
-    <None Include="res\game\item_eng.gmd" />
-    <None Include="res\game\item_fre.gmd" />
-    <None Include="res\game\item_ger.gmd" />
-    <None Include="res\game\item_ita.gmd" />
-    <None Include="res\game\item_jpn.gmd" />
-    <None Include="res\game\item_kor.gmd" />
-    <None Include="res\game\item_pol.gmd" />
-    <None Include="res\game\item_ptB.gmd" />
-    <None Include="res\game\item_rus.gmd" />
-    <None Include="res\game\item_spa.gmd" />
     <None Include="res\mapping\CalcUnknown.ipynb" />
     <None Include="res\mapping\Mapping.ods" />
     <None Include="res\mapping\MonsterHunterWorld.CT" />

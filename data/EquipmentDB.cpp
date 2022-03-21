@@ -10,11 +10,11 @@ EquipmentDB::EquipmentDB()
   Settings* settings = settings->GetInstance();
   game_language itemLanguage = settings->GetItemLanguage();
 
-  Read_am_dat(&am_dat, Paths::GetResourcesPath("game/armor.am_dat"));
-  ReadLanguage_gmd(&gmd_armor, "game/armor_%1.gmd", itemLanguage);
+  Read_am_dat(&am_dat, Paths::GetResourcesPath("chunk/common/equip/armor.am_dat"));
+  ReadLanguage_gmd(&gmd_armor, "chunk/common/text/steam/armor_%1.gmd", itemLanguage);
 
-  Read_rod_inse(&rod_inse, Paths::GetResourcesPath("game/rod_insect.rod_inse"));
-  ReadLanguage_gmd(&gmd_kinsect, "game/rod_insect_%1.gmd", itemLanguage);
+  Read_rod_inse(&rod_inse, Paths::GetResourcesPath("chunk/common/equip/rod_insect.rod_inse"));
+  ReadLanguage_gmd(&gmd_kinsect, "chunk/common/text/vfont/rod_insect_%1.gmd", itemLanguage);
 
   BindMapping(0, &wp_dat_l_sword, &gmd_l_sword, "l_sword"); // Great Sword
   BindMapping(1, &wp_dat_sword, &gmd_sword, "sword");       // Sword And Shield
@@ -41,9 +41,9 @@ EquipmentDB::EquipmentDB()
     wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
     gmd_meta* gmd = map_gmd.value(type);
 
-    QString file_dat = QString("game/%1.wp_dat").arg(basename);
-    QString file_dat_g = QString("game/%1.wp_dat_g").arg(basename);
-    QString file_gmd = QString("game/%1_%2.gmd").arg(basename).arg("%1");
+    QString file_dat = QString("chunk/common/equip/%1.wp_dat").arg(basename);
+    QString file_dat_g = QString("chunk/common/equip/%1.wp_dat_g").arg(basename);
+    QString file_gmd = QString("chunk/common/text/steam/%1_%2.gmd").arg(basename).arg("%1");
 
     if (wp_dat) Read_wp_dat(wp_dat, Paths::GetResourcesPath(file_dat));
     if (wp_dat_g) Read_wp_dat_g(wp_dat_g, Paths::GetResourcesPath(file_dat_g));

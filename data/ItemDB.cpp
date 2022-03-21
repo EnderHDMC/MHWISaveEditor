@@ -26,7 +26,7 @@ ItemDB::ItemDB()
   Settings* settings = settings->GetInstance();
   game_language itemLanguage = settings->GetItemLanguage();
 
-  QString itemPath = Paths::GetResourcesPath("game/itemData.itm");
+  QString itemPath = Paths::GetResourcesPath("chunk/common/item/itemData.itm");
   success_itm = Read_itm(&itm, itemPath);
   LoadGMD(itemLanguage);
 
@@ -42,7 +42,7 @@ ItemDB::~ItemDB()
 
 void ItemDB::LoadGMD(game_language language)
 {
-  success_gmd = ReadLanguage_gmd(&gmd, "game/item_%1.gmd", language);
+  success_gmd = ReadLanguage_gmd(&gmd, "chunk/common/text/steam/item_%1.gmd", language);
 }
 
 bool ItemDB::ReadCustomFlags(itm_meta* itm) {
