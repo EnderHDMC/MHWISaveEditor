@@ -38,7 +38,7 @@ struct rod_inse_meta {
 };
 #pragma pack(pop)
 
-static void FreeMeta_rod_inse(rod_inse_meta* meta) {
+static void FreeMetaFile(rod_inse_meta* meta) {
   if (!meta) return;
 
   if (meta->header) free(meta->header);
@@ -47,7 +47,7 @@ static void FreeMeta_rod_inse(rod_inse_meta* meta) {
   meta->entries = nullptr;
 }
 
-static bool InitMeta_rod_inse(rod_inse_meta* meta, rod_inse_header* header) {
+static bool InitMetaFile(rod_inse_meta* meta, rod_inse_header* header) {
   if (!meta) return false;
 
   u8* base = (u8*)header;

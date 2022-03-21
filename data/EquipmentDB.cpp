@@ -10,11 +10,11 @@ EquipmentDB::EquipmentDB()
   Settings* settings = settings->GetInstance();
   game_language itemLanguage = settings->GetItemLanguage();
 
-  Read_am_dat(&am_dat, Paths::GetResourcesPath("chunk/common/equip/armor.am_dat"));
-  ReadLanguage_gmd(&gmd_armor, "chunk/common/text/steam/armor_%1.gmd", itemLanguage);
+  ReadMetaFile(&am_dat, Paths::GetResourcesPath("chunk/common/equip/armor.am_dat"));
+  ReadMetaFileLanguage(&gmd_armor, "chunk/common/text/steam/armor_%1.gmd", itemLanguage);
 
-  Read_rod_inse(&rod_inse, Paths::GetResourcesPath("chunk/common/equip/rod_insect.rod_inse"));
-  ReadLanguage_gmd(&gmd_kinsect, "chunk/common/text/vfont/rod_insect_%1.gmd", itemLanguage);
+  ReadMetaFile(&rod_inse, Paths::GetResourcesPath("chunk/common/equip/rod_insect.rod_inse"));
+  ReadMetaFileLanguage(&gmd_kinsect, "chunk/common/text/vfont/rod_insect_%1.gmd", itemLanguage);
 
   BindMapping(0, &wp_dat_l_sword, &gmd_l_sword, "l_sword"); // Great Sword
   BindMapping(1, &wp_dat_sword, &gmd_sword, "sword");       // Sword And Shield
@@ -45,9 +45,9 @@ EquipmentDB::EquipmentDB()
     QString file_dat_g = QString("chunk/common/equip/%1.wp_dat_g").arg(basename);
     QString file_gmd = QString("chunk/common/text/steam/%1_%2.gmd").arg(basename).arg("%1");
 
-    if (wp_dat) Read_wp_dat(wp_dat, Paths::GetResourcesPath(file_dat));
-    if (wp_dat_g) Read_wp_dat_g(wp_dat_g, Paths::GetResourcesPath(file_dat_g));
-    ReadLanguage_gmd(gmd, file_gmd, itemLanguage);
+    if (wp_dat) ReadMetaFile(wp_dat, Paths::GetResourcesPath(file_dat));
+    if (wp_dat_g) ReadMetaFile(wp_dat_g, Paths::GetResourcesPath(file_dat_g));
+    ReadMetaFileLanguage(gmd, file_gmd, itemLanguage);
   }
 }
 
@@ -73,24 +73,24 @@ EquipmentDB* EquipmentDB::GetInstance()
 
 void EquipmentDB::Free()
 {
-  FreeMeta_am_dat(&am_dat);         FreeMeta_gmd(&gmd_armor);
-  FreeMeta_rod_inse(&rod_inse);     FreeMeta_gmd(&gmd_kinsect);
+  FreeMetaFile(&am_dat);         FreeMetaFile(&gmd_armor);
+  FreeMetaFile(&rod_inse);       FreeMetaFile(&gmd_kinsect);
 
-  FreeMeta_wp_dat(&wp_dat_c_axe);   FreeMeta_gmd(&gmd_c_axe);
-  FreeMeta_wp_dat(&wp_dat_g_lance); FreeMeta_gmd(&gmd_g_lance);
-  FreeMeta_wp_dat(&wp_dat_hammer);  FreeMeta_gmd(&gmd_hammer);
-  FreeMeta_wp_dat(&wp_dat_lance);   FreeMeta_gmd(&gmd_lance);
-  FreeMeta_wp_dat(&wp_dat_l_sword); FreeMeta_gmd(&gmd_l_sword);
-  FreeMeta_wp_dat(&wp_dat_rod);     FreeMeta_gmd(&gmd_rod);
-  FreeMeta_wp_dat(&wp_dat_s_axe);   FreeMeta_gmd(&gmd_sword);
-  FreeMeta_wp_dat(&wp_dat_sword);   FreeMeta_gmd(&gmd_s_axe);
-  FreeMeta_wp_dat(&wp_dat_tachi);   FreeMeta_gmd(&gmd_tachi);
-  FreeMeta_wp_dat(&wp_dat_whistle); FreeMeta_gmd(&gmd_whistle);
-  FreeMeta_wp_dat(&wp_dat_w_sword); FreeMeta_gmd(&gmd_w_sword);
+  FreeMetaFile(&wp_dat_c_axe);   FreeMetaFile(&gmd_c_axe);
+  FreeMetaFile(&wp_dat_g_lance); FreeMetaFile(&gmd_g_lance);
+  FreeMetaFile(&wp_dat_hammer);  FreeMetaFile(&gmd_hammer);
+  FreeMetaFile(&wp_dat_lance);   FreeMetaFile(&gmd_lance);
+  FreeMetaFile(&wp_dat_l_sword); FreeMetaFile(&gmd_l_sword);
+  FreeMetaFile(&wp_dat_rod);     FreeMetaFile(&gmd_rod);
+  FreeMetaFile(&wp_dat_s_axe);   FreeMetaFile(&gmd_sword);
+  FreeMetaFile(&wp_dat_sword);   FreeMetaFile(&gmd_s_axe);
+  FreeMetaFile(&wp_dat_tachi);   FreeMetaFile(&gmd_tachi);
+  FreeMetaFile(&wp_dat_whistle); FreeMetaFile(&gmd_whistle);
+  FreeMetaFile(&wp_dat_w_sword); FreeMetaFile(&gmd_w_sword);
 
-  FreeMeta_wp_dat_g(&wp_dat_g_bow); FreeMeta_gmd(&gmd_bow);
-  FreeMeta_wp_dat_g(&wp_dat_g_hbg); FreeMeta_gmd(&gmd_hbg);
-  FreeMeta_wp_dat_g(&wp_dat_g_lbg); FreeMeta_gmd(&gmd_lbg);
+  FreeMetaFile(&wp_dat_g_bow);   FreeMetaFile(&gmd_bow);
+  FreeMetaFile(&wp_dat_g_hbg);   FreeMetaFile(&gmd_hbg);
+  FreeMetaFile(&wp_dat_g_lbg);   FreeMetaFile(&gmd_lbg);
 
   delete instance;
   instance = nullptr;

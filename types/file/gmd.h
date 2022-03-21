@@ -48,7 +48,7 @@ struct gmd_meta {
 };
 #pragma pack(pop)
 
-static void FreeMeta_gmd(gmd_meta* meta) {
+static void FreeMetaFile(gmd_meta* meta) {
   if (!meta) return;
 
   if (meta->header) free(meta->header);
@@ -66,7 +66,7 @@ static void FreeMeta_gmd(gmd_meta* meta) {
   meta->strings = nullptr;
 }
 
-static bool InitMeta_gmd(gmd_meta* meta, gmd_header* header) {
+static bool InitMetaFile(gmd_meta* meta, gmd_header* header) {
   if (!meta) return false;
 
   u8* base = (u8*)header;
@@ -80,7 +80,7 @@ static bool InitMeta_gmd(gmd_meta* meta, gmd_header* header) {
   meta->keys = (u8**)malloc(sizeof(u8*) * header->key_count);
   meta->strings = (u8**)malloc(sizeof(u8*) * header->string_count);
   if (!meta->keys || !meta->strings) {
-    FreeMeta_gmd(meta);
+    FreeMetaFile(meta);
     return false;
   }
 
@@ -101,7 +101,7 @@ static bool InitMeta_gmd(gmd_meta* meta, gmd_header* header) {
   }
 
   if (key_index != header->key_count || str_index != header->string_count) {
-    FreeMeta_gmd(meta);
+    FreeMetaFile(meta);
     return false;
   }
 

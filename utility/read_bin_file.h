@@ -56,39 +56,39 @@ static u8* ReadEntireFile(const QString& path, u8* dst = nullptr, u32 size = 0) 
   return ReadEntireFileSize(path, dst, &size);
 }
 
-static bool Read_gmd(gmd_meta* meta, const QString& path)
+static bool ReadMetaFile(gmd_meta* meta, const QString& path)
 {
-  FreeMeta_gmd(meta);
+  FreeMetaFile(meta);
   gmd_header* header = (gmd_header*)ReadEntireFile(path);
   if (!header) {
     return false;
   }
 
-  return InitMeta_gmd(meta, header);
+  return InitMetaFile(meta, header);
 }
 
-static bool Read_itm(itm_meta* meta, const QString& path) {
-  FreeMeta_itm(meta);
+static bool ReadMetaFile(itm_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
   itm_header* header = (itm_header*)ReadEntireFile(path);
   if (!header) {
     return false;
   }
 
-  return InitMeta_itm(meta, header);
+  return InitMetaFile(meta, header);
 }
 
-static bool Read_am_dat(am_dat_meta* meta, const QString& path) {
-  FreeMeta_am_dat(meta);
+static bool ReadMetaFile(am_dat_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
   am_dat_header* header = (am_dat_header*)ReadEntireFile(path);
   if (!header) {
     return false;
   }
 
-  return InitMeta_am_dat(meta, header);
+  return InitMetaFile(meta, header);
 }
 
-static bool Read_rod_inse(rod_inse_meta* meta, const QString& path) {
-  FreeMeta_rod_inse(meta);
+static bool ReadMetaFile(rod_inse_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
   u32 size = 0;
   rod_inse_header* header = (rod_inse_header*)ReadEntireFileSize(path, nullptr, &size);
   if (!header) {
@@ -96,30 +96,30 @@ static bool Read_rod_inse(rod_inse_meta* meta, const QString& path) {
   }
 
   blowfish_decrypt((u8*)header, size, KEY_ROD_INSE);
-  return InitMeta_rod_inse(meta, header);
+  return InitMetaFile(meta, header);
 }
 
-static bool Read_wp_dat(wp_dat_meta* meta, const QString& path) {
-  FreeMeta_wp_dat(meta);
+static bool ReadMetaFile(wp_dat_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
   wp_dat_header* header = (wp_dat_header*)ReadEntireFile(path);
   if (!header) {
     return false;
   }
 
-  return InitMeta_wp_dat(meta, header);
+  return InitMetaFile(meta, header);
 }
 
-static bool Read_wp_dat_g(wp_dat_g_meta* meta, const QString& path) {
-  FreeMeta_wp_dat_g(meta);
+static bool ReadMetaFile(wp_dat_g_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
   wp_dat_g_header* header = (wp_dat_g_header*)ReadEntireFile(path);
   if (!header) {
     return false;
   }
 
-  return InitMeta_wp_dat_g(meta, header);
+  return InitMetaFile(meta, header);
 }
 
-static bool ReadLanguage_gmd(gmd_meta* meta, const QString& res, game_language language = game_language::InvalidLanguage)
+static bool ReadMetaFileLanguage(gmd_meta* meta, const QString& res, game_language language = game_language::InvalidLanguage)
 {
   QString languageCode = Language::GetLanguageCode(language);
 
@@ -128,5 +128,5 @@ static bool ReadLanguage_gmd(gmd_meta* meta, const QString& res, game_language l
     gmdPath = QString(Paths::GetResourcesPath(res)).arg(languageCode);
   }
 
-  return Read_gmd(meta, gmdPath);
+  return ReadMetaFile(meta, gmdPath);
 }

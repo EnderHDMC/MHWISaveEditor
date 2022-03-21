@@ -58,7 +58,7 @@ struct am_dat_meta {
 };
 #pragma pack(pop)
 
-static void FreeMeta_am_dat(am_dat_meta* meta) {
+static void FreeMetaFile(am_dat_meta* meta) {
   if (!meta) return;
 
   if (meta->header) free(meta->header);
@@ -67,7 +67,7 @@ static void FreeMeta_am_dat(am_dat_meta* meta) {
   meta->entries = nullptr;
 }
 
-static bool InitMeta_am_dat(am_dat_meta* meta, am_dat_header* header) {
+static bool InitMetaFile(am_dat_meta* meta, am_dat_header* header) {
   if (!meta) return false;
 
   u8* base = (u8*)header;

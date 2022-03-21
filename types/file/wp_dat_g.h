@@ -62,7 +62,7 @@ struct wp_dat_g_meta {
 };
 #pragma pack(pop)
 
-static void FreeMeta_wp_dat_g(wp_dat_g_meta* meta) {
+static void FreeMetaFile(wp_dat_g_meta* meta) {
   if (!meta) return;
 
   if (meta->header) free(meta->header);
@@ -71,7 +71,7 @@ static void FreeMeta_wp_dat_g(wp_dat_g_meta* meta) {
   meta->entries = nullptr;
 }
 
-static bool InitMeta_wp_dat_g(wp_dat_g_meta* meta, wp_dat_g_header* header) {
+static bool InitMetaFile(wp_dat_g_meta* meta, wp_dat_g_header* header) {
   if (!meta) return false;
 
   u8* base = (u8*)header;
