@@ -29,6 +29,13 @@
 // Other forms
 #include "settings/settingsui.h"
 
+// The editors
+#include "inventory/inventoryeditor.h"
+#include "info/limitedunlocks.h"
+#include "info/generalinfo.h"
+#include "info/hunterinfo.h"
+#include "equipment/equipmenteditortab.h"
+
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent), ui(new Ui::MHWISaveEditor),
   SaveLoader()
@@ -89,10 +96,11 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(dumpSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(Dump(int)));
 
   editor_tab editorTabs[] = {
-    {new GeneralInfo(),     &generalInfo    },
-    {new HunterInfo(),      &hunterInfo     },
-    {new InventoryEditor(), &inventoryEditor},
-    {new LimitedUnlocks(),  &limitedUnlocks },
+    {new GeneralInfo(),        &generalInfo    },
+    {new HunterInfo(),         &hunterInfo     },
+    {new InventoryEditor(),    &inventoryEditor},
+    {new LimitedUnlocks(),     &limitedUnlocks },
+    {new EquipmentEditorTab(), &equipmentEditor},
   };
   int editorCount = COUNTOF(editorTabs);
   editors.resize(editorCount);
@@ -345,6 +353,7 @@ void MHWISaveEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 {
   SaveLoader::LoadResources(itemDB, bitmapDB);
   inventoryEditor->LoadResources(itemDB, bitmapDB);
+  equipmentEditor->LoadResources(itemDB, bitmapDB);
 }
 
 void MHWISaveEditor::LoadSaveSlot()

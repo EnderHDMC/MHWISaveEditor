@@ -4,15 +4,26 @@
 #include <QIcon>
 #include <QMap>
 
+#include "EquipmentDB.h"
 #include "ItemDB.h"
 
 class BitmapDB
 {
 private:
+  const int iconWidth = 64;
+  const int iconHeight = 64;
+  
   QImage items;
   QImage itemsMask;
   QMap<u32, QImage*> iconTints;
   QMap<u64, QIcon*> icons;
+
+
+  void InitTints(int imageWidth, int imageHeight, bool matrixMode, bool darkMode);
+  void InitItems(ItemDB* itemDB);
+  void InitEquipment(EquipmentDB* equipmentDB);
+
+  void AddIcon(u64 key, int id, int color);
 
 public:
   BitmapDB(ItemDB* itemDB);
@@ -25,6 +36,24 @@ public:
   }
 
   QIcon* ItemIcon(itm_entry* info);
+  QIcon* EquipmentIcon(mhw_equipment* equipment);
+
+  const int wp_index_id_map[14] = {
+    1,  // Great Sword
+    0,  // Sword And Shield
+    3,  // Dual Blades
+    2,  // Longsword
+    6,  // Hammer
+    7,  // Hunting Horn
+    4,  // Lance
+    5,  // Gunlance
+    8,  // Switch Axe
+    9,  // Charge Blade
+    10, // Insect Glaive
+    13, // Bow
+    12, // Heavy Bowgun
+    11, // Light Bowgun
+  };
 
   // 0xaarrggbb
   const u32 palletes[28] = {

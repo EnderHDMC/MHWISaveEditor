@@ -153,6 +153,16 @@ QString EquipmentDB::GetNameArmor(i32 type, i32 id)
   return name;
 }
 
+int EquipmentDB::CountArmor()
+{
+  return am_dat.header->entry_count;
+}
+
+am_dat_entry* EquipmentDB::IndexArmor(i32 index)
+{
+  return &am_dat.entries[index];
+}
+
 wp_dat_entry* EquipmentDB::GetEntryWeaponMelee(i32 type, i32 id)
 {
   wp_dat_meta* weapon_data = map_wp_dat.value(type, nullptr);
@@ -245,6 +255,42 @@ QString EquipmentDB::GetNameWeapon(i32 type, i32 id)
   return name;
 }
 
+int EquipmentDB::CountWeaponMelee(i32 type)
+{
+  int count = 0;
+
+  wp_dat_meta* wp_dat = map_wp_dat.value(type);
+  if (wp_dat) count = wp_dat->header->entry_count;
+  return count;
+}
+
+int EquipmentDB::CountWeaponRanged(i32 type)
+{
+  int count = 0;
+
+  wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
+  if (wp_dat_g) count = wp_dat_g->header->entry_count;
+  return count;
+}
+
+wp_dat_entry* EquipmentDB::IndexWeaponMelee(i32 type, i32 index)
+{
+  wp_dat_entry* entry = nullptr;
+
+  wp_dat_meta* wp_dat = map_wp_dat.value(type);
+  if (wp_dat) entry = &wp_dat->entries[index];
+  return entry;
+}
+
+wp_dat_g_entry* EquipmentDB::IndexWeaponRanged(i32 type, i32 index)
+{
+  wp_dat_g_entry* entry = nullptr;
+
+  wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
+  if (wp_dat_g) entry = &wp_dat_g->entries[index];
+  return entry;
+}
+
 rod_inse_entry* EquipmentDB::GetEntryKinsect(i32 type, i32 id)
 {
   rod_inse_meta* kinsect_data = &rod_inse;
@@ -277,6 +323,16 @@ QString EquipmentDB::GetNameKinsect(i32 type, i32 id)
   if (name.isNull()) name = "GMD FAILURE";
 
   return name;
+}
+
+int EquipmentDB::CountKinsect()
+{
+  return rod_inse.header->entry_count;
+}
+
+rod_inse_entry* EquipmentDB::IndexKinsect(i32 index)
+{
+  return &rod_inse.entries[index];
 }
 
 QString EquipmentDB::GetName(mhw_equipment* equipment)

@@ -19,6 +19,8 @@
     <ClInclude Include="data\EquipmentDB.h" />
     <ClInclude Include="gui\common\Notification.h" />
     <ClInclude Include="gui\common\WheelGuard.h" />
+    <QtMoc Include="gui\equipment\equipmenteditortab.h" />
+    <QtMoc Include="gui\equipment\equipmentslotview.h" />
     <ClInclude Include="types\file\wp_dat_g.h" />
     <ClInclude Include="types\file\wp_dat.h" />
     <ClInclude Include="types\file\rod_inse.h" />
@@ -58,6 +60,8 @@
     <ClCompile Include="data\EquipmentDB.cpp" />
     <ClCompile Include="gui\common\Notification.cpp" />
     <ClCompile Include="gui\common\WheelGuard.cpp" />
+    <ClCompile Include="gui\equipment\equipmenteditortab.cpp" />
+    <ClCompile Include="gui\equipment\equipmentslotview.cpp" />
     <ClCompile Include="gui\info\generalinfo.cpp" />
     <ClCompile Include="gui\info\hunterinfo.cpp" />
     <ClCompile Include="gui\info\limitedunlocks.cpp" />
@@ -71,6 +75,8 @@
     <ClCompile Include="utility\common\StringByteLengthValidator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="gui\equipment\equipmenteditortab.ui" />
+    <QtUic Include="gui\equipment\equipmentslotview.ui" />
     <QtUic Include="gui\info\generalinfo.ui" />
     <QtUic Include="gui\info\hunterinfo.ui" />
     <QtUic Include="gui\info\limitedunlocks.ui" />
@@ -177,6 +183,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>.\gui\equipment;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
@@ -195,6 +202,7 @@ for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>.\gui\equipment;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)

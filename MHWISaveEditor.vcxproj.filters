@@ -169,6 +169,12 @@
     <ClCompile Include="data\EquipmentDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gui\equipment\equipmenteditortab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\equipment\equipmentslotview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="gui\info\generalinfo.h">
@@ -195,6 +201,12 @@
     <QtMoc Include="gui\settings\settingsui.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="gui\equipment\equipmenteditortab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="gui\equipment\equipmentslotview.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\info\generalinfo.ui">
@@ -219,6 +231,12 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="gui\settings\settingsui.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gui\equipment\equipmenteditortab.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gui\equipment\equipmentslotview.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

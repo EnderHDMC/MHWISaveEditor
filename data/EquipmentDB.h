@@ -59,6 +59,9 @@ public:
   am_dat_entry* GetEntryArmor(i32 type, i32 id);
   QString GetNameArmor(i32 type, i32 id);
 
+  int CountArmor();
+  am_dat_entry* IndexArmor(i32 index);
+
   // Weapons
   wp_dat_entry* GetEntryWeaponMelee(i32 type, i32 id);
   wp_dat_g_entry* GetEntryWeaponRanged(i32 type, i32 id);
@@ -68,9 +71,17 @@ public:
   QString GetNameWeaponRanged(i32 type, i32 id);
   QString GetNameWeapon(i32 type, i32 id);
 
+  int CountWeaponMelee(i32 type);
+  int CountWeaponRanged(i32 type);
+  wp_dat_entry* IndexWeaponMelee(i32 type, i32 index);
+  wp_dat_g_entry* IndexWeaponRanged(i32 type, i32 index);
+
   // Kinsects
   rod_inse_entry* GetEntryKinsect(i32 type, i32 id);
   QString GetNameKinsect(i32 type, i32 id);
+
+  int CountKinsect();
+  rod_inse_entry* IndexKinsect(i32 index);
 
   // All
   QString GetName(mhw_equipment* equipment);

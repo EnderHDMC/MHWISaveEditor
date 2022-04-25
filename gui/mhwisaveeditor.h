@@ -7,10 +7,7 @@
 
 #include "../types/mhw_save.h"
 
-#include "inventory/inventoryeditor.h"
-#include "info/limitedunlocks.h"
-#include "info/generalinfo.h"
-#include "info/hunterinfo.h"
+#include "../utility/common/saveloader.h"
 #include "../utility/common/Settings.h"
 
 struct editor_tab {
@@ -80,6 +77,7 @@ private:
   SaveLoader* hunterInfo = nullptr;
   SaveLoader* limitedUnlocks = nullptr;
   SaveLoader* generalInfo = nullptr;
+  SaveLoader* equipmentEditor = nullptr;
   QList<SaveLoader*> editors;
 
   QSignalMapper* slotSignalMapper;
