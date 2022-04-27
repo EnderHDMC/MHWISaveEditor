@@ -49,7 +49,7 @@ void ItemSlotView::UpdateItemDisplay(itm_entry* info)
   QIcon* icon = bitmapDB->ItemIcon(info);
   QString itemName = itemDB->ItemName(info);
 
-  ui->btnIcon->setIcon(icon ? *icon : QIcon());
+  ui->btnIcon->setIcon(*icon);
   ui->btnIcon->setText(itemName);
 }
 

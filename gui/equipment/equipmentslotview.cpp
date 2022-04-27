@@ -40,6 +40,6 @@ void EquipmentSlotView::UpdateEquipDisplay(mhw_equipment* equipment)
   QIcon* icon = bitmapDB->EquipmentIcon(equipment);
   QString name = equipmentDB->GetName(equipment);
 
-  ui->btnIcon->setIcon(icon ? *icon : QIcon());
+  ui->btnIcon->setIcon(*icon);
   ui->btnIcon->setText(name);
 }

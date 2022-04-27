@@ -21,6 +21,7 @@
     <ClInclude Include="gui\common\WheelGuard.h" />
     <QtMoc Include="gui\equipment\equipmenteditortab.h" />
     <QtMoc Include="gui\equipment\equipmentslotview.h" />
+    <ClInclude Include="types\file\uct.h" />
     <ClInclude Include="types\file\wp_dat_g.h" />
     <ClInclude Include="types\file\wp_dat.h" />
     <ClInclude Include="types\file\rod_inse.h" />

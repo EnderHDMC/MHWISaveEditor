@@ -71,8 +71,8 @@ int main(int argc, char* argv[])
   qInfo("Current path: %s", qUtf8Printable(QDir::currentPath()));
 
   ItemDB* itemDB = new ItemDB();
-  BitmapDB* bitmapDB = new BitmapDB(itemDB);
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
+  BitmapDB* bitmapDB = new BitmapDB(itemDB, equipmentDB);
 
   QString uiLanguage = settings->GetUiLanguage();
   QTranslator translator;
@@ -89,9 +89,9 @@ int main(int argc, char* argv[])
   w.show();
   int ret = a.exec();
 
-  delete itemDB;
   delete bitmapDB;
   equipmentDB->Free();
+  delete itemDB;
 
   return ret;
 }

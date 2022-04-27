@@ -13,31 +13,41 @@
 
 #include "types.bt"
 
-struct mhw_color
+typedef struct
 {
   u8 r, g, b, a;
-};
+} mhw_color <bgcolor=mhw_color_func, fgcolor=mhw_color_func>;
+
+u32 mhw_color_func(mhw_color &col) {
+  local u32 r = (u32)col.r;
+  local u32 g = (u32)col.g;
+  local u32 b = (u32)col.b;
+  return r << 0 | g << 8 | b << 16;
+}
 
 struct uct_header
 {
   u32 magic;
   u32 extension;
   u32 version;
-  u32 color_count;
 };
 
-struct color_info
+struct uct_color_info
 {
   u32 unknown0;
   mhw_color color;
   f32 unknown1[5];
 };
 
+struct uct_color_pallete
+{
+  u32 color_count;
+  uct_color_info color_info[color_count] <optimize=false>;
+};
+
 uct_header header;
-color_info ui_color[header.color_count];
-u32 unknown0_count;
-color_info unknown0[unknown0_count];
-u32 unknown1_count;
-color_info unknown1[unknown1_count];
-u32 unknown2_count;
-color_info unknown2[unknown2_count];
+
+uct_color_pallete item;
+uct_color_pallete rarity;
+uct_color_pallete sharpness; // Credits to MandL27 for figuring it out
+uct_color_pallete unknown0;

@@ -12,6 +12,7 @@
 #include "../types/file/gmd.h"
 #include "../types/file/itm.h"
 #include "../types/file/rod_inse.h"
+#include "../types/file/uct.h"
 #include "../types/file/wp_dat.h"
 #include "../types/file/wp_dat_g.h"
 
@@ -112,6 +113,16 @@ static bool ReadMetaFile(wp_dat_meta* meta, const QString& path) {
 static bool ReadMetaFile(wp_dat_g_meta* meta, const QString& path) {
   FreeMetaFile(meta);
   wp_dat_g_header* header = (wp_dat_g_header*)ReadEntireFile(path);
+  if (!header) {
+    return false;
+  }
+
+  return InitMetaFile(meta, header);
+}
+
+static bool ReadMetaFile(uct_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
+  uct_header* header = (uct_header*)ReadEntireFile(path);
   if (!header) {
     return false;
   }

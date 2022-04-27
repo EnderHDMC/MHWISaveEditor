@@ -119,6 +119,9 @@
     <ClInclude Include="types\file\rod_inse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="types\file\uct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp">
