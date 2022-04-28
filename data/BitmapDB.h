@@ -46,13 +46,24 @@ private:
 public:
   BitmapDB(ItemDB* itemDB, EquipmentDB* equipmentDB);
   ~BitmapDB();
-  void OutputIcons(const QString& path, ItemDB* itemDB);
 
   inline u64 BuildKey(u32 id, u16 pallete, u16 color)
   {
     return (u64)id << 32 | (u64)pallete << 16 | color;
   }
 
+  inline void DissectKey(u64 key, u32* id, u16* pallete, u16* color) {
+    *id = key >> 32;
+    *pallete = (key >> 16) & 0xffff;
+    *color = key & 0xffff;
+  }
+
   QIcon* ItemIcon(itm_entry* info);
   QIcon* EquipmentIcon(mhw_equipment* equipment);
+
+  // Debug
+  bool DebugDumpAtlas(const QString& path);
+  bool DebugDumpAtlases(const QString& path);
+  bool DebugDumpIcons(const QString& path);
+  bool DebugDumpUsedMask(const QString& path);
 };

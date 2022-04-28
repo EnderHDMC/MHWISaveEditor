@@ -640,3 +640,23 @@ void MHWISaveEditor::SetupDarkMode()
     qApp->setPalette(p);
   }
 }
+
+void MHWISaveEditor::DebugDumpIconsAll()
+{
+  QString dumpPath = Paths::GetIconDumpPath();
+
+  bool success = true;
+  success &= bitmapDB->DebugDumpAtlas(dumpPath);
+  success &= bitmapDB->DebugDumpAtlases(dumpPath);
+  success &= bitmapDB->DebugDumpIcons(dumpPath);
+  success &= bitmapDB->DebugDumpUsedMask(dumpPath);
+
+  Notification* notif = notif->GetInstance();
+  if (success) {
+    notif->ShowMessage(tr("Dumped icons: %1",
+      "Indicate sucessful icon dump, %1 is the path where the icons were dumped to.").arg(dumpPath));
+  }
+  else
+    notif->ShowMessage(tr("Could not dump icons: %1",
+      "Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.").arg(dumpPath));
+}

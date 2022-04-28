@@ -125,13 +125,26 @@
     <property name="title">
      <string comment="Tools menu" extracomment="Contains editor settings and shortcuts.">Tools</string>
     </property>
+    <addaction name="actionSettings"/>
+   </widget>
+   <widget class="QMenu" name="menuDebug">
+    <property name="title">
+     <string comment="Debug menu" extracomment="Shows debug options.">Debug</string>
+    </property>
+    <widget class="QMenu" name="menuDebugIcons">
+     <property name="title">
+      <string comment="Debug -&gt; Icons" extracomment="Shows debug icon options.">Icons</string>
+     </property>
+     <addaction name="actionDumpIconsAll"/>
+    </widget>
     <addaction name="actionOpenEditorData"/>
     <addaction name="separator"/>
-    <addaction name="actionSettings"/>
+    <addaction name="menuDebugIcons"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSlot"/>
    <addaction name="menuTools"/>
+   <addaction name="menuDebug"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
@@ -375,12 +388,20 @@
   </action>
   <action name="actionOpenEditorData">
    <property name="text">
-    <string comment="Tools -&gt; Open editor data" extracomment="Opens location that contains the editor settings and backups.">Open editor data</string>
+    <string comment="Debug -&gt; Open editor data" extracomment="Opens location that contains the editor settings and backups.">Open editor data</string>
    </property>
   </action>
   <action name="actionSettings">
    <property name="text">
     <string comment="Tools -&gt; Settings" extracomment="Opens the settings menu for the editor.">Settings</string>
+   </property>
+  </action>
+  <action name="actionDumpIconsAll">
+   <property name="text">
+    <string comment="Debug -&gt; Icons -&gt; Dump All" extracomment="Dumps all the icons, atlases and icon use masks.">Dump All</string>
+   </property>
+   <property name="shortcut">
+    <string comment="Debug -&gt; Icons -&gt; Dump All"/>
    </property>
   </action>
  </widget>
@@ -530,6 +551,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionDumpIconsAll</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>DebugDumpIconsAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -541,5 +578,6 @@
   <slot>OpenSAVEDATA1000()</slot>
   <slot>EditorTabChange(int)</slot>
   <slot>OpenSettings()</slot>
+  <slot>DebugDumpIconsAll()</slot>
  </slots>
 </ui>

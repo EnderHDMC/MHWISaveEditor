@@ -25,6 +25,7 @@
     <ClInclude Include="types\file\wp_dat_g.h" />
     <ClInclude Include="types\file\wp_dat.h" />
     <ClInclude Include="types\file\rod_inse.h" />
+    <ClInclude Include="utility\math.h" />
     <ClInclude Include="utility\system\paths.h" />
     <ClInclude Include="types\language.h" />
     <ClInclude Include="resource.h" />

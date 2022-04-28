@@ -44,6 +44,9 @@ public slots:
 
   void EditorTabChange(int editorIndex);
 
+  // Debug
+  void DebugDumpIconsAll();
+
 public:
   MHWISaveEditor(QWidget* parent = nullptr);
   ~MHWISaveEditor();
