@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../types.h"
+#include "../mhw_save.h"
 
 #pragma pack(push, 1)
 struct uct_header

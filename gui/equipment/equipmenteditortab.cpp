@@ -22,6 +22,16 @@ EquipmentEditorTab::~EquipmentEditorTab()
     delete ui;
 }
 
+void EquipmentEditorTab::UncraftUnusedEquipment()
+{
+  MHW_SAVE_GUARD;
+  for (size_t i = 0; i < slotViews.count(); i++)
+  {
+    EquipmentSlotView* slotView = slotViews[i];
+    slotView->Uncraft();
+  }
+}
+
 void EquipmentEditorTab::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);

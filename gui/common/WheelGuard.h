@@ -5,8 +5,14 @@
 
 class WheelGuard : public QObject
 {
-public:
+private:
+  static WheelGuard* instance;
   explicit WheelGuard(QObject* parent);
+
+public:
+  static WheelGuard* GetInstance(QObject* parent = nullptr);
+  void Free();
+
 
 protected:
   bool eventFilter(QObject* o, QEvent* e) override;

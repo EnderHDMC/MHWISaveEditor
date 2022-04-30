@@ -98,20 +98,34 @@ void EquipmentDB::Free()
 
 equipment_info* EquipmentDB::GetEquipment(mhw_equipment* equipment)
 {
-  i32 category = equipment->serial_item_category;
+  mhw_equip_category category = equipment->category;
   i32 type = equipment->type;
   u32 id = equipment->id;
 
   equipment_info* info = nullptr;
 
   switch (category) {
-  case 0: info = (equipment_info*)GetEntryArmor(type, id); break;
-  case 1: info = (equipment_info*)GetEntryWeapon(type, id); break;
-  case 2: info = (equipment_info*)GetEntryArmor(type, id); break;
-  case 4: info = (equipment_info*)GetEntryKinsect(type, id); break;
+  case mhw_equip_category::Armor:
+  case mhw_equip_category::Charm:
+    info = (equipment_info*)GetEntryArmor(type, id); break;
+
+  case mhw_equip_category::Weapon:
+    info = (equipment_info*)GetEntryWeapon(type, id); break;
+
+  case mhw_equip_category::Kinsect:
+    info = (equipment_info*)GetEntryKinsect(type, id); break;
   }
 
   return info;
+}
+
+i32 EquipmentDB::GetRawIndex(mhw_equipment* equipment)
+{
+  i32 index = -1;
+  equipment_info* info = GetEquipment(equipment);
+
+  if (info) index = info->am_dat.index;
+  return index;
 }
 
 am_dat_entry* EquipmentDB::GetEntryArmor(i32 type, i32 id)
@@ -337,17 +351,22 @@ rod_inse_entry* EquipmentDB::IndexKinsect(i32 index)
 
 QString EquipmentDB::GetName(mhw_equipment* equipment)
 {
-  i32 category = equipment->serial_item_category;
+  mhw_equip_category category = equipment->category;
   i32 type = equipment->type;
   u32 id = equipment->id;
 
   QString name;
 
   switch (category) {
-  case 0: name = GetNameArmor(type, id); break;
-  case 1: name = GetNameWeapon(type, id); break;
-  case 2: name = GetNameArmor(type, id); break;
-  case 4: name = GetNameKinsect(type, id); break;
+  case mhw_equip_category::Armor:
+  case mhw_equip_category::Charm:
+    name = GetNameArmor(type, id); break;
+
+  case mhw_equip_category::Weapon:
+    name = GetNameWeapon(type, id); break;
+
+  case mhw_equip_category::Kinsect:
+    name = GetNameKinsect(type, id); break;
   }
 
   return name;

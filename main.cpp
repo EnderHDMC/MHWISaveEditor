@@ -8,6 +8,7 @@
 #include "data/BitmapDB.h"
 #include "data/EquipmentDB.h"
 #include "data/ItemDB.h"
+#include "data/SmithyDB.h"
 
 #ifdef Q_OS_WIN
 #include <Windows.h>
@@ -72,6 +73,7 @@ int main(int argc, char* argv[])
 
   ItemDB* itemDB = new ItemDB();
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
+  SmithyDB* smithyDB = smithyDB->GetInstance();
   BitmapDB* bitmapDB = new BitmapDB(itemDB, equipmentDB);
 
   QString uiLanguage = settings->GetUiLanguage();
@@ -91,6 +93,7 @@ int main(int argc, char* argv[])
 
   delete bitmapDB;
   equipmentDB->Free();
+  smithyDB->Free();
   delete itemDB;
 
   return ret;

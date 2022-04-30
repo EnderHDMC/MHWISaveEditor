@@ -2,13 +2,14 @@
 
 #include <QFile>
 
-#include "../crypto/blowfish.h"
-
+#include "../types/types.h"
 #include "../types/language.h"
 
-#include "../types/types.h"
+#include "../crypto/blowfish.h"
 
 #include "../types/file/am_dat.h"
+#include "../types/file/eq_crt.h"
+#include "../types/file/eq_cus.h"
 #include "../types/file/gmd.h"
 #include "../types/file/itm.h"
 #include "../types/file/rod_inse.h"
@@ -81,6 +82,26 @@ static bool ReadMetaFile(itm_meta* meta, const QString& path) {
 static bool ReadMetaFile(am_dat_meta* meta, const QString& path) {
   FreeMetaFile(meta);
   am_dat_header* header = (am_dat_header*)ReadEntireFile(path);
+  if (!header) {
+    return false;
+  }
+
+  return InitMetaFile(meta, header);
+}
+
+static bool ReadMetaFile(eq_crt_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
+  eq_crt_header* header = (eq_crt_header*)ReadEntireFile(path);
+  if (!header) {
+    return false;
+  }
+
+  return InitMetaFile(meta, header);
+}
+
+static bool ReadMetaFile(eq_cus_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
+  eq_cus_header* header = (eq_cus_header*)ReadEntireFile(path);
   if (!header) {
     return false;
   }

@@ -51,9 +51,36 @@
      </property>
     </widget>
    </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="btnUncraft">
+     <property name="text">
+      <string>Uncraft</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnUncraft</sender>
+   <signal>clicked()</signal>
+   <receiver>EquipmentSlotView</receiver>
+   <slot>Uncraft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>Uncraft()</slot>
+ </slots>
 </ui>

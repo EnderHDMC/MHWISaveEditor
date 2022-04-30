@@ -1,6 +1,8 @@
 #pragma once
 #include "types.h"
 
+#pragma warning(push)
+#pragma warning(disable: 26812)
 enum mhw_gender : u32
 {
   Male = 0,
@@ -96,6 +98,16 @@ enum mhw_gamepad_glyphs : u8
   OtherXBOX = 2
 };
 
+enum mhw_equip_category : i32
+{
+  Empty = -1,
+  Armor = 0,
+  Weapon = 1,
+  Charm = 2,
+
+  Kinsect = 4
+};
+
 enum mhw_handler_outfit : u8
 {
   O_The_Handlers_Outfit = 0,
@@ -152,3 +164,4 @@ enum mhw_monster_index : i32
   I_Stygian_Zinogre     =  95, I_Raging_Brachydios    =  96, I_Safi_jiiva          =  97,
   I_Scarred_Yian_Garuga =  99, I_Frostfang_Barioth    = 100, I_Fatalis             = 101
 };
+#pragma warning(pop)

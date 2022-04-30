@@ -15,6 +15,8 @@ public:
   EquipmentEditorTab(QWidget* parent = Q_NULLPTR);
   ~EquipmentEditorTab();
 
+  void UncraftUnusedEquipment();
+
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
   virtual void LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB) override;

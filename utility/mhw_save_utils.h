@@ -81,6 +81,15 @@ static mhw_item_slot* FindCategoryItemOrEmpty(mhw_save_slot* save_slot, itm_entr
   return result;
 }
 
+static bool GiveItem(mhw_item_slot* item_slot, mhw_item_slot* add) {
+  bool replace = item_slot->id != add->id;
+  item_slot->id = add->id;
+  item_slot->amount += add->amount;
+  if (item_slot->amount > 9999) item_slot->amount = 9999;
+
+  return replace;
+}
+
 static bool GiveItem(mhw_item_slot* item_slot, itm_entry* info) {
   bool replace = item_slot->id != info->id;
   item_slot->id = info->id;
@@ -90,7 +99,7 @@ static bool GiveItem(mhw_item_slot* item_slot, itm_entry* info) {
   return replace;
 }
 
-static void DiscoverItem(mhw_save_slot* save_slot, itm_entry* info) {
+static inline void DiscoverItem(mhw_save_slot* save_slot, itm_entry* info) {
   u32 is = info->id / 8;
   u32 isi = info->id % 8;
   save_slot->discovered_items.items[is] |= 1 << isi;
@@ -113,6 +122,54 @@ static mhw_equipment* FindEquipment(mhw_save_slot* save_slot, i32 type, u32 id) 
   }
 
   return result;
+}
+
+static inline void ClearEquipmentSlot(mhw_equipment* equipment) {
+  i32 sort_index = equipment->sort_index;
+  memcpy_s(equipment, sizeof(*equipment), &MHW_EQUIPMENT_EMPTY, sizeof(MHW_EQUIPMENT_EMPTY));
+  equipment->sort_index = sort_index;
+}
+
+#pragma warning(push)
+#pragma warning(disable: 26812)
+static inline bool IsEquipmentEmpty(mhw_equipment* equipment) {
+  return equipment->category == mhw_equip_category::Empty || equipment->type == -1;
+}
+#pragma warning(pop)
+
+static u32 CountEquipmentReferenced(mhw_save_slot* save_slot, mhw_equipment* ref) {
+  mhw_equip_category category = ref->category;
+  i32 type = ref->type;
+  u32 id = ref->id;
+
+  mhw_equipment* equipment = save_slot->equipment;
+  int srcIndex = ref - equipment;
+  u32 referenced = false;
+
+  // Check for references from equipped gear
+  mhw_current_equipment* current_equipment = &save_slot->current_equipment;
+  referenced += current_equipment->weapon == srcIndex;
+  referenced += current_equipment->helmet == srcIndex;
+  referenced += current_equipment->torso == srcIndex;
+  referenced += current_equipment->arms == srcIndex;
+  referenced += current_equipment->coil == srcIndex;
+  referenced += current_equipment->feet == srcIndex;
+  referenced += current_equipment->charm == srcIndex;
+  referenced += current_equipment->kinsect == srcIndex;
+
+  // Check for references from loadouts
+  const int count = COUNTOF(save_slot->equipment_loadouts);
+  for (int i = 0; i < count; ++i) {
+    mhw_equipment_loadout* loadout = save_slot->equipment_loadouts + i;
+    referenced += loadout->weapon_index == srcIndex;
+    referenced += loadout->helmet_index == srcIndex;
+    referenced += loadout->torso_index == srcIndex;
+    referenced += loadout->arms_index == srcIndex;
+    referenced += loadout->coil_index == srcIndex;
+    referenced += loadout->feet_index == srcIndex;
+    referenced += loadout->charm_index == srcIndex;
+  }
+  return referenced;
 }
 
 static mhw_layered_loadout* FindEmptyLayeredLoadout(mhw_save_slot* save_slot) {
@@ -146,7 +203,125 @@ static u32 SetLayeredLoadout(mhw_layered_loadout* loadout, i32 layered, const QS
   return index;
 }
 
-static void ValidateItemSlots(mhw_item_slot* items, int count) {
+/// <summary>
+/// Updates all the references of current equipment &amp; loadouts to reference
+/// the equipment's sort_index instead, this will very likely crash the game.
+/// Should be followed by a call to 'void DefragEquipment(mhw_save_slot* save_slot)'
+/// to fix the crash that would otherwise happen.
+/// Assumes all the references are valid; -1 &lt;= reference &lt; equipment count
+/// </summary>
+/// <param name="save_slot">The save slot to defrag references for.</param>
+static inline void DefragEquipmentReferences(mhw_save_slot* save_slot) {
+  const mhw_equipment* equipment = save_slot->equipment;
+
+  // Assumes all the indices are valid
+  // Update indices of currently equiped gear
+  mhw_current_equipment* current_equipment = &save_slot->current_equipment;
+  if (current_equipment->weapon > -1) current_equipment->weapon = equipment[current_equipment->weapon].sort_index;
+  if (current_equipment->helmet > -1) current_equipment->helmet = equipment[current_equipment->helmet].sort_index;
+  if (current_equipment->torso > -1) current_equipment->torso = equipment[current_equipment->torso].sort_index;
+  if (current_equipment->arms > -1) current_equipment->arms = equipment[current_equipment->arms].sort_index;
+  if (current_equipment->coil > -1) current_equipment->coil = equipment[current_equipment->coil].sort_index;
+  if (current_equipment->feet > -1) current_equipment->feet = equipment[current_equipment->feet].sort_index;
+  if (current_equipment->charm > -1) current_equipment->charm = equipment[current_equipment->charm].sort_index;
+  if (current_equipment->kinsect > -1) current_equipment->kinsect = equipment[current_equipment->kinsect].sort_index;
+
+  // Update indices of loadout gear
+  const int count = COUNTOF(save_slot->equipment_loadouts);
+  for (int i = 0; i < count; ++i) {
+    mhw_equipment_loadout* loadout = save_slot->equipment_loadouts + i;
+    if (loadout->weapon_index > -1) loadout->weapon_index = equipment[loadout->weapon_index].sort_index;
+    if (loadout->helmet_index > -1) loadout->helmet_index = equipment[loadout->helmet_index].sort_index;
+    if (loadout->torso_index > -1) loadout->torso_index = equipment[loadout->torso_index].sort_index;
+    if (loadout->arms_index > -1) loadout->arms_index = equipment[loadout->arms_index].sort_index;
+    if (loadout->coil_index > -1) loadout->coil_index = equipment[loadout->coil_index].sort_index;
+    if (loadout->feet_index > -1) loadout->feet_index = equipment[loadout->feet_index].sort_index;
+    if (loadout->charm_index > -1) loadout->charm_index = equipment[loadout->charm_index].sort_index;
+  }
+}
+
+static inline void SwapEquipmentEntries(mhw_equipment* a, mhw_equipment* b) {
+  mhw_equipment temp;
+  memcpy_s(&temp, sizeof(temp), a, sizeof(*a));
+  memcpy_s(a, sizeof(*a), b, sizeof(*b));
+  memcpy_s(b, sizeof(*b), &temp, sizeof(temp));
+}
+
+/// <summary>
+/// Moves all equipment to the slot equal to their sort_index, this will break the
+/// equipment references in current equipment and the loadouts.
+/// Should be preceded by a call to 'void DefragEquipmentReferences(mhw_save_slot* save_slot)'
+/// to fix adjust the references before-hand, else the game will very likely crash.
+/// 
+/// Assumes all the sort indices are valid; 0 &lt;= sort index &lt; equipment count
+/// </summary>
+/// <param name="save_slot">The save slot to defrag references for.</param>
+static void DefragEquipment(mhw_save_slot* save_slot) {
+  mhw_equipment* equipment = save_slot->equipment;
+  u32* equipment_index_table = save_slot->equipment_index_table;
+  i32 filled = 0;
+
+  i32 count = COUNTOF(save_slot->equipment);
+  for (int i = 0; i < count; ++i) {
+    int index = equipment_index_table[i];
+    mhw_equipment* src = equipment + index;
+    mhw_equipment* dst = equipment + i;
+    i32 srcIndex = src->sort_index;
+    i32 dstIndex = dst->sort_index;
+
+    SwapEquipmentEntries(src, dst);
+    i32 temp = equipment_index_table[srcIndex];
+    equipment_index_table[srcIndex] = equipment_index_table[dstIndex];
+    equipment_index_table[dstIndex] = temp;
+  }
+}
+
+static bool ValidateEquipmentBox(mhw_save_slot* save_slot) {
+  bool sort_index_issue = false;
+  bool index_table_issue = false;
+  
+  // Detection
+  const i32 count = COUNTOF(save_slot->equipment);
+  u32 ref_tally[count] = {};
+  for (int i = 0; i < count; ++i) {
+    int sort_index = save_slot->equipment[i].sort_index;
+    int table_index = save_slot->equipment_index_table[i];
+    if (sort_index >= 0 && sort_index < count) ref_tally[sort_index] |= 1 << 0;
+    if (table_index >= 0 && table_index < count) ref_tally[table_index] |= 1 << 1;
+  }
+  for (int i = 0; i < count; ++i) {
+    sort_index_issue |= !(ref_tally[i] >> 0 & 1);
+    index_table_issue |= !(ref_tally[i] >> 1 & 1);
+    if (index_table_issue && sort_index_issue) break;
+  }
+  bool any_issue = sort_index_issue || index_table_issue;
+
+  // Handling
+  if (index_table_issue && sort_index_issue) {
+    for (int i = 0; i < count; ++i) {
+      save_slot->equipment_index_table[i] = i;
+      save_slot->equipment[i].sort_index = i;
+    }
+  }
+  else if (!sort_index_issue && (index_table_issue)) {
+    for (int i = 0; i < count; ++i) {
+      save_slot->equipment_index_table[i] = save_slot->equipment[i].sort_index;
+    }
+  }
+  else if (!index_table_issue && (sort_index_issue)) {
+    for (int i = 0; i < count; ++i) {
+      save_slot->equipment[i].sort_index = save_slot->equipment_index_table[i];
+    }
+  }
+  else {
+    // No issue detected
+    Q_ASSERT(!any_issue);
+  }
+
+  return !any_issue;
+}
+
+static bool ValidateItemSlots(mhw_item_slot* items, int count) {
   for (int i = 0; i < count; i++) {
     if (items[i].amount == 0) {
       items[i].id = 0;
@@ -156,6 +331,7 @@ static void ValidateItemSlots(mhw_item_slot* items, int count) {
       items[i].amount = 0;
     }
   }
+  return true;
 }
 
 static void ValidateSaveFile(mhw_ib_save* save) {
@@ -171,5 +347,6 @@ static void ValidateSaveFile(mhw_ib_save* save) {
     ValidateItemSlots(storage->decorations, COUNTOF(storage->decorations));
     ValidateItemSlots(storage->items, COUNTOF(storage->items));
     ValidateItemSlots(storage->materials, COUNTOF(storage->materials));
+    ValidateEquipmentBox(save_slot);
   }
 }

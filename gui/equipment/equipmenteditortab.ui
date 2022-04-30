@@ -20,7 +20,7 @@
    <string comment="The title of the 'Equipment Editor' tab in the editor.">Equipment Editor</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QScrollArea" name="scrollArea">
      <property name="widgetResizable">
       <bool>true</bool>
@@ -31,7 +31,7 @@
         <x>0</x>
         <y>0</y>
         <width>380</width>
-        <height>280</height>
+        <height>242</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -40,6 +40,16 @@
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string comment="Note on what gear cannot be uncrafted.">NOTE: You can only uncraft gear that you don't have equipped or in a loadout.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
   </layout>

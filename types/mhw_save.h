@@ -372,16 +372,16 @@ struct mhw_hunter_equipment
 
 struct mhw_current_equipment
 {
-  u32 weapon;
-  u32 helmet;
-  u32 torso;
-  u32 arms;
-  u32 coil;
-  u32 feet;
-  u32 charm;
-  u32 tool1;
-  u32 tool2;
-  u32 kinsect;
+  i32 weapon;
+  i32 helmet;
+  i32 torso;
+  i32 arms;
+  i32 coil;
+  i32 feet;
+  i32 charm;
+  i32 tool1;
+  i32 tool2;
+  i32 kinsect;
 };
 
 struct mhw_arena_record
@@ -578,15 +578,15 @@ struct mhw_equipment_loadout
 {
   u32 slot_id;
   str256 name;
-  u32 weapon_index;
-  u32 helmet_index;
-  u32 torso_index;
-  u32 arms_index;
-  u32 coil_index;
-  u32 feet_index;
-  u32 charm_index;
-  u32 tool1_index;
-  u32 tool2_index;
+  i32 weapon_index;
+  i32 helmet_index;
+  i32 torso_index;
+  i32 arms_index;
+  i32 coil_index;
+  i32 feet_index;
+  i32 charm_index;
+  i32 tool1_index;
+  i32 tool2_index;
   u32 weapon_decos[3];
   u32 helmet_decos[3];
   u32 torso_decos[3];
@@ -612,7 +612,7 @@ struct mhw_layered_loadout
 struct mhw_equipment
 {
   i32 sort_index;
-  i32 serial_item_category;
+  mhw_equip_category category;
   i32 type;
   u32 id;
   u32 level;
@@ -1637,5 +1637,8 @@ union mhw_save_raw
   u8 data[sizeof(mhw_ib_save)];
 };
 #pragma pack(pop)
+
+// Assumptions
+static_assert(COUNTOF(mhw_save_slot::equipment) == COUNTOF(mhw_save_slot::equipment_index_table));
 
 static_assert(sizeof(mhw_ib_save) == MHW_IB_SAVE_SIZE, "Size of MHW:IB Save is not as expected.");

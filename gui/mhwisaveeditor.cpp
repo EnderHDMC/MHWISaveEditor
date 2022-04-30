@@ -48,6 +48,8 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   notif->Register(ui->statusbar);
   notif->SetDefaultMode(NotificationMode::StatusBar);
 
+  scrollGuard = scrollGuard->GetInstance();
+
   statusFile = new QLabel(tr("File: None", "Indicate the currently open file (no file)."), ui->statusbar);
   ui->statusbar->addPermanentWidget(statusFile);
 
@@ -142,6 +144,7 @@ MHWISaveEditor::~MHWISaveEditor()
 void MHWISaveEditor::closeEvent(QCloseEvent* event)
 {
   settings->Free();
+  scrollGuard->Free();
 }
 
 bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt, bool validate)
@@ -369,8 +372,7 @@ void MHWISaveEditor::LoadSaveSlot()
     cloneSlotActions[i]->setEnabled(i != mhwSaveIndex);
   }
 
-  int index = ui->tabWidget->currentIndex();
-  SaveLoader* loader = editors[index];
+  SaveLoader* loader = GetActiveEditorTab();
   loader->Load(mhwSave, mhwSaveIndex);
 }
 
@@ -467,7 +469,15 @@ void MHWISaveEditor::CloneSlot(int slot)
   memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Cloned slot: %1 to slot: %2.", "Indicate a slot was cloned, %1 is the current slot, %2 is the target slot.").arg(mhwSaveIndex + 1).arg(slot + 1));
+  notif->ShowMessage(tr("Cloned slot: %1 to slot: %2.",
+    "Indicate a slot was cloned, %1 is the current slot, %2 is the target slot.")
+    .arg(mhwSaveIndex + 1).arg(slot + 1));
+}
+
+void MHWISaveEditor::UncraftUnusedEquipment()
+{
+  EquipmentEditorTab* equipTab = static_cast<EquipmentEditorTab*>(equipmentEditor);
+  equipTab->UncraftUnusedEquipment();
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)
@@ -494,6 +504,8 @@ void MHWISaveEditor::OpenSettings()
   LoadItemLanguage(language, true);
 }
 
+#pragma warning(push)
+#pragma warning(disable: 26812)
 void MHWISaveEditor::LoadItemLanguage(game_language language, bool doReload) {
   game_language current = itemDB->CurrentLanguage();
 
@@ -506,6 +518,7 @@ void MHWISaveEditor::LoadItemLanguage(game_language language, bool doReload) {
     LoadSaveSlot();
   }
 }
+#pragma warning(pop)
 
 void MHWISaveEditor::Backup() {
   mhw_save_raw* saveWrite = MHWS_Save();
@@ -641,6 +654,12 @@ void MHWISaveEditor::SetupDarkMode()
   }
 }
 
+SaveLoader* MHWISaveEditor::GetActiveEditorTab()
+{
+  int index = ui->tabWidget->currentIndex();
+  return editors[index];
+}
+
 void MHWISaveEditor::DebugDumpIconsAll()
 {
   QString dumpPath = Paths::GetIconDumpPath();
@@ -659,4 +678,18 @@ void MHWISaveEditor::DebugDumpIconsAll()
   else
     notif->ShowMessage(tr("Could not dump icons: %1",
       "Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.").arg(dumpPath));
+}
+
+void MHWISaveEditor::DebugDefragEquipment()
+{
+  MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  int mhwSaveIndex = MHW_SaveIndex();
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
+  DefragEquipmentReferences(mhwSaveSlot);
+  DefragEquipment(mhwSaveSlot);
+
+  SaveLoader* loader = GetActiveEditorTab();
+  if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
 }

@@ -18,10 +18,13 @@ public:
     // Inherited via SaveLoader
     virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
 
+public slots:
+  void Uncraft();
+
 private:
     Ui::EquipmentSlotView *ui;
 
-    void UpdateEquipDisplay(mhw_equipment* equipment);
+    void UpdateEquipDisplay(mhw_equipment* equipment, bool uncraftable);
 
     int equipslot = 0;
 };

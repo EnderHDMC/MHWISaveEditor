@@ -178,14 +178,14 @@ QIcon* BitmapDB::EquipmentIcon(mhw_equipment* equipment)
   const int icon_pallete = 1;
 
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
-  i32 category = equipment->serial_item_category;
+  mhw_equip_category category = equipment->category;
   i32 type = equipment->type;
   u32 id = equipment->id;
   u64 key = -1;
 
   switch (category) {
-  case 0: // Armors
-  case 2: // Charms
+  case mhw_equip_category::Armor:
+  case mhw_equip_category::Charm:
   {
     am_dat_entry* armor = equipmentDB->GetEntryArmor(type, id);
     int icon_id = 16 * 14 + armor->equip_slot;
@@ -194,7 +194,7 @@ QIcon* BitmapDB::EquipmentIcon(mhw_equipment* equipment)
     key = BuildKey(icon_id, icon_pallete, icon_color);
   } break;
 
-  case 1: // Weapons
+  case mhw_equip_category::Weapon:
   {
     wp_dat_entry* wp_dat = equipmentDB->GetEntryWeaponMelee(type, id);
     wp_dat_g_entry* wp_dat_g = equipmentDB->GetEntryWeaponRanged(type, id);
@@ -207,7 +207,7 @@ QIcon* BitmapDB::EquipmentIcon(mhw_equipment* equipment)
     key = BuildKey(icon_id, icon_pallete, icon_color);
   }; break;
 
-  case 4: // Kinsects
+  case mhw_equip_category::Kinsect:
   {
     rod_inse_entry* kinsect = equipmentDB->GetEntryKinsect(type, id);
     int icon_id = 16 * 14 + 8 + kinsect->attack_type;

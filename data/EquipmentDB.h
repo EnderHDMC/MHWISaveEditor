@@ -15,6 +15,11 @@ union equipment_info {
   rod_inse_entry rod_inse;
 };
 
+// Required by EquipmentDB::GetRawIndex, we assume the index field is in the same position in all the members of equipment_info
+static_assert(offsetof(am_dat_entry, index) == offsetof(wp_dat_entry, index)
+            && offsetof(wp_dat_entry, index) == offsetof(wp_dat_g_entry, index)
+            && offsetof(wp_dat_g_entry, index) == offsetof(rod_inse_entry, index));
+
 class EquipmentDB
 {
 private:
@@ -54,6 +59,7 @@ public:
   void Free();
 
   equipment_info* GetEquipment(mhw_equipment* equipment);
+  i32 GetRawIndex(mhw_equipment* equipment);
 
   // Armor
   am_dat_entry* GetEntryArmor(i32 type, i32 id);

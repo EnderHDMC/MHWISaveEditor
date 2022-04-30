@@ -126,6 +126,8 @@
      <string comment="Tools menu" extracomment="Contains editor settings and shortcuts.">Tools</string>
     </property>
     <addaction name="actionSettings"/>
+    <addaction name="separator"/>
+    <addaction name="actionUncraftEquipment"/>
    </widget>
    <widget class="QMenu" name="menuDebug">
     <property name="title">
@@ -137,7 +139,15 @@
      </property>
      <addaction name="actionDumpIconsAll"/>
     </widget>
+    <widget class="QMenu" name="menuFixes">
+     <property name="title">
+      <string comment="Debug -&gt; Fixes" extracomment="Scripts to fix some issues that arise from memory edits.">Fixes</string>
+     </property>
+     <addaction name="actionFixEquipmentTable"/>
+    </widget>
     <addaction name="actionOpenEditorData"/>
+    <addaction name="separator"/>
+    <addaction name="menuFixes"/>
     <addaction name="separator"/>
     <addaction name="menuDebugIcons"/>
    </widget>
@@ -404,6 +414,16 @@
     <string comment="Debug -&gt; Icons -&gt; Dump All"/>
    </property>
   </action>
+  <action name="actionFixEquipmentTable">
+   <property name="text">
+    <string comment="Debug -&gt; Fixes -&gt; Defrag Equipment Table" extracomment="Matches equipment to their sort order.">Defrag Equipment Table</string>
+   </property>
+  </action>
+  <action name="actionUncraftEquipment">
+   <property name="text">
+    <string comment="Tools -&gt; Uncraft Unused Equipment" extracomment="Uncrafts all equipment not equipped or in a loadout.">Uncraft Unused Equipment</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -567,6 +587,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionFixEquipmentTable</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>DebugDefragEquipment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionUncraftEquipment</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>UncraftUnusedEquipment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -579,5 +631,7 @@
   <slot>EditorTabChange(int)</slot>
   <slot>OpenSettings()</slot>
   <slot>DebugDumpIconsAll()</slot>
+  <slot>DebugDefragEquipment()</slot>
+  <slot>UncraftUnusedEquipment()</slot>
  </slots>
 </ui>

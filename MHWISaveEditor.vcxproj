@@ -21,6 +21,9 @@
     <ClInclude Include="gui\common\WheelGuard.h" />
     <QtMoc Include="gui\equipment\equipmenteditortab.h" />
     <QtMoc Include="gui\equipment\equipmentslotview.h" />
+    <ClInclude Include="data\SmithyDB.h" />
+    <ClInclude Include="types\file\eq_cus.h" />
+    <ClInclude Include="types\file\eq_crt.h" />
     <ClInclude Include="types\file\uct.h" />
     <ClInclude Include="types\file\wp_dat_g.h" />
     <ClInclude Include="types\file\wp_dat.h" />
@@ -73,6 +76,7 @@
     <ClCompile Include="gui\mhwisaveeditor.cpp" />
     <ClCompile Include="gui\settings\settingsui.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="data\SmithyDB.cpp" />
     <ClCompile Include="utility\common\Settings.cpp" />
     <ClCompile Include="utility\common\StringByteLengthValidator.cpp" />
   </ItemGroup>
@@ -92,6 +96,8 @@
     <None Include="res\CustomFlags.bin" />
     <None Include="res\mapping\am_dat.bt" />
     <None Include="res\mapping\CalcUnknown.ipynb" />
+    <None Include="res\mapping\eq_crt.bt" />
+    <None Include="res\mapping\eq_cus.bt" />
     <None Include="res\mapping\Mapping.ods" />
     <None Include="res\mapping\mask_generator.1sc" />
     <None Include="res\mapping\MonsterHunterWorld.CT" />
