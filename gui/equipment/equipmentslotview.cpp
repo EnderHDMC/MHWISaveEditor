@@ -34,14 +34,18 @@ void EquipmentSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   mhw_equipment* equipment = mhwSaveSlot->equipment;
   mhw_equipment* equipmentSlot = equipment + equipIndex;
   equipment_info* info = equipmentDB->GetEquipment(equipmentSlot);
-  if (!info) {
-    // TODO: Think about what we want to do here.
-  }
 
   bool referenced = CountEquipmentReferenced(mhwSaveSlot, equipmentSlot);
   bool empty = IsEquipmentEmpty(equipmentSlot);
-  UpdateEquipDisplay(equipmentSlot, !empty && !referenced);
+  if (!info && !empty) {
+    qCritical().nospace() << "Invalid equipment detected, equipment info: "
+      << "index = " << equipslot
+      << ", category = " << equipment->category
+      << ", type = " << equipment->type
+      << ", id = " << equipment->id;
+  }
 
+  UpdateEquipDisplay(equipmentSlot, !empty && !referenced);
   SaveLoader::FinishLoad();
 }
 
@@ -74,6 +78,7 @@ void EquipmentSlotView::Uncraft()
   }
 
   ClearEquipmentSlot(equipmentSlot);
+  ui->btnUncraft->clearFocus(); // Prevent scrolling to the next widget.
   UpdateEquipDisplay(equipmentSlot, false);
 }
 

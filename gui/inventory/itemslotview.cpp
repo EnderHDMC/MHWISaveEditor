@@ -35,7 +35,10 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
   itm_entry* info = itemDB->GetItemByIdSafe(itemSlot->id);
   if (!info) {
-    // TODO: Think about what we want to do here.
+    qCritical().nospace() << "Invalid item detected, item info: "
+      << "index = " << invslot
+      << ", id = " << itemSlot->id
+      << ", amount = " << itemSlot->amount;
   }
 
   UpdateItemDisplay(info);

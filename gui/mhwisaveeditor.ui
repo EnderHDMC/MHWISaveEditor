@@ -140,6 +140,9 @@
      <addaction name="actionDumpIconsAll"/>
     </widget>
     <widget class="QMenu" name="menuFixes">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string comment="Debug -&gt; Fixes" extracomment="Scripts to fix some issues that arise from memory edits.">Fixes</string>
      </property>
@@ -420,6 +423,9 @@
    </property>
   </action>
   <action name="actionUncraftEquipment">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string comment="Tools -&gt; Uncraft Unused Equipment" extracomment="Uncrafts all equipment not equipped or in a loadout.">Uncraft Unused Equipment</string>
    </property>

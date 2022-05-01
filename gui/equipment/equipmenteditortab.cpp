@@ -25,11 +25,14 @@ EquipmentEditorTab::~EquipmentEditorTab()
 void EquipmentEditorTab::UncraftUnusedEquipment()
 {
   MHW_SAVE_GUARD;
+
+  qInfo("Uncrafting all unused all unused equipment...");
   for (size_t i = 0; i < slotViews.count(); i++)
   {
     EquipmentSlotView* slotView = slotViews[i];
     slotView->Uncraft();
   }
+  qInfo("Unused equipment has been uncrafted.");
 }
 
 void EquipmentEditorTab::Load(mhw_save_raw* mhwSave, int slotIndex)

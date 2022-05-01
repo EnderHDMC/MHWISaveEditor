@@ -100,10 +100,14 @@ void HunterInfo::UncapGuidingLands()
   MHW_SAVE_GUARD;
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
+  u32 old_level = mhwSaveSlot->guiding_lands.level_total;
   mhwSaveSlot->guiding_lands.level_total = GUIDING_LANDS_LEVEL_UNCAP;
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Guiding Lands levels uncapped.", "Notify that the Guiding Lands region levels have been uncapped."), 5000);
+  notif->ShowMessage(tr("Guiding Lands levels uncapped, xp %1 -> %2.",
+    "Notify that the Guiding Lands region levels have been uncapped. %1 is the old experience level, %2 is the the uncapped experience level.")
+    .arg(old_level).arg(GUIDING_LANDS_LEVEL_UNCAP), 5000);
+  qInfo().nospace() << "Guiding Lands levels uncapped, xp " << old_level << " -> " << GUIDING_LANDS_LEVEL_UNCAP;
 }
 
 void HunterInfo::PlaytimeChange(double value)

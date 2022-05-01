@@ -152,7 +152,7 @@
       <item row="0" column="1">
        <widget class="QPushButton" name="btnLevelCapGL">
         <property name="text">
-         <string comment="Button to uncap the guiding lands levels.">Uncap Guiding Lands Levels</string>
+         <string comment="Button to uncap the guiding lands levels.">Uncap Guiding Lands Levels (MR100+)</string>
         </property>
        </widget>
       </item>

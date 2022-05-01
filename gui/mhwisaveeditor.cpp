@@ -73,13 +73,24 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(switchSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SwitchSlot(int)));
   connect(cloneSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(CloneSlot(int)));
 
+  const QString gamePath = Paths::GetGamePath();
+  const QString gameSaveFilePath = Paths::GetGameSaveFilePath();
+  const QString dataPath = Paths::GetDataPath();
+  ui->actionOpenGameLocation->setEnabled(!gamePath.isNull());
+  ui->actionOpenSaveLocation->setEnabled(!gameSaveFilePath.isNull());
+  ui->actionOpenSAVEDATA1000->setEnabled(!gameSaveFilePath.isNull());
+  ui->actionOpenEditorData->setEnabled(!dataPath.isNull());
+  qInfo().noquote() << "Game path: " << gamePath;
+  qInfo().noquote() << "Game save file path: " << gameSaveFilePath;
+  qInfo().noquote() << "Data path: " << dataPath;
+
   openSignalMapper = new QSignalMapper(this);
   connect(ui->actionOpenGameLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
-  openSignalMapper->setMapping(ui->actionOpenGameLocation, Paths::GetGamePath());
+  openSignalMapper->setMapping(ui->actionOpenGameLocation, gamePath);
   connect(ui->actionOpenSaveLocation, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
-  openSignalMapper->setMapping(ui->actionOpenSaveLocation, Paths::GetDefaultSavePath());
+  openSignalMapper->setMapping(ui->actionOpenSaveLocation, gameSaveFilePath);
   connect(ui->actionOpenEditorData, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
-  openSignalMapper->setMapping(ui->actionOpenEditorData, Paths::GetDataPath());
+  openSignalMapper->setMapping(ui->actionOpenEditorData, dataPath);
   connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
 
   dumpSignalMapper = new QSignalMapper(this);
@@ -220,7 +231,7 @@ void MHWISaveEditor::Dump(int number)
       success = false;
     }
     else {
-      LoadFile(Paths::GetDefaultSavePath(), &buffer);
+      LoadFile(Paths::GetGameSaveFilePath(), &buffer);
       saveWrite = buffer;
     }
   }
@@ -240,7 +251,7 @@ void MHWISaveEditor::Dump(int number)
 
 void MHWISaveEditor::Open()
 {
-  QString path = Paths::GetDefaultSaveDir();
+  QString path = Paths::GetGameSavePath();
   QString filepath = QString();
 
   QFileDialog dialog(nullptr);
@@ -258,7 +269,7 @@ void MHWISaveEditor::Open()
 
 void MHWISaveEditor::OpenSAVEDATA1000()
 {
-  QString path = Paths::GetDefaultSavePath();
+  QString path = Paths::GetGameSaveFilePath();
   LoadFile(path);
 }
 
@@ -279,7 +290,7 @@ void MHWISaveEditor::SaveAs()
 {
   MHW_SAVE_GUARD;
 
-  QString path = Paths::GetDefaultSaveDir();
+  QString path = Paths::GetGameSavePath();
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
@@ -318,6 +329,8 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->actionSaveAs->setEnabled(true);
   ui->menuSwitchWith->setEnabled(true);
   ui->menuCloneTo->setEnabled(true);
+  ui->actionUncraftEquipment->setEnabled(true);
+  ui->menuFixes->setEnabled(true);
   for (int i = 0; i < selectSlotActions.size(); i++) {
     selectSlotActions[i]->setEnabled(true);
   }
@@ -452,7 +465,8 @@ void MHWISaveEditor::SwitchSlot(int slot)
   free(temp);
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Switched slots: %1 to slot: %2.", "Indicate a successful slot switch, %1 is the current slot, %2 is the target slot.").arg(mhwSaveIndex + 1).arg(slot + 1));
+  notif->ShowMessage(tr("Switched slots: %1 and %2", "Indicate a successful slot switch, %1 is the current slot, %2 is the target slot.").arg(mhwSaveIndex + 1).arg(slot + 1));
+  qInfo().nospace() << "Switched slots: " << mhwSaveIndex << " and " << slot;
 
   LoadSaveSlot();
 }
@@ -469,9 +483,10 @@ void MHWISaveEditor::CloneSlot(int slot)
   memcpy_s(saveB, sizeof(mhw_save_slot), saveA, sizeof(mhw_save_slot));
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("Cloned slot: %1 to slot: %2.",
+  notif->ShowMessage(tr("Cloned slot: %1 to %2",
     "Indicate a slot was cloned, %1 is the current slot, %2 is the target slot.")
     .arg(mhwSaveIndex + 1).arg(slot + 1));
+  qInfo().nospace() << "Cloned slot: " << mhwSaveIndex << " to " << slot;
 }
 
 void MHWISaveEditor::UncraftUnusedEquipment()
@@ -532,7 +547,7 @@ void MHWISaveEditor::Backup() {
       success = false;
     }
     else {
-      success = LoadFile(Paths::GetDefaultSavePath(), &buffer);
+      success = LoadFile(Paths::GetGameSaveFilePath(), &buffer);
       saveWrite = buffer;
     }
   }
@@ -592,7 +607,7 @@ void MHWISaveEditor::Restore() {
   };
 
   memcpy(savep->data, saveBlob.constData(), saveBlob.length());
-  SaveLoader::LoadFile(Paths::GetDefaultSavePath());
+  SaveLoader::LoadFile(Paths::GetGameSaveFilePath());
   Load(savep, -1);
 }
 
@@ -674,10 +689,13 @@ void MHWISaveEditor::DebugDumpIconsAll()
   if (success) {
     notif->ShowMessage(tr("Dumped icons: %1",
       "Indicate sucessful icon dump, %1 is the path where the icons were dumped to.").arg(dumpPath));
+    qInfo().noquote() << "Dumped all icons: " << dumpPath;
   }
-  else
+  else {
     notif->ShowMessage(tr("Could not dump icons: %1",
       "Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.").arg(dumpPath));
+    qWarning().noquote() << "Failed to dump all icons: " << dumpPath;
+  }
 }
 
 void MHWISaveEditor::DebugDefragEquipment()
@@ -687,8 +705,11 @@ void MHWISaveEditor::DebugDefragEquipment()
   int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
+  qInfo("Defragging equipment references...");
   DefragEquipmentReferences(mhwSaveSlot);
+  qInfo("Defragging equipment...");
   DefragEquipment(mhwSaveSlot);
+  qInfo("Defragging finished.");
 
   SaveLoader* loader = GetActiveEditorTab();
   if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);

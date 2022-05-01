@@ -224,7 +224,7 @@ bool BitmapDB::DebugDumpAtlas(const QString& path)
 {
   QDir outDir = QDir(path);
   QString outPath = outDir.path();
-  if (!outDir.exists()) return false;
+  if (path.isNull() || !outDir.exists()) return false;
 
   const int iconCount = icons.count();
   const int atlasIconCount = RoundUpPow4(iconCount);
@@ -234,10 +234,10 @@ bool BitmapDB::DebugDumpAtlas(const QString& path)
   const int atlasHeight = atlasCountRoot;
   const int atlasCanvasWidth = atlasWidth * iconWidth;
   const int atlasCanvasHeight = atlasHeight * iconHeight;
-  
+
   QPainter p;
   QImage atlas(atlasCanvasWidth, atlasCanvasHeight, QImage::Format_ARGB32);
-  
+
   p.begin(&atlas);
   p.setCompositionMode(QPainter::CompositionMode_Source);
   p.fillRect(atlas.rect(), Qt::transparent);
@@ -265,17 +265,25 @@ bool BitmapDB::DebugDumpAtlas(const QString& path)
   }
 
   p.end();
-  atlas.save(QString("%1/atlas.png").arg(outPath));
 
-  return true;
+  QString filepath = QString("%1/atlas.png").arg(outPath);
+  bool success = atlas.save(filepath);
+  if (success) {
+    qInfo().noquote() << "Dumped atlas:" << filepath;
+  }
+  else {
+    qWarning().noquote() << "Failed to dump atlas:" << filepath;
+  }
+  return success;
 }
 
 bool BitmapDB::DebugDumpAtlases(const QString& path)
 {
   QDir outDir = QDir(path);
   QString outPath = outDir.path();
-  if (!outDir.exists()) return false;
+  if (path.isNull() || !outDir.exists()) return false;
 
+  bool success = true;
   QMapIterator<u32, QImage*> tinter(iconTints);
   while (tinter.hasNext()) {
     tinter.next();
@@ -285,20 +293,32 @@ bool BitmapDB::DebugDumpAtlases(const QString& path)
     u16 icon_color = 0;
     DissectKey(key, &icon_id, &icon_pallete, &icon_color);
 
+    QString filepath = QString("%1/atlas_p%2_c%3.png").arg(outPath).arg(icon_pallete).arg(icon_color);
     QImage* tint = tinter.value();
-    if (tint)
-      tint->save(QString("%1/atlas_p%2_c%3.png").arg(outPath).arg(icon_pallete).arg(icon_color));
+    bool localSuccess = (bool)tint;
+    if (localSuccess) {
+      localSuccess &= tint->save(filepath);
+    }
+
+    success &= localSuccess;
+    if (localSuccess) {
+      qInfo().noquote() << "Dumped atlas:" << filepath;
+    }
+    else {
+      qWarning().noquote() << "Failed to dump atlas:" << filepath;
+    }
   }
 
-  return true;
+  return success;
 }
 
 bool BitmapDB::DebugDumpIcons(const QString& path)
 {
   QDir outDir = QDir(path);
   QString outPath = outDir.path();
-  if (!outDir.exists()) return false;
+  if (path.isNull() || !outDir.exists()) return false;
 
+  bool success = true;
   QMapIterator<u64, QIcon*> iconIterator(icons);
   while (iconIterator.hasNext()) {
     iconIterator.next();
@@ -308,21 +328,30 @@ bool BitmapDB::DebugDumpIcons(const QString& path)
     u16 icon_color = 0;
     DissectKey(key, &icon_id, &icon_pallete, &icon_color);
 
+    QString filepath = QString("%1/item_i%2_p%3_c%4.png").arg(outPath).arg(icon_id).arg(icon_pallete).arg(icon_color);
     QIcon* icon = iconIterator.value();
-    if (icon) {
+    bool localSuccess = (bool)icon;
+    if (localSuccess) {
       QPixmap iconPixmap = icon->pixmap(icon->availableSizes().first());
-      iconPixmap.save(QString("%1/item_i%2_p%3_c%4.png").arg(outPath).arg(icon_id).arg(icon_pallete).arg(icon_color));
+      localSuccess &= iconPixmap.save(filepath);
+    }
+
+    if (localSuccess) {
+      qInfo().noquote() << "Dumped icon:" << filepath;
+    }
+    else {
+      qWarning().noquote() << "Failed to dump icon:" << filepath;
     }
   }
 
-  return true;
+  return success;
 }
 
 bool BitmapDB::DebugDumpUsedMask(const QString& path)
 {
   QDir outDir = QDir(path);
   QString outPath = outDir.path();
-  if (!outDir.exists()) return false;
+  if (path.isNull() || !outDir.exists()) return false;
 
   const int iconCount = icons.count();
   const int atlasIconCount = RoundUpPow4(iconCount);
@@ -370,9 +399,15 @@ bool BitmapDB::DebugDumpUsedMask(const QString& path)
 
   p.setCompositionMode(QPainter::CompositionMode_SourceOver);
   p.drawTiledPixmap(usedImage.rect(), brushPattern);
-
   p.end();
-  usedImage.save(QString("%1/used.png").arg(outPath));
 
-  return true;
+  QString filepath = QString("%1/used.png").arg(outPath);
+  bool success = usedImage.save(filepath);
+  if (success) {
+    qInfo().noquote() << "Dumped used mask:" << filepath;
+  }
+  else {
+    qWarning().noquote() << "Failed to dump used mask:" << filepath;
+  }
+  return success;
 }
