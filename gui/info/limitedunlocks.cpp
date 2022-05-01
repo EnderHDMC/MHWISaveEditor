@@ -92,7 +92,7 @@ void LimitedUnlocks::GiveArtemisGear()
       u32 sort_index = equipment->sort_index;
       memcpy_s(equipment, sizeof(mhw_equipment), &MHW_EQUIPMENT_EMPTY, sizeof(mhw_equipment));
       equipment->sort_index = sort_index;
-      equipment->serial_item_category = 0;
+      equipment->category = mhw_equip_category::Armor;
       equipment->type = type;
       equipment->id = ARTEMIS_GEAR_ID;
     }

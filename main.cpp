@@ -8,10 +8,34 @@
 #include "data/BitmapDB.h"
 #include "data/EquipmentDB.h"
 #include "data/ItemDB.h"
+#include "data/SmithyDB.h"
 
 #ifdef Q_OS_WIN
 #include <Windows.h>
 #endif // Q_OS_WIN
+
+static void MessagePrintLog(QtMsgType type, const QMessageLogContext& context, const QString& msg)
+{
+  static QString logPath = Paths::GetDataPath() + "/EnderHDMC/MHWI Save Editor/MHWISaveEditor.log";
+  static QFile logFile(logPath);
+  if (!logFile.isOpen()) logFile.open(QIODevice::WriteOnly);
+  static QTextStream logger(&logFile);
+
+  QString typeStr = "None";
+  FILE* output = stdout;
+  switch (type) {
+  case QtDebugMsg:    typeStr = "Debug";    output = stderr; break;
+  case QtWarningMsg:  typeStr = "Warning";  output = stderr; break;
+  case QtCriticalMsg: typeStr = "Critical"; output = stderr; break;
+  case QtFatalMsg:    typeStr = "Fatal";    output = stderr; break;
+  case QtInfoMsg:     typeStr = "Info";     output = stdout; break;
+  }
+
+  QByteArray printMessage = QString("%1: %2\n").arg(typeStr).arg(msg).toLocal8Bit();
+  fprintf(output, "%s", printMessage.constData());
+  logger << printMessage;
+  logger.flush();
+}
 
 bool OpenConsole()
 {
@@ -57,7 +81,8 @@ int main(int argc, char* argv[])
 
   bool debugger = Settings::DebuggerPresent();
   bool showConsole = settings->GetShowConsole();
-  if (!debugger && showConsole) OpenConsole();
+  if (!debugger) qInstallMessageHandler(MessagePrintLog);
+  if (!debugger || showConsole) OpenConsole();
 
   qInfo("Debugger present: %d", debugger);
   settings->LogReadPath();
@@ -71,8 +96,9 @@ int main(int argc, char* argv[])
   qInfo("Current path: %s", qUtf8Printable(QDir::currentPath()));
 
   ItemDB* itemDB = new ItemDB();
-  BitmapDB* bitmapDB = new BitmapDB(itemDB);
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
+  SmithyDB* smithyDB = smithyDB->GetInstance();
+  BitmapDB* bitmapDB = new BitmapDB(itemDB, equipmentDB);
 
   QString uiLanguage = settings->GetUiLanguage();
   QTranslator translator;
@@ -89,9 +115,10 @@ int main(int argc, char* argv[])
   w.show();
   int ret = a.exec();
 
-  delete itemDB;
   delete bitmapDB;
   equipmentDB->Free();
+  smithyDB->Free();
+  delete itemDB;
 
   return ret;
 }

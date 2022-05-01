@@ -9,7 +9,7 @@ ItemSlotView::ItemSlotView(const inventory_area* area, int slot, QWidget* parent
   ui = new Ui::ItemSlotView();
   ui->setupUi(this);
 
-  WheelGuard* guard = new WheelGuard(ui->spnCount);
+  WheelGuard* guard = guard->GetInstance();
   ui->spnCount->installEventFilter(guard);
 
   this->area = area;
@@ -35,7 +35,10 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   mhw_item_slot* itemSlot = ((mhw_item_slot*)(slot)+invslot);
   itm_entry* info = itemDB->GetItemByIdSafe(itemSlot->id);
   if (!info) {
-    // TODO: Think about what we want to do here.
+    qCritical().nospace() << "Invalid item detected, item info: "
+      << "index = " << invslot
+      << ", id = " << itemSlot->id
+      << ", amount = " << itemSlot->amount;
   }
 
   UpdateItemDisplay(info);
@@ -49,7 +52,7 @@ void ItemSlotView::UpdateItemDisplay(itm_entry* info)
   QIcon* icon = bitmapDB->ItemIcon(info);
   QString itemName = itemDB->ItemName(info);
 
-  ui->btnIcon->setIcon(icon ? *icon : QIcon());
+  ui->btnIcon->setIcon(*icon);
   ui->btnIcon->setText(itemName);
 }
 

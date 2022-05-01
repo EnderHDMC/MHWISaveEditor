@@ -84,6 +84,8 @@ static bool InitMetaFile(gmd_meta* meta, gmd_header* header) {
     return false;
   }
 
+#pragma warning(push)
+#pragma warning(disable : 6386)
   u32 key_index = 0;
   u8* key_end = meta->first_key + header->key_block_size;
   for (u8* key = meta->first_key; key < key_end && key_index < header->key_count; key++) {
@@ -99,6 +101,7 @@ static bool InitMetaFile(gmd_meta* meta, gmd_header* header) {
     str_index++;
     str += strlen((char*)str);
   }
+#pragma warning(pop)
 
   if (key_index != header->key_count || str_index != header->string_count) {
     FreeMetaFile(meta);

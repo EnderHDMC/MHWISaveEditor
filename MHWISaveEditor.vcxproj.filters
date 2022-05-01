@@ -119,6 +119,21 @@
     <ClInclude Include="types\file\rod_inse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="types\file\uct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data\SmithyDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\file\eq_crt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\file\eq_cus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp">
@@ -169,6 +184,15 @@
     <ClCompile Include="data\EquipmentDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gui\equipment\equipmenteditortab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\equipment\equipmentslotview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data\SmithyDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="gui\info\generalinfo.h">
@@ -195,6 +219,12 @@
     <QtMoc Include="gui\settings\settingsui.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="gui\equipment\equipmenteditortab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="gui\equipment\equipmentslotview.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\info\generalinfo.ui">
@@ -219,6 +249,12 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="gui\settings\settingsui.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gui\equipment\equipmenteditortab.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="gui\equipment\equipmentslotview.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -263,6 +299,8 @@
     <None Include="res\mapping\wp_dat.bt" />
     <None Include="res\mapping\wp_dat_g.bt" />
     <None Include="res\mapping\rod_inse.bt" />
+    <None Include="res\mapping\eq_crt.bt" />
+    <None Include="res\mapping\eq_cus.bt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">

@@ -98,20 +98,34 @@ void EquipmentDB::Free()
 
 equipment_info* EquipmentDB::GetEquipment(mhw_equipment* equipment)
 {
-  i32 category = equipment->serial_item_category;
+  mhw_equip_category category = equipment->category;
   i32 type = equipment->type;
   u32 id = equipment->id;
 
   equipment_info* info = nullptr;
 
   switch (category) {
-  case 0: info = (equipment_info*)GetEntryArmor(type, id); break;
-  case 1: info = (equipment_info*)GetEntryWeapon(type, id); break;
-  case 2: info = (equipment_info*)GetEntryArmor(type, id); break;
-  case 4: info = (equipment_info*)GetEntryKinsect(type, id); break;
+  case mhw_equip_category::Armor:
+  case mhw_equip_category::Charm:
+    info = (equipment_info*)GetEntryArmor(type, id); break;
+
+  case mhw_equip_category::Weapon:
+    info = (equipment_info*)GetEntryWeapon(type, id); break;
+
+  case mhw_equip_category::Kinsect:
+    info = (equipment_info*)GetEntryKinsect(type, id); break;
   }
 
   return info;
+}
+
+i32 EquipmentDB::GetRawIndex(mhw_equipment* equipment)
+{
+  i32 index = -1;
+  equipment_info* info = GetEquipment(equipment);
+
+  if (info) index = info->am_dat.index;
+  return index;
 }
 
 am_dat_entry* EquipmentDB::GetEntryArmor(i32 type, i32 id)
@@ -151,6 +165,16 @@ QString EquipmentDB::GetNameArmor(i32 type, i32 id)
   }
 
   return name;
+}
+
+int EquipmentDB::CountArmor()
+{
+  return am_dat.header->entry_count;
+}
+
+am_dat_entry* EquipmentDB::IndexArmor(i32 index)
+{
+  return &am_dat.entries[index];
 }
 
 wp_dat_entry* EquipmentDB::GetEntryWeaponMelee(i32 type, i32 id)
@@ -245,6 +269,42 @@ QString EquipmentDB::GetNameWeapon(i32 type, i32 id)
   return name;
 }
 
+int EquipmentDB::CountWeaponMelee(i32 type)
+{
+  int count = 0;
+
+  wp_dat_meta* wp_dat = map_wp_dat.value(type);
+  if (wp_dat) count = wp_dat->header->entry_count;
+  return count;
+}
+
+int EquipmentDB::CountWeaponRanged(i32 type)
+{
+  int count = 0;
+
+  wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
+  if (wp_dat_g) count = wp_dat_g->header->entry_count;
+  return count;
+}
+
+wp_dat_entry* EquipmentDB::IndexWeaponMelee(i32 type, i32 index)
+{
+  wp_dat_entry* entry = nullptr;
+
+  wp_dat_meta* wp_dat = map_wp_dat.value(type);
+  if (wp_dat) entry = &wp_dat->entries[index];
+  return entry;
+}
+
+wp_dat_g_entry* EquipmentDB::IndexWeaponRanged(i32 type, i32 index)
+{
+  wp_dat_g_entry* entry = nullptr;
+
+  wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
+  if (wp_dat_g) entry = &wp_dat_g->entries[index];
+  return entry;
+}
+
 rod_inse_entry* EquipmentDB::GetEntryKinsect(i32 type, i32 id)
 {
   rod_inse_meta* kinsect_data = &rod_inse;
@@ -279,19 +339,34 @@ QString EquipmentDB::GetNameKinsect(i32 type, i32 id)
   return name;
 }
 
+int EquipmentDB::CountKinsect()
+{
+  return rod_inse.header->entry_count;
+}
+
+rod_inse_entry* EquipmentDB::IndexKinsect(i32 index)
+{
+  return &rod_inse.entries[index];
+}
+
 QString EquipmentDB::GetName(mhw_equipment* equipment)
 {
-  i32 category = equipment->serial_item_category;
+  mhw_equip_category category = equipment->category;
   i32 type = equipment->type;
   u32 id = equipment->id;
 
   QString name;
 
   switch (category) {
-  case 0: name = GetNameArmor(type, id); break;
-  case 1: name = GetNameWeapon(type, id); break;
-  case 2: name = GetNameArmor(type, id); break;
-  case 4: name = GetNameKinsect(type, id); break;
+  case mhw_equip_category::Armor:
+  case mhw_equip_category::Charm:
+    name = GetNameArmor(type, id); break;
+
+  case mhw_equip_category::Weapon:
+    name = GetNameWeapon(type, id); break;
+
+  case mhw_equip_category::Kinsect:
+    name = GetNameKinsect(type, id); break;
   }
 
   return name;

@@ -51,25 +51,32 @@ void GeneralInfo::ResetEditVouchers()
   MHW_SAVE_GUARD;
   mhw_section1* mhwSection1 = MHW_Section1();
 
-  mhwSection1->character_edit_voucher = 0;
-  mhwSection1->character_edit_voucher_free = 0;
-  mhwSection1->character_edit_voucher_single_voucher = 0;
-  mhwSection1->character_edit_voucher_two_voucher_pack = 0;
-  mhwSection1->character_edit_voucher_three_voucher_pack = 0;
-  mhwSection1->character_c_palico_edit_voucher_single_voucher = 0;
-  mhwSection1->character_c_palico_edit_two_voucher_pack = 0;
-  mhwSection1->character_c_palico_edit_three_voucher_pack = 0;
+  u32 charVouchers = 0;
+  charVouchers += mhwSection1->character_edit_voucher; mhwSection1->character_edit_voucher = 0;
+  charVouchers += mhwSection1->character_edit_voucher_free; mhwSection1->character_edit_voucher_free = 0;
+  charVouchers += mhwSection1->character_edit_voucher_single_voucher; mhwSection1->character_edit_voucher_single_voucher = 0;
+  charVouchers += mhwSection1->character_edit_voucher_two_voucher_pack; mhwSection1->character_edit_voucher_two_voucher_pack = 0;
+  charVouchers += mhwSection1->character_edit_voucher_three_voucher_pack; mhwSection1->character_edit_voucher_three_voucher_pack = 0;
+  charVouchers += mhwSection1->character_c_palico_edit_voucher_single_voucher; mhwSection1->character_c_palico_edit_voucher_single_voucher = 0;
+  charVouchers += mhwSection1->character_c_palico_edit_two_voucher_pack; mhwSection1->character_c_palico_edit_two_voucher_pack = 0;
+  charVouchers += mhwSection1->character_c_palico_edit_three_voucher_pack; mhwSection1->character_c_palico_edit_three_voucher_pack = 0;
 
-  mhwSection1->palico_edit_voucher = 0;
-  mhwSection1->palico_edit_voucher_single_voucher = 0;
-  mhwSection1->palico_edit_voucher_two_voucher_pack = 0;
-  mhwSection1->palico_edit_voucher_three_voucher_pack = 0;
-  mhwSection1->character_p_palico_edit_voucher_single_voucher = 0;
-  mhwSection1->character_p_palico_edit_two_voucher_pack = 0;
-  mhwSection1->character_p_palico_edit_three_voucher_pack = 0;
+  u32 palicoVouchers = 0;
+  palicoVouchers += mhwSection1->palico_edit_voucher; mhwSection1->palico_edit_voucher = 0;
+  palicoVouchers += mhwSection1->palico_edit_voucher_single_voucher; mhwSection1->palico_edit_voucher_single_voucher = 0;
+  palicoVouchers += mhwSection1->palico_edit_voucher_two_voucher_pack; mhwSection1->palico_edit_voucher_two_voucher_pack = 0;
+  palicoVouchers += mhwSection1->palico_edit_voucher_three_voucher_pack; mhwSection1->palico_edit_voucher_three_voucher_pack = 0;
+  palicoVouchers += mhwSection1->character_p_palico_edit_voucher_single_voucher; mhwSection1->character_p_palico_edit_voucher_single_voucher = 0;
+  palicoVouchers += mhwSection1->character_p_palico_edit_two_voucher_pack; mhwSection1->character_p_palico_edit_two_voucher_pack = 0;
+  palicoVouchers += mhwSection1->character_p_palico_edit_three_voucher_pack; mhwSection1->character_p_palico_edit_three_voucher_pack = 0;
 
   Notification* notif = notif->GetInstance();
-  notif->ShowMessage(tr("All character and palico edit vouchers have been reset.", "Notify that all character and palico edit vouchers have been reset."), 5000);
+  notif->ShowMessage(tr("All character and palico edit vouchers have been reset.",
+    "Notify that all character and palico edit vouchers have been reset."), 5000);
+
+  qInfo().nospace() << "Reset edit vouchers: "
+    << "character vouchers used = 0 <- " << charVouchers
+    << ", palico vouchers used = 0 <- " << palicoVouchers;
 }
 
 void GeneralInfo::Load(mhw_save_raw* mhwSave, int slotIndex)

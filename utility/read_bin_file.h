@@ -2,16 +2,18 @@
 
 #include <QFile>
 
-#include "../crypto/blowfish.h"
-
+#include "../types/types.h"
 #include "../types/language.h"
 
-#include "../types/types.h"
+#include "../crypto/blowfish.h"
 
 #include "../types/file/am_dat.h"
+#include "../types/file/eq_crt.h"
+#include "../types/file/eq_cus.h"
 #include "../types/file/gmd.h"
 #include "../types/file/itm.h"
 #include "../types/file/rod_inse.h"
+#include "../types/file/uct.h"
 #include "../types/file/wp_dat.h"
 #include "../types/file/wp_dat_g.h"
 
@@ -87,6 +89,26 @@ static bool ReadMetaFile(am_dat_meta* meta, const QString& path) {
   return InitMetaFile(meta, header);
 }
 
+static bool ReadMetaFile(eq_crt_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
+  eq_crt_header* header = (eq_crt_header*)ReadEntireFile(path);
+  if (!header) {
+    return false;
+  }
+
+  return InitMetaFile(meta, header);
+}
+
+static bool ReadMetaFile(eq_cus_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
+  eq_cus_header* header = (eq_cus_header*)ReadEntireFile(path);
+  if (!header) {
+    return false;
+  }
+
+  return InitMetaFile(meta, header);
+}
+
 static bool ReadMetaFile(rod_inse_meta* meta, const QString& path) {
   FreeMetaFile(meta);
   u32 size = 0;
@@ -112,6 +134,16 @@ static bool ReadMetaFile(wp_dat_meta* meta, const QString& path) {
 static bool ReadMetaFile(wp_dat_g_meta* meta, const QString& path) {
   FreeMetaFile(meta);
   wp_dat_g_header* header = (wp_dat_g_header*)ReadEntireFile(path);
+  if (!header) {
+    return false;
+  }
+
+  return InitMetaFile(meta, header);
+}
+
+static bool ReadMetaFile(uct_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
+  uct_header* header = (uct_header*)ReadEntireFile(path);
   if (!header) {
     return false;
   }

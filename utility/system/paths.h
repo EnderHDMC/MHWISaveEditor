@@ -3,6 +3,7 @@
 #include <QDir>
 #include <QString>
 #include <QSettings>
+#include <QInputDialog>
 #include <QStandardPaths>
 
 #include "../../types/constants.h"
@@ -10,76 +11,99 @@
 class Paths
 {
 public:
-  static QString GetSteamPath()
-  {
-    QSettings regSteam(R"(HKEY_CURRENT_USER\SOFTWARE\Valve\Steam)", QSettings::NativeFormat);
-    if (regSteam.childKeys().contains("SteamPath"))
-      return regSteam.value("SteamPath").toString();
+  static inline const QVariant RegQuery(const QString& path, const QString& member) {
+    QVariant value = NULL;
+    QSettings regSteam(path, QSettings::NativeFormat);
+    if (regSteam.childKeys().contains(member))
+      value = regSteam.value(member);
 
-    return NULL;
+    return value;
   }
 
-  static QString GetGamePath()
-  {
-    QString path = GetSteamPath();
-    if (!path.isNull()) {
-      QDir fullpath(path);
+  // Steam info
+  static inline const QString GetSteamPath() { return RegQuery(STEAM_INSTALL_REG.c_str(), "SteamPath").toString(); }
+  static inline const QString GetActiveSteamUser() { return RegQuery(STEAM_PROCESS_REG.c_str(), "ActiveUser").toString(); }
+  static inline const QStringList GetSteamUsers() { return QSettings(STEAM_USERS_REG.c_str(), QSettings::NativeFormat).childGroups(); }
 
-      bool cd = true;
-      cd &= fullpath.cd("steamapps");
-      if (cd) cd &= fullpath.cd("common");
-      if (cd) cd &= fullpath.cd(QString::fromUtf8(MHW_FOLDER_NAME));
-      if (!cd) path = NULL;
-      else path = fullpath.path();
+  static const QString GetSteamUser() {
+    static QString selectedSteamUser = NULL;
+    QString user = selectedSteamUser;
+    if (user.isNull()) user = GetActiveSteamUser();
+
+    if (user.isNull()) {
+      QStringList users = GetSteamUsers();
+      int userCount = users.length();
+      if (userCount == 1)
+        user = users.at(0);
+      else if (userCount > 1) {
+        // TODO: get fancy names and such
+        bool ok;
+
+        QString item = QInputDialog::getItem(
+          nullptr, QObject::tr("Steam user:", "Steam user selection dialog title."),
+          QObject::tr("If you're unsure which you are, sign-in to the Steam app, or find your AccountID on https://steamdb.info/calculator",
+            "Steam user selection dialog hint."),
+          users, 0, false, &ok);
+
+        if (ok && !item.isEmpty())
+          user = item;
+      }
     }
 
+    if (selectedSteamUser.isNull()) selectedSteamUser = user;
+    return user;
+  }
+
+  // Game info
+  static inline const QString GetGamePath() {
+    static QString selectedGamePath = NULL;
+    QString path = selectedGamePath;
+    if (path.isNull()) path = RegQuery(MHW_INSTALL_REG.c_str(), "InstallLocation").toString();;
+
+    if (path.isNull()) {
+      QDir fullpath(GetSteamPath());
+      bool found = fullpath.cd("steamapps/common/Monster Hunter World");
+
+      if (found) {
+        path = fullpath.path();
+      }
+    }
+
+    if (selectedGamePath.isNull()) selectedGamePath = path;
     return path;
   }
 
-  static QString GetDefaultSaveDir()
+  static QString GetGameSavePath()
   {
-    QSettings regUsers(R"(HKEY_CURRENT_USER\SOFTWARE\Valve\Steam\Users)", QSettings::NativeFormat);
-    QStringList users = regUsers.childGroups();
-    bool steam = true;
+    QString path = GetSteamPath();
+    QString user = GetSteamUser();
 
-    QString path = GetSteamPath(), user;
-    if (users.length() > 0)
-      user = users.at(0);
-
-    if (!path.isNull()) {
+    if (!path.isNull() && !user.isNull()) {
       QDir fullpath(path);
-      bool cd = true;
-      cd &= fullpath.cd("userdata");
-      if (cd) cd &= fullpath.cd(user);
-      if (cd) cd &= fullpath.cd(QString::fromUtf8(MHW_ID));
-      if (cd) cd &= fullpath.cd("remote");
-      if (!cd) {
-        cd |= fullpath.cd(QDir::homePath());
-        steam = false;
-      }
-
+      QString rel = QString("userdata/%1/%2/remote").arg(user).arg(QString::fromUtf8(MHW_ID));
+      fullpath.cd(rel);
       path = fullpath.path();
     }
     else {
       path = QDir::homePath();
     }
 
-    qDebug() << "Save Path:" << path << (steam ? "(steam)" : "(home)");
     return path;
   }
 
-  static QString GetDefaultSavePath()
+  static QString GetGameSaveFilePath()
   {
-    return GetDefaultSaveDir() + "/" + QString::fromUtf8(SAVE_NAME);
+    return GetGameSavePath() + "/" + QString::fromUtf8(SAVE_NAME);
   }
 
   static QString GetDefaultDumpPath(int slot)
   {
-    assert(slot >= 0 && slot <= 9);
-    QString path = GetDefaultSavePath();
+    Q_ASSERT(slot >= 0 && slot <= 9);
+    QString path = GetGameSaveFilePath();
+    bool isNull = path.isNull();
     int last = path.length() - 1;
-    path[last] = QChar('0' + slot);
-    return path + ".bin";
+    if (!isNull) path[last] = QChar('0' + slot);
+    return path.isNull() ? path : path + ".bin";
   }
 
   static QString GetDataPath()
@@ -88,7 +112,7 @@ public:
 
     QDir dir = QDir();
     if (dir.mkpath(path)) return path;
-    else return "";
+    else return NULL;
   }
 
 
@@ -99,7 +123,7 @@ public:
 
     QDir dir = QDir();
     if (dir.mkpath(path)) return path;
-    else return "";
+    else return NULL;
   }
 
   static QString GetIconDumpPath()
@@ -109,7 +133,7 @@ public:
 
     QDir dir = QDir();
     if (dir.mkpath(path)) return path;
-    else return "";
+    else return NULL;
   }
 
   static QString GetBasePath() {

@@ -4,6 +4,15 @@
 
 #include "types.h"
 
+// Steam registry items
+const std::string STEAM_INSTALL_REG = R"(HKEY_CURRENT_USER\SOFTWARE\Valve\Steam)";
+const std::string STEAM_PROCESS_REG = R"(HKEY_CURRENT_USER\Software\Valve\Steam\ActiveProcess)";
+const std::string STEAM_USERS_REG = R"(HKEY_CURRENT_USER\Software\Valve\Steam\Users)";
+
+// Game registry items
+const std::string MHW_INSTALL_REG = R"(HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 582010)";
+
+// Game keys
 const std::string KEY_SAVEDATA1000 = "xieZjoe#P2134-3zmaghgpqoe0z8$3azeq";
 
 const std::string KEY_ROD_INSE     = "SFghFQVFJycHnypExurPwut98ZZq1cwvm7lpDpASeP4biRhstQgULzlb";
