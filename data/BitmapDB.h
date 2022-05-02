@@ -58,7 +58,7 @@ public:
     *color = key & 0xffff;
   }
 
-  QIcon* ItemIcon(itm_entry* info);
+  QIcon* ItemIcon(ItemDB* itemDB, itm_entry* info);
   QIcon* EquipmentIcon(mhw_equipment* equipment);
 
   // Debug

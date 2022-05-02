@@ -49,7 +49,7 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
 
 void ItemSlotView::UpdateItemDisplay(itm_entry* info)
 {
-  QIcon* icon = bitmapDB->ItemIcon(info);
+  QIcon* icon = bitmapDB->ItemIcon(itemDB, info);
   QString itemName = itemDB->ItemName(info);
 
   ui->btnIcon->setIcon(*icon);

@@ -159,7 +159,7 @@ void InventoryEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
     itm_entry* info = itemDB->GetItemById(i);
     if (info->type == (u32)itemCategory::Furniture) continue;
     if (info->type == (u32)itemCategory::Account) continue;
-    if (info->flags & (u32)itemFlag::RejectFlag) continue;
+    if (info->flags & (u32)itemFlag::RejectFlag && info->id != ItemDB::IgniSignID) continue;
 
     QString itemName = itemDB->ItemName(info);
     if (!(info->flags & (u32)itemFlag::CustomObtainable) && info->id) {
@@ -172,7 +172,7 @@ void InventoryEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
       }
     }
 
-    QIcon* icon = bitmapDB->ItemIcon(info);
+    QIcon* icon = bitmapDB->ItemIcon(itemDB, info);
     QVariant pass = QVariant::fromValue(info);
 
     ui->cmbSearchItem->addItem(*icon, itemName, pass);

@@ -163,11 +163,12 @@ void BitmapDB::AddIcon(u64 key, u32 id, u16 pallete, u16 color)
   icons.insert(key, icon);
 }
 
-QIcon* BitmapDB::ItemIcon(itm_entry* info)
+QIcon* BitmapDB::ItemIcon(ItemDB* itemDB, itm_entry* info)
 {
   if (!info) return &nullIcon;
   const int icon_pallete = 0;
 
+  info = itemDB->AdjustItemPtr(info);
   u64 key = BuildKey(info->icon_id, icon_pallete, info->icon_color);
   return icons.value(key, &nullIcon);
 }

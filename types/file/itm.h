@@ -10,6 +10,7 @@ enum class itemFlag : u32 {
   ItemBar = 1 << 3,
   Feystone = 1 << 4,
   LoadoutItem = 1 << 5,
+  YellowStar = 1 << 6,
   PalicoGadget = 1 << 7,
   AmmoLvl1 = 1 << 8,
   AmmoLvl2 = 1 << 9,
@@ -17,9 +18,8 @@ enum class itemFlag : u32 {
   GlowEffect = 1 << 11,
 
   UnknownA = 1 << 2,
-  UnknownB = 1 << 6,
   UnknownC = 1 << 13,
-  Unknown = UnknownA | UnknownB | UnknownC,
+  Unknown = UnknownA | UnknownC,
 
   Unused = 0xFFFFFFFF
   & ~(PermanentItem | SupplyItem | ItemBar
