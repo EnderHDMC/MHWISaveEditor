@@ -3,18 +3,20 @@
 //
 //      File: export_save_equipment.1sc
 //   Authors: EnderHDMC
-//   Version: 0.1.0
-//   Purpose: Dump the unknown bits of equipment data,
-//            the hope is to see what they are.
+//   Version: 0.1.5
+//   Purpose: Dump the desired parts of equipment data.
 //  Category: Game
-//   History: Initial Version
+//   History:
+//     0.1.0: Initial Version
+//     0.1.5: Update to reflect SAVEDATA1000
+//            Script is mostly obsolete now
 //------------------------------------------------
 
 // Export unknown bits plus sort index
 local struct mhw_equipment
 {
   i32 sort_index;
-  i32 serial_item_category;
+  i32 category;
   i32 type;
   u32 id;
 };
@@ -32,10 +34,10 @@ Printf("index; "
 
 for (i = 0; i < max; i++) {
   equip.sort_index           = mhw_save.section3.saves[target].equipment[i].sort_index;
-  equip.serial_item_category = mhw_save.section3.saves[target].equipment[i].serial_item_category;
+  equip.category             = mhw_save.section3.saves[target].equipment[i].category;
   equip.type                 = mhw_save.section3.saves[target].equipment[i].type;
   equip.id                   = mhw_save.section3.saves[target].equipment[i].id;
 
   Printf("%d; %d; %d; %d; %d\n", i,
-    equip.sort_index, equip.serial_item_category, equip.type, equip.id);
+    equip.sort_index, equip.category, equip.type, equip.id);
 }

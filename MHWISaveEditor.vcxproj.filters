@@ -270,45 +270,13 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\CustomFlags.bin" />
-    <None Include="res\mapping\CalcUnknown.ipynb" />
-    <None Include="res\mapping\Mapping.ods" />
-    <None Include="res\mapping\MonsterHunterWorld.CT" />
-    <None Include="res\mapping\ProgressStructGenerator.ipynb" />
-    <None Include="res\mapping\SAVEDATA1000.bt" />
-    <None Include="res\mapping\SAVEDATA1000_basegame.bt" />
-    <None Include="res\mapping\allow_layered_crafts.1sc" />
-    <None Include="res\mapping\armor_items.1sc" />
-    <None Include="res\mapping\copy_unknown.1sc" />
-    <None Include="res\mapping\dlc.csv" />
-    <None Include="res\mapping\dump_save_structure.1sc" />
-    <None Include="res\mapping\export_items.1sc" />
-    <None Include="res\mapping\export_obtainable_mask.1sc" />
-    <None Include="res\mapping\export_save_equipment.1sc" />
-    <None Include="res\mapping\export_unsafe_item_mask.1sc" />
-    <None Include="res\mapping\gmd.bt" />
-    <None Include="res\mapping\itm.bt" />
-    <None Include="res\mapping\max_all_items.1sc" />
-    <None Include="res\mapping\test_data.1sc" />
-    <None Include="res\mapping\types.bt" />
-    <None Include="res\mapping\uct.bt" />
     <None Include="res\translations\mhwisaveeditor_template.qm" />
     <None Include="setup.iss" />
-    <None Include="res\mapping\am_dat.bt" />
-    <None Include="res\mapping\mask_generator.1sc" />
-    <None Include="res\mapping\wp_dat.bt" />
-    <None Include="res\mapping\wp_dat_g.bt" />
-    <None Include="res\mapping\rod_inse.bt" />
-    <None Include="res\mapping\eq_crt.bt" />
-    <None Include="res\mapping\eq_cus.bt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="res\mapping\note.txt" />
   </ItemGroup>
   <ItemGroup>
     <QtTranslation Include="res\translations\mhwisaveeditor_template.ts">

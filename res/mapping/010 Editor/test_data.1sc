@@ -8,9 +8,10 @@
 //            my assumptions of the save structure actually
 //            hold across all of them.
 //  Category: Binary
-//   History: 0.1.3:
-//            Added more block checks
-//            Initial Version
+//   History: 
+//     0.1.?: Initial Version
+//     0.1.3: Added more block checks
+//     0.1.5: Updated to reflect SAVEDATA1000.bt changes
 //------------------------------------------------
 
 int x, y, value;
@@ -79,14 +80,14 @@ Printf("Random Thing: %d\n", mhw_save.section0.unknown2);
 
 
 
-// Test if section3.saves[y].unknown19b is indeed all zero
+// Test if section3.saves[y].unknown21b is indeed all zero
 for (y = 0; y < 3; y++) {
-  Printf("Check: 'mhw_save.section3.saves[%d].unknown19b'\n", y);
+  Printf("Check: 'mhw_save.section3.saves[%d].unknown21b'\n", y);
   asumption = 0;
-  max = sizeof(mhw_save.section3.saves[y].unknown19b) / sizeof(mhw_save.section3.saves[y].unknown19b[0]);
+  max = sizeof(mhw_save.section3.saves[y].unknown21b) / sizeof(mhw_save.section3.saves[y].unknown21b[0]);
   prog = RoundDownPow10(max);
   for (x = 0; x < max; x++) {
-    value = mhw_save.section3.saves[y].unknown19b[x];
+    value = mhw_save.section3.saves[y].unknown21b[x];
   
     if (value == 0) asumption++;
     else Printf("Nonzero, %u, %u\n", x, value);
@@ -98,14 +99,14 @@ for (y = 0; y < 3; y++) {
 
 
 
-// Test if section3.saves[y].unknown19d is indeed all zero
+// Test if section3.saves[y].unknown21d is indeed all zero
 for (y = 0; y < 3; y++) {
-  Printf("Check: 'mhw_save.section3.saves[%d].unknown19d'\n", y);
+  Printf("Check: 'mhw_save.section3.saves[%d].unknown21d'\n", y);
   asumption = 0;
-  max = sizeof(mhw_save.section3.saves[y].unknown19d) / sizeof(mhw_save.section3.saves[y].unknown19d[0]);
+  max = sizeof(mhw_save.section3.saves[y].unknown21d) / sizeof(mhw_save.section3.saves[y].unknown21d[0]);
   prog = RoundDownPow10(max);
   for (x = 0; x < max; x++) {
-    value = mhw_save.section3.saves[y].unknown19d[x];
+    value = mhw_save.section3.saves[y].unknown21d[x];
   
     if (value == 0) asumption++;
     else Printf("Nonzero, %u, %u\n", x, value);
@@ -117,14 +118,14 @@ for (y = 0; y < 3; y++) {
 
 
 
-// Test if section3.saves[y].unknown23 is indeed all zero
+// Test if section3.saves[y].unknown25 is indeed all zero
 for (y = 0; y < 3; y++) {
-  Printf("Check: 'mhw_save.section3.saves[%d].unknown23'\n", y);
+  Printf("Check: 'mhw_save.section3.saves[%d].unknown25'\n", y);
   asumption = 0;
-  max = sizeof(mhw_save.section3.saves[y].unknown23) / sizeof(mhw_save.section3.saves[y].unknown23[0]);
+  max = sizeof(mhw_save.section3.saves[y].unknown25) / sizeof(mhw_save.section3.saves[y].unknown25[0]);
   prog = RoundDownPow10(max);
   for (x = 0; x < max; x++) {
-    value = mhw_save.section3.saves[y].unknown23[x];
+    value = mhw_save.section3.saves[y].unknown25[x];
   
     if (value == 0) asumption++;
     else Printf("Nonzero, %u, %u\n", x, value);

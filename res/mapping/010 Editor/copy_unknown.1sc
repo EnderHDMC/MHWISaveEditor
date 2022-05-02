@@ -3,10 +3,14 @@
 //
 //      File: copy_unknown.1sc
 //   Authors: EnderHDMC
-//   Version: 0.1.3
-//   Purpose: Copy all unknown bits from 1 save slot to another
+//   Version: 0.1.5
+//   Purpose: Copy all unknown bits from one save slot to another
+//            Should be run on an unencrypted save with
+//            the SAVEDATA1000.bt template.
 //  Category: Game
-//   History: Initial Version
+//   History:
+//     0.1.3: Initial Version
+//     0.1.5: Updated to reflect changes in SAVEDATA1000.bt
 //------------------------------------------------
 
 // NOTE: current script may not be in sync with SAVEDATA.bt
@@ -21,8 +25,8 @@
 // 010 knows how to asign u8[] to u8[]
 // but not other array types.
 
-u32 source = 0;
-u32 target = 2;
+u32 source = 0; // Source save slot
+u32 target = 2; // Target save slot
 
 mhw_save.section3.saves[target].unknown0                = mhw_save.section3.saves[source].unknown0;
 mhw_save.section3.saves[target].unknown1                = mhw_save.section3.saves[source].unknown1;
@@ -44,36 +48,40 @@ mhw_save.section3.saves[target].unknown6a               = mhw_save.section3.save
 mhw_save.section3.saves[target].unknown6b               = mhw_save.section3.saves[source].unknown6b;
 mhw_save.section3.saves[target].unknown7                = mhw_save.section3.saves[source].unknown7;
 mhw_save.section3.saves[target].unknown8                = mhw_save.section3.saves[source].unknown8;
-mhw_save.section3.saves[target].unknown9                = mhw_save.section3.saves[source].unknown9;
-mhw_save.section3.saves[target].unknown_equipment       = mhw_save.section3.saves[source].unknown_equipment;
+mhw_save.section3.saves[target].unknown9a               = mhw_save.section3.saves[source].unknown9a;
+mhw_save.section3.saves[target].unknown9b               = mhw_save.section3.saves[source].unknown9b;
 mhw_save.section3.saves[target].unknown10a              = mhw_save.section3.saves[source].unknown10a;
 mhw_save.section3.saves[target].unknown10b              = mhw_save.section3.saves[source].unknown10b;
 mhw_save.section3.saves[target].unknown10c              = mhw_save.section3.saves[source].unknown10c;
 mhw_save.section3.saves[target].unknown10d              = mhw_save.section3.saves[source].unknown10d;
 mhw_save.section3.saves[target].unknown10e              = mhw_save.section3.saves[source].unknown10e;
 mhw_save.section3.saves[target].unknown10f              = mhw_save.section3.saves[source].unknown10f;
-mhw_save.section3.saves[target].unknown10g              = mhw_save.section3.saves[source].unknown10g;
-mhw_save.section3.saves[target].unknown10h              = mhw_save.section3.saves[source].unknown10h;
-// mhw_save.section3.saves[target].unknown10_              = mhw_save.section3.saves[source].unknown10_;
 mhw_save.section3.saves[target].unknown11               = mhw_save.section3.saves[source].unknown11;
 mhw_save.section3.saves[target].unknown12a              = mhw_save.section3.saves[source].unknown12a;
 mhw_save.section3.saves[target].unknown12b              = mhw_save.section3.saves[source].unknown12b;
 mhw_save.section3.saves[target].unknown12c              = mhw_save.section3.saves[source].unknown12c;
-mhw_save.section3.saves[target].unknown12_              = mhw_save.section3.saves[source].unknown12_;
+mhw_save.section3.saves[target].unknown12d              = mhw_save.section3.saves[source].unknown12d;
 mhw_save.section3.saves[target].unknown13               = mhw_save.section3.saves[source].unknown13;
-mhw_save.section3.saves[target].unknown14               = mhw_save.section3.saves[source].unknown14;
+mhw_save.section3.saves[target].unknown14a              = mhw_save.section3.saves[source].unknown14a;
+mhw_save.section3.saves[target].unknown14b              = mhw_save.section3.saves[source].unknown14b;
 mhw_save.section3.saves[target].unknown15               = mhw_save.section3.saves[source].unknown15;
-mhw_save.section3.saves[target].unknown16               = mhw_save.section3.saves[source].unknown16;
-mhw_save.section3.saves[target].unknown17               = mhw_save.section3.saves[source].unknown17;
+mhw_save.section3.saves[target].unknown16a              = mhw_save.section3.saves[source].unknown16a;
+mhw_save.section3.saves[target].unknown16b              = mhw_save.section3.saves[source].unknown16b;
+mhw_save.section3.saves[target].unknown16c              = mhw_save.section3.saves[source].unknown16c;
+mhw_save.section3.saves[target].unknown17d              = mhw_save.section3.saves[source].unknown17d;
+mhw_save.section3.saves[target].unknown17_              = mhw_save.section3.saves[source].unknown17_;
 mhw_save.section3.saves[target].unknown18               = mhw_save.section3.saves[source].unknown18;
-mhw_save.section3.saves[target].unknown19a              = mhw_save.section3.saves[source].unknown19a;
-mhw_save.section3.saves[target].unknown19b              = mhw_save.section3.saves[source].unknown19b;
-mhw_save.section3.saves[target].unknown19c              = mhw_save.section3.saves[source].unknown19c;
-mhw_save.section3.saves[target].unknown19d              = mhw_save.section3.saves[source].unknown19d;
-mhw_save.section3.saves[target].unknown19_              = mhw_save.section3.saves[source].unknown19_;
-mhw_save.section3.saves[target].unknown20a              = mhw_save.section3.saves[source].unknown20a;
-mhw_save.section3.saves[target].unknown20_              = mhw_save.section3.saves[source].unknown20_;
-mhw_save.section3.saves[target].unknown21               = mhw_save.section3.saves[source].unknown21;
+mhw_save.section3.saves[target].unknown19               = mhw_save.section3.saves[source].unknown19;
+mhw_save.section3.saves[target].unknown20               = mhw_save.section3.saves[source].unknown20;
+mhw_save.section3.saves[target].unknown21a              = mhw_save.section3.saves[source].unknown21a;
+mhw_save.section3.saves[target].unknown21b              = mhw_save.section3.saves[source].unknown21b;
+mhw_save.section3.saves[target].unknown21c              = mhw_save.section3.saves[source].unknown21c;
+mhw_save.section3.saves[target].unknown21d              = mhw_save.section3.saves[source].unknown21d;
+mhw_save.section3.saves[target].unknown21e              = mhw_save.section3.saves[source].unknown21e;
 mhw_save.section3.saves[target].unknown22a              = mhw_save.section3.saves[source].unknown22a;
-mhw_save.section3.saves[target].unknown22_              = mhw_save.section3.saves[source].unknown22_;
+mhw_save.section3.saves[target].unknown22b              = mhw_save.section3.saves[source].unknown22b;
+mhw_save.section3.saves[target].unknown22               = mhw_save.section3.saves[source].unknown22;
 mhw_save.section3.saves[target].unknown23               = mhw_save.section3.saves[source].unknown23;
+mhw_save.section3.saves[target].unknown24a              = mhw_save.section3.saves[source].unknown24a;
+mhw_save.section3.saves[target].unknown24b              = mhw_save.section3.saves[source].unknown24b;
+mhw_save.section3.saves[target].unknown25               = mhw_save.section3.saves[source].unknown25;

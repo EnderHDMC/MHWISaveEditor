@@ -1,10 +1,16 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Script File
 //
-//      File: export_obtainable_mask.1sc
+//      File: mask_generator.1sc
 //   Authors: EnderHDMC
 //   Version: 0.1.4
 //   Purpose: Mask generation common code.
+//            Shouldn't be run on its own.
+//            Contains common code for the mask generator scripts.
+//            These scripts are to generate the custom flags file.
+//            The custom flags file is a file that defines custom
+//            flags to be used by the save editor to filter items
+//            better.
 //  Category: Game
 //   History: Initial Version
 //------------------------------------------------
@@ -29,10 +35,11 @@ u32 flags_size = 400; // Comes from sizeof(mhw_discovered_items) in SAVEDATA1000
 
 int working_file = GetFileNum();
 string script_path = FileNameGetPath(GetScriptFileName());
-string flags_path = script_path + "..\\CustomFlags.bin";
+string flags_path = script_path + "..\\outputs\\CustomFlags.bin";
 int flags_file = FileOpen(flags_path, false, "Hex", false);
 if (flags_file == -1) {
   flags_file = FileNew("Hex", true);
+  MakeDir(script_path + "..\\outputs");
 }
 
 FileSelect(flags_file);

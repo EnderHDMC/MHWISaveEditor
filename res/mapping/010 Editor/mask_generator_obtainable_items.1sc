@@ -1,14 +1,28 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Script File
 //
-//      File: export_obtainable_mask.1sc
+//      File: mask_generator_obtainable_items.1sc
 //   Authors: EnderHDMC
 //   Version: 0.1.4
 //   Purpose: Construct a mask of items that are obtainable legit.
+//            Should be run on an unencrypted save with
+//            the SAVEDATA1000.bt template.
+//            This script loads the currently known obtainable items
+//            specified in ../outputs/CustomFlags.bin
+//            then it analyses the save file to see what items exist
+//            in the inventories of the characters, being marked as obtainable.
+//            It also checks what items have been discovered.
+//            
+//            This script assumes all items in the save have not been cheated in.
+//            The generated flags file can then be used by the save editor to
+//            distinguish items that can be obtained and discovered normally in-game.
 //  Category: Game
 //   History: Initial Version
 //------------------------------------------------
 #include <mask_generator.1sc>
+
+i32 save_slot_start = 0;
+i32 save_slot_end   = 2;
 
 u8 obtainable_items[flags_size];
 u32 obtainable_index = Obtainable * flags_size;
@@ -32,10 +46,10 @@ u32 decorations = sizeof(mhw_save.section3.saves[0].storage.decorations)
                 / sizeof(mhw_save.section3.saves[0].storage.decorations[0]);
 u32 item_id, item_count;
 
-for (y = 0; y < 2; y++)
+for (y = save_slot_start; y <= save_slot_end; y++)
 {
   for (x = 0; x < flags_size; x++) {
-    discoverable_items[x] |= mhw_save.section3.saves[0].discovered_items.items[x];
+    discoverable_items[x] |= mhw_save.section3.saves[y].discovered_items.items[x];
   }
 
   for (x = 0; x < items; x++) {

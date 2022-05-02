@@ -1,16 +1,23 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Script File
 //
-//      File: export_items.1sc
+//      File: export_item_data_csv.1sc
 //   Authors: EnderHDMC
-//   Version: 0.1.0
-//   Purpose: Dump itemData.item, with names from currently
-//            selected gmd file.
+//   Version: 0.1.5
+//   Purpose: Dump itemData.itm, with names from currently
+//            selected gmd file into a csv file.
+//            Should be run on any item_XXX.gmd file with
+//            the gmd.bt template.
+//            Assumes itemData.itm is relative to the gmd:
+//            ../../item/itemData.itm
 //  Category: Game
-//   History: Initial Version
+//   History:
+//     0.1.0: Initial Version
+//     0.1.5: Change output path
 //------------------------------------------------
 
-#include <types.bt>
+// If 010 complains about redefinition of typedefs, comment this out.
+// #include <types.bt>
 
 typedef struct {
   u32 id;
@@ -31,13 +38,15 @@ typedef struct {
 
 int item_names = GetFileNum();
 string script_path = FileNameGetPath(GetScriptFileName());
-string export_csv_path = script_path + "..\\MasterItemList.csv";
-int item_data = FileOpen(script_path + "itemData.itm", true, "Hex", false);
+string res_path = FileNameGetPath(GetFileName());
+string export_csv_path = script_path + "..\\outputs\\MasterItemList.csv";
+int item_data = FileOpen(res_path + "..\\..\\item\\itemData.itm", true, "Hex", false);
 int csv = FileNew();
 
 FileSelect(item_data);
 
 local item_record item;
+// If 010 complains about header not being defined, try re-running this script.
 int entry_count = header.entry_count;
 int i, comp;
 
@@ -88,5 +97,6 @@ for(i = 0; i < entry_count; i++)
 }
 
 FileSelect(csv);
-FileSave(export_csv_path);
+if (MakeDir(script_path + "..\\outputs"))
+  FileSave(export_csv_path);
 FileClose();

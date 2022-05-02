@@ -1,0 +1,4 @@
+find . -regex ".*\.\(txt\|1sc\|cpp\|h\)" -exec sh -c "echo -n '{} '; tail -c1 '{}' | wc -l" \; | grep "0$"
+find . -type f -not -regex '.*/\(\..*\|x64\|chunk\).*' -exec sh -c "echo -n '{} '; tail -c1 '{}' | wc -l" \; | grep "0$"
+
+grep -r "File:"
