@@ -48,6 +48,17 @@ void EquipmentEditorTab::Load(mhw_save_raw* mhwSave, int slotIndex)
   SaveLoader::FinishLoad();
 }
 
+void EquipmentEditorTab::PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull)
+{
+  SaveLoader::PrimeLoad(mhwSave, slotIndex, loadFull);
+  for (size_t i = 0; i < slotViews.count(); i++)
+  {
+    EquipmentSlotView* slotView = slotViews[i];
+    slotView->PrimeLoad(mhwSave, slotIndex, loadFull);
+  }
+  SaveLoader::FinishLoad();
+}
+
 void EquipmentEditorTab::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 {
   for (size_t i = 0; i < slotViews.count(); i++)

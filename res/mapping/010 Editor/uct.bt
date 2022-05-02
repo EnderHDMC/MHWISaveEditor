@@ -4,7 +4,7 @@
 //      File: uct.bt
 //   Authors: See Credits
 //   Version: 0.1.3
-//   Purpose: View MHW color pallete files.
+//   Purpose: View MHW color palette files.
 //  Category: Game
 // File Mask: *.uct
 //  ID Bytes: 01 10 09 18
@@ -39,7 +39,7 @@ struct uct_color_info
   f32 unknown1[5];
 };
 
-struct uct_color_pallete
+struct uct_color_palette
 {
   u32 color_count;
   uct_color_info color_info[color_count] <optimize=false>;
@@ -47,7 +47,7 @@ struct uct_color_pallete
 
 uct_header header;
 
-uct_color_pallete item;
-uct_color_pallete rarity;
-uct_color_pallete sharpness; // Credits to MandL27 for figuring it out
-uct_color_pallete unknown0;
+uct_color_palette item;
+uct_color_palette rarity;
+uct_color_palette sharpness; // Credits to MandL27 for figuring it out
+uct_color_palette unknown0;

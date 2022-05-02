@@ -80,7 +80,7 @@ private:
 
   void SetupDarkMode();
 
-  void LoadItemLanguage(game_language language, bool doReload = false);
+  void LoadItemLanguage(game_language language, bool reloadItemSearch = false);
 
   SaveLoader* GetActiveEditorTab();
 

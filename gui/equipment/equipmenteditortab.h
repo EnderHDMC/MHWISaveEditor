@@ -19,6 +19,7 @@ public:
 
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
+  virtual void PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull) override;
   virtual void LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB) override;
 
 private:

@@ -26,6 +26,7 @@ private:
   static EquipmentDB* instance;
   EquipmentDB();
 
+  bool hasData = false;
   am_dat_meta am_dat = {};         gmd_meta gmd_armor = {};
   rod_inse_meta rod_inse = {};     gmd_meta gmd_kinsect = {};
 
@@ -60,6 +61,11 @@ public:
 
   equipment_info* GetEquipment(mhw_equipment* equipment);
   i32 GetRawIndex(mhw_equipment* equipment);
+
+  // Database management interface
+  void LoadGMD(game_language language);
+  game_language CurrentLanguage();
+  bool HasData();
 
   // Armor
   am_dat_entry* GetEntryArmor(i32 type, i32 id);

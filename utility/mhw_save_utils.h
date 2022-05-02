@@ -46,38 +46,39 @@ static mhw_item_slot* FindCategoryItemOrEmpty(mhw_save_slot* save_slot, itm_entr
   mhw_item_slot* items = nullptr;
   int count = 0;
 
-  switch (info->type) {
-  case (u32)itemCategory::Item: {
-    items = storage->items;
-    count = COUNTOF(storage->items);
-  } break;
+  if (info) {
+    switch (info->type) {
+    case (u32)itemCategory::Item: {
+      items = storage->items;
+      count = COUNTOF(storage->items);
+    } break;
 
-  case (u32)itemCategory::Ammo: {
-    items = storage->ammo;
-    count = COUNTOF(storage->ammo);
-  } break;
+    case (u32)itemCategory::Ammo: {
+      items = storage->ammo;
+      count = COUNTOF(storage->ammo);
+    } break;
 
-  case (u32)itemCategory::Material: {
-    items = storage->materials;
-    count = COUNTOF(storage->materials);
-  } break;
+    case (u32)itemCategory::Material: {
+      items = storage->materials;
+      count = COUNTOF(storage->materials);
+    } break;
 
-  case (u32)itemCategory::Decoration: {
-    items = storage->decorations;
-    count = COUNTOF(storage->decorations);
-  } break;
+    case (u32)itemCategory::Decoration: {
+      items = storage->decorations;
+      count = COUNTOF(storage->decorations);
+    } break;
 
-  case (u32)itemCategory::Account:
-  case (u32)itemCategory::Furniture:
-    break;
+    case (u32)itemCategory::Account:
+    case (u32)itemCategory::Furniture:
+      break;
 
-  default:
-    break;
+    default:
+      break;
+    }
   }
 
-  if (!items) return nullptr;
-
-  mhw_item_slot* result = FindItemOrEmpty(items, count, info->id);
+  mhw_item_slot* result = nullptr;
+  if (items) result = FindItemOrEmpty(items, count, info->id);;
   return result;
 }
 
@@ -279,7 +280,7 @@ static void DefragEquipment(mhw_save_slot* save_slot) {
 static bool ValidateEquipmentBox(mhw_save_slot* save_slot) {
   bool sort_index_issue = false;
   bool index_table_issue = false;
-  
+
   // Detection
   const i32 count = COUNTOF(save_slot->equipment);
   u32 ref_tally[count] = {};

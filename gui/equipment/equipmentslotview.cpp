@@ -37,15 +37,21 @@ void EquipmentSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
 
   bool referenced = CountEquipmentReferenced(mhwSaveSlot, equipmentSlot);
   bool empty = IsEquipmentEmpty(equipmentSlot);
-  if (!info && !empty) {
+  if (!info && !empty && equipmentDB->HasData()) {
     qCritical().nospace() << "Invalid equipment detected, equipment info: "
       << "index = " << equipslot
-      << ", category = " << equipment->category
-      << ", type = " << equipment->type
-      << ", id = " << equipment->id;
+      << ", category = " << equipmentSlot->category
+      << ", type = " << equipmentSlot->type
+      << ", id = " << equipmentSlot->id;
   }
 
   UpdateEquipDisplay(equipmentSlot, !empty && !referenced);
+  SaveLoader::FinishLoad();
+}
+
+void EquipmentSlotView::PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull)
+{
+  SaveLoader::PrimeLoad(mhwSave, slotIndex, loadFull);
   SaveLoader::FinishLoad();
 }
 
@@ -70,7 +76,7 @@ void EquipmentSlotView::Uncraft()
   for (int i = 0; i < mats.count(); i++)
   {
     mhw_item_slot mat = mats[i];
-    itm_entry* info = itemDB->GetItemById(mat.id);
+    itm_entry* info = itemDB->GetItemByIdSafe(mat.id);
     mhw_item_slot* addSlot = FindCategoryItemOrEmpty(mhwSaveSlot, info);
 
     qInfo().noquote() << QString("\t%1 (%2) x %3").arg(itemDB->ItemName(info)).arg(mat.id).arg(mat.amount);

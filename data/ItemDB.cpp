@@ -107,7 +107,7 @@ int ItemDB::count()
 
 QString ItemDB::ItemName(u32 id)
 {
-  if (!success_gmd) return "GMD Failure";
+  if (!success_gmd) return GMD_FAILURE.c_str();
   
   id = AdjustItemID(id);
   const QRegularExpression regex("(<STYL.*>)(.*)(</STYL>)");
@@ -118,7 +118,7 @@ QString ItemDB::ItemName(u32 id)
 QString ItemDB::ItemName(itm_entry* info)
 {
   if (success_itm) return ItemName(info->id);
-  else return "ITM Failure";
+  else return ITM_FAILURE.c_str();
 }
 
 u32 ItemDB::AdjustItemID(u32 id)

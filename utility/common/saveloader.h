@@ -57,6 +57,11 @@ public:
     this->mhwSaveSlot = (mhwSection3) ? &mhwSection3->saves[mhwSaveIndex] : nullptr;
   }
 
+  virtual void PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull = false) {
+    loading = true;
+    if (loadFull) SaveLoader::Load(mhwSave, slotIndex);
+  }
+
   virtual void LoadFile(const QString& file)
   {
     this->file = file;

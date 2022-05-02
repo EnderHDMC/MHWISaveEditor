@@ -491,7 +491,12 @@ void MHWISaveEditor::CloneSlot(int slot)
 
 void MHWISaveEditor::UncraftUnusedEquipment()
 {
+  MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  int mhwSaveIndex = MHW_SaveIndex();
+
   EquipmentEditorTab* equipTab = static_cast<EquipmentEditorTab*>(equipmentEditor);
+  equipTab->PrimeLoad(mhwSave, mhwSaveIndex, true);
   equipTab->UncraftUnusedEquipment();
 }
 
@@ -503,6 +508,7 @@ void MHWISaveEditor::OpenLocation(const QString& location)
 
 void MHWISaveEditor::OpenSettings()
 {
+  bool oldShowUnobtainable = settings->GetShowUnobtainable();
   SettingsUI* settingsUI = new SettingsUI();
   settingsUI->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
   settingsUI->exec();
@@ -516,22 +522,25 @@ void MHWISaveEditor::OpenSettings()
   }
 
   game_language language = settings->GetItemLanguage();
-  LoadItemLanguage(language, true);
+  LoadItemLanguage(language, oldShowUnobtainable != settings->GetShowUnobtainable());
 }
 
 #pragma warning(push)
 #pragma warning(disable: 26812)
-void MHWISaveEditor::LoadItemLanguage(game_language language, bool doReload) {
-  game_language current = itemDB->CurrentLanguage();
+void MHWISaveEditor::LoadItemLanguage(game_language language, bool reloadItemSearch) {
+  EquipmentDB* equipmentDB = equipmentDB->GetInstance();
+  game_language currentItem = itemDB->CurrentLanguage();
+  game_language currentEquipment = equipmentDB->CurrentLanguage();
 
   if (language == game_language::GameLanguage && MHW_SAVE_CHECK)
     language = (game_language)MHW_Section1()->text_language;
 
-  if (language != current) {
-    itemDB->LoadGMD(language);
-    inventoryEditor->LoadResources(itemDB, bitmapDB);
-    LoadSaveSlot();
-  }
+  bool reload = false;
+  if (language != currentItem) { itemDB->LoadGMD(language); reload = true; }
+  if (language != currentEquipment) { equipmentDB->LoadGMD(language); reload = true; }
+
+  if (reloadItemSearch || reload) inventoryEditor->LoadResources(itemDB, bitmapDB);
+  if (reload) LoadSaveSlot();
 }
 #pragma warning(pop)
 
