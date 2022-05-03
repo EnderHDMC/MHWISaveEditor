@@ -1,8 +1,6 @@
 #pragma once
 #include "types.h"
 
-#pragma warning(push)
-#pragma warning(disable: 26812)
 enum mhw_gender : u32
 {
   Male = 0,
@@ -164,4 +162,3 @@ enum mhw_monster_index : i32
   I_Stygian_Zinogre     =  95, I_Raging_Brachydios    =  96, I_Safi_jiiva          =  97,
   I_Scarred_Yian_Garuga =  99, I_Frostfang_Barioth    = 100, I_Fatalis             = 101
 };
-#pragma warning(pop)

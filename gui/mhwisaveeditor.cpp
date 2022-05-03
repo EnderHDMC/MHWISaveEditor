@@ -46,7 +46,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 
   Notification* notif = notif->GetInstance();
   notif->Register(ui->statusbar);
-  notif->SetDefaultMode(NotificationMode::StatusBar);
+  notif->SetDefaultMode(NotificationMode::NotifModeStatusBar);
 
   scrollGuard = scrollGuard->GetInstance();
 
@@ -264,6 +264,19 @@ void MHWISaveEditor::Open()
     filepath = files[0];
 
     LoadFile(filepath);
+
+    QString editorFile = EditorFile();
+    QDir fileInfo(editorFile);
+    qInfo() << fileInfo;
+    if (fileInfo.exists(MHW_EXE_REL.c_str())) {
+      Notification* notif = notif->GetInstance();
+      notif->PushMode(NotificationMode::NotifModeMessageBox);
+      QString theoryPath = Paths::GetTheoreticalGameSaveFilePath();
+      notif->ShowMessage(tr("You have likely opened a backup of your save file.\nChanges won't be seen in-game.\nYour save file is usually in the following place:\n%1\n\nYour Steam Account ID can be found online.",
+        "Tell the user that they've loaded a backup, and instruct them on where to find their save. %s is the path to where the save is usually found.")
+        .arg(theoryPath));
+      notif->PopMode();
+    }
   }
 }
 
@@ -355,8 +368,9 @@ void MHWISaveEditor::LoadFile(const QString& file)
 
     if (settings->GetDoAutoBackups()) {
       Notification* notif = notif->GetInstance();
-      notif->Silence(1);
+      notif->PushMode(NotificationMode::NotifModeNone);
       Backup();
+      notif->PopMode();
     }
   }
   else {
@@ -516,17 +530,15 @@ void MHWISaveEditor::OpenSettings()
   if (settings->GetRequireRestart()) {
     Notification* notif = notif->GetInstance();
     NotificationMode notifMode = notif->GetDefaultMode();
-    notif->SetDefaultMode(NotificationMode::MessageBox);
+    notif->PushMode(NotificationMode::NotifModeMessageBox);
     notif->ShowMessage(tr("Some settings you have changed will apply on restart.", "Tell the user they have some settings that will only be applied on restart."));
-    notif->SetDefaultMode(notifMode);
+    notif->PopMode();
   }
 
   game_language language = settings->GetItemLanguage();
   LoadItemLanguage(language, oldShowUnobtainable != settings->GetShowUnobtainable());
 }
 
-#pragma warning(push)
-#pragma warning(disable: 26812)
 void MHWISaveEditor::LoadItemLanguage(game_language language, bool reloadItemSearch) {
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
   game_language currentItem = itemDB->CurrentLanguage();
@@ -542,7 +554,6 @@ void MHWISaveEditor::LoadItemLanguage(game_language language, bool reloadItemSea
   if (reloadItemSearch || reload) inventoryEditor->LoadResources(itemDB, bitmapDB);
   if (reload) LoadSaveSlot();
 }
-#pragma warning(pop)
 
 void MHWISaveEditor::Backup() {
   mhw_save_raw* saveWrite = MHWS_Save();

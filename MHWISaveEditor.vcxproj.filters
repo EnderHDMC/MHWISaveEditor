@@ -272,6 +272,9 @@
   <ItemGroup>
     <None Include="res\translations\mhwisaveeditor_template.qm" />
     <None Include="setup.iss" />
+    <None Include="res\CustomFlags.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">

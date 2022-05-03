@@ -737,7 +737,7 @@
     </message>
     <message>
         <location filename="../../gui/mhwisaveeditor.cpp" line="196"/>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="343"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="356"/>
         <source>File: %1</source>
         <comment>Indicate the currently open file.</comment>
         <translation>文件: %1</translation>
@@ -761,56 +761,67 @@
         <translation>导出文件失败: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="341"/>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="442"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="354"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="456"/>
         <source>Loaded character slot %1: %2</source>
         <comment>Indicate a character slot change, %1 is the slot number, %2 is the character name.</comment>
         <translation>加载角色 %1: %2</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="364"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="378"/>
         <source>Failed to load file: %1</source>
         <comment>Indicate a failed file load, %1 is the path to the file that was to be loaded.</comment>
         <translation>加载文件失败: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="514"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="534"/>
         <source>Some settings you have changed will apply on restart.</source>
         <comment>Tell the user they have some settings that will only be applied on restart.</comment>
         <translation>部分设置在重启后才会生效。</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="468"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="482"/>
         <source>Switched slots: %1 and %2</source>
         <comment>Indicate a successful slot switch, %1 is the current slot, %2 is the target slot.</comment>
         <translation type="unfinished">已交换槽 %1和槽 %2。</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="486"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="275"/>
+        <source>You have likely opened a backup of your save file.
+Changes won&apos;t be seen in-game.
+Your save file is usually in the following place:
+%1
+
+Your Steam Account ID can be found online.</source>
+        <comment>Tell the user that they&apos;ve loaded a backup, and instruct them on where to find their save. %s is the path to where the save is usually found.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="500"/>
         <source>Cloned slot: %1 to %2</source>
         <comment>Indicate a slot was cloned, %1 is the current slot, %2 is the target slot.</comment>
         <translation type="unfinished">已复制槽 %1到槽 %2.</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="690"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="710"/>
         <source>Dumped icons: %1</source>
         <comment>Indicate sucessful icon dump, %1 is the path where the icons were dumped to.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="695"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="715"/>
         <source>Could not dump icons: %1</source>
         <comment>Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="577"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="597"/>
         <source>Backup made: %1</source>
         <comment>Notify of a backup being made, %1 is the path to where it is.</comment>
         <translation>备份完成: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="580"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="600"/>
         <source>Failed to create backup: %1</source>
         <comment>Notify of a backup failure, %1 is the path to where it was supposed to be.</comment>
         <translation>创建备份失败: %1</translation>
@@ -824,13 +835,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../utility/system/paths.h" line="43"/>
+        <location filename="../../utility/system/paths.h" line="44"/>
         <source>Steam user:</source>
         <comment>Steam user selection dialog title.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../utility/system/paths.h" line="44"/>
+        <location filename="../../utility/system/paths.h" line="45"/>
         <source>If you&apos;re unsure which you are, sign-in to the Steam app, or find your AccountID on https://steamdb.info/calculator</source>
         <comment>Steam user selection dialog hint.</comment>
         <translation type="unfinished"></translation>

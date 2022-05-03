@@ -161,6 +161,7 @@
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>.\gui\equipment;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>26812</DisableSpecificWarnings>
     </ClCompile>
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
@@ -180,6 +181,7 @@ for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>.\gui\equipment;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>26812</DisableSpecificWarnings>
     </ClCompile>
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)

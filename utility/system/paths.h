@@ -29,6 +29,7 @@ public:
     static QString selectedSteamUser = NULL;
     QString user = selectedSteamUser;
     if (user.isNull()) user = GetActiveSteamUser();
+    if (user == "0") user = NULL;
 
     if (user.isNull()) {
       QStringList users = GetSteamUsers();
@@ -94,6 +95,18 @@ public:
   static QString GetGameSaveFilePath()
   {
     return GetGameSavePath() + "/" + QString::fromUtf8(SAVE_NAME);
+  }
+
+  static QString GetTheoreticalGameSaveFilePath()
+  {
+    QString path = GetSteamPath();
+    QString user = GetSteamUser();
+
+    if (path.isNull()) path = "c:/program files (x86)/steam";
+    if (user.isNull()) user = "<SteamAccountID>";
+
+    path = QString("%1/userdata/%2/%3/remote/").arg(path).arg(user).arg(QString::fromUtf8(MHW_ID));
+    return path;
   }
 
   static QString GetDefaultDumpPath(int slot)

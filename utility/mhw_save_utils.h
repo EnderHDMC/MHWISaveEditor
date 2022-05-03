@@ -131,12 +131,9 @@ static inline void ClearEquipmentSlot(mhw_equipment* equipment) {
   equipment->sort_index = sort_index;
 }
 
-#pragma warning(push)
-#pragma warning(disable: 26812)
 static inline bool IsEquipmentEmpty(mhw_equipment* equipment) {
   return equipment->category == mhw_equip_category::Empty || equipment->type == -1;
 }
-#pragma warning(pop)
 
 static u32 CountEquipmentReferenced(mhw_save_slot* save_slot, mhw_equipment* ref) {
   mhw_equip_category category = ref->category;
