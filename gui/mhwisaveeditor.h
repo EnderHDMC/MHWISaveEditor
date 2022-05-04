@@ -2,6 +2,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QMessageBox>
 #include <QSignalMapper>
 #include <QFileSystemWatcher>
 
@@ -54,6 +55,7 @@ public slots:
 
   // Fixes
   void DebugDefragEquipment();
+  void DebugFixEquipmentBoxRef();
   
   // Debug
   void DebugDumpIconsAll();
@@ -90,6 +92,7 @@ private:
 
   Ui::MHWISaveEditor* ui;
   QLabel* statusFile = nullptr;
+  QMessageBox* msgNotification = nullptr;
 
   SaveLoader* inventoryEditor = nullptr;
   SaveLoader* hunterInfo = nullptr;

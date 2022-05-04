@@ -17,6 +17,10 @@ EquipmentSlotView::EquipmentSlotView(int index, QWidget* parent)
   ui->btnUncraft->installEventFilter(guard);
 
   equipslot = index;
+
+  equipmentIndex.setParent(this);
+  equipmentIndex.setGeometry(4, -4, 32, 32);
+  equipmentIndex.show();
 }
 
 EquipmentSlotView::~EquipmentSlotView()
@@ -31,21 +35,22 @@ void EquipmentSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
 
   int equipIndex = mhwSaveSlot->equipment_index_table[equipslot];
-  mhw_equipment* equipment = mhwSaveSlot->equipment;
-  mhw_equipment* equipmentSlot = equipment + equipIndex;
-  equipment_info* info = equipmentDB->GetEquipment(equipmentSlot);
+  const mhw_equipment* equipment = mhwSaveSlot->equipment + equipIndex;
+  if (equipIndex < 0 || equipIndex >= COUNTOF(mhwSaveSlot->equipment))
+    equipment = &MHW_EQUIPMENT_EMPTY;
+  equipment_info* info = equipmentDB->GetEquipment(equipment);
 
-  bool referenced = CountEquipmentReferenced(mhwSaveSlot, equipmentSlot);
-  bool empty = IsEquipmentEmpty(equipmentSlot);
+  bool referenced = CountEquipmentReferenced(mhwSaveSlot, equipment);
+  bool empty = IsEquipmentEmpty(equipment);
   if (!info && !empty && equipmentDB->HasData()) {
     qCritical().nospace() << "Invalid equipment detected, equipment info: "
       << "index = " << equipslot
-      << ", category = " << equipmentSlot->category
-      << ", type = " << equipmentSlot->type
-      << ", id = " << equipmentSlot->id;
+      << ", category = " << equipment->category
+      << ", type = " << equipment->type
+      << ", id = " << equipment->id;
   }
 
-  UpdateEquipDisplay(equipmentSlot, !empty && !referenced);
+  UpdateEquipDisplay(equipment, equipIndex, !empty && !referenced);
   SaveLoader::FinishLoad();
 }
 
@@ -63,16 +68,18 @@ void EquipmentSlotView::Uncraft()
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
 
   int equipIndex = mhwSaveSlot->equipment_index_table[equipslot];
-  mhw_equipment* equipment = mhwSaveSlot->equipment;
-  mhw_equipment* equipmentSlot = equipment + equipIndex;
+  mhw_equipment emptyEquipment = MHW_EQUIPMENT_EMPTY;
+  mhw_equipment* equipment = mhwSaveSlot->equipment + equipIndex;
+  if (equipIndex < 0 || equipIndex >= COUNTOF(mhwSaveSlot->equipment))
+    equipment = &emptyEquipment;
 
   // Disallow uncrafting for used equipment or empty equipment.
-  bool referenced = CountEquipmentReferenced(mhwSaveSlot, equipmentSlot);
-  bool empty = IsEquipmentEmpty(equipmentSlot);
+  bool referenced = CountEquipmentReferenced(mhwSaveSlot, equipment);
+  bool empty = IsEquipmentEmpty(equipment);
   if (empty || referenced) return;
 
-  qInfo().noquote() << "Uncrafting:" << equipmentDB->GetName(equipmentSlot);
-  QList<mhw_item_slot> mats = smithyDB->GetLineCraftingMats(equipmentSlot);
+  qInfo().noquote() << "Uncrafting:" << equipmentDB->GetName(equipment);
+  QList<mhw_item_slot> mats = smithyDB->GetLineCraftingMats(equipment);
   for (int i = 0; i < mats.count(); i++)
   {
     mhw_item_slot mat = mats[i];
@@ -83,17 +90,20 @@ void EquipmentSlotView::Uncraft()
     if (addSlot) GiveItem(addSlot, &mat);
   }
 
-  ClearEquipmentSlot(equipmentSlot);
+  ClearEquipmentSlot(equipment);
   ui->btnUncraft->clearFocus(); // Prevent scrolling to the next widget.
-  UpdateEquipDisplay(equipmentSlot, false);
+  UpdateEquipDisplay(equipment, equipIndex, false);
 }
 
-void EquipmentSlotView::UpdateEquipDisplay(mhw_equipment* equipment, bool uncraftable)
+void EquipmentSlotView::UpdateEquipDisplay(const mhw_equipment* slot, int position, bool uncraftable)
 {
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
-  QIcon* icon = bitmapDB->EquipmentIcon(equipment);
-  QString name = equipmentDB->GetName(equipment);
 
+  QIcon* icon = bitmapDB->EquipmentIcon(slot);
+  QString name = equipmentDB->GetName(slot);
+
+  equipmentIndex.setText(QString::number(position));
   ui->btnUncraft->setEnabled(uncraftable);
 
   ui->btnIcon->setIcon(*icon);

@@ -59,7 +59,7 @@ public:
   }
 
   QIcon* ItemIcon(ItemDB* itemDB, itm_entry* info);
-  QIcon* EquipmentIcon(mhw_equipment* equipment);
+  QIcon* EquipmentIcon(const mhw_equipment* equipment);
 
   // Debug
   bool DebugDumpAtlas(const QString& path);

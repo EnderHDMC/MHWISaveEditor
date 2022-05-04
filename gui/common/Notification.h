@@ -35,6 +35,8 @@ public:
   NotificationMode GetDefaultMode();
   bool SetDefaultMode(NotificationMode mode);
   void ShowMessage(const QString& text, int timeout = 0);
+
+  void Register(QMessageBox* messageBox);
   void Register(QStatusBar* statusbar);
 
   void Silence(unsigned int times);

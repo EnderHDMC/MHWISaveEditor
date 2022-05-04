@@ -59,8 +59,8 @@ public:
   static EquipmentDB* GetInstance();
   void Free();
 
-  equipment_info* GetEquipment(mhw_equipment* equipment);
-  i32 GetRawIndex(mhw_equipment* equipment);
+  equipment_info* GetEquipment(const mhw_equipment* equipment);
+  i32 GetRawIndex(const mhw_equipment* equipment);
 
   // Database management interface
   void LoadGMD(game_language language);
@@ -96,7 +96,7 @@ public:
   rod_inse_entry* IndexKinsect(i32 index);
 
   // All
-  QString GetName(mhw_equipment* equipment);
+  QString GetName(const mhw_equipment* equipment);
 
   // Debug
   void DumpWeaponInfo();

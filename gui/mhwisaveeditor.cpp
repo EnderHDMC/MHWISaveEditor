@@ -42,9 +42,17 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 {
   settings = settings->GetInstance();
   ui->setupUi(this);
-  setWindowIcon(QIcon(Paths::GetResourcesPath("icon.ico")));
+  QIcon windowIcon = QIcon(Paths::GetResourcesPath("icon.ico"));
+  setWindowIcon(windowIcon);
+
+  msgNotification = new QMessageBox(
+    QMessageBox::Icon::Information,
+    tr("Notification", "Notification popup title. Usually appears when there something the user should be aware of."),
+    NULL, QMessageBox::StandardButton::Ok, this);
+  msgNotification->setWindowIcon(windowIcon);
 
   Notification* notif = notif->GetInstance();
+  notif->Register(msgNotification);
   notif->Register(ui->statusbar);
   notif->SetDefaultMode(NotificationMode::NotifModeStatusBar);
 
@@ -267,11 +275,13 @@ void MHWISaveEditor::Open()
 
     QString editorFile = EditorFile();
     QDir fileInfo(editorFile);
-    qInfo() << fileInfo;
-    if (fileInfo.exists(MHW_EXE_REL.c_str())) {
+
+    if (fileInfo.exists(MHW_EXE_REL_BACKUP.c_str())) {
+      QString theoryPath = Paths::GetTheoreticalGameSaveFilePath();
+      qWarning() << "Opened game backup save:" << editorFile;
+
       Notification* notif = notif->GetInstance();
       notif->PushMode(NotificationMode::NotifModeMessageBox);
-      QString theoryPath = Paths::GetTheoreticalGameSaveFilePath();
       notif->ShowMessage(tr("You have likely opened a backup of your save file.\nChanges won't be seen in-game.\nYour save file is usually in the following place:\n%1\n\nYour Steam Account ID can be found online.",
         "Tell the user that they've loaded a backup, and instruct them on where to find their save. %s is the path to where the save is usually found.")
         .arg(theoryPath));
@@ -289,7 +299,6 @@ void MHWISaveEditor::OpenSAVEDATA1000()
 void MHWISaveEditor::Save()
 {
   MHW_SAVE_GUARD;
-
   QFileInfo fi(EditorFile());
   QString ext = fi.completeSuffix();
   ext = ext.isEmpty() ? "" : '.' + ext;
@@ -302,7 +311,6 @@ void MHWISaveEditor::Save()
 void MHWISaveEditor::SaveAs()
 {
   MHW_SAVE_GUARD;
-
   QString path = Paths::GetGameSavePath();
 
   QFileDialog dialog(this);
@@ -725,12 +733,72 @@ void MHWISaveEditor::DebugDefragEquipment()
   int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
-  qInfo("Defragging equipment references...");
-  DefragEquipmentReferences(mhwSaveSlot);
-  qInfo("Defragging equipment...");
-  DefragEquipment(mhwSaveSlot);
-  qInfo("Defragging finished.");
+  qInfo("Checking equipment box references...");
+  bool check = ValidateEquipmentBox(mhwSaveSlot, true);
 
-  SaveLoader* loader = GetActiveEditorTab();
-  if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+  Notification* notif = notif->GetInstance();
+  if (check) {
+    qInfo("Defragging equipment references...");
+    DefragEquipmentReferences(mhwSaveSlot);
+    qInfo("Defragging equipment...");
+    DefragEquipment(mhwSaveSlot);
+    qInfo("Defragging finished successfully.");
+
+    SaveLoader* loader = GetActiveEditorTab();
+    if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+
+    notif->ShowMessage(tr("Equipment has been defragged.", "Tell the user that the equipment has been defragged."));
+  }
+  else {
+    qCritical("Defragging equipment failed, equipment box references are corrupt.");
+
+    notif->PushMode(NotificationMode::NotifModeMessageBox);
+    notif->ShowMessage(tr("Could not defrag equipment, there are issues with the equipment references.\n\n"
+      "Try running the Equipment Box Reference Fix:\n"
+      "Debug -> Fixes -> Equipment Box Reference Fix",
+      "Tell the user that equipment couldn't be defragged, because there are issues."));
+    notif->PopMode();
+  }
+}
+
+void MHWISaveEditor::DebugFixEquipmentBoxRef()
+{
+  MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  int mhwSaveIndex = MHW_SaveIndex();
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
+  qInfo("Checking equipment box references...");
+  bool check = ValidateEquipmentBox(mhwSaveSlot, true);
+
+  Notification* notif = notif->GetInstance();
+  if (!check) {
+    qInfo("Fixing equipment box references...");
+    check = ValidateEquipmentBox(mhwSaveSlot, false);
+
+    if (check) {
+      SaveLoader* loader = GetActiveEditorTab();
+      if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+
+      qInfo("Equipment box references have been fixed successfully.");
+
+      notif->ShowMessage(tr("Equipment box references have been fixed successfully.",
+        "Tell the user the equipment box references were fixed."));
+    }
+    else {
+      qCritical("Fixing equipment box references failed.");
+
+      notif->PushMode(NotificationMode::NotifModeMessageBox);
+      notif->ShowMessage(tr("Could not fix equipment references.\n\n"
+        "Please consider filing a bug report and sending your save.",
+        "Tell the user that equipment references couldn't be fixed, and give further instructions."));
+      notif->PopMode();
+    }
+  }
+  else {
+    qInfo("Equipment box references are fine.");
+
+    notif->ShowMessage(tr("Equipment box references are already fine.",
+      "Tell the user the equipment box references are already fine."));
+  }
 }

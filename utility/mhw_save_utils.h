@@ -131,21 +131,21 @@ static inline void ClearEquipmentSlot(mhw_equipment* equipment) {
   equipment->sort_index = sort_index;
 }
 
-static inline bool IsEquipmentEmpty(mhw_equipment* equipment) {
+static inline bool IsEquipmentEmpty(const mhw_equipment* equipment) {
   return equipment->category == mhw_equip_category::Empty || equipment->type == -1;
 }
 
-static u32 CountEquipmentReferenced(mhw_save_slot* save_slot, mhw_equipment* ref) {
+static u32 CountEquipmentReferenced(const mhw_save_slot* save_slot, const mhw_equipment* ref) {
   mhw_equip_category category = ref->category;
   i32 type = ref->type;
   u32 id = ref->id;
 
-  mhw_equipment* equipment = save_slot->equipment;
+  const mhw_equipment* equipment = save_slot->equipment;
   int srcIndex = ref - equipment;
   u32 referenced = false;
 
   // Check for references from equipped gear
-  mhw_current_equipment* current_equipment = &save_slot->current_equipment;
+  const mhw_current_equipment* current_equipment = &save_slot->current_equipment;
   referenced += current_equipment->weapon == srcIndex;
   referenced += current_equipment->helmet == srcIndex;
   referenced += current_equipment->torso == srcIndex;
@@ -158,7 +158,7 @@ static u32 CountEquipmentReferenced(mhw_save_slot* save_slot, mhw_equipment* ref
   // Check for references from loadouts
   const int count = COUNTOF(save_slot->equipment_loadouts);
   for (int i = 0; i < count; ++i) {
-    mhw_equipment_loadout* loadout = save_slot->equipment_loadouts + i;
+    const mhw_equipment_loadout* loadout = save_slot->equipment_loadouts + i;
     referenced += loadout->weapon_index == srcIndex;
     referenced += loadout->helmet_index == srcIndex;
     referenced += loadout->torso_index == srcIndex;
@@ -238,11 +238,13 @@ static inline void DefragEquipmentReferences(mhw_save_slot* save_slot) {
   }
 }
 
-static inline void SwapEquipmentEntries(mhw_equipment* a, mhw_equipment* b) {
+static inline void SwapEquipmentEntries(u32* index_table, mhw_equipment* a, mhw_equipment* b) {
   mhw_equipment temp;
   memcpy_s(&temp, sizeof(temp), a, sizeof(*a));
   memcpy_s(a, sizeof(*a), b, sizeof(*b));
   memcpy_s(b, sizeof(*b), &temp, sizeof(temp));
+  index_table[a->sort_index] = index_table[b->sort_index];
+  index_table[b->sort_index] = temp.sort_index;
 }
 
 /// <summary>
@@ -257,77 +259,80 @@ static inline void SwapEquipmentEntries(mhw_equipment* a, mhw_equipment* b) {
 static void DefragEquipment(mhw_save_slot* save_slot) {
   mhw_equipment* equipment = save_slot->equipment;
   u32* equipment_index_table = save_slot->equipment_index_table;
-  i32 filled = 0;
 
   i32 count = COUNTOF(save_slot->equipment);
   for (int i = 0; i < count; ++i) {
     int index = equipment_index_table[i];
     mhw_equipment* src = equipment + index;
     mhw_equipment* dst = equipment + i;
-    i32 srcIndex = src->sort_index;
-    i32 dstIndex = dst->sort_index;
 
-    SwapEquipmentEntries(src, dst);
-    i32 temp = equipment_index_table[srcIndex];
-    equipment_index_table[srcIndex] = equipment_index_table[dstIndex];
-    equipment_index_table[dstIndex] = temp;
+    if (src != dst) {
+      SwapEquipmentEntries(equipment_index_table, src, dst);
+    }
   }
 }
 
-static bool ValidateEquipmentBox(mhw_save_slot* save_slot) {
-  bool sort_index_issue = false;
-  bool index_table_issue = false;
+static bool ValidateEquipmentBox(mhw_save_slot* save_slot, bool dry = false) {
+  // Issue types
+  enum SaveEquipmentIssue : u32 {
+    EquipIssue_Fine = 0,
+    EquipIssue_SortIndex = 1 << 0,
+    EquipIssue_TableIndex = 1 << 1,
+    EquipIssue_Both = EquipIssue_SortIndex | EquipIssue_TableIndex
+  };
+  u32 issues = EquipIssue_Fine;
 
   // Detection
   const i32 count = COUNTOF(save_slot->equipment);
-  u32 ref_tally[count] = {};
   for (int i = 0; i < count; ++i) {
     int sort_index = save_slot->equipment[i].sort_index;
     int table_index = save_slot->equipment_index_table[i];
-    if (sort_index >= 0 && sort_index < count) ref_tally[sort_index] |= 1 << 0;
-    if (table_index >= 0 && table_index < count) ref_tally[table_index] |= 1 << 1;
+
+    if (sort_index < 0 || sort_index >= count || save_slot->equipment_index_table[sort_index] != i) {
+      issues |= EquipIssue_SortIndex;
+    }
+
+    if (table_index < 0 || table_index >= count || save_slot->equipment[table_index].sort_index != i) {
+      issues |= EquipIssue_TableIndex;
+    }
+    if (issues == EquipIssue_Both) break;
   }
-  for (int i = 0; i < count; ++i) {
-    sort_index_issue |= !(ref_tally[i] >> 0 & 1);
-    index_table_issue |= !(ref_tally[i] >> 1 & 1);
-    if (index_table_issue && sort_index_issue) break;
-  }
-  bool any_issue = sort_index_issue || index_table_issue;
 
   // Handling
-  if (index_table_issue && sort_index_issue) {
-    for (int i = 0; i < count; ++i) {
-      save_slot->equipment_index_table[i] = i;
-      save_slot->equipment[i].sort_index = i;
+  if (!dry) {
+    switch (issues) {
+    case EquipIssue_Both: {
+      for (int i = 0; i < count; ++i) {
+        save_slot->equipment_index_table[i] = i;
+        save_slot->equipment[i].sort_index = i;
+      }
+      issues = EquipIssue_Fine;
+    } break;
+
+    case EquipIssue_SortIndex: {
+      for (int i = 0; i < count; ++i)
+        save_slot->equipment[i].sort_index = save_slot->equipment_index_table[i];
+      issues = EquipIssue_Fine;
+    } break;
+
+    case EquipIssue_TableIndex: {
+      for (int i = 0; i < count; ++i)
+        save_slot->equipment_index_table[i] = save_slot->equipment[i].sort_index;
+      issues = EquipIssue_Fine;
+    } break;
+
+    case EquipIssue_Fine: break;
+    default: Q_ASSERT(false); break; // All issues should be handled somehow
     }
-  }
-  else if (!sort_index_issue && (index_table_issue)) {
-    for (int i = 0; i < count; ++i) {
-      save_slot->equipment_index_table[i] = save_slot->equipment[i].sort_index;
-    }
-  }
-  else if (!index_table_issue && (sort_index_issue)) {
-    for (int i = 0; i < count; ++i) {
-      save_slot->equipment[i].sort_index = save_slot->equipment_index_table[i];
-    }
-  }
-  else {
-    // No issue detected
-    Q_ASSERT(!any_issue);
   }
 
-  return !any_issue;
+  return issues == EquipIssue_Fine;
 }
 
 static bool ValidateItemSlots(mhw_item_slot* items, int count) {
   for (int i = 0; i < count; i++) {
-    if (items[i].amount == 0) {
-      items[i].id = 0;
-    }
-
-    if (items[i].id == 0) {
-      items[i].amount = 0;
-    }
+    if (items[i].amount == 0) items[i].id = 0;
+    if (items[i].id == 0) items[i].amount = 0;
   }
   return true;
 }

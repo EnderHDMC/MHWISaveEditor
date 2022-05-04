@@ -91,7 +91,7 @@ void EquipmentDB::Free()
   instance = nullptr;
 }
 
-equipment_info* EquipmentDB::GetEquipment(mhw_equipment* equipment)
+equipment_info* EquipmentDB::GetEquipment(const mhw_equipment* equipment)
 {
   mhw_equip_category category = equipment->category;
   i32 type = equipment->type;
@@ -114,7 +114,7 @@ equipment_info* EquipmentDB::GetEquipment(mhw_equipment* equipment)
   return info;
 }
 
-i32 EquipmentDB::GetRawIndex(mhw_equipment* equipment)
+i32 EquipmentDB::GetRawIndex(const mhw_equipment* equipment)
 {
   i32 index = -1;
   equipment_info* info = GetEquipment(equipment);
@@ -384,7 +384,7 @@ rod_inse_entry* EquipmentDB::IndexKinsect(i32 index)
   return &rod_inse.entries[index];
 }
 
-QString EquipmentDB::GetName(mhw_equipment* equipment)
+QString EquipmentDB::GetName(const mhw_equipment* equipment)
 {
   mhw_equip_category category = equipment->category;
   i32 type = equipment->type;

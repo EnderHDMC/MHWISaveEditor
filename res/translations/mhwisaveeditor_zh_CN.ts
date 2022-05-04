@@ -452,341 +452,389 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="165"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="166"/>
         <source>Open</source>
         <comment>File -&gt; Open</comment>
         <extracomment>Allows the user to open a file.</extracomment>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="168"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="169"/>
         <source>Ctrl+O</source>
         <comment>Hotkey for: File -&gt; Open</comment>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="176"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="177"/>
         <source>Save</source>
         <comment>File -&gt; Save</comment>
         <extracomment>Saves the currently loaded file, overwriting what was loaded.</extracomment>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="179"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="180"/>
         <source>Ctrl+S</source>
         <comment>Hotkey for: File -&gt; Save</comment>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="187"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="188"/>
         <source>Backup</source>
         <comment>File -&gt; Backup</comment>
         <extracomment>Makes a backup of the currently loaded file or SAVEDATA1000 if none is loaded.</extracomment>
         <translation>备份</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="195"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="196"/>
         <source>Restore</source>
         <comment>File -&gt; Restore</comment>
         <extracomment>Like open, but specifically opens a previous backup.</extracomment>
         <translation>备份恢复</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="200"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="201"/>
         <source>Exit</source>
         <comment>File -&gt; Exit</comment>
         <extracomment>Exit the application.</extracomment>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="205"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="206"/>
         <source>Open game location</source>
         <comment>File -&gt; Open game location</comment>
         <extracomment>Open the folder where the game is located.</extracomment>
         <translation>打开游戏目录</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="210"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="211"/>
         <source>Open save location</source>
         <comment>File -&gt; Open save location</comment>
         <extracomment>Open the folder that contains the game save files.</extracomment>
         <translation>打开存档目录</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="215"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="216"/>
         <source>Open SAVEDATA1000</source>
         <comment>File -&gt; Open SAVEDATA1000</comment>
         <extracomment>Acts as a shortcut to open the save file of the user.</extracomment>
         <translation>打开 SAVEDATA100</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="218"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="219"/>
         <source>Ctrl+Shift+O</source>
         <comment>Hotkey for: File -&gt; Open SAVEDATA1000</comment>
         <translation>Ctrl+Shift+O</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="226"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="227"/>
         <source>Ctrl+0</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1000.bin</comment>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="234"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="235"/>
         <source>Ctrl+1</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1001.bin</comment>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="242"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="243"/>
         <source>Ctrl+2</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1002.bin</comment>
         <translation>Ctrl+2</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="250"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="251"/>
         <source>Ctrl+3</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1003.bin</comment>
         <translation>Ctrl+3</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="258"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="259"/>
         <source>Ctrl+4</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1004.bin</comment>
         <translation>Ctrl+4</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="266"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="267"/>
         <source>Ctrl+5</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1005.bin</comment>
         <translation>Ctrl+5</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="274"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="275"/>
         <source>Ctrl+6</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1006.bin</comment>
         <translation>Ctrl+6</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="282"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="283"/>
         <source>Ctrl+7</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1007.bin</comment>
         <translation>Ctrl+7</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="290"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="291"/>
         <source>Ctrl+8</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1008.bin</comment>
         <translation>Ctrl+8</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="298"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="299"/>
         <source>Ctrl+9</source>
         <comment>Hotkey for File -&gt; Dump -&gt; SAVEDATA1009.bin</comment>
         <translation>Ctrl+9</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="309"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="310"/>
         <source>Slot 1</source>
         <comment>Slot -&gt; Slot 1</comment>
         <translation>槽1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="312"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="313"/>
         <source>F1</source>
         <comment>Hotkey for: Slot -&gt; Slot 1</comment>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="323"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="324"/>
         <source>Slot 2</source>
         <comment>Slot -&gt; Slot 2</comment>
         <translation>槽2</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="326"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="327"/>
         <source>F2</source>
         <comment>Hotkey for: Slot -&gt; Slot 2</comment>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="337"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="338"/>
         <source>Slot 3</source>
         <comment>Slot -&gt; Slot 3</comment>
         <translation>槽3</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="340"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="341"/>
         <source>F3</source>
         <comment>Hotkey for: Slot -&gt; Slot 3</comment>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="348"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="349"/>
         <source>Slot 1</source>
         <comment>Slot -&gt; Switch with -&gt; Slot 1</comment>
         <translation>槽1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="356"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="357"/>
         <source>Slot 2</source>
         <comment>Slot -&gt; Switch with -&gt; Slot 2</comment>
         <translation>槽2</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="364"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="365"/>
         <source>Slot 3</source>
         <comment>Slot -&gt; Switch with -&gt; Slot 3</comment>
         <translation>槽3</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="372"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="373"/>
         <source>Slot 1</source>
         <comment>Slot -&gt; Clone to -&gt; Slot 1</comment>
         <translation>槽1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="380"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="381"/>
         <source>Slot 2</source>
         <comment>Slot -&gt; Clone to -&gt; Slot 2</comment>
         <translation>槽2</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="388"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="389"/>
         <source>Slot 3</source>
         <comment>Slot -&gt; Clone to -&gt; Slot 3</comment>
         <translation>槽3</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="396"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="397"/>
         <source>Save As</source>
         <comment>File -&gt; Save As</comment>
         <extracomment>Allows the user to save to a specific file.</extracomment>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="399"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="400"/>
         <source>Ctrl+Shift+S</source>
         <comment>Hotkey for: File -&gt; Save As</comment>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="404"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="405"/>
         <source>Open editor data</source>
         <comment>Debug -&gt; Open editor data</comment>
         <extracomment>Opens location that contains the editor settings and backups.</extracomment>
         <translation>打开编辑器文件</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="414"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="415"/>
         <source>Dump All</source>
         <comment>Debug -&gt; Icons -&gt; Dump All</comment>
         <extracomment>Dumps all the icons, atlases and icon use masks.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="422"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="423"/>
         <source>Defrag Equipment Table</source>
         <comment>Debug -&gt; Fixes -&gt; Defrag Equipment Table</comment>
         <extracomment>Matches equipment to their sort order.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="430"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="431"/>
         <source>Uncraft Unused Equipment</source>
         <comment>Tools -&gt; Uncraft Unused Equipment</comment>
         <extracomment>Uncrafts all equipment not equipped or in a loadout.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.ui" line="409"/>
+        <location filename="../../gui/mhwisaveeditor.ui" line="436"/>
+        <source>Equipment Box Reference Fix</source>
+        <comment>Debug-&gt;Fixes-&gt;Equipment Box Reference Fix</comment>
+        <extracomment>Fixes the cross references in equipment box &amp; the sort table.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/mhwisaveeditor.ui" line="410"/>
         <source>Settings</source>
         <comment>Tools -&gt; Settings</comment>
         <extracomment>Opens the settings menu for the editor.</extracomment>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="53"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="61"/>
         <source>File: None</source>
         <comment>Indicate the currently open file (no file).</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="133"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="141"/>
         <source>All Files</source>
         <comment>Open/Save filter, show all files.</comment>
         <translation>全部文件</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="134"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="142"/>
         <source>Encrypted Save</source>
         <comment>Open/Save filter, show only *.raw files.</comment>
         <translation>加密的存档</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="135"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="143"/>
         <source>Unencrypted Save</source>
         <comment>Open/Save filter, show only *.bin files.</comment>
         <translation>解密后存档</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="195"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="203"/>
         <source>Saved file: %1</source>
         <comment>Indicate sucessful file save, %1 is the path where the file was saved to.</comment>
         <translation>保存文件: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="196"/>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="356"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="204"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="364"/>
         <source>File: %1</source>
         <comment>Indicate the currently open file.</comment>
         <translation>文件: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="199"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="207"/>
         <source>Could not save file: %1</source>
         <comment>Indicate failed file save, %1 is the path where the file was supposed to be saved to.</comment>
         <translation>保存文件失败: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="245"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="253"/>
         <source>Dumped file: %1</source>
         <comment>Indicate a successful file dump, %1 is the path where the file was dumped to.</comment>
         <translation>导出为文件: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="247"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="255"/>
         <source>Could not dump file: %1</source>
         <comment>Indicate a failed file dump, %1 is the path where the file was supposed to be dumped to.</comment>
         <translation>导出文件失败: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="354"/>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="456"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="362"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="464"/>
         <source>Loaded character slot %1: %2</source>
         <comment>Indicate a character slot change, %1 is the slot number, %2 is the character name.</comment>
         <translation>加载角色 %1: %2</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="378"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="386"/>
         <source>Failed to load file: %1</source>
         <comment>Indicate a failed file load, %1 is the path to the file that was to be loaded.</comment>
         <translation>加载文件失败: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="534"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="542"/>
         <source>Some settings you have changed will apply on restart.</source>
         <comment>Tell the user they have some settings that will only be applied on restart.</comment>
         <translation>部分设置在重启后才会生效。</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="482"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="750"/>
+        <source>Equipment has been defragged.</source>
+        <comment>Tell the user that the equipment has been defragged.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="756"/>
+        <source>Could not defrag equipment, there are issues with the equipment references.
+
+Try running the Equipment Box Reference Fix:
+Debug -&gt; Fixes -&gt; Equipment Box Reference Fix</source>
+        <comment>Tell the user that equipment couldn&apos;t be defragged, because there are issues.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="785"/>
+        <source>Equipment box references have been fixed successfully.</source>
+        <comment>Tell the user the equipment box references were fixed.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="792"/>
+        <source>Could not fix equipment references.
+
+Please consider filing a bug report and sending your save.</source>
+        <comment>Tell the user that equipment references couldn&apos;t be fixed, and give further instructions.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="801"/>
+        <source>Equipment box references are already fine.</source>
+        <comment>Tell the user the equipment box references are already fine.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="490"/>
         <source>Switched slots: %1 and %2</source>
         <comment>Indicate a successful slot switch, %1 is the current slot, %2 is the target slot.</comment>
         <translation type="unfinished">已交换槽 %1和槽 %2。</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="275"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="50"/>
+        <source>Notification</source>
+        <comment>Notification popup title. Usually appears when there something the user should be aware of.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="285"/>
         <source>You have likely opened a backup of your save file.
 Changes won&apos;t be seen in-game.
 Your save file is usually in the following place:
@@ -797,31 +845,31 @@ Your Steam Account ID can be found online.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="500"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="508"/>
         <source>Cloned slot: %1 to %2</source>
         <comment>Indicate a slot was cloned, %1 is the current slot, %2 is the target slot.</comment>
         <translation type="unfinished">已复制槽 %1到槽 %2.</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="710"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="718"/>
         <source>Dumped icons: %1</source>
         <comment>Indicate sucessful icon dump, %1 is the path where the icons were dumped to.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="715"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="723"/>
         <source>Could not dump icons: %1</source>
         <comment>Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="597"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="605"/>
         <source>Backup made: %1</source>
         <comment>Notify of a backup being made, %1 is the path to where it is.</comment>
         <translation>备份完成: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="600"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="608"/>
         <source>Failed to create backup: %1</source>
         <comment>Notify of a backup failure, %1 is the path to where it was supposed to be.</comment>
         <translation>创建备份失败: %1</translation>
@@ -829,11 +877,6 @@ Your Steam Account ID can be found online.</source>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <location filename="../../gui/common/Notification.cpp" line="11"/>
-        <source>Notification</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="../../utility/system/paths.h" line="44"/>
         <source>Steam user:</source>

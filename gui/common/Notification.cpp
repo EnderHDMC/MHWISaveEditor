@@ -6,10 +6,6 @@ Notification* Notification::instance = nullptr;
 
 Notification::Notification()
 {
-  messageBox = new QMessageBox();
-  messageBox->setIcon(QMessageBox::Icon::Information);
-  messageBox->setWindowTitle(QObject::tr("Notification"));
-
   notificationModes.insert(NotificationMode::NotifModeInvalid, nullptr);
   notificationModes.insert(NotificationMode::NotifModeNone, nullptr);
   notificationModes.insert(NotificationMode::NotifModeStatusBar, statusBar);
@@ -69,9 +65,15 @@ void Notification::ShowMessage(const QString& text, int timeout)
   }
 }
 
+void Notification::Register(QMessageBox* messageBox)
+{
+  this->messageBox = messageBox;
+  notificationModes.insert(NotificationMode::NotifModeMessageBox, messageBox);
+}
+
 void Notification::Register(QStatusBar* statusbar)
 {
-  statusBar = statusbar;
+  this->statusBar = statusbar;
   notificationModes.insert(NotificationMode::NotifModeStatusBar, statusBar);
 }
 

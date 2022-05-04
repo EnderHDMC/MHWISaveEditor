@@ -146,7 +146,8 @@
      <property name="title">
       <string comment="Debug -&gt; Fixes" extracomment="Scripts to fix some issues that arise from memory edits.">Fixes</string>
      </property>
-     <addaction name="actionFixEquipmentTable"/>
+     <addaction name="actionFixEquipmentBoxRef"/>
+     <addaction name="actionDefragEquipmentBox"/>
     </widget>
     <addaction name="actionOpenEditorData"/>
     <addaction name="separator"/>
@@ -417,7 +418,7 @@
     <string comment="Debug -&gt; Icons -&gt; Dump All"/>
    </property>
   </action>
-  <action name="actionFixEquipmentTable">
+  <action name="actionDefragEquipmentBox">
    <property name="text">
     <string comment="Debug -&gt; Fixes -&gt; Defrag Equipment Table" extracomment="Matches equipment to their sort order.">Defrag Equipment Table</string>
    </property>
@@ -428,6 +429,11 @@
    </property>
    <property name="text">
     <string comment="Tools -&gt; Uncraft Unused Equipment" extracomment="Uncrafts all equipment not equipped or in a loadout.">Uncraft Unused Equipment</string>
+   </property>
+  </action>
+  <action name="actionFixEquipmentBoxRef">
+   <property name="text">
+    <string comment="Debug-&gt;Fixes-&gt;Equipment Box Reference Fix" extracomment="Fixes the cross references in equipment box &amp; the sort table.">Equipment Box Reference Fix</string>
    </property>
   </action>
  </widget>
@@ -594,7 +600,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionFixEquipmentTable</sender>
+   <sender>actionDefragEquipmentBox</sender>
    <signal>triggered()</signal>
    <receiver>MHWISaveEditor</receiver>
    <slot>DebugDefragEquipment()</slot>
@@ -625,6 +631,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionFixEquipmentBoxRef</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>DebugFixEquipmentBoxRef()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -639,5 +661,6 @@
   <slot>DebugDumpIconsAll()</slot>
   <slot>DebugDefragEquipment()</slot>
   <slot>UncraftUnusedEquipment()</slot>
+  <slot>DebugFixEquipmentBoxRef()</slot>
  </slots>
 </ui>

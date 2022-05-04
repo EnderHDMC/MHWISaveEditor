@@ -25,7 +25,7 @@ const std::string MHW_ID = "582010";
 const std::string SAVE_NAME = "SAVEDATA1000";
 const std::string MHW_FOLDER_NAME = "Monster Hunter World";
 const std::string MHW_EXE_NAME = "MonsterHunterWorld.exe";
-const std::string MHW_EXE_REL = "../../MonsterHunterWorld.exe";
+const std::string MHW_EXE_REL_BACKUP = "../../MonsterHunterWorld.exe";
 
 const u32 MHW_IB_SAVE_SIZE = 11284704;
 

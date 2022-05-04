@@ -176,7 +176,7 @@ QIcon* BitmapDB::ItemIcon(ItemDB* itemDB, itm_entry* info)
   return icons.value(key, &nullIcon);
 }
 
-QIcon* BitmapDB::EquipmentIcon(mhw_equipment* equipment)
+QIcon* BitmapDB::EquipmentIcon(const mhw_equipment* equipment)
 {
   if (!equipment) return &nullIcon;
   const int icon_palette = 1;
