@@ -31,5 +31,5 @@ public:
   eq_cus_entry* GetUpgradeEntry(eq_cus_meta* eq_cus, u8 type, u16 raw_index);
   eq_cus_entry* GetUpgradeParent(eq_cus_meta* upgrades, eq_cus_entry* child);
 
-  QList<mhw_item_slot> GetLineCraftingMats(mhw_equipment* equipment);
+  QList<mhw_item_slot> GetLineCraftingMats(equipment_info* info, mhw_equipment* equipment);
 };

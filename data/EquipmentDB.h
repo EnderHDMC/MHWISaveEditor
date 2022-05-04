@@ -8,6 +8,14 @@
 
 #include "../utility/read_bin_file.h"
 
+enum class EquipmentInfoType : i8 {
+  INVALID = -1,
+  AM_DAT = 0,
+  WP_DAT = 1,
+  WP_DAT_G = 2,
+  ROD_INSE = 3,
+};
+
 union equipment_info {
   am_dat_entry am_dat;
   wp_dat_entry wp_dat;
@@ -60,7 +68,24 @@ public:
   void Free();
 
   equipment_info* GetEquipment(const mhw_equipment* equipment);
-  i32 GetRawIndex(const mhw_equipment* equipment);
+  EquipmentInfoType GetInfoType(const equipment_info* info);
+  bool IsType(const equipment_info* info, EquipmentInfoType type);
+
+  inline i32 GetRawIndex(const equipment_info* info)
+  {
+    i32 index = -1;
+    if (info) index = info->am_dat.index;
+    return index;
+  }
+
+  inline i32 GetRawIndex(const mhw_equipment* equipment)
+  {
+    i32 index = -1;
+    equipment_info* info = GetEquipment(equipment);
+
+    if (info) index = info->am_dat.index;
+    return index;
+  }
 
   // Database management interface
   void LoadGMD(game_language language);
@@ -73,6 +98,11 @@ public:
 
   int CountArmor();
   am_dat_entry* IndexArmor(i32 index);
+
+  static inline bool IsPermanent(am_dat_entry* entry)
+  {
+    return entry && (entry->is_permanent || entry->cost == 0);
+  }
 
   // Weapons
   wp_dat_entry* GetEntryWeaponMelee(i32 type, i32 id);

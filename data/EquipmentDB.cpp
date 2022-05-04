@@ -114,13 +114,81 @@ equipment_info* EquipmentDB::GetEquipment(const mhw_equipment* equipment)
   return info;
 }
 
-i32 EquipmentDB::GetRawIndex(const mhw_equipment* equipment)
+EquipmentInfoType EquipmentDB::GetInfoType(const equipment_info* info)
 {
-  i32 index = -1;
-  equipment_info* info = GetEquipment(equipment);
+  EquipmentInfoType result = EquipmentInfoType::INVALID;
 
-  if (info) index = info->am_dat.index;
-  return index;
+  if (am_dat.header && (am_dat_entry*)info >= am_dat.entries &&
+    (am_dat_entry*)info < am_dat.entries + am_dat.header->entry_count)
+    result = EquipmentInfoType::AM_DAT;
+
+  if (rod_inse.header && (rod_inse_entry*)info >= rod_inse.entries &&
+    (rod_inse_entry*)info < rod_inse.entries + rod_inse.header->entry_count)
+    result = EquipmentInfoType::ROD_INSE;
+
+  QMapIterator<i32, QString> wp(mapBasenames);
+  while (wp.hasNext()) {
+    wp.next();
+    i32 type = wp.key();
+
+    wp_dat_meta* wp_dat = map_wp_dat.value(type);
+    wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
+
+    if (wp_dat->header && (wp_dat_entry*)info >= wp_dat->entries &&
+      (wp_dat_entry*)info < wp_dat->entries + wp_dat->header->entry_count) {
+      result = EquipmentInfoType::WP_DAT; break;
+    }
+
+    if (wp_dat_g->header && (wp_dat_g_entry*)info >= wp_dat_g->entries &&
+      (wp_dat_g_entry*)info < wp_dat_g->entries + wp_dat_g->header->entry_count) {
+      result = EquipmentInfoType::WP_DAT_G; break;
+    }
+  }
+
+  return result;
+}
+
+bool EquipmentDB::IsType(const equipment_info* info, EquipmentInfoType type)
+{
+  bool result = false;
+
+  switch (type) {
+  case EquipmentInfoType::INVALID: break;
+
+  case EquipmentInfoType::AM_DAT:
+    result = am_dat.header && (am_dat_entry*)info >= am_dat.entries &&
+      (am_dat_entry*)info < am_dat.entries + am_dat.header->entry_count;
+    break;
+
+  case EquipmentInfoType::ROD_INSE:
+    result = rod_inse.header && (rod_inse_entry*)info >= rod_inse.entries &&
+      (rod_inse_entry*)info < rod_inse.entries + rod_inse.header->entry_count;
+    break;
+
+  case EquipmentInfoType::WP_DAT:
+  case EquipmentInfoType::WP_DAT_G: {
+    QMapIterator<i32, QString> wp(mapBasenames);
+    while (wp.hasNext()) {
+      wp.next();
+      i32 type = wp.key();
+
+      wp_dat_meta* wp_dat = map_wp_dat.value(type);
+      wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
+
+      if (wp_dat->header && (wp_dat_entry*)info >= wp_dat->entries &&
+        (wp_dat_entry*)info < wp_dat->entries + wp_dat->header->entry_count) {
+        result = true; break;
+      }
+
+      if (wp_dat_g->header && (wp_dat_g_entry*)info >= wp_dat_g->entries &&
+        (wp_dat_g_entry*)info < wp_dat_g->entries + wp_dat_g->header->entry_count) {
+        result = true; break;
+      }
+    }
+  } break;
+  }
+
+  return result;
 }
 
 void EquipmentDB::LoadGMD(game_language language)

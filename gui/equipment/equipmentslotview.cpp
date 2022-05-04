@@ -1,8 +1,10 @@
 #include "equipmentslotview.h"
 #include "ui_equipmentslotview.h"
 
+#include <QMessageBox>
+
 #include "../../data/SmithyDB.h"
-#include "../../utility/mhw_save_utils.h"
+#include "../../utility/mhw_save_operations.h"
 #include "../../types/mhw_struct_constants.h"
 
 #include "../common/WheelGuard.h"
@@ -40,8 +42,8 @@ void EquipmentSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
     equipment = &MHW_EQUIPMENT_EMPTY;
   equipment_info* info = equipmentDB->GetEquipment(equipment);
 
-  bool referenced = CountEquipmentReferenced(mhwSaveSlot, equipment);
-  bool empty = IsEquipmentEmpty(equipment);
+  bool referenced = MHWSaveUtils::CountEquipmentReferenced(mhwSaveSlot, equipment);
+  bool empty = MHWSaveUtils::IsEquipmentEmpty(equipment);
   if (!info && !empty && equipmentDB->HasData()) {
     qCritical().nospace() << "Invalid equipment detected, equipment info: "
       << "index = " << equipslot
@@ -54,12 +56,6 @@ void EquipmentSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   SaveLoader::FinishLoad();
 }
 
-void EquipmentSlotView::PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull)
-{
-  SaveLoader::PrimeLoad(mhwSave, slotIndex, loadFull);
-  SaveLoader::FinishLoad();
-}
-
 void EquipmentSlotView::Uncraft()
 {
   MHW_SAVE_GUARD;
@@ -67,37 +63,28 @@ void EquipmentSlotView::Uncraft()
   SmithyDB* smithyDB = smithyDB->GetInstance();
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
 
-  int equipIndex = mhwSaveSlot->equipment_index_table[equipslot];
-  mhw_equipment emptyEquipment = MHW_EQUIPMENT_EMPTY;
-  mhw_equipment* equipment = mhwSaveSlot->equipment + equipIndex;
-  if (equipIndex < 0 || equipIndex >= COUNTOF(mhwSaveSlot->equipment))
-    equipment = &emptyEquipment;
-
-  // Disallow uncrafting for used equipment or empty equipment.
-  bool referenced = CountEquipmentReferenced(mhwSaveSlot, equipment);
-  bool empty = IsEquipmentEmpty(equipment);
-  if (empty || referenced) return;
-
-  qInfo().noquote() << "Uncrafting:" << equipmentDB->GetName(equipment);
-  QList<mhw_item_slot> mats = smithyDB->GetLineCraftingMats(equipment);
-  for (int i = 0; i < mats.count(); i++)
-  {
-    mhw_item_slot mat = mats[i];
-    itm_entry* info = itemDB->GetItemByIdSafe(mat.id);
-    mhw_item_slot* addSlot = FindCategoryItemOrEmpty(mhwSaveSlot, info);
-
-    qInfo().noquote() << QString("\t%1 (%2) x %3").arg(itemDB->ItemName(info)).arg(mat.id).arg(mat.amount);
-    if (addSlot) GiveItem(addSlot, &mat);
+  bool confirm = true;
+  int index = mhwSaveSlot->equipment_index_table[equipslot];
+  const mhw_equipment* equipment = mhwSaveSlot->equipment + index;
+  equipment_info* info = equipmentDB->GetEquipment(equipment);
+  if (equipmentDB->IsType(info, EquipmentInfoType::AM_DAT) && equipmentDB->IsPermanent(&info->am_dat)) {
+    QMessageBox::StandardButton permanentConfirm =
+      QMessageBox::question(this, "Confirm",
+        tr("Are you sure you want to delete this permanent equipment item?\n\n%1",
+          "Ask confirmation to delete a permanent equipment item. %1 is the equipment's name.")
+        .arg(equipmentDB->GetNameArmor(equipment->type, equipment->id)));
+    confirm &= permanentConfirm == QMessageBox::StandardButton::Yes;
   }
 
-  ClearEquipmentSlot(equipment);
+  if (confirm)
+    equipment = MHWSaveOperations::Uncraft(mhwSaveSlot, index, true, equipmentDB, smithyDB, itemDB);
+
   ui->btnUncraft->clearFocus(); // Prevent scrolling to the next widget.
-  UpdateEquipDisplay(equipment, equipIndex, false);
+  UpdateEquipDisplay(equipment, index, false);
 }
 
 void EquipmentSlotView::UpdateEquipDisplay(const mhw_equipment* slot, int position, bool uncraftable)
 {
-  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
 
   QIcon* icon = bitmapDB->EquipmentIcon(slot);

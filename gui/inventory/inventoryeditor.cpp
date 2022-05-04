@@ -66,7 +66,7 @@ void InventoryEditor::SearchIndexChange(int index)
     u8* slot = ((u8*)mhwSaveSlot) + area->localoffset;
     baseItemSlot = (mhw_item_slot*)slot;
 
-    findItem = FindItem(baseItemSlot, area->count, info->id);
+    findItem = MHWSaveUtils::FindItem(baseItemSlot, area->count, info->id);
     if (findItem) {
       areaIndex = tab;
       break;
@@ -114,11 +114,11 @@ void InventoryEditor::ItemAdd()
   }
   u8* slot = ((u8*)mhwSaveSlot) + storageArea->localoffset;
   mhw_item_slot* baseItemSlot = (mhw_item_slot*)slot;
-  mhw_item_slot* findItem = FindCategoryItemOrEmpty(mhwSaveSlot, info);
+  mhw_item_slot* findItem = MHWSaveUtils::FindCategoryItemOrEmpty(mhwSaveSlot, info);
 
   if (findItem) {
-    DiscoverItem(mhwSaveSlot, info);
-    GiveItem(findItem, info);
+    MHWSaveUtils::DiscoverItem(mhwSaveSlot, info);
+    MHWSaveUtils::GiveItem(findItem, info);
 
     int index = findItem - baseItemSlot;
     ui->tabEditors->setCurrentIndex(areaIndex);

@@ -19,7 +19,6 @@ public:
 
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
-  virtual void PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull = false) override;
 
 public slots:
   void Uncraft();

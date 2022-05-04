@@ -13,8 +13,10 @@
 
 // Save paths
 #include "../utility/system/file_utils.h"
-#include "../utility/mhw_save_utils.h"
 #include "../utility/read_bin_file.h"
+
+// Save functions
+#include "../utility/mhw_save_operations.h"
 
 // Inventory Layout
 #include "../types/inventory_areas.h"
@@ -179,7 +181,7 @@ bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bo
   }
 
   memcpy(saveWrite, save, sizeof(mhw_save_raw));
-  if (validate) ValidateSaveFile(&saveWrite->save);
+  if (validate) MHWSaveUtils::ValidateSaveFile(&saveWrite->save);
   if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
 
   bool written = WriteFile(path, saveWrite->data, sizeof(mhw_save_raw));
@@ -218,7 +220,7 @@ bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
     return false;
   }
 
-  if (!IsBlowfishDecrypted(&savep->save)) {
+  if (!MHWSaveUtils::IsBlowfishDecrypted(&savep->save)) {
     DecryptSave(savep->data, sizeof(mhw_save_raw));
   }
   *save = savep;
@@ -515,11 +517,22 @@ void MHWISaveEditor::UncraftUnusedEquipment()
 {
   MHW_SAVE_GUARD;
   mhw_save_raw* mhwSave = MHW_Save();
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   int mhwSaveIndex = MHW_SaveIndex();
 
-  EquipmentEditorTab* equipTab = static_cast<EquipmentEditorTab*>(equipmentEditor);
-  equipTab->PrimeLoad(mhwSave, mhwSaveIndex, true);
-  equipTab->UncraftUnusedEquipment();
+  EquipmentDB* equipmentDB = equipmentDB->GetInstance();
+  SmithyDB* smithyDB = smithyDB->GetInstance();
+
+  qInfo("Uncrafting all unused all unused equipment...");
+  MHWSaveOperations::UncraftAllUnusedEquipment(mhwSaveSlot, false, equipmentDB, smithyDB, itemDB);
+  qInfo("Unused equipment has been uncrafted.");
+
+  SaveLoader* loader = GetActiveEditorTab();
+  if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage(tr("Unused equipment uncrafted, permanent equipment items are skipped.",
+    "Tell the user the unused equipment has been uncrafted, and that permanent equipment (such as Defender Gear) is skipped."));
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)
@@ -734,14 +747,14 @@ void MHWISaveEditor::DebugDefragEquipment()
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   qInfo("Checking equipment box references...");
-  bool check = ValidateEquipmentBox(mhwSaveSlot, true);
+  bool check = MHWSaveUtils::ValidateEquipmentBox(mhwSaveSlot, true);
 
   Notification* notif = notif->GetInstance();
   if (check) {
     qInfo("Defragging equipment references...");
-    DefragEquipmentReferences(mhwSaveSlot);
+    MHWSaveUtils::DefragEquipmentReferences(mhwSaveSlot);
     qInfo("Defragging equipment...");
-    DefragEquipment(mhwSaveSlot);
+    MHWSaveUtils::DefragEquipment(mhwSaveSlot);
     qInfo("Defragging finished successfully.");
 
     SaveLoader* loader = GetActiveEditorTab();
@@ -769,12 +782,12 @@ void MHWISaveEditor::DebugFixEquipmentBoxRef()
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   qInfo("Checking equipment box references...");
-  bool check = ValidateEquipmentBox(mhwSaveSlot, true);
+  bool check = MHWSaveUtils::ValidateEquipmentBox(mhwSaveSlot, true);
 
   Notification* notif = notif->GetInstance();
   if (!check) {
     qInfo("Fixing equipment box references...");
-    check = ValidateEquipmentBox(mhwSaveSlot, false);
+    check = MHWSaveUtils::ValidateEquipmentBox(mhwSaveSlot, false);
 
     if (check) {
       SaveLoader* loader = GetActiveEditorTab();

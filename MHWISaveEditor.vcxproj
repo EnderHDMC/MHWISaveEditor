@@ -29,6 +29,7 @@
     <ClInclude Include="types\file\wp_dat.h" />
     <ClInclude Include="types\file\rod_inse.h" />
     <ClInclude Include="utility\math.h" />
+    <ClInclude Include="utility\mhw_save_operations.h" />
     <ClInclude Include="utility\system\paths.h" />
     <ClInclude Include="types\language.h" />
     <ClInclude Include="resource.h" />
@@ -93,6 +94,7 @@
     <QtUic Include="gui\settings\settingsui.ui" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="res\CustomFlags.bin" />
     <None Include="res\translations\mhwisaveeditor_template.qm" />
     <None Include="setup.iss" />

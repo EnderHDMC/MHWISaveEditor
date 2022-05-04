@@ -134,6 +134,9 @@
     <ClInclude Include="types\file\eq_cus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utility\mhw_save_operations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp">
@@ -275,6 +278,7 @@
     <None Include="res\CustomFlags.bin">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MHWISaveEditor.rc">
