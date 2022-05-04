@@ -258,10 +258,11 @@ public:
   /// Assumes all the sort indices are valid; 0 &lt;= sort index &lt; equipment count
   /// </summary>
   /// <param name="save_slot">The save slot to defrag references for.</param>
-  static void DefragEquipment(mhw_save_slot* save_slot) {
+  static int DefragEquipment(mhw_save_slot* save_slot) {
     mhw_equipment* equipment = save_slot->equipment;
     u32* equipment_index_table = save_slot->equipment_index_table;
 
+    int switchCount = 0;
     i32 count = COUNTOF(save_slot->equipment);
     for (int i = 0; i < count; ++i) {
       int index = equipment_index_table[i];
@@ -270,8 +271,10 @@ public:
 
       if (src != dst) {
         SwapEquipmentEntries(equipment_index_table, src, dst);
+        ++switchCount;
       }
     }
+    return switchCount;
   }
 
   static bool ValidateEquipmentBox(mhw_save_slot* save_slot, bool dry = false) {

@@ -752,7 +752,7 @@
     </message>
     <message>
         <location filename="../../gui/mhwisaveeditor.cpp" line="206"/>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="366"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="370"/>
         <source>File: %1</source>
         <comment>Indicate the currently open file.</comment>
         <translation>文件: %1</translation>
@@ -764,44 +764,44 @@
         <translation>保存文件失败: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="255"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="256"/>
         <source>Dumped file: %1</source>
         <comment>Indicate a successful file dump, %1 is the path where the file was dumped to.</comment>
         <translation>导出为文件: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="257"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="259"/>
         <source>Could not dump file: %1</source>
         <comment>Indicate a failed file dump, %1 is the path where the file was supposed to be dumped to.</comment>
         <translation>导出文件失败: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="364"/>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="466"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="368"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="470"/>
         <source>Loaded character slot %1: %2</source>
         <comment>Indicate a character slot change, %1 is the slot number, %2 is the character name.</comment>
         <translation>加载角色 %1: %2</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="388"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="392"/>
         <source>Failed to load file: %1</source>
         <comment>Indicate a failed file load, %1 is the path to the file that was to be loaded.</comment>
         <translation>加载文件失败: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="555"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="559"/>
         <source>Some settings you have changed will apply on restart.</source>
         <comment>Tell the user they have some settings that will only be applied on restart.</comment>
         <translation>部分设置在重启后才会生效。</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="763"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="755"/>
         <source>Equipment has been defragged.</source>
         <comment>Tell the user that the equipment has been defragged.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="769"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="761"/>
         <source>Could not defrag equipment, there are issues with the equipment references.
 
 Try running the Equipment Box Reference Fix:
@@ -810,13 +810,13 @@ Debug -&gt; Fixes -&gt; Equipment Box Reference Fix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="798"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="790"/>
         <source>Equipment box references have been fixed successfully.</source>
         <comment>Tell the user the equipment box references were fixed.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="805"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="797"/>
         <source>Could not fix equipment references.
 
 Please consider filing a bug report and sending your save.</source>
@@ -824,13 +824,13 @@ Please consider filing a bug report and sending your save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="814"/>
-        <source>Equipment box references are already fine.</source>
-        <comment>Tell the user the equipment box references are already fine.</comment>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="806"/>
+        <source>No issues found in equipment box references.</source>
+        <comment>Tell the user the there was no issues found in equipment box references.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="492"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="496"/>
         <source>Switched slots: %1 and %2</source>
         <comment>Indicate a successful slot switch, %1 is the current slot, %2 is the target slot.</comment>
         <translation type="unfinished">已交换槽 %1和槽 %2。</translation>
@@ -842,7 +842,7 @@ Please consider filing a bug report and sending your save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="287"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="291"/>
         <source>You have likely opened a backup of your save file.
 Changes won&apos;t be seen in-game.
 Your save file is usually in the following place:
@@ -853,37 +853,37 @@ Your Steam Account ID can be found online.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="510"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="514"/>
         <source>Cloned slot: %1 to %2</source>
         <comment>Indicate a slot was cloned, %1 is the current slot, %2 is the target slot.</comment>
         <translation type="unfinished">已复制槽 %1到槽 %2.</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="534"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="538"/>
         <source>Unused equipment uncrafted, permanent equipment items are skipped.</source>
         <comment>Tell the user the unused equipment has been uncrafted, and that permanent equipment (such as Defender Gear) is skipped.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="731"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="723"/>
         <source>Dumped icons: %1</source>
         <comment>Indicate sucessful icon dump, %1 is the path where the icons were dumped to.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="736"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="728"/>
         <source>Could not dump icons: %1</source>
         <comment>Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="618"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="610"/>
         <source>Backup made: %1</source>
         <comment>Notify of a backup being made, %1 is the path to where it is.</comment>
         <translation>备份完成: %1</translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="621"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="613"/>
         <source>Failed to create backup: %1</source>
         <comment>Notify of a backup failure, %1 is the path to where it was supposed to be.</comment>
         <translation>创建备份失败: %1</translation>

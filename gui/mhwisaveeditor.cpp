@@ -231,7 +231,7 @@ void MHWISaveEditor::Dump(int number)
 {
   mhw_save_raw* saveWrite = MHWS_Save();
   mhw_save_raw* buffer = nullptr;
-  QString path = Paths::GetDefaultDumpPath(number);
+  QString path = Paths::GetSaveDumpPath(EditorFile(), number);
   bool success = true;
 
   if (MHW_SAVE_GUARD_CHECK) {
@@ -241,7 +241,7 @@ void MHWISaveEditor::Dump(int number)
       success = false;
     }
     else {
-      LoadFile(Paths::GetGameSaveFilePath(), &buffer);
+      success = LoadFile(Paths::GetGameSaveFilePath(), &buffer);
       saveWrite = buffer;
     }
   }
@@ -251,10 +251,14 @@ void MHWISaveEditor::Dump(int number)
   }
 
   Notification* notif = notif->GetInstance();
-  if (success)
+  if (success) {
+    qInfo().noquote() << "Succesfully dumped file:" << path;
     notif->ShowMessage(tr("Dumped file: %1", "Indicate a successful file dump, %1 is the path where the file was dumped to.").arg(path));
-  else
+  }
+  else {
     notif->ShowMessage(tr("Could not dump file: %1", "Indicate a failed file dump, %1 is the path where the file was supposed to be dumped to.").arg(path));
+    qInfo().noquote() << "Failed to dump file:" << path;
+  }
 
   if (buffer) free(buffer);
 }
@@ -266,7 +270,7 @@ void MHWISaveEditor::Open()
 
   QFileDialog dialog(nullptr);
   dialog.setDirectory(path);
-  dialog.selectFile(QString::fromUtf8(SAVE_NAME));
+  dialog.selectFile(QString::fromUtf8(MHW_SAVE_NAME));
   dialog.setFileMode(QFileDialog::ExistingFile);
 
   if (dialog.exec()) {
@@ -593,19 +597,7 @@ void MHWISaveEditor::Backup() {
     }
   }
 
-  QFileInfo fi = QFileInfo(EditorFile());
-  QString basename = fi.baseName();
-  QString ext = fi.completeSuffix();
-
-  if (basename.isEmpty()) basename = QString::fromUtf8(SAVE_NAME);
-  if (ext.isEmpty()) ext = "";
-  else ext = "_" + ext.replace('.', '_');
-
-  QDateTime date = QDateTime::currentDateTime();
-  QString datatime = date.toString("yyyy-MM-dd_hh-mm-ss");
-  QString writeFile = basename + ext + '_' + datatime + ".zlib";
-  QString path = Paths::GetDataPathBackups() + writeFile;
-
+  QString path = Paths::GetBackupPath(EditorFile());
   if (success) {
     QByteArray compressed = qCompress((u8*)saveWrite, sizeof(mhw_save_raw), 9);
     int compressedSize = compressed.size();
@@ -615,10 +607,10 @@ void MHWISaveEditor::Backup() {
 
   Notification* notif = notif->GetInstance();
   if (success) {
-    notif->ShowMessage(tr("Backup made: %1", "Notify of a backup being made, %1 is the path to where it is.").arg(writeFile));
+    notif->ShowMessage(tr("Backup made: %1", "Notify of a backup being made, %1 is the path to where it is.").arg(path));
   }
   else {
-    notif->ShowMessage(tr("Failed to create backup: %1", "Notify of a backup failure, %1 is the path to where it was supposed to be.").arg(writeFile));
+    notif->ShowMessage(tr("Failed to create backup: %1", "Notify of a backup failure, %1 is the path to where it was supposed to be.").arg(path));
   }
   TrimBackups();
 }
@@ -754,8 +746,9 @@ void MHWISaveEditor::DebugDefragEquipment()
     qInfo("Defragging equipment references...");
     MHWSaveUtils::DefragEquipmentReferences(mhwSaveSlot);
     qInfo("Defragging equipment...");
-    MHWSaveUtils::DefragEquipment(mhwSaveSlot);
+    int defragged = MHWSaveUtils::DefragEquipment(mhwSaveSlot);
     qInfo("Defragging finished successfully.");
+    qInfo().noquote().nospace() << QString::number(defragged) << " equipment items were moved.";
 
     SaveLoader* loader = GetActiveEditorTab();
     if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
@@ -809,9 +802,9 @@ void MHWISaveEditor::DebugFixEquipmentBoxRef()
     }
   }
   else {
-    qInfo("Equipment box references are fine.");
+    qInfo("No issues found in equipment box references.");
 
-    notif->ShowMessage(tr("Equipment box references are already fine.",
-      "Tell the user the equipment box references are already fine."));
+    notif->ShowMessage(tr("No issues found in equipment box references.",
+      "Tell the user the there was no issues found in equipment box references."));
   }
 }
