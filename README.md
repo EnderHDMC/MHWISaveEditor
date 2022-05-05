@@ -2,10 +2,13 @@
 A save editor for Monster Hunter World: Iceborne.
 
 ## TODO
-- Equipment Box Editor (Delete those pesky Guardian Armors)
+- Investigation Editor
 - Crown Size normalisation
 - Clear arena records
 - A way to open multiple saves?
+- Seige completion?
+- Allow crafting any gear in-game?
+- Allow editing all mantles?
 
 ## Translation
 If you would like to help translate the editor into other languages, you can follow these instructions:
@@ -56,11 +59,11 @@ vcpkg install cryptopp:x64-windows
 ```
 In Visual Studio Installer you only need `Desktop Development with C++`
 
-Additionally you need to install a version of [QT](https://www.qt.io/), the project currently uses `QT 6.2.3`.<br/>
-In the QT installer you only need to install the component: `QT/QT 6.2.3/MSVC 2019 64-bit`.
+Additionally you need to install a version of [QT](https://www.qt.io/), the project currently uses `QT 6.1.3`.<br/>
+In the QT installer you only need to install the component: `QT/QT 6.1.3/MSVC 2019 64-bit`.
 
 Next install the QT Visual Studio Tools extension.<br/>
-Then in the QT Version settings of the extension set version to `6.2.3_msvc2019_64` and set the path to wherever you installed QT.<br/>
+Then in the QT Version settings of the extension set version to `6.1.3_msvc2019_64` and set the path to wherever you installed QT.<br/>
 Restart Visual Studio once this is done, so QT sets up the appropriate environment variables.
 
 That's it, you should be able to build it now.
