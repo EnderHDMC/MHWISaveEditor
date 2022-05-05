@@ -527,12 +527,13 @@ void MHWISaveEditor::UncraftUnusedEquipment()
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
   SmithyDB* smithyDB = smithyDB->GetInstance();
 
-  qInfo("Uncrafting all unused all unused equipment...");
+  qInfo("Uncrafting all unused, non-permanent equipment...");
   MHWSaveOperations::UncraftAllUnusedEquipment(mhwSaveSlot, false, equipmentDB, smithyDB, itemDB);
   qInfo("Unused equipment has been uncrafted.");
 
   SaveLoader* loader = GetActiveEditorTab();
   if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+  else if (loader == inventoryEditor) loader->Load(mhwSave, mhwSaveIndex);
 
   Notification* notif = notif->GetInstance();
   notif->ShowMessage(tr("Unused equipment uncrafted, permanent equipment items are skipped.",

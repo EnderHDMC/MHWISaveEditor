@@ -801,31 +801,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="559"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="560"/>
         <source>Some settings you have changed will apply on restart.</source>
         <comment>Tell the user they have some settings that will only be applied on restart.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="723"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="724"/>
         <source>Dumped icons: %1</source>
         <comment>Indicate sucessful icon dump, %1 is the path where the icons were dumped to.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="728"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="729"/>
         <source>Could not dump icons: %1</source>
         <comment>Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="755"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="757"/>
         <source>Equipment has been defragged.</source>
         <comment>Tell the user that the equipment has been defragged.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="761"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="763"/>
         <source>Could not defrag equipment, there are issues with the equipment references.
 
 Try running the Equipment Box Reference Fix:
@@ -834,13 +834,13 @@ Debug -&gt; Fixes -&gt; Equipment Box Reference Fix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="790"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="792"/>
         <source>Equipment box references have been fixed successfully.</source>
         <comment>Tell the user the equipment box references were fixed.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="797"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="799"/>
         <source>Could not fix equipment references.
 
 Please consider filing a bug report and sending your save.</source>
@@ -848,13 +848,13 @@ Please consider filing a bug report and sending your save.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="806"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="808"/>
         <source>No issues found in equipment box references.</source>
         <comment>Tell the user the there was no issues found in equipment box references.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="610"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="611"/>
         <source>Backup made: %1</source>
         <comment>Notify of a backup being made, %1 is the path to where it is.</comment>
         <translation type="unfinished"></translation>
@@ -877,13 +877,13 @@ Your Steam Account ID can be found online.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="538"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="539"/>
         <source>Unused equipment uncrafted, permanent equipment items are skipped.</source>
         <comment>Tell the user the unused equipment has been uncrafted, and that permanent equipment (such as Defender Gear) is skipped.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../gui/mhwisaveeditor.cpp" line="613"/>
+        <location filename="../../gui/mhwisaveeditor.cpp" line="614"/>
         <source>Failed to create backup: %1</source>
         <comment>Notify of a backup failure, %1 is the path to where it was supposed to be.</comment>
         <translation type="unfinished"></translation>
