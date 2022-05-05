@@ -6,9 +6,12 @@
 //   Version: 0.1.3
 //   Purpose: Generate SAVEDATA1000.csv for analysis
 //            in other environments.
+//            Should be run on an unencrypted save with
+//            the SAVEDATA1000.bt template.
 //  Category: Game
 //   History: Initial Version
 //------------------------------------------------
+
 string filename = GetFileName();
 Printf("%s %d\n", filename, GetFileNum());
 string script_path = FileNameGetPath(GetScriptFileName());
@@ -54,4 +57,7 @@ for (y = 0; y < 3; y++) {
 }
 
 ExpandAll();
-ExportCSV(script_path + "outputs/SAVEDATA1000.csv");
+if (MakeDir(script_path + "..\\outputs"))
+  ExportCSV(script_path + "..\\outputs\\SAVEDATA1000.csv");
+else
+  Printf("Cannot save csv: " + script_path + "..\\outputs\\SAVEDATA1000.csv");

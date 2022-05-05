@@ -37,7 +37,6 @@ SettingsUI::SettingsUI(QWidget* parent)
   ui->chkShowConsole->setChecked(settings->GetShowConsole());
 
   ui->lblMatrixMode->setText("*" + ui->lblMatrixMode->text());
-  ui->lblShowUnobtainable->setText("*" + ui->lblShowUnobtainable->text());
   ui->lblUILanguage->setText("*" + ui->lblUILanguage->text());
   ui->lblDarkMode->setText("*" + ui->lblDarkMode->text());
   ui->lblShowConsole->setText("*" + ui->lblShowConsole->text());

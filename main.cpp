@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
   bool debugger = Settings::DebuggerPresent();
   bool showConsole = settings->GetShowConsole();
   if (!debugger) qInstallMessageHandler(MessagePrintLog);
-  if (!debugger || showConsole) OpenConsole();
+  if (!debugger && showConsole) OpenConsole();
 
   qInfo("Debugger present: %d", debugger);
   settings->LogReadPath();

@@ -87,7 +87,7 @@ void LimitedUnlocks::GiveArtemisGear()
   int type;
   for (type = 0; type < 5; type++)
   {
-    mhw_equipment* equipment = FindEquipment(mhwSaveSlot, -1, 0);
+    mhw_equipment* equipment = MHWSaveUtils::FindEquipment(mhwSaveSlot, -1, 0);
     if (equipment) {
       u32 sort_index = equipment->sort_index;
       memcpy_s(equipment, sizeof(mhw_equipment), &MHW_EQUIPMENT_EMPTY, sizeof(mhw_equipment));
@@ -140,11 +140,11 @@ void LimitedUnlocks::GiveLayeredLoadout(i32 layered, const QString& name)
   MHW_SAVE_GUARD;
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
-  mhw_layered_loadout* loadout = FindEmptyLayeredLoadout(mhwSaveSlot);
+  mhw_layered_loadout* loadout = MHWSaveUtils::FindEmptyLayeredLoadout(mhwSaveSlot);
 
   Notification* notif = notif->GetInstance();
   if (loadout) {
-    i32 index = SetLayeredLoadout(loadout, layered, name);
+    i32 index = MHWSaveUtils::SetLayeredLoadout(loadout, layered, name);
 
     notif->ShowMessage(tr("Added layered loadout: '%1' at slot: %2", "Indicate a layered loadout has been added, %1 is the loadout name, %2 is the index it was added in.").arg(name).arg(index + 1), 5000);
   }

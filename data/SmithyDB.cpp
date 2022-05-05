@@ -113,30 +113,26 @@ eq_cus_entry* SmithyDB::GetUpgradeParent(eq_cus_meta* upgrades, eq_cus_entry* ch
   return result;
 }
 
-QList<mhw_item_slot> SmithyDB::GetLineCraftingMats(mhw_equipment* equipment)
+QList<mhw_item_slot> SmithyDB::GetLineCraftingMats(equipment_info* info, mhw_equipment *equipment)
 {
-  mhw_equip_category category = equipment->category;
-  i32 type = equipment->type;
-  u32 id = equipment->id;
-
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
-  i32 raw_index = equipmentDB->GetRawIndex(equipment);
+  i32 raw_index = equipmentDB->GetRawIndex(info);
 
   QList<mhw_item_slot> result;
-  if (IsEquipmentEmpty(equipment)) return result;
+  if (raw_index < 0) return result;
 
   eq_crt_meta* eq_crt = nullptr;
   eq_cus_meta* eq_cus = nullptr;
   eq_cus_meta* eq_cus_extra = nullptr;
 
-  switch (category) {
+  switch (equipment->category) {
   case mhw_equip_category::Armor: eq_crt = &eq_crt_armor; eq_cus = nullptr; eq_cus_extra = nullptr; break;
   case mhw_equip_category::Weapon: eq_crt = &eq_crt_weapon; eq_cus = &eq_cus_weapon; eq_cus_extra = nullptr; break;
   case mhw_equip_category::Charm: eq_crt = &eq_crt_armor; eq_cus = &eq_cus_charms; eq_cus_extra = nullptr; break;
   case mhw_equip_category::Kinsect: eq_crt = nullptr; eq_cus = &eq_cus_insect; eq_cus_extra = &eq_cus_insect_element; break;
   }
 
-  eq_crt_entry* forge_recipe = GetForgeEntry(eq_crt, type, raw_index);
+  eq_crt_entry* forge_recipe = GetForgeEntry(eq_crt, equipment->type, raw_index);
   if (forge_recipe) {
     if (forge_recipe->mats[0].id) AddMaterial(result, { forge_recipe->mats[0].id, forge_recipe->mats[0].count });
     if (forge_recipe->mats[1].id) AddMaterial(result, { forge_recipe->mats[1].id, forge_recipe->mats[1].count });
@@ -144,7 +140,7 @@ QList<mhw_item_slot> SmithyDB::GetLineCraftingMats(mhw_equipment* equipment)
     if (forge_recipe->mats[3].id) AddMaterial(result, { forge_recipe->mats[3].id, forge_recipe->mats[3].count });
   }
 
-  eq_cus_entry* upgrade_recipe = GetUpgradeEntry(eq_cus, type, raw_index);
+  eq_cus_entry* upgrade_recipe = GetUpgradeEntry(eq_cus, equipment->type, raw_index);
   if (upgrade_recipe) {
     eq_cus_entry* upgrade_parent = upgrade_recipe;
     eq_cus_entry* upgrade_prev = nullptr;

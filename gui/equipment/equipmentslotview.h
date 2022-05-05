@@ -1,30 +1,33 @@
 #pragma once
 
 #include <QWidget>
+#include <QLabel>
 
 #include "../../data/EquipmentDB.h"
 #include "../../utility/common/saveloader.h"
+#include "../../types/mhw_struct_constants.h"
 
 namespace Ui { class EquipmentSlotView; };
 
 class EquipmentSlotView : public QWidget, public SaveLoader
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    EquipmentSlotView(int index, QWidget *parent = Q_NULLPTR);
-    ~EquipmentSlotView();
+  EquipmentSlotView(int index, QWidget* parent = Q_NULLPTR);
+  ~EquipmentSlotView();
 
-    // Inherited via SaveLoader
-    virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
+  // Inherited via SaveLoader
+  virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
 
 public slots:
   void Uncraft();
 
 private:
-    Ui::EquipmentSlotView *ui;
+  Ui::EquipmentSlotView* ui;
 
-    void UpdateEquipDisplay(mhw_equipment* equipment, bool uncraftable);
+  void UpdateEquipDisplay(const mhw_equipment* slot, int position, bool uncraftable);
 
-    int equipslot = 0;
+  QLabel equipmentIndex;
+  int equipslot = 0;
 };

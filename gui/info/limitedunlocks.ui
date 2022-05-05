@@ -31,7 +31,7 @@
    <item>
     <widget class="QCheckBox" name="chkLayeredArtemis">
      <property name="text">
-      <string comment="Whether the Artemis Layered is unlocked.">Layered: Artemis</string>
+      <string comment="Whether the Artemis Layered is unlocked.">Layered: Artemis (MR required)</string>
      </property>
     </widget>
    </item>

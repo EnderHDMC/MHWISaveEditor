@@ -24,7 +24,7 @@ private:
   void InitItems(ItemDB* itemDB);
   void InitEquipment(EquipmentDB* equipmentDB);
 
-  void AddIcon(u64 key, u32 id, u16 pallete, u16 color);
+  void AddIcon(u64 key, u32 id, u16 palette, u16 color);
 
   const int wp_index_id_map[14] = {
     1,  // Great Sword
@@ -47,19 +47,19 @@ public:
   BitmapDB(ItemDB* itemDB, EquipmentDB* equipmentDB);
   ~BitmapDB();
 
-  inline u64 BuildKey(u32 id, u16 pallete, u16 color)
+  inline u64 BuildKey(u32 id, u16 palette, u16 color)
   {
-    return (u64)id << 32 | (u64)pallete << 16 | color;
+    return (u64)id << 32 | (u64)palette << 16 | color;
   }
 
-  inline void DissectKey(u64 key, u32* id, u16* pallete, u16* color) {
+  inline void DissectKey(u64 key, u32* id, u16* palette, u16* color) {
     *id = key >> 32;
-    *pallete = (key >> 16) & 0xffff;
+    *palette = (key >> 16) & 0xffff;
     *color = key & 0xffff;
   }
 
-  QIcon* ItemIcon(itm_entry* info);
-  QIcon* EquipmentIcon(mhw_equipment* equipment);
+  QIcon* ItemIcon(ItemDB* itemDB, itm_entry* info);
+  QIcon* EquipmentIcon(const mhw_equipment* equipment);
 
   // Debug
   bool DebugDumpAtlas(const QString& path);

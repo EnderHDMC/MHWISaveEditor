@@ -1,0 +1,74 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: mask_generator_print_names.1sc
+//   Authors: EnderHDMC
+//   Version: 0.1.4
+//   Purpose: Prints the custom flags mask file in a
+//            human readable form.
+//            Should be run on an item translation file of your choice.
+//            item_XXX.gmd with gmd.bt
+//  Category: Game
+//   History: Initial Version
+//------------------------------------------------
+#include <mask_generator.1sc>
+
+
+u8 obtainable_items[flags_size];
+u32 obtainable_index = Obtainable * flags_size;
+u8 discoverable_items[flags_size];
+u32 discoverable_index = Discoverable * flags_size;
+u8 slinger_ammo_items[flags_size];
+u32 slinger_ammo_index = SlingerAmmo * flags_size;
+u8 unavailable_items[flags_size];
+u32 unavailable_index = Unavailable * flags_size;
+u8 hardummy_items[flags_size];
+u32 hardummy_index = HARDUMMY * flags_size;
+u8 triple_q_items[flags_size];
+u32 triple_q_index = TripleQ * flags_size;
+u8 appraisal_items[flags_size];
+u32 appraisal_index = Appraisal * flags_size;
+
+FileSelect(flags_file);
+ReadBytes(obtainable_items, obtainable_index, flags_size);
+ReadBytes(discoverable_items, discoverable_index, flags_size);
+ReadBytes(slinger_ammo_items, slinger_ammo_index, flags_size);
+ReadBytes(appraisal_items, appraisal_index, flags_size);
+ReadBytes(unavailable_items, unavailable_index, flags_size);
+ReadBytes(hardummy_items, hardummy_index, flags_size);
+ReadBytes(triple_q_items, triple_q_index, flags_size);
+FileSelect(working_file);
+
+void PrintFlagNames(string label, u8 flags[], int count) {
+  local int abi;
+  local u32 item_index_name, item_index_desc;
+  local u32 item_count = header.key_count / 2;
+  local string item_name, item_desc;
+  local u32 byte_index, bit_index;
+
+  Printf("%s\n", label);
+  for (abi = 0; abi < count * 8; ++abi) {
+    byte_index = abi / 8;
+    bit_index = abi % 8;
+
+    if ((flags[byte_index] >> bit_index) & 1) {
+      item_index_name = abi * 2;
+      item_index_desc = abi * 2 + 1;
+      item_name = Str("%s", strings.str[item_index_name].value);
+      item_desc = Str("%s", strings.str[item_index_desc].value);
+      Printf("%s\n", item_name);
+    }
+  }
+}
+
+PrintFlagNames("Obtainable items:", obtainable_items, flags_size);
+PrintFlagNames("Discoverable items:", discoverable_items, flags_size);
+PrintFlagNames("Slinger Ammo:", slinger_ammo_items, flags_size);
+PrintFlagNames("Appraisal items:", appraisal_items, flags_size);
+PrintFlagNames("Unavailable items:", unavailable_items, flags_size);
+PrintFlagNames("HARDUMMY items:", hardummy_items, flags_size);
+PrintFlagNames("??? items:", triple_q_items, flags_size);
+
+FileSelect(flags_file);
+FileClose();
+Printf("Finished!");

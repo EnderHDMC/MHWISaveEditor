@@ -57,6 +57,16 @@ public:
     this->mhwSaveSlot = (mhwSection3) ? &mhwSection3->saves[mhwSaveIndex] : nullptr;
   }
 
+#if 0
+  // NOTE: For development purposes only.
+  // Should only be enabled for a quick & dirty method while testing stuff.
+  // This is not a debug function, this is just to bypass the full Load logic while testing.
+  virtual void PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull = false) {
+    loading = true;
+    if (loadFull) SaveLoader::Load(mhwSave, slotIndex);
+}
+#endif
+
   virtual void LoadFile(const QString& file)
   {
     this->file = file;

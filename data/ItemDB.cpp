@@ -107,21 +107,9 @@ int ItemDB::count()
 
 QString ItemDB::ItemName(u32 id)
 {
-  if (!success_gmd) return "GMD Failure";
-
-  switch (id) {
-  case SurvivalJewelID:
-    id = SmokeJewelID;
-    break;
-
-  case SmokeJewelID:
-    id = SurvivalJewelID;
-    break;
-
-  default:
-    break;
-  }
-
+  if (!success_gmd) return GMD_FAILURE.c_str();
+  
+  id = AdjustItemID(id);
   const QRegularExpression regex("(<STYL.*>)(.*)(</STYL>)");
   QString name = QString::fromUtf8(gmd.value(id * 2));
   return name.replace(regex, "\\2");
@@ -130,7 +118,37 @@ QString ItemDB::ItemName(u32 id)
 QString ItemDB::ItemName(itm_entry* info)
 {
   if (success_itm) return ItemName(info->id);
-  else return "ITM Failure";
+  else return ITM_FAILURE.c_str();
+}
+
+u32 ItemDB::AdjustItemID(u32 id)
+{
+  switch (id) {
+  // Smoke Jewel & Survival Jewel switch
+  case SurvivalJewelID: id = SmokeJewelID; break;
+  case SmokeJewelID: id = SurvivalJewelID; break;
+
+  // Igni Sign & Hunter Runestone switch
+  case IgniSignID: id = HunterRunestoneID; break;
+  case HunterRunestoneID: id = IgniSignID; break;
+  }
+  return id;
+}
+
+itm_entry* ItemDB::AdjustItemPtr(itm_entry* entry)
+{
+  if (entry) {
+    switch (entry->id) {
+      // Smoke Jewel & Survival Jewel switch
+    case SurvivalJewelID: entry = GetItemById(SmokeJewelID); break;
+    case SmokeJewelID: entry = GetItemById(SurvivalJewelID); break;
+
+      // Igni Sign & Hunter Runestone switch
+    case IgniSignID: entry = GetItemById(HunterRunestoneID); break;
+    case HunterRunestoneID: entry = GetItemById(IgniSignID); break;
+    }
+  }
+  return entry;
 }
 
 game_language ItemDB::CurrentLanguage()

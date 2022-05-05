@@ -1,0 +1,68 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: SteamID.bt
+//   Authors: EnderHDMC
+//   Version: 0.1.0
+//   Purpose: Store SteamID struct as defined in the steam dev wiki
+//            https://developer.valvesoftware.com/wiki/SteamID
+//  Category: Game
+// File Mask: *.SteamID
+//  ID Bytes: 
+//   History: Initial Version
+//------------------------------------------------
+
+#include <types.bt>
+
+// Example:
+// SteamID = 76561198092541763
+// 00000001 0001 00000000000000000001 0000011111100010010111110100001 1
+// │        │    │                    │                               │
+// │        │    │                    │                               └> Y
+// │        │    │                    └> account number
+// │        │    └> instance
+// │        └> type
+// └> universe
+
+enum <u32> SteamUniverse {
+  UniverseIndividual = 0,
+  UniverseUnspecified = 0,
+  UniversePublic = 1,
+  UniverseBeta = 2,
+  UniverseInternal = 3,
+  UniverseDev = 4,
+  UniverseRC = 5
+};
+
+enum <u32> SteamType {
+  TypeInvalid = 0,
+  TypeIndividual = 1,
+  TypeMultiseat = 2,
+  TypeGameServer = 3,
+  TypeAnonGameServer = 4,
+  TypePending = 5,
+  TypeContentServer = 6,
+  TypeClan = 7,
+  TypeChat = 8,
+  TypeP2PSuperSeeder = 9,
+  TypeAnonUser = 10
+};
+
+typedef struct {
+  u32 Y : 1;
+  u32 accountNumber : 31;
+} AccountID <read=(this.accountNumber << 1 | this.Y)>;
+
+struct SteamID {
+  AccountID accountID;
+  u32 instance : 20;
+  SteamType type : 4;
+  SteamUniverse universe : 8;
+};
+
+union SteamSpecID {
+  u64 full;
+  SteamID id;
+};
+
+SteamSpecID id;

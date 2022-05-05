@@ -13,8 +13,10 @@
 
 // Save paths
 #include "../utility/system/file_utils.h"
-#include "../utility/mhw_save_utils.h"
 #include "../utility/read_bin_file.h"
+
+// Save functions
+#include "../utility/mhw_save_operations.h"
 
 // Inventory Layout
 #include "../types/inventory_areas.h"
@@ -42,11 +44,19 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 {
   settings = settings->GetInstance();
   ui->setupUi(this);
-  setWindowIcon(QIcon(Paths::GetResourcesPath("icon.ico")));
+  QIcon windowIcon = QIcon(Paths::GetResourcesPath("icon.ico"));
+  setWindowIcon(windowIcon);
+
+  msgNotification = new QMessageBox(
+    QMessageBox::Icon::Information,
+    tr("Notification", "Notification popup title. Usually appears when there something the user should be aware of."),
+    NULL, QMessageBox::StandardButton::Ok, this);
+  msgNotification->setWindowIcon(windowIcon);
 
   Notification* notif = notif->GetInstance();
+  notif->Register(msgNotification);
   notif->Register(ui->statusbar);
-  notif->SetDefaultMode(NotificationMode::StatusBar);
+  notif->SetDefaultMode(NotificationMode::NotifModeStatusBar);
 
   scrollGuard = scrollGuard->GetInstance();
 
@@ -171,7 +181,7 @@ bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bo
   }
 
   memcpy(saveWrite, save, sizeof(mhw_save_raw));
-  if (validate) ValidateSaveFile(&saveWrite->save);
+  if (validate) MHWSaveUtils::ValidateSaveFile(&saveWrite->save);
   if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
 
   bool written = WriteFile(path, saveWrite->data, sizeof(mhw_save_raw));
@@ -210,7 +220,7 @@ bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
     return false;
   }
 
-  if (!IsBlowfishDecrypted(&savep->save)) {
+  if (!MHWSaveUtils::IsBlowfishDecrypted(&savep->save)) {
     DecryptSave(savep->data, sizeof(mhw_save_raw));
   }
   *save = savep;
@@ -221,7 +231,7 @@ void MHWISaveEditor::Dump(int number)
 {
   mhw_save_raw* saveWrite = MHWS_Save();
   mhw_save_raw* buffer = nullptr;
-  QString path = Paths::GetDefaultDumpPath(number);
+  QString path = Paths::GetSaveDumpPath(EditorFile(), number);
   bool success = true;
 
   if (MHW_SAVE_GUARD_CHECK) {
@@ -231,7 +241,7 @@ void MHWISaveEditor::Dump(int number)
       success = false;
     }
     else {
-      LoadFile(Paths::GetGameSaveFilePath(), &buffer);
+      success = LoadFile(Paths::GetGameSaveFilePath(), &buffer);
       saveWrite = buffer;
     }
   }
@@ -241,10 +251,14 @@ void MHWISaveEditor::Dump(int number)
   }
 
   Notification* notif = notif->GetInstance();
-  if (success)
+  if (success) {
+    qInfo().noquote() << "Succesfully dumped file:" << path;
     notif->ShowMessage(tr("Dumped file: %1", "Indicate a successful file dump, %1 is the path where the file was dumped to.").arg(path));
-  else
+  }
+  else {
     notif->ShowMessage(tr("Could not dump file: %1", "Indicate a failed file dump, %1 is the path where the file was supposed to be dumped to.").arg(path));
+    qInfo().noquote() << "Failed to dump file:" << path;
+  }
 
   if (buffer) free(buffer);
 }
@@ -256,7 +270,7 @@ void MHWISaveEditor::Open()
 
   QFileDialog dialog(nullptr);
   dialog.setDirectory(path);
-  dialog.selectFile(QString::fromUtf8(SAVE_NAME));
+  dialog.selectFile(QString::fromUtf8(MHW_SAVE_NAME));
   dialog.setFileMode(QFileDialog::ExistingFile);
 
   if (dialog.exec()) {
@@ -264,6 +278,21 @@ void MHWISaveEditor::Open()
     filepath = files[0];
 
     LoadFile(filepath);
+
+    QString editorFile = EditorFile();
+    QDir fileInfo(editorFile);
+
+    if (fileInfo.exists(MHW_EXE_REL_BACKUP.c_str())) {
+      QString theoryPath = Paths::GetTheoreticalGameSaveFilePath();
+      qWarning() << "Opened game backup save:" << editorFile;
+
+      Notification* notif = notif->GetInstance();
+      notif->PushMode(NotificationMode::NotifModeMessageBox);
+      notif->ShowMessage(tr("You have likely opened a backup of your save file.\nChanges won't be seen in-game.\nYour save file is usually in the following place:\n%1\n\nYour Steam Account ID can be found online.",
+        "Tell the user that they've loaded a backup, and instruct them on where to find their save. %s is the path to where the save is usually found.")
+        .arg(theoryPath));
+      notif->PopMode();
+    }
   }
 }
 
@@ -276,7 +305,6 @@ void MHWISaveEditor::OpenSAVEDATA1000()
 void MHWISaveEditor::Save()
 {
   MHW_SAVE_GUARD;
-
   QFileInfo fi(EditorFile());
   QString ext = fi.completeSuffix();
   ext = ext.isEmpty() ? "" : '.' + ext;
@@ -289,7 +317,6 @@ void MHWISaveEditor::Save()
 void MHWISaveEditor::SaveAs()
 {
   MHW_SAVE_GUARD;
-
   QString path = Paths::GetGameSavePath();
 
   QFileDialog dialog(this);
@@ -355,8 +382,9 @@ void MHWISaveEditor::LoadFile(const QString& file)
 
     if (settings->GetDoAutoBackups()) {
       Notification* notif = notif->GetInstance();
-      notif->Silence(1);
+      notif->PushMode(NotificationMode::NotifModeNone);
       Backup();
+      notif->PopMode();
     }
   }
   else {
@@ -491,8 +519,25 @@ void MHWISaveEditor::CloneSlot(int slot)
 
 void MHWISaveEditor::UncraftUnusedEquipment()
 {
-  EquipmentEditorTab* equipTab = static_cast<EquipmentEditorTab*>(equipmentEditor);
-  equipTab->UncraftUnusedEquipment();
+  MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  int mhwSaveIndex = MHW_SaveIndex();
+
+  EquipmentDB* equipmentDB = equipmentDB->GetInstance();
+  SmithyDB* smithyDB = smithyDB->GetInstance();
+
+  qInfo("Uncrafting all unused, non-permanent equipment...");
+  MHWSaveOperations::UncraftAllUnusedEquipment(mhwSaveSlot, false, equipmentDB, smithyDB, itemDB);
+  qInfo("Unused equipment has been uncrafted.");
+
+  SaveLoader* loader = GetActiveEditorTab();
+  if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+  else if (loader == inventoryEditor) loader->Load(mhwSave, mhwSaveIndex);
+
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage(tr("Unused equipment uncrafted, permanent equipment items are skipped.",
+    "Tell the user the unused equipment has been uncrafted, and that permanent equipment (such as Defender Gear) is skipped."));
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)
@@ -503,6 +548,7 @@ void MHWISaveEditor::OpenLocation(const QString& location)
 
 void MHWISaveEditor::OpenSettings()
 {
+  bool oldShowUnobtainable = settings->GetShowUnobtainable();
   SettingsUI* settingsUI = new SettingsUI();
   settingsUI->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
   settingsUI->exec();
@@ -510,30 +556,30 @@ void MHWISaveEditor::OpenSettings()
   if (settings->GetRequireRestart()) {
     Notification* notif = notif->GetInstance();
     NotificationMode notifMode = notif->GetDefaultMode();
-    notif->SetDefaultMode(NotificationMode::MessageBox);
+    notif->PushMode(NotificationMode::NotifModeMessageBox);
     notif->ShowMessage(tr("Some settings you have changed will apply on restart.", "Tell the user they have some settings that will only be applied on restart."));
-    notif->SetDefaultMode(notifMode);
+    notif->PopMode();
   }
 
   game_language language = settings->GetItemLanguage();
-  LoadItemLanguage(language, true);
+  LoadItemLanguage(language, oldShowUnobtainable != settings->GetShowUnobtainable());
 }
 
-#pragma warning(push)
-#pragma warning(disable: 26812)
-void MHWISaveEditor::LoadItemLanguage(game_language language, bool doReload) {
-  game_language current = itemDB->CurrentLanguage();
+void MHWISaveEditor::LoadItemLanguage(game_language language, bool reloadItemSearch) {
+  EquipmentDB* equipmentDB = equipmentDB->GetInstance();
+  game_language currentItem = itemDB->CurrentLanguage();
+  game_language currentEquipment = equipmentDB->CurrentLanguage();
 
   if (language == game_language::GameLanguage && MHW_SAVE_CHECK)
     language = (game_language)MHW_Section1()->text_language;
 
-  if (language != current) {
-    itemDB->LoadGMD(language);
-    inventoryEditor->LoadResources(itemDB, bitmapDB);
-    LoadSaveSlot();
-  }
+  bool reload = false;
+  if (language != currentItem) { itemDB->LoadGMD(language); reload = true; }
+  if (language != currentEquipment) { equipmentDB->LoadGMD(language); reload = true; }
+
+  if (reloadItemSearch || reload) inventoryEditor->LoadResources(itemDB, bitmapDB);
+  if (reload) LoadSaveSlot();
 }
-#pragma warning(pop)
 
 void MHWISaveEditor::Backup() {
   mhw_save_raw* saveWrite = MHWS_Save();
@@ -552,19 +598,7 @@ void MHWISaveEditor::Backup() {
     }
   }
 
-  QFileInfo fi = QFileInfo(EditorFile());
-  QString basename = fi.baseName();
-  QString ext = fi.completeSuffix();
-
-  if (basename.isEmpty()) basename = QString::fromUtf8(SAVE_NAME);
-  if (ext.isEmpty()) ext = "";
-  else ext = "_" + ext.replace('.', '_');
-
-  QDateTime date = QDateTime::currentDateTime();
-  QString datatime = date.toString("yyyy-MM-dd_hh-mm-ss");
-  QString writeFile = basename + ext + '_' + datatime + ".zlib";
-  QString path = Paths::GetDataPathBackups() + writeFile;
-
+  QString path = Paths::GetBackupPath(EditorFile());
   if (success) {
     QByteArray compressed = qCompress((u8*)saveWrite, sizeof(mhw_save_raw), 9);
     int compressedSize = compressed.size();
@@ -574,10 +608,10 @@ void MHWISaveEditor::Backup() {
 
   Notification* notif = notif->GetInstance();
   if (success) {
-    notif->ShowMessage(tr("Backup made: %1", "Notify of a backup being made, %1 is the path to where it is.").arg(writeFile));
+    notif->ShowMessage(tr("Backup made: %1", "Notify of a backup being made, %1 is the path to where it is.").arg(path));
   }
   else {
-    notif->ShowMessage(tr("Failed to create backup: %1", "Notify of a backup failure, %1 is the path to where it was supposed to be.").arg(writeFile));
+    notif->ShowMessage(tr("Failed to create backup: %1", "Notify of a backup failure, %1 is the path to where it was supposed to be.").arg(path));
   }
   TrimBackups();
 }
@@ -705,12 +739,73 @@ void MHWISaveEditor::DebugDefragEquipment()
   int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
-  qInfo("Defragging equipment references...");
-  DefragEquipmentReferences(mhwSaveSlot);
-  qInfo("Defragging equipment...");
-  DefragEquipment(mhwSaveSlot);
-  qInfo("Defragging finished.");
+  qInfo("Checking equipment box references...");
+  bool check = MHWSaveUtils::ValidateEquipmentBox(mhwSaveSlot, true);
 
-  SaveLoader* loader = GetActiveEditorTab();
-  if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+  Notification* notif = notif->GetInstance();
+  if (check) {
+    qInfo("Defragging equipment references...");
+    MHWSaveUtils::DefragEquipmentReferences(mhwSaveSlot);
+    qInfo("Defragging equipment...");
+    int defragged = MHWSaveUtils::DefragEquipment(mhwSaveSlot);
+    qInfo("Defragging finished successfully.");
+    qInfo().noquote().nospace() << QString::number(defragged) << " equipment items were moved.";
+
+    SaveLoader* loader = GetActiveEditorTab();
+    if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+
+    notif->ShowMessage(tr("Equipment has been defragged.", "Tell the user that the equipment has been defragged."));
+  }
+  else {
+    qCritical("Defragging equipment failed, equipment box references are corrupt.");
+
+    notif->PushMode(NotificationMode::NotifModeMessageBox);
+    notif->ShowMessage(tr("Could not defrag equipment, there are issues with the equipment references.\n\n"
+      "Try running the Equipment Box Reference Fix:\n"
+      "Debug -> Fixes -> Equipment Box Reference Fix",
+      "Tell the user that equipment couldn't be defragged, because there are issues."));
+    notif->PopMode();
+  }
+}
+
+void MHWISaveEditor::DebugFixEquipmentBoxRef()
+{
+  MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  int mhwSaveIndex = MHW_SaveIndex();
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
+  qInfo("Checking equipment box references...");
+  bool check = MHWSaveUtils::ValidateEquipmentBox(mhwSaveSlot, true);
+
+  Notification* notif = notif->GetInstance();
+  if (!check) {
+    qInfo("Fixing equipment box references...");
+    check = MHWSaveUtils::ValidateEquipmentBox(mhwSaveSlot, false);
+
+    if (check) {
+      SaveLoader* loader = GetActiveEditorTab();
+      if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+
+      qInfo("Equipment box references have been fixed successfully.");
+
+      notif->ShowMessage(tr("Equipment box references have been fixed successfully.",
+        "Tell the user the equipment box references were fixed."));
+    }
+    else {
+      qCritical("Fixing equipment box references failed.");
+
+      notif->PushMode(NotificationMode::NotifModeMessageBox);
+      notif->ShowMessage(tr("Could not fix equipment references.\n\n"
+        "Please consider filing a bug report and sending your save.",
+        "Tell the user that equipment references couldn't be fixed, and give further instructions."));
+      notif->PopMode();
+    }
+  }
+  else {
+    qInfo("No issues found in equipment box references.");
+
+    notif->ShowMessage(tr("No issues found in equipment box references.",
+      "Tell the user the there was no issues found in equipment box references."));
+  }
 }

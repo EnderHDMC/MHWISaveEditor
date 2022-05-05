@@ -61,7 +61,7 @@ public:
   bool GetMatrixMode() { return _matrixMode; }
   void SetMatrixMode(bool value) { if (_matrixMode != value) _requireRestart = true; _matrixMode = value; }
   bool GetShowUnobtainable() { return _showUnobtainable; }
-  void SetShowUnobtainable(bool value) { if (_showUnobtainable != value) _requireRestart = true; _showUnobtainable = value; }
+  void SetShowUnobtainable(bool value) { _showUnobtainable = value; }
   bool GetItemPouchSearchAll() { return _itemPouchSearchAll; }
   void SetItemPouchSearchAll(bool value) { _itemPouchSearchAll = value; }
 

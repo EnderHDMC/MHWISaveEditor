@@ -2,6 +2,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QMessageBox>
 #include <QSignalMapper>
 #include <QFileSystemWatcher>
 
@@ -54,6 +55,7 @@ public slots:
 
   // Fixes
   void DebugDefragEquipment();
+  void DebugFixEquipmentBoxRef();
   
   // Debug
   void DebugDumpIconsAll();
@@ -80,7 +82,7 @@ private:
 
   void SetupDarkMode();
 
-  void LoadItemLanguage(game_language language, bool doReload = false);
+  void LoadItemLanguage(game_language language, bool reloadItemSearch = false);
 
   SaveLoader* GetActiveEditorTab();
 
@@ -90,6 +92,7 @@ private:
 
   Ui::MHWISaveEditor* ui;
   QLabel* statusFile = nullptr;
+  QMessageBox* msgNotification = nullptr;
 
   SaveLoader* inventoryEditor = nullptr;
   SaveLoader* hunterInfo = nullptr;

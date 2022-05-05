@@ -6,13 +6,10 @@ Notification* Notification::instance = nullptr;
 
 Notification::Notification()
 {
-  messageBox = new QMessageBox();
-  messageBox->setIcon(QMessageBox::Icon::Information);
-  messageBox->setWindowTitle(QObject::tr("Notification"));
-
-  notificationModes.insert(NotificationMode::None, nullptr);
-  notificationModes.insert(NotificationMode::StatusBar, statusBar);
-  notificationModes.insert(NotificationMode::MessageBox, messageBox);
+  notificationModes.insert(NotificationMode::NotifModeInvalid, nullptr);
+  notificationModes.insert(NotificationMode::NotifModeNone, nullptr);
+  notificationModes.insert(NotificationMode::NotifModeStatusBar, statusBar);
+  notificationModes.insert(NotificationMode::NotifModeMessageBox, messageBox);
 }
 
 Notification* Notification::GetInstance()
@@ -42,19 +39,22 @@ NotificationMode Notification::GetDefaultMode()
 void Notification::ShowMessage(const QString& text, int timeout)
 {
   if (silence) { silence--; return; }
+  NotificationMode messageMode = defaultMode;
+  if (!modeStack.isEmpty()) messageMode = modeStack.top();
 
-  switch (defaultMode)
+  switch (messageMode)
   {
-  case NotificationMode::None: break;
+  case NotificationMode::NotifModeInvalid: break;
+  case NotificationMode::NotifModeNone: break;
 
-  case NotificationMode::MessageBox: {
+  case NotificationMode::NotifModeMessageBox: {
     if (messageBox) {
       messageBox->setText(text);
       messageBox->exec();
     }
   } break;
 
-  case NotificationMode::StatusBar: {
+  case NotificationMode::NotifModeStatusBar: {
     if (statusBar) {
       statusBar->showMessage(text, timeout);
     }
@@ -65,13 +65,39 @@ void Notification::ShowMessage(const QString& text, int timeout)
   }
 }
 
+void Notification::Register(QMessageBox* messageBox)
+{
+  this->messageBox = messageBox;
+  notificationModes.insert(NotificationMode::NotifModeMessageBox, messageBox);
+}
+
 void Notification::Register(QStatusBar* statusbar)
 {
-  statusBar = statusbar;
-  notificationModes.insert(NotificationMode::StatusBar, statusBar);
+  this->statusBar = statusbar;
+  notificationModes.insert(NotificationMode::NotifModeStatusBar, statusBar);
 }
 
 void Notification::Silence(unsigned int times)
 {
   silence = times;
+}
+
+bool Notification::PushMode(NotificationMode mode)
+{
+  bool canPush = modeStack.count() < 16;
+  if (canPush) {
+    modeStack.push(mode);
+  }
+
+  return canPush;
+}
+
+NotificationMode Notification::PopMode()
+{
+  NotificationMode result = NotificationMode::NotifModeInvalid;
+  if (!modeStack.isEmpty()) {
+    result = modeStack.pop();
+  }
+
+  return result;
 }

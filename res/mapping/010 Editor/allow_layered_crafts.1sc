@@ -6,12 +6,14 @@
 //   Version: 0.1.3
 //   Purpose: Allow all layered armors to be crafted.
 //            Optionally give resources to craft them.
+//            Should be run on an unencrypted save with
+//            the SAVEDATA1000.bt template.
 //  Category: Game
 //   History: Initial Version
 //------------------------------------------------
 
-u32 target_save = 2;
-u32 give_items = true;
+u32 target_save = 2; // The save slot to add items to
+u32 give_items = true; // 
 u32 give_zeni_research = true;
 
 u32 items[3200] = {
@@ -120,6 +122,7 @@ u32 fsp = -1;
 u32 fs, fsi;
 u8 buffer;
 
+Printf("Discovering items...");
 for (i = 0; i < count; i++) {
   cur = items[i];
   if (!cur && i != 0) continue;
@@ -130,14 +133,14 @@ for (i = 0; i < count; i++) {
   fsp = fs;
 
   Printf(" %d", cur);
-  buffer = mhw_save.section3.saves[target_save].discovered_items[fs];
+  buffer = mhw_save.section3.saves[target_save].discovered_items.items[fs];
   Printf(" '%02x->", buffer);
   buffer |= 1 << fsi;
   Printf("%02x'", buffer);
   
-  if (cur) mhw_save.section3.saves[target_save].discovered_items[fs] = buffer;
+  if (cur) mhw_save.section3.saves[target_save].discovered_items.items[fs] = buffer;
 }
-Printf("\nDone!\n");
+Printf("\nItems discovered!\n");
 
 
 
@@ -147,6 +150,8 @@ u32 mats = sizeof(mhw_save.section3.saves[target_save].storage.materials)
 u32 item_id, item_count;
 u32 add_item, add_index = 0;
 
+
+Printf("Retrieving needed items...\n");
 for (y = 0; y < count; y++)
 {
   add_item = items[y];
@@ -166,9 +171,9 @@ for (y = 0; y < count; y++)
 
   if (add_index) {
     if (give_items) {
-    mhw_save.section3.saves[target_save].storage.materials[add_index].id = add_item;
-    mhw_save.section3.saves[target_save].storage.materials[add_index].amount = 9999;
-    Printf("Added %d at materials[%d]\n", add_item, add_index);
+      mhw_save.section3.saves[target_save].storage.materials[add_index].id = add_item;
+      mhw_save.section3.saves[target_save].storage.materials[add_index].amount = 9999;
+      Printf("Added %d at materials[%d]\n", add_item, add_index);
     }
     else {
       Printf("Need item id: %d\n", add_item);
@@ -181,4 +186,4 @@ if (give_zeni_research) {
   mhw_save.section3.saves[target_save].hunter.zeni = 99999999;
   mhw_save.section3.saves[target_save].hunter.research_points = 99999999;
 }
-Printf("Done!");
+Printf("Needed items retrieved!\n");

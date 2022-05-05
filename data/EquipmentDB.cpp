@@ -10,11 +10,8 @@ EquipmentDB::EquipmentDB()
   Settings* settings = settings->GetInstance();
   game_language itemLanguage = settings->GetItemLanguage();
 
-  ReadMetaFile(&am_dat, Paths::GetResourcesPath("chunk/common/equip/armor.am_dat"));
-  ReadMetaFileLanguage(&gmd_armor, "chunk/common/text/steam/armor_%1.gmd", itemLanguage);
-
-  ReadMetaFile(&rod_inse, Paths::GetResourcesPath("chunk/common/equip/rod_insect.rod_inse"));
-  ReadMetaFileLanguage(&gmd_kinsect, "chunk/common/text/vfont/rod_insect_%1.gmd", itemLanguage);
+  hasData |= ReadMetaFile(&am_dat, Paths::GetResourcesPath("chunk/common/equip/armor.am_dat"));
+  hasData |= ReadMetaFile(&rod_inse, Paths::GetResourcesPath("chunk/common/equip/rod_insect.rod_inse"));
 
   BindMapping(0, &wp_dat_l_sword, &gmd_l_sword, "l_sword"); // Great Sword
   BindMapping(1, &wp_dat_sword, &gmd_sword, "sword");       // Sword And Shield
@@ -30,6 +27,7 @@ EquipmentDB::EquipmentDB()
   BindMapping(11, &wp_dat_g_bow, &gmd_bow, "bow");          // Bow
   BindMapping(12, &wp_dat_g_hbg, &gmd_hbg, "hbg");          // Heavy Bowgun
   BindMapping(13, &wp_dat_g_lbg, &gmd_lbg, "lbg");          // Light Bowgun
+  LoadGMD(itemLanguage);
 
   QMapIterator<i32, QString> wp(mapBasenames);
   while (wp.hasNext()) {
@@ -39,15 +37,12 @@ EquipmentDB::EquipmentDB()
     QString basename = mapBasenames.value(type);
     wp_dat_meta* wp_dat = map_wp_dat.value(type);
     wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
-    gmd_meta* gmd = map_gmd.value(type);
 
     QString file_dat = QString("chunk/common/equip/%1.wp_dat").arg(basename);
     QString file_dat_g = QString("chunk/common/equip/%1.wp_dat_g").arg(basename);
-    QString file_gmd = QString("chunk/common/text/steam/%1_%2.gmd").arg(basename).arg("%1");
 
-    if (wp_dat) ReadMetaFile(wp_dat, Paths::GetResourcesPath(file_dat));
-    if (wp_dat_g) ReadMetaFile(wp_dat_g, Paths::GetResourcesPath(file_dat_g));
-    ReadMetaFileLanguage(gmd, file_gmd, itemLanguage);
+    if (wp_dat) hasData |= ReadMetaFile(wp_dat, Paths::GetResourcesPath(file_dat));
+    if (wp_dat_g) hasData |= ReadMetaFile(wp_dat_g, Paths::GetResourcesPath(file_dat_g));
   }
 }
 
@@ -96,7 +91,7 @@ void EquipmentDB::Free()
   instance = nullptr;
 }
 
-equipment_info* EquipmentDB::GetEquipment(mhw_equipment* equipment)
+equipment_info* EquipmentDB::GetEquipment(const mhw_equipment* equipment)
 {
   mhw_equip_category category = equipment->category;
   i32 type = equipment->type;
@@ -119,13 +114,121 @@ equipment_info* EquipmentDB::GetEquipment(mhw_equipment* equipment)
   return info;
 }
 
-i32 EquipmentDB::GetRawIndex(mhw_equipment* equipment)
+EquipmentInfoType EquipmentDB::GetInfoType(const equipment_info* info)
 {
-  i32 index = -1;
-  equipment_info* info = GetEquipment(equipment);
+  EquipmentInfoType result = EquipmentInfoType::INVALID;
 
-  if (info) index = info->am_dat.index;
-  return index;
+  if (am_dat.header && (am_dat_entry*)info >= am_dat.entries &&
+    (am_dat_entry*)info < am_dat.entries + am_dat.header->entry_count)
+    result = EquipmentInfoType::AM_DAT;
+
+  if (rod_inse.header && (rod_inse_entry*)info >= rod_inse.entries &&
+    (rod_inse_entry*)info < rod_inse.entries + rod_inse.header->entry_count)
+    result = EquipmentInfoType::ROD_INSE;
+
+  QMapIterator<i32, QString> wp(mapBasenames);
+  while (wp.hasNext()) {
+    wp.next();
+    i32 type = wp.key();
+
+    wp_dat_meta* wp_dat = map_wp_dat.value(type);
+    wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
+
+    if (wp_dat->header && (wp_dat_entry*)info >= wp_dat->entries &&
+      (wp_dat_entry*)info < wp_dat->entries + wp_dat->header->entry_count) {
+      result = EquipmentInfoType::WP_DAT; break;
+    }
+
+    if (wp_dat_g->header && (wp_dat_g_entry*)info >= wp_dat_g->entries &&
+      (wp_dat_g_entry*)info < wp_dat_g->entries + wp_dat_g->header->entry_count) {
+      result = EquipmentInfoType::WP_DAT_G; break;
+    }
+  }
+
+  return result;
+}
+
+bool EquipmentDB::IsType(const equipment_info* info, EquipmentInfoType type)
+{
+  bool result = false;
+
+  switch (type) {
+  case EquipmentInfoType::INVALID: break;
+
+  case EquipmentInfoType::AM_DAT:
+    result = am_dat.header && (am_dat_entry*)info >= am_dat.entries &&
+      (am_dat_entry*)info < am_dat.entries + am_dat.header->entry_count;
+    break;
+
+  case EquipmentInfoType::ROD_INSE:
+    result = rod_inse.header && (rod_inse_entry*)info >= rod_inse.entries &&
+      (rod_inse_entry*)info < rod_inse.entries + rod_inse.header->entry_count;
+    break;
+
+  case EquipmentInfoType::WP_DAT:
+  case EquipmentInfoType::WP_DAT_G: {
+    QMapIterator<i32, QString> wp(mapBasenames);
+    while (wp.hasNext()) {
+      wp.next();
+      i32 type = wp.key();
+
+      wp_dat_meta* wp_dat = map_wp_dat.value(type);
+      wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
+
+      if (wp_dat->header && (wp_dat_entry*)info >= wp_dat->entries &&
+        (wp_dat_entry*)info < wp_dat->entries + wp_dat->header->entry_count) {
+        result = true; break;
+      }
+
+      if (wp_dat_g->header && (wp_dat_g_entry*)info >= wp_dat_g->entries &&
+        (wp_dat_g_entry*)info < wp_dat_g->entries + wp_dat_g->header->entry_count) {
+        result = true; break;
+      }
+    }
+  } break;
+  }
+
+  return result;
+}
+
+void EquipmentDB::LoadGMD(game_language language)
+{
+  ReadMetaFileLanguage(&gmd_armor, "chunk/common/text/steam/armor_%1.gmd", language);
+  ReadMetaFileLanguage(&gmd_kinsect, "chunk/common/text/vfont/rod_insect_%1.gmd", language);
+
+  QMapIterator<i32, QString> wp(mapBasenames);
+  while (wp.hasNext()) {
+    wp.next();
+    i32 type = wp.key();
+
+    QString basename = mapBasenames.value(type);
+    gmd_meta* gmd = map_gmd.value(type);
+
+    QString file_gmd = QString("chunk/common/text/steam/%1_%2.gmd").arg(basename).arg("%1");
+    ReadMetaFileLanguage(gmd, file_gmd, language);
+  }
+}
+
+game_language EquipmentDB::CurrentLanguage()
+{
+  if (gmd_armor.header) return (game_language)gmd_armor.header->language_id;
+  else if (gmd_kinsect.header) return (game_language)gmd_kinsect.header->language_id;
+  else {
+    QMapIterator<i32, QString> wp(mapBasenames);
+    while (wp.hasNext()) {
+      wp.next();
+      i32 type = wp.key();
+
+      gmd_meta* gmd = map_gmd.value(type);
+      if (gmd->header) return (game_language)gmd->header->language_id;
+    }
+  }
+  return game_language::InvalidLanguage;
+}
+
+bool EquipmentDB::HasData()
+{
+  return hasData;
 }
 
 am_dat_entry* EquipmentDB::GetEntryArmor(i32 type, i32 id)
@@ -152,12 +255,12 @@ QString EquipmentDB::GetNameArmor(i32 type, i32 id)
   am_dat_entry* entry = GetEntryArmor(type, id);
 
   QString name;
-  if (entry)
+  if (gmd->header && entry)
   {
     u16 gmdIndex = entry->gmd_name_index;
     name = QString::fromUtf8(gmd->value(gmdIndex));
   }
-  if (name.isNull()) name = "GMD FAILURE";
+  if (name.isNull()) name = GMD_FAILURE.c_str();
   else {
     name = name.replace("<ICON BETA>", " \u03B2");
     name = name.replace("<ICON ALPHA>", " \u03B1");
@@ -169,7 +272,7 @@ QString EquipmentDB::GetNameArmor(i32 type, i32 id)
 
 int EquipmentDB::CountArmor()
 {
-  return am_dat.header->entry_count;
+  return am_dat.header ? am_dat.header->entry_count : 0;
 }
 
 am_dat_entry* EquipmentDB::IndexArmor(i32 index)
@@ -232,12 +335,12 @@ QString EquipmentDB::GetNameWeaponMelee(i32 type, i32 id)
   wp_dat_entry* entry = GetEntryWeaponMelee(type, id);
 
   QString name;
-  if (entry)
+  if (gmd->header && entry)
   {
     u16 gmdIndex = entry->gmd_name_index;
     name = QString::fromUtf8(gmd->value(gmdIndex));
   }
-  if (name.isNull()) name = "GMD FAILURE";
+  if (name.isNull()) name = GMD_FAILURE.c_str();
 
   return name;
 }
@@ -248,12 +351,12 @@ QString EquipmentDB::GetNameWeaponRanged(i32 type, i32 id)
   wp_dat_g_entry* entry = GetEntryWeaponRanged(type, id);
 
   QString name;
-  if (entry)
+  if (gmd->header && entry)
   {
     u16 gmdIndex = entry->gmd_name_index;
     name = QString::fromUtf8(gmd->value(gmdIndex));
   }
-  if (name.isNull()) name = "GMD FAILURE";
+  if (name.isNull()) name = GMD_FAILURE.c_str();
 
   return name;
 }
@@ -262,7 +365,7 @@ QString EquipmentDB::GetNameWeapon(i32 type, i32 id)
 {
   wp_dat_meta* wp_dat = map_wp_dat.value(type);
   wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
-  QString name = "GMD FAILURE";
+  QString name = GMD_FAILURE.c_str();
 
   if (wp_dat) name = GetNameWeaponMelee(type, id);
   if (wp_dat_g) name = GetNameWeaponRanged(type, id);
@@ -274,7 +377,7 @@ int EquipmentDB::CountWeaponMelee(i32 type)
   int count = 0;
 
   wp_dat_meta* wp_dat = map_wp_dat.value(type);
-  if (wp_dat) count = wp_dat->header->entry_count;
+  if (wp_dat && wp_dat->header) count = wp_dat->header->entry_count;
   return count;
 }
 
@@ -283,7 +386,7 @@ int EquipmentDB::CountWeaponRanged(i32 type)
   int count = 0;
 
   wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
-  if (wp_dat_g) count = wp_dat_g->header->entry_count;
+  if (wp_dat_g && wp_dat_g->header) count = wp_dat_g->header->entry_count;
   return count;
 }
 
@@ -292,7 +395,7 @@ wp_dat_entry* EquipmentDB::IndexWeaponMelee(i32 type, i32 index)
   wp_dat_entry* entry = nullptr;
 
   wp_dat_meta* wp_dat = map_wp_dat.value(type);
-  if (wp_dat) entry = &wp_dat->entries[index];
+  if (wp_dat && wp_dat->header) entry = &wp_dat->entries[index];
   return entry;
 }
 
@@ -301,7 +404,7 @@ wp_dat_g_entry* EquipmentDB::IndexWeaponRanged(i32 type, i32 index)
   wp_dat_g_entry* entry = nullptr;
 
   wp_dat_g_meta* wp_dat_g = map_wp_dat_g.value(type);
-  if (wp_dat_g) entry = &wp_dat_g->entries[index];
+  if (wp_dat_g && wp_dat_g->header) entry = &wp_dat_g->entries[index];
   return entry;
 }
 
@@ -329,19 +432,19 @@ QString EquipmentDB::GetNameKinsect(i32 type, i32 id)
   rod_inse_entry* entry = GetEntryKinsect(type, id);
 
   QString name;
-  if (entry)
+  if (gmd->header && entry)
   {
     u16 gmdIndex = entry->index;
     name = QString::fromUtf8(gmd->value(gmdIndex));
   }
-  if (name.isNull()) name = "GMD FAILURE";
+  if (name.isNull()) name = GMD_FAILURE.c_str();
 
   return name;
 }
 
 int EquipmentDB::CountKinsect()
 {
-  return rod_inse.header->entry_count;
+  return rod_inse.header ? rod_inse.header->entry_count : 0;
 }
 
 rod_inse_entry* EquipmentDB::IndexKinsect(i32 index)
@@ -349,7 +452,7 @@ rod_inse_entry* EquipmentDB::IndexKinsect(i32 index)
   return &rod_inse.entries[index];
 }
 
-QString EquipmentDB::GetName(mhw_equipment* equipment)
+QString EquipmentDB::GetName(const mhw_equipment* equipment)
 {
   mhw_equip_category category = equipment->category;
   i32 type = equipment->type;

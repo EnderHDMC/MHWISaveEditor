@@ -37,6 +37,9 @@ public:
   QString ItemName(u32 id);
   QString ItemName(itm_entry* info);
 
+  static u32 AdjustItemID(u32 id);
+  itm_entry* AdjustItemPtr(itm_entry* entry);
+
   //////////////////////////////////////////////
   //////// Items with special treatment ////////
   //////////////////////////////////////////////
@@ -47,6 +50,11 @@ public:
   // Their names basically just need to be swapped, did you enjoy this rant?
   static const u32 SurvivalJewelID = 2270;
   static const u32 SmokeJewelID = 819;
+
+  // Igni Sign [956] and Hunter Runestone [957] have a similar story.
+  // Except both Igni Sign (Hunter Runestone) counts as a loadout item.
+  static const u32 IgniSignID = 956;
+  static const u32 HunterRunestoneID = 957;
 
   // Mega Dash Juice is a material, but needs to be an item.
   // Exhaust Coating is a material, but needs to be an ammo.

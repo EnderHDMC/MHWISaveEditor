@@ -29,6 +29,7 @@ public:
     static QString selectedSteamUser = NULL;
     QString user = selectedSteamUser;
     if (user.isNull()) user = GetActiveSteamUser();
+    if (user == "0") user = NULL;
 
     if (user.isNull()) {
       QStringList users = GetSteamUsers();
@@ -93,17 +94,45 @@ public:
 
   static QString GetGameSaveFilePath()
   {
-    return GetGameSavePath() + "/" + QString::fromUtf8(SAVE_NAME);
+    return GetGameSavePath() + "/" + QString::fromUtf8(MHW_SAVE_NAME);
   }
 
-  static QString GetDefaultDumpPath(int slot)
+  static QString GetTheoreticalGameSaveFilePath()
+  {
+    QString path = GetSteamPath();
+    QString user = "<SteamAccountID>";
+
+    if (path.isNull()) path = "c:/program files (x86)/steam";
+    path = QString("%1/userdata/%2/%3/remote/").arg(path).arg(user).arg(QString::fromUtf8(MHW_ID));
+    return path;
+  }
+
+  static inline QString GetDumpSlot(int slot) {
+    QString dumpFile = QString::fromUtf8(MHW_SAVE_NAME_REL);
+    dumpFile[dumpFile.length() - 5] = QChar('0' + slot);
+    return dumpFile;
+  }
+
+  static QString GetDefaultSaveDumpPath(int slot)
   {
     Q_ASSERT(slot >= 0 && slot <= 9);
-    QString path = GetGameSaveFilePath();
-    bool isNull = path.isNull();
-    int last = path.length() - 1;
-    if (!isNull) path[last] = QChar('0' + slot);
-    return path.isNull() ? path : path + ".bin";
+    QString path = GetGameSavePath();
+    QString dumpFile = GetDumpSlot(slot);
+
+    return path.isNull() ? path : path + dumpFile;
+  }
+
+  static QString GetSaveDumpPath(const QString& file, int slot)
+  {
+    // TODO: Use the filepath.
+    Q_ASSERT(slot >= 0 && slot <= 9);
+    QString defaultPath = GetDefaultSaveDumpPath(slot);
+    QString dumpFile = GetDumpSlot(slot);
+    QDir filePath = file;
+    filePath.cdUp();
+
+    QString path = filePath.absolutePath();
+    return file.isNull() ? defaultPath : path + dumpFile;
   }
 
   static QString GetDataPath()
@@ -124,6 +153,21 @@ public:
     QDir dir = QDir();
     if (dir.mkpath(path)) return path;
     else return NULL;
+  }
+
+  static QString GetBackupPath(const QString& file) {
+    QFileInfo fi = QFileInfo(file);
+    QString basename = fi.baseName();
+    QString ext = fi.completeSuffix();
+
+    if (!ext.isEmpty()) ext = "_" + ext.replace('.', '_');
+    if (basename.isEmpty()) basename = QString::fromUtf8(MHW_SAVE_NAME);
+
+    QDateTime date = QDateTime::currentDateTime();
+    QString datetime = date.toString("yyyy-MM-dd_hh-mm-ss");
+    QString writeFile = basename + ext + '_' + datetime + ".zlib";
+    QString path = Paths::GetDataPathBackups() + writeFile;
+    return path;
   }
 
   static QString GetIconDumpPath()

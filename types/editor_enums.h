@@ -2,8 +2,6 @@
 
 #include "mhw_enums.h"
 
-#pragma warning(push)
-#pragma warning(disable: 26812)
 enum class game_language : i8
 {
   Japanese = mhw_language::Japanese,
@@ -24,4 +22,3 @@ enum class game_language : i8
   GameLanguage = -2,
   EditorUILanguage = -3,
 };
-#pragma warning(pop)

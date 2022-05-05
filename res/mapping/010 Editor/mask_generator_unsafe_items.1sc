@@ -1,10 +1,22 @@
 //------------------------------------------------
 //--- 010 Editor v12.0.1 Script File
 //
-//      File: export_unsafe_item_mask.1sc
+//      File: mask_generator_unsafe_items.1sc
 //   Authors: EnderHDMC
 //   Version: 0.1.4
-//   Purpose: Construct a mask of unused items
+//   Purpose: Construct a mask of items that are potentially unsafe to have.
+//            Should be run on an the item_eng.gmd with
+//            the gmd.bt template.
+//            This script loads the currently known unsafe items
+//            specified in ../outputs/CustomFlags.bin
+//            then it analyses the language file to check for
+//            slinger ammo, unavailable, HARDUMMY, ??? and appraisal
+//            items, and marks them each in their own table.
+//            
+//            This script can also be run on the other item_XXX.gmd files as well.
+//            The script is designed for item_eng.gmd though.
+//            The generated flags file can then be used by the save editor to
+//            distinguish items that can be potentially harmful (crashes or weird behaviour).
 //  Category: Game
 //   History: Initial Version
 //------------------------------------------------
