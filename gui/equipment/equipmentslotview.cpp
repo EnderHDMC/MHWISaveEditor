@@ -76,11 +76,11 @@ void EquipmentSlotView::Uncraft()
     confirm &= permanentConfirm == QMessageBox::StandardButton::Yes;
   }
 
-  if (confirm)
+  if (confirm) {
     equipment = MHWSaveOperations::Uncraft(mhwSaveSlot, index, true, equipmentDB, smithyDB, itemDB);
-
-  ui->btnUncraft->clearFocus(); // Prevent scrolling to the next widget.
-  UpdateEquipDisplay(equipment, index, false);
+    ui->btnUncraft->clearFocus(); // Prevent scrolling to the next widget.
+    UpdateEquipDisplay(equipment, index, false);
+  }
 }
 
 void EquipmentSlotView::UpdateEquipDisplay(const mhw_equipment* slot, int position, bool uncraftable)

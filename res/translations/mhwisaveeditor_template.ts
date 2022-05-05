@@ -311,7 +311,7 @@
     </message>
     <message>
         <location filename="../../gui/info/limitedunlocks.ui" line="34"/>
-        <source>Layered: Artemis</source>
+        <source>Layered: Artemis (MR required)</source>
         <comment>Whether the Artemis Layered is unlocked.</comment>
         <translation type="unfinished"></translation>
     </message>
