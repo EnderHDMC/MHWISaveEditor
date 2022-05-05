@@ -1,5 +1,5 @@
 #define MHWIAppName "MHWISaveEditor"
-#define MHWIAppVersion "0.1.4"
+#define MHWIAppVersion "0.1.5"
 #define MHWIAppPublisher "EnderHDMC"
 #define MHWIAppURL "https://github.com/EnderHDMC/MHWISaveEditor"
 #define MHWIAppExeName "MHWISaveEditor.exe"
@@ -30,7 +30,7 @@ OutputBaseFilename={#MHWIAppName}Setup-v{#MHWIAppVersion}
 SetupIconFile={#RelDir}\res\icon.ico
 Compression=lzma
 SolidCompression=yes
-WizardStyle=modern  
+WizardStyle=modern
 Uninstallable=no
 VersionInfoVersion={#MHWIAppVersion}.{#MHWISubversion}
 
@@ -52,11 +52,10 @@ Source: "{#RelDir}\Qt6Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#RelDir}\res\*"; DestDir: "{app}\res"; Flags: ignoreversion recursesubdirs createallsubdirs       
+Source: "{#RelDir}\res\*"; DestDir: "{app}\res"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\styles\*"; DestDir: "{app}\styles"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\translations\*"; DestDir: "{app}\translations"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Run]
 Filename: "{app}\{#MHWIAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MHWIAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-
