@@ -146,6 +146,8 @@
      <property name="title">
       <string comment="Debug -&gt; Fixes" extracomment="Scripts to fix some issues that arise from memory edits.">Fixes</string>
      </property>
+     <addaction name="actionRemoveUnobtainableItems"/>
+     <addaction name="separator"/>
      <addaction name="actionFixEquipmentBoxRef"/>
      <addaction name="actionDefragEquipmentBox"/>
     </widget>
@@ -436,6 +438,11 @@
     <string comment="Debug-&gt;Fixes-&gt;Equipment Box Reference Fix" extracomment="Fixes the cross references in equipment box &amp; the sort table.">Equipment Box Reference Fix</string>
    </property>
   </action>
+  <action name="actionRemoveUnobtainableItems">
+   <property name="text">
+    <string comment="Debug-&gt;Fixes-&gt;Remove Unobtainable Items" extracomment="Removes all unobtainable items from the player inventory and item box.">Remove Unobtainable Items</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -647,6 +654,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionRemoveUnobtainableItems</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>DebugRemoveUnobtainableItems()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -662,5 +685,6 @@
   <slot>DebugDefragEquipment()</slot>
   <slot>UncraftUnusedEquipment()</slot>
   <slot>DebugFixEquipmentBoxRef()</slot>
+  <slot>DebugRemoveUnobtainableItems()</slot>
  </slots>
 </ui>

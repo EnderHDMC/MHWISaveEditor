@@ -36,9 +36,22 @@ void ItemSlotView::Load(mhw_save_raw* mhwSave, int slotIndex)
   itm_entry* info = itemDB->GetItemByIdSafe(itemSlot->id);
   if (!info && itemDB->count()) {
     qCritical().nospace() << "Invalid item detected, item info: "
-      << "index = " << invslot
+      << "storage = " << area->storage
+      << ", storage type = " << (u32)area->type
+      << ", index = " << invslot
       << ", id = " << itemSlot->id
       << ", amount = " << itemSlot->amount;
+  }
+
+  if (info && (!(info->flags & (u32)itemFlag::CustomObtainable) || info->type != (u32)area->type) && info->id) {
+    qCritical().nospace() << "Illegal item detected, item info: "
+      << "storage = " << area->storage
+      << ", storage type = " << (u32)area->type
+      << ", index = " << invslot
+      << ", id = " << itemSlot->id
+      << ", amount = " << itemSlot->amount
+      << ", type = " << info->type
+      << ", name = " << itemDB->ItemName(info);
   }
 
   UpdateItemDisplay(info);

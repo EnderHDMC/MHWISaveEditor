@@ -171,8 +171,8 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
 bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt, bool validate)
 {
   qInfo("Saving: %s", qUtf8Printable(path));
-  qInfo("Validate: %s", validate ? "True" : "False");
-  qInfo("Encrypted: %s", encrypt ? "True" : "False");
+  qInfo() << "Validate:" << validate;
+  qInfo() << "Encrypted:" << encrypt;
 
   mhw_save_raw* saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
   if (!saveWrite) {
@@ -749,7 +749,7 @@ void MHWISaveEditor::DebugDefragEquipment()
     qInfo("Defragging equipment...");
     int defragged = MHWSaveUtils::DefragEquipment(mhwSaveSlot);
     qInfo("Defragging finished successfully.");
-    qInfo().noquote().nospace() << QString::number(defragged) << " equipment items were moved.";
+    qInfo().nospace() << defragged << " equipment items were moved.";
 
     SaveLoader* loader = GetActiveEditorTab();
     if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
@@ -808,4 +808,23 @@ void MHWISaveEditor::DebugFixEquipmentBoxRef()
     notif->ShowMessage(tr("No issues found in equipment box references.",
       "Tell the user the there was no issues found in equipment box references."));
   }
+}
+
+void MHWISaveEditor::DebugRemoveUnobtainableItems()
+{
+  MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  int mhwSaveIndex = MHW_SaveIndex();
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
+  qInfo("Removing unobtainable items...");
+  int removed = MHWSaveOperations::RemoveUnobtainableItems(mhwSaveSlot, itemDB);
+  qInfo().nospace() << removed << " unobtainable items were removed.";
+
+  SaveLoader* loader = GetActiveEditorTab();
+  if (loader == inventoryEditor) loader->Load(mhwSave, mhwSaveIndex);
+
+  Notification* notif = notif->GetInstance();
+  notif->ShowMessage(tr("Unobtainable items removed: %1.",
+    "Tell the user how many unobtainable items have been removed, %1 is how many were removed.").arg(removed));
 }

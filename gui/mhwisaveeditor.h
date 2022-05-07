@@ -56,6 +56,7 @@ public slots:
   // Fixes
   void DebugDefragEquipment();
   void DebugFixEquipmentBoxRef();
+  void DebugRemoveUnobtainableItems();
   
   // Debug
   void DebugDumpIconsAll();
