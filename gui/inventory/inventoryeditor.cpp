@@ -26,6 +26,7 @@ InventoryEditor::InventoryEditor(QWidget* parent)
   for (size_t i = 0; i < areaCount; i++)
   {
     InventoryEditorTab* editor = new InventoryEditorTab(&inventory_areas[i]);
+    editor->setWindowTitle(names[i]);
     editorTabs[i] = editor;
 
     ui->tabEditors->addTab(editor, names[i]);

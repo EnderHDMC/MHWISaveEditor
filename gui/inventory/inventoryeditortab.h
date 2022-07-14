@@ -5,6 +5,8 @@
 
 #include "itemslotview.h"
 
+#include "../common/FlowLayout.h"
+
 #include "../../utility/common/saveloader.h"
 #include "../../types/inventory_areas.h"
 
@@ -28,5 +30,6 @@ public:
 private:
   Ui::InventoryEditorTab* ui;
 
+  FlowLayout flow;
   QList<ItemSlotView*> slotViews;
 };

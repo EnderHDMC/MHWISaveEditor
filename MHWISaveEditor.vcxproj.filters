@@ -137,6 +137,9 @@
     <ClInclude Include="utility\mhw_save_operations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gui\common\FlowLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp">
@@ -194,6 +197,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="data\SmithyDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\common\FlowLayout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

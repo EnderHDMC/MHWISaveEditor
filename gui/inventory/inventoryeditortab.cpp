@@ -14,8 +14,10 @@ InventoryEditorTab::InventoryEditorTab(const inventory_area* area, QWidget* pare
   {
     slotViews[i] = new ItemSlotView(area, i, this);
     slotViews[i]->setFixedSize(128, 128);
-    ui->gridLayoutScroll->addWidget(slotViews[i], i / 8, i % 8);
+    flow.addWidget(slotViews[i]);
   }
+
+  ui->scrollAreaWidgetContents->setLayout(&flow);
 }
 
 InventoryEditorTab::~InventoryEditorTab()
@@ -25,7 +27,7 @@ InventoryEditorTab::~InventoryEditorTab()
 
 void InventoryEditorTab::ScrollToIndex(int index)
 {
-  ItemSlotView *itemView = slotViews[index];
+  ItemSlotView* itemView = slotViews[index];
   ui->scrollArea->ensureWidgetVisible(itemView);
   itemView->SetFocus();
 }
