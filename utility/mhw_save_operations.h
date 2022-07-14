@@ -7,6 +7,8 @@
 
 #include "../data/SmithyDB.h"
 
+#include "../types/inventory_areas.h"
+
 #include <QList>
 
 class MHWSaveOperations {
@@ -53,5 +55,49 @@ public:
     {
       Uncraft(save_slot, i, ignorePermanent, equipmentDB, smithyDB, itemDB);
     }
+  }
+
+  static int RemoveUnobtainableItems(mhw_save_slot* save_slot, ItemDB* itemDB) {
+    int removed = 0;
+
+    for (int y = 0; y < COUNTOF(inventory_areas); ++y) {
+      const inventory_area* area = &inventory_areas[y];
+      mhw_item_slot* inventory = (mhw_item_slot*)((u8*)save_slot + area->localoffset);
+
+      for (int i = 0; i < area->count; ++i) {
+        mhw_item_slot* slot = &inventory[i];
+        itm_entry* info = itemDB->GetItemByIdSafe(slot->id);
+
+        bool remove = false;
+        if (!info && itemDB->count()) {
+          qCritical().nospace() << "Invalid item detected, item info: "
+            << "storage = " << area->storage
+            << ", storage type = " << (u32)area->type
+            << ", index = " << i
+            << ", id = " << slot->id
+            << ", amount = " << slot->amount;
+          remove = true;
+        }
+        else if (info && (!(info->flags & (u32)itemFlag::CustomObtainable) || info->type != (u32)area->type) && info->id) {
+          qCritical().nospace() << "Illegal item detected, item info: "
+            << "storage = " << area->storage
+            << ", storage type = " << (u32)area->type
+            << ", index = " << i
+            << ", id = " << slot->id
+            << ", amount = " << slot->amount
+            << ", type = " << info->type
+            << ", name = " << itemDB->ItemName(info);
+          remove = true;
+        }
+
+        if (remove) {
+          qInfo("Removing...");
+          MHWSaveUtils::RemoveItem(slot);
+          ++removed;
+        }
+      }
+    }
+
+    return removed;
   }
 };

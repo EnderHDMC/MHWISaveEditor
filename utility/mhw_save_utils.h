@@ -93,13 +93,21 @@ public:
     return replace;
   }
 
-  static bool GiveItem(mhw_item_slot* item_slot, itm_entry* info) {
+  static bool GiveItem(mhw_item_slot* item_slot, itm_entry* info, int count = 1) {
     bool replace = item_slot->id != info->id;
     item_slot->id = info->id;
-    item_slot->amount++;
+    item_slot->amount += count;
     if (item_slot->amount > 9999) item_slot->amount = 9999;
 
     return replace;
+  }
+
+  static bool RemoveItem(mhw_item_slot* item_slot) {
+    bool removed = item_slot->id;
+    item_slot->id = 0;
+    item_slot->amount = 0;
+
+    return removed;
   }
 
   static inline void DiscoverItem(mhw_save_slot* save_slot, itm_entry* info) {
