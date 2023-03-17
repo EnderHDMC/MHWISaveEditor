@@ -7,6 +7,7 @@
 #include <QStandardPaths>
 
 #include "../../types/constants.h"
+#include "../../types/steamid.h"
 
 class Paths
 {
@@ -34,8 +35,11 @@ public:
     if (user.isNull()) {
       QStringList users = GetSteamUsers();
       int userCount = users.length();
-      if (userCount == 1)
+      if (userCount == 1) {
         user = users.at(0);
+        SteamSpecID steamID = SteamIDFrom32(user.toUInt());
+        qInfo() << "Steam ID:" << steamID.full;
+      }
       else if (userCount > 1) {
         // TODO: get fancy names and such
         bool ok;

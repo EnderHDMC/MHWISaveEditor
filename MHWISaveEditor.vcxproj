@@ -41,6 +41,7 @@
     <ClInclude Include="types\mhw_enums.h" />
     <ClInclude Include="types\mhw_save.h" />
     <ClInclude Include="types\mhw_struct_constants.h" />
+    <ClInclude Include="types\steamid.h" />
     <ClInclude Include="types\types.h" />
     <ClInclude Include="utility\common\Settings.h" />
     <ClInclude Include="utility\common\StringByteLengthValidator.h" />
