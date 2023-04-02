@@ -1,0 +1,81 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Script File
+//
+//      File: export_save_loadouts.1sc
+//   Authors: EnderHDMC
+//   Version: 0.1.6
+//   Purpose: Dump the desired parts of equipment data.
+//  Category: Game
+//   History:
+//     0.1.6: Initial Version
+//------------------------------------------------
+
+local struct mhw_color
+{
+  u8 r, g, b, a;
+};
+
+local struct mhw_pigments
+{
+  u32 bitmask_custom_color; // 000htacf
+  u32 bitmask_rainbow; // 000htacf
+  local mhw_color head;
+  local mhw_color torso;
+  local mhw_color arms;
+  local mhw_color coil;
+  local mhw_color feet;
+  local mhw_color whole;
+};
+
+local struct mhw_layered_equipment
+{
+  i32 head;
+  i32 torso;
+  i32 arms;
+  i32 coil;
+  i32 feet;
+  i32 unused;
+  local mhw_pigments pigments;
+};
+
+local struct mhw_equipment_loadout
+{
+  u32 slot_id;
+  str256 name;
+  i32 weapon_index;
+  i32 helmet_index;
+  i32 torso_index;
+  i32 arms_index;
+  i32 coil_index;
+  i32 feet_index;
+  i32 charm_index;
+  i32 tool1_index;
+  i32 tool2_index;
+  u32 weapon_decos[3];
+  u32 helmet_decos[3];
+  u32 torso_decos[3];
+  u32 arms_decos[3];
+  u32 coil_decos[3];
+  u32 feet_decos[3];
+  u32 charm_decos[3];
+  u32 tool1_decos[3];
+  u32 tool2_decos[3];
+  u32 unknown0[45];
+  local mhw_pigments armor;
+  local mhw_layered_equipment layered;
+  u32 unknown2;
+};
+
+i32 slot = 0;
+i32 length;
+i32 i, max;
+local mhw_equipment_loadout temp;
+
+max = sizeof(mhw_save.section3.saves[0].equipment_loadouts) / sizeof(mhw_save.section3.saves[0].equipment_loadouts[0]);
+for (i = 0; i < max; i++) {
+  temp.name = mhw_save.section3.saves[slot].equipment_loadouts[i].name;
+  length = Strlen(temp.name);
+  if (length) {
+    Printf("%s\n", temp.name);
+  }
+}
