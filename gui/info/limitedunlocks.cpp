@@ -51,7 +51,6 @@ void LimitedUnlocks::UnlockAssassinHood(int checked)
   mhwSaveSlot->tool_unlocks[0] = unlock;
 }
 
-
 void LimitedUnlocks::UpgradeAssassinHood(int checked)
 {
   MHW_LOADING_GUARD;
@@ -87,16 +86,13 @@ void LimitedUnlocks::GiveArtemisGear()
   int type;
   for (type = 0; type < 5; type++)
   {
-    mhw_equipment* equipment = MHWSaveUtils::FindEquipment(mhwSaveSlot, -1, 0);
-    if (equipment) {
-      u32 sort_index = equipment->sort_index;
-      memcpy_s(equipment, sizeof(mhw_equipment), &MHW_EQUIPMENT_EMPTY, sizeof(mhw_equipment));
-      equipment->sort_index = sort_index;
-      equipment->category = mhw_equip_category::Armor;
-      equipment->type = type;
-      equipment->id = ARTEMIS_GEAR_ID;
-    }
-    else break;
+    mhw_equipment gear = MHW_EQUIPMENT_EMPTY;
+    gear.category = mhw_equip_category::Armor;
+    gear.type = type;
+    gear.id = ARTEMIS_GEAR_ID;
+
+    bool success = MHWSaveUtils::GiveEquipment(mhwSaveSlot, &gear);
+    if (!success) break;
   }
 
   Notification* notif = notif->GetInstance();

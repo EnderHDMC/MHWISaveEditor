@@ -135,6 +135,15 @@ public:
     return result;
   }
 
+  static bool GiveEquipment(mhw_save_slot* save_slot, mhw_equipment* equipment) {
+    mhw_equipment* slot = MHWSaveUtils::FindEquipment(save_slot, -1, 0);
+    if (!slot) return false;
+
+    equipment->sort_index = slot->sort_index;
+    memcpy_s(slot, sizeof(mhw_equipment), equipment, sizeof(mhw_equipment));
+    return true;
+  }
+
   static inline void ClearEquipmentSlot(mhw_equipment* equipment) {
     i32 sort_index = equipment->sort_index;
     memcpy_s(equipment, sizeof(*equipment), &MHW_EQUIPMENT_EMPTY, sizeof(MHW_EQUIPMENT_EMPTY));
