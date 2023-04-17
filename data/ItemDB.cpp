@@ -49,7 +49,7 @@ bool ItemDB::ReadCustomFlags(itm_meta* itm) {
   QString flagsPath = Paths::GetResourcesPath("CustomFlags.bin");
   mhw_items_discovered flags[(u64)FlagFileIndex::FlagFileIndexCount] = {};
 
-  u8* obtain = ReadEntireFile(flagsPath, (u8*)flags, sizeof(flags));
+  u8* obtain = FileUtils::ReadEntireFile(flagsPath, (u8*)flags, sizeof(flags));
   if (!obtain) {
     return false;
   }

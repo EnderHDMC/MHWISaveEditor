@@ -146,6 +146,9 @@
     <ClInclude Include="platform\platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utility\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp">

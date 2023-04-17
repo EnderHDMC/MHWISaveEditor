@@ -2,7 +2,6 @@
 #include "ui_mhwisaveeditor.h"
 
 #include <QFileDialog>
-#include <QSaveFile>
 #include <QByteArray>
 #include <QDesktopServices>
 #include <QGridLayout>
@@ -214,7 +213,7 @@ bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
   qInfo("Loading %s", qUtf8Printable(path));
   mhw_save_raw* savep = *save;
 
-  savep = (mhw_save_raw*)ReadEntireFile(path, (u8*)savep, sizeof(mhw_save_raw));
+  savep = (mhw_save_raw*)FileUtils::ReadEntireFile(path, (u8*)savep, sizeof(mhw_save_raw));
   if (!savep) {
     qWarning("Save: %s, cannot be read.", qUtf8Printable(path));
     return false;

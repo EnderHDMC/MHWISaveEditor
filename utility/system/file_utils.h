@@ -4,6 +4,8 @@
 #include <QSaveFile>
 #include <QProcess>
 
+#include "../types.h"
+
 class FileUtils {
 public:
   static const void showInGraphicalShell(const QString& path)
@@ -49,6 +51,27 @@ public:
 
     file.commit();
     return true;
+  }
+
+  static u8* ReadEntireFileSize(const QString& path, u8* dst = nullptr, u32* size = nullptr) {
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) {
+      qWarning("Cannot open file: %s", qUtf8Printable(path));
+      return nullptr;
+    }
+
+    QByteArray blob = file.readAll();
+    u32 array_size = 0;
+    if (size) array_size = *size;
+    if (array_size == 0) array_size = blob.size();
+    if (size) *size = array_size;
+    file.close();
+
+    return QByteArrayToU8(blob, dst, array_size);
+  }
+
+  static u8* ReadEntireFile(const QString& path, u8* dst = nullptr, u32 size = 0) {
+    return ReadEntireFileSize(path, dst, &size);
   }
 
   static bool WriteFile(const QString& path, u8* data, u64 size)
