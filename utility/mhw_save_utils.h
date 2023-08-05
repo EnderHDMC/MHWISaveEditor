@@ -174,6 +174,18 @@ public:
     referenced += current_equipment->charm == srcIndex;
     referenced += current_equipment->kinsect == srcIndex;
 
+    if (ref->category == mhw_equip_category::Kinsect) {
+      const int count = COUNTOF(save_slot->equipment);
+      for (int i = 0; i < count; ++i) {
+        bool isWeapon = equipment[i].category == mhw_equip_category::Weapon;
+
+        // TODO: Probably want an enum for this
+        bool isGlaive = isWeapon && equipment[i].type == 10;
+        // TODO: This should be a union
+        referenced += isGlaive && equipment[i].bowgun_mods[0] == srcIndex;
+      }
+    }
+
     // Check for references from loadouts
     const int count = COUNTOF(save_slot->equipment_loadouts);
     for (int i = 0; i < count; ++i) {
@@ -185,6 +197,9 @@ public:
       referenced += loadout->coil_index == srcIndex;
       referenced += loadout->feet_index == srcIndex;
       referenced += loadout->charm_index == srcIndex;
+      if (ref->category == mhw_equip_category::Kinsect) {
+        referenced += loadout->bowgun_mods[0] == srcIndex;
+      }
     }
     return referenced;
   }
@@ -234,26 +249,34 @@ public:
     // Assumes all the indices are valid
     // Update indices of currently equiped gear
     mhw_current_equipment* current_equipment = &save_slot->current_equipment;
-    if (current_equipment->weapon > -1) current_equipment->weapon = equipment[current_equipment->weapon].sort_index;
-    if (current_equipment->helmet > -1) current_equipment->helmet = equipment[current_equipment->helmet].sort_index;
-    if (current_equipment->torso > -1) current_equipment->torso = equipment[current_equipment->torso].sort_index;
-    if (current_equipment->arms > -1) current_equipment->arms = equipment[current_equipment->arms].sort_index;
-    if (current_equipment->coil > -1) current_equipment->coil = equipment[current_equipment->coil].sort_index;
-    if (current_equipment->feet > -1) current_equipment->feet = equipment[current_equipment->feet].sort_index;
-    if (current_equipment->charm > -1) current_equipment->charm = equipment[current_equipment->charm].sort_index;
-    if (current_equipment->kinsect > -1) current_equipment->kinsect = equipment[current_equipment->kinsect].sort_index;
+#define SyncIndex(ptr, member, arr, index) if(ptr->member > -1) ptr->member = arr[ptr->member].index
+    SyncIndex(current_equipment, weapon, equipment, sort_index);
+    SyncIndex(current_equipment, helmet, equipment, sort_index);
+    SyncIndex(current_equipment, torso, equipment, sort_index);
+    SyncIndex(current_equipment, arms, equipment, sort_index);
+    SyncIndex(current_equipment, coil, equipment, sort_index);
+    SyncIndex(current_equipment, feet, equipment, sort_index);
+    SyncIndex(current_equipment, charm, equipment, sort_index);
+    SyncIndex(current_equipment, kinsect, equipment, sort_index);
 
     // Update indices of loadout gear
     const int count = COUNTOF(save_slot->equipment_loadouts);
     for (int i = 0; i < count; ++i) {
       mhw_equipment_loadout* loadout = save_slot->equipment_loadouts + i;
-      if (loadout->weapon_index > -1) loadout->weapon_index = equipment[loadout->weapon_index].sort_index;
-      if (loadout->helmet_index > -1) loadout->helmet_index = equipment[loadout->helmet_index].sort_index;
-      if (loadout->torso_index > -1) loadout->torso_index = equipment[loadout->torso_index].sort_index;
-      if (loadout->arms_index > -1) loadout->arms_index = equipment[loadout->arms_index].sort_index;
-      if (loadout->coil_index > -1) loadout->coil_index = equipment[loadout->coil_index].sort_index;
-      if (loadout->feet_index > -1) loadout->feet_index = equipment[loadout->feet_index].sort_index;
-      if (loadout->charm_index > -1) loadout->charm_index = equipment[loadout->charm_index].sort_index;
+      bool hasWeapon = loadout->weapon_index > -1;
+      bool isWeapon = hasWeapon && equipment[loadout->weapon_index].category == mhw_equip_category::Weapon;
+
+      bool isGlaive = isWeapon && equipment[loadout->weapon_index].type == 10;
+      SyncIndex(loadout, weapon_index, equipment, sort_index);
+      SyncIndex(loadout, helmet_index, equipment, sort_index);
+      SyncIndex(loadout, torso_index, equipment, sort_index);
+      SyncIndex(loadout, arms_index, equipment, sort_index);
+      SyncIndex(loadout, coil_index, equipment, sort_index);
+      SyncIndex(loadout, feet_index, equipment, sort_index);
+      SyncIndex(loadout, charm_index, equipment, sort_index);
+      if (isGlaive) {
+        SyncIndex(loadout, bowgun_mods[0], equipment, sort_index);
+      }
     }
   }
 

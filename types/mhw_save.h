@@ -597,7 +597,7 @@ struct mhw_equipment_loadout
   u32 charm_decos[3];
   u32 tool1_decos[3];
   u32 tool2_decos[3];
-  u32 bowgun_mods[5];
+  i32 bowgun_mods[5];
   u32 unknown0[40];
   mhw_pigments armor;
   mhw_layered_equipment layered;
