@@ -1,0 +1,127 @@
+//------------------------------------------------
+//--- 010 Editor v13.0 Script File
+//
+//      File: achievement_clear.1sc
+//   Authors: EnderHDMC
+//   Version: 0.1.6
+//   Purpose: Clears the achievements for a given save slot.
+//            Commented ones are either safe, unsafe, or untested.
+//            Uncommented ones are safe to clear.
+//  Category: Game
+//   History: Initial Version
+//------------------------------------------------
+
+int slot = 0;
+
+void ClearAchievement(int slot, int achievement) {
+  u32 bi = achievement / 8;
+  u8 si = achievement % 8;
+
+  mhw_save.section3.saves[slot].achievements_obtained[bi] &= ~(1 << si);
+  mhw_save.section3.saves[slot].achievements_unseen[bi] &= ~(1 << si);
+  mhw_save.section3.saves[slot].guild_card.achievements[bi] &= ~(1 << si);
+}
+
+// Base game
+ClearAchievement(slot, BASE_CONQUEROR_OF_THE_NEW_WORLD);
+// ClearAchievement(slot, BASE_WELCOME_TO_THE_NEW_WORLD);
+// ClearAchievement(slot, BASE_NOTHING_STOPS_THIS_COMMISSION);
+// ClearAchievement(slot, BASE_DEFENDER_OF_ASTERA);
+// ClearAchievement(slot, BASE_INTO_THE_DEEP);
+// ClearAchievement(slot, BASE_DEATH_BEGETS_LIFE);
+// ClearAchievement(slot, BASE_THE_EMPRESS_OF_THE_HIGHLANDS);
+// ClearAchievement(slot, BASE_ONE_SHALL_STAND_ONE_SHALL_FALL);
+// ClearAchievement(slot, BASE_THE_SAPPHIRE_STAR);
+// ClearAchievement(slot, BASE_THE_HUNTERS_LIFE_FOR_ME);
+// ClearAchievement(slot, BASE_AN_INQUISITIVE_MIND);
+// ClearAchievement(slot, BASE_THE_FRANCHISE_HUNTER);
+// ClearAchievement(slot, BASE_STEP_INTO_THE_ARENA);
+// ClearAchievement(slot, BASE_NOWHERE_TO_GO_BUT_UP);
+// ClearAchievement(slot, BASE_NEW_WORLD_SETTLER);
+// ClearAchievement(slot, BASE_THE_ART_OF_CAMOUFLAGE);
+// ClearAchievement(slot, BASE_ANGLING_FOR_A_BITE);
+ClearAchievement(slot, BASE_MMM_SO_TASTY);
+// ClearAchievement(slot, BASE_THE_BIGGER_THEY_ARE);
+// ClearAchievement(slot, BASE_A_LIVING_FOSSIL);
+// ClearAchievement(slot, BASE_SNUGGLES_FOR_ALL);
+// ClearAchievement(slot, BASE_BRISTLES_FOR_ALL);
+ClearAchievement(slot, BASE_RAINBOW_BRIGHT);
+// ClearAchievement(slot, BASE_COMMISSIONED_WORK);
+// ClearAchievement(slot, BASE_BOURGEOIS_HUNTER);
+// ClearAchievement(slot, BASE_IMPREGNABLE_DEFENSE);
+// ClearAchievement(slot, BASE_POWER_IS_EVERYTHING);
+// ClearAchievement(slot, BASE_MOVIN_ON_UP);
+// ClearAchievement(slot, BASE_FIRST_FRIENDS);
+// ClearAchievement(slot, BASE_BOSOM_BUDDIES);
+// ClearAchievement(slot, BASE_MONSTER_PHD);
+// ClearAchievement(slot, BASE_TEMPER_TEMPER);
+// ClearAchievement(slot, BASE_INDOMITABLE);
+// ClearAchievement(slot, BASE_MINIATURE_CROWN);
+// ClearAchievement(slot, BASE_MINIATURE_CROWN_COLLECTOR);
+// ClearAchievement(slot, BASE_MINIATURE_CROWN_MASTER);
+// ClearAchievement(slot, BASE_GIANT_CROWN);
+// ClearAchievement(slot, BASE_GIANT_CROWN_COLLECTOR);
+// ClearAchievement(slot, BASE_GIANT_CROWN_MASTER);
+// ClearAchievement(slot, BASE_CAPTURE_NOVICE);
+// ClearAchievement(slot, BASE_CAPTURE_PRO);
+// ClearAchievement(slot, BASE_ELDERSLAYER);
+// ClearAchievement(slot, BASE_MONSTER_SLAYER);
+// ClearAchievement(slot, BASE_MONSTER_HUNTER);
+// ClearAchievement(slot, BASE_HELP);
+// ClearAchievement(slot, BASE_I_AM_THE_REINFORCEMENTS);
+// ClearAchievement(slot, BASE_HUNTERS_UNITED);
+// ClearAchievement(slot, BASE_HUNTERS_UNITED_FOREVER);
+// ClearAchievement(slot, BASE_SPREADING_THE_WORD);
+// ClearAchievement(slot, BASE_ESTABLISHED_HUNTER);
+
+// Iceborne
+ClearAchievement(slot, ICE_CONQUEROR_OF_THE_HINTERLANDS);
+// ClearAchievement(slot, ICE_THE_BEGINNING_OF_A_NEW_EXPEDITION);
+// ClearAchievement(slot, ICE_TIME_TO_GET_SERIOUS);
+// ClearAchievement(slot, ICE_THE_ELUSIVE_ELDER_DRAGON);
+// ClearAchievement(slot, ICE_INDOMITABLE_SPIRIT);
+// ClearAchievement(slot, ICE_THE_OLD_EVERWYRM);
+// ClearAchievement(slot, ICE_AN_END_AND_A_BEGINNING);
+// ClearAchievement(slot, ICE_TO_THE_LAND_OF_DISCOVERIES);
+// ClearAchievement(slot, ICE_EVOLVING_ECOLOGY);
+// ClearAchievement(slot, ICE_IN_SEARCH_OF_RARE_MATERIALS);
+// ClearAchievement(slot, ICE_INSATIABLE_INVESTIGATOR);
+// ClearAchievement(slot, ICE_FATES_CONCLUSION);
+// ClearAchievement(slot, ICE_MASTER_EXPLORER);
+// ClearAchievement(slot, ICE_SOURCE_OF_RELAXATION);
+// ClearAchievement(slot, ICE_CLUTCH_CLAW_NEOPHYTE);
+// ClearAchievement(slot, ICE_GOLDEN_GLEAM);
+// ClearAchievement(slot, ICE_FRIENDLY_POINTER);
+ClearAchievement(slot, ICE_SWEET_MELODY);
+ClearAchievement(slot, ICE_SUBMERGED_MYSTERY);
+// ClearAchievement(slot, ICE_CELESTIAL_ILLUSION);
+// ClearAchievement(slot, ICE_DEFT_DIGGER);
+// ClearAchievement(slot, ICE_CREATURES_OF_THE_EARTH);
+// ClearAchievement(slot, ICE_UNWAVERING_DEFENSE);
+// ClearAchievement(slot, ICE_DEVASTATING_OFFENSE);
+// ClearAchievement(slot, ICE_PERSONAL_TREASURE);
+// ClearAchievement(slot, ICE_FIRST_RIDE);
+// ClearAchievement(slot, ICE_EXPERIENCED_RIDER);
+// ClearAchievement(slot, ICE_FLEDGLING_COLLECTOR);
+// ClearAchievement(slot, ICE_VETERAN_COLLECTOR);
+// ClearAchievement(slot, ICE_ULTIMATE_COLLECTOR);
+// ClearAchievement(slot, ICE_REMODELER);
+// ClearAchievement(slot, ICE_INTERIOR_DECORATOR);
+// ClearAchievement(slot, ICE_ARCHITECTURAL_ARTIST);
+// ClearAchievement(slot, ICE_EAGER_ENGINEER);
+// ClearAchievement(slot, ICE_SKILLED_STEAMWORKER);
+// ClearAchievement(slot, ICE_ANOTHER_MINIATURE_CROWN);
+// ClearAchievement(slot, ICE_ANOTHER_GIANT_CROWN);
+// ClearAchievement(slot, ICE_FLEDGLING_OBSERVER);
+// ClearAchievement(slot, ICE_OUTSTANDING_OBSERVER);
+// ClearAchievement(slot, ICE_HELPFUL_HUNTER);
+// ClearAchievement(slot, ICE_MASTER_OF_MASTERS);
+// ClearAchievement(slot, ICE_MONSTER_MASTER);
+// ClearAchievement(slot, ICE_TRUE_MINIATURE_CROWN_COLLECTOR);
+// ClearAchievement(slot, ICE_TRUE_LARGE_CROWN_COLLECTOR);
+// ClearAchievement(slot, ICE_THE_TRUE_HUNT_BEGINS);
+// ClearAchievement(slot, ICE_HUNTER_PRODIGY);
+// ClearAchievement(slot, ICE_MASTER_CAPTURER);
+// ClearAchievement(slot, ICE_MASTER_SLAYER);
+// ClearAchievement(slot, ICE_CONFRONTING_THE_UNKNOWN);
+// ClearAchievement(slot, ICE_SEEN_IT_ALL);

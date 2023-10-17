@@ -368,6 +368,7 @@ struct mhw_hunter_equipment
   mhw_equipment_ref charm;
   mhw_equipment_ref tool1;
   mhw_equipment_ref tool2;
+  mhw_equipment_ref kinsect;
 };
 
 struct mhw_current_equipment
@@ -416,7 +417,7 @@ struct mhw_guild_card
   mhw_character_appearance appearance;
   mhw_palico_appearance palico_appearance;
   mhw_hunter_equipment hunter_equipment;
-  u8 unknown3a[12];
+  u8 unknown3a[4];
   mhw_equipment_ref layered_helmet;
   mhw_equipment_ref layered_torso;
   mhw_equipment_ref layered_arms;
@@ -428,11 +429,11 @@ struct mhw_guild_card
   mhw_color layered_color_arms;
   mhw_color layered_color_coil;
   mhw_color layered_color_feet;
-  u8 unknown3_[16];
+  u8 unknown3c[16];
 
   mhw_palico palico;
   u32 unity;
-  u8 unknown4[16];
+  u8 achievements[16];
   u16 quests_lr;
   u16 quests_hr;
   u16 investigations;
@@ -481,7 +482,7 @@ struct mhw_item_pouch
 {
   mhw_item_slot items[24];
   mhw_item_slot ammo[16];
-  u8 unknown1[296];
+  u8 unknown0[296];
 };
 
 struct mhw_storage
@@ -596,7 +597,8 @@ struct mhw_equipment_loadout
   u32 charm_decos[3];
   u32 tool1_decos[3];
   u32 tool2_decos[3];
-  u32 unknown0[45];
+  u32 bowgun_mods[5];
+  u32 unknown0[40];
   mhw_pigments armor;
   mhw_layered_equipment layered;
   u32 unknown2;
@@ -620,7 +622,7 @@ struct mhw_equipment
   i32 decos[3];
   i32 bowgun_mods[5];
   u32 augments[3];
-  u32 unknown0[2];
+  u64 unknown0; // Always: ffff ffff ffff ffff
   i32 pendant;
   u8 extra_slots;
   u8 attack_increase;
@@ -629,7 +631,7 @@ struct mhw_equipment
   u8 slot_upgrade;
   u8 health_regen;
   u8 element_status_effect_up;
-  u8 unknown1[11];
+  u8 unknown1[11]; // Always: 00 00 00 00 00 00 00 00 00 00 00
   u8 custom_upgrades[12]; // u8 so it doesn't print funny.
   i16 base;
   i16 parts;
@@ -725,6 +727,8 @@ struct mhw_guiding_lands
   u32 unknown2[3];
   u8 region_level_unlocked[8];
   mhw_guiding_lands_analysis analyses[8];
+  monsters128_u32 monster_lures;
+  u8 unknown3[sizeof(monsters128_u32)];
 };
 
 struct mhw_endemic_placement
@@ -756,10 +760,10 @@ struct mhw_slot_settings
   u8 target_settings;
   u8 item_control_settings;
   u8 display_head_armor;
-  u8 unknown0_[2];
+  u8 unknown1[2];
   mhw_bool save_manual;
   mhw_toggle vibration;
-  u8 unknown1a;
+  u8 unknown2;
   u8 camera_controls;
   u8 pad_camera_speed;
   u8 reticle_controls;
@@ -768,34 +772,34 @@ struct mhw_slot_settings
   u8 target_camera_vertical_settings;
   u8 focus_camera_settings;
   u8 slinger_settings;
-  u8 unknown1b;
+  u8 unknown3;
   u8 sheathe_settings;
   u8 directional_control_type;
   u8 target_camera_controls;
-  u8 unknown1c[3];
+  u8 unknown4[3];
   mhw_toggle damage_indicators;
   u8 switch_l1l2_r1r2;
-  u8 unknown1_[6];
+  u8 unknown5[6];
   u8 quest_join_settings;
   mhw_toggle aim_assist;
   u8 radial_menu_settings;
   u8 start_menu_navigation;
   u8 hp_stamina_gauge_setting;
-  u8 unknown3[7];
+  u8 unknown6[7];
   u8 mouse_sensitivity;
   u8 mouse_sensitivity_vertical_bias;
   u8 mouse_sensitivity_aiming;
   u8 mouse_sensitivity_aiming_vertical_bias;
   u8 keyboard_shortcut_input;
   u8 focus_camera_for_mouse_controls;
-  u8 unknown3b[4];
+  u8 unknown7[4];
   u8 default_return_point;
-  u8 unknown4[7];
+  u8 unknown8[7];
   mhw_toggle hud_display[9];
   u8 color_blind_settings;
-  u8 unknown5[3];
+  u8 unknown9[3];
   u8 camera_scoutfly;
-  u8 unknown6;
+  u8 unknown10;
   u8 player_silhouette;
   u8 trajectory_reticle_controls;
   u8 hunting_horn_display;
@@ -807,7 +811,7 @@ struct mhw_slot_settings
   u8 obtained_item_placement;
   mhw_toggle surveyor_set_controls;
   u8 swap_keys_while_mounted;
-  u8 unknown7[34];
+  u8 unknown11[34];
 };
 
 struct mhw_seliana_room_deco {
@@ -1386,46 +1390,46 @@ struct mhw_save_slot
   mhw_storage storage;
 
   mhw_equipment equipment[2500];
-  mhw_equipment unused_equipment[510];
+  mhw_equipment unused_equipment[510]; // 510 != 500?
   mhw_equipment palico_equipment[1250]; // Only 750 used
   u32 equipment_index_table[2500];
   u32 unused_equipment_index_table[500]; // 510 - 500 = 10?
   u32 palico_equipment_index_table[1250];
-  u8 unknown10a_[4096];
+  u8 unknown7[4096];
 
   u32 gesture_order[512];
   u32 pose_order[256];
-  u8 unknown10b[sizeof(u32) * 256];
+  u8 unknown8[sizeof(u32) * 256];
 
-  u32 unknown10c_a;
+  u32 unknown9a;
   mhw_wishlist_item wishlist[36];
-  u8 unknown10c_[2628 - 4 - sizeof(mhw_wishlist_item) * 36];
+  u8 unknown9b[2048];
   mhw_smithy smithy;
 
-  u8 unknown10d[80];
+  u8 unknown10a[80];
   u32 layered_helmet;
   u32 layered_torso;
   u32 layered_arms;
   u32 layered_coil;
   u32 layered_feet;
-  u8 unknown10e[68];
+  u8 unknown10b[68];
   u32 favourite_stickers[10];
   u32 sticker_count[256];
-  u8 unknown10f[1064];
+  u8 unknown10c[1064];
   u32 layered_color_helmet;
   u32 layered_color_torso;
   u32 layered_color_arms;
   u32 layered_color_coil;
   u32 layered_color_feet;
   u32 layered_color_whole;
-  u8 unknown10g[20];
+  u8 unknown10d[20];
 
   mhw_radial radial_menu[8];
-  u8 unknown10h[sizeof(u32) * 3280];
+  u8 unknown10e[sizeof(u32) * 3280];
   mhw_npc_chat_entry npc_chat_progress[2048];
   mhw_slot_settings settings;
   mhw_progress_flags progress;
-  u8 unknown10_[19];
+  u8 unknown10f[19];
 
   str64 palico_name;
   u32 palico_xp;
@@ -1442,7 +1446,7 @@ struct mhw_save_slot
   u8 unknown12b[64];
   u8 seen_optionals[64];
   u8 unknown12c[84];
-  u8 unknown12_[sizeof(u32) * 201];
+  u8 unknown12d[sizeof(u32) * 201];
 
   mhw_investigation investigations[400];
   u8 unknown13[2614];
@@ -1454,25 +1458,40 @@ struct mhw_save_slot
 
   u8 unknown14a[24];
   u32 registered_bounties[6];
-  u8 unknown14b[1976];
+  u8 unknown14b[1628];
+  u32 platter_ingredient[36];
+  str32s platter_names[6];
+  u8 unknown14c[12];
+
   u32 steamworks_natural_fuel;
   u32 steamworks_stored_fuel;
   // [92] unlocks for hub functions?
-  u8 unknown14c[96];
+  u8 unknown15[96];
 
   mhw_equipment_loadout equipment_loadouts[224];
   mhw_layered_loadout layered_loadouts[112];
   mhw_palico_loadout palico_loadouts[24];
   mhw_botanical_research botanist;
-  u8 unknown15[213];
+  u8 unknown16a[49];
+  u8 elder_melder_seen_items[32];
+  u8 unknown16b[9];
+  u8 elder_melder_seen_decos[16];
+  u8 unknown16c[73];
+  u8 argosy_purchased_slots;
+  u8 unknown17d;
+  u32 argosy_slot_requests[3];
+  u8 unknown17_[20];
   mhw_safari safaris[4];
-  u8 unknown16[284];
+  u8 unknown18[284];
 
   mhw_shoutout_settings shoutout_settings;
 
-  u8 unknown17[761];
+  u8 unknown19a[725];
+  u8 achievements_obtained[16];
+  u8 achievements_unseen[16];
+  u32 unknown19b;
   mhw_save_quests completed;
-  u8 unknown18[2048];
+  u8 unknown20[2048];
   mhw_weapon_usage32 high_rank_usage;
   mhw_weapon_usage32 low_rank_usage;
   mhw_weapon_usage32 investigations_usage;
@@ -1485,30 +1504,34 @@ struct mhw_save_slot
   u8 gallery_unlocked[16];
   u8 gallery_unseen[16];
 
-  u8 unknown19a[260];
+  u8 unknown21a[260];
   u64 daily_bonus_collect_time;
-  u8 unknown19b[30000];
-  u8 unknown19c[400];
-  u8 unknown19d[79728];
+  u8 unknown21b[30000];
+  u8 unknown21c[400];
+  u8 unknown21d[79728];
   // Contains tutorial flags
-  u8 unknown19_[79];
+  u8 unknown21e[79];
 
   str64 poogie_name;
   u8 poogie_costumes[4];
-  u8 unknown20a[264];
+  u8 unknown22a[264];
   u32 poogie_love;
-  u8 unknown20_[4];
+  u8 unknown22b[4];
   mhw_handler_outfit handler_outfit;
-  u8 unknown21[980]; // Seen flags for appearance, maybe more
+  u8 unknown22[980]; // Seen flags for appearance, maybe more
 
   mhw_lynian_observatory lynian_observatory;
   mhw_guiding_lands guiding_lands;
 
-  u8 unknown22a[1708];
+  u8 unknown23a[312];
+  u32 unknown_set_empty_save; // Set in empty slot deleted previously
+  u8 unknown23b[368];
   mhw_toggle shoutout_manual_auto_translation;
-  u8 unknown22_[762];
+  u8 unknown24a[406];
+  u8 elder_melder_seen_awakening_alchemy;
+  u8 unknown24b[355];
 
-  u8 unknown23[sizeof(u16) * 4741]; // Zero?
+  u8 unknown25[sizeof(u16) * 4741]; // Zero?
   u8 hash_table[512];
 };
 

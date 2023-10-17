@@ -22,6 +22,22 @@ u32 mhw_color_func(mhw_color &col) {
   local u32 r = (u32)col.r;
   local u32 g = (u32)col.g;
   local u32 b = (u32)col.b;
+  local u32 a = (u32)col.a;
+  return r << 0 | g << 8 | b << 16;
+}
+
+typedef struct
+{
+  f32 r, g, b, a;
+  f32 gamma;
+} mhw_srgba <bgcolor=mhw_srgba_func, fgcolor=mhw_srgba_func>;
+
+u32 mhw_srgba_func(mhw_srgba &col) {
+  local f32 power = 1.0 / col.gamma;
+  local u32 r = (u32)(Pow(col.r, power) * 0xFF);
+  local u32 g = (u32)(Pow(col.g, power) * 0xFF);
+  local u32 b = (u32)(Pow(col.b, power) * 0xFF);
+  local u32 a = (u32)(col.a * 0xFF);
   return r << 0 | g << 8 | b << 16;
 }
 
@@ -36,7 +52,7 @@ struct uct_color_info
 {
   u32 unknown0;
   mhw_color color;
-  f32 unknown1[5];
+  mhw_srgba srgb;
 };
 
 struct uct_color_palette
