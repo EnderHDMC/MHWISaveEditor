@@ -4,23 +4,18 @@
 #include "../utility/common/Settings.h"
 #include "../utility/system/paths.h"
 #include "../utility/math.h"
+#include "IconAtlas.h"
 
 BitmapDB::BitmapDB(ItemDB* itemDB, EquipmentDB* equipmentDB)
 {
   items = QImage(Paths::GetResourcesPath("items.png"));
   itemsMask = QImage(Paths::GetResourcesPath("items_mask.png"));
   ReadMetaFile(&uct, Paths::GetResourcesPath("chunk/common/ui/ui_colortable.uct"));
+  textureAtlas = QPixmap::fromImage(items);
+  maskAtlas = QPixmap::fromImage(itemsMask);
 
   int imageWidth = items.width();
   int imageHeight = items.height();
-
-  Settings* settings = settings->GetInstance();
-  bool matrixMode = settings->GetMatrixMode();
-  bool darkMode = settings->GetDarkMode();
-
-  InitTints(imageWidth, imageHeight, matrixMode, darkMode);
-  InitItems(itemDB);
-  InitEquipment(equipmentDB);
 }
 
 BitmapDB::~BitmapDB()
@@ -30,150 +25,43 @@ BitmapDB::~BitmapDB()
     iconMap.next();
     delete(iconMap.value());
   }
-
-  QMapIterator<u32, QImage*> tinter(iconTints);
-  while (tinter.hasNext()) {
-    tinter.next();
-    delete(tinter.value());
-  }
 }
 
-void BitmapDB::InitTints(int imageWidth, int imageHeight, bool matrixMode, bool darkMode)
+QIcon* BitmapDB::CreateIcon(u64 key, QIcon* nullIcon)
 {
-  QPainter::CompositionMode modeA = QPainter::CompositionMode_DestinationOut;
-  QPainter::CompositionMode modeB = QPainter::CompositionMode_Multiply;
-  if (matrixMode) {
-    modeA = QPainter::CompositionMode_DestinationIn;
-    modeB = QPainter::CompositionMode_DestinationIn;
-  }
+  if (key == (u64)-1) return nullIcon;
+  if (icons.contains(key)) return icons.value(key, nullIcon);
 
-  const mhw_color white = { 0xFF, 0XFF, 0xFF, 0xFF };
-  mhw_color matrixColor = uct.item ? uct.item->color_info[2].color : white;
-  QPainter p;
+  u32 icon_id = 0;
+  u16 icon_palette = 0;
+  u16 icon_color = 0;
+  DissectKey(key, &icon_id, &icon_palette, &icon_color);
 
-  for (u16 indexPalette = 0; indexPalette < COUNTOF(uct.palettes); ++indexPalette) {
-    uct_color_palette* palette = uct.palettes[indexPalette];
+  const uct_color_palette* palette = uct.palettes[icon_palette];
+  const mhw_color fullColor = palette->color_info[icon_color].color;
+  QColor iconColor = QColor(fullColor.r, fullColor.g, fullColor.b, fullColor.a);
 
-    if (palette) {
-      for (u16 indexColor = 0; indexColor < palette->color_count; ++indexColor) {
-        u32 key = indexPalette << 16 | indexColor;
+  const int x = (icon_id % 16) * iconWidth;
+  const int y = (icon_id / 16) * iconHeight;
+  QRect iconRegion(x, y, iconWidth, iconHeight);
 
-        uct_color_palette* palette = uct.palettes[indexPalette];
-        mhw_color trueColor = palette->color_info[indexColor].color;
-        mhw_color fullColor = (matrixMode && !darkMode) ? matrixColor : trueColor;
-        QColor color = fullColor.a << 24 | fullColor.r << 16 | fullColor.g << 8 | fullColor.b << 0;
-
-        QImage* tint = new QImage(imageWidth, imageHeight, QImage::Format_ARGB32);
-        tint->fill(color);
-
-        p.begin(tint);
-        p.setCompositionMode(modeA);
-        p.fillRect(0, 0, imageWidth, imageHeight, itemsMask);
-        p.setCompositionMode(modeB);
-        p.fillRect(0, 0, imageWidth, imageHeight, items);
-        p.end();
-
-        iconTints.insert(key, tint);
-      }
-    }
-  }
-}
-
-void BitmapDB::InitItems(ItemDB* itemDB)
-{
-  const int icon_palette = 0;
-
-  for (size_t i = 0; i < itemDB->count(); i++)
-  {
-    itm_entry* info = itemDB->GetItemById(i);
-    int icon_id = info->icon_id;
-    int icon_color = info->icon_color;
-
-    u64 key = BuildKey(icon_id, icon_palette, icon_color);
-    if (!icons.contains(key)) {
-      AddIcon(key, icon_id, icon_palette, icon_color & 0xFF);
-    }
-  }
-}
-
-void BitmapDB::InitEquipment(EquipmentDB* equipmentDB)
-{
-  const int icon_palette = 1;
-
-  for (int i = 0; i < equipmentDB->CountArmor(); i++)
-  {
-    am_dat_entry* armor = equipmentDB->IndexArmor(i);
-    int icon_id = 16 * 14 + armor->equip_slot;
-    int icon_color = armor->rarity;
-
-    u64 key = BuildKey(icon_id, icon_palette, icon_color);
-    if (!icons.contains(key)) {
-      AddIcon(key, icon_id, icon_palette, icon_color);
-    }
-  }
-
-  for (int i = 0; i < equipmentDB->CountKinsect(); i++)
-  {
-    rod_inse_entry* kinsect = equipmentDB->IndexKinsect(i);
-    int icon_id = 16 * 14 + 8 + kinsect->attack_type;
-    int icon_color = kinsect->rarity;
-
-    u64 key = BuildKey(icon_id, icon_palette, icon_color);
-    if (!icons.contains(key)) {
-      AddIcon(key, icon_id, icon_palette, icon_color);
-    }
-  }
-
-  for (int y = 0; y < 14; y++)
-  {
-    int wp_datCount = equipmentDB->CountWeaponMelee(y);
-    int wp_dat_gCount = equipmentDB->CountWeaponRanged(y);
-    int icon_id = 16 * 15 + wp_index_id_map[y];
-
-    for (int i = 0; i < wp_datCount; i++)
-    {
-      wp_dat_entry* wp_dat = equipmentDB->IndexWeaponMelee(y, i);
-      int icon_color = wp_dat->rarity;
-
-      u64 key = BuildKey(icon_id, icon_palette, icon_color);
-      if (!icons.contains(key)) {
-        AddIcon(key, icon_id, icon_palette, icon_color);
-      }
-    }
-
-    for (int i = 0; i < wp_dat_gCount; i++)
-    {
-      wp_dat_g_entry* wp_dat_g = equipmentDB->IndexWeaponRanged(y, i);
-      int icon_color = wp_dat_g->rarity;
-
-      u64 key = BuildKey(icon_id, icon_palette, icon_color);
-      if (!icons.contains(key)) {
-        AddIcon(key, icon_id, icon_palette, icon_color);
-      }
-    }
-  }
-}
-
-void BitmapDB::AddIcon(u64 key, u32 id, u16 palette, u16 color)
-{
-  int x = (id % 16) * iconWidth;
-  int y = (id / 16) * iconHeight;
-
-  u32 paletteColor = palette << 16 | color;
-  QImage iconImage = iconTints.value(paletteColor, &items)->copy(x, y, iconWidth, iconHeight);
-  QPixmap iconPixmap = QPixmap::fromImage(iconImage);
-  QIcon* icon = new QIcon(iconPixmap);
+  IconAtlas* iconEngine = new IconAtlas(textureAtlas, maskAtlas, iconRegion, iconColor);
+  QIcon* icon = new QIcon(iconEngine);
   icons.insert(key, icon);
+  return icon;
 }
 
 QIcon* BitmapDB::ItemIcon(ItemDB* itemDB, itm_entry* info)
 {
   if (!info) return &nullIcon;
-  const int icon_palette = 0;
-
   info = itemDB->AdjustItemPtr(info);
-  u64 key = BuildKey(info->icon_id, icon_palette, info->icon_color);
-  return icons.value(key, &nullIcon);
+  const u32 id = info->icon_id;
+  const u16 palette = 0;
+  const u16 color = info->icon_color;
+
+  u64 key = BuildKey(id, palette, color);
+  QIcon* icon = CreateIcon(key, &nullIcon);
+  return icon;
 }
 
 QIcon* BitmapDB::EquipmentIcon(const mhw_equipment* equipment)
@@ -183,50 +71,62 @@ QIcon* BitmapDB::EquipmentIcon(const mhw_equipment* equipment)
 
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
   mhw_equip_category category = equipment->category;
-  i32 type = equipment->type;
-  u32 id = equipment->id;
+  const i32 type = equipment->type;
+  const u32 id = equipment->id;
   u64 key = -1;
 
   switch (category) {
   case mhw_equip_category::Armor:
   case mhw_equip_category::Charm:
-  {
-    am_dat_entry* armor = equipmentDB->GetEntryArmor(type, id);
-    if (!armor) break;
-
-    int icon_id = 16 * 14 + armor->equip_slot;
-    int icon_color = armor->rarity;
-
-    key = BuildKey(icon_id, icon_palette, icon_color);
-  } break;
+    key = BuildArmorKey(equipmentDB, type, id, icon_palette);
+    break;
 
   case mhw_equip_category::Weapon:
-  {
-    wp_dat_entry* wp_dat = equipmentDB->GetEntryWeaponMelee(type, id);
-    wp_dat_g_entry* wp_dat_g = equipmentDB->GetEntryWeaponRanged(type, id);
-    if (!wp_dat && !wp_dat_g) break;
-
-    int icon_id = 16 * 15 + wp_index_id_map[type];
-    int icon_color = 0;
-    if (wp_dat) icon_color = wp_dat->rarity;
-    if (wp_dat_g) icon_color = wp_dat_g->rarity;
-
-    key = BuildKey(icon_id, icon_palette, icon_color);
-  }; break;
+    key = BuildWeaponKey(equipmentDB, type, id, icon_palette);
+    break;
 
   case mhw_equip_category::Kinsect:
-  {
-    rod_inse_entry* kinsect = equipmentDB->GetEntryKinsect(type, id);
-    if (!kinsect) break;
-
-    int icon_id = 16 * 14 + 8 + kinsect->attack_type;
-    int icon_color = kinsect->rarity;
-
-    key = BuildKey(icon_id, icon_palette, icon_color);
-  } break;
+    key = BuildKinsectKey(equipmentDB, type, id, icon_palette);
+    break;
   }
 
-  return icons.value(key, &nullIcon);
+  QIcon* icon = CreateIcon(key, &nullIcon);
+  return icon;
+}
+
+u64 BitmapDB::BuildArmorKey(EquipmentDB* equipmentDB, const i32 type, const u32 id, const u16 palette)
+{
+  am_dat_entry* armor = equipmentDB->GetEntryArmor(type, id);
+  if (!armor) return -1;
+
+  const int icon_id = 16 * 14 + armor->equip_slot;
+  const int icon_color = armor->rarity;
+
+  return BuildKey(icon_id, palette, icon_color);
+}
+
+u64 BitmapDB::BuildWeaponKey(EquipmentDB* equipmentDB, const i32 type, const u32 id, const u16 palette)
+{
+  wp_dat_entry* wp_dat = equipmentDB->GetEntryWeaponMelee(type, id);
+  wp_dat_g_entry* wp_dat_g = equipmentDB->GetEntryWeaponRanged(type, id);
+  if (!wp_dat && !wp_dat_g) return -1;
+
+  int icon_id = 16 * 15 + wp_index_id_map[type];
+  int icon_color = 0;
+  if (wp_dat) icon_color = wp_dat->rarity;
+  if (wp_dat_g) icon_color = wp_dat_g->rarity;
+
+  return BuildKey(icon_id, palette, icon_color);
+}
+
+u64 BitmapDB::BuildKinsectKey(EquipmentDB* equipmentDB, const i32 type, const u32 id, const u16 palette) {
+  rod_inse_entry* kinsect = equipmentDB->GetEntryKinsect(type, id);
+  if (!kinsect) return -1;
+
+  int icon_id = 16 * 14 + 8 + kinsect->attack_type;
+  int icon_color = kinsect->rarity;
+
+  return BuildKey(icon_id, palette, icon_color);
 }
 
 bool BitmapDB::DebugDumpAtlas(const QString& path)
@@ -264,7 +164,9 @@ bool BitmapDB::DebugDumpAtlas(const QString& path)
 
     QIcon* icon = iconIterator.value();
     if (icon) {
-      QPixmap iconPixmap = icon->pixmap(icon->availableSizes().first());
+      QList<QSize> sizes = icon->availableSizes();
+      QSize size = sizes.first();
+      QPixmap iconPixmap = icon->pixmap(size);
       int x = (index % atlasWidth) * iconWidth;
       int y = (index / atlasWidth) * iconHeight;
 
@@ -283,41 +185,6 @@ bool BitmapDB::DebugDumpAtlas(const QString& path)
   else {
     qWarning().noquote() << "Failed to dump atlas:" << filepath;
   }
-  return success;
-}
-
-bool BitmapDB::DebugDumpAtlases(const QString& path)
-{
-  QDir outDir = QDir(path);
-  QString outPath = outDir.path();
-  if (path.isNull() || !outDir.exists()) return false;
-
-  bool success = true;
-  QMapIterator<u32, QImage*> tinter(iconTints);
-  while (tinter.hasNext()) {
-    tinter.next();
-    u32 key = tinter.key();
-    u32 icon_id = 0;
-    u16 icon_palette = 0;
-    u16 icon_color = 0;
-    DissectKey(key, &icon_id, &icon_palette, &icon_color);
-
-    QString filepath = QString("%1/atlas_p%2_c%3.png").arg(outPath).arg(icon_palette).arg(icon_color);
-    QImage* tint = tinter.value();
-    bool localSuccess = (bool)tint;
-    if (localSuccess) {
-      localSuccess &= tint->save(filepath);
-    }
-
-    success &= localSuccess;
-    if (localSuccess) {
-      qInfo().noquote() << "Dumped atlas:" << filepath;
-    }
-    else {
-      qWarning().noquote() << "Failed to dump atlas:" << filepath;
-    }
-  }
-
   return success;
 }
 
@@ -341,7 +208,9 @@ bool BitmapDB::DebugDumpIcons(const QString& path)
     QIcon* icon = iconIterator.value();
     bool localSuccess = (bool)icon;
     if (localSuccess) {
-      QPixmap iconPixmap = icon->pixmap(icon->availableSizes().first());
+      QList<QSize> sizes = icon->availableSizes();
+      QSize size = sizes.first();
+      QPixmap iconPixmap = icon->pixmap(size);
       localSuccess &= iconPixmap.save(filepath);
     }
 
@@ -388,12 +257,10 @@ bool BitmapDB::DebugDumpUsedMask(const QString& path)
 
     QIcon* icon = iconIterator.value();
     if (icon) {
-      QPixmap iconPixmap = icon->pixmap(icon->availableSizes().first());
       int x = (icon_id % 16) * iconWidth;
       int y = (icon_id / 16) * iconHeight;
 
-      p.setBrush(QBrush(Qt::black));
-      p.fillRect(x, y, iconWidth, iconHeight, p.brush());
+      p.fillRect(x, y, iconWidth, iconHeight, Qt::black);
     }
     ++index;
   }

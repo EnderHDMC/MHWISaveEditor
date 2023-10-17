@@ -19,12 +19,8 @@ private:
   QMap<u32, QImage*> iconTints;
   QMap<u64, QIcon*> icons;
   QIcon nullIcon = QIcon();
-
-  void InitTints(int imageWidth, int imageHeight, bool matrixMode, bool darkMode);
-  void InitItems(ItemDB* itemDB);
-  void InitEquipment(EquipmentDB* equipmentDB);
-
-  void AddIcon(u64 key, u32 id, u16 palette, u16 color);
+  QPixmap textureAtlas;
+  QPixmap maskAtlas;
 
   const int wp_index_id_map[14] = {
     1,  // Great Sword
@@ -58,12 +54,15 @@ public:
     *color = key & 0xffff;
   }
 
+  QIcon* CreateIcon(u64 key, QIcon* nullIcon);
   QIcon* ItemIcon(ItemDB* itemDB, itm_entry* info);
+  u64 BuildArmorKey(EquipmentDB* equipmentDB, const i32 type, const u32 id, const u16 palette);
+  u64 BuildWeaponKey(EquipmentDB* equipmentDB, const i32 type, const u32 id, const u16 palette);
+  u64 BuildKinsectKey(EquipmentDB* equipmentDB, const i32 type, const u32 id, const u16 palette);
   QIcon* EquipmentIcon(const mhw_equipment* equipment);
 
   // Debug
   bool DebugDumpAtlas(const QString& path);
-  bool DebugDumpAtlases(const QString& path);
   bool DebugDumpIcons(const QString& path);
   bool DebugDumpUsedMask(const QString& path);
 };

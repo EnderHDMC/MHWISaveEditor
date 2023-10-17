@@ -715,7 +715,6 @@ void MHWISaveEditor::DebugDumpIconsAll()
 
   bool success = true;
   success &= bitmapDB->DebugDumpAtlas(dumpPath);
-  success &= bitmapDB->DebugDumpAtlases(dumpPath);
   success &= bitmapDB->DebugDumpIcons(dumpPath);
   success &= bitmapDB->DebugDumpUsedMask(dumpPath);
 

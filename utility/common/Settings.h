@@ -59,7 +59,7 @@ public:
   void SetMaxBackups(u32 value) { _maxBackups = value; }
 
   bool GetMatrixMode() { return _matrixMode; }
-  void SetMatrixMode(bool value) { if (_matrixMode != value) _requireRestart = true; _matrixMode = value; }
+  void SetMatrixMode(bool value) { _matrixMode = value; }
   bool GetShowUnobtainable() { return _showUnobtainable; }
   void SetShowUnobtainable(bool value) { _showUnobtainable = value; }
   bool GetItemPouchSearchAll() { return _itemPouchSearchAll; }

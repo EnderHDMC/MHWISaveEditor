@@ -15,6 +15,7 @@
     <ClInclude Include="crypto\iceborne_crypt.h" />
     <ClInclude Include="crypto\sha1.h" />
     <ClInclude Include="data\BitmapDB.h" />
+    <ClInclude Include="data\IconAtlas.h" />
     <ClInclude Include="data\ItemDB.h" />
     <ClInclude Include="data\EquipmentDB.h" />
     <ClInclude Include="gui\common\Notification.h" />
@@ -62,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp" />
+    <ClCompile Include="data\IconAtlas.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
     <ClCompile Include="data\EquipmentDB.cpp" />
     <ClCompile Include="gui\common\Notification.cpp" />
