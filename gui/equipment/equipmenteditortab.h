@@ -3,7 +3,7 @@
 #include <QWidget>
 
 #include "../../utility/common/saveloader.h"
-#include <equipmentslotview.h>
+#include "equipmentslotview.h"
 
 namespace Ui { class EquipmentEditorTab; };
 
