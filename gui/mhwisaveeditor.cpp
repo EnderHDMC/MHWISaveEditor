@@ -184,7 +184,7 @@ bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bo
   if (validate) MHWSaveUtils::ValidateSaveFile(&saveWrite->save);
   if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
 
-  bool written = WriteFile(path, saveWrite->data, sizeof(mhw_save_raw));
+  bool written = FileUtils::WriteFileSafe(path, saveWrite->data, sizeof(mhw_save_raw));
 
   if (saveWrite != save) free(saveWrite);
   return written;
@@ -417,34 +417,6 @@ void MHWISaveEditor::LoadSaveSlot()
   loader->Load(mhwSave, mhwSaveIndex);
 }
 
-bool MHWISaveEditor::WriteFile(const QString& path, u8* data, u64 size)
-{
-  QSaveFile file(path);
-  if (!file.open(QIODevice::WriteOnly)) {
-    qWarning("File: %s, cannot be written.", qUtf8Printable(path));
-    return false;
-  }
-
-  u64 bytesToWrite = size;
-  u64 bytesWritten = 0;
-  char* writeData = (char*)data;
-  while (bytesWritten < bytesToWrite)
-  {
-    u64 writeSize = bytesToWrite - bytesWritten;
-    i64 bytesWrite = file.write(writeData, writeSize);
-    if (bytesWrite < 0) {
-      qWarning("File: %s, cannot be written.", qUtf8Printable(path));
-      file.cancelWriting();
-      return false;
-    }
-    bytesWritten += bytesWrite;
-    writeData += bytesWrite;
-  }
-
-  file.commit();
-  return true;
-}
-
 void MHWISaveEditor::EditorTabChange(int editorIndex)
 {
   MHW_SAVE_GUARD;
@@ -603,7 +575,7 @@ void MHWISaveEditor::Backup() {
     QByteArray compressed = qCompress((u8*)saveWrite, sizeof(mhw_save_raw), 9);
     int compressedSize = compressed.size();
 
-    success = WriteFile(path, (u8*)compressed.constData(), compressedSize);
+    success = FileUtils::WriteFileSafe(path, (u8*)compressed.constData(), compressedSize);
   }
 
   Notification* notif = notif->GetInstance();
