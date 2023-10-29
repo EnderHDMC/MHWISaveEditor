@@ -37,6 +37,7 @@ static void MessagePrintLog(QtMsgType type, const QMessageLogContext& context, c
 
 int main(int argc, char* argv[])
 {
+  Platform::Init();
   Settings* settings = settings->GetInstance();
 
   bool debugger = Settings::DebuggerPresent();

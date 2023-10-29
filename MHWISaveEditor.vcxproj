@@ -11,8 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="platform\oodle.h" />
+    <ClInclude Include="platform\common.h" />
     <ClInclude Include="platform\platform.h" />
     <ClInclude Include="platform\platform_windows.h" />
+    <ClInclude Include="utility\chunk\chunk.h" />
     <ClInclude Include="crypto\blowfish.h" />
     <ClInclude Include="crypto\iceborne_crypt.h" />
     <ClInclude Include="crypto\sha1.h" />
@@ -33,6 +36,7 @@
     <ClInclude Include="types\file\rod_inse.h" />
     <ClInclude Include="utility\math.h" />
     <ClInclude Include="utility\mhw_save_operations.h" />
+    <ClInclude Include="utility\chunk\filenode.h" />
     <ClInclude Include="utility\system\paths.h" />
     <ClInclude Include="types\language.h" />
     <ClInclude Include="resource.h" />
@@ -64,7 +68,9 @@
     <QtMoc Include="gui\settings\settingsui.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="platform\oodle.cpp" />
     <ClCompile Include="platform\platform_windows.cpp" />
+    <ClCompile Include="utility\chunk\chunk.cpp" />
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\IconAtlas.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
@@ -100,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="res\chunk.key" />
     <None Include="res\CustomFlags.bin" />
     <None Include="res\translations\mhwisaveeditor_template.qm" />
     <None Include="setup.iss" />

@@ -3,6 +3,33 @@
 
 #include <stdio.h>
 
+#include "oodle.h"
+
+HINSTANCE Platform::hinst_oo2core = nullptr;
+
+HINSTANCE Platform::LoadOo2core(Proto_OodleLZ_Decompress* OodleLZDecompress)
+{
+  HINSTANCE hinstOo2core;
+  bool linkSuccess = true;
+
+  hinstOo2core = LoadLibrary(L"oo2core_9_win64_f2db01967705b62aecef3cd3e5a28e4d.dll");
+  linkSuccess &= (bool)hinstOo2core;
+
+  if (hinstOo2core)
+  {
+    Proto_OodleLZ_Decompress decompress = (Proto_OodleLZ_Decompress)GetProcAddress(hinstOo2core, "OodleLZ_Decompress");
+    *OodleLZDecompress = decompress;
+    linkSuccess &= (bool)decompress;
+  }
+
+  return hinstOo2core;
+}
+
+void Platform::Init()
+{
+  hinst_oo2core = LoadOo2core(&Oodle::OodleLZ_Decompress);
+}
+
 bool Platform::OpenConsole()
 {
   bool console = false;

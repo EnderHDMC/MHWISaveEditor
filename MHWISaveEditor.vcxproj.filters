@@ -140,10 +140,22 @@
     <ClInclude Include="data\IconAtlas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utility\chunk\chunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\chunk\filenode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="platform\platform_windows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="platform\platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\oodle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -208,7 +220,13 @@
     <ClCompile Include="data\IconAtlas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="utility\chunk\chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="platform\platform_windows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="platform\oodle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

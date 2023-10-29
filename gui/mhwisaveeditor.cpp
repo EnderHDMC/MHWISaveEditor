@@ -38,6 +38,8 @@
 #include "info/hunterinfo.h"
 #include "equipment/equipmenteditortab.h"
 
+#include "../utility/chunk/chunk.h"
+
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent), ui(new Ui::MHWISaveEditor),
   SaveLoader()
@@ -153,6 +155,17 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   encrypt_map.insert(".bin", false);
 
   SetupDarkMode();
+
+#ifdef QT_DEBUG
+  {
+    Chunk* chunk = new Chunk();
+    QList<FileNode*> analysis;
+    analysis = chunk->AnalyseChunk("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Monster Hunter World\\chunk\\chunkG0.bin", analysis);
+    chunk->ExtractSelected(analysis, "A:/chunk");
+    FileNode::DeleteList(analysis);
+    delete chunk;
+  }
+#endif
 }
 
 MHWISaveEditor::~MHWISaveEditor()
