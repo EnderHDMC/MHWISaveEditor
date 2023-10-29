@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="platform\platform.h" />
+    <ClInclude Include="platform\platform_windows.h" />
     <ClInclude Include="crypto\blowfish.h" />
     <ClInclude Include="crypto\iceborne_crypt.h" />
     <ClInclude Include="crypto\sha1.h" />
@@ -62,6 +64,7 @@
     <QtMoc Include="gui\settings\settingsui.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="platform\platform_windows.cpp" />
     <ClCompile Include="data\BitmapDB.cpp" />
     <ClCompile Include="data\IconAtlas.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
