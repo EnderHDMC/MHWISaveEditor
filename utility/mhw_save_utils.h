@@ -11,6 +11,66 @@ public:
     return save->header.magic == 0x00000001;
   }
 
+  static u32 HRExpToRank(u32 xp) {
+    u32 rank = 999;
+
+    for (int i = 0; i < 1000; i++) {
+      if (xp < hr_exp_table[i]) {
+        rank = i - 1;
+        break;
+      }
+    }
+
+    return rank;
+  }
+
+  static inline bool HRIsLock(u32 level) {
+    u32 next = level + 1;
+    if (next > 999) next = 999;
+    return hr_exp_table[level] == hr_exp_table[next];
+  }
+
+  static u32 HRNextLock(u32 level) {
+    u32 result = -1;
+    for (int i = level; i < 1000; i++) {
+      if (HRIsLock(i)) {
+        result = i;
+        break;
+      }
+    }
+    return result;
+  }
+
+  static u32 MRExpToRank(u32 xp) {
+    u32 rank = 999;
+
+    for (int i = 0; i < 1000; i++) {
+      if (xp < mr_exp_table[i]) {
+        rank = i - 1;
+        break;
+      }
+    }
+
+    return rank;
+  }
+
+  static inline bool MRIsLock(u32 level) {
+    u32 next = level + 1;
+    if (next > 999) next = 999;
+    return mr_exp_table[level] == mr_exp_table[next];
+  }
+
+  static u32 MRNextLock(u32 level) {
+    u32 result = -1;
+    for (int i = level; i < 1000; i++) {
+      if (MRIsLock(i)) {
+        result = i;
+        break;
+      }
+    }
+    return result;
+  }
+
   static mhw_item_slot* FindItem(mhw_item_slot* items, int count, u32 id) {
     mhw_item_slot* result = nullptr;
     for (int i = 0; i < count; i++)
