@@ -1,9 +1,11 @@
 #include "hunterinfo.h"
 #include "ui_hunterinfo.h"
 
-#include "../../utility/common/StringByteLengthValidator.h"
 #include "../common/Notification.h"
+#include "../../utility/common/StringByteLengthValidator.h"
 #include "../../utility/settype.h"
+
+#include "../../utility/mhw_save_utils.h"
 
 #include <QSignalMapper>
 
@@ -83,6 +85,7 @@ void HunterInfo::RegionalLevelGLChange(int value)
 
   QSpinBox* senderSpin = qobject_cast<QSpinBox*>(sender());
   int index = regionIndexMapping.value(senderSpin, -1);
+  Q_ASSERT(index > -1);
 
   if (index != -1) {
     u32 xp = mhwSaveSlot->guiding_lands.region_levels[index];
@@ -137,6 +140,60 @@ void HunterInfo::PlaytimeChange(double value)
   mhwSaveSlot->hunter.playtime = playtime;
 }
 
+void HunterInfo::HRChange(int value)
+{
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  u32 game_hr = mhwSaveSlot->hunter.hunter_rank;
+  u32 rank_cap = MHWSaveUtils::HRNextLock(game_hr);
+  u32 milestone = MHWSaveUtils::HRPreviousMilestone(game_hr);
+
+  u32 hr_exp = value;
+  u32 exp_rank = MHWSaveUtils::HRExpToRank(hr_exp);
+  game_hr = exp_rank;
+
+  if (game_hr > hr_original) {
+    game_hr = hr_original;
+  }
+
+  QString suffix = tr(
+    " exp, HR = %1, game cap = %2, game hr = %3",
+    "HR Experience indicator, %1 is the converted rank, %2 is the current game cap, $3 is the game display.")
+    .arg(exp_rank).arg(rank_cap).arg(game_hr);
+  ui->spnHunterHR->setSuffix(suffix);
+
+  MHW_LOADING_GUARD;
+  mhwSaveSlot->hunter.hunter_rank = game_hr;
+  mhwSaveSlot->hunter.hunter_rank_xp = hr_exp;
+}
+
+void HunterInfo::MRChange(int value)
+{
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  u32 game_mr = mhwSaveSlot->hunter.master_rank;
+  u32 rank_cap = MHWSaveUtils::MRNextLock(game_mr);
+  u32 milestone = MHWSaveUtils::MRPreviousMilestone(game_mr);
+
+  u32 mr_exp = value;
+  u32 exp_rank = MHWSaveUtils::MRExpToRank(mr_exp);
+  game_mr = exp_rank;
+
+  if (game_mr > mr_original) {
+    game_mr = mr_original;
+  }
+
+  QString suffix = tr(
+    " exp, MR = %1, game cap = %2, game mr = %3",
+    "MR Experience indicator, %1 is the converted rank, %2 is the current game cap, $3 is the game display.")
+    .arg(exp_rank).arg(rank_cap).arg(game_mr);
+  ui->spnHunterMR->setSuffix(suffix);
+
+  MHW_LOADING_GUARD;
+  mhwSaveSlot->hunter.master_rank = game_mr;
+  mhwSaveSlot->hunter.master_rank_xp = mr_exp;
+}
+
 void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
@@ -162,6 +219,32 @@ void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->spnResearchPoints->setValue(researchPoints);
   ui->spnSteamworksFuel->setValue(steamworksFuel);
   ui->spnPlaytime->setValue(playtime);
+
+  {
+    hr_original = mhwSaveSlot->hunter.hunter_rank;
+
+    u32 hr = mhwSaveSlot->hunter.hunter_rank;
+    u32 hr_xp = mhwSaveSlot->hunter.hunter_rank_xp;
+    u32 hr_min = MHWSaveUtils::HRPreviousMilestone(hr);
+    u32 hr_min_xp = MHWSaveUtils::HRRankToEXP(hr_min);
+    if (hr_min == hr) hr_min_xp = hr_xp;
+    ui->spnHunterHR->setRange(0, HR_MAX_XP);
+    ui->spnHunterHR->setValue(hr_xp);
+    ui->spnHunterHR->setRange(hr_min_xp, HR_MAX_XP);
+  }
+
+  {
+    mr_original = mhwSaveSlot->hunter.master_rank;
+
+    u32 mr = mhwSaveSlot->hunter.master_rank;
+    u32 mr_xp = mhwSaveSlot->hunter.master_rank_xp;
+    u32 mr_min = MHWSaveUtils::MRPreviousMilestone(mr);
+    u32 mr_min_xp = MHWSaveUtils::MRRankToEXP(mr_min);
+    if (mr_min == mr) mr_min_xp = mr_xp;
+    ui->spnHunterMR->setRange(0, MR_MAX_XP);
+    ui->spnHunterMR->setValue(mr_xp);
+    ui->spnHunterMR->setRange(mr_min_xp, MR_MAX_XP);
+  }
 
   QMapIterator<QSpinBox*, u8> i(regionIndexMapping);
   while (i.hasNext()) {

@@ -49,6 +49,9 @@ const u32 GUIDING_LANDS_LEVEL_UNCAP = 390000;
 const u32 GUIDING_LANDS_XP_PER_LEVEL = 10000;
 const u32 GUIDING_LANDS_XP_MAX = 65000;
 
+const u32 HR_MAX_XP = 99999999;
+const u32 MR_MAX_XP = 99999999;
+
 // Ranking
  const u32 hr_exp_table[] = {
         0,       0,       0,       0,       0,       0,       0,       0,       0,       0,

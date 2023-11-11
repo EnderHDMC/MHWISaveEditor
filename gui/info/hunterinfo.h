@@ -20,6 +20,8 @@ public slots:
   void RegionalLevelGLChange(int value);
   void UncapGuidingLands();
   void PlaytimeChange(double value);
+  void HRChange(int value);
+  void MRChange(int value);
 
 public:
   HunterInfo(QWidget* parent = Q_NULLPTR);
@@ -32,4 +34,7 @@ private:
   Ui::HunterInfo* ui;
 
   QMap<QSpinBox*, u8> regionIndexMapping;
+
+  u32 hr_original = 0;
+  u32 mr_original = 0;
 };

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>460</width>
-    <height>436</height>
+    <height>492</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -130,7 +130,7 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="0" colspan="2">
+   <item row="8" column="0" colspan="2">
     <widget class="QGroupBox" name="grpGuidingLands">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -272,6 +272,46 @@
     <widget class="QLabel" name="lblPlaytime">
      <property name="text">
       <string comment="Label for hunter playtime.">Playtime:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QSpinBox" name="spnHunterHR">
+     <property name="maximum">
+      <number>99999999</number>
+     </property>
+     <property name="singleStep">
+      <number>1000</number>
+     </property>
+     <property name="stepType">
+      <enum>QAbstractSpinBox::DefaultStepType</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QSpinBox" name="spnHunterMR">
+     <property name="maximum">
+      <number>99999999</number>
+     </property>
+     <property name="singleStep">
+      <number>2000</number>
+     </property>
+     <property name="stepType">
+      <enum>QAbstractSpinBox::DefaultStepType</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="lblHunterHR">
+     <property name="text">
+      <string comment="Label for hunter HR.">HR:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="lblHunterMR">
+     <property name="text">
+      <string comment="Label for hunter MR.">MR:</string>
      </property>
     </widget>
    </item>
@@ -488,6 +528,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>spnHunterHR</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>HRChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>187</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spnHunterMR</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>HunterInfo</receiver>
+   <slot>MRChange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>HunterNameChange(QString)</slot>
@@ -498,5 +570,7 @@
   <slot>SteamworksFuelChange(int)</slot>
   <slot>RegionalLevelGLChange(int)</slot>
   <slot>PlaytimeChange(double)</slot>
+  <slot>HRChange(int)</slot>
+  <slot>MRChange(int)</slot>
  </slots>
 </ui>

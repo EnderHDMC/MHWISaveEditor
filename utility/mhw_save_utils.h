@@ -11,65 +11,82 @@ public:
     return save->header.magic == 0x00000001;
   }
 
-  static u32 HRExpToRank(u32 xp) {
-    u32 rank = 999;
+  static inline u32 ExpToRank(u32 xp, const u32 exp_table[1000]) {
+    u32 rank = -1;
 
     for (int i = 0; i < 1000; i++) {
-      if (xp < hr_exp_table[i]) {
-        rank = i - 1;
-        break;
+      u32 exp = exp_table[i];
+      if (xp >= exp) {
+        rank = i;
       }
+      else break;
     }
 
     return rank;
   }
 
-  static inline bool HRIsLock(u32 level) {
-    u32 next = level + 1;
+  static inline u32 RankToExp(u32 rank, const u32 exp_table[1000]) {
+    Q_ASSERT(rank < 1000);
+    return exp_table[rank];
+  }
+
+  static inline bool RankIsLock(u32 rank, const u32 exp_table[1000]) {
+    Q_ASSERT(rank < 1000);
+    u32 next = rank + 1;
     if (next > 999) next = 999;
-    return hr_exp_table[level] == hr_exp_table[next];
+
+    u32 exp = exp_table[rank];
+    u32 exp_next = exp_table[next];
+    return exp == exp_next || exp == 0;
   }
 
-  static u32 HRNextLock(u32 level) {
-    u32 result = -1;
-    for (int i = level; i < 1000; i++) {
-      if (HRIsLock(i)) {
-        result = i;
+  static inline u32 RankNextLock(u32 rank, const u32 exp_table[1000]) {
+    u32 next = -1;
+    for (int check = rank; check < 1000; check++) {
+      if (RankIsLock(check, exp_table)) {
+        next = check;
         break;
       }
     }
-    return result;
+    return next;
   }
 
-  static u32 MRExpToRank(u32 xp) {
-    u32 rank = 999;
-
-    for (int i = 0; i < 1000; i++) {
-      if (xp < mr_exp_table[i]) {
-        rank = i - 1;
+  static inline u32 RankPreviousMilestone(u32 rank, const u32 exp_table[1000]) {
+    u32 milestone = 0;
+    for (int check = rank - 1; check > -1; check--) {
+      if (RankIsLock(check, exp_table)) {
+        milestone = check + 1;
         break;
       }
     }
-
-    return rank;
+    return milestone;
   }
 
-  static inline bool MRIsLock(u32 level) {
-    u32 next = level + 1;
-    if (next > 999) next = 999;
-    return mr_exp_table[level] == mr_exp_table[next];
-  }
+  static inline u32 ExpToRankWithHint(u32 xp, u32 hint, const u32 exp_table[1000]) {
+    bool hintLock = RankIsLock(hint, exp_table);
+    Q_ASSERT(hintLock);
 
-  static u32 MRNextLock(u32 level) {
-    u32 result = -1;
-    for (int i = level; i < 1000; i++) {
-      if (MRIsLock(i)) {
-        result = i;
-        break;
-      }
+    u32 guess = ExpToRank(xp, exp_table);
+    if (guess != hint && hintLock) {
+      guess = hint;
     }
-    return result;
+
+    return guess;
   }
+
+  static inline u32 HRExpToRank(u32 xp) { return ExpToRank(xp, hr_exp_table); }
+  static inline u32 HRRankToEXP(u32 rank) { return RankToExp(rank, hr_exp_table); }
+  static inline bool HRIsLock(u32 level) { return RankIsLock(level, hr_exp_table); }
+  static inline u32 HRNextLock(u32 level) { return RankNextLock(level, hr_exp_table); }
+  static inline u32 HRPreviousMilestone(u32 level) { return RankPreviousMilestone(level, hr_exp_table); }
+  static inline u32 HRExpToRankHint(u32 xp, u32 hint) { return ExpToRankWithHint(xp, hint, hr_exp_table); }
+
+  static inline u32 MRExpToRank(u32 xp) { return ExpToRank(xp, mr_exp_table); }
+  static inline u32 MRRankToEXP(u32 rank) { return RankToExp(rank, mr_exp_table); }
+  static inline bool MRIsLock(u32 level) { return RankIsLock(level, mr_exp_table); }
+  static inline u32 MRNextLock(u32 level) { return RankNextLock(level, mr_exp_table); }
+  static inline u32 MRPreviousMilestone(u32 level) { return RankPreviousMilestone(level, mr_exp_table); }
+  static inline u32 MRExpToRankHint(u32 xp, u32 hint) { return ExpToRankWithHint(xp, hint, mr_exp_table); }
 
   static mhw_item_slot* FindItem(mhw_item_slot* items, int count, u32 id) {
     mhw_item_slot* result = nullptr;
