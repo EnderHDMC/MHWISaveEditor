@@ -7,6 +7,8 @@
 #include <QGridLayout>
 #include <QStyleFactory>
 
+#include <fstream>
+
 // Encryption
 #include "../crypto/iceborne_crypt.h"
 
@@ -262,6 +264,39 @@ void MHWISaveEditor::Dump(int number)
   if (buffer) free(buffer);
 }
 
+void MHWISaveEditor::ExportDecoList()
+{
+  MHW_SAVE_GUARD;
+  auto current_save = MHW_SaveSlot();
+  auto deco_list = current_save->storage.decorations;
+
+  QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), "", tr("JSON files(*.json)"));
+  if (fileName == nullptr)
+  {
+    return;
+  }
+
+  std::ofstream deco_file(fileName.toStdString());
+
+  deco_file << "{\n";
+  for (uint32 i = 0; i < COUNTOF(mhw_storage::decorations); i++)
+  {
+    if (deco_list[i].amount > 0)
+    {
+      auto deco_name = itemDB->ItemName(deco_list[i].id);
+      if (i > 0)
+      {
+        deco_file << ",\n";
+      }
+
+      deco_file << "  \"" << deco_name.toStdString() << "\": " << deco_list[i].amount;
+    }
+  }
+  deco_file << "\n}";
+
+  deco_file.close();
+}
+
 void MHWISaveEditor::Open()
 {
   QString path = Paths::GetGameSavePath();
@@ -357,6 +392,7 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->menuCloneTo->setEnabled(true);
   ui->actionUncraftEquipment->setEnabled(true);
   ui->menuFixes->setEnabled(true);
+  ui->menuExport->setEnabled(true);
   for (int i = 0; i < selectSlotActions.size(); i++) {
     selectSlotActions[i]->setEnabled(true);
   }
