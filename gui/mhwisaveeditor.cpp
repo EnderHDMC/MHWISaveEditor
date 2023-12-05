@@ -105,8 +105,6 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   openSignalMapper->setMapping(ui->actionOpenEditorData, dataPath);
   connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
 
-  connect(ui->actionExportDecoList, SIGNAL(triggered()), this, SLOT(ExportDecoList()));
-
   dumpSignalMapper = new QSignalMapper(this);
   QList<QAction*> slotDump = {
     ui->actionSAVEDATA1000bin, ui->actionSAVEDATA1001bin,
@@ -269,40 +267,35 @@ void MHWISaveEditor::Dump(int number)
 
 void MHWISaveEditor::ExportDecoList()
 {
-  if (!MHW_SaveCheck()) return;
+  MHW_SAVE_GUARD;
+  auto current_save = MHW_SaveSlot();
+  auto deco_list = current_save->storage.decorations;
 
-  QString fileName = QFileDialog::getSaveFileName(this, tr("Save File" ), "", tr("JSON files(*.json)"));
-
+  QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), "", tr("JSON files(*.json)"));
   if (fileName == nullptr)
   {
     return;
   }
 
-  auto current_save = &(MHW_Section3()->saves[MHW_SaveIndex()]);
-  auto deco_list = current_save->storage.decorations;
-
   std::ofstream deco_file(fileName.toStdString());
 
-  deco_file << "{";
-
-  for (uint32 i = 0; i < 500; i++)
+  deco_file << "{\n";
+  for (uint32 i = 0; i < COUNTOF(mhw_storage::decorations); i++)
   {
     if (deco_list[i].amount > 0)
     {
       auto deco_name = itemDB->ItemName(deco_list[i].id);
       if (i > 0)
       {
-        deco_file << ",";
+        deco_file << ",\n";
       }
 
-      deco_file << "\"" << deco_name.toStdString() << "\":" << deco_list[i].amount;
+      deco_file << "  \"" << deco_name.toStdString() << "\": " << deco_list[i].amount;
     }
   }
-
-  deco_file << "}";
+  deco_file << "\n}";
 
   deco_file.close();
-
 }
 
 void MHWISaveEditor::Open()
@@ -400,6 +393,7 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->menuCloneTo->setEnabled(true);
   ui->actionUncraftEquipment->setEnabled(true);
   ui->menuFixes->setEnabled(true);
+  ui->menuExport->setEnabled(true);
   for (int i = 0; i < selectSlotActions.size(); i++) {
     selectSlotActions[i]->setEnabled(true);
   }
