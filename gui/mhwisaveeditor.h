@@ -34,6 +34,7 @@ public slots:
   void Save();
   void SaveAs();
   void Dump(int number);
+  void ExportDecoList();
 
   void Backup();
   void Restore();

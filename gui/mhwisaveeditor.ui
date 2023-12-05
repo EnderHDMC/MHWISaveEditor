@@ -125,7 +125,18 @@
     <property name="title">
      <string comment="Tools menu" extracomment="Contains editor settings and shortcuts.">Tools</string>
     </property>
+    <widget class="QMenu" name="menuExport">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Export</string>
+     </property>
+     <addaction name="actionExportDecoList"/>
+    </widget>
     <addaction name="actionSettings"/>
+    <addaction name="separator"/>
+    <addaction name="menuExport"/>
     <addaction name="separator"/>
     <addaction name="actionUncraftEquipment"/>
    </widget>
@@ -443,6 +454,11 @@
     <string comment="Debug-&gt;Fixes-&gt;Remove Unobtainable Items" extracomment="Removes all unobtainable items from the player inventory and item box.">Remove Unobtainable Items</string>
    </property>
   </action>
+  <action name="actionExportDecoList">
+   <property name="text">
+    <string>Export Deco List</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -670,6 +686,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionExportDecoList</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>ExportDecoList()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -686,5 +718,6 @@
   <slot>UncraftUnusedEquipment()</slot>
   <slot>DebugFixEquipmentBoxRef()</slot>
   <slot>DebugRemoveUnobtainableItems()</slot>
+  <slot>ExportDecoList()</slot>
  </slots>
 </ui>
