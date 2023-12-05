@@ -82,6 +82,7 @@
     <addaction name="actionOpenSaveLocation"/>
     <addaction name="separator"/>
     <addaction name="menuDump"/>
+    <addaction name="actionExportDecoList"/>
     <addaction name="separator"/>
     <addaction name="actionBackup"/>
     <addaction name="actionRestore"/>
@@ -441,6 +442,11 @@
   <action name="actionRemoveUnobtainableItems">
    <property name="text">
     <string comment="Debug-&gt;Fixes-&gt;Remove Unobtainable Items" extracomment="Removes all unobtainable items from the player inventory and item box.">Remove Unobtainable Items</string>
+   </property>
+  </action>
+  <action name="actionExportDecoList">
+   <property name="text">
+    <string>Export Deco List</string>
    </property>
   </action>
  </widget>

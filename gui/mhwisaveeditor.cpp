@@ -1,3 +1,6 @@
+#include <iostream>
+#include <fstream>
+
 #include "mhwisaveeditor.h"
 #include "ui_mhwisaveeditor.h"
 
@@ -102,6 +105,8 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(ui->actionOpenEditorData, SIGNAL(triggered()), openSignalMapper, SLOT(map()));
   openSignalMapper->setMapping(ui->actionOpenEditorData, dataPath);
   connect(openSignalMapper, SIGNAL(mappedString(const QString&)), this, SLOT(OpenLocation(const QString&)));
+
+  connect(ui->actionExportDecoList, SIGNAL(triggered()), this, SLOT(ExportDecoList()));
 
   dumpSignalMapper = new QSignalMapper(this);
   QList<QAction*> slotDump = {
@@ -261,6 +266,44 @@ void MHWISaveEditor::Dump(int number)
   }
 
   if (buffer) free(buffer);
+}
+
+void MHWISaveEditor::ExportDecoList()
+{
+  if (!MHW_SaveCheck()) return;
+
+  QString fileName = QFileDialog::getSaveFileName(this, tr("Save File" ), "", tr("JSON files(*.json)"));
+
+  if (fileName == nullptr)
+  {
+    return;
+  }
+
+  auto current_save = &(MHW_Section3()->saves[MHW_SaveIndex()]);
+  auto deco_list = current_save->storage.decorations;
+
+  std::ofstream deco_file(fileName.toStdString());
+
+  deco_file << "{";
+
+  for (uint32 i = 0; i < 500; i++)
+  {
+    if (deco_list[i].amount > 0)
+    {
+      auto deco_name = itemDB->ItemName(deco_list[i].id);
+      if (i > 0)
+      {
+        deco_file << ",";
+      }
+
+      deco_file << "\"" << deco_name.toStdString() << "\":" << deco_list[i].amount;
+    }
+  }
+
+  deco_file << "}";
+
+  deco_file.close();
+
 }
 
 void MHWISaveEditor::Open()
