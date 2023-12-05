@@ -1,6 +1,3 @@
-#include <iostream>
-#include <fstream>
-
 #include "mhwisaveeditor.h"
 #include "ui_mhwisaveeditor.h"
 
@@ -10,6 +7,8 @@
 #include <QDesktopServices>
 #include <QGridLayout>
 #include <QStyleFactory>
+
+#include <fstream>
 
 // Encryption
 #include "../crypto/iceborne_crypt.h"
