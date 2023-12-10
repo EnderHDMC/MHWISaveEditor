@@ -291,6 +291,7 @@ void MHWISaveEditor::ExportDecoList()
     }
   }
 
+  // TODO: Load these from: chunk/common/item/skillGemParam.sgpa
   // Deco's slotted into equipement are not refered to by there actual
   // item ID. Instead the seem to be stored as indices of a deco a flat
   // deco list. So we make this list by running through all item ID's
@@ -301,11 +302,12 @@ void MHWISaveEditor::ExportDecoList()
   uint32 deco_map_idx = 0;
   for (uint32 i = 0; i < itemDB->count(); i++)
   {
-    auto item_name = itemDB->ItemName(i);
-    if (item_name.contains("Jewel")) {
-      deco_id_map[deco_map_idx] = i + 1;
-      deco_map_idx++;
-    }
+    itm_entry* info = itemDB->GetItemById(i);
+    if (info->type != (u32)itemCategory::Decoration) continue;
+    if (!(info->flags & (u32)itemFlag::CustomObtainable)) continue;
+
+    deco_id_map[deco_map_idx] = i;
+    deco_map_idx++;
   }
 
   // Now that we have our flat deco list, we can run through the
@@ -318,7 +320,7 @@ void MHWISaveEditor::ExportDecoList()
       {
         auto equipment = &current_save->equipment[i];
         auto deco_idx = equipment->decos[j];
-        if (deco_idx < COUNTOF(mhw_storage::decorations))
+        if (deco_idx < deco_map_idx)
         {
           auto deco_name = itemDB->ItemName(deco_id_map[deco_idx]);
 
