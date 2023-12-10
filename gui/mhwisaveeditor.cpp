@@ -277,22 +277,83 @@ void MHWISaveEditor::ExportDecoList()
     return;
   }
 
-  std::ofstream deco_file(fileName.toStdString());
-
-  deco_file << "{\n";
+  // First we fill the deco map with the amount of deco's that
+  // are in the player storage. This DOES NOT include the deco's
+  // that have been slotted in equipment.
+  std::map<QString, uint32> equiped_deco_map;
   for (uint32 i = 0; i < COUNTOF(mhw_storage::decorations); i++)
   {
     if (deco_list[i].amount > 0)
     {
       auto deco_name = itemDB->ItemName(deco_list[i].id);
-      if (i > 0)
-      {
-        deco_file << ",\n";
-      }
 
-      deco_file << "  \"" << deco_name.toStdString() << "\": " << deco_list[i].amount;
+      equiped_deco_map[deco_name] = deco_list[i].amount;
     }
   }
+
+  // Deco's slotted into equipement are not refered to by there actual
+  // item ID. Instead the seem to be stored as indices of a deco a flat
+  // deco list. So we make this list by running through all item ID's
+  // that contain decos, and only pulling out the items that are decorations.
+  // Unfortunatly a flat offset cannot be used, as there are unused
+  // entries intertwined with the decorations.
+  uint32 deco_id_map[COUNTOF(mhw_storage::decorations)] = { 0 };
+  uint32 deco_map_idx = 0;
+  for (uint32 i = 0; i < itemDB->count(); i++)
+  {
+    auto item_name = itemDB->ItemName(i);
+    if (item_name.contains("Jewel")) {
+      deco_id_map[deco_map_idx] = i + 1;
+      deco_map_idx++;
+    }
+  }
+
+  // Now that we have our flat deco list, we can run through the
+  // player equipment and extract the decos that have been slotted.
+  for (uint32 i = 0; i < COUNTOF(mhw_save_slot::equipment); i++)
+  {
+    for (uint32 j = 0; j < COUNTOF(mhw_equipment::decos); j++)
+    {
+      if (current_save->equipment[i].decos[j] != -1)
+      {
+        auto equipment = &current_save->equipment[i];
+        auto deco_idx = equipment->decos[j];
+        if (deco_idx < COUNTOF(mhw_storage::decorations))
+        {
+          auto deco_name = itemDB->ItemName(deco_id_map[deco_idx]);
+
+          if (equiped_deco_map.find(deco_name) != equiped_deco_map.end())
+          {
+            equiped_deco_map[deco_name]++;
+          }
+          else {
+            equiped_deco_map[deco_name] = 1;
+          }
+        }
+      }
+    }
+  }
+
+  // Save list to disk as JSON file.
+  std::ofstream deco_file(fileName.toStdString());
+
+  deco_file << "{\n";
+
+  uint32 i = 0;
+  for (auto const& pair : equiped_deco_map)
+  {
+    auto deco_name = pair.first;
+    auto deco_count = pair.second;
+
+    if (i > 0)
+    {
+      deco_file << ",\n";
+    }
+
+    deco_file << "  \"" << deco_name.toStdString() << "\": " << deco_count;
+    i++;
+  }
+
   deco_file << "\n}";
 
   deco_file.close();
