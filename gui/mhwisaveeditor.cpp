@@ -280,14 +280,14 @@ void MHWISaveEditor::ExportDecoList()
   // First we fill the deco map with the amount of deco's that
   // are in the player storage. This DOES NOT include the deco's
   // that have been slotted in equipment.
-  std::map<QString, uint32> equiped_deco_map;
+  std::map<QString, uint32> decoration_counts;
   for (uint32 i = 0; i < COUNTOF(mhw_storage::decorations); i++)
   {
     if (deco_list[i].amount > 0)
     {
       auto deco_name = itemDB->ItemName(deco_list[i].id);
 
-      equiped_deco_map[deco_name] = deco_list[i].amount;
+      decoration_counts[deco_name] = deco_list[i].amount;
     }
   }
 
@@ -324,13 +324,16 @@ void MHWISaveEditor::ExportDecoList()
         {
           auto deco_name = itemDB->ItemName(deco_id_map[deco_idx]);
 
-          if (equiped_deco_map.find(deco_name) != equiped_deco_map.end())
+          if (decoration_counts.find(deco_name) != decoration_counts.end())
           {
-            equiped_deco_map[deco_name]++;
+            decoration_counts[deco_name]++;
           }
           else {
-            equiped_deco_map[deco_name] = 1;
+            decoration_counts[deco_name] = 1;
           }
+        }
+        else {
+          // TODO: Logging
         }
       }
     }
@@ -342,7 +345,7 @@ void MHWISaveEditor::ExportDecoList()
   deco_file << "{\n";
 
   uint32 i = 0;
-  for (auto const& pair : equiped_deco_map)
+  for (auto const& pair : decoration_counts)
   {
     auto deco_name = pair.first;
     auto deco_count = pair.second;
