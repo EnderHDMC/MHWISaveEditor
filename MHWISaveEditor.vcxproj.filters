@@ -149,6 +149,9 @@
     <ClInclude Include="utility\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="types\file\sgpa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp">

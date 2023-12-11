@@ -17,8 +17,8 @@ enum class FlagFileIndex : u32 {
   HARDUMMY = 5,
   TripleQ = 6, // ??? items
 
-   // Assumes every other entry is seqential and starts at 0.
-   FlagFileIndexCount
+  // Assumes every other entry is seqential and starts at 0.
+  FlagFileIndexCount
 };
 
 ItemDB::ItemDB()
@@ -27,7 +27,9 @@ ItemDB::ItemDB()
   game_language itemLanguage = settings->GetItemLanguage();
 
   QString itemPath = Paths::GetResourcesPath("chunk/common/item/itemData.itm");
+  QString skillGemPath = Paths::GetResourcesPath("chunk/common/item/skillGemParam.sgpa");
   success_itm = ReadMetaFile(&itm, itemPath);
+  success_sgpa = ReadMetaFile(&sgpa, skillGemPath);
   LoadGMD(itemLanguage);
 
   if (itm.header)
@@ -100,6 +102,16 @@ itm_entry* ItemDB::GetItemById(u32 id)
   return &itm.items[id];
 }
 
+itm_entry* ItemDB::GetItemByDecoIndex(i32 index)
+{
+  if (!success_sgpa) return nullptr;
+  if (index > sgpa.header->entry_count) return nullptr;
+  if (index < 0) return nullptr;
+
+  u32 id = sgpa.gems[index].id;
+  return GetItemById(id);
+}
+
 int ItemDB::count()
 {
   return success_itm ? itm.header->entry_count : 0;
@@ -108,7 +120,7 @@ int ItemDB::count()
 QString ItemDB::ItemName(u32 id)
 {
   if (!success_gmd) return GMD_FAILURE.c_str();
-  
+
   id = AdjustItemID(id);
   const QRegularExpression regex("(<STYL.*>)(.*)(</STYL>)");
   QString name = QString::fromUtf8(gmd.value(id * 2));
