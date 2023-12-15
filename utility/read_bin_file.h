@@ -14,6 +14,7 @@
 #include "../types/file/gmd.h"
 #include "../types/file/itm.h"
 #include "../types/file/rod_inse.h"
+#include "../types/file/sgpa.h"
 #include "../types/file/uct.h"
 #include "../types/file/wp_dat.h"
 #include "../types/file/wp_dat_g.h"
@@ -124,4 +125,14 @@ static bool ReadMetaFileLanguage(gmd_meta* meta, const QString& res, game_langua
   }
 
   return ReadMetaFile(meta, gmdPath);
+}
+
+static bool ReadMetaFile(sgpa_meta* meta, const QString& path) {
+  FreeMetaFile(meta);
+  sgpa_header* header = (sgpa_header*)FileUtils::ReadEntireFile(path);
+  if (!header) {
+    return false;
+  }
+
+  return InitMetaFile(meta, header);
 }

@@ -11,38 +11,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="platform\platform.h" />
-    <ClInclude Include="platform\platform_windows.h" />
     <ClInclude Include="crypto\blowfish.h" />
     <ClInclude Include="crypto\iceborne_crypt.h" />
     <ClInclude Include="crypto\sha1.h" />
     <ClInclude Include="data\BitmapDB.h" />
+    <ClInclude Include="data\EquipmentDB.h" />
     <ClInclude Include="data\IconAtlas.h" />
     <ClInclude Include="data\ItemDB.h" />
-    <ClInclude Include="data\EquipmentDB.h" />
+    <ClInclude Include="data\SmithyDB.h" />
     <ClInclude Include="gui\common\Notification.h" />
     <ClInclude Include="gui\common\WheelGuard.h" />
-    <ClInclude Include="utility\types.h" />
-    <QtMoc Include="gui\equipment\equipmenteditortab.h" />
-    <QtMoc Include="gui\equipment\equipmentslotview.h" />
-    <ClInclude Include="data\SmithyDB.h" />
-    <ClInclude Include="types\file\eq_cus.h" />
-    <ClInclude Include="types\file\eq_crt.h" />
-    <ClInclude Include="types\file\uct.h" />
-    <ClInclude Include="types\file\wp_dat_g.h" />
-    <ClInclude Include="types\file\wp_dat.h" />
-    <ClInclude Include="types\file\rod_inse.h" />
-    <ClInclude Include="utility\math.h" />
-    <ClInclude Include="utility\mhw_save_operations.h" />
-    <ClInclude Include="utility\system\paths.h" />
-    <ClInclude Include="types\language.h" />
+    <ClInclude Include="platform\platform.h" />
+    <ClInclude Include="platform\platform_windows.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="types\constants.h" />
     <ClInclude Include="types\editor_enums.h" />
+    <ClInclude Include="types\file\am_dat.h" />
+    <ClInclude Include="types\file\eq_crt.h" />
+    <ClInclude Include="types\file\eq_cus.h" />
     <ClInclude Include="types\file\gmd.h" />
     <ClInclude Include="types\file\itm.h" />
-    <ClInclude Include="types\file\am_dat.h" />
+    <ClInclude Include="types\file\rod_inse.h" />
+    <ClInclude Include="types\file\sgpa.h" />
+    <ClInclude Include="types\file\uct.h" />
+    <ClInclude Include="types\file\wp_dat.h" />
+    <ClInclude Include="types\file\wp_dat_g.h" />
     <ClInclude Include="types\inventory_areas.h" />
+    <ClInclude Include="types\language.h" />
     <ClInclude Include="types\mhw_enums.h" />
     <ClInclude Include="types\mhw_save.h" />
     <ClInclude Include="types\mhw_struct_constants.h" />
@@ -51,10 +46,16 @@
     <ClInclude Include="utility\common\StringByteLengthValidator.h" />
     <ClInclude Include="utility\common\saveloader.h" />
     <ClInclude Include="utility\endian.h" />
+    <ClInclude Include="utility\math.h" />
+    <ClInclude Include="utility\mhw_save_operations.h" />
     <ClInclude Include="utility\mhw_save_utils.h" />
     <ClInclude Include="utility\read_bin_file.h" />
     <ClInclude Include="utility\settype.h" />
     <ClInclude Include="utility\system\file_utils.h" />
+    <ClInclude Include="utility\system\paths.h" />
+    <ClInclude Include="utility\types.h" />
+    <QtMoc Include="gui\equipment\equipmenteditortab.h" />
+    <QtMoc Include="gui\equipment\equipmentslotview.h" />
     <QtMoc Include="gui\info\generalinfo.h" />
     <QtMoc Include="gui\info\hunterinfo.h" />
     <QtMoc Include="gui\info\limitedunlocks.h" />
@@ -65,11 +66,11 @@
     <QtMoc Include="gui\settings\settingsui.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="platform\platform_windows.cpp" />
     <ClCompile Include="data\BitmapDB.cpp" />
+    <ClCompile Include="data\EquipmentDB.cpp" />
     <ClCompile Include="data\IconAtlas.cpp" />
     <ClCompile Include="data\ItemDB.cpp" />
-    <ClCompile Include="data\EquipmentDB.cpp" />
+    <ClCompile Include="data\SmithyDB.cpp" />
     <ClCompile Include="gui\common\Notification.cpp" />
     <ClCompile Include="gui\common\WheelGuard.cpp" />
     <ClCompile Include="gui\equipment\equipmenteditortab.cpp" />
@@ -83,7 +84,7 @@
     <ClCompile Include="gui\mhwisaveeditor.cpp" />
     <ClCompile Include="gui\settings\settingsui.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="data\SmithyDB.cpp" />
+    <ClCompile Include="platform\platform_windows.cpp" />
     <ClCompile Include="utility\common\Settings.cpp" />
     <ClCompile Include="utility\common\StringByteLengthValidator.cpp" />
   </ItemGroup>
@@ -173,6 +174,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26812</DisableSpecificWarnings>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)

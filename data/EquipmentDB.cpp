@@ -237,7 +237,7 @@ am_dat_entry* EquipmentDB::GetEntryArmor(i32 type, i32 id)
   am_dat_entry* info = nullptr;
 
   if (armor && armor->header) {
-    for (int i = 0; i < armor->header->entry_count; i++) {
+    for (u32 i = 0; i < armor->header->entry_count; i++) {
       am_dat_entry* current = &armor->entries[i];
       if (current->equip_slot == type && current->set_group == id) {
         info = current;
@@ -286,7 +286,7 @@ wp_dat_entry* EquipmentDB::GetEntryWeaponMelee(i32 type, i32 id)
   wp_dat_entry* info = nullptr;
 
   if (weapon_data && weapon_data->header) {
-    for (int i = 0; i < weapon_data->header->entry_count; i++) {
+    for (u32 i = 0; i < weapon_data->header->entry_count; i++) {
       wp_dat_entry* current = &weapon_data->entries[i];
       if (current->id == id) {
         info = current;
@@ -304,7 +304,7 @@ wp_dat_g_entry* EquipmentDB::GetEntryWeaponRanged(i32 type, i32 id)
   wp_dat_g_entry* info = nullptr;
 
   if (weapon_data && weapon_data->header) {
-    for (int i = 0; i < weapon_data->header->entry_count; i++) {
+    for (u32 i = 0; i < weapon_data->header->entry_count; i++) {
       wp_dat_g_entry* current = &weapon_data->entries[i];
       if (current->id == id) {
         info = current;
@@ -414,7 +414,7 @@ rod_inse_entry* EquipmentDB::GetEntryKinsect(i32 type, i32 id)
   rod_inse_entry* info = nullptr;
 
   if (kinsect_data && kinsect_data->header) {
-    for (int i = 0; i < kinsect_data->header->entry_count; i++) {
+    for (u32 i = 0; i < kinsect_data->header->entry_count; i++) {
       rod_inse_entry* current = &kinsect_data->entries[i];
       if (current->equip_id == id) {
         info = current;
@@ -434,7 +434,7 @@ QString EquipmentDB::GetNameKinsect(i32 type, i32 id)
   QString name;
   if (gmd->header && entry)
   {
-    u16 gmdIndex = entry->index;
+    u32 gmdIndex = entry->index;
     name = QString::fromUtf8(gmd->value(gmdIndex));
   }
   if (name.isNull()) name = GMD_FAILURE.c_str();
@@ -491,7 +491,7 @@ void EquipmentDB::DumpWeaponInfo()
     gmd_meta* gmd = map_gmd.value(type);
 
     if (wp_dat) {
-      for (int i = 0; i < wp_dat->header->entry_count; i++) {
+      for (u32 i = 0; i < wp_dat->header->entry_count; i++) {
         wp_dat_entry* current = &wp_dat->entries[i];
         i32 id = current->id;
         QString name = GetNameWeaponMelee(type, id);
@@ -501,7 +501,7 @@ void EquipmentDB::DumpWeaponInfo()
     }
 
     if (wp_dat_g) {
-      for (int i = 0; i < wp_dat_g->header->entry_count; i++) {
+      for (u32 i = 0; i < wp_dat_g->header->entry_count; i++) {
         wp_dat_g_entry* current = &wp_dat_g->entries[i];
         i32 id = current->id;
         QString name = GetNameWeaponRanged(type, id);
@@ -518,7 +518,7 @@ void EquipmentDB::DumpArmorInfo()
     << "equip_slot" << ';' << "gender" << ';' << "set_group " << ';' << "name";
   i32 category = 0;
 
-  for (int i = 0; i < am_dat.header->entry_count; i++) {
+  for (u32 i = 0; i < am_dat.header->entry_count; i++) {
     am_dat_entry* current = &am_dat.entries[i];
     u32 index = current->index;
     u8 variant = current->variant;
@@ -540,7 +540,7 @@ void EquipmentDB::DumpKinsectInfo()
   qInfo().noquote().nospace() << "index" << ';' << "id" << ';' << "equip_id" << ';' << "name";
   i32 category = 0;
 
-  for (int i = 0; i < rod_inse.header->entry_count; i++) {
+  for (u32 i = 0; i < rod_inse.header->entry_count; i++) {
     rod_inse_entry* current = &rod_inse.entries[i];
     u32 index = current->index;
     u8 id = current->id;

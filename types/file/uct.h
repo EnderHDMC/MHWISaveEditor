@@ -20,11 +20,14 @@ struct uct_color_info
   f32 unknown1[5];
 };
 
+#pragma warning( push )
+#pragma warning( disable : 4200 )
 struct uct_color_palette
 {
   u32 color_count;
-  uct_color_info color_info[];
+  uct_color_info color_info[0];
 };
+#pragma warning( pop )
 
 struct uct_meta
 {

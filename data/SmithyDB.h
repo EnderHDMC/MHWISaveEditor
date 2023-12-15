@@ -27,8 +27,8 @@ public:
   static SmithyDB* GetInstance();
   void Free();
 
-  eq_crt_entry* GetForgeEntry(eq_crt_meta* eq_crt, u8 type, u16 raw_index);
-  eq_cus_entry* GetUpgradeEntry(eq_cus_meta* eq_cus, u8 type, u16 raw_index);
+  eq_crt_entry* GetForgeEntry(eq_crt_meta* eq_crt, i32 type, u16 raw_index);
+  eq_cus_entry* GetUpgradeEntry(eq_cus_meta* eq_cus, i32 type, u16 raw_index);
   eq_cus_entry* GetUpgradeParent(eq_cus_meta* upgrades, eq_cus_entry* child);
 
   QList<mhw_item_slot> GetLineCraftingMats(equipment_info* info, mhw_equipment* equipment);

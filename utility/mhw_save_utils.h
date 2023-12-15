@@ -12,7 +12,7 @@ public:
   }
 
   static inline u32 ExpToRank(u32 xp, const u32 exp_table[1000]) {
-    u32 rank = -1;
+    u32 rank = 0;
 
     for (int i = 0; i < 1000; i++) {
       u32 exp = exp_table[i];
@@ -41,7 +41,7 @@ public:
   }
 
   static inline u32 RankNextLock(u32 rank, const u32 exp_table[1000]) {
-    u32 next = -1;
+    u32 next = 0;
     for (int check = rank; check < 1000; check++) {
       if (RankIsLock(check, exp_table)) {
         next = check;
@@ -232,10 +232,6 @@ public:
   }
 
   static u32 CountEquipmentReferenced(const mhw_save_slot* save_slot, const mhw_equipment* ref) {
-    mhw_equip_category category = ref->category;
-    i32 type = ref->type;
-    u32 id = ref->id;
-
     const mhw_equipment* equipment = save_slot->equipment;
     int srcIndex = ref - equipment;
     u32 referenced = false;
@@ -405,10 +401,10 @@ public:
     u32 issues = EquipIssue_Fine;
 
     // Detection
-    const i32 count = COUNTOF(save_slot->equipment);
-    for (int i = 0; i < count; ++i) {
-      int sort_index = save_slot->equipment[i].sort_index;
-      int table_index = save_slot->equipment_index_table[i];
+    const u32 count = COUNTOF(save_slot->equipment);
+    for (u32 i = 0; i < count; ++i) {
+      i32 sort_index = save_slot->equipment[i].sort_index;
+      u32 table_index = save_slot->equipment_index_table[i];
 
       if (sort_index < 0 || sort_index >= count || save_slot->equipment_index_table[sort_index] != i) {
         issues |= EquipIssue_SortIndex;

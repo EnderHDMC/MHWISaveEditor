@@ -7,6 +7,8 @@
 #include <QGridLayout>
 #include <QStyleFactory>
 
+#include <fstream>
+
 // Encryption
 #include "../crypto/iceborne_crypt.h"
 
@@ -262,6 +264,80 @@ void MHWISaveEditor::Dump(int number)
   if (buffer) free(buffer);
 }
 
+void MHWISaveEditor::ExportDecoList()
+{
+  MHW_SAVE_GUARD;
+  auto current_save = MHW_SaveSlot();
+  auto deco_list = current_save->storage.decorations;
+
+  QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), "", tr("JSON files(*.json)"));
+  if (fileName == nullptr)
+  {
+    return;
+  }
+
+  // First we fill the deco map with the amount of deco's that
+  // are in the player storage. This DOES NOT include the deco's
+  // that have been slotted in equipment.
+  std::map<QString, uint32> decoration_counts;
+  for (uint32 i = 0; i < COUNTOF(mhw_storage::decorations); i++)
+  {
+    if (deco_list[i].amount > 0)
+    {
+      QString deco_name = itemDB->ItemName(deco_list[i].id);
+      decoration_counts[deco_name] = deco_list[i].amount;
+    }
+  }
+
+  // Now that we have our flat deco list, we can run through the
+  // player equipment and extract the decos that have been slotted.
+  for (uint32 i = 0; i < COUNTOF(mhw_save_slot::equipment); i++)
+  {
+    mhw_equipment* equipment = &current_save->equipment[i];
+
+    for (uint32 j = 0; j < COUNTOF(mhw_equipment::decos); j++)
+    {
+      i32 deco_idx = equipment->decos[j];
+      if (deco_idx == -1) continue;
+      itm_entry* info = itemDB->GetItemByDecoIndex(deco_idx);
+
+      if (info) {
+        QString deco_name = itemDB->ItemName(info);
+        
+        if (decoration_counts.find(deco_name) != decoration_counts.end())
+        {
+          decoration_counts[deco_name]++;
+        }
+        else {
+          decoration_counts[deco_name] = 1;
+        }
+      }
+      else {
+        qWarning().nospace() << "Invalid decoration in save: " << MHW_SaveIndex() << ", slot: " << i;
+        // TODO: Warn user
+      }
+    }
+  }
+
+  // Save list to disk as JSON file.
+  std::ofstream deco_file(fileName.toStdString());
+
+  uint32 i = 0;
+  deco_file << "{\n";
+  for (auto const& pair : decoration_counts)
+  {
+    QString deco_name = pair.first;
+    u32 deco_count = pair.second;
+
+    if (i > 0) deco_file << ",\n";
+    deco_file << "  \"" << deco_name.toStdString() << "\": " << deco_count;
+    i++;
+  }
+
+  deco_file << "\n}";
+  deco_file.close();
+}
+
 void MHWISaveEditor::Open()
 {
   QString path = Paths::GetGameSavePath();
@@ -357,6 +433,7 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->menuCloneTo->setEnabled(true);
   ui->actionUncraftEquipment->setEnabled(true);
   ui->menuFixes->setEnabled(true);
+  ui->menuExport->setEnabled(true);
   for (int i = 0; i < selectSlotActions.size(); i++) {
     selectSlotActions[i]->setEnabled(true);
   }
@@ -405,7 +482,7 @@ void MHWISaveEditor::LoadSaveSlot()
   mhw_save_raw* mhwSave = MHW_Save();
   int mhwSaveIndex = MHW_SaveIndex();
 
-  for (size_t i = 0; i < selectSlotActions.count(); i++)
+  for (i64 i = 0; i < selectSlotActions.count(); i++)
   {
     selectSlotActions[i]->setChecked(i == mhwSaveIndex);
     switchSlotActions[i]->setEnabled(i != mhwSaveIndex);

@@ -1,0 +1,33 @@
+//------------------------------------------------
+//--- 010 Editor v13.0 Binary Template
+//
+//      File: itm.bt
+//   Authors: See Credits
+//   Version: 0.1.0
+//   Purpose: Store game item records.
+//  Category: Game
+// File Mask: *.sgpa
+//  ID Bytes: 01 10 09 18
+//   History: Intial Version
+//------------------------------------------------
+
+#include "types.bt"
+
+typedef struct {
+    u32 magic1;
+    u16 magic2;
+    u32 entry_count;
+} sgpa_header;
+
+typedef struct {
+    u32 id;
+    u32 index;
+    u32 size;
+    u32 skill1;
+    u32 skill1_level;
+    u32 skill2;
+    u32 skill2_level;
+} sgpa_entry;
+
+sgpa_header header;
+sgpa_entry gems[header.entry_count];

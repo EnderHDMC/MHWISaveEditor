@@ -64,7 +64,7 @@ void EquipmentSlotView::Uncraft()
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
 
   bool confirm = true;
-  int index = mhwSaveSlot->equipment_index_table[equipslot];
+  u32 index = mhwSaveSlot->equipment_index_table[equipslot];
   const mhw_equipment* equipment = mhwSaveSlot->equipment + index;
   equipment_info* info = equipmentDB->GetEquipment(equipment);
   if (equipmentDB->IsType(info, EquipmentInfoType::AM_DAT) && equipmentDB->IsPermanent(&info->am_dat)) {

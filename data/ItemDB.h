@@ -8,16 +8,19 @@
 #include "../types/mhw_save.h"
 #include "../types/file/itm.h"
 #include "../types/file/gmd.h"
+#include "../types/file/sgpa.h"
 #include "../types/editor_enums.h"
 
 class ItemDB
 {
 private:
   itm_meta itm = {};
+  sgpa_meta sgpa = {};
   gmd_meta gmd = {};
 
   bool success_itm = false;
   bool success_gmd = false;
+  bool success_sgpa = false;
   bool success_flags = false;
 
   bool ReadCustomFlags(itm_meta* itm);
@@ -28,7 +31,8 @@ public:
 
   itm_entry* GetItemByIdSafe(u32 id);
   itm_entry* GetItemById(u32 id);
-  int count();
+  itm_entry* GetItemByDecoIndex(i32 index);
+  u32 count();
 
   void LoadGMD(game_language language);
   game_language CurrentLanguage();
