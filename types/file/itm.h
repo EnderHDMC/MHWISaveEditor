@@ -16,15 +16,17 @@ enum class itemFlag : u32 {
   AmmoLvl2 = 1 << 9,
   AmmoLvl3 = 1 << 10,
   GlowEffect = 1 << 11,
+  Carriable = 1 << 12,
+  NoStore = 1 << 13,
 
   UnknownA = 1 << 2,
-  UnknownC = 1 << 13,
-  Unknown = UnknownA | UnknownC,
+  Unknown = UnknownA,
 
   Unused = 0xFFFFFFFF
   & ~(PermanentItem | SupplyItem | ItemBar
-    | Feystone | LoadoutItem | PalicoGadget
-    | AmmoLvl1 | AmmoLvl2 | AmmoLvl3 | GlowEffect
+    | Feystone | LoadoutItem | YellowStar | PalicoGadget
+    | AmmoLvl1 | AmmoLvl2 | AmmoLvl3
+    | GlowEffect | Carriable | NoStore
     | Unknown),
 
   CustomTripleQ = 1 << 25,
