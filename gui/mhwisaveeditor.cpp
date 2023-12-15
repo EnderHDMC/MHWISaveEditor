@@ -276,22 +276,88 @@ void MHWISaveEditor::ExportDecoList()
     return;
   }
 
-  std::ofstream deco_file(fileName.toStdString());
-
-  deco_file << "{\n";
+  // First we fill the deco map with the amount of deco's that
+  // are in the player storage. This DOES NOT include the deco's
+  // that have been slotted in equipment.
+  std::map<QString, uint32> decoration_counts;
   for (uint32 i = 0; i < COUNTOF(mhw_storage::decorations); i++)
   {
     if (deco_list[i].amount > 0)
     {
       auto deco_name = itemDB->ItemName(deco_list[i].id);
-      if (i > 0)
-      {
-        deco_file << ",\n";
-      }
 
-      deco_file << "  \"" << deco_name.toStdString() << "\": " << deco_list[i].amount;
+      decoration_counts[deco_name] = deco_list[i].amount;
     }
   }
+
+  // TODO: Load these from: chunk/common/item/skillGemParam.sgpa
+  // Deco's slotted into equipement are not refered to by there actual
+  // item ID. Instead the seem to be stored as indices of a deco a flat
+  // deco list. So we make this list by running through all item ID's
+  // that contain decos, and only pulling out the items that are decorations.
+  // Unfortunatly a flat offset cannot be used, as there are unused
+  // entries intertwined with the decorations.
+  uint32 deco_id_map[COUNTOF(mhw_storage::decorations)] = { 0 };
+  uint32 deco_map_idx = 0;
+  for (uint32 i = 0; i < itemDB->count(); i++)
+  {
+    itm_entry* info = itemDB->GetItemById(i);
+    if (info->type != (u32)itemCategory::Decoration) continue;
+    if (!(info->flags & (u32)itemFlag::CustomObtainable)) continue;
+
+    deco_id_map[deco_map_idx] = i;
+    deco_map_idx++;
+  }
+
+  // Now that we have our flat deco list, we can run through the
+  // player equipment and extract the decos that have been slotted.
+  for (uint32 i = 0; i < COUNTOF(mhw_save_slot::equipment); i++)
+  {
+    for (uint32 j = 0; j < COUNTOF(mhw_equipment::decos); j++)
+    {
+      if (current_save->equipment[i].decos[j] != -1)
+      {
+        auto equipment = &current_save->equipment[i];
+        auto deco_idx = equipment->decos[j];
+        if (deco_idx < deco_map_idx)
+        {
+          auto deco_name = itemDB->ItemName(deco_id_map[deco_idx]);
+
+          if (decoration_counts.find(deco_name) != decoration_counts.end())
+          {
+            decoration_counts[deco_name]++;
+          }
+          else {
+            decoration_counts[deco_name] = 1;
+          }
+        }
+        else {
+          // TODO: Logging
+        }
+      }
+    }
+  }
+
+  // Save list to disk as JSON file.
+  std::ofstream deco_file(fileName.toStdString());
+
+  deco_file << "{\n";
+
+  uint32 i = 0;
+  for (auto const& pair : decoration_counts)
+  {
+    auto deco_name = pair.first;
+    auto deco_count = pair.second;
+
+    if (i > 0)
+    {
+      deco_file << ",\n";
+    }
+
+    deco_file << "  \"" << deco_name.toStdString() << "\": " << deco_count;
+    i++;
+  }
+
   deco_file << "\n}";
 
   deco_file.close();
