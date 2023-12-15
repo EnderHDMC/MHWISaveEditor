@@ -298,8 +298,8 @@ void MHWISaveEditor::ExportDecoList()
   // Unfortunatly a flat offset cannot be used, as there are unused
   // entries intertwined with the decorations.
   uint32 deco_id_map[COUNTOF(mhw_storage::decorations)] = { 0 };
-  uint32 deco_map_idx = 0;
-  for (uint32 i = 0; i < itemDB->count(); i++)
+  i32 deco_map_idx = 0;
+  for (u32 i = 0; i < itemDB->count(); i++)
   {
     itm_entry* info = itemDB->GetItemById(i);
     if (info->type != (u32)itemCategory::Decoration) continue;
@@ -315,25 +315,24 @@ void MHWISaveEditor::ExportDecoList()
   {
     for (uint32 j = 0; j < COUNTOF(mhw_equipment::decos); j++)
     {
-      if (current_save->equipment[i].decos[j] != -1)
-      {
-        auto equipment = &current_save->equipment[i];
-        auto deco_idx = equipment->decos[j];
-        if (deco_idx < deco_map_idx)
-        {
-          auto deco_name = itemDB->ItemName(deco_id_map[deco_idx]);
+      auto equipment = &current_save->equipment[i];
+      auto deco_idx = equipment->decos[j];
 
-          if (decoration_counts.find(deco_name) != decoration_counts.end())
-          {
-            decoration_counts[deco_name]++;
-          }
-          else {
-            decoration_counts[deco_name] = 1;
-          }
+      if (deco_idx < 0) continue;
+      if (deco_idx < deco_map_idx)
+      {
+        auto deco_name = itemDB->ItemName(deco_id_map[deco_idx]);
+
+        if (decoration_counts.find(deco_name) != decoration_counts.end())
+        {
+          decoration_counts[deco_name]++;
         }
         else {
-          // TODO: Logging
+          decoration_counts[deco_name] = 1;
         }
+      }
+      else {
+        // TODO: Logging
       }
     }
   }
@@ -507,7 +506,7 @@ void MHWISaveEditor::LoadSaveSlot()
   mhw_save_raw* mhwSave = MHW_Save();
   int mhwSaveIndex = MHW_SaveIndex();
 
-  for (size_t i = 0; i < selectSlotActions.count(); i++)
+  for (i64 i = 0; i < selectSlotActions.count(); i++)
   {
     selectSlotActions[i]->setChecked(i == mhwSaveIndex);
     switchSlotActions[i]->setEnabled(i != mhwSaveIndex);

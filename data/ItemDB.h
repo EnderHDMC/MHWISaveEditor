@@ -32,7 +32,7 @@ public:
   itm_entry* GetItemByIdSafe(u32 id);
   itm_entry* GetItemById(u32 id);
   itm_entry* GetItemByDecoIndex(i32 index);
-  int count();
+  u32 count();
 
   void LoadGMD(game_language language);
   game_language CurrentLanguage();

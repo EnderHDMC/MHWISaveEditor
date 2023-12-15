@@ -137,7 +137,7 @@ void InventoryEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
 
-  for (size_t i = 0; i < editorTabs.count(); i++)
+  for (i64 i = 0; i < editorTabs.count(); i++)
   {
     InventoryEditorTab* editor = editorTabs[i];
     editor->Load(mhwSave, slotIndex);
@@ -154,7 +154,7 @@ void InventoryEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
   Settings* settings = settings->GetInstance();
   bool showUnobtainable = settings->GetShowUnobtainable();
 
-  for (int i = 0; i < itemDB->count(); i++)
+  for (u32 i = 0; i < itemDB->count(); i++)
   {
     itm_entry* info = itemDB->GetItemById(i);
     if (info->type == (u32)itemCategory::Furniture) continue;
@@ -178,7 +178,7 @@ void InventoryEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
     ui->cmbSearchItem->addItem(*icon, itemName, pass);
   }
 
-  for (size_t i = 0; i < editorTabs.count(); i++)
+  for (i64 i = 0; i < editorTabs.count(); i++)
   {
     InventoryEditorTab* editor = editorTabs[i];
     editor->LoadResources(itemDB, bitmapDB);

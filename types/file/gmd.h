@@ -40,7 +40,7 @@ struct gmd_meta {
   u8** keys;
   u8** strings;
 
-  u8* value(i32 index) {
+  u8* value(u32 index) {
     u8* str = nullptr;
     if (index < header->string_count) str = strings[index];
     return str;

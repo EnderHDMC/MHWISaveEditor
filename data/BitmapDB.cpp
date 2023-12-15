@@ -99,8 +99,8 @@ u64 BitmapDB::BuildArmorKey(EquipmentDB* equipmentDB, const i32 type, const u32 
   am_dat_entry* armor = equipmentDB->GetEntryArmor(type, id);
   if (!armor) return -1;
 
-  const int icon_id = 16 * 14 + armor->equip_slot;
-  const int icon_color = armor->rarity;
+  const u32 icon_id = 16 * 14 + armor->equip_slot;
+  const u16 icon_color = armor->rarity;
 
   return BuildKey(icon_id, palette, icon_color);
 }
@@ -111,8 +111,8 @@ u64 BitmapDB::BuildWeaponKey(EquipmentDB* equipmentDB, const i32 type, const u32
   wp_dat_g_entry* wp_dat_g = equipmentDB->GetEntryWeaponRanged(type, id);
   if (!wp_dat && !wp_dat_g) return -1;
 
-  int icon_id = 16 * 15 + wp_index_id_map[type];
-  int icon_color = 0;
+  u32 icon_id = 16 * 15 + wp_index_id_map[type];
+  u16 icon_color = 0;
   if (wp_dat) icon_color = wp_dat->rarity;
   if (wp_dat_g) icon_color = wp_dat_g->rarity;
 
@@ -123,8 +123,8 @@ u64 BitmapDB::BuildKinsectKey(EquipmentDB* equipmentDB, const i32 type, const u3
   rod_inse_entry* kinsect = equipmentDB->GetEntryKinsect(type, id);
   if (!kinsect) return -1;
 
-  int icon_id = 16 * 14 + 8 + kinsect->attack_type;
-  int icon_color = kinsect->rarity;
+  const u32 icon_id = 16 * 14 + 8 + kinsect->attack_type;
+  const u16 icon_color = kinsect->rarity;
 
   return BuildKey(icon_id, palette, icon_color);
 }

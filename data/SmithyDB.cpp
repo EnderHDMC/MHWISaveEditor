@@ -54,12 +54,12 @@ void SmithyDB::Free()
   instance = nullptr;
 }
 
-eq_crt_entry* SmithyDB::GetForgeEntry(eq_crt_meta* eq_crt, u8 type, u16 raw_index)
+eq_crt_entry* SmithyDB::GetForgeEntry(eq_crt_meta* eq_crt, i32 type, u16 raw_index)
 {
   eq_crt_entry* result = nullptr;
 
   if (eq_crt && eq_crt->header) {
-    for (int i = 0; i < eq_crt->header->entry_count; ++i) {
+    for (u32 i = 0; i < eq_crt->header->entry_count; ++i) {
       eq_crt_entry* entry = eq_crt->entries + i;
 
       if (entry->equipment_category_raw == type && entry->equipment_index_raw == raw_index) {
@@ -72,12 +72,12 @@ eq_crt_entry* SmithyDB::GetForgeEntry(eq_crt_meta* eq_crt, u8 type, u16 raw_inde
   return result;
 }
 
-eq_cus_entry* SmithyDB::GetUpgradeEntry(eq_cus_meta* eq_cus, u8 type, u16 raw_index)
+eq_cus_entry* SmithyDB::GetUpgradeEntry(eq_cus_meta* eq_cus, i32 type, u16 raw_index)
 {
   eq_cus_entry* result = nullptr;
 
   if (eq_cus && eq_cus->header) {
-    for (int i = 0; i < eq_cus->header->entry_count; ++i) {
+    for (u32 i = 0; i < eq_cus->header->entry_count; ++i) {
       eq_cus_entry* entry = eq_cus->entries + i;
 
       if (entry->equipment_category_raw == type && entry->equipment_index_raw == raw_index) {
@@ -95,12 +95,11 @@ eq_cus_entry* SmithyDB::GetUpgradeParent(eq_cus_meta* upgrades, eq_cus_entry* ch
   eq_cus_entry* result = nullptr;
   if (child && upgrades && upgrades->header) {
     eq_cus_entry* base = upgrades->entries;
-    const size_t index = child - base;
+    const i64 index = child - base;
 
     if (index > -1 && index < upgrades->header->entry_count) {
-      for (int i = index - 1; i >= 0; --i) {
+      for (i64 i = index - 1; i >= 0; --i) {
         eq_cus_entry* entry = base + i;
-        int temp = entry - base;
 
         if (entry->children[0] == index) { result = entry; break; }
         if (entry->children[1] == index) { result = entry; break; }
@@ -113,7 +112,7 @@ eq_cus_entry* SmithyDB::GetUpgradeParent(eq_cus_meta* upgrades, eq_cus_entry* ch
   return result;
 }
 
-QList<mhw_item_slot> SmithyDB::GetLineCraftingMats(equipment_info* info, mhw_equipment *equipment)
+QList<mhw_item_slot> SmithyDB::GetLineCraftingMats(equipment_info* info, mhw_equipment* equipment)
 {
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
   i32 raw_index = equipmentDB->GetRawIndex(info);
@@ -132,7 +131,7 @@ QList<mhw_item_slot> SmithyDB::GetLineCraftingMats(equipment_info* info, mhw_equ
   case mhw_equip_category::Kinsect: eq_crt = nullptr; eq_cus = &eq_cus_insect; eq_cus_extra = &eq_cus_insect_element; break;
   }
 
-  eq_crt_entry* forge_recipe = GetForgeEntry(eq_crt, equipment->type, raw_index);
+  eq_crt_entry* forge_recipe = GetForgeEntry(eq_crt, equipment->type, (u16)raw_index);
   if (forge_recipe) {
     if (forge_recipe->mats[0].id) AddMaterial(result, { forge_recipe->mats[0].id, forge_recipe->mats[0].count });
     if (forge_recipe->mats[1].id) AddMaterial(result, { forge_recipe->mats[1].id, forge_recipe->mats[1].count });
@@ -140,7 +139,7 @@ QList<mhw_item_slot> SmithyDB::GetLineCraftingMats(equipment_info* info, mhw_equ
     if (forge_recipe->mats[3].id) AddMaterial(result, { forge_recipe->mats[3].id, forge_recipe->mats[3].count });
   }
 
-  eq_cus_entry* upgrade_recipe = GetUpgradeEntry(eq_cus, equipment->type, raw_index);
+  eq_cus_entry* upgrade_recipe = GetUpgradeEntry(eq_cus, equipment->type, (u16)raw_index);
   if (upgrade_recipe) {
     eq_cus_entry* upgrade_parent = upgrade_recipe;
     eq_cus_entry* upgrade_prev = nullptr;

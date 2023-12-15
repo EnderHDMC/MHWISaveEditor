@@ -13,9 +13,9 @@
 
 class MHWSaveOperations {
 public:
-  static const mhw_equipment* Uncraft(mhw_save_slot* save_slot, int slot, bool ignorePermanent, EquipmentDB* equipmentDB, SmithyDB* smithyDB, ItemDB* itemDB) {
+  static const mhw_equipment* Uncraft(mhw_save_slot* save_slot, u32 slot, bool ignorePermanent, EquipmentDB* equipmentDB, SmithyDB* smithyDB, ItemDB* itemDB) {
     mhw_equipment* equipment = save_slot->equipment + slot;
-    if (slot < 0 || slot >= COUNTOF(save_slot->equipment))
+    if (slot >= COUNTOF(save_slot->equipment))
       return &MHW_EQUIPMENT_EMPTY;
 
     // Disallow uncrafting for used equipment or empty equipment.
@@ -51,7 +51,7 @@ public:
   }
 
   static void UncraftAllUnusedEquipment(mhw_save_slot* save_slot, bool ignorePermanent, EquipmentDB* equipmentDB, SmithyDB* smithyDB, ItemDB* itemDB) {
-    for (size_t i = 0; i < COUNTOF(save_slot->equipment); i++)
+    for (u32 i = 0; i < COUNTOF(save_slot->equipment); i++)
     {
       Uncraft(save_slot, i, ignorePermanent, equipmentDB, smithyDB, itemDB);
     }

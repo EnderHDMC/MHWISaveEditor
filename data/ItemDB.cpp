@@ -105,14 +105,14 @@ itm_entry* ItemDB::GetItemById(u32 id)
 itm_entry* ItemDB::GetItemByDecoIndex(i32 index)
 {
   if (!success_sgpa) return nullptr;
-  if (index > sgpa.header->entry_count) return nullptr;
+  if (index >= (i32)sgpa.header->entry_count) return nullptr;
   if (index < 0) return nullptr;
 
   u32 id = sgpa.gems[index].id;
   return GetItemById(id);
 }
 
-int ItemDB::count()
+u32 ItemDB::count()
 {
   return success_itm ? itm.header->entry_count : 0;
 }
