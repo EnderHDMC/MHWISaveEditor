@@ -284,45 +284,26 @@ void MHWISaveEditor::ExportDecoList()
   {
     if (deco_list[i].amount > 0)
     {
-      auto deco_name = itemDB->ItemName(deco_list[i].id);
-
+      QString deco_name = itemDB->ItemName(deco_list[i].id);
       decoration_counts[deco_name] = deco_list[i].amount;
     }
-  }
-
-  // TODO: Load these from: chunk/common/item/skillGemParam.sgpa
-  // Deco's slotted into equipement are not refered to by there actual
-  // item ID. Instead the seem to be stored as indices of a deco a flat
-  // deco list. So we make this list by running through all item ID's
-  // that contain decos, and only pulling out the items that are decorations.
-  // Unfortunatly a flat offset cannot be used, as there are unused
-  // entries intertwined with the decorations.
-  uint32 deco_id_map[COUNTOF(mhw_storage::decorations)] = { 0 };
-  i32 deco_map_idx = 0;
-  for (u32 i = 0; i < itemDB->count(); i++)
-  {
-    itm_entry* info = itemDB->GetItemById(i);
-    if (info->type != (u32)itemCategory::Decoration) continue;
-    if (!(info->flags & (u32)itemFlag::CustomObtainable)) continue;
-
-    deco_id_map[deco_map_idx] = i;
-    deco_map_idx++;
   }
 
   // Now that we have our flat deco list, we can run through the
   // player equipment and extract the decos that have been slotted.
   for (uint32 i = 0; i < COUNTOF(mhw_save_slot::equipment); i++)
   {
+    mhw_equipment* equipment = &current_save->equipment[i];
+
     for (uint32 j = 0; j < COUNTOF(mhw_equipment::decos); j++)
     {
-      auto equipment = &current_save->equipment[i];
-      auto deco_idx = equipment->decos[j];
+      i32 deco_idx = equipment->decos[j];
+      if (deco_idx == -1) continue;
+      itm_entry* info = itemDB->GetItemByDecoIndex(deco_idx);
 
-      if (deco_idx < 0) continue;
-      if (deco_idx < deco_map_idx)
-      {
-        auto deco_name = itemDB->ItemName(deco_id_map[deco_idx]);
-
+      if (info) {
+        QString deco_name = itemDB->ItemName(info);
+        
         if (decoration_counts.find(deco_name) != decoration_counts.end())
         {
           decoration_counts[deco_name]++;
@@ -332,7 +313,8 @@ void MHWISaveEditor::ExportDecoList()
         }
       }
       else {
-        // TODO: Logging
+        qWarning().nospace() << "Invalid decoration in save: " << MHW_SaveIndex() << ", slot: " << i;
+        // TODO: Warn user
       }
     }
   }
@@ -340,25 +322,19 @@ void MHWISaveEditor::ExportDecoList()
   // Save list to disk as JSON file.
   std::ofstream deco_file(fileName.toStdString());
 
-  deco_file << "{\n";
-
   uint32 i = 0;
+  deco_file << "{\n";
   for (auto const& pair : decoration_counts)
   {
-    auto deco_name = pair.first;
-    auto deco_count = pair.second;
+    QString deco_name = pair.first;
+    u32 deco_count = pair.second;
 
-    if (i > 0)
-    {
-      deco_file << ",\n";
-    }
-
+    if (i > 0) deco_file << ",\n";
     deco_file << "  \"" << deco_name.toStdString() << "\": " << deco_count;
     i++;
   }
 
   deco_file << "\n}";
-
   deco_file.close();
 }
 
