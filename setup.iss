@@ -43,6 +43,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "{#RelDir}\{#MHWIAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#RelDir}\libcurl.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
