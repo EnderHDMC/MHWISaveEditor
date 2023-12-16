@@ -61,6 +61,7 @@ public slots:
   
   // Debug
   void DebugDumpIconsAll();
+  void DebugUtility();
 
 public:
   MHWISaveEditor(QWidget* parent = nullptr);

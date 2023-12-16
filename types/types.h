@@ -38,3 +38,9 @@ typedef str32 str32s;
 
 #define SIZEOF(arr) (*(&arr + 1) - arr)
 #define COUNTOF(arr) sizeof(arr) / sizeof(arr[0])
+
+#define EMBED_STRINGIFY(s) #s
+#define EMBED_XSTRINGIFY(s) EMBED_STRINGIFY(s)
+
+#define EMDED_DO_EXPAND(X) X ## 1
+#define EMBED_EXPAND(X) EMDED_DO_EXPAND(X)

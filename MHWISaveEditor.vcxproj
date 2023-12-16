@@ -66,6 +66,7 @@
     <QtMoc Include="gui\inventory\itemslotview.h" />
     <QtMoc Include="gui\mhwisaveeditor.h" />
     <QtMoc Include="gui\settings\settingsui.h" />
+    <QtMoc Include="gui\steam\steamuserselect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp" />
@@ -85,6 +86,7 @@
     <ClCompile Include="gui\inventory\itemslotview.cpp" />
     <ClCompile Include="gui\mhwisaveeditor.cpp" />
     <ClCompile Include="gui\settings\settingsui.cpp" />
+    <ClCompile Include="gui\steam\steamuserselect.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="platform\platform_windows.cpp" />
     <ClCompile Include="utility\common\Settings.cpp" />
@@ -101,9 +103,11 @@
     <QtUic Include="gui\inventory\itemslotview.ui" />
     <QtUic Include="gui\mhwisaveeditor.ui" />
     <QtUic Include="gui\settings\settingsui.ui" />
+    <QtUic Include="gui\steam\steamuserselect.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="api\steam.http" />
     <None Include="res\CustomFlags.bin" />
     <None Include="res\translations\mhwisaveeditor_template.qm" />
     <None Include="setup.iss" />
@@ -177,6 +181,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26812</DisableSpecificWarnings>
       <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>STEAM_API_KEY=$(STEAM_API_KEY);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
@@ -197,6 +202,8 @@ for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26812</DisableSpecificWarnings>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>STEAM_API_KEY=$(STEAM_API_KEY);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)

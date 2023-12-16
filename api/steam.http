@@ -1,0 +1,4 @@
+@SteamApi = api.steampowered.com
+@SteamID = 0
+
+GET http://{{SteamApi}}/ISteamUser/GetPlayerSummaries/v0002/?key={{SteamApiKey}}&steamids={{SteamID}}

@@ -38,6 +38,7 @@
 #include "info/generalinfo.h"
 #include "info/hunterinfo.h"
 #include "equipment/equipmenteditortab.h"
+#include "steam/steamuserselect.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent), ui(new Ui::MHWISaveEditor),
@@ -154,6 +155,12 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   encrypt_map.insert(".bin", false);
 
   SetupDarkMode();
+
+#if defined(QT_DEBUG)
+  QAction* debugAction = new QAction("Debug", ui->menuDebug);
+  connect(debugAction, SIGNAL(triggered()), this, SLOT(DebugUtility()));
+  ui->menuDebug->addAction(debugAction);
+#endif
 }
 
 MHWISaveEditor::~MHWISaveEditor()
@@ -777,6 +784,12 @@ void MHWISaveEditor::DebugDumpIconsAll()
       "Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.").arg(dumpPath));
     qWarning().noquote() << "Failed to dump all icons: " << dumpPath;
   }
+}
+
+void MHWISaveEditor::DebugUtility()
+{
+  SteamUserSelect userSelect = SteamUserSelect(this);
+  userSelect.exec();
 }
 
 void MHWISaveEditor::DebugDefragEquipment()
