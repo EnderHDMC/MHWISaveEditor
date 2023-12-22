@@ -11,7 +11,7 @@ class SteamUserSelect : public QDialog
   Q_OBJECT
 
 public:
-  SteamUserSelect(QWidget* parent = nullptr);
+  SteamUserSelect(QStringList& users, QWidget* parent = nullptr);
 
   uint64 userId;
 
@@ -23,5 +23,5 @@ private:
 
   Ui::SteamUserSelectClass ui;
 
-  void GetUsers();
+  void GetUsers(QStringList& users);
 };

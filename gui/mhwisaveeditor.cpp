@@ -38,7 +38,6 @@
 #include "info/generalinfo.h"
 #include "info/hunterinfo.h"
 #include "equipment/equipmenteditortab.h"
-#include "steam/steamuserselect.h"
 
 MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   : QMainWindow(parent), ui(new Ui::MHWISaveEditor),
@@ -787,8 +786,7 @@ void MHWISaveEditor::DebugDumpIconsAll()
 
 void MHWISaveEditor::DebugUtility()
 {
-  SteamUserSelect userSelect = SteamUserSelect(this);
-  userSelect.exec();
+  qInfo() << "DEBUG!";
 }
 
 void MHWISaveEditor::DebugDefragEquipment()

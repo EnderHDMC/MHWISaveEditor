@@ -12,32 +12,33 @@
 #include <QFormLayout>
 #include <QSignalMapper>
 
-SteamUserSelect::SteamUserSelect(QWidget* parent)
+SteamUserSelect::SteamUserSelect(QStringList& users, QWidget* parent)
   : QDialog(parent)
 {
   ui.setupUi(this);
 
-  GetUsers();
-}
-
-void SteamUserSelect::GetUsers()
-{
-  const char* steamKey = STEAM_API_KEY_EMBED.c_str();
-  const char* endpoint = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=%1&steamids=%2";
-  QStringList users = Paths::GetSteamUsers();
-
-  int userCount = users.size();
-  userCount = (userCount > 100) ? 100 : userCount;
-  for (int i = 0; i < userCount; ++i) {
-    QString userIDRaw = users.at(i);
+  QStringList userIDs = QStringList(users);
+  for (int i = 0; i < userIDs.size(); ++i) {
+    QString userIDRaw = userIDs.at(i);
     u32 userID = userIDRaw.toUInt();
     SteamSpecID spec = SteamIDFrom32(userID);
     u64 steamID = spec.full;
-    users[i] = QString::number(steamID);
+    userIDs[i] = QString::number(steamID);
   }
-  QString allUsers = users.join(',');
 
-  QString query = tr(endpoint).arg(steamKey).arg(allUsers);
+  GetUsers(userIDs);
+}
+
+void SteamUserSelect::GetUsers(QStringList& users)
+{
+  const char* steamKey = STEAM_API_KEY_EMBED.c_str();
+  const char* endpoint = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=%1&steamids=%2";
+
+  int userCount = users.size();
+  userCount = (userCount > 100) ? 100 : userCount;
+  QString userQuery = users.mid(0, userCount).join(',');
+
+  QString query = tr(endpoint).arg(steamKey).arg(userQuery);
   NetworkQuery* network = new NetworkQuery();
   int status = network->get(query);
   if (status == 0) ProcessResponse(network);

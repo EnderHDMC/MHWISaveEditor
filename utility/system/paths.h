@@ -3,11 +3,12 @@
 #include <QDir>
 #include <QString>
 #include <QSettings>
-#include <QInputDialog>
 #include <QStandardPaths>
 
 #include "../../types/constants.h"
 #include "../../types/steamid.h"
+
+#include "../../gui/steam/steamuserselect.h"
 
 class Paths
 {
@@ -41,17 +42,12 @@ public:
         qInfo() << "Steam ID:" << steamID.full;
       }
       else if (userCount > 1) {
-        // TODO: get fancy names and such
-        bool ok;
+        SteamUserSelect userSelect = SteamUserSelect(users);
+        userSelect.exec();
 
-        QString item = QInputDialog::getItem(
-          nullptr, QObject::tr("Steam user:", "Steam user selection dialog title."),
-          QObject::tr("If you're unsure which you are, sign-in to the Steam app, or find your AccountID on https://steamdb.info/calculator",
-            "Steam user selection dialog hint."),
-          users, 0, false, &ok);
-
-        if (ok && !item.isEmpty())
-          user = item;
+        SteamSpecID steamID = { userSelect.userId };
+        u32 userAccountId = SteamAccountIDFromSpec(steamID);
+        if (steamID.full) user = QString::number(userAccountId);
       }
     }
 

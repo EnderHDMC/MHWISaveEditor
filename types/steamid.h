@@ -42,7 +42,7 @@ union SteamSpecID {
   SteamID id;
 };
 
-static SteamSpecID SteamIDFrom32(u32 accountID,
+const static SteamSpecID SteamIDFrom32(u32 accountID,
                           u32 instance = 1,
                           SteamType type = SteamType::TypeIndividual,
                           SteamUniverse universe = SteamUniverse::UniversePublic) {
@@ -53,4 +53,13 @@ static SteamSpecID SteamIDFrom32(u32 accountID,
   steamID.id.universe = universe;
 
   return steamID;
+}
+
+const static u32 SteamAccountIDFromSpec(SteamSpecID steamID) {
+  return steamID.id.accountID.accountNumber << 1;
+}
+
+const static u32 SteamAccountIDFromFull(u64 full) {
+  SteamSpecID steamID = { full };
+  return SteamAccountIDFromSpec(steamID);
 }
