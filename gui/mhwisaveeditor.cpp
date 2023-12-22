@@ -48,6 +48,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
   QIcon windowIcon = QIcon(Paths::GetResourcesPath("icon.ico"));
   setWindowIcon(windowIcon);
+  SetupDarkMode();
 
   msgNotification = new QMessageBox(
     QMessageBox::Icon::Information,
@@ -153,8 +154,6 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   encrypt_map.insert("", true);
   encrypt_map.insert(".raw", true);
   encrypt_map.insert(".bin", false);
-
-  SetupDarkMode();
 
 #if defined(QT_DEBUG)
   QAction* debugAction = new QAction("Debug", ui->menuDebug);
