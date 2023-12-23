@@ -38,7 +38,7 @@ void SteamUserSelect::GetUsers(QStringList& users)
   userCount = (userCount > 100) ? 100 : userCount;
   QString userQuery = users.mid(0, userCount).join(',');
 
-  QString query = tr(endpoint).arg(steamKey).arg(userQuery);
+  QString query = QString(endpoint).arg(steamKey).arg(userQuery);
   NetworkQuery* network = new NetworkQuery();
   int status = network->get(query);
   if (status == 0) ProcessResponse(network);
