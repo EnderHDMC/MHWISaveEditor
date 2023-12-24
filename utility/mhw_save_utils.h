@@ -280,12 +280,19 @@ public:
   static mhw_layered_loadout* FindEmptyLayeredLoadout(mhw_save_slot* save_slot) {
     mhw_layered_loadout* loadouts = save_slot->layered_loadouts;
     int count = COUNTOF(save_slot->layered_loadouts);
-    mhw_layered_loadout* result = nullptr;
 
+    mhw_layered_loadout* result = nullptr;
     for (int i = 0; i < count; i++) {
       mhw_layered_loadout* current = &loadouts[i];
 
-      if (current->name[0] == '\0') {
+      bool isEmpty = true;
+      isEmpty &= current->layered.head == -1;
+      isEmpty &= current->layered.torso == -1;
+      isEmpty &= current->layered.arms == -1;
+      isEmpty &= current->layered.coil == -1;
+      isEmpty &= current->layered.feet == -1;
+
+      if (isEmpty) {
         result = current;
         break;
       }
@@ -366,7 +373,7 @@ public:
   /// Moves all equipment to the slot equal to their sort_index, this will break the
   /// equipment references in current equipment and the loadouts.
   /// Should be preceded by a call to 'void DefragEquipmentReferences(mhw_save_slot* save_slot)'
-  /// to fix adjust the references before-hand, else the game will very likely crash.
+  /// to adjust the references before-hand, else the game will very likely crash.
   /// 
   /// Assumes all the sort indices are valid; 0 &lt;= sort index &lt; equipment count
   /// </summary>
