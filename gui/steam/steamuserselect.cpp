@@ -17,6 +17,9 @@ SteamUserSelect::SteamUserSelect(QStringList& users, const QString& user, bool c
   : QDialog(parent)
 {
   ui.setupUi(this);
+  QIcon windowIcon = QIcon(Paths::GetResourcesPath("icon.ico"));
+  setWindowIcon(windowIcon);
+
   QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok;
   if (canCancel) {
     buttons |= QDialogButtonBox::Cancel;
