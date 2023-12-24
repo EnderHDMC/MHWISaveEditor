@@ -4,6 +4,8 @@
 #include <QInputDialog>
 #include "../common/Notification.h"
 
+#include "../../utility/system/steam.h"
+
 GeneralInfo::GeneralInfo(QWidget* parent)
   : QWidget(parent), SaveLoader()
 {
@@ -24,7 +26,7 @@ void GeneralInfo::ChangeSteamID()
   u64 steamID = mhwSaveIB->header.steam_id;
   QString id = QString::number(steamID);
 
-  QStringList users = Paths::GetSteamUsers();
+  QStringList users = Steam::GetSteamUsers();
   SteamUserSelect userSelect = SteamUserSelect(users, id, true);
   bool ok = userSelect.exec() == QDialog::Accepted;
 

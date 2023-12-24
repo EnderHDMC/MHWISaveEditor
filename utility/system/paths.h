@@ -2,64 +2,26 @@
 
 #include <QDir>
 #include <QString>
-#include <QSettings>
 #include <QStandardPaths>
 
 #include "../../types/constants.h"
-#include "../../types/steamid.h"
 
-#include "../../gui/steam/steamuserselect.h"
+#include "Registry.h"
 
 class Paths
 {
 public:
-  static inline const QVariant RegQuery(const QString& path, const QString& member) {
-    QVariant value = NULL;
-    QSettings regSteam(path, QSettings::NativeFormat);
-    if (regSteam.childKeys().contains(member))
-      value = regSteam.value(member);
-
-    return value;
-  }
+  // Game info
+  static inline const QString GetGameInstallPath() { return Registry::Query(MHW_INSTALL_REG.c_str(), "InstallLocation").toString(); }
 
   // Steam info
-  static inline const QString GetSteamPath() { return RegQuery(STEAM_INSTALL_REG.c_str(), "SteamPath").toString(); }
-  static inline const QString GetActiveSteamUser() { return RegQuery(STEAM_PROCESS_REG.c_str(), "ActiveUser").toString(); }
-  static inline const QStringList GetSteamUsers() { return QSettings(STEAM_USERS_REG.c_str(), QSettings::NativeFormat).childGroups(); }
-
-  static const QString GetSteamUser() {
-    static QString selectedSteamUser = NULL;
-    QString user = selectedSteamUser;
-    if (user.isNull()) user = GetActiveSteamUser();
-    if (user == "0") user = NULL;
-
-    if (user.isNull()) {
-      QStringList users = GetSteamUsers();
-      int userCount = users.length();
-      if (userCount == 1) {
-        user = users.at(0);
-        SteamSpecID steamID = SteamIDFrom32(user.toUInt());
-        qInfo() << "Steam ID:" << steamID.full;
-      }
-      else if (userCount > 1) {
-        SteamUserSelect userSelect = SteamUserSelect(users);
-        userSelect.exec();
-
-        u64 userId = userSelect.userId.toULongLong();
-        u32 userAccountId = SteamAccountIDFromFull(userId);
-        if (userId) user = QString::number(userAccountId);
-      }
-    }
-
-    if (selectedSteamUser.isNull()) selectedSteamUser = user;
-    return user;
-  }
+  static inline const QString GetSteamPath() { return Registry::Query(STEAM_INSTALL_REG.c_str(), "SteamPath").toString(); }
 
   // Game info
   static inline const QString GetGamePath() {
     static QString selectedGamePath = NULL;
     QString path = selectedGamePath;
-    if (path.isNull()) path = RegQuery(MHW_INSTALL_REG.c_str(), "InstallLocation").toString();;
+    if (path.isNull()) path = GetGameInstallPath();
 
     if (path.isNull()) {
       QDir fullpath(GetSteamPath());
@@ -74,10 +36,9 @@ public:
     return path;
   }
 
-  static QString GetGameSavePath()
+  static QString GetGameSavePath(const QString &user)
   {
     QString path = GetSteamPath();
-    QString user = GetSteamUser();
 
     if (!path.isNull() && !user.isNull()) {
       QDir fullpath(path);
@@ -92,9 +53,9 @@ public:
     return path;
   }
 
-  static QString GetGameSaveFilePath()
+  static QString GetGameSaveFilePath(const QString& user)
   {
-    return GetGameSavePath() + "/" + QString::fromUtf8(MHW_SAVE_NAME);
+    return GetGameSavePath(user) + "/" + QString::fromUtf8(MHW_SAVE_NAME);
   }
 
   static QString GetTheoreticalGameSaveFilePath()
@@ -113,20 +74,20 @@ public:
     return dumpFile;
   }
 
-  static QString GetDefaultSaveDumpPath(int slot)
+  static QString GetDefaultSaveDumpPath(const QString& user, int slot)
   {
     Q_ASSERT(slot >= 0 && slot <= 9);
-    QString path = GetGameSavePath();
+    QString path = GetGameSavePath(user);
     QString dumpFile = GetDumpSlot(slot);
 
     return path.isNull() ? path : path + dumpFile;
   }
 
-  static QString GetSaveDumpPath(const QString& file, int slot)
+  static QString GetSaveDumpPath(const QString& file, const QString& user, int slot)
   {
     // TODO: Use the filepath.
     Q_ASSERT(slot >= 0 && slot <= 9);
-    QString defaultPath = GetDefaultSaveDumpPath(slot);
+    QString defaultPath = GetDefaultSaveDumpPath(user, slot);
     QString dumpFile = GetDumpSlot(slot);
     QDir filePath = file;
     filePath.cdUp();

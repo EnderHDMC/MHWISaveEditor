@@ -1,6 +1,7 @@
 #include "steamuserselect.h"
 
 #include "../../types/types.h"
+#include "../../types/steamid.h"
 #include "../../types/constants.h"
 #include "../../utility/system/paths.h"
 

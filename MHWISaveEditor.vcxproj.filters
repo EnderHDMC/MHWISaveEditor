@@ -158,6 +158,12 @@
     <ClInclude Include="utility\system\network.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utility\system\registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\system\steam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="data\BitmapDB.cpp">

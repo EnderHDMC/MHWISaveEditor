@@ -118,6 +118,8 @@ private:
 
   WheelGuard* scrollGuard = nullptr;
 
+  QString steamUser = NULL;
+
   //////// Settings ////////
   Settings *settings = nullptr;
 };

@@ -55,6 +55,8 @@
     <ClInclude Include="utility\system\file_utils.h" />
     <ClInclude Include="utility\system\network.h" />
     <ClInclude Include="utility\system\paths.h" />
+    <ClInclude Include="utility\system\registry.h" />
+    <ClInclude Include="utility\system\steam.h" />
     <ClInclude Include="utility\types.h" />
     <QtMoc Include="gui\equipment\equipmenteditortab.h" />
     <QtMoc Include="gui\equipment\equipmentslotview.h" />
