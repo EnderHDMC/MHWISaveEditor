@@ -61,6 +61,7 @@ public slots:
   
   // Debug
   void DebugDumpIconsAll();
+  void DebugUtility();
 
 public:
   MHWISaveEditor(QWidget* parent = nullptr);
@@ -116,6 +117,8 @@ private:
   QStringList filters;
 
   WheelGuard* scrollGuard = nullptr;
+
+  QString steamUser = NULL;
 
   //////// Settings ////////
   Settings *settings = nullptr;

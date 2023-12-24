@@ -23,6 +23,7 @@
 // │        │    └> instance
 // │        └> type
 // └> universe
+// Universe, type, instance = 1, 1, 1 -> 76561197960265728
 
 enum <u32> SteamUniverse {
   UniverseIndividual = 0,

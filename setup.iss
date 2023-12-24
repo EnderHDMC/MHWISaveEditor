@@ -43,12 +43,13 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "{#RelDir}\{#MHWIAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#RelDir}\libcurl.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-; Source: "{#RelDir}\vc_redist.x64.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#RelDir}\vc_redist.x64.exe"; DestDir: "{tmp}"; Flags: ignoreversion dontcopy deleteafterinstall
 Source: "{#RelDir}\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -57,5 +58,33 @@ Source: "{#RelDir}\styles\*"; DestDir: "{app}\styles"; Flags: ignoreversion recu
 Source: "{#RelDir}\translations\*"; DestDir: "{app}\translations"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
+[Code]
+function VCRedistNeedsInstall: Boolean;
+var 
+  Version: String;
+begin
+  if RegQueryStringValue(HKEY_LOCAL_MACHINE,
+       'SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64', 'Version',
+       Version) then
+  begin
+    // Is the installed version at least 14.38 ? 
+    Log('VC Redist Version check : found ' + Version);
+    Result := (CompareStr(Version, 'v14.38.33130.00') < 0);
+  end
+  else 
+  begin
+    // Not even an old version installed
+    Result := True;
+  end;
+  if (Result) then
+  begin
+    ExtractTemporaryFile('vc_redist.x64.exe');
+  end;
+end;
+
 [Run]
+Filename: {tmp}\vc_redist.x64.exe; \
+    Parameters: "/quiet"; \
+    Check: VCRedistNeedsInstall; \
+    StatusMsg: "Installing VC++ 2015-2022 Redistributables..."
 Filename: "{app}\{#MHWIAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MHWIAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent

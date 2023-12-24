@@ -12,6 +12,9 @@
 // Encryption
 #include "../crypto/iceborne_crypt.h"
 
+// Steam
+#include "../utility/system/steam.h"
+
 // Save paths
 #include "../utility/system/file_utils.h"
 #include "../utility/read_bin_file.h"
@@ -47,6 +50,7 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   ui->setupUi(this);
   QIcon windowIcon = QIcon(Paths::GetResourcesPath("icon.ico"));
   setWindowIcon(windowIcon);
+  SetupDarkMode();
 
   msgNotification = new QMessageBox(
     QMessageBox::Icon::Information,
@@ -84,8 +88,9 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   connect(switchSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(SwitchSlot(int)));
   connect(cloneSignalMapper, SIGNAL(mappedInt(int)), this, SLOT(CloneSlot(int)));
 
+  steamUser = Steam::GetSteamUser();
   const QString gamePath = Paths::GetGamePath();
-  const QString gameSaveFilePath = Paths::GetGameSaveFilePath();
+  const QString gameSaveFilePath = Paths::GetGameSaveFilePath(steamUser);
   const QString dataPath = Paths::GetDataPath();
   ui->actionOpenGameLocation->setEnabled(!gamePath.isNull());
   ui->actionOpenSaveLocation->setEnabled(!gameSaveFilePath.isNull());
@@ -153,7 +158,11 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
   encrypt_map.insert(".raw", true);
   encrypt_map.insert(".bin", false);
 
-  SetupDarkMode();
+#if defined(QT_DEBUG)
+  QAction* debugAction = new QAction("Debug", ui->menuDebug);
+  connect(debugAction, SIGNAL(triggered()), this, SLOT(DebugUtility()));
+  ui->menuDebug->addAction(debugAction);
+#endif
 }
 
 MHWISaveEditor::~MHWISaveEditor()
@@ -232,7 +241,7 @@ void MHWISaveEditor::Dump(int number)
 {
   mhw_save_raw* saveWrite = MHWS_Save();
   mhw_save_raw* buffer = nullptr;
-  QString path = Paths::GetSaveDumpPath(EditorFile(), number);
+  QString path = Paths::GetSaveDumpPath(EditorFile(), steamUser, number);
   bool success = true;
 
   if (MHW_SAVE_GUARD_CHECK) {
@@ -242,7 +251,7 @@ void MHWISaveEditor::Dump(int number)
       success = false;
     }
     else {
-      success = LoadFile(Paths::GetGameSaveFilePath(), &buffer);
+      success = LoadFile(Paths::GetGameSaveFilePath(steamUser), &buffer);
       saveWrite = buffer;
     }
   }
@@ -340,7 +349,7 @@ void MHWISaveEditor::ExportDecoList()
 
 void MHWISaveEditor::Open()
 {
-  QString path = Paths::GetGameSavePath();
+  QString path = Paths::GetGameSavePath(steamUser);
   QString filepath = QString();
 
   QFileDialog dialog(nullptr);
@@ -373,7 +382,7 @@ void MHWISaveEditor::Open()
 
 void MHWISaveEditor::OpenSAVEDATA1000()
 {
-  QString path = Paths::GetGameSaveFilePath();
+  QString path = Paths::GetGameSaveFilePath(steamUser);
   LoadFile(path);
 }
 
@@ -392,7 +401,7 @@ void MHWISaveEditor::Save()
 void MHWISaveEditor::SaveAs()
 {
   MHW_SAVE_GUARD;
-  QString path = Paths::GetGameSavePath();
+  QString path = Paths::GetGameSavePath(steamUser);
 
   QFileDialog dialog(this);
   dialog.setDirectory(path);
@@ -641,7 +650,7 @@ void MHWISaveEditor::Backup() {
       success = false;
     }
     else {
-      success = LoadFile(Paths::GetGameSaveFilePath(), &buffer);
+      success = LoadFile(Paths::GetGameSaveFilePath(steamUser), &buffer);
       saveWrite = buffer;
     }
   }
@@ -689,7 +698,7 @@ void MHWISaveEditor::Restore() {
   };
 
   memcpy(savep->data, saveBlob.constData(), saveBlob.length());
-  SaveLoader::LoadFile(Paths::GetGameSaveFilePath());
+  SaveLoader::LoadFile(Paths::GetGameSaveFilePath(steamUser));
   Load(savep, -1);
 }
 
@@ -777,6 +786,11 @@ void MHWISaveEditor::DebugDumpIconsAll()
       "Indicate failed icon dump, %1 is the path where the icons were supposed to be dumped to.").arg(dumpPath));
     qWarning().noquote() << "Failed to dump all icons: " << dumpPath;
   }
+}
+
+void MHWISaveEditor::DebugUtility()
+{
+  qInfo() << "DEBUG!";
 }
 
 void MHWISaveEditor::DebugDefragEquipment()

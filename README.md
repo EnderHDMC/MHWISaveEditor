@@ -58,7 +58,7 @@ To load the translation into the editor:
 To build this project you first need to install [vcpkg](https://vcpkg.io).<br/>
 Then you can install the required packages:
 ```
-vcpkg install cryptopp:x64-windows
+vcpkg install cryptopp:x64-windows curl:x64-windows
 ```
 In Visual Studio Installer you only need `Desktop Development with C++`
 
