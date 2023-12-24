@@ -45,9 +45,9 @@ public:
         SteamUserSelect userSelect = SteamUserSelect(users);
         userSelect.exec();
 
-        SteamSpecID steamID = { userSelect.userId };
-        u32 userAccountId = SteamAccountIDFromSpec(steamID);
-        if (steamID.full) user = QString::number(userAccountId);
+        u64 userId = userSelect.userId.toULongLong();
+        u32 userAccountId = SteamAccountIDFromFull(userId);
+        if (userId) user = QString::number(userAccountId);
       }
     }
 

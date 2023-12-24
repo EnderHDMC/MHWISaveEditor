@@ -12,15 +12,24 @@
 #include <QFormLayout>
 #include <QSignalMapper>
 
-SteamUserSelect::SteamUserSelect(QStringList& users, QWidget* parent)
+SteamUserSelect::SteamUserSelect(QStringList& users, const QString& user, bool canCancel, QWidget* parent)
   : QDialog(parent)
 {
   ui.setupUi(this);
+  QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok;
+  if (canCancel) {
+    buttons |= QDialogButtonBox::Cancel;
+  }
+  ui.bboxControls->setStandardButtons(buttons);
+
+  ui.edtUserId->setEnabled(canCancel);
+  if (!user.isNull()) ui.edtUserId->setText(user);
 
   QStringList userIDs = QStringList(users);
   for (int i = 0; i < userIDs.size(); ++i) {
     QString userIDRaw = userIDs.at(i);
     u32 userID = userIDRaw.toUInt();
+
     SteamSpecID spec = SteamIDFrom32(userID);
     u64 steamID = spec.full;
     userIDs[i] = QString::number(steamID);
@@ -44,6 +53,11 @@ void SteamUserSelect::GetUsers(QStringList& users)
   if (status == 0) ProcessResponse(network);
 }
 
+void SteamUserSelect::UserIdChange(const QString& text)
+{
+  this->userId = text;
+}
+
 void SteamUserSelect::ProcessResponse(NetworkQuery* reply)
 {
   QByteArray loadData = reply->recievedData();
@@ -57,7 +71,7 @@ void SteamUserSelect::ProcessResponse(NetworkQuery* reply)
 
   const QJsonObject root = request.object();
   const QJsonArray players = root.value("response").toObject().value("players").toArray();
-  QHBoxLayout* layout = ui.horizontalLayout;
+  QHBoxLayout* layout = ui.steamUserLayout;
 
   QSignalMapper* slotSignalMapper = new QSignalMapper(this);
 
@@ -77,7 +91,7 @@ void SteamUserSelect::ProcessResponse(NetworkQuery* reply)
     QIcon icon = QIcon(pixmap);
     QSize size = pixmap.size();
 
-    QToolButton* button = new QToolButton(this);
+    QToolButton* button = new QToolButton(ui.wgtSteamUsers);
     button->setText(personaName);
     button->setIcon(icon);
     button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -96,7 +110,5 @@ void SteamUserSelect::ProcessResponse(NetworkQuery* reply)
 
 void SteamUserSelect::SetUserId(const QString& userId)
 {
-  qInfo() << "Selected:" << userId;
-  this->userId = userId.toULongLong();
-  this->accept();
+  ui.edtUserId->setText(userId);
 }

@@ -11,12 +11,13 @@ class SteamUserSelect : public QDialog
   Q_OBJECT
 
 public:
-  SteamUserSelect(QStringList& users, QWidget* parent = nullptr);
+  SteamUserSelect(QStringList& users, const QString& user = NULL, bool canCancel = false, QWidget* parent = nullptr);
 
-  uint64 userId;
+  QString userId;
 
 private slots:
   void SetUserId(const QString& userId);
+  void UserIdChange(const QString& text);
 
 private:
   void ProcessResponse(NetworkQuery* reply);

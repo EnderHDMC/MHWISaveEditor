@@ -24,15 +24,15 @@ void GeneralInfo::ChangeSteamID()
   u64 steamID = mhwSaveIB->header.steam_id;
   QString id = QString::number(steamID);
 
-  bool ok;
-  QString text = QInputDialog::getText(
-    this, tr("Enter Steam ID", "Steam id prompt title."), tr("Steam ID:", "Steam id prompt text."),
-    QLineEdit::Normal, id, &ok);
+  QStringList users = Paths::GetSteamUsers();
+  SteamUserSelect userSelect = SteamUserSelect(users, id, true);
+  bool ok = userSelect.exec() == QDialog::Accepted;
 
-  if (ok && !text.isEmpty())
+  if (ok)
   {
     Notification* notif = notif->GetInstance();
 
+    QString text = userSelect.userId;
     steamID = text.toULongLong(&ok);
     if (ok) {
       ui->btnSteamID->setText(text);
