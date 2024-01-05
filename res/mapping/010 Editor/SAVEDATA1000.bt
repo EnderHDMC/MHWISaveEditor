@@ -631,7 +631,7 @@ struct mhw_current_equipment
 
 struct mhw_arena_record
 {
-  u32 unknown0;
+  u32 time; // TODO: Figure out encoding...
   str32 partner_name;
   u64 partner_steamid;
   u64 partner_created;
