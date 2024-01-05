@@ -457,6 +457,7 @@ struct mhw_hunter
   u32 hunter_rank_xp;
   u32 master_rank_xp;
   u32 playtime; // In seconds
+  u32 room_preference;
 };
 
 struct mhw_character_makeup
@@ -472,7 +473,6 @@ struct mhw_character_makeup
 
 struct mhw_character_appearance
 {
-  i32 unknown0; // New in Iceborne
   mhw_character_makeup makeup[3]; // 3 for iceborne, 2 for pre-iceborne
 
   mhw_color left_eye_color;
@@ -656,7 +656,7 @@ struct mhw_guild_card
 
   str64 name;
   str54 primary_group;
-  u8 unknown2[16];
+  u8 unknown2[20];
 
   mhw_character_appearance appearance;
   mhw_palico_appearance palico_appearance;
