@@ -597,6 +597,19 @@ void MHWISaveEditor::UncraftUnusedEquipment()
     "Tell the user the unused equipment has been uncrafted, and that permanent equipment (such as Defender Gear) is skipped."));
 }
 
+void MHWISaveEditor::GiveAllItems()
+{
+  MHW_SAVE_GUARD;
+  mhw_save_raw* mhwSave = MHW_Save();
+  int mhwSaveIndex = MHW_SaveIndex();
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  
+  MHWSaveOperations::GiveAllItems(mhwSaveSlot, itemDB, 500);
+
+  SaveLoader* loader = GetActiveEditorTab();
+  if (loader == inventoryEditor) loader->Load(mhwSave, mhwSaveIndex);
+}
+
 void MHWISaveEditor::OpenLocation(const QString& location)
 {
   qInfo("Opening: %s", qUtf8Printable(location));
@@ -791,6 +804,8 @@ void MHWISaveEditor::DebugDumpIconsAll()
 void MHWISaveEditor::DebugUtility()
 {
   qInfo() << "DEBUG!";
+
+  GiveAllItems();
 }
 
 void MHWISaveEditor::DebugDefragEquipment()

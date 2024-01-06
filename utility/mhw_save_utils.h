@@ -120,11 +120,8 @@ public:
     return result;
   }
 
-  static mhw_item_slot* FindCategoryItemOrEmpty(mhw_save_slot* save_slot, itm_entry* info) {
-    mhw_storage* storage = &save_slot->storage;
-    mhw_item_slot* items = nullptr;
-    int count = 0;
-
+  static void GetStorageForItem(itm_entry* info, mhw_storage* storage, mhw_item_slot*& items, int& count)
+  {
     if (info) {
       switch (info->type) {
       case (u32)itemCategory::Item: {
@@ -155,9 +152,29 @@ public:
         break;
       }
     }
+  }
+
+  static mhw_item_slot* FindCategoryItemOrEmpty(mhw_save_slot* save_slot, itm_entry* info) {
+    mhw_storage* storage = &save_slot->storage;
+    mhw_item_slot* items = nullptr;
+    int count = 0;
+
+    GetStorageForItem(info, storage, items, count);
 
     mhw_item_slot* result = nullptr;
     if (items) result = FindItemOrEmpty(items, count, info->id);;
+    return result;
+  }
+
+  static mhw_item_slot* FindCategoryItem(mhw_save_slot* save_slot, itm_entry* info) {
+    mhw_storage* storage = &save_slot->storage;
+    mhw_item_slot* items = nullptr;
+    int count = 0;
+
+    GetStorageForItem(info, storage, items, count);
+
+    mhw_item_slot* result = nullptr;
+    if (items) result = FindItem(items, count, info->id);;
     return result;
   }
 

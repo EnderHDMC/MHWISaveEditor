@@ -46,6 +46,7 @@ public slots:
 
   // Tools
   void UncraftUnusedEquipment();
+  void GiveAllItems();
   
   // Management
   void OpenSettings();
