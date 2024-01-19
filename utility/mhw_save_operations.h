@@ -100,4 +100,17 @@ public:
 
     return removed;
   }
+
+  static const void GiveAllItems(mhw_save_slot* save_slot, ItemDB* itemDB, int count) {
+    for (u32 i = 0; i < itemDB->count(); i++) {
+      itm_entry* info = itemDB->GetItemById(i);
+      if (info->flags & (u32)itemFlag::CustomObtainable) {
+        mhw_item_slot* item = MHWSaveUtils::FindCategoryItemOrEmpty(save_slot, info);
+        if (!item) break;
+        
+        MHWSaveUtils::DiscoverItem(save_slot, info);
+        MHWSaveUtils::GiveItem(item, info, count);
+      }
+    }
+  }
 };
