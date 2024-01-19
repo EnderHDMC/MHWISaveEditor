@@ -6,6 +6,7 @@
 #include <QDesktopServices>
 #include <QGridLayout>
 #include <QStyleFactory>
+#include <QInputDialog>
 
 #include <fstream>
 
@@ -438,9 +439,13 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   ui->tabWidget->setEnabled(true);
   ui->actionSave->setEnabled(true);
   ui->actionSaveAs->setEnabled(true);
+
   ui->menuSwitchWith->setEnabled(true);
   ui->menuCloneTo->setEnabled(true);
+
+  ui->actionGiveAllItems->setEnabled(true);
   ui->actionUncraftEquipment->setEnabled(true);
+  
   ui->menuFixes->setEnabled(true);
   ui->menuExport->setEnabled(true);
   for (int i = 0; i < selectSlotActions.size(); i++) {
@@ -604,7 +609,14 @@ void MHWISaveEditor::GiveAllItems()
   int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   
-  MHWSaveOperations::GiveAllItems(mhwSaveSlot, itemDB, 500);
+  bool ok = false;
+  int count = QInputDialog::getInt(this,
+    tr("Give all items", "Give all items title"),
+    tr("Enter amount of items", "Give all items label"),
+    1, 0, 9999, 1, &ok);
+  if (!ok) return;
+
+  MHWSaveOperations::GiveAllItems(mhwSaveSlot, itemDB, count);
 
   SaveLoader* loader = GetActiveEditorTab();
   if (loader == inventoryEditor) loader->Load(mhwSave, mhwSaveIndex);
@@ -804,8 +816,6 @@ void MHWISaveEditor::DebugDumpIconsAll()
 void MHWISaveEditor::DebugUtility()
 {
   qInfo() << "DEBUG!";
-
-  GiveAllItems();
 }
 
 void MHWISaveEditor::DebugDefragEquipment()

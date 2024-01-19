@@ -138,6 +138,8 @@
     <addaction name="separator"/>
     <addaction name="menuExport"/>
     <addaction name="separator"/>
+    <addaction name="actionGiveAllItems"/>
+    <addaction name="separator"/>
     <addaction name="actionUncraftEquipment"/>
    </widget>
    <widget class="QMenu" name="menuDebug">
@@ -459,6 +461,14 @@
     <string>Export Deco List</string>
    </property>
   </action>
+  <action name="actionGiveAllItems">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string comment="Tools -&gt; Give All Items" extracomment="Gives all items to the hunter.">Give All Items</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -702,6 +712,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionGiveAllItems</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>GiveAllItems()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -719,5 +745,6 @@
   <slot>DebugFixEquipmentBoxRef()</slot>
   <slot>DebugRemoveUnobtainableItems()</slot>
   <slot>ExportDecoList()</slot>
+  <slot>GiveAllItems()</slot>
  </slots>
 </ui>
