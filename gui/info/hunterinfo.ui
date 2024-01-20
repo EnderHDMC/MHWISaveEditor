@@ -318,6 +318,23 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>edtHunterName</tabstop>
+  <tabstop>edtPalicoName</tabstop>
+  <tabstop>spnZenny</tabstop>
+  <tabstop>spnResearchPoints</tabstop>
+  <tabstop>spnSteamworksFuel</tabstop>
+  <tabstop>spnPlaytime</tabstop>
+  <tabstop>spnHunterHR</tabstop>
+  <tabstop>spnHunterMR</tabstop>
+  <tabstop>btnLevelCapGL</tabstop>
+  <tabstop>spnAncientForestGL</tabstop>
+  <tabstop>spnWildspireWasteGL</tabstop>
+  <tabstop>spnCoralHighlandsGL</tabstop>
+  <tabstop>spnRottenVeilGL</tabstop>
+  <tabstop>spnEldersRecessGL</tabstop>
+  <tabstop>spnHoarfrostReachGL</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
