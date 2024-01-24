@@ -486,8 +486,8 @@ void MHWISaveEditor::LoadFile(const QString& file)
 void MHWISaveEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 {
   SaveLoader::LoadResources(itemDB, bitmapDB);
-  inventoryEditor->LoadResources(itemDB, bitmapDB);
-  equipmentEditor->LoadResources(itemDB, bitmapDB);
+  if (inventoryEditor) inventoryEditor->LoadResources(itemDB, bitmapDB);
+  if (equipmentEditor) equipmentEditor->LoadResources(itemDB, bitmapDB);
 }
 
 void MHWISaveEditor::LoadSaveSlot()
@@ -594,8 +594,9 @@ void MHWISaveEditor::UncraftUnusedEquipment()
   qInfo("Unused equipment has been uncrafted.");
 
   SaveLoader* loader = GetActiveEditorTab();
-  if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
-  else if (loader == inventoryEditor) loader->Load(mhwSave, mhwSaveIndex);
+  if (loader == equipmentEditor || loader == inventoryEditor) {
+    loader->Load(mhwSave, mhwSaveIndex);
+  }
 
   Notification* notif = notif->GetInstance();
   notif->ShowMessage(tr("Unused equipment uncrafted, permanent equipment items are skipped.",
@@ -659,7 +660,7 @@ void MHWISaveEditor::LoadItemLanguage(game_language language, bool reloadItemSea
   if (language != currentItem) { itemDB->LoadGMD(language); reload = true; }
   if (language != currentEquipment) { equipmentDB->LoadGMD(language); reload = true; }
 
-  if (reloadItemSearch || reload) inventoryEditor->LoadResources(itemDB, bitmapDB);
+  if (reloadItemSearch || reload && inventoryEditor) inventoryEditor->LoadResources(itemDB, bitmapDB);
   if (reload) LoadSaveSlot();
 }
 
