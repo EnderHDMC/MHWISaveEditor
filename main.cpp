@@ -14,7 +14,7 @@
 
 static void MessagePrintLog(QtMsgType type, const QMessageLogContext& context, const QString& msg)
 {
-  static QString logPath = Paths::GetDataPath() + "/EnderHDMC/MHWI Save Editor/MHWISaveEditor.log";
+  static QString logPath = Paths::GetDataPath() + "/MHWISaveEditor.log";
   static QFile logFile(logPath);
   if (!logFile.isOpen()) logFile.open(QIODevice::WriteOnly);
   static QTextStream logger(&logFile);
