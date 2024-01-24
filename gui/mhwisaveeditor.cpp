@@ -141,10 +141,11 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
     SaveLoader* loader = (SaveLoader*)tab->widget;
     QWidget* editor = dynamic_cast<QWidget*>(loader);
 
-    ui->tabWidget->addTab(editor, editor->windowTitle());
     if (tab->binding)
       *tab->binding = loader;
     editors[i] = loader;
+
+    ui->tabWidget->addTab(editor, editor->windowTitle());
   }
 
   filters.append(tr("All Files", "Open/Save filter, show all files.") + " (*)");
