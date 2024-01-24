@@ -37,6 +37,9 @@ static void MessagePrintLog(QtMsgType type, const QMessageLogContext& context, c
 
 int main(int argc, char* argv[])
 {
+  QCoreApplication::setOrganizationName("EnderHDMC");
+  QCoreApplication::setOrganizationDomain("enderhdmc.github.io");
+  QCoreApplication::setApplicationName("MHWI Save Editor");
   Settings* settings = settings->GetInstance();
 
   bool debugger = Settings::DebuggerPresent();
@@ -48,10 +51,6 @@ int main(int argc, char* argv[])
   settings->LogReadPath();
 
   QApplication a(argc, argv);
-  QCoreApplication::setOrganizationName("EnderHDMC");
-  QCoreApplication::setOrganizationDomain("enderhdmc.github.io");
-  QCoreApplication::setApplicationName("MHWI Save Editor");
-
   QDir::setCurrent(qApp->applicationDirPath());
   qInfo("Current path: %s", qUtf8Printable(QDir::currentPath()));
 
