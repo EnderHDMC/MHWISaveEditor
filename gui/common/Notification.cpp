@@ -26,7 +26,7 @@ void Notification::Free()
 
 bool Notification::SetDefaultMode(NotificationMode mode)
 {
-  QObject *system = notificationModes.value(mode, nullptr);
+  QObject* system = notificationModes.value(mode, nullptr);
   if (system) defaultMode = mode;
   return system;
 }

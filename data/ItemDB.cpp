@@ -151,11 +151,11 @@ itm_entry* ItemDB::AdjustItemPtr(itm_entry* entry)
 {
   if (entry) {
     switch (entry->id) {
-      // Smoke Jewel & Survival Jewel switch
+    // Smoke Jewel & Survival Jewel switch
     case SurvivalJewelID: entry = GetItemById(SmokeJewelID); break;
     case SmokeJewelID: entry = GetItemById(SurvivalJewelID); break;
 
-      // Igni Sign & Hunter Runestone switch
+    // Igni Sign & Hunter Runestone switch
     case IgniSignID: entry = GetItemById(HunterRunestoneID); break;
     case HunterRunestoneID: entry = GetItemById(IgniSignID); break;
     }

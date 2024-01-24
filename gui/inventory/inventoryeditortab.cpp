@@ -25,7 +25,7 @@ InventoryEditorTab::~InventoryEditorTab()
 
 void InventoryEditorTab::ScrollToIndex(int index)
 {
-  ItemSlotView *itemView = slotViews[index];
+  ItemSlotView* itemView = slotViews[index];
   ui->scrollArea->ensureWidgetVisible(itemView);
   itemView->SetFocus();
 }

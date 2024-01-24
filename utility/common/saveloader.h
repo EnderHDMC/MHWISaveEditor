@@ -64,7 +64,7 @@ public:
   virtual void PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull = false) {
     loading = true;
     if (loadFull) SaveLoader::Load(mhwSave, slotIndex);
-}
+  }
 #endif
 
   virtual void LoadFile(const QString& file)

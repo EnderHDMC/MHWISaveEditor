@@ -36,7 +36,7 @@ public:
     return path;
   }
 
-  static QString GetGameSavePath(const QString &user)
+  static QString GetGameSavePath(const QString& user)
   {
     QString path = GetSteamPath();
 

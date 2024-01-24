@@ -314,7 +314,7 @@ void MHWISaveEditor::ExportDecoList()
 
       if (info) {
         QString deco_name = itemDB->ItemName(info);
-        
+
         if (decoration_counts.find(deco_name) != decoration_counts.end())
         {
           decoration_counts[deco_name]++;
@@ -446,7 +446,7 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 
   ui->actionGiveAllItems->setEnabled(true);
   ui->actionUncraftEquipment->setEnabled(true);
-  
+
   ui->menuFixes->setEnabled(true);
   ui->menuExport->setEnabled(true);
   for (int i = 0; i < selectSlotActions.size(); i++) {
@@ -610,7 +610,7 @@ void MHWISaveEditor::GiveAllItems()
   mhw_save_raw* mhwSave = MHW_Save();
   int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
-  
+
   bool ok = false;
   int count = QInputDialog::getInt(this,
     tr("Give all items", "Give all items title"),

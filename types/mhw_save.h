@@ -1376,7 +1376,7 @@ struct mhw_save_slot
   monsters128_f32 monster_xp;
   monsters128_u32 monster_level;
   monsters128_f32 monster_xp_cap;
-  
+
   u8 unknown6a[548];
   mhw_monster_index capture_monster_index;
   u32 capture_monster_size;
@@ -1567,7 +1567,7 @@ struct mhw_section0
 struct mhw_section1
 {
   mhw_section_header header;
-  
+
   u32 unknown0;
   u32 last_active_slot;
   mhw_sound_device sound_device;

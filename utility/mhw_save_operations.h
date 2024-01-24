@@ -107,7 +107,7 @@ public:
       if (info->flags & (u32)itemFlag::CustomObtainable) {
         mhw_item_slot* item = MHWSaveUtils::FindCategoryItemOrEmpty(save_slot, info);
         if (!item) break;
-        
+
         MHWSaveUtils::DiscoverItem(save_slot, info);
         MHWSaveUtils::GiveItem(item, info, count);
       }

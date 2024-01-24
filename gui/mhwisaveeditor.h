@@ -47,7 +47,7 @@ public slots:
   // Tools
   void UncraftUnusedEquipment();
   void GiveAllItems();
-  
+
   // Management
   void OpenSettings();
   void EditorTabChange(int editorIndex);
@@ -59,7 +59,7 @@ public slots:
   void DebugDefragEquipment();
   void DebugFixEquipmentBoxRef();
   void DebugRemoveUnobtainableItems();
-  
+
   // Debug
   void DebugDumpIconsAll();
   void DebugUtility();
@@ -122,5 +122,5 @@ private:
   QString steamUser = NULL;
 
   //////// Settings ////////
-  Settings *settings = nullptr;
+  Settings* settings = nullptr;
 };
