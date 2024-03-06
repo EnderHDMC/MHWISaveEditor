@@ -14,6 +14,7 @@ class HunterInfo : public QWidget, public SaveLoader
 public slots:
   void HunterNameChange(const QString& text);
   void PalicoNameChange(const QString& text);
+  void HunterXPChange(int value);
   void ZennyChange(int value);
   void ResearchPointsChange(int value);
   void SteamworksFuelChange(int value);

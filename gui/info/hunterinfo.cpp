@@ -49,6 +49,15 @@ void HunterInfo::PalicoNameChange(const QString& text)
   SetStr(palicoName, text);
 }
 
+void HunterInfo::HunterXPChange(int value)
+{
+  MHW_LOADING_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
+  u32 hunterXp = value;
+  mhwSaveSlot->hunter.hunter_rank_xp = hunterXp;
+}
+
 void HunterInfo::ZennyChange(int value)
 {
   MHW_LOADING_GUARD;
@@ -144,6 +153,8 @@ void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
 
   str64 hunterName = {};
   str64 palicoName = {};
+  u32 hunterXp = mhwSaveSlot->hunter.hunter_rank_xp;
+
   u32 zeni = mhwSaveSlot->hunter.zeni;
   u32 researchPoints = mhwSaveSlot->hunter.research_points;
   u32 steamworksFuel = mhwSaveSlot->steamworks_stored_fuel;
@@ -158,10 +169,13 @@ void HunterInfo::Load(mhw_save_raw* mhwSave, int slotIndex)
 
   ui->edtHunterName->setText(hunterName);
   ui->edtPalicoName->setText(palicoName);
+  ui->spnHunterXP->setValue(hunterXp);
   ui->spnZenny->setValue(zeni);
   ui->spnResearchPoints->setValue(researchPoints);
   ui->spnSteamworksFuel->setValue(steamworksFuel);
   ui->spnPlaytime->setValue(playtime);
+
+  connect(ui->spnHunterXP, SIGNAL(valueChanged(int)), this, SLOT(HunterXPChange(int)));
 
   QMapIterator<QSpinBox*, u8> i(regionIndexMapping);
   while (i.hasNext()) {
