@@ -47,7 +47,7 @@ public:
     return (int)ret;
   }
 
-  QByteArray recievedData() {
+  QByteArray receivedData() {
     return data;
   }
 };

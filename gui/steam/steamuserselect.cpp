@@ -64,7 +64,7 @@ void SteamUserSelect::UserIdChange(const QString& text)
 
 void SteamUserSelect::ProcessResponse(NetworkQuery* reply)
 {
-  QByteArray loadData = reply->recievedData();
+  QByteArray loadData = reply->receivedData();
   QJsonParseError jsonError;
   QJsonDocument request = QJsonDocument::fromJson(loadData, &jsonError);
 
@@ -89,7 +89,7 @@ void SteamUserSelect::ProcessResponse(NetworkQuery* reply)
     int status = network->get(avatarUrl);
     if (status) continue;
 
-    QByteArray imageData = network->recievedData();
+    QByteArray imageData = network->receivedData();
     QPixmap pixmap;
     pixmap.loadFromData(imageData, "JPG");
     QIcon icon = QIcon(pixmap);
