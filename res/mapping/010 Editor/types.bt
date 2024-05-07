@@ -44,3 +44,13 @@ local u32 string_count;
 typedef struct {
   c_string str[string_count] <optimize=false>;
 } string_block;
+
+const i8   I8_MAX = 0x7F;
+const i16 I16_MAX = 0x7FFF;
+const i32 I32_MAX = 0x7FFFFFFF;
+const i64 I64_MAX = 0x7FFFFFFFFFFFFFFF;
+
+const i8   I8_MIN = 0x80;
+const i16 I16_MIN = 0x8000;
+const i32 I32_MIN = 0x80000000;
+const i64 I64_MIN = 0x8000000000000000;
