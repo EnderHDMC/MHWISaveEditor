@@ -1,0 +1,23 @@
+//------------------------------------------------
+//--- 010 Editor v13.0 Binary Template
+//
+//      File: amrs.bt
+//   Authors: See Credits
+//   Version: 0.1.6
+//   Purpose: Series ids for gear
+//  Category: Game
+// File Mask: *.amrs
+//  ID Bytes: 01 10 09 18
+//   History: Initial Version
+//------------------------------------------------
+
+#include "types.bt"
+
+struct amrs_header {
+  u32 magic;
+  u16 version;
+  u32 count;
+};
+
+amrs_header header;
+u32 series[header.count];
