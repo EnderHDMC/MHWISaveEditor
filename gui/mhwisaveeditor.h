@@ -75,7 +75,7 @@ public:
 
 private:
   bool SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt = true, bool validate = false);
-  bool LoadFile(const QString& path, mhw_save_raw** save);
+  bool LoadSaveFile(const QString& path, mhw_save_raw** save);
   void SaveFile(const QString& path);
 
   void LoadSaveSlot();

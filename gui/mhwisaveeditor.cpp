@@ -221,7 +221,7 @@ void MHWISaveEditor::SaveFile(const QString& path)
     notif->ShowMessage(tr("Could not save file: %1", "Indicate failed file save, %1 is the path where the file was supposed to be saved to.").arg(path));
 }
 
-bool MHWISaveEditor::LoadFile(const QString& path, mhw_save_raw** save)
+bool MHWISaveEditor::LoadSaveFile(const QString& path, mhw_save_raw** save)
 {
   qInfo("Loading %s", qUtf8Printable(path));
   mhw_save_raw* savep = *save;
@@ -253,7 +253,7 @@ void MHWISaveEditor::Dump(int number)
       success = false;
     }
     else {
-      success = LoadFile(Paths::GetGameSaveFilePath(steamUser), &buffer);
+      success = LoadSaveFile(Paths::GetGameSaveFilePath(steamUser), &buffer);
       saveWrite = buffer;
     }
   }
@@ -465,11 +465,12 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 
 void MHWISaveEditor::LoadFile(const QString& file)
 {
-  bool load = LoadFile(file, MHWS_SavePtr());
+  bool load = LoadSaveFile(file, MHWS_SavePtr());
 
   if (load) {
     SaveLoader::LoadFile(file);
-    Load(MHW_Save());
+    mhw_save_raw* mhwSave = MHW_Save();
+    Load(mhwSave);
 
     if (settings->GetDoAutoBackups()) {
       Notification* notif = notif->GetInstance();
@@ -677,7 +678,7 @@ void MHWISaveEditor::Backup() {
       success = false;
     }
     else {
-      success = LoadFile(Paths::GetGameSaveFilePath(steamUser), &buffer);
+      success = LoadSaveFile(Paths::GetGameSaveFilePath(steamUser), &buffer);
       saveWrite = buffer;
     }
   }
