@@ -324,7 +324,7 @@ static void SetChecksum(byte* save, byte* checksum, int regionOffset, int region
 
 static bool CheckChecksum(byte* save, byte* checksum, int regionOffset, int regionLength)
 {
-  return memcmp(save + regionOffset, checksum, regionLength);
+  return !memcmp(save + regionOffset + regionLength, checksum, 0x200);
 }
 
 static byte* GenerateSlotChecksum(byte* save, int offset, int length, int saveSlot)
