@@ -1,5 +1,5 @@
 #pragma once
-// This file is pretty much for save utility functions, much lie `mhw_save_utils.h`.
+// This file is pretty much for save utility functions, much like `mhw_save_utils.h`.
 // The difference is that this file is for stuff that depend on the databases.
 // Or for things that require external libraries.
 
