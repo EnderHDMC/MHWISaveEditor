@@ -21,3 +21,6 @@ Deploy
 
 # Libreoffice temp files
 .~lock*
+
+# Designer
+*.aps
