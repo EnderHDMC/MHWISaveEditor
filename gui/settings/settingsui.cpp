@@ -75,6 +75,7 @@ void SettingsUI::PopulateUILanguageSelection()
     QLocale trLocale = QLocale(trCode);
     QString trName = trLocale.nativeLanguageName();
     QString trLanguage = QLocale::languageToString(trLocale.language());
+    // NOTE: Native language name might display as ??? on non-unicode consoles
     qInfo().noquote() << QString("Detect language: %1 (%2)").arg(trName).arg(trLanguage);
     ui->cmbUILanguage->addItem(trName, trCode);
   }
