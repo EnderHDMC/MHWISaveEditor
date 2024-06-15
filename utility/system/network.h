@@ -24,11 +24,21 @@ public:
     hnd = curl_easy_init();
   }
 
-  int get(const QString& url) {
-    CURLcode ret;
+  ~NetworkQuery() {
+    if (hnd) {
+      curl_easy_cleanup(hnd);
+    }
+  }
 
+  int get(const QString& url) {
+    if (!hnd) {
+      return CURLE_FAILED_INIT;
+    }
+
+    CURLcode ret;
     QByteArray url_data = url.toUtf8();
     const char* curl_url = url_data.constData();
+
     curl_easy_setopt(hnd, CURLOPT_BUFFERSIZE, 102400L);
     curl_easy_setopt(hnd, CURLOPT_URL, curl_url);
     curl_easy_setopt(hnd, CURLOPT_NOPROGRESS, 1L);
@@ -41,13 +51,14 @@ public:
 
     ret = curl_easy_perform(hnd);
 
-    curl_easy_cleanup(hnd);
-    hnd = NULL;
+    if (ret != CURLE_OK) {
+      // Handle error as needed, you can add logging or additional error handling here
+    }
 
     return (int)ret;
   }
 
-  QByteArray receivedData() {
+  QByteArray receivedData() const {
     return data;
   }
 };
