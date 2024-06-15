@@ -229,6 +229,18 @@ public:
     return result;
   }
 
+  static void SetGuidingLandsRegionLevel(mhw_save_slot* save_slot, i32 index, i32 value) {
+    u32 xp = save_slot->guiding_lands.region_levels[index];
+    u32 level = xp / GUIDING_LANDS_XP_PER_LEVEL;
+    
+    xp -= level * GUIDING_LANDS_XP_PER_LEVEL;
+    level = value - 1;
+    xp += level * GUIDING_LANDS_XP_PER_LEVEL;
+    if (xp > GUIDING_LANDS_XP_MAX) xp = GUIDING_LANDS_XP_MAX;
+
+    save_slot->guiding_lands.region_levels[index] = xp;
+  }
+
   static bool GiveEquipment(mhw_save_slot* save_slot, mhw_equipment* equipment) {
     mhw_equipment* slot = MHWSaveUtils::FindEquipment(save_slot, -1, 0);
     if (!slot) return false;

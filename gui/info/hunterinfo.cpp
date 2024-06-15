@@ -88,13 +88,7 @@ void HunterInfo::RegionalLevelGLChange(int value)
   Q_ASSERT(index > -1);
 
   if (index != -1) {
-    u32 xp = mhwSaveSlot->guiding_lands.region_levels[index];
-    u32 level = xp / GUIDING_LANDS_XP_PER_LEVEL;
-    xp -= level * GUIDING_LANDS_XP_PER_LEVEL;
-    level = value - 1;
-    xp += level * GUIDING_LANDS_XP_PER_LEVEL;
-    if (xp > GUIDING_LANDS_XP_MAX) xp = GUIDING_LANDS_XP_MAX;
-    mhwSaveSlot->guiding_lands.region_levels[index] = xp;
+    MHWSaveUtils::SetGuidingLandsRegionLevel(mhwSaveSlot, index, value);
   }
 }
 

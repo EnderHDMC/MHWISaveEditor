@@ -113,4 +113,47 @@ public:
       }
     }
   }
+
+  static const QMap<QString, uint32> GetDecorationCounts(mhw_save_slot* save_slot, ItemDB* itemDB) {
+
+    mhw_item_slot* decorations = save_slot->storage.decorations;
+    QMap<QString, uint32> decoCounts;
+
+    // First we fill the deco map with the amount of deco's that
+    // are in the player storage. This DOES NOT include the deco's
+    // that have been slotted in equipment.
+    for (uint32 i = 0; i < COUNTOF(mhw_storage::decorations); i++)
+    {
+      if (decorations[i].id > 0)
+      {
+        QString decoName = itemDB->ItemName(decorations[i].id);
+        decoCounts.insert(decoName, decorations[i].amount);
+      }
+    }
+
+    // Now that we have our flat deco list, we can run through the
+    // player equipment and extract the decos that have been slotted.
+    for (uint32 i = 0; i < COUNTOF(mhw_save_slot::equipment); i++)
+    {
+      mhw_equipment* equipment = &save_slot->equipment[i];
+
+      for (uint32 j = 0; j < COUNTOF(mhw_equipment::decos); j++)
+      {
+        i32 decoIndex = equipment->decos[j];
+        if (decoIndex == -1) continue;
+        itm_entry* info = itemDB->GetItemByDecoIndex(decoIndex);
+
+        if (info) {
+          QString decoName = itemDB->ItemName(info);
+          uint32 count = decoCounts.value(decoName, 0);
+          decoCounts[decoName] = count + 1;
+        }
+        else {
+          qWarning().nospace() << "Invalid decoration in slot: " << i;
+        }
+      }
+    }
+
+    return decoCounts;
+  }
 };
