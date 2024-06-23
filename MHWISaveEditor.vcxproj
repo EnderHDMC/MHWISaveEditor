@@ -216,11 +216,14 @@ for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
   if not "%%~nf%%~xf" == "mhwisaveeditor_template.ts" (lrelease "%%f")
 )
 
-xcopy /Y "$(VcpkgRoot)\installed\x64-windows\bin\libcurl.dll" "$(OutDirFullPath)"
-
 xcopy /E /Y "$(ProjectDir)res\" "$(OutDirFullPath)..\Deploy\res\"
 xcopy /Y "$(TargetPath)" "$(OutDirFullPath)..\Deploy\"
+
+xcopy /Y "$(VcpkgRoot)\installed\x64-windows\bin\libcurl.dll" "$(OutDirFullPath)"
+xcopy /Y "$(VcpkgRoot)\installed\x64-windows\bin\zlib1.dll" "$(OutDirFullPath)"
+
 xcopy /Y "$(OutDirFullPath)libcurl.dll" "$(OutDirFullPath)..\Deploy\"
+xcopy /Y "$(OutDirFullPath)zlib1.dll" "$(OutDirFullPath)..\Deploy\"
 windeployqt "$(OutDirFullPath)..\Deploy\$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

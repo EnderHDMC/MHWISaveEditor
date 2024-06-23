@@ -49,6 +49,7 @@ Source: "{#RelDir}\Qt6Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\Qt6Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#RelDir}\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RelDir}\vc_redist.x64.exe"; DestDir: "{tmp}"; Flags: ignoreversion dontcopy deleteafterinstall
 Source: "{#RelDir}\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#RelDir}\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
