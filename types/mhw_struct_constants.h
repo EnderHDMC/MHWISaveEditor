@@ -4,8 +4,8 @@
 
 const mhw_equipment MHW_EQUIPMENT_EMPTY = {
   .sort_index = 0,
-  .category = mhw_equip_category::Empty,
-  .type = -1,
+  .category = mhw_equip_category::Category_Empty,
+  .type = mhw_equip_type::Type_Empty,
   .id = 0,
   .level = 0,
   .points = 0,

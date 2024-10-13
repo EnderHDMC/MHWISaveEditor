@@ -21,12 +21,16 @@ public:
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
 
 public slots:
+  void Equip();
   void Uncraft();
+
+signals:
+  void Equipped(int index);
 
 private:
   Ui::EquipmentSlotView* ui;
 
-  void UpdateEquipDisplay(const mhw_equipment* slot, int position, bool uncraftable);
+  void UpdateEquipDisplay(const mhw_equipment* slot, int position, bool uncraftable, bool equipped, bool empty);
 
   QLabel equipmentIndex;
   int equipslot = 0;

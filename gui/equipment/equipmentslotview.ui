@@ -29,7 +29,7 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <item row="0" column="0">
+   <item row="0" column="0" colspan="2">
     <widget class="QToolButton" name="btnIcon">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -52,6 +52,13 @@
     </widget>
    </item>
    <item row="1" column="0">
+    <widget class="QPushButton" name="btnEquip">
+     <property name="text">
+      <string>Equip</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
     <widget class="QPushButton" name="btnUncraft">
      <property name="text">
       <string>Uncraft</string>
@@ -79,8 +86,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnEquip</sender>
+   <signal>clicked()</signal>
+   <receiver>EquipmentSlotView</receiver>
+   <slot>Equip()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
+  <signal>Equipped(int)</signal>
   <slot>Uncraft()</slot>
+  <slot>Equip()</slot>
  </slots>
 </ui>

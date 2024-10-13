@@ -9,6 +9,7 @@ A save editor for Monster Hunter World: Iceborne.
 - Seige completion?
 - Allow crafting any gear in-game?
 - Allow editing all mantles?
+- Add a save on exit prompt
 
 ## Translation
 If you would like to help translate the editor into other languages, you can follow these instructions:

@@ -88,7 +88,7 @@ void LimitedUnlocks::GiveArtemisGear()
   {
     mhw_equipment gear = MHW_EQUIPMENT_EMPTY;
     gear.category = mhw_equip_category::Armor;
-    gear.type = type;
+    gear.type = (mhw_equip_type)type;
     gear.id = ARTEMIS_GEAR_ID;
 
     bool success = MHWSaveUtils::GiveEquipment(mhwSaveSlot, &gear);

@@ -19,7 +19,7 @@ public:
       return &MHW_EQUIPMENT_EMPTY;
 
     // Disallow uncrafting for used equipment or empty equipment.
-    bool referenced = MHWSaveUtils::CountEquipmentReferenced(save_slot, equipment);
+    bool referenced = MHWSaveUtils::CountEquipmentReferenced(save_slot, slot);
     bool empty = MHWSaveUtils::IsEquipmentEmpty(equipment);
     if (empty || referenced) return equipment;
 

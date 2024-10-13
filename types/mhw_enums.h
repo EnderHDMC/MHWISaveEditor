@@ -98,12 +98,39 @@ enum mhw_gamepad_glyphs : u8
 
 enum mhw_equip_category : i32
 {
-  Empty   = -1,
+  Category_Empty = -1,
+
   Armor   = 0,
   Weapon  = 1,
   Charm   = 2,
   Tool    = 3,
   Kinsect = 4
+};
+
+enum mhw_equip_type : i32
+{
+  Type_Empty = -1,
+
+  Helmet = 0,
+  Torso  = 1,
+  Arms   = 2,
+  Coil   = 3,
+  Feet   = 4,
+
+  GreatSword     = 0,
+  SwordAndShield = 1,
+  DualBlades     = 2,
+  Longsword      = 3,
+  Hammer         = 4,
+  HuntingHorn    = 5,
+  Lance          = 6,
+  Gunlance       = 7,
+  SwitchAxe      = 8,
+  ChargeBlade    = 9,
+  InsectGlaive   = 10,
+  Bow            = 11,
+  HeavyBowgun    = 12,
+  LightBowgun    = 13
 };
 
 enum mhw_handler_outfit : u8

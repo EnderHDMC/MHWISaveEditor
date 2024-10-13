@@ -615,7 +615,7 @@ struct mhw_equipment
 {
   i32 sort_index;
   mhw_equip_category category;
-  i32 type;
+  mhw_equip_type type;
   u32 id;
   u32 level;
   u32 points;

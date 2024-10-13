@@ -129,12 +129,39 @@ enum <u8> mhw_gamepad_glyphs
 
 enum <i32> mhw_equip_category
 {
-  Empty   = -1,
+  Category_Empty = -1,
+
   Armor   = 0,
   Weapon  = 1,
   Charm   = 2,
   Tool    = 3,
   Kinsect = 4
+};
+
+enum <i32> mhw_equip_type
+{
+  Type_Empty = -1,
+
+  Helmet = 0,
+  Torso  = 1,
+  Arms   = 2,
+  Coil   = 3,
+  Feet   = 4,
+
+  GreatSword     = 0,
+  SwordAndShield = 1,
+  DualBlades     = 2,
+  Longsword      = 3,
+  Hammer         = 4,
+  HuntingHorn    = 5,
+  Lance          = 6,
+  Gunlance       = 7,
+  SwitchAxe      = 8,
+  ChargeBlade    = 9,
+  InsectGlaive   = 10,
+  Bow            = 11,
+  HeavyBowgun    = 12,
+  LightBowgun    = 13
 };
 
 enum <u8> mhw_handler_outfit
@@ -859,7 +886,7 @@ struct mhw_equipment
 {
   i32 sort_index;
   mhw_equip_category category;
-  i32 type;
+  mhw_equip_type type;
   u32 id;
   u32 level;
   u32 points;
