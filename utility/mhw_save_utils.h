@@ -232,13 +232,58 @@ public:
   static void SetGuidingLandsRegionLevel(mhw_save_slot* save_slot, i32 index, i32 value) {
     u32 xp = save_slot->guiding_lands.region_levels[index];
     u32 level = xp / GUIDING_LANDS_XP_PER_LEVEL;
-    
+
     xp -= level * GUIDING_LANDS_XP_PER_LEVEL;
     level = value - 1;
     xp += level * GUIDING_LANDS_XP_PER_LEVEL;
     if (xp > GUIDING_LANDS_XP_MAX) xp = GUIDING_LANDS_XP_MAX;
 
     save_slot->guiding_lands.region_levels[index] = xp;
+  }
+
+  static void EquipEquipment(mhw_save_slot* save_slot, const mhw_equipment* ref) {
+    mhw_current_equipment* current_equipment = &save_slot->current_equipment;
+    const mhw_equipment* equipment = save_slot->equipment;
+    int srcIndex = ref - equipment;
+
+    switch (ref->category) {
+    case Category_Empty:
+    case Tool:
+      break;
+
+    case Armor:
+      switch (ref->type) {
+      case mhw_equip_type::Helmet:
+        current_equipment->helmet = srcIndex; break;
+      case mhw_equip_type::Torso:
+        current_equipment->torso = srcIndex; break;
+      case mhw_equip_type::Arms:
+        current_equipment->arms = srcIndex; break;
+      case mhw_equip_type::Coil:
+        current_equipment->coil = srcIndex; break;
+      case mhw_equip_type::Feet:
+        current_equipment->feet = srcIndex; break;
+      default:
+        // TODO: This is invalid
+        break;
+      }
+      break;
+
+    case Weapon:
+      current_equipment->weapon = srcIndex;
+      break;
+
+    case Charm:
+      current_equipment->charm = srcIndex;
+      break;
+
+    case Kinsect:
+      current_equipment->kinsect = srcIndex;
+      break;
+    default:
+      // TODO: This is invalid
+      break;
+    }
   }
 
   static bool GiveEquipment(mhw_save_slot* save_slot, mhw_equipment* equipment) {
@@ -257,52 +302,83 @@ public:
   }
 
   static inline bool IsEquipmentEmpty(const mhw_equipment* equipment) {
-    return equipment->category == mhw_equip_category::Empty || equipment->type == -1;
+    return equipment->category == mhw_equip_category::Category_Empty || equipment->type == -1;
   }
 
-  static u32 CountEquipmentReferenced(const mhw_save_slot* save_slot, const mhw_equipment* ref) {
-    const mhw_equipment* equipment = save_slot->equipment;
-    int srcIndex = ref - equipment;
-    u32 referenced = false;
+  static inline const mhw_equipment* GetEquipmentAtSlot(mhw_save_slot* save_slot, int slot, int &index, const mhw_equipment* fallback = nullptr) {
+    index = save_slot->equipment_index_table[slot];
+    const mhw_equipment* equipment = save_slot->equipment + index;
+    if (index < 0 || index >= COUNTOF(save_slot->equipment))
+      equipment = fallback;
 
-    // Check for references from equipped gear
+    return equipment;
+  }
+
+  static u32 CountEquipped(const mhw_save_slot* save_slot, int index)
+  {
     const mhw_current_equipment* current_equipment = &save_slot->current_equipment;
-    referenced += current_equipment->weapon == srcIndex;
-    referenced += current_equipment->helmet == srcIndex;
-    referenced += current_equipment->torso == srcIndex;
-    referenced += current_equipment->arms == srcIndex;
-    referenced += current_equipment->coil == srcIndex;
-    referenced += current_equipment->feet == srcIndex;
-    referenced += current_equipment->charm == srcIndex;
-    referenced += current_equipment->kinsect == srcIndex;
+    u32 referenced = 0;
 
-    if (ref->category == mhw_equip_category::Kinsect) {
-      const int count = COUNTOF(save_slot->equipment);
-      for (int i = 0; i < count; ++i) {
-        bool isWeapon = equipment[i].category == mhw_equip_category::Weapon;
+    referenced += current_equipment->weapon == index;
+    referenced += current_equipment->helmet == index;
+    referenced += current_equipment->torso == index;
+    referenced += current_equipment->arms == index;
+    referenced += current_equipment->coil == index;
+    referenced += current_equipment->feet == index;
+    referenced += current_equipment->charm == index;
+    referenced += current_equipment->kinsect == index;
 
-        // TODO: Probably want an enum for this
-        bool isGlaive = isWeapon && equipment[i].type == 10;
-        // TODO: This should be a union
-        referenced += isGlaive && equipment[i].bowgun_mods[0] == srcIndex;
-      }
-    }
+    return referenced;
+  }
 
-    // Check for references from loadouts
+  static u32 CountLoadoutReferences(const mhw_save_slot* save_slot, int index, bool isKinsect)
+  {
+    u32 referenced = 0;
+
     const int count = COUNTOF(save_slot->equipment_loadouts);
     for (int i = 0; i < count; ++i) {
       const mhw_equipment_loadout* loadout = save_slot->equipment_loadouts + i;
-      referenced += loadout->weapon_index == srcIndex;
-      referenced += loadout->helmet_index == srcIndex;
-      referenced += loadout->torso_index == srcIndex;
-      referenced += loadout->arms_index == srcIndex;
-      referenced += loadout->coil_index == srcIndex;
-      referenced += loadout->feet_index == srcIndex;
-      referenced += loadout->charm_index == srcIndex;
-      if (ref->category == mhw_equip_category::Kinsect) {
-        referenced += loadout->bowgun_mods[0] == srcIndex;
+      referenced += loadout->weapon_index == index;
+      referenced += loadout->helmet_index == index;
+      referenced += loadout->torso_index == index;
+      referenced += loadout->arms_index == index;
+      referenced += loadout->coil_index == index;
+      referenced += loadout->feet_index == index;
+      referenced += loadout->charm_index == index;
+      if (isKinsect) {
+        // TODO: This should be a union
+        referenced += loadout->bowgun_mods[0] == index;
       }
     }
+
+    return referenced;
+  }
+
+  static u32 CountKinsectReferences(const mhw_save_slot* save_slot, int index, bool isKinsect)
+  {
+    u32 referenced = 0;
+    if (!isKinsect) return 0;
+
+    const int count = COUNTOF(save_slot->equipment);
+    const mhw_equipment* equipment = save_slot->equipment;
+    for (int i = 0; i < count; ++i) {
+      bool isWeapon = equipment[i].category == mhw_equip_category::Weapon;
+      bool isGlaive = isWeapon && equipment[i].type == mhw_equip_type::InsectGlaive;
+      referenced += isGlaive && equipment[i].bowgun_mods[0] == index;
+    }
+
+    return referenced;
+  }
+
+  static u32 CountEquipmentReferenced(const mhw_save_slot* save_slot, int index) {
+    const mhw_equipment* ref = &save_slot->equipment[index];
+    u32 referenced = false;
+
+    bool isKinsect = ref->category == mhw_equip_category::Kinsect;
+    referenced += CountEquipped(save_slot, index);
+    referenced += CountLoadoutReferences(save_slot, index, isKinsect);
+    referenced += CountKinsectReferences(save_slot, index, isKinsect);
+
     return referenced;
   }
 

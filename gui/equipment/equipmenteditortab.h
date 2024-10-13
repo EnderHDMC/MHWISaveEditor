@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QSignalMapper>
 
 #include "../../utility/common/saveloader.h"
 #include "equipmentslotview.h"
@@ -18,6 +19,11 @@ public:
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
   virtual void LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB) override;
+
+  void LoadSlotViews(mhw_save_raw* mhwSave, int slotIndex);
+
+public slots:
+  void Equip(int index);
 
 private:
   Ui::EquipmentEditorTab* ui;

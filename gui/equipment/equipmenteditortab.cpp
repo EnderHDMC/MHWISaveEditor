@@ -13,6 +13,9 @@ EquipmentEditorTab::EquipmentEditorTab(QWidget* parent)
   {
     slotViews[i] = new EquipmentSlotView((i32)i, this);
     slotViews[i]->setFixedSize(128, 128);
+
+    connect(slotViews[i], SIGNAL(Equipped(int)), this, SLOT(Equip(int)));
+
     ui->gridLayoutScroll->addWidget(slotViews[i], (i32)(i / 8), (i32)(i % 8));
   }
 }
@@ -26,20 +29,33 @@ void EquipmentEditorTab::Load(mhw_save_raw* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
 
-  for (i64 i = 0; i < slotViews.count(); i++)
-  {
-    EquipmentSlotView* slotView = slotViews[i];
-    slotView->Load(mhwSave, slotIndex);
-  }
+  LoadSlotViews(mhwSave, slotIndex);
 
   SaveLoader::FinishLoad();
 }
 
 void EquipmentEditorTab::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 {
+  SaveLoader::LoadResources(itemDB, bitmapDB);
   for (i64 i = 0; i < slotViews.count(); i++)
   {
     EquipmentSlotView* slotView = slotViews[i];
     slotView->LoadResources(itemDB, bitmapDB);
   }
+}
+
+void EquipmentEditorTab::LoadSlotViews(mhw_save_raw* mhwSave, int slotIndex)
+{
+  for (i64 i = 0; i < slotViews.count(); i++)
+  {
+    EquipmentSlotView* slotView = slotViews[i];
+    slotView->Load(mhwSave, slotIndex);
+  }
+}
+
+void EquipmentEditorTab::Equip(int index) {
+  mhw_save_raw* mhwSave = MHW_Save();
+  int slotIndex = MHW_SaveIndex();
+
+  LoadSlotViews(mhwSave, slotIndex);
 }
