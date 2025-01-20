@@ -1628,7 +1628,8 @@ struct mhw_save_slot
   mhw_guild_card receive_guild_card[20];
   u32 unknown3;
   mhw_current_equipment current_equipment;
-  u8 unknown4[sizeof(u32) * 6];
+  u8 unknown4[sizeof(u32) * 5];
+  i32 last_insect_glaive;
   u8 unknown_monster_a[sizeof(monsters128_u16)];
   u8 unknown_monster_b[sizeof(monsters128_u8)];
   u8 unknown_monster_flags_a[16];
