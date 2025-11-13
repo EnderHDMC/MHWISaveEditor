@@ -10,6 +10,9 @@
 #define STEAM_API_KEY_VALUE "";
 #endif
 
+// Steam integration
+const std::string STEAM_API_KEY_EMBED = STEAM_API_KEY_VALUE;
+
 // File failure strings
 const std::string ITM_FAILURE = "ITM FAILURE";
 const std::string GMD_FAILURE = "GMD FAILURE";
@@ -18,9 +21,6 @@ const std::string GMD_FAILURE = "GMD FAILURE";
 const std::string STEAM_INSTALL_REG = R"(HKEY_CURRENT_USER\SOFTWARE\Valve\Steam)";
 const std::string STEAM_PROCESS_REG = R"(HKEY_CURRENT_USER\Software\Valve\Steam\ActiveProcess)";
 const std::string STEAM_USERS_REG   = R"(HKEY_CURRENT_USER\Software\Valve\Steam\Users)";
-
-// Steam integration
-const std::string STEAM_API_KEY_EMBED = STEAM_API_KEY_VALUE;
 
 // Game registry items
 const std::string MHW_INSTALL_REG   = R"(HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 582010)";
