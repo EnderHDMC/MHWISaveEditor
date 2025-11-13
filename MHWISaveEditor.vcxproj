@@ -149,12 +149,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
-    <QtInstall>6.1.3_msvc2019_64</QtInstall>
+    <QtInstall>6.5.3_msvc2019_64</QtInstall>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
-    <QtInstall>6.1.3_msvc2019_64</QtInstall>
+    <QtInstall>6.5.3_msvc2019_64</QtInstall>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
     <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
@@ -171,8 +171,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <VcpkgConfiguration>Debug</VcpkgConfiguration>
@@ -186,7 +188,7 @@
       <PreprocessorDefinitions>STEAM_API_KEY=$(STEAM_API_KEY);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
-      <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
+      <Command>set PATH=$(QtDllPath);$(Path)
 set VCINSTALLDIR=$(VCInstallDir)
 
 for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
@@ -208,7 +210,7 @@ for %%f in ("$(ProjectDir)res\translations\"*.ts) do (
       <PreprocessorDefinitions>STEAM_API_KEY=$(STEAM_API_KEY);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
-      <Command>set PATH=$(QMake_QT_HOST_BINS_);$(Path)
+      <Command>set PATH=$(QtDllPath);$(Path)
 set VCINSTALLDIR=$(VCInstallDir)
 
 for %%f in ("$(ProjectDir)res\translations\"*.ts) do (

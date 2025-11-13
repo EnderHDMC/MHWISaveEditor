@@ -4,6 +4,11 @@
 #include <QByteArray>
 
 static u8* QByteArrayToU8(QByteArray arr, u8* dst, u32 size) {
+#if 0
+  // This is meant to allow loading smaller files
+  arr = arr.leftJustified(size, '\0');
+#endif
+
   u8* newdst = dst;
   if (arr.length() != size) {
     qWarning("Error: array size does not match desired size.");
