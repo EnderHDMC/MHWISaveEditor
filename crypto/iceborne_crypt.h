@@ -537,6 +537,7 @@ static u8* DecryptSave(u8* save, int length)
 
   u8* checksum = GenerateHash(save, length, 64);
   byteswap(checksum, 20);
+  // TODO: Double check this
   if (!CheckHash(save, checksum))
   {
     free(checksum);

@@ -240,6 +240,20 @@ bool MHWISaveEditor::LoadSaveFile(const QString& path, mhw_save_raw** save)
   return true;
 }
 
+bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, void** save)
+{
+  u8* ps4 = FileUtils::ReadEntireFile(path, NULL, 8388608);
+
+  // NOTE: Pure guesses at this point
+  blowfish_decrypt(ps4 + 1160, 8388608 - 1160, KEY_SAVEDATA1000);
+  DecryptRegion(ps4, 1160, 0x2098C0 - 0x200, 0);
+  DecryptRegion(ps4, 2137928, 0x2098C0 - 0x200, 1);
+  DecryptRegion(ps4, 4274696, 0x2098C0 - 0x200, 2);
+
+  FileUtils::WriteFile(path + ".dump", ps4, 8388608);
+  return false;
+}
+
 void MHWISaveEditor::Dump(int number)
 {
   mhw_save_raw* saveWrite = MHWS_Save();
@@ -423,7 +437,9 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 
 void MHWISaveEditor::LoadFile(const QString& file)
 {
-  bool load = LoadSaveFile(file, MHWS_SavePtr());
+  mhw_save_raw** mhwSavePtr = MHWS_SavePtr();
+  bool load = LoadSaveFile(file, mhwSavePtr);
+  load = LoadSaveFilePS4(file, (void**)mhwSavePtr);
 
   if (load) {
     SaveLoader::LoadFile(file);
@@ -777,6 +793,22 @@ void MHWISaveEditor::DebugDumpIconsAll()
 void MHWISaveEditor::DebugUtility()
 {
   qInfo() << "DEBUG!";
+  EquipmentDB* equipmentDB = equipmentDB->GetInstance();
+
+  int count = 0;
+  for (int i = 0; i < equipmentDB->CountArmor(); i++)
+  {
+    am_dat_entry* armor = equipmentDB->IndexArmor(i);
+    if (armor->variant != 0) continue;
+    if (armor->equip_slot == 5) continue;
+    if (armor->sort_order == 0) continue;
+    QString name = equipmentDB->GetNameArmor(armor->equip_slot, armor->set_group);
+
+    qInfo() << i << name << armor->sort_order << armor->equip_slot;
+    count = max(count, armor->sort_order);
+  }
+
+  qInfo() << "Done!";
 }
 
 void MHWISaveEditor::DebugDefragEquipment()
