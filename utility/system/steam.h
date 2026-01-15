@@ -15,9 +15,7 @@ public:
   static inline const QStringList GetSteamUsers() { return Registry::Groups(STEAM_USERS_REG.c_str()); }
 
   static const QString GetSteamUser() {
-    static QString selectedSteamUser = NULL;
-    QString user = selectedSteamUser;
-    if (user.isNull()) user = GetActiveSteamUser();
+    QString user = GetActiveSteamUser();
     if (user == "0") user = NULL;
 
     if (user.isNull()) {
@@ -38,7 +36,6 @@ public:
       }
     }
 
-    if (selectedSteamUser.isNull()) selectedSteamUser = user;
     return user;
   }
 };
