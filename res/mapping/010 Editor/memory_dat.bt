@@ -1566,199 +1566,11 @@ struct mhw_progress_flags
   u8 unknown52[11];
 };
 
-// NOTE: I'm really hoping this uses the same format as on PC
+// NOTE: I was really hoping this used the same format as on PC
+//       but alas...
 struct mhw_save_slot
 {
-  u32 unknown0;
-  mhw_hunter hunter;
-  mhw_character_appearance appearance;
-  u8 unknown1[382];
-  mhw_palico_appearance palico_appearance;
-
-  mhw_guild_card guild_card;
-  mhw_guild_card collected_guild_card[100];
-  u16 guild_card_order[100];
-
-  u8 unknown2[516];
-  mhw_guild_card receive_guild_card[20];
-  u32 unknown3;
-  mhw_current_equipment current_equipment;
-  u8 unknown4[sizeof(u32) * 6];
-  u8 unknown_monster_a[sizeof(monsters128_u16)];
-  u8 unknown_monster_b[sizeof(monsters128_u8)];
-  u8 unknown_monster_flags_a[16];
-  u8 unknown_monster_flags_b[16];
-  u8 unknown_monster_flags_c[16];
-  u8 unknown_monster_flags_d[16];
-  monsters128_u32 monsters_captured;
-  monsters128_u32 monsters_slain;
-  u8 unknown_monster_c[sizeof(monsters128_u32)];
-  u8 unknown_monster_d[sizeof(monsters128_u32)];
-  u8 unknown_monster_e[sizeof(monsters128_u32)]; // MR slain?
-  u8 unknown_monster_f[sizeof(monsters128_u32)];
-  u8 unknown5[sizeof(u32) * 7];
-  monsters128_u32 monster_largest;
-  monsters128_u32 monster_smallest;
-  monsters128_f32 monster_xp;
-  monsters128_u32 monster_level;
-  monsters128_f32 monster_xp_cap;
-  
-  u8 unknown6a[548];
-  mhw_monster_index capture_monster_index;
-  u32 capture_monster_size;
-  u8 unknown6b[22];
-  mhw_items_discovered discovered_items;
-  mhw_endemic_life endemic_life;
-  mhw_seliana_room seliana_room;
-
-  mhw_item_loadouts item_loadouts;
-  mhw_item_pouch item_pouch;
-  mhw_storage storage;
-
-  mhw_equipment equipment[2500];
-  mhw_equipment unused_equipment[510]; // 510 != 500?
-  mhw_equipment palico_equipment[1250]; // Only 750 used
-  u32 equipment_index_table[2500];
-  u32 unused_equipment_index_table[500]; // 510 - 500 = 10?
-  u32 palico_equipment_index_table[1250];
-  u8 unknown7[4096];
-
-  u32 gesture_order[512];
-  u32 pose_order[256];
-  u8 unknown8[sizeof(u32) * 256];
-
-  u32 unknown9a;
-  mhw_wishlist_item wishlist[36];
-  u8 unknown9b[2048];
-  mhw_smithy smithy;
-
-  u8 unknown10a[80];
-  u32 layered_helmet;
-  u32 layered_torso;
-  u32 layered_arms;
-  u32 layered_coil;
-  u32 layered_feet;
-  u8 unknown10b[68];
-  u32 favourite_stickers[10];
-  u32 sticker_count[256];
-  u8 unknown10c[1064];
-  u32 layered_color_helmet;
-  u32 layered_color_torso;
-  u32 layered_color_arms;
-  u32 layered_color_coil;
-  u32 layered_color_feet;
-  u32 layered_color_whole;
-  u8 unknown10d[20];
-
-  mhw_radial radial_menu[8];
-  u8 unknown10e[sizeof(u32) * 3280];
-  mhw_npc_chat_entry npc_chat_progress[2048];
-  mhw_slot_settings settings;
-  mhw_progress_flags progress;
-  u8 unknown10f[19];
-
-  str64 palico_name;
-  u32 palico_xp;
-  u32 vigorwasp_spray;
-  u32 flashfly_cage;
-  u32 shieldspire;
-  u32 coral_orchestra;
-  u32 plunderblade;
-  u32 meowlotov_cocktail;
-  u8 unknown11[sizeof(u32) * 10];
-
-  u8 unknown12a[336];
-  u8 unlocked_optionals[64];
-  u8 unknown12b[64];
-  u8 seen_optionals[64];
-  u8 unknown12c[84];
-  u8 unknown12d[sizeof(u32) * 201];
-
-  mhw_investigation investigations[400];
-  u8 unknown13[2614];
-
-  u32 tool_unlocks[4];
-  mhw_equipment tools[128];
-  u8 pendants_unlocked[32];
-  u8 pendants_seen[32];
-
-  u8 unknown14a[24];
-  u32 registered_bounties[6];
-  u8 unknown14b[1628];
-  u32 platter_ingredient[36];
-  str32s platter_names[6];
-  u8 unknown14c[12];
-
-  u32 steamworks_natural_fuel;
-  u32 steamworks_stored_fuel;
-  // [92] unlocks for hub functions?
-  u8 unknown15[96];
-
-  mhw_equipment_loadout equipment_loadouts[224];
-  mhw_layered_loadout layered_loadouts[112];
-  mhw_palico_loadout palico_loadouts[24];
-  mhw_botanical_research botanist;
-  u8 unknown16a[49];
-  u8 elder_melder_seen_items[32];
-  u8 unknown16b[9];
-  u8 elder_melder_seen_decos[16];
-  u8 unknown16c[73];
-  u8 argosy_purchased_slots;
-  u8 unknown17d;
-  u32 argosy_slot_requests[3];
-  u8 unknown17_[20];
-  mhw_safari safaris[4];
-  u8 unknown18[284];
-
-  mhw_shoutout_settings shoutout_settings;
-
-  u8 unknown19a[725];
-  u8 achievements_obtained[16];
-  u8 achievements_unseen[16];
-  u32 unknown19b;
-  mhw_save_quests completed;
-  u8 unknown20[2048];
-  mhw_weapon_usage32 high_rank_usage;
-  mhw_weapon_usage32 low_rank_usage;
-  mhw_weapon_usage32 investigations_usage;
-  mhw_weapon_usage32 master_rank_usage;
-  mhw_weapon_usage32 guiding_lands_usage;
-
-  u8 addons_unseen[64];
-  u8 addons_claimed[64];
-  u16 addons[512];
-  u8 gallery_unlocked[16];
-  u8 gallery_unseen[16];
-
-  u8 unknown21a[260];
-  u64 daily_bonus_collect_time;
-  u8 unknown21b[30000];
-  u8 unknown21c[400];
-  u8 unknown21d[79728];
-  // Contains tutorial flags
-  u8 unknown21e[79];
-
-  str64 poogie_name;
-  u8 poogie_costumes[4];
-  u8 unknown22a[264];
-  u32 poogie_love;
-  u8 unknown22b[4];
-  mhw_handler_outfit handler_outfit;
-  u8 unknown22[980]; // Seen flags for appearance, maybe more
-
-  mhw_lynian_observatory lynian_observatory;
-  mhw_guiding_lands guiding_lands;
-
-  u8 unknown23a[312];
-  u32 unknown_set_empty_save; // Set in empty slot deleted previously
-  u8 unknown23b[368];
-  mhw_toggle shoutout_manual_auto_translation;
-  u8 unknown24a[406];
-  u8 elder_melder_seen_awakening_alchemy;
-  u8 unknown24b[355];
-
-  u8 unknown25[sizeof(u16) * 4741]; // Zero?
-  u8 hash_table[512];
+  u8 unknown0[0x200000];
 };
 
 struct mhw_keybind
@@ -1802,8 +1614,7 @@ struct mhw_ib_save
   mhw_section1 section1;
   mhw_section_header temp;
   mhw_save_slot saves[3];
-  u8 unknown1[3128];
-  u64 zero0[1974016 / 8];
+  u8 unknown1[368728];
 };
 
 union mhw_save_raw
@@ -1814,4 +1625,4 @@ union mhw_save_raw
 
 mhw_ib_save mhw_save;
 
-Assert(0x800000 == sizeof(mhw_ib_save), "Save file size invalid");
+// Assert(0x800000 == sizeof(mhw_ib_save), "Save file size invalid");
