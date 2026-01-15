@@ -1604,6 +1604,9 @@ struct mhw_section1
 struct mhw_section2
 {
   mhw_section_header header;
+  // NOTE: I'm unsure of the sizes of these
+  //       Could be a save array of sorts
+  mhw_save_slot saves[3];
 };
 
 struct mhw_ib_save
@@ -1612,9 +1615,8 @@ struct mhw_ib_save
   u64 offsets[3];
   mhw_section0 section0;
   mhw_section1 section1;
-  mhw_section_header temp;
-  mhw_save_slot saves[3];
-  u8 unknown1[368728];
+  mhw_section2 section2;
+  u8 unknown0[2095992];
 };
 
 union mhw_save_raw
@@ -1625,4 +1627,4 @@ union mhw_save_raw
 
 mhw_ib_save mhw_save;
 
-// Assert(0x800000 == sizeof(mhw_ib_save), "Save file size invalid");
+Assert(0x800000 == sizeof(mhw_ib_save), "Save file size invalid");
