@@ -4,9 +4,12 @@
 #include <QByteArray>
 
 static u8* QByteArrayToU8(QByteArray arr, u8* dst, u32 size) {
-#if 0
+#if 1
   // This is meant to allow loading smaller files
-  arr = arr.leftJustified(size, '\0');
+  if (arr.length() != size) {
+    qWarning("Loading unexpected file size.");
+    arr = arr.leftJustified(size, '\0');
+  }
 #endif
 
   u8* newdst = dst;
