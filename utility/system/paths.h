@@ -38,24 +38,23 @@ public:
 
   static QString GetGameSavePath(const QString& user)
   {
-    QString path = GetSteamPath();
+    if (user.isNull()) return NULL;
 
-    if (!path.isNull() && !user.isNull()) {
-      QDir fullpath(path);
-      QString rel = QString("userdata/%1/%2/remote").arg(user).arg(QString::fromUtf8(MHW_ID));
-      fullpath.cd(rel);
-      path = fullpath.path();
-    }
-    else {
-      path = QDir::homePath();
-    }
+    QString steam = GetSteamPath();
+    if (steam.isNull()) return NULL;
 
-    return path;
+    QDir path(steam);
+    QString rel = QString("userdata/%1/%2/remote").arg(user).arg(QString::fromUtf8(MHW_ID));
+
+    if (!path.cd(rel)) return NULL;
+    return path.path();
   }
 
   static QString GetGameSaveFilePath(const QString& user)
   {
-    return GetGameSavePath(user) + "/" + QString::fromUtf8(MHW_SAVE_NAME);
+    QString saveDir = GetGameSavePath(user);
+    if (saveDir.isNull()) return NULL;
+    return saveDir + "/" + QString::fromUtf8(MHW_SAVE_NAME);
   }
 
   static QString GetTheoreticalGameSaveFilePath()
