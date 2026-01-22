@@ -76,7 +76,7 @@ public:
 private:
   bool SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt = true, bool validate = false);
   bool LoadSaveFile(const QString& path, mhw_save_raw** save);
-  bool LoadSaveFilePS4(const QString& path, void** save);
+  bool LoadSaveFilePS4(const QString& path, mhw_save_raw** save);
   void SaveFile(const QString& path);
 
   void LoadSaveSlot();
@@ -91,7 +91,7 @@ private:
 
   // Inherited via SaveLoader
   virtual void Load(mhw_save_raw* mhwSave, int slotIndex = -1) override;
-  virtual void LoadFile(const QString& file) override;
+  virtual void LoadFile(const QString& file, bool isPS4) override;
 
   Ui::MHWISaveEditor* ui;
   QLabel* statusFile = nullptr;

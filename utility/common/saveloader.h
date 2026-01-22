@@ -27,6 +27,7 @@ private:
   int mhwSaveIndex = 0;
 
   QString file;
+  bool isPS4 = false;
   bool loading = false;
 
 protected:
@@ -67,9 +68,10 @@ public:
   }
 #endif
 
-  virtual void LoadFile(const QString& file)
+  virtual void LoadFile(const QString& file, bool isPS4)
   {
     this->file = file;
+    this->isPS4 = isPS4;
   }
 
   virtual void LoadIndex(int index)
