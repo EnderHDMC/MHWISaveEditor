@@ -7,6 +7,10 @@
 
 class MHWSaveUtils {
 public:
+  static bool IsBlowfishDecryptedPS4(u8* save) {
+    return save[0] != 0;
+  }
+
   static bool IsBlowfishDecrypted(mhw_ib_save* save) {
     return save->header.magic == 0x00000001;
   }

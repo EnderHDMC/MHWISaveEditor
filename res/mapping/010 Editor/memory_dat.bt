@@ -20,11 +20,9 @@ struct mhw_section_header
   u64 size;
 };
 
-// NOTE: I was really hoping this used the same format as on PC
-//       but alas...
 struct mhw_save_slot
 {
-  u8 unknown0[0x200000];
+  u8 unknown0[0x209AC0];
 };
 
 struct mhw_section0
@@ -43,8 +41,6 @@ struct mhw_section1
 struct mhw_section2
 {
   mhw_section_header header;
-  // NOTE: I'm unsure of the sizes of these
-  //       Could be a save array of sorts
   mhw_save_slot saves[3];
 };
 
@@ -55,7 +51,7 @@ struct mhw_ib_save
   mhw_section0 section0;
   mhw_section1 section1;
   mhw_section2 section2;
-  u8 unknown0[2095992];
+  u8 unknown0[0x1E2B38];
 };
 
 union mhw_save_raw

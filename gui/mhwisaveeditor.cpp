@@ -240,18 +240,31 @@ bool MHWISaveEditor::LoadSaveFile(const QString& path, mhw_save_raw** save)
   return true;
 }
 
-bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, void** save)
+bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save)
 {
-  u8* ps4 = FileUtils::ReadEntireFile(path, NULL, 8388608);
+  qInfo("Loading memory %s", qUtf8Printable(path));
+  mhw_save_raw* savep = *save;
+  if (!savep) savep = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+  if (!savep) {
+    qWarning("Memory: %s, cannot be read.", qUtf8Printable(path));
+    return false;
+  }
 
-  // NOTE: Pure guesses at this point
-  blowfish_decrypt(ps4 + 1160, 8388608 - 1160, KEY_SAVEDATA1000);
-  DecryptRegion(ps4, 1160, 0x2098C0 - 0x200, 0);
-  DecryptRegion(ps4, 2137928, 0x2098C0 - 0x200, 1);
-  DecryptRegion(ps4, 4274696, 0x2098C0 - 0x200, 2);
+  u8* ps4 = FileUtils::ReadEntireFile(path, nullptr, 0x800000);
+  if (!ps4) {
+    qWarning("Memory: %s, cannot be read.", qUtf8Printable(path));
+    return false;
+  }
 
-  FileUtils::WriteFile(path + ".dump", ps4, 8388608);
-  return false;
+  if (!MHWSaveUtils::IsBlowfishDecryptedPS4(ps4)) {
+    DecryptSavePS4(ps4, 0x800000);
+  }
+
+  memset(savep, 0, sizeof(mhw_save_raw));
+  memcpy(savep->save.section3.saves, ps4 + 0x488, sizeof(savep->save.section3.saves));
+
+  *save = savep;
+  return true;
 }
 
 void MHWISaveEditor::Dump(int number)
@@ -335,7 +348,9 @@ void MHWISaveEditor::Open()
     QStringList files = dialog.selectedFiles();
     filepath = files[0];
 
-    LoadFile(filepath);
+    QFileInfo fi(filepath);
+    bool isPS4 = fi.size() == 0x800000;
+    LoadFile(filepath, isPS4);
 
     QString editorFile = EditorFile();
     QDir fileInfo(editorFile);
@@ -357,7 +372,7 @@ void MHWISaveEditor::Open()
 void MHWISaveEditor::OpenSAVEDATA1000()
 {
   QString path = Paths::GetGameSaveFilePath(steamUser);
-  LoadFile(path);
+  LoadFile(path, false);
 }
 
 void MHWISaveEditor::Save()
@@ -392,7 +407,7 @@ void MHWISaveEditor::SaveAs()
       fi.setFile(fi.filePath() + ext_map.value(selectedFilter));
     }
 
-    SaveLoader::LoadFile(files[0]);
+    SaveLoader::LoadFile(files[0], false);
     SaveFile(files[0]);
   }
 }
@@ -435,18 +450,19 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
   SaveLoader::FinishLoad();
 }
 
-void MHWISaveEditor::LoadFile(const QString& file)
+void MHWISaveEditor::LoadFile(const QString& file, bool isPS4)
 {
   mhw_save_raw** mhwSavePtr = MHWS_SavePtr();
-  bool load = LoadSaveFile(file, mhwSavePtr);
-  load = LoadSaveFilePS4(file, (void**)mhwSavePtr);
+  bool load = false;
+  if (!isPS4) load = LoadSaveFile(file, mhwSavePtr);
+  else load = LoadSaveFilePS4(file, mhwSavePtr);
 
   if (load) {
-    SaveLoader::LoadFile(file);
+    SaveLoader::LoadFile(file, isPS4);
     mhw_save_raw* mhwSave = MHW_Save();
     Load(mhwSave);
 
-    if (settings->GetDoAutoBackups()) {
+    if (settings->GetDoAutoBackups() && !isPS4) {
       Notification* notif = notif->GetInstance();
       notif->PushMode(NotificationMode::NotifModeNone);
       Backup();
@@ -700,7 +716,7 @@ void MHWISaveEditor::Restore() {
   };
 
   memcpy(savep->data, saveBlob.constData(), saveBlob.length());
-  SaveLoader::LoadFile(Paths::GetGameSaveFilePath(steamUser));
+  SaveLoader::LoadFile(Paths::GetGameSaveFilePath(steamUser), false);
   Load(savep, -1);
 }
 
