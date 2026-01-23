@@ -660,6 +660,15 @@ static uint32 Crc32PS4(uint32 iv, u8 data[], int offset, int length)
   return result;
 }
 
+static byte* GenerateSlotChecksumPS4(byte* save, int offset, int length, int saveSlot)
+{
+  // TODO: Fix checksum
+  u8* checksum = (u8*)malloc(0x200);
+
+  memcpy(checksum, save + offset + length, 0x200);
+  return checksum;
+}
+
 static void GenerateSaltPS4(byte salt[], uint32 keySalt)
 {
   uint32 tableOffset = 0xC0490023 & 0xFFF;
@@ -799,7 +808,66 @@ static bool DecryptRegionPS4(u8* save, int offset, int length, int saveSlot)
       saveOffset += 16;
     }
   }
-  return false;
+
+  u8* checksum = GenerateSlotChecksumPS4(save, offset, length, saveSlot);
+  bool match = CheckChecksum(save, checksum, offset, length);
+  free(checksum);
+  return match;
+}
+
+static void EncryptRegionPS4(byte* save, int offset, int length, int saveSlot)
+{
+  CryptoPP::ECB_Mode<CryptoPP::AES>::Encryption encryptor;
+
+  byte salt[0x200] = {};
+  byte keys[0x20][0x10] = {};
+  int keyLength[0x20] = {};
+
+  byte* checksum = GenerateSlotChecksumPS4(save, offset, length, saveSlot);
+  SetChecksum(save, checksum, offset, length);
+
+  uint32 salts[] = { 2353370976, 2590720403, 3860918196 };
+  uint32 keySalt = Crc32PS4(0xC0490023, save, offset + length, 0x200);
+  int saveOffset = offset;
+  free(checksum);
+
+  GenerateSaltPS4(salt, keySalt);
+  GenerateKeysPS4(keys, keySalt, salt);
+  GenerateKeyLengthPS4(keyLength, keySalt, length);
+
+  for (int i = 0; i < 32; ++i) {
+    int saltOffset = 0;
+    encryptor.SetKey(keys[i], 0x10);
+
+    while (saveOffset < keyLength[i] + offset)
+    {
+      // if current salt is even, then salt 2nd and 4th word, encrypt, then salt 1st and 3rd word, otherwise do opposite
+      int branch = (salt[saltOffset & 0x1FF] & 1) == 0 ? 4 : 0;
+      save[saveOffset + branch + 0] ^= salt[saltOffset + 0 & 0x1FF];
+      save[saveOffset + branch + 1] ^= salt[saltOffset + 1 & 0x1FF];
+      save[saveOffset + branch + 2] ^= salt[saltOffset + 2 & 0x1FF];
+      save[saveOffset + branch + 3] ^= salt[saltOffset + 3 & 0x1FF];
+
+      save[saveOffset + branch + 8] ^= salt[saltOffset + 4 & 0x1FF];
+      save[saveOffset + branch + 9] ^= salt[saltOffset + 5 & 0x1FF];
+      save[saveOffset + branch + 10] ^= salt[saltOffset + 6 & 0x1FF];
+      save[saveOffset + branch + 11] ^= salt[saltOffset + 7 & 0x1FF];
+
+      encryptor.ProcessData(save + saveOffset, save + saveOffset, 0x10);
+
+      save[saveOffset - branch + 4] ^= salt[saltOffset + 8 & 0x1FF];
+      save[saveOffset - branch + 5] ^= salt[saltOffset + 9 & 0x1FF];
+      save[saveOffset - branch + 6] ^= salt[saltOffset + 10 & 0x1FF];
+      save[saveOffset - branch + 7] ^= salt[saltOffset + 11 & 0x1FF];
+
+      save[saveOffset - branch + 12] ^= salt[saltOffset + 12 & 0x1FF];
+      save[saveOffset - branch + 13] ^= salt[saltOffset + 13 & 0x1FF];
+      save[saveOffset - branch + 14] ^= salt[saltOffset + 14 & 0x1FF];
+      save[saveOffset - branch + 15] ^= salt[saltOffset + 15 & 0x1FF];
+      saltOffset += 4;
+      saveOffset += 16;
+    }
+  }
 }
 
 static void rotateBuffer(u8* buffer, u64 start, u64 end, i64 rotation) {
@@ -825,6 +893,17 @@ static u8* DecryptSavePS4(u8* save, int length)
   DecryptRegionPS4(save, 0x000488, 0x2098C0, 0);
   DecryptRegionPS4(save, 0x209F48, 0x2098C0, 1);
   DecryptRegionPS4(save, 0x413A08, 0x2098C0, 2);
+
+  return save;
+}
+
+static u8* EncryptSavePS4(u8* save, int length)
+{
+  EncryptRegionPS4(save, 0x000488, 0x2098C0, 0);
+  EncryptRegionPS4(save, 0x209F48, 0x2098C0, 1);
+  EncryptRegionPS4(save, 0x413A08, 0x2098C0, 2);
+
+  rotateBuffer(save, 0x600488, (uint64)0x61D4C8 + 3128, 3128);
 
   return save;
 }

@@ -1659,9 +1659,14 @@ union mhw_save_raw
   mhw_ib_save save;
   u8 data[sizeof(mhw_ib_save)];
 };
+
+struct mhw_save_ps4 {
+  u8 data[0x800000];
+};
 #pragma pack(pop)
 
 // Assumptions
 static_assert(COUNTOF(mhw_save_slot::equipment) == COUNTOF(mhw_save_slot::equipment_index_table));
 
 static_assert(sizeof(mhw_ib_save) == MHW_IB_SAVE_SIZE, "Size of MHW:IB Save is not as expected.");
+static_assert(sizeof(mhw_save_ps4) == MHW_PS4_SAVE_SIZE, "Size of MHW PS4 Save is not as expected.");
