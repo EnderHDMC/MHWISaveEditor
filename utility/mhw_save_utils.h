@@ -7,8 +7,8 @@
 
 class MHWSaveUtils {
 public:
-  static bool IsBlowfishDecryptedPS4(mhw_save_ps4* save) {
-    return save->data[0] != 0;
+  static bool IsBlowfishDecryptedPS4(mhw_ps4_save* save) {
+    return (save->section2.saves[0].unknown0 & 0xFFFF0000) == 0;
   }
 
   static bool IsBlowfishDecrypted(mhw_ib_save* save) {

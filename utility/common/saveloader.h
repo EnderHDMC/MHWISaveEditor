@@ -17,7 +17,7 @@ class SaveLoader {
 private:
   // You really don't want to set any of these directly.
   mhw_save_raw* mhwSave = nullptr;
-  mhw_save_ps4* mhwSavePS4 = nullptr;
+  mhw_ps4_save* mhwSavePS4 = nullptr;
   mhw_section0* mhwSection0 = nullptr;
   mhw_section1* mhwSection1 = nullptr;
   mhw_section2* mhwSection2 = nullptr;
@@ -129,10 +129,10 @@ public:
   // but null/false/empty values should still be handled by the caller.
   // You can do a guard check after calling these as well.
   mhw_save_raw* MHWS_Save() { return mhwSave; }
-  mhw_save_ps4* MHWS_SavePS4() { return mhwSavePS4; }
+  mhw_ps4_save* MHWS_SavePS4() { return mhwSavePS4; }
 
   mhw_save_raw** MHWS_SavePtr() { return &mhwSave; }
-  mhw_save_ps4** MHWS_SavePS4Ptr() { return &mhwSavePS4; }
+  mhw_ps4_save** MHWS_SavePS4Ptr() { return &mhwSavePS4; }
   bool MHWS_IsPS4() { return isPS4; }
 
   QString EditorFile() { return file; }

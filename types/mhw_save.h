@@ -1660,8 +1660,40 @@ union mhw_save_raw
   u8 data[sizeof(mhw_ib_save)];
 };
 
-struct mhw_save_ps4 {
-  u8 data[0x800000];
+// PS4 unique
+struct mhw_ps4_section0
+{
+  mhw_section_header header;
+  u8 data[1024];
+
+};
+
+struct mhw_ps4_section1
+{
+  mhw_section_header header;
+  u8 data[48];
+};
+
+struct mhw_ps4_section2
+{
+  mhw_section_header header;
+  mhw_save_slot saves[3];
+};
+
+struct mhw_ps4_save
+{
+  u8 header[16];
+  u64 offsets[3];
+  mhw_ps4_section0 section0;
+  mhw_ps4_section1 section1;
+  mhw_ps4_section2 section2;
+  u8 unknown0[0x1E2B38];
+};
+
+union mhw_ps4_save_raw
+{
+  mhw_ps4_save save;
+  u8 data[sizeof(mhw_ps4_save)];
 };
 #pragma pack(pop)
 
@@ -1669,4 +1701,4 @@ struct mhw_save_ps4 {
 static_assert(COUNTOF(mhw_save_slot::equipment) == COUNTOF(mhw_save_slot::equipment_index_table));
 
 static_assert(sizeof(mhw_ib_save) == MHW_IB_SAVE_SIZE, "Size of MHW:IB Save is not as expected.");
-static_assert(sizeof(mhw_save_ps4) == MHW_PS4_SAVE_SIZE, "Size of MHW PS4 Save is not as expected.");
+static_assert(sizeof(mhw_ps4_save) == MHW_PS4_SAVE_SIZE, "Size of MHW PS4 Save is not as expected.");
