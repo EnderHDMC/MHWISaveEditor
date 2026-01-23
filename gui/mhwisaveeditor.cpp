@@ -208,11 +208,11 @@ bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bo
     return written;
   }
   else {
-    mhw_save_ps4* ps4 = MHWS_SavePS4();
+    mhw_ps4_save* ps4 = MHWS_SavePS4();
     memcpy((u8*)ps4 + 0x488, save->save.section3.saves, sizeof(save->save.section3.saves));
-    if (encrypt) EncryptSavePS4((u8*)ps4, sizeof(mhw_save_ps4));
+    if (encrypt) EncryptSavePS4((u8*)ps4, sizeof(mhw_ps4_save));
 
-    return FileUtils::WriteFileSafe(path, (u8*)ps4, sizeof(mhw_save_ps4));
+    return FileUtils::WriteFileSafe(path, (u8*)ps4, sizeof(mhw_ps4_save));
   }
 }
 
@@ -253,7 +253,7 @@ bool MHWISaveEditor::LoadSaveFile(const QString& path, mhw_save_raw** save)
   return true;
 }
 
-bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save, mhw_save_ps4** ps4)
+bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save, mhw_ps4_save** ps4)
 {
   qInfo("Loading memory %s", qUtf8Printable(path));
   mhw_save_raw* savep = *save;
@@ -264,14 +264,14 @@ bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save, m
   }
   *save = savep;
 
-  *ps4 = (mhw_save_ps4*)FileUtils::ReadEntireFile(path, (u8*)*ps4, sizeof(mhw_save_ps4));
+  *ps4 = (mhw_ps4_save*)FileUtils::ReadEntireFile(path, (u8*)*ps4, sizeof(mhw_ps4_save));
   if (!*ps4) {
     qWarning("Memory: %s, cannot be read.", qUtf8Printable(path));
     return false;
   }
 
   if (!MHWSaveUtils::IsBlowfishDecryptedPS4(*ps4)) {
-    DecryptSavePS4((u8*)*ps4, sizeof(mhw_save_ps4));
+    DecryptSavePS4((u8*)*ps4, sizeof(mhw_ps4_save));
   }
 
   memset(savep, 0, sizeof(mhw_save_raw));
@@ -467,7 +467,7 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 void MHWISaveEditor::LoadFile(const QString& file, bool isPS4)
 {
   mhw_save_raw** mhwSavePtr = MHWS_SavePtr();
-  mhw_save_ps4** mhwSavePS4Ptr = MHWS_SavePS4Ptr();
+  mhw_ps4_save** mhwSavePS4Ptr = MHWS_SavePS4Ptr();
   bool load = false;
   if (!isPS4) load = LoadSaveFile(file, mhwSavePtr);
   else load = LoadSaveFilePS4(file, mhwSavePtr, mhwSavePS4Ptr);
