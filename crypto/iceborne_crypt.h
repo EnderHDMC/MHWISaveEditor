@@ -662,10 +662,83 @@ static uint32 Crc32PS4(uint32 iv, u8 data[], int offset, int length)
 
 static byte* GenerateSlotChecksumPS4(byte* save, int offset, int length, int saveSlot)
 {
-  // TODO: Fix checksum
   u8* checksum = (u8*)malloc(0x200);
 
-  memcpy(checksum, save + offset + length, 0x200);
+  u32 seed = 0xC0490023;
+  u32 constants[4] = { 0x67308D52, 0x26AE9DAB, 0x701D5D68, seed };
+  u32 crcLengths[7] = {};
+  u32 partialCrcs[8] = {};
+  u32 hashLookup[8] = {};
+
+  u32 slotConstants[8] = {
+    0x394E4E79 ^ constants[saveSlot & 3],
+    0x681BA6CF ^ constants[(saveSlot + 1) & 3],
+    0x671A5459 ^ constants[(saveSlot + 2) & 3],
+    constants[(saveSlot - 1) & 3] ^ 0x4BF0CF23,
+    constants[saveSlot & 3] ^ 0x137E601C,
+    constants[(saveSlot + 1) & 3] ^ 0x4BF0CF23,
+    constants[(saveSlot + 2) & 3] ^ 0x7C8B3AF0,
+    constants[(saveSlot - 1) & 3] ^ 0x5D9E0742
+  };
+
+  int lengthInt = length >> 3;
+
+  for (int i = 0; i < 7; ++i) {
+    int idx = i + 1;
+    if (idx < 8) {
+      float variation = FLOAT_CONSTANTS[(slotConstants[idx] + INTEGER_CONSTANTS[slotConstants[idx] & 0xFFF]) & 0xFFF];
+      crcLengths[i] = (int)((variation - 0.5F) * (float)lengthInt) + (idx + 1) * lengthInt;
+    }
+  }
+  crcLengths[6] = length;
+
+  u32 pos = int((FLOAT_CONSTANTS[(INTEGER_CONSTANTS[slotConstants[0] & 0xFFF] + slotConstants[0]) & 0xFFF] - 0.5) * (float)lengthInt) + lengthInt;
+  partialCrcs[0] = Crc32(slotConstants[0], save, offset, pos);
+
+  u32 prevPos = pos;
+  for (int i = 1; i < 8; ++i) {
+    pos = i < 7 ? crcLengths[i - 1] : length;
+    int crcInit = partialCrcs[i - 1] ^ slotConstants[i];
+    partialCrcs[i] = Crc32(crcInit, save, offset + prevPos, pos - prevPos);
+    prevPos = pos;
+  }
+
+  for (int i = 0; i < 7; ++i) {
+    hashLookup[i] = slotConstants[i] ^ partialCrcs[i] ^ partialCrcs[7] ^ constants[3];
+  }
+  hashLookup[7] = slotConstants[7] ^ partialCrcs[7] ^ constants[3];
+
+  u32 crc = constants[3] ^ constants[saveSlot];
+  for (int i = 0; i < 8; ++i) {
+    crc = (crc >> 8) ^ CRC_TABLE[((slotConstants[i] >> 0) & 0xFF) ^ (crc & 0xFF)];
+    crc = (crc >> 8) ^ CRC_TABLE[((slotConstants[i] >> 8) & 0xFF) ^ (crc & 0xFF)];
+    crc = (crc >> 8) ^ CRC_TABLE[((slotConstants[i] >> 16) & 0xFF) ^ (crc & 0xFF)];
+    crc = (crc >> 8) ^ CRC_TABLE[((slotConstants[i] >> 24) & 0xFF) ^ (crc & 0xFF)];
+  }
+
+  for (int i = 0; i < 8; ++i) {
+    crc = (crc >> 8) ^ CRC_TABLE[((partialCrcs[i] >> 0) & 0xFF) ^ (crc & 0xFF)];
+    crc = (crc >> 8) ^ CRC_TABLE[((partialCrcs[i] >> 8) & 0xFF) ^ (crc & 0xFF)];
+    crc = (crc >> 8) ^ CRC_TABLE[((partialCrcs[i] >> 16) & 0xFF) ^ (crc & 0xFF)];
+    crc = (crc >> 8) ^ CRC_TABLE[((partialCrcs[i] >> 24) & 0xFF) ^ (crc & 0xFF)];
+  }
+
+  u32 crcSalt = crc;
+  for (int i = 0; i < 0x200; i += 4) {
+    u32 index = INTEGER_CONSTANTS[crcSalt & 0xFFF];
+    u32 hashIndex = (index + saveSlot) & 7;
+    u32 checksumInt = (index ^ hashLookup[hashIndex] ^ seed) & 0xFFFFFFFF;
+
+    checksum[i] = (u8)checksumInt;
+    checksum[i + 1] = (u8)(checksumInt >> 8);
+    checksum[i + 2] = (u8)(checksumInt >> 16);
+    checksum[i + 3] = (u8)(checksumInt >> 24);
+
+    u32 byteC = ((crc & 0xFF) + ((crc >> 8) & 0xFF) + ((crc >> 16) & 0xFF) + (crc >> 24) + 1);
+    crcSalt = crcSalt + byteC;
+  }
+
+  // memcpy(checksum, save + offset + length, 0x200);
   return checksum;
 }
 
@@ -702,37 +775,37 @@ static void GenerateKeysPS4(byte keys[0x20][0x10], uint32 keySalt, u8 salt[])
   uint32 c4 = 0x67308D52;
 
   uint32 initialSeed = 0xC0490023;
-  uint32 iVar11 = ((initialSeed >> 24) + ((initialSeed >> 16) & 0xFF)) + ((initialSeed >> 8) & 0xFF) + (initialSeed & 0xFF);
+  uint32 saltOffset = ((initialSeed >> 24) + ((initialSeed >> 16) & 0xFF)) + ((initialSeed >> 8) & 0xFF) + (initialSeed & 0xFF);
 
   for (int i = 0; i < 32; ++i) {
     int j = i << 2;
     uint32 saltValue = (uint32)(salt[j] | (salt[j + 1] << 8) | (salt[j + 2] << 16) | (salt[j + 3] << 24));
-    uint32 salty = saltValue ^ keySalt ^ initialSeed;
+    uint32 encodedKeyIndex = saltValue ^ keySalt ^ initialSeed;
 
     uint32 offset0 = initialSeed & 0xFFF;
-    uint32 offset1 = (initialSeed + 1 + iVar11) & 0xFFF;
-    uint32 offset2 = (initialSeed + 2 + iVar11 * 2) & 0xFFF;
-    uint32 offset3 = (initialSeed + 3 + iVar11 * 3) & 0xFFF;
+    uint32 offset1 = (initialSeed + 1 + saltOffset) & 0xFFF;
+    uint32 offset2 = (initialSeed + 2 + saltOffset * 2) & 0xFFF;
+    uint32 offset3 = (initialSeed + 3 + saltOffset * 3) & 0xFFF;
 
-    uint32 k = INTEGER_CONSTANTS[offset0] ^ salty ^ c1;
+    uint32 k = INTEGER_CONSTANTS[offset0] ^ encodedKeyIndex ^ c1;
     keys[i][0] = (byte)(k);
     keys[i][1] = (byte)(k >> 8);
     keys[i][2] = (byte)(k >> 16);
     keys[i][3] = (byte)(k >> 24);
 
-    k = INTEGER_CONSTANTS[offset1] ^ salty ^ c2;
+    k = INTEGER_CONSTANTS[offset1] ^ encodedKeyIndex ^ c2;
     keys[i][4] = (byte)(k);
     keys[i][5] = (byte)(k >> 8);
     keys[i][6] = (byte)(k >> 16);
     keys[i][7] = (byte)(k >> 24);
 
-    k = INTEGER_CONSTANTS[offset2] ^ salty ^ c3;
+    k = INTEGER_CONSTANTS[offset2] ^ encodedKeyIndex ^ c3;
     keys[i][8] = (byte)(k);
     keys[i][9] = (byte)(k >> 8);
     keys[i][10] = (byte)(k >> 16);
     keys[i][11] = (byte)(k >> 24);
 
-    k = INTEGER_CONSTANTS[offset3] ^ salty ^ c4;
+    k = INTEGER_CONSTANTS[offset3] ^ encodedKeyIndex ^ c4;
     keys[i][12] = (byte)(k);
     keys[i][13] = (byte)(k >> 8);
     keys[i][14] = (byte)(k >> 16);
