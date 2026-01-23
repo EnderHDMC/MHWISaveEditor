@@ -151,14 +151,17 @@ MHWISaveEditor::MHWISaveEditor(QWidget* parent)
 
   filters.append(tr("All Files", "Open/Save filter, show all files.") + " (*)");
   filters.append(tr("Encrypted Save", "Open/Save filter, show only *.raw files.") + " (*.raw)");
+  filters.append(tr("PS4 Save", "Open/Save filter, show only *.dat files.") + " (*.dat)");
   filters.append(tr("Unencrypted Save", "Open/Save filter, show only *.bin files.") + " (*.bin)");
 
   ext_map.insert(filters[0], "");
   ext_map.insert(filters[1], ".raw");
-  ext_map.insert(filters[2], ".bin");
+  ext_map.insert(filters[2], ".dat");
+  ext_map.insert(filters[3], ".bin");
 
   encrypt_map.insert("", true);
   encrypt_map.insert(".raw", true);
+  encrypt_map.insert(".dat", true);
   encrypt_map.insert(".bin", false);
 
 #if defined(QT_DEBUG)
@@ -186,21 +189,31 @@ bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bo
   qInfo("Saving: %s", qUtf8Printable(path));
   qInfo() << "Validate:" << validate;
   qInfo() << "Encrypted:" << encrypt;
+  bool isPS4 = MHWS_IsPS4();
+  qInfo() << "PS4:" << isPS4;
 
-  mhw_save_raw* saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
-  if (!saveWrite) {
-    qWarning("Error allocating memory.");
-    return false;
+  if (!isPS4) {
+    mhw_save_raw* saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+    if (!saveWrite) {
+      qWarning("Error allocating memory.");
+      return false;
+    }
+    memcpy(saveWrite, save, sizeof(mhw_save_raw));
+
+    if (validate) MHWSaveUtils::ValidateSaveFile(&saveWrite->save);
+    if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
+
+    bool written = FileUtils::WriteFileSafe(path, saveWrite->data, sizeof(mhw_save_raw));
+    free(saveWrite);
+    return written;
   }
+  else {
+    mhw_save_ps4* ps4 = MHWS_SavePS4();
+    memcpy((u8*)ps4 + 0x488, save->save.section3.saves, sizeof(save->save.section3.saves));
+    if (encrypt) EncryptSavePS4((u8*)ps4, sizeof(mhw_save_ps4));
 
-  memcpy(saveWrite, save, sizeof(mhw_save_raw));
-  if (validate) MHWSaveUtils::ValidateSaveFile(&saveWrite->save);
-  if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
-
-  bool written = FileUtils::WriteFileSafe(path, saveWrite->data, sizeof(mhw_save_raw));
-
-  if (saveWrite != save) free(saveWrite);
-  return written;
+    return FileUtils::WriteFileSafe(path, (u8*)ps4, sizeof(mhw_save_ps4));
+  }
 }
 
 void MHWISaveEditor::SaveFile(const QString& path)
@@ -240,7 +253,7 @@ bool MHWISaveEditor::LoadSaveFile(const QString& path, mhw_save_raw** save)
   return true;
 }
 
-bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save)
+bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save, mhw_save_ps4** ps4)
 {
   qInfo("Loading memory %s", qUtf8Printable(path));
   mhw_save_raw* savep = *save;
@@ -249,21 +262,21 @@ bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save)
     qWarning("Memory: %s, cannot be read.", qUtf8Printable(path));
     return false;
   }
+  *save = savep;
 
-  u8* ps4 = FileUtils::ReadEntireFile(path, nullptr, 0x800000);
-  if (!ps4) {
+  *ps4 = (mhw_save_ps4*)FileUtils::ReadEntireFile(path, (u8*)*ps4, sizeof(mhw_save_ps4));
+  if (!*ps4) {
     qWarning("Memory: %s, cannot be read.", qUtf8Printable(path));
     return false;
   }
 
-  if (!MHWSaveUtils::IsBlowfishDecryptedPS4(ps4)) {
-    DecryptSavePS4(ps4, 0x800000);
+  if (!MHWSaveUtils::IsBlowfishDecryptedPS4(*ps4)) {
+    DecryptSavePS4((u8*)*ps4, sizeof(mhw_save_ps4));
   }
 
   memset(savep, 0, sizeof(mhw_save_raw));
-  memcpy(savep->save.section3.saves, ps4 + 0x488, sizeof(savep->save.section3.saves));
+  memcpy(savep->save.section3.saves, (u8*)*ps4 + 0x488, sizeof(savep->save.section3.saves));
 
-  *save = savep;
   return true;
 }
 
@@ -407,8 +420,9 @@ void MHWISaveEditor::SaveAs()
       fi.setFile(fi.filePath() + ext_map.value(selectedFilter));
     }
 
-    SaveLoader::LoadFile(files[0], false);
     SaveFile(files[0]);
+    bool isPS4 = MHWS_IsPS4();
+    SaveLoader::LoadFile(files[0], isPS4);
   }
 }
 
@@ -453,9 +467,10 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 void MHWISaveEditor::LoadFile(const QString& file, bool isPS4)
 {
   mhw_save_raw** mhwSavePtr = MHWS_SavePtr();
+  mhw_save_ps4** mhwSavePS4Ptr = MHWS_SavePS4Ptr();
   bool load = false;
   if (!isPS4) load = LoadSaveFile(file, mhwSavePtr);
-  else load = LoadSaveFilePS4(file, mhwSavePtr);
+  else load = LoadSaveFilePS4(file, mhwSavePtr, mhwSavePS4Ptr);
 
   if (load) {
     SaveLoader::LoadFile(file, isPS4);
