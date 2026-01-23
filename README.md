@@ -34,12 +34,16 @@ To load the translation into the editor:
 - [LEGENDFF](https://github.com/LEGENDFF/) - for the reference implementation for decrypting/encrypting the save files.
 - [Synthlight](https://github.com/Synthlight/) - for the .itm template that I adapted to dump the items.
 - [Marcus101RR](https://www.nexusmods.com/monsterhunterworld/users/58495681) - for the [tables](https://www.nexusmods.com/monsterhunterworld/mods/2161) that have helped me map out the save structure.
+- [Ahmed](https://github.com/alfizari) - for cracking the MHW 2nd encryption layer.
+- [Radu](https://github.com/Radu13) - for help on the PS4 3rd slot decryption.
+- Anna - for testing the encryption.
 
 ### Translators
-- Narugakuruga - for the Simplified Chinese translation.
+- [Narugakuruga](https://github.com/Narugakuruga) - for the Simplified Chinese translation.
 
 ### Important Links:
 - [LEGENDFF/mhw-Savecrypt](https://github.com/LEGENDFF/mhw-Savecrypt)
+- [alfizari/Monster-Hunter-World-Save-Decrypt-PS4](https://github.com/alfizari/Monster-Hunter-World-Save-Decrypt-PS4)
 - [Fusion86/Cirilla](https://github.com/Fusion86/Cirilla)
 - [Synthlight/MHW-Editor](https://github.com/Synthlight/MHW-Editor)
 - [TanukiSharp/MHWSaveUtils](https://github.com/TanukiSharp/MHWSaveUtils)
