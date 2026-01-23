@@ -452,13 +452,6 @@ struct mhw_section_offsets
   u64 section[4];
 };
 
-struct mhw_section_header
-{
-  u32 signature;
-  u32 unknown0;
-  u64 size;
-};
-
 struct mhw_color
 {
   u8 r, g, b, a;
@@ -1820,6 +1813,13 @@ struct mhw_control_loadout
   u16 unknown0;
   str64 name;
   mhw_keybind keybinds[200];
+};
+
+struct mhw_section_header
+{
+  u32 signature;
+  u32 unknown0;
+  u64 size;
 };
 
 struct mhw_section0
