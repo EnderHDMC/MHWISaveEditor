@@ -1818,12 +1818,6 @@ struct mhw_ps4_save
   u8 unknown0[0x1E2B38];
 };
 
-union mhw_ps4_save_raw
-{
-  mhw_ps4_save save;
-  u8 data[sizeof(mhw_ps4_save)];
-};
-
 mhw_ps4_save mhw_save;
 
 Assert(0x800000 == sizeof(mhw_ps4_save), "Save file size invalid");

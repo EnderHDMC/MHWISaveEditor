@@ -30,7 +30,7 @@ void InventoryEditorTab::ScrollToIndex(int index)
   itemView->SetFocus();
 }
 
-void InventoryEditorTab::Load(mhw_save_raw* mhwSave, int slotIndex)
+void InventoryEditorTab::Load(mhw_ib_save* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
 
@@ -46,7 +46,7 @@ void InventoryEditorTab::Load(mhw_save_raw* mhwSave, int slotIndex)
 void InventoryEditorTab::LoadIndex(int index)
 {
   SaveLoader::LoadIndex(index);
-  mhw_save_raw* mhwSave = MHW_Save();
+  mhw_ib_save* mhwSave = MHW_SaveIB();
   int slotIndex = MHW_SaveIndex();
 
   ItemSlotView* slotView = slotViews[index];

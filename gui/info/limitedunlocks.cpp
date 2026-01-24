@@ -21,7 +21,7 @@ LimitedUnlocks::~LimitedUnlocks()
   delete ui;
 }
 
-void LimitedUnlocks::Load(mhw_save_raw* mhwSave, int slotIndex)
+void LimitedUnlocks::Load(mhw_ib_save* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();

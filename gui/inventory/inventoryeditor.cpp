@@ -133,7 +133,7 @@ void InventoryEditor::ItemAdd()
   }
 }
 
-void InventoryEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
+void InventoryEditor::Load(mhw_ib_save* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
 

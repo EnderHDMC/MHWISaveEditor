@@ -16,14 +16,13 @@
 class SaveLoader {
 private:
   // You really don't want to set any of these directly.
-  mhw_save_raw* mhwSave = nullptr;
+  mhw_ib_save* mhwSaveIB = nullptr;
   mhw_ps4_save* mhwSavePS4 = nullptr;
   mhw_section0* mhwSection0 = nullptr;
   mhw_section1* mhwSection1 = nullptr;
   mhw_section2* mhwSection2 = nullptr;
   mhw_section3* mhwSection3 = nullptr;
 
-  mhw_ib_save* mhwSaveIB = nullptr;
   mhw_save_slot* mhwSaveSlot = nullptr;
   int mhwSaveIndex = 0;
 
@@ -38,36 +37,26 @@ protected:
 public:
   virtual ~SaveLoader() {}
 
-  virtual void Load(mhw_save_raw* mhwSave, int slotIndex)
+  virtual void Load(mhw_ib_save* mhwSave, int slotIndex)
   {
     loading = true;
 
-    if (this->mhwSave != mhwSave && !this->mhwSave) {
-      free(this->mhwSave);
+    if (this->mhwSaveIB != mhwSave && !this->mhwSaveIB) {
+      qWarning() << "Potential double-free";
+      free(this->mhwSaveIB);
     }
-    this->mhwSave = (mhwSave) ? mhwSave : nullptr;
 
-    this->mhwSaveIB = (this->mhwSave) ? &this->mhwSave->save : nullptr;
-    this->mhwSection0 = (mhwSaveIB) ? &mhwSaveIB->section0 : nullptr;
-    this->mhwSection1 = (mhwSaveIB) ? &mhwSaveIB->section1 : nullptr;
-    this->mhwSection2 = (mhwSaveIB) ? &mhwSaveIB->section2 : nullptr;
-    this->mhwSection3 = (mhwSaveIB) ? &mhwSaveIB->section3 : nullptr;
+    this->mhwSaveIB = (mhwSave) ? mhwSave : nullptr;
+    this->mhwSection0 = (mhwSave) ? &mhwSave->section0 : nullptr;
+    this->mhwSection1 = (mhwSave) ? &mhwSave->section1 : nullptr;
+    this->mhwSection2 = (mhwSave) ? &mhwSave->section2 : nullptr;
+    this->mhwSection3 = (mhwSave) ? &mhwSave->section3 : nullptr;
 
     this->mhwSaveIndex = slotIndex;
     if (slotIndex == -1 && mhwSaveIB)
       mhwSaveIndex = mhwSection1->last_active_slot;
     this->mhwSaveSlot = (mhwSection3) ? &mhwSection3->saves[mhwSaveIndex] : nullptr;
   }
-
-#if 0
-  // NOTE: For development purposes only.
-  // Should only be enabled for a quick & dirty method while testing stuff.
-  // This is not a debug function, this is just to bypass the full Load logic while testing.
-  virtual void PrimeLoad(mhw_save_raw* mhwSave, int slotIndex, bool loadFull = false) {
-    loading = true;
-    if (loadFull) SaveLoader::Load(mhwSave, slotIndex);
-  }
-#endif
 
   virtual void LoadFile(const QString& file, bool isPS4)
   {
@@ -90,15 +79,14 @@ public:
   virtual void Unload(bool freeMem = false)
   {
     loading = true;
-    if (freeMem) free(this->mhwSave);
+    if (freeMem) free(this->mhwSaveIB);
 
-    this->mhwSave = nullptr;
+    this->mhwSaveIB = nullptr;
     this->mhwSection0 = nullptr;
     this->mhwSection1 = nullptr;
     this->mhwSection2 = nullptr;
     this->mhwSection3 = nullptr;
 
-    this->mhwSaveIB = nullptr;
     this->mhwSaveSlot = nullptr;
   }
 
@@ -114,24 +102,23 @@ public:
 
   // All of these should be preceeded by a guard.
   // They all assert that the values are set.
-  bool MHW_SaveCheck() { return mhwSave; }
-  mhw_save_raw* MHW_Save() { Q_ASSERT(mhwSave); return mhwSave; }
+  bool MHW_SaveCheck() { return mhwSaveIB; }
+  mhw_ib_save* MHW_SaveIB() { Q_ASSERT(mhwSaveIB); return mhwSaveIB; }
   mhw_section0* MHW_Section0() { Q_ASSERT(mhwSection0); return mhwSection0; }
   mhw_section1* MHW_Section1() { Q_ASSERT(mhwSection1); return mhwSection1; }
   mhw_section2* MHW_Section2() { Q_ASSERT(mhwSection2); return mhwSection2; }
   mhw_section3* MHW_Section3() { Q_ASSERT(mhwSection3); return mhwSection3; }
 
-  mhw_ib_save* MHW_SaveIB() { Q_ASSERT(mhwSaveIB); return mhwSaveIB; }
   mhw_save_slot* MHW_SaveSlot() { Q_ASSERT(mhwSaveSlot); return mhwSaveSlot; }
   int MHW_SaveIndex() { Q_ASSERT(mhwSaveIndex >= 0 && mhwSaveIndex <= 2); return mhwSaveIndex; }
 
   // These are safe to call,
   // but null/false/empty values should still be handled by the caller.
   // You can do a guard check after calling these as well.
-  mhw_save_raw* MHWS_Save() { return mhwSave; }
+  mhw_ib_save* MHWS_SaveIB() { return mhwSaveIB; }
   mhw_ps4_save* MHWS_SavePS4() { return mhwSavePS4; }
 
-  mhw_save_raw** MHWS_SavePtr() { return &mhwSave; }
+  mhw_ib_save** MHWS_SaveIBPtr() { return &mhwSaveIB; }
   mhw_ps4_save** MHWS_SavePS4Ptr() { return &mhwSavePS4; }
   bool MHWS_IsPS4() { return isPS4; }
 
