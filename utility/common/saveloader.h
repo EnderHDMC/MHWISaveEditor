@@ -41,11 +41,6 @@ public:
   {
     loading = true;
 
-    if (this->mhwSaveIB != mhwSave && !this->mhwSaveIB) {
-      qWarning() << "Potential double-free";
-      free(this->mhwSaveIB);
-    }
-
     this->mhwSaveIB = (mhwSave) ? mhwSave : nullptr;
     this->mhwSection0 = (mhwSave) ? &mhwSave->section0 : nullptr;
     this->mhwSection1 = (mhwSave) ? &mhwSave->section1 : nullptr;
