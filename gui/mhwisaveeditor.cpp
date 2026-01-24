@@ -184,7 +184,7 @@ void MHWISaveEditor::closeEvent(QCloseEvent* event)
   scrollGuard->Free();
 }
 
-bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt, bool validate)
+bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_ib_save* save, bool encrypt, bool validate)
 {
   qInfo("Saving: %s", qUtf8Printable(path));
   qInfo() << "Validate:" << validate;
@@ -193,23 +193,23 @@ bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_save_raw* save, bo
   qInfo() << "PS4:" << isPS4;
 
   if (!isPS4) {
-    mhw_save_raw* saveWrite = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+    mhw_ib_save* saveWrite = (mhw_ib_save*)malloc(sizeof(mhw_ib_save));
     if (!saveWrite) {
       qWarning("Error allocating memory.");
       return false;
     }
-    memcpy(saveWrite, save, sizeof(mhw_save_raw));
+    memcpy(saveWrite, save, sizeof(mhw_ib_save));
 
-    if (validate) MHWSaveUtils::ValidateSaveFile(&saveWrite->save);
-    if (encrypt) EncryptSave(saveWrite->data, sizeof(mhw_save_raw));
+    if (validate) MHWSaveUtils::ValidateSaveFile(saveWrite);
+    if (encrypt) EncryptSave((u8*)saveWrite, sizeof(mhw_ib_save));
 
-    bool written = FileUtils::WriteFileSafe(path, saveWrite->data, sizeof(mhw_save_raw));
+    bool written = FileUtils::WriteFileSafe(path, (u8*)saveWrite, sizeof(mhw_ib_save));
     free(saveWrite);
     return written;
   }
   else {
     mhw_ps4_save* ps4 = MHWS_SavePS4();
-    memcpy((u8*)ps4 + 0x488, save->save.section3.saves, sizeof(save->save.section3.saves));
+    memcpy((u8*)ps4 + 0x488, save->section3.saves, sizeof(save->section3.saves));
     if (encrypt) EncryptSavePS4((u8*)ps4, sizeof(mhw_ps4_save));
 
     return FileUtils::WriteFileSafe(path, (u8*)ps4, sizeof(mhw_ps4_save));
@@ -224,7 +224,7 @@ void MHWISaveEditor::SaveFile(const QString& path)
   QString filepath = fi.absoluteFilePath();
 
   bool encrypt = encrypt_map.value(ext, false);
-  bool success = SaveFileEncrypt(filepath, MHW_Save(), encrypt, true);
+  bool success = SaveFileEncrypt(filepath, MHW_SaveIB(), encrypt, true);
 
   Notification* notif = notif->GetInstance();
   if (success) {
@@ -235,29 +235,29 @@ void MHWISaveEditor::SaveFile(const QString& path)
     notif->ShowMessage(tr("Could not save file: %1", "Indicate failed file save, %1 is the path where the file was supposed to be saved to.").arg(path));
 }
 
-bool MHWISaveEditor::LoadSaveFile(const QString& path, mhw_save_raw** save)
+bool MHWISaveEditor::LoadSaveFile(const QString& path, mhw_ib_save** save)
 {
   qInfo("Loading %s", qUtf8Printable(path));
-  mhw_save_raw* savep = *save;
+  mhw_ib_save* savep = *save;
 
-  savep = (mhw_save_raw*)FileUtils::ReadEntireFile(path, (u8*)savep, sizeof(mhw_save_raw));
+  savep = (mhw_ib_save*)FileUtils::ReadEntireFile(path, (u8*)savep, sizeof(mhw_ib_save));
   if (!savep) {
     qWarning("Save: %s, cannot be read.", qUtf8Printable(path));
     return false;
   }
 
-  if (!MHWSaveUtils::IsBlowfishDecrypted(&savep->save)) {
-    DecryptSave(savep->data, sizeof(mhw_save_raw));
+  if (!MHWSaveUtils::IsBlowfishDecrypted(savep)) {
+    DecryptSave((u8*)savep, sizeof(mhw_ib_save));
   }
   *save = savep;
   return true;
 }
 
-bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save, mhw_ps4_save** ps4)
+bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_ib_save** save, mhw_ps4_save** ps4)
 {
   qInfo("Loading memory %s", qUtf8Printable(path));
-  mhw_save_raw* savep = *save;
-  if (!savep) savep = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+  mhw_ib_save* savep = *save;
+  if (!savep) savep = (mhw_ib_save*)malloc(sizeof(mhw_ib_save));
   if (!savep) {
     qWarning("Memory: %s, cannot be read.", qUtf8Printable(path));
     return false;
@@ -274,21 +274,21 @@ bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_save_raw** save, m
     DecryptSavePS4((u8*)*ps4, sizeof(mhw_ps4_save));
   }
 
-  memset(savep, 0, sizeof(mhw_save_raw));
-  memcpy(savep->save.section3.saves, (u8*)*ps4 + 0x488, sizeof(savep->save.section3.saves));
+  memset(savep, 0, sizeof(mhw_ib_save));
+  memcpy(savep->section3.saves, (u8*)*ps4 + 0x488, sizeof(savep->section3.saves));
 
   return true;
 }
 
 void MHWISaveEditor::Dump(int number)
 {
-  mhw_save_raw* saveWrite = MHWS_Save();
-  mhw_save_raw* buffer = nullptr;
+  mhw_ib_save* saveWrite = MHWS_SaveIB();
+  mhw_ib_save* buffer = nullptr;
   QString path = Paths::GetSaveDumpPath(EditorFile(), steamUser, number);
   bool success = true;
 
   if (MHW_SAVE_GUARD_CHECK) {
-    buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+    buffer = (mhw_ib_save*)malloc(sizeof(mhw_ib_save));
 
     if (!buffer) {
       success = false;
@@ -426,7 +426,7 @@ void MHWISaveEditor::SaveAs()
   }
 }
 
-void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
+void MHWISaveEditor::Load(mhw_ib_save* mhwSave, int slotIndex)
 {
   SaveLoader::Load(mhwSave, slotIndex);
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
@@ -466,7 +466,7 @@ void MHWISaveEditor::Load(mhw_save_raw* mhwSave, int slotIndex)
 
 void MHWISaveEditor::LoadFile(const QString& file, bool isPS4)
 {
-  mhw_save_raw** mhwSavePtr = MHWS_SavePtr();
+  mhw_ib_save** mhwSavePtr = MHWS_SaveIBPtr();
   mhw_ps4_save** mhwSavePS4Ptr = MHWS_SavePS4Ptr();
   bool load = false;
   if (!isPS4) load = LoadSaveFile(file, mhwSavePtr);
@@ -474,7 +474,7 @@ void MHWISaveEditor::LoadFile(const QString& file, bool isPS4)
 
   if (load) {
     SaveLoader::LoadFile(file, isPS4);
-    mhw_save_raw* mhwSave = MHW_Save();
+    mhw_ib_save* mhwSave = MHW_SaveIB();
     Load(mhwSave);
 
     if (settings->GetDoAutoBackups() && !isPS4) {
@@ -500,7 +500,7 @@ void MHWISaveEditor::LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB)
 void MHWISaveEditor::LoadSaveSlot()
 {
   MHW_SAVE_GUARD;
-  mhw_save_raw* mhwSave = MHW_Save();
+  mhw_ib_save* mhwSave = MHW_SaveIB();
   int mhwSaveIndex = MHW_SaveIndex();
 
   for (i64 i = 0; i < selectSlotActions.count(); i++)
@@ -517,7 +517,7 @@ void MHWISaveEditor::LoadSaveSlot()
 void MHWISaveEditor::EditorTabChange(int editorIndex)
 {
   MHW_SAVE_GUARD;
-  mhw_save_raw* mhwSave = MHW_Save();
+  mhw_ib_save* mhwSave = MHW_SaveIB();
   int mhwSaveIndex = MHW_SaveIndex();
 
   int index = editorIndex;
@@ -589,7 +589,7 @@ void MHWISaveEditor::CloneSlot(int slot)
 void MHWISaveEditor::UncraftUnusedEquipment()
 {
   MHW_SAVE_GUARD;
-  mhw_save_raw* mhwSave = MHW_Save();
+  mhw_ib_save* mhwSave = MHW_SaveIB();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   int mhwSaveIndex = MHW_SaveIndex();
 
@@ -613,7 +613,7 @@ void MHWISaveEditor::UncraftUnusedEquipment()
 void MHWISaveEditor::GiveAllItems()
 {
   MHW_SAVE_GUARD;
-  mhw_save_raw* mhwSave = MHW_Save();
+  mhw_ib_save* mhwSave = MHW_SaveIB();
   int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
@@ -672,12 +672,12 @@ void MHWISaveEditor::LoadItemLanguage(game_language language, bool reloadItemSea
 }
 
 void MHWISaveEditor::Backup() {
-  mhw_save_raw* saveWrite = MHWS_Save();
-  mhw_save_raw* buffer = nullptr;
+  mhw_ib_save* saveWrite = MHWS_SaveIB();
+  mhw_ib_save* buffer = nullptr;
   bool success = true;
 
-  if (MHW_SAVE_GUARD_CHECK) {
-    buffer = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+  if (!saveWrite) {
+    buffer = (mhw_ib_save*)malloc(sizeof(mhw_ib_save));
 
     if (!buffer) {
       success = false;
@@ -690,7 +690,7 @@ void MHWISaveEditor::Backup() {
 
   QString path = Paths::GetBackupPath(EditorFile());
   if (success) {
-    QByteArray compressed = qCompress((u8*)saveWrite, sizeof(mhw_save_raw), 9);
+    QByteArray compressed = qCompress((u8*)saveWrite, sizeof(mhw_ib_save), 9);
     int compressedSize = compressed.size();
 
     success = FileUtils::WriteFileSafe(path, (u8*)compressed.constData(), compressedSize);
@@ -724,13 +724,13 @@ void MHWISaveEditor::Restore() {
   QByteArray saveBlob = qUncompress(compressed);
   file.close();
 
-  mhw_save_raw* savep = (mhw_save_raw*)malloc(sizeof(mhw_save_raw));
+  mhw_ib_save* savep = (mhw_ib_save*)malloc(sizeof(mhw_ib_save));
   if (!savep) {
     qWarning("Error allocating memory.");
     return;
   };
 
-  memcpy(savep->data, saveBlob.constData(), saveBlob.length());
+  memcpy(savep, saveBlob.constData(), saveBlob.length());
   SaveLoader::LoadFile(Paths::GetGameSaveFilePath(steamUser), false);
   Load(savep, -1);
 }
@@ -845,7 +845,7 @@ void MHWISaveEditor::DebugUtility()
 void MHWISaveEditor::DebugDefragEquipment()
 {
   MHW_SAVE_GUARD;
-  mhw_save_raw* mhwSave = MHW_Save();
+  mhw_ib_save* mhwSave = MHW_SaveIB();
   int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
@@ -881,7 +881,7 @@ void MHWISaveEditor::DebugDefragEquipment()
 void MHWISaveEditor::DebugFixEquipmentBoxRef()
 {
   MHW_SAVE_GUARD;
-  mhw_save_raw* mhwSave = MHW_Save();
+  mhw_ib_save* mhwSave = MHW_SaveIB();
   int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
@@ -923,9 +923,9 @@ void MHWISaveEditor::DebugFixEquipmentBoxRef()
 void MHWISaveEditor::DebugRemoveUnobtainableItems()
 {
   MHW_SAVE_GUARD;
-  mhw_save_raw* mhwSave = MHW_Save();
-  int mhwSaveIndex = MHW_SaveIndex();
+  mhw_ib_save* mhwSave = MHW_SaveIB();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  int mhwSaveIndex = MHW_SaveIndex();
 
   qInfo("Removing unobtainable items...");
   int removed = MHWSaveOperations::RemoveUnobtainableItems(mhwSaveSlot, itemDB);

@@ -1926,12 +1926,6 @@ struct mhw_ib_save
   mhw_section3 section3;
 };
 
-union mhw_save_raw
-{
-  mhw_ib_save save;
-  u8 data[sizeof(mhw_ib_save)];
-};
-
 mhw_ib_save mhw_save;
 
 Assert(11284704 == sizeof(mhw_ib_save), "Save file size invalid");

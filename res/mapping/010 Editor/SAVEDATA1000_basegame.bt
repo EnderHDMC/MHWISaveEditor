@@ -84,12 +84,6 @@ struct mhw_b_save
   u8 unknown0[8];
 };
 
-union mhw_save_raw
-{
-  mhw_b_save save;
-  u8 data[sizeof(mhw_b_save)];
-};
-
 mhw_b_save mhw_save;
 
 Assert(9438432 == sizeof(mhw_b_save), "Base game save file size invalid.");

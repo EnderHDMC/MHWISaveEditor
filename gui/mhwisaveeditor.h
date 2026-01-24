@@ -74,9 +74,9 @@ public:
   virtual void LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB) override;
 
 private:
-  bool SaveFileEncrypt(const QString& path, mhw_save_raw* save, bool encrypt = true, bool validate = false);
-  bool LoadSaveFile(const QString& path, mhw_save_raw** save);
-  bool LoadSaveFilePS4(const QString& path, mhw_save_raw** save, mhw_ps4_save** ps4);
+  bool SaveFileEncrypt(const QString& path, mhw_ib_save* save, bool encrypt = true, bool validate = false);
+  bool LoadSaveFile(const QString& path, mhw_ib_save** save);
+  bool LoadSaveFilePS4(const QString& path, mhw_ib_save** save, mhw_ps4_save** ps4);
   void SaveFile(const QString& path);
 
   void LoadSaveSlot();
@@ -90,7 +90,7 @@ private:
   SaveLoader* GetActiveEditorTab();
 
   // Inherited via SaveLoader
-  virtual void Load(mhw_save_raw* mhwSave, int slotIndex = -1) override;
+  virtual void Load(mhw_ib_save* mhwSave, int slotIndex = -1) override;
   virtual void LoadFile(const QString& file, bool isPS4) override;
 
   Ui::MHWISaveEditor* ui;

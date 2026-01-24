@@ -26,7 +26,7 @@ public:
   ~LimitedUnlocks();
 
   // Inherited via SaveLoader
-  virtual void Load(mhw_save_raw* mhwSave, int slotIndex) override;
+  virtual void Load(mhw_ib_save* mhwSave, int slotIndex) override;
 
 private:
   Ui::LimitedUnlocks* ui;

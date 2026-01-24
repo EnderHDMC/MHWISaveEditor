@@ -1654,12 +1654,6 @@ struct mhw_ib_save
   mhw_section3 section3;
 };
 
-union mhw_save_raw
-{
-  mhw_ib_save save;
-  u8 data[sizeof(mhw_ib_save)];
-};
-
 // PS4 unique
 struct mhw_ps4_section0
 {
@@ -1688,12 +1682,6 @@ struct mhw_ps4_save
   mhw_ps4_section1 section1;
   mhw_ps4_section2 section2;
   u8 unknown0[0x1E2B38];
-};
-
-union mhw_ps4_save_raw
-{
-  mhw_ps4_save save;
-  u8 data[sizeof(mhw_ps4_save)];
 };
 #pragma pack(pop)
 
