@@ -5,7 +5,6 @@
 #include <string>
 
 #include "../types/types.h"
-#include "../types/constants.h"
 #include "../utility/endian.h"
 
 static void blowfish_decrypt(u8 data[], int length, const std::string& key) {

@@ -2,7 +2,6 @@
 
 #include <cryptopp/sha.h>
 #include <cryptopp/aes.h>
-#include <string>
 
 #include "../types/types.h"
 #include "blowfish.h"
@@ -460,7 +459,7 @@ static void GenerateSalt(byte salt[], uint32 keySalt)
 
 static bool CheckHash(u8* save, u8* hash)
 {
-  return memcmp(save + 12, hash, 20);
+  return !memcmp(save + 12, hash, 20);
 }
 
 static void SetHash(u8* save, u8* hash)
@@ -528,8 +527,6 @@ static u8* DecryptSave(u8* save, int length)
   blowfish_decrypt(save, length, KEY_SAVEDATA1000);
 
   u8* checksum = GenerateHash(save, length, 64);
-  byteswap(checksum, 20);
-  // TODO: Double check this
   if (!CheckHash(save, checksum)) {
     free(checksum);
     return nullptr;

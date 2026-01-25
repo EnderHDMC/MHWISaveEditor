@@ -36,8 +36,6 @@ typedef char str54[54];
 
 typedef str32 str32s;
 
-#define UNPACK_UINT32(arr, offset) (uint32)(arr[(offset)] | (arr[(offset) + 1] << 8) | (arr[(offset) + 2] << 16) | (arr[(offset) + 3] << 24))
-
 #define SIZEOF(arr) (*(&arr + 1) - arr)
 #define COUNTOF(arr) sizeof(arr) / sizeof(arr[0])
 
