@@ -1792,8 +1792,9 @@ struct mhw_section_header
 struct mhw_ps4_section0
 {
   mhw_section_header header;
-  u8 data[1024];
-  
+  u8 unknown0[56];
+  u8 character_edit_voucher;
+  u8 data[967];
 };
 
 struct mhw_ps4_section1
@@ -1808,6 +1809,22 @@ struct mhw_ps4_section2
   mhw_save_slot saves[3];
 };
 
+struct mhw_ps4_swap
+{
+  u32 signature;
+  u32 unknown0;
+  u64 start;
+  u64 end;
+};
+
+struct mhw_ps4_section3
+{
+  mhw_ps4_swap header;
+  u8 unknown0[157];
+  u8 palico_edit_voucher;
+  u8 unknown1[1976962];
+};
+
 struct mhw_ps4_save
 {
   u8 header[16];
@@ -1815,7 +1832,7 @@ struct mhw_ps4_save
   mhw_ps4_section0 section0;
   mhw_ps4_section1 section1;
   mhw_ps4_section2 section2;
-  u8 unknown0[0x1E2B38];
+  mhw_ps4_section3 section3;
 };
 
 mhw_ps4_save mhw_save;
