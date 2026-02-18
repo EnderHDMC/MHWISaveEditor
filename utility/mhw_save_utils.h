@@ -92,6 +92,43 @@ public:
   static inline u32 MRPreviousMilestone(u32 level) { return RankPreviousMilestone(level, mr_exp_table); }
   static inline u32 MRExpToRankHint(u32 xp, u32 hint) { return ExpToRankWithHint(xp, hint, mr_exp_table); }
 
+  static inline u32 zeroVoucher(u8* voucher) {
+    u32 used = *voucher;
+    *voucher = 0;
+    return used;
+  }
+
+  static u32 resetCharacterVouchers(mhw_ib_save* save, mhw_ps4_save* ps4) {
+    mhw_section1* mhwSection1 = &save->section1;
+
+    u32 vouchers = 0;
+    vouchers += zeroVoucher(&mhwSection1->character_edit_voucher);
+    vouchers += zeroVoucher(&mhwSection1->character_edit_voucher_free);
+    vouchers += zeroVoucher(&mhwSection1->character_edit_voucher_single_voucher);
+    vouchers += zeroVoucher(&mhwSection1->character_edit_voucher_two_voucher_pack);
+    vouchers += zeroVoucher(&mhwSection1->character_edit_voucher_three_voucher_pack);
+    vouchers += zeroVoucher(&mhwSection1->character_c_palico_edit_voucher_single_voucher);
+    vouchers += zeroVoucher(&mhwSection1->character_c_palico_edit_two_voucher_pack);
+    vouchers += zeroVoucher(&mhwSection1->character_c_palico_edit_three_voucher_pack);
+
+    return vouchers;
+  }
+
+  static u32 resetPalicoVouchers(mhw_ib_save* save, mhw_ps4_save* ps4) {
+    mhw_section1* mhwSection1 = &save->section1;
+
+    u32 vouchers = 0;
+    vouchers += zeroVoucher(&mhwSection1->palico_edit_voucher);
+    vouchers += zeroVoucher(&mhwSection1->palico_edit_voucher_single_voucher);
+    vouchers += zeroVoucher(&mhwSection1->palico_edit_voucher_two_voucher_pack);
+    vouchers += zeroVoucher(&mhwSection1->palico_edit_voucher_three_voucher_pack);
+    vouchers += zeroVoucher(&mhwSection1->character_p_palico_edit_voucher_single_voucher);
+    vouchers += zeroVoucher(&mhwSection1->character_p_palico_edit_two_voucher_pack);
+    vouchers += zeroVoucher(&mhwSection1->character_p_palico_edit_three_voucher_pack);
+
+    return vouchers;
+  }
+
   static mhw_item_slot* FindItem(mhw_item_slot* items, int count, u32 id) {
     mhw_item_slot* result = nullptr;
     for (int i = 0; i < count; i++)
@@ -309,7 +346,7 @@ public:
     return equipment->category == mhw_equip_category::Category_Empty || equipment->type == -1;
   }
 
-  static inline const mhw_equipment* GetEquipmentAtSlot(mhw_save_slot* save_slot, int slot, int &index, const mhw_equipment* fallback = nullptr) {
+  static inline const mhw_equipment* GetEquipmentAtSlot(mhw_save_slot* save_slot, int slot, int& index, const mhw_equipment* fallback = nullptr) {
     index = save_slot->equipment_index_table[slot];
     const mhw_equipment* equipment = save_slot->equipment + index;
     if (index < 0 || index >= COUNTOF(save_slot->equipment))
