@@ -37,6 +37,13 @@ static void MessagePrintLog(QtMsgType type, const QMessageLogContext& context, c
 
 int main(int argc, char* argv[])
 {
+#if 0
+  while (!IsDebuggerPresent()) {
+    Sleep(1000);
+  }
+  __debugbreak();
+#endif
+
   QCoreApplication::setOrganizationName("EnderHDMC");
   QCoreApplication::setOrganizationDomain("enderhdmc.github.io");
   QCoreApplication::setApplicationName("MHWI Save Editor");
