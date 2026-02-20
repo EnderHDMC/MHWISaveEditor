@@ -111,6 +111,12 @@ public:
     vouchers += zeroVoucher(&mhwSection1->character_c_palico_edit_two_voucher_pack);
     vouchers += zeroVoucher(&mhwSection1->character_c_palico_edit_three_voucher_pack);
 
+    if (ps4) {
+      mhw_ps4_section0* mhwSection0 = &ps4->section0;
+
+      vouchers += zeroVoucher(&mhwSection0->character_edit_voucher);
+    }
+
     return vouchers;
   }
 
@@ -125,6 +131,12 @@ public:
     vouchers += zeroVoucher(&mhwSection1->character_p_palico_edit_voucher_single_voucher);
     vouchers += zeroVoucher(&mhwSection1->character_p_palico_edit_two_voucher_pack);
     vouchers += zeroVoucher(&mhwSection1->character_p_palico_edit_three_voucher_pack);
+
+    if (ps4) {
+      mhw_ps4_section3* mhwSection3 = &ps4->section3;
+
+      vouchers += zeroVoucher(&mhwSection3->palico_edit_voucher);
+    }
 
     return vouchers;
   }

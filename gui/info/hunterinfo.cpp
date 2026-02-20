@@ -188,9 +188,9 @@ void HunterInfo::MRChange(int value)
   mhwSaveSlot->hunter.master_rank_xp = mr_exp;
 }
 
-void HunterInfo::Load(mhw_ib_save* mhwSave, int slotIndex)
+void HunterInfo::Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex)
 {
-  SaveLoader::Load(mhwSave, slotIndex);
+  SaveLoader::Load(mhwSave, ps4, slotIndex);
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   str64 hunterName = {};

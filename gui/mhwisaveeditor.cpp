@@ -209,7 +209,7 @@ bool MHWISaveEditor::SaveFileEncrypt(const QString& path, mhw_ib_save* save, boo
   }
   else {
     mhw_ps4_save* ps4 = MHWS_SavePS4();
-    memcpy((u8*)ps4 + 0x488, save->section3.saves, sizeof(save->section3.saves));
+    memcpy(ps4->section2.saves, save->section3.saves, sizeof(save->section3.saves));
     if (encrypt) EncryptSavePS4((u8*)ps4, sizeof(mhw_ps4_save));
 
     return FileUtils::WriteFileSafe(path, (u8*)ps4, sizeof(mhw_ps4_save));
@@ -274,8 +274,9 @@ bool MHWISaveEditor::LoadSaveFilePS4(const QString& path, mhw_ib_save** save, mh
     DecryptSavePS4((u8*)*ps4, sizeof(mhw_ps4_save));
   }
 
+  mhw_ps4_save* ps4p = *ps4;
   memset(savep, 0, sizeof(mhw_ib_save));
-  memcpy(savep->section3.saves, (u8*)*ps4 + 0x488, sizeof(savep->section3.saves));
+  memcpy(savep->section3.saves, ps4p->section2.saves, sizeof(savep->section3.saves));
 
   return true;
 }
@@ -426,9 +427,9 @@ void MHWISaveEditor::SaveAs()
   }
 }
 
-void MHWISaveEditor::Load(mhw_ib_save* mhwSave, int slotIndex)
+void MHWISaveEditor::Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex)
 {
-  SaveLoader::Load(mhwSave, slotIndex);
+  SaveLoader::Load(mhwSave, ps4, slotIndex);
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   int mhwSaveIndex = MHW_SaveIndex();
 
@@ -475,7 +476,8 @@ void MHWISaveEditor::LoadFile(const QString& file, bool isPS4)
   if (load) {
     SaveLoader::LoadFile(file, isPS4);
     mhw_ib_save* mhwSave = MHW_SaveIB();
-    Load(mhwSave);
+    mhw_ps4_save* ps4 = MHWS_SavePS4();
+    Load(mhwSave, ps4);
 
     if (settings->GetDoAutoBackups() && !isPS4) {
       Notification* notif = notif->GetInstance();
@@ -501,6 +503,7 @@ void MHWISaveEditor::LoadSaveSlot()
 {
   MHW_SAVE_GUARD;
   mhw_ib_save* mhwSave = MHW_SaveIB();
+  mhw_ps4_save* ps4 = MHWS_SavePS4();
   int mhwSaveIndex = MHW_SaveIndex();
 
   for (i64 i = 0; i < selectSlotActions.count(); i++)
@@ -511,18 +514,19 @@ void MHWISaveEditor::LoadSaveSlot()
   }
 
   SaveLoader* loader = GetActiveEditorTab();
-  loader->Load(mhwSave, mhwSaveIndex);
+  loader->Load(mhwSave, ps4, mhwSaveIndex);
 }
 
 void MHWISaveEditor::EditorTabChange(int editorIndex)
 {
   MHW_SAVE_GUARD;
   mhw_ib_save* mhwSave = MHW_SaveIB();
+  mhw_ps4_save* ps4 = MHWS_SavePS4();
   int mhwSaveIndex = MHW_SaveIndex();
 
   int index = editorIndex;
   SaveLoader* loader = editors[index];
-  loader->Load(mhwSave, mhwSaveIndex);
+  loader->Load(mhwSave, ps4, mhwSaveIndex);
 }
 
 void MHWISaveEditor::SelectSlot(int slot)
@@ -589,9 +593,7 @@ void MHWISaveEditor::CloneSlot(int slot)
 void MHWISaveEditor::UncraftUnusedEquipment()
 {
   MHW_SAVE_GUARD;
-  mhw_ib_save* mhwSave = MHW_SaveIB();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
-  int mhwSaveIndex = MHW_SaveIndex();
 
   EquipmentDB* equipmentDB = equipmentDB->GetInstance();
   SmithyDB* smithyDB = smithyDB->GetInstance();
@@ -602,7 +604,7 @@ void MHWISaveEditor::UncraftUnusedEquipment()
 
   SaveLoader* loader = GetActiveEditorTab();
   if (loader == equipmentEditor || loader == inventoryEditor) {
-    loader->Load(mhwSave, mhwSaveIndex);
+    loader->Refresh();
   }
 
   Notification* notif = notif->GetInstance();
@@ -613,8 +615,6 @@ void MHWISaveEditor::UncraftUnusedEquipment()
 void MHWISaveEditor::GiveAllItems()
 {
   MHW_SAVE_GUARD;
-  mhw_ib_save* mhwSave = MHW_SaveIB();
-  int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   bool ok = false;
@@ -627,7 +627,7 @@ void MHWISaveEditor::GiveAllItems()
   MHWSaveOperations::GiveAllItems(mhwSaveSlot, itemDB, count);
 
   SaveLoader* loader = GetActiveEditorTab();
-  if (loader == inventoryEditor) loader->Load(mhwSave, mhwSaveIndex);
+  if (loader == inventoryEditor) loader->Refresh();
 }
 
 void MHWISaveEditor::OpenLocation(const QString& location)
@@ -732,7 +732,7 @@ void MHWISaveEditor::Restore() {
 
   memcpy(savep, saveBlob.constData(), saveBlob.length());
   SaveLoader::LoadFile(Paths::GetGameSaveFilePath(steamUser), false);
-  Load(savep, -1);
+  Load(savep, nullptr, -1);
 }
 
 void MHWISaveEditor::TrimBackups()
@@ -845,8 +845,6 @@ void MHWISaveEditor::DebugUtility()
 void MHWISaveEditor::DebugDefragEquipment()
 {
   MHW_SAVE_GUARD;
-  mhw_ib_save* mhwSave = MHW_SaveIB();
-  int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   qInfo("Checking equipment box references...");
@@ -862,7 +860,7 @@ void MHWISaveEditor::DebugDefragEquipment()
     qInfo().nospace() << defragged << " equipment items were moved.";
 
     SaveLoader* loader = GetActiveEditorTab();
-    if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+    if (loader == equipmentEditor) loader->Refresh();
 
     notif->ShowMessage(tr("Equipment has been defragged.", "Tell the user that the equipment has been defragged."));
   }
@@ -881,8 +879,6 @@ void MHWISaveEditor::DebugDefragEquipment()
 void MHWISaveEditor::DebugFixEquipmentBoxRef()
 {
   MHW_SAVE_GUARD;
-  mhw_ib_save* mhwSave = MHW_SaveIB();
-  int mhwSaveIndex = MHW_SaveIndex();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   qInfo("Checking equipment box references...");
@@ -895,7 +891,7 @@ void MHWISaveEditor::DebugFixEquipmentBoxRef()
 
     if (check) {
       SaveLoader* loader = GetActiveEditorTab();
-      if (loader == equipmentEditor) loader->Load(mhwSave, mhwSaveIndex);
+      if (loader == equipmentEditor) loader->Refresh();
 
       qInfo("Equipment box references have been fixed successfully.");
 
@@ -923,16 +919,14 @@ void MHWISaveEditor::DebugFixEquipmentBoxRef()
 void MHWISaveEditor::DebugRemoveUnobtainableItems()
 {
   MHW_SAVE_GUARD;
-  mhw_ib_save* mhwSave = MHW_SaveIB();
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
-  int mhwSaveIndex = MHW_SaveIndex();
 
   qInfo("Removing unobtainable items...");
   int removed = MHWSaveOperations::RemoveUnobtainableItems(mhwSaveSlot, itemDB);
   qInfo().nospace() << removed << " unobtainable items were removed.";
 
   SaveLoader* loader = GetActiveEditorTab();
-  if (loader == inventoryEditor) loader->Load(mhwSave, mhwSaveIndex);
+  if (loader == inventoryEditor) loader->Refresh();
 
   Notification* notif = notif->GetInstance();
   notif->ShowMessage(tr("Unobtainable items removed: %1.",

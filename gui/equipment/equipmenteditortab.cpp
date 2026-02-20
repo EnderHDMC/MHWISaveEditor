@@ -25,9 +25,9 @@ EquipmentEditorTab::~EquipmentEditorTab()
   delete ui;
 }
 
-void EquipmentEditorTab::Load(mhw_ib_save* mhwSave, int slotIndex)
+void EquipmentEditorTab::Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex)
 {
-  SaveLoader::Load(mhwSave, slotIndex);
+  SaveLoader::Load(mhwSave, ps4, slotIndex);
 
   LoadSlotViews(mhwSave, slotIndex);
 
@@ -49,7 +49,7 @@ void EquipmentEditorTab::LoadSlotViews(mhw_ib_save* mhwSave, int slotIndex)
   for (i64 i = 0; i < slotViews.count(); i++)
   {
     EquipmentSlotView* slotView = slotViews[i];
-    slotView->Load(mhwSave, slotIndex);
+    slotView->Load(mhwSave, nullptr, slotIndex);
   }
 }
 
