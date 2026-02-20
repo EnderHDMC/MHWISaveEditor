@@ -18,16 +18,11 @@ private:
   // You really don't want to set any of these directly.
   mhw_ib_save* mhwSaveIB = nullptr;
   mhw_ps4_save* mhwSavePS4 = nullptr;
-  mhw_section0* mhwSection0 = nullptr;
-  mhw_section1* mhwSection1 = nullptr;
-  mhw_section2* mhwSection2 = nullptr;
-  mhw_section3* mhwSection3 = nullptr;
+  bool isPS4 = false;
 
-  mhw_save_slot* mhwSaveSlot = nullptr;
   int mhwSaveIndex = 0;
 
   QString file;
-  bool isPS4 = false;
   bool loading = false;
 
 protected:
@@ -37,20 +32,26 @@ protected:
 public:
   virtual ~SaveLoader() {}
 
-  virtual void Load(mhw_ib_save* mhwSave, int slotIndex)
+  virtual void Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex)
   {
     loading = true;
+    this->mhwSaveIB = mhwSave;
+    this->mhwSavePS4 = ps4;
 
-    this->mhwSaveIB = (mhwSave) ? mhwSave : nullptr;
-    this->mhwSection0 = (mhwSave) ? &mhwSave->section0 : nullptr;
-    this->mhwSection1 = (mhwSave) ? &mhwSave->section1 : nullptr;
-    this->mhwSection2 = (mhwSave) ? &mhwSave->section2 : nullptr;
-    this->mhwSection3 = (mhwSave) ? &mhwSave->section3 : nullptr;
+    mhw_section1* mhwSection1 = MHW_Section1();
+    mhw_section3* mhwSection3 = MHW_Section3();
 
     this->mhwSaveIndex = slotIndex;
     if (slotIndex == -1 && mhwSaveIB)
       mhwSaveIndex = mhwSection1->last_active_slot;
-    this->mhwSaveSlot = (mhwSection3) ? &mhwSection3->saves[mhwSaveIndex] : nullptr;
+  }
+
+  void Refresh() {
+    mhw_ib_save* mhwSave = MHW_SaveIB();
+    mhw_ps4_save* ps4 = MHWS_SavePS4();
+    int mhwSaveIndex = MHW_SaveIndex();
+    
+    Load(mhwSave, ps4, mhwSaveIndex);
   }
 
   virtual void LoadFile(const QString& file, bool isPS4)
@@ -67,8 +68,8 @@ public:
   virtual void LoadSlot(int slotIndex)
   {
     loading = true;
+    mhw_section3* mhwSection3 = MHW_Section3();
     this->mhwSaveIndex = slotIndex;
-    this->mhwSaveSlot = (mhwSection3) ? &mhwSection3->saves[mhwSaveIndex] : nullptr;
   }
 
   virtual void Unload(bool freeMem = false)
@@ -77,12 +78,6 @@ public:
     if (freeMem) free(this->mhwSaveIB);
 
     this->mhwSaveIB = nullptr;
-    this->mhwSection0 = nullptr;
-    this->mhwSection1 = nullptr;
-    this->mhwSection2 = nullptr;
-    this->mhwSection3 = nullptr;
-
-    this->mhwSaveSlot = nullptr;
   }
 
   virtual void FinishLoad()
@@ -99,12 +94,10 @@ public:
   // They all assert that the values are set.
   bool MHW_SaveCheck() { return mhwSaveIB; }
   mhw_ib_save* MHW_SaveIB() { Q_ASSERT(mhwSaveIB); return mhwSaveIB; }
-  mhw_section0* MHW_Section0() { Q_ASSERT(mhwSection0); return mhwSection0; }
-  mhw_section1* MHW_Section1() { Q_ASSERT(mhwSection1); return mhwSection1; }
-  mhw_section2* MHW_Section2() { Q_ASSERT(mhwSection2); return mhwSection2; }
-  mhw_section3* MHW_Section3() { Q_ASSERT(mhwSection3); return mhwSection3; }
+  mhw_section1* MHW_Section1() { Q_ASSERT(mhwSaveIB); return &mhwSaveIB->section1; }
+  mhw_section3* MHW_Section3() { Q_ASSERT(mhwSaveIB); return &mhwSaveIB->section3; }
 
-  mhw_save_slot* MHW_SaveSlot() { Q_ASSERT(mhwSaveSlot); return mhwSaveSlot; }
+  mhw_save_slot* MHW_SaveSlot() { return mhwSaveIB ? &mhwSaveIB->section3.saves[mhwSaveIndex] : nullptr; }
   int MHW_SaveIndex() { Q_ASSERT(mhwSaveIndex >= 0 && mhwSaveIndex <= 2); return mhwSaveIndex; }
 
   // These are safe to call,

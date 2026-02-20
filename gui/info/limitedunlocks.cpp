@@ -21,9 +21,9 @@ LimitedUnlocks::~LimitedUnlocks()
   delete ui;
 }
 
-void LimitedUnlocks::Load(mhw_ib_save* mhwSave, int slotIndex)
+void LimitedUnlocks::Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex)
 {
-  SaveLoader::Load(mhwSave, slotIndex);
+  SaveLoader::Load(mhwSave, ps4, slotIndex);
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
 
   u32 assassinHoodUnlocked = (mhwSaveSlot->tool_unlocks[0] >> ASSASSIN_HOOD_INDEX) & 0x01;

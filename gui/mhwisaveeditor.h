@@ -90,7 +90,7 @@ private:
   SaveLoader* GetActiveEditorTab();
 
   // Inherited via SaveLoader
-  virtual void Load(mhw_ib_save* mhwSave, int slotIndex = -1) override;
+  virtual void Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex = -1) override;
   virtual void LoadFile(const QString& file, bool isPS4) override;
 
   Ui::MHWISaveEditor* ui;

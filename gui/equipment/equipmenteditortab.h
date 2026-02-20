@@ -17,7 +17,7 @@ public:
   ~EquipmentEditorTab();
 
   // Inherited via SaveLoader
-  virtual void Load(mhw_ib_save* mhwSave, int slotIndex) override;
+  virtual void Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex) override;
   virtual void LoadResources(ItemDB* itemDB, BitmapDB* bitmapDB) override;
 
   void LoadSlotViews(mhw_ib_save* mhwSave, int slotIndex);

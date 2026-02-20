@@ -133,14 +133,14 @@ void InventoryEditor::ItemAdd()
   }
 }
 
-void InventoryEditor::Load(mhw_ib_save* mhwSave, int slotIndex)
+void InventoryEditor::Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex)
 {
-  SaveLoader::Load(mhwSave, slotIndex);
+  SaveLoader::Load(mhwSave, ps4, slotIndex);
 
   for (i64 i = 0; i < editorTabs.count(); i++)
   {
     InventoryEditorTab* editor = editorTabs[i];
-    editor->Load(mhwSave, slotIndex);
+    editor->Load(mhwSave, ps4, slotIndex);
   }
 
   SaveLoader::FinishLoad();

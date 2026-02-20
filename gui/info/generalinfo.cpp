@@ -68,9 +68,9 @@ void GeneralInfo::ResetEditVouchers()
     << ", palico vouchers used = 0 <- " << palicoVouchers;
 }
 
-void GeneralInfo::Load(mhw_ib_save* mhwSave, int slotIndex)
+void GeneralInfo::Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex)
 {
-  SaveLoader::Load(mhwSave, slotIndex);
+  SaveLoader::Load(mhwSave, ps4, slotIndex);
 
   u64 steamID = mhwSave->header.steam_id;
   ui->btnSteamID->setText(QString::number(steamID));
