@@ -68,8 +68,8 @@ vcpkg install cryptopp:x64-windows curl:x64-windows
 ```
 In Visual Studio Installer you only need `Desktop Development with C++`
 
-Additionally you need to install a version of [QT](https://www.qt.io/), the project currently uses `QT 6.5.3`.<br/>
-In the QT installer you only need to install the component: `QT/QT 6.5.3/MSVC 2019 64-bit`.
+Additionally you need to install a version of [QT](https://www.qt.io/), the project currently uses `QT 6.7.3`.<br/>
+In the QT installer you only need to install the component: `QT/QT 6.7.3/MSVC 2019 64-bit`.
 
 Next install the QT Visual Studio Tools extension.<br/>
 Then in the QT Version settings of the extension set version to `6.5.3_msvc2019_64` and set the path to wherever you installed QT.<br/>
