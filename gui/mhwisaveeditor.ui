@@ -120,6 +120,9 @@
     <addaction name="separator"/>
     <addaction name="menuSwitchWith"/>
     <addaction name="menuCloneTo"/>
+    <addaction name="separator"/>
+    <addaction name="actionSaveSlot"/>
+    <addaction name="actionLoadSlot"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -469,6 +472,22 @@
     <string comment="Tools -&gt; Give All Items" extracomment="Gives all items to the hunter.">Give All Items</string>
    </property>
   </action>
+  <action name="actionSaveSlot">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionLoadSlot">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -728,6 +747,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionSaveSlot</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>SaveSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionLoadSlot</sender>
+   <signal>triggered()</signal>
+   <receiver>MHWISaveEditor</receiver>
+   <slot>LoadSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -746,5 +797,7 @@
   <slot>DebugRemoveUnobtainableItems()</slot>
   <slot>ExportDecoList()</slot>
   <slot>GiveAllItems()</slot>
+  <slot>SaveSlot()</slot>
+  <slot>LoadSlot()</slot>
  </slots>
 </ui>

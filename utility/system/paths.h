@@ -73,6 +73,12 @@ public:
     return dumpFile;
   }
 
+  static inline QString GetPlayerDump(int slot) {
+    QString dumpFile = QString::fromUtf8(MHW_CHAR_NAME_REL);
+    dumpFile[dumpFile.length() - 5] = QChar('0' + slot);
+    return dumpFile;
+  }
+
   static QString GetDefaultSaveDumpPath(const QString& user, int slot)
   {
     Q_ASSERT(slot >= 0 && slot <= 9);
@@ -84,15 +90,22 @@ public:
 
   static QString GetSaveDumpPath(const QString& file, const QString& user, int slot)
   {
-    // TODO: Use the filepath.
     Q_ASSERT(slot >= 0 && slot <= 9);
-    QString defaultPath = GetDefaultSaveDumpPath(user, slot);
     QString dumpFile = GetDumpSlot(slot);
-    QDir filePath = file;
-    filePath.cdUp();
+    QString defaultPath = GetDefaultSaveDumpPath(user, slot);
+    QString path = FileParent(file);
 
-    QString path = filePath.absolutePath();
     return file.isNull() ? defaultPath : path + dumpFile;
+  }
+
+  static QString GetPlayerDumpPath(const QString& file, const QString& user, int slot)
+  {
+    Q_ASSERT(slot >= 0 && slot <= 2);
+    Q_ASSERT(!file.isNull());
+
+    QString dumpFile = GetPlayerDump(slot);
+    QString path = FileParent(file);
+    return path + dumpFile;
   }
 
   static QString GetDataPath()
@@ -170,5 +183,12 @@ public:
   static QString GetResourcesPath(const QString& subpath)
   {
     return GetBasePath() + "/res/" + subpath;
+  }
+
+  static QString FileParent(const QString& file) {
+    QDir filePath = file;
+    filePath.cdUp();
+
+    return filePath.absolutePath();
   }
 };
