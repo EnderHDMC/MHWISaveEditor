@@ -2,9 +2,10 @@
 You will need:
 - A PS5
 - A USB
-- A PS4 save decryptor: https://discord.com/invite/protobuffers
+- A PS4 save decryptor
+You can use https://discord.com/invite/protobuffers
 
-PS5:
+## PS5 export:
 1. Plug in USB to PS5
 2. Settings > Storage
 3. Console Storage > Saved Data > PS4 Games
@@ -13,20 +14,20 @@ PS5:
 6. Copy
 7. Remove USB
 
-PC:
+## PC import:
 1. Plug in USB to PC
 2. Navigate to PS4\SAVEDATA\<USERID>\CUSA07708
 3. Decrypt sce_sdmemory and sce_sdmemory.bin using Discord Bot
 4. Download decrypted save, extract it, you should end up with a memory.dat file
 5. Open memory.dat in MHWISaveEditor
 
-PC:
-1. Encrypt edited save, you will need to upload encrypted saves as well as your edited one
+## PC export:
+1. Encrypt edited save
 2. Extract new encrypted save to USB
 3. Make sure the files match PS4\SAVEDATA\<USERID>\CUSA07708
 4. Remove USB
 
-PS5:
+## PS5 import:
 1. Plug in USB to PS5
 2. Settings > Storage
 3. Console Storage > Saved Data > Saved Data and Game/App Settings
