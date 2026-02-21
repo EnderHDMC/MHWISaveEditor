@@ -44,6 +44,9 @@ public slots:
   void SwitchSlot(int slot);
   void CloneSlot(int slot);
 
+  void SaveSlot();
+  void LoadSlot();
+
   // Tools
   void UncraftUnusedEquipment();
   void GiveAllItems();

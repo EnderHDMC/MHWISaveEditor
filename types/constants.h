@@ -37,6 +37,7 @@ const std::string MHW_EXE_NAME    = "MonsterHunterWorld.exe";
 
 const std::string MHW_EXE_REL_BACKUP  = "../../MonsterHunterWorld.exe";
 const std::string MHW_SAVE_NAME_REL   = "/SAVEDATA1000.bin";
+const std::string MHW_CHAR_NAME_REL   = "/PLAYER$.bin";
 
 const u32 MHW_IB_SAVE_SIZE = 11284704;
 const u32 MHW_PS4_SAVE_SIZE = 0x800000;

@@ -446,6 +446,9 @@ void MHWISaveEditor::Load(mhw_ib_save* mhwSave, mhw_ps4_save* ps4, int slotIndex
   ui->menuSwitchWith->setEnabled(true);
   ui->menuCloneTo->setEnabled(true);
 
+  ui->actionSaveSlot->setEnabled(true);
+  ui->actionLoadSlot->setEnabled(true);
+
   ui->actionGiveAllItems->setEnabled(true);
   ui->actionUncraftEquipment->setEnabled(true);
 
@@ -588,6 +591,54 @@ void MHWISaveEditor::CloneSlot(int slot)
     "Indicate a slot was cloned, %1 is the current slot, %2 is the target slot.")
     .arg(mhwSaveIndex + 1).arg(slot + 1));
   qInfo().nospace() << "Cloned slot: " << mhwSaveIndex << " to " << slot;
+}
+
+void MHWISaveEditor::SaveSlot()
+{
+  MHW_SAVE_GUARD;
+  int mhwSaveIndex = MHW_SaveIndex();
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+  QString editorFile = EditorFile();
+
+  QString path = Paths::GetPlayerDumpPath(EditorFile(), steamUser, mhwSaveIndex);
+  bool success = FileUtils::WriteFileSafe(path, (u8*)mhwSaveSlot, sizeof(mhw_save_slot));
+
+  Notification* notif = notif->GetInstance();
+  if (success) {
+    notif->ShowMessage(tr("Player save: %1", "Notify of a player being saved, %1 is the path to where it is.").arg(path));
+  }
+  else {
+    notif->ShowMessage(tr("Failed to save player: %1", "Notify of a save failure, %1 is the path to where it was supposed to be.").arg(path));
+  }
+}
+
+void MHWISaveEditor::LoadSlot()
+{
+  MHW_SAVE_GUARD;
+  mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
+
+  QString path = Paths::FileParent(EditorFile());
+  QString filepath = QString();
+
+  QFileDialog dialog(nullptr);
+  dialog.setDirectory(path);
+  dialog.selectFile(QString::fromUtf8(MHW_CHAR_NAME_REL));
+  dialog.setFileMode(QFileDialog::ExistingFile);
+
+  if (dialog.exec()) {
+    QStringList files = dialog.selectedFiles();
+    filepath = files[0];
+
+    mhw_save_slot* buffer = (mhw_save_slot*)FileUtils::ReadEntireFile(filepath, nullptr, sizeof(mhw_save_slot));
+    if (!buffer) {
+      qWarning("Character: %s, cannot be read.", qUtf8Printable(filepath));
+      return;
+    }
+
+    memcpy(mhwSaveSlot, buffer, sizeof(mhw_save_slot));
+    LoadSaveSlot();
+    free(buffer);
+  }
 }
 
 void MHWISaveEditor::UncraftUnusedEquipment()
