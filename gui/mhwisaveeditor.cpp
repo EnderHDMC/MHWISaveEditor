@@ -605,9 +605,11 @@ void MHWISaveEditor::SaveSlot()
 
   Notification* notif = notif->GetInstance();
   if (success) {
+    qInfo().noquote() << "Saved player:" << mhwSaveIndex;
     notif->ShowMessage(tr("Player save: %1", "Notify of a player being saved, %1 is the path to where it is.").arg(path));
   }
   else {
+    qInfo().noquote() << "Failed to save player:" << mhwSaveIndex;
     notif->ShowMessage(tr("Failed to save player: %1", "Notify of a save failure, %1 is the path to where it was supposed to be.").arg(path));
   }
 }
@@ -630,11 +632,15 @@ void MHWISaveEditor::LoadSlot()
     filepath = files[0];
 
     mhw_save_slot* buffer = (mhw_save_slot*)FileUtils::ReadEntireFile(filepath, nullptr, sizeof(mhw_save_slot));
+    
+    Notification* notif = notif->GetInstance();
     if (!buffer) {
       qWarning("Character: %s, cannot be read.", qUtf8Printable(filepath));
+      notif->ShowMessage(tr("Failed to load player: %1", "Notify of a load failure, %1 is the path to where it is.").arg(path));
       return;
     }
 
+    notif->ShowMessage(tr("Player load: %1", "Notify of a player being loaded, %1 is the path to where it is.").arg(path));
     memcpy(mhwSaveSlot, buffer, sizeof(mhw_save_slot));
     LoadSaveSlot();
     free(buffer);
