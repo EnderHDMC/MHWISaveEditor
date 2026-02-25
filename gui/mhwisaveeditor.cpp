@@ -288,7 +288,7 @@ void MHWISaveEditor::Dump(int number)
   QString path = Paths::GetSaveDumpPath(EditorFile(), steamUser, number);
   bool success = true;
 
-  if (MHW_SAVE_GUARD_CHECK) {
+  if (saveWrite) {
     buffer = (mhw_ib_save*)malloc(sizeof(mhw_ib_save));
 
     if (!buffer) {
@@ -353,7 +353,7 @@ void MHWISaveEditor::Open()
   QString path = Paths::GetGameSavePath(steamUser);
   QString filepath = QString();
 
-  QFileDialog dialog(nullptr);
+  QFileDialog dialog(this);
   dialog.setDirectory(path);
   dialog.selectFile(QString::fromUtf8(MHW_SAVE_NAME));
   dialog.setFileMode(QFileDialog::ExistingFile);
@@ -600,7 +600,7 @@ void MHWISaveEditor::SaveSlot()
   mhw_save_slot* mhwSaveSlot = MHW_SaveSlot();
   QString editorFile = EditorFile();
 
-  QString path = Paths::GetPlayerDumpPath(EditorFile(), steamUser, mhwSaveIndex);
+  QString path = Paths::GetPlayerDumpPath(editorFile, steamUser, mhwSaveIndex);
   bool success = FileUtils::WriteFileSafe(path, (u8*)mhwSaveSlot, sizeof(mhw_save_slot));
 
   Notification* notif = notif->GetInstance();
@@ -622,7 +622,7 @@ void MHWISaveEditor::LoadSlot()
   QString path = Paths::FileParent(EditorFile());
   QString filepath = QString();
 
-  QFileDialog dialog(nullptr);
+  QFileDialog dialog(this);
   dialog.setDirectory(path);
   dialog.selectFile(QString::fromUtf8(MHW_CHAR_NAME_REL));
   dialog.setFileMode(QFileDialog::ExistingFile);
@@ -636,11 +636,11 @@ void MHWISaveEditor::LoadSlot()
     Notification* notif = notif->GetInstance();
     if (!buffer) {
       qWarning("Character: %s, cannot be read.", qUtf8Printable(filepath));
-      notif->ShowMessage(tr("Failed to load player: %1", "Notify of a load failure, %1 is the path to where it is.").arg(path));
+      notif->ShowMessage(tr("Failed to load player: %1", "Notify of a load failure, %1 is the path to where it is.").arg(filepath));
       return;
     }
 
-    notif->ShowMessage(tr("Player load: %1", "Notify of a player being loaded, %1 is the path to where it is.").arg(path));
+    notif->ShowMessage(tr("Player load: %1", "Notify of a player being loaded, %1 is the path to where it is.").arg(filepath));
     memcpy(mhwSaveSlot, buffer, sizeof(mhw_save_slot));
     LoadSaveSlot();
     free(buffer);
@@ -787,7 +787,12 @@ void MHWISaveEditor::Restore() {
     return;
   };
 
-  memcpy(savep, saveBlob.constData(), saveBlob.length());
+  if (saveBlob.length() != sizeof(mhw_ib_save)) {
+    qWarning("Decompressed size incorrect.");
+    return;
+  }
+
+  memcpy(savep, saveBlob.constData(), sizeof(mhw_ib_save));
   SaveLoader::LoadFile(Paths::GetGameSaveFilePath(steamUser), false);
   Load(savep, nullptr, -1);
 }

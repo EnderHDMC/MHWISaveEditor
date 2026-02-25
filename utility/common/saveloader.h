@@ -7,8 +7,8 @@
 #include "../../data/BitmapDB.h"
 
 #define MHW_SAVE_CHECK MHW_SaveCheck()
-#define MHW_SAVE_GUARD_CHECK (!MHW_SAVE_CHECK)
-#define MHW_SAVE_GUARD if MHW_SAVE_GUARD_CHECK return
+#define MHW_SAVE_GUARD_CHECK !MHW_SAVE_CHECK
+#define MHW_SAVE_GUARD if (MHW_SAVE_GUARD_CHECK) return
 #define MHW_LOADING_CHECK (EditorLoading() && MHW_SAVE_CHECK)
 #define MHW_LOADING_GUARD_CHECK (!MHW_LOADING_CHECK)
 #define MHW_LOADING_GUARD if (MHW_LOADING_CHECK) return
@@ -38,11 +38,10 @@ public:
     this->mhwSaveIB = mhwSave;
     this->mhwSavePS4 = ps4;
 
-    mhw_section1* mhwSection1 = MHW_Section1();
-    mhw_section3* mhwSection3 = MHW_Section3();
+    mhw_section1* mhwSection1 = mhwSave ? &mhwSave->section1 : nullptr;
 
     this->mhwSaveIndex = slotIndex;
-    if (slotIndex == -1 && mhwSaveIB)
+    if (slotIndex == -1 && mhwSection1)
       mhwSaveIndex = mhwSection1->last_active_slot;
   }
 
