@@ -4,26 +4,27 @@
 
 #include "../types/types.h"
 
-static void SetStr(str64* str, const QString& value) {
-  char* strPtr = (char*)str;
+static void SetStrImpl(void* dst, size_t dstSize, const QString& value)
+{
+  char* strPtr = (char*)dst;
+  QByteArray utf8 = value.toUtf8();
 
-  QByteArray newValue = value.toUtf8();
-  unsigned int len = newValue.size();
-  size_t lenMax = sizeof(*str);
-  Q_ASSERT(len < lenMax);
+  size_t srcLen = utf8.size();
+  Q_ASSERT(srcLen < dstSize);
+  size_t len = (srcLen < dstSize) ? srcLen : dstSize - 1;
 
-  strncpy_s(strPtr, lenMax, newValue, lenMax);
-  memset(strPtr + len, '\0', lenMax - len);
+  memcpy(strPtr, utf8.constData(), len);
+  memset(strPtr + len, 0, dstSize - len);
 }
 
-static void SetStr(str256* str, const QString& value) {
-  char* strPtr = (char*)str;
+inline static void SetStr(str54* str, const QString& value) {
+  SetStrImpl(str, sizeof(*str), value);
+}
 
-  QByteArray newValue = value.toUtf8();
-  unsigned int len = newValue.size();
-  size_t lenMax = sizeof(*str);
-  Q_ASSERT(len < lenMax);
+inline static void SetStr(str64* str, const QString& value) {
+  SetStrImpl(str, sizeof(*str), value);
+}
 
-  strncpy_s(strPtr, lenMax, newValue, lenMax);
-  memset(strPtr + len, '\0', lenMax - len);
+inline static void SetStr(str256* str, const QString& value) {
+  SetStrImpl(str, sizeof(*str), value);
 }

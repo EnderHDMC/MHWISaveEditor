@@ -92,6 +92,38 @@ public:
   static inline u32 MRPreviousMilestone(u32 level) { return RankPreviousMilestone(level, mr_exp_table); }
   static inline u32 MRExpToRankHint(u32 xp, u32 hint) { return ExpToRankWithHint(xp, hint, mr_exp_table); }
 
+  static void anonymizeSave(mhw_ib_save* save) {
+    save->header.steam_id = 0;
+
+    for (int i = 0; i < COUNTOF(save->section3.saves); i++) {
+      mhw_save_slot* slot = &save->section3.saves[i];
+      SetStr(&slot->hunter.name, "Hunter");
+
+      slot->guild_card.steam_id = 0;
+      SetStr(&slot->guild_card.primary_group, "");
+
+      SetStr(&slot->palico_name, "Palico");
+
+      mhw_guild_card* emptyCard = &slot->collected_guild_card[99];
+      mhw_guild_card* ownCard = &slot->guild_card;
+      memcpy(ownCard, emptyCard, sizeof(mhw_guild_card));
+      for (int j = 0; j < COUNTOF(slot->collected_guild_card); j++) {
+        mhw_guild_card* card = &slot->collected_guild_card[j];
+        memcpy(card, emptyCard, sizeof(mhw_guild_card));
+      }
+
+      for (int j = 0; j < COUNTOF(slot->safaris); j++) {
+        mhw_safari* safari = &slot->safaris[j];
+        for (int k = 0; k < COUNTOF(safari->members); k++) {
+          mhw_safari_member* member = &safari->members[k];
+          member->steam_id = 0;
+          SetStr(&member->palico, "");
+          SetStr(&member->character, "");
+        }
+      }
+    }
+  }
+
   static inline u32 zeroVoucher(u8* voucher) {
     u32 used = *voucher;
     *voucher = 0;
