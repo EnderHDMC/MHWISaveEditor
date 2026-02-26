@@ -288,7 +288,7 @@ void MHWISaveEditor::Dump(int number)
   QString path = Paths::GetSaveDumpPath(EditorFile(), steamUser, number);
   bool success = true;
 
-  if (saveWrite) {
+  if (!saveWrite) {
     buffer = (mhw_ib_save*)malloc(sizeof(mhw_ib_save));
 
     if (!buffer) {
