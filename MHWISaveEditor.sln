@@ -8,11 +8,14 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
+		Hybrid|x64 = Hybrid|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AA92CA46-D39D-4501-A111-671AD0FFEB42}.Debug|x64.ActiveCfg = Debug|x64
 		{AA92CA46-D39D-4501-A111-671AD0FFEB42}.Debug|x64.Build.0 = Debug|x64
+		{AA92CA46-D39D-4501-A111-671AD0FFEB42}.Hybrid|x64.ActiveCfg = Hybrid|x64
+		{AA92CA46-D39D-4501-A111-671AD0FFEB42}.Hybrid|x64.Build.0 = Hybrid|x64
 		{AA92CA46-D39D-4501-A111-671AD0FFEB42}.Release|x64.ActiveCfg = Release|x64
 		{AA92CA46-D39D-4501-A111-671AD0FFEB42}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection

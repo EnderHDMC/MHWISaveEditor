@@ -1,7 +1,5 @@
 # Build files
-[Dd]ebug
-[Rr]elease
-Deploy
+/x64
 
 # User files
 *.user

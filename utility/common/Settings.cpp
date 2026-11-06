@@ -62,10 +62,11 @@ bool Settings::SyncSettings(bool sync)
 
 void Settings::ReadSettings()
 {
-  QString path = Paths::GetDataPath() + "/settings.ini";
+  QString path = Paths::GetDataPath("settings.ini");
   QSettings::Format format = QSettings::Format::IniFormat;
   QSettings::setDefaultFormat(format);
   settings = new QSettings(path, format, nullptr);
+  qDebug() << "Read settings file:" << settings->fileName();
   SyncSettings(false);
 }
 
@@ -101,11 +102,6 @@ void Settings::WriteSettings()
 QString Settings::FileName()
 {
   return settings->fileName();
-}
-
-void Settings::LogReadPath()
-{
-  qDebug() << "Read settings file (log delayed):" << settings->fileName();
 }
 
 bool Settings::DebuggerPresent()

@@ -110,18 +110,25 @@ public:
 
   static QString GetDataPath()
   {
-    QString path = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation)[0];
-
-    QDir dir = QDir();
-    if (dir.mkpath(path)) return path;
+    QString documents = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+      
+    QDir dir = QDir(documents);
+    QString data = dir.filePath(ORGANIZATION_NAME + "/" + APPLICATION_NAME);
+    if (dir.mkpath(data)) return data;
     else return NULL;
   }
 
+  static QString GetDataPath(const QString& subpath)
+  {
+    QString data = GetDataPath();
+    QDir dir = QDir(data);
+    if (data.isNull()) return NULL;
+    return dir.filePath(subpath);
+  }
 
   static QString GetDataPathBackups()
   {
-    QString path = GetDataPath();
-    path = path + "/backups/";
+    QString path = GetDataPath("backups/");
 
     QDir dir = QDir();
     if (dir.mkpath(path)) return path;
@@ -145,8 +152,7 @@ public:
 
   static QString GetIconDumpPath()
   {
-    QString path = GetDataPath();
-    path = path + "/icons/";
+    QString path = GetDataPath("icons/");
 
     QDir dir = QDir();
     if (dir.mkpath(path)) return path;

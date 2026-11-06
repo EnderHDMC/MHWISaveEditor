@@ -92,6 +92,24 @@ public:
   static inline u32 MRPreviousMilestone(u32 level) { return RankPreviousMilestone(level, mr_exp_table); }
   static inline u32 MRExpToRankHint(u32 xp, u32 hint) { return ExpToRankWithHint(xp, hint, mr_exp_table); }
 
+
+  static void clearWeaponUsage(mhw_weapon_usage16* usage) {
+    memset(usage, 0, sizeof(*usage));
+    usage->longsword = 1;
+  }
+  static void clearWeaponUsage(mhw_weapon_usage32* usage) {
+    memset(usage, 0, sizeof(*usage));
+    usage->longsword = 1;
+  }
+
+  static void resetGuildCard(mhw_guild_card* card) {
+    clearWeaponUsage(&card->low_rank_usage);
+    clearWeaponUsage(&card->high_rank_usage);
+    clearWeaponUsage(&card->investigation_usage);
+    clearWeaponUsage(&card->master_rank_usage);
+    clearWeaponUsage(&card->guiding_lands_usage);
+  }
+
   static void anonymizeSave(mhw_ib_save* save) {
     save->header.steam_id = 0;
 
@@ -104,8 +122,18 @@ public:
 
       SetStr(&slot->palico_name, "Palico");
 
-      mhw_guild_card* emptyCard = &slot->collected_guild_card[99];
+      clearWeaponUsage(&slot->high_rank_usage);
+      clearWeaponUsage(&slot->low_rank_usage);
+      clearWeaponUsage(&slot->investigations_usage);
+      clearWeaponUsage(&slot->master_rank_usage);
+      clearWeaponUsage(&slot->guiding_lands_usage);
+
+      slot->seliana_room.passcode = 0;
+
       mhw_guild_card* ownCard = &slot->guild_card;
+      resetGuildCard(ownCard);
+      
+      mhw_guild_card* emptyCard = &slot->collected_guild_card[99];
       memcpy(ownCard, emptyCard, sizeof(mhw_guild_card));
       for (int j = 0; j < COUNTOF(slot->collected_guild_card); j++) {
         mhw_guild_card* card = &slot->collected_guild_card[j];

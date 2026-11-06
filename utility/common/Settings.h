@@ -46,8 +46,6 @@ public:
   void WriteSettings();
   QString FileName();
 
-  void LogReadPath();
-
   static bool DebuggerPresent();
 
 #pragma region Settings Access
